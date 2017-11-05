@@ -1,0 +1,22 @@
+Juan: el modulo de usuario es el "rol"? 
+Santi: si.
+
+podemos cambiar entrega a compra? 
+	Listo.
+podemos cambiar entregaproducto a compraDetalle? 
+	Listo.
+podemos cambiar liquidación a venta? 
+	Listo.
+podemos cambiar liquidacióndetalle a ventaDetalle? 
+	Listo.
+
+Juan: Hay que registrar cuando se paga un saldo de la cuenta, esto requiere datos de la cuenta, cliente y el movimiento
+será necesario unir venta con pago?
+lo mismo con compra?
+Santi: Por lo que entendi, te referis a registrar los pagos del cliente o los pagos al proveedor. Si, tiene que existir una interfaz
+para registrar esos pagos y los datos de la cuenta a la que iria.	
+
+Unificadas las cuentas en "gestorcuentas"
+
+Actualizado el modelo.
+
