@@ -130,34 +130,113 @@ namespace AppLaMejor.formularios
 
         private void AgregarGarron()
         {
-            Garron g = new Garron();
-            g.FechaEntrada = DateTime.Now;
-            FormEntityInput dialog= new FormEntityInput(g, FormEntityInput.MODO_INSERTAR);
-            Boolean result = dialog.Execute(g);
+            //Garron g = new Garron();
+            //g.FechaEntrada = DateTime.Now;
+            //FormEntityInput dialog = new FormEntityInput(g, FormEntityInput.MODO_INSERTAR);
+            //Boolean result = dialog.Execute(g);
 
-            if (result)
-            {
-                g = (Garron)dialog.SelectedObject;
-                // Desde este form solo se carga garron estado COMPLETO = 1
-                g.TipoEstadoGarron = TiposManager.Instance().GetTipoEstadoGarron(1);
-                /* Insert en BD */
-                if (FuncionesGarron.InsertGarron(g))
-                {
-                    MyTextTimer.TStart("Cuenta se guardo correctamente", statusStrip1, tsslMensaje);
-                    CargarGarronCompletoEnTablePanel(g);
-                }
-                else
-                {
-                    MyTextTimer.TStart("No se guardo cuenta.", statusStrip1, tsslMensaje);
-                }
+            //if (result)
+            //{
+            //    g = (Garron)dialog.SelectedObject;
+            //    // Desde este form solo se carga garron estado COMPLETO = 1
+            //    g.TipoEstadoGarron = TiposManager.Instance().GetTipoEstadoGarron(1);
+            //    /* Insert en BD */
+            //    if (FuncionesGarron.InsertGarron(g))
+            //    {
+            //        MyTextTimer.TStart("Cuenta se guardo correctamente", statusStrip1, tsslMensaje);
+            //        CargarGarronCompletoEnTablePanel(g);
+            //    }
+            //    else
+            //    {
+            //        MyTextTimer.TStart("No se guardo cuenta.", statusStrip1, tsslMensaje);
+            //    }
 
-            }
+            //}
+            Garron g = FuncionesGarron.GetGarron(5);
+            CargarGarronCompletoEnTablePanel(g);
         }
 
         private void CargarGarronCompletoEnTablePanel(Garron g)
         {
             List<GarronParte> listPartes = FuncionesGarron.GetIdProductoDeposteByGarron(g.Id);
+
+            int rowIndex = 0;
+            int columnIndex = 0;
+            int controlAddedCount = 0;
+
+            this.tablePanel.Dock = DockStyle.Fill;
+
+            this.tablePanel.RowStyles.Clear();
+            this.tablePanel.ColumnStyles.Clear();
+
+            this.tablePanel.ColumnCount = 5;
+            float percentValue = 100 / this.tablePanel.ColumnCount;
+            for (int i = 0; i < tablePanel.ColumnCount; i++)
+            {
+                this.tablePanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, percentValue));
+            }
+
+            this.tablePanel.RowCount = 1;
+            this.tablePanel.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
+
+            foreach (GarronParte gp in listPartes)
+            {
+                gp.Garron = g;
+
+                Random rnd = new Random();
+                Color randomColor = Color.FromArgb(rnd.Next(256), rnd.Next(256), rnd.Next(256));
+
+                Panel panel = new Panel();
+                panel.BackColor = randomColor;
+                panel.Name = gp.Garron.Id.ToString() +"-"+ gp.Producto.Id.ToString();
+                panel.Dock = DockStyle.Fill;
+
+                Label productoTitulo = new Label();
+                productoTitulo.Name = panel.Name + "titulo";
+                productoTitulo.Text = "Ingrese Peso de " + gp.Producto.DescripcionBreve.ToUpper();
+                productoTitulo.AutoSize = true;
+                productoTitulo.Anchor = AnchorStyles.None;
+                productoTitulo.Dock = DockStyle.Top;
+                
+                /*productoTitulo.Location = new Point(panel.Width / 2 - productoTitulo.Size.Width / 2, panel.Height / 2 - productoTitulo.Size.Height / 2 - 20);
+                productoTitulo.Anchor = AnchorStyles.None;*/
+
+                TextBox productoPeso = new TextBox();
+                productoPeso.Name = panel.Name + "peso";
+                
+                productoPeso.MaximumSize = new Size(100,40);
+                productoPeso.MinimumSize = new Size(100,30);
+                productoPeso.Leave += leavePesoBox;
+
+                productoPeso.Location = new Point(panel.Width / 2 - productoPeso.Size.Width / 2, panel.Height / 2 - productoPeso.Size.Height / 2);
+                productoPeso.Anchor = AnchorStyles.None;
+
+                panel.Controls.Add(productoTitulo);
+                panel.Controls.Add(productoPeso);
+
+                tablePanel.Controls.Add(panel); //, columnIndex, rowIndex);
+                controlAddedCount++;
+
+                // int div = a / b; //div is 1
+                //int mod = a % b; //mod is 2
+                int mod = controlAddedCount % tablePanel.ColumnCount;
+
+                if (mod.Equals(0))
+                {
+                    this.tablePanel.RowCount ++;
+                    this.tablePanel.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
+                }
+            }
         }
 
+        private void leavePesoBox(object sender, EventArgs e)
+        {
+            TextBox textbox = (TextBox)sender;
+            decimal test;
+            if (!decimal.TryParse(textbox.Text, out test))
+            {
+                MyTextTimer.TStart("El peso ingresado es incorrecto. ", this.statusStrip1, this.tsslMensaje);
+            }
+        }
     }
 }

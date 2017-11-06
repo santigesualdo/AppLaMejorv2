@@ -12,6 +12,14 @@ namespace AppLaMejor.controlmanager
 {
     public class FuncionesGarron
     {
+        public static Garron GetGarron(int idGarron)
+        {
+            QueryManager manager = QueryManager.Instance();
+            string query = manager.GetGarron(idGarron);
+            DataTable result = manager.GetTableResults(ConnecionBD.Instance().Connection, query);
+            DataNamesMapper<Garron> mg = new DataNamesMapper<Garron>();
+            return mg.Map(result).ToList().First();
+        }
         public static ComboBox GetComboTipoGarron(ComboBox cb, List<TipoGarron> list)
         {
             BindingList<TipoGarron> objects = new BindingList<TipoGarron>(list);
@@ -20,14 +28,12 @@ namespace AppLaMejor.controlmanager
             cb.SelectedIndex = -1;
             return cb;
         }
-
         public static TipoGarron GetTipoGarronClicked(object sender, EventArgs e)
         {
             ComboBox combo = (ComboBox)sender;
             TipoGarron tipoGarron = (TipoGarron)combo.SelectedValue;
             return tipoGarron;
         }
-
         public static ComboBox GetComboGarron(ComboBox cb, List<Garron> list)
         {
             BindingList<Garron> objects = new BindingList<Garron>(list);
@@ -36,14 +42,12 @@ namespace AppLaMejor.controlmanager
             cb.SelectedIndex = -1;
             return cb;
         }
-
         public static Garron GetGarronClicked(object sender, EventArgs e)
         {
             ComboBox combo = (ComboBox)sender;
             Garron garron = (Garron)combo.SelectedValue;
             return garron;
         }
-
         public static List<Garron> GetListGarronByEstadoAndTipo(string estado, string tipo)
         {
             string consulta = QueryManager.Instance().GetGarronByEstadoAndTipo(estado, tipo);
@@ -51,7 +55,6 @@ namespace AppLaMejor.controlmanager
             DataNamesMapper<Garron> mg = new DataNamesMapper<Garron>();
             return mg.Map(dataTablaGarron).ToList();
         }
-
         public static List<GarronParte> GetIdProductoDeposteByGarron(int idGarron)
         {
             string consulta = QueryManager.Instance().GetGarronProductoByGarron(idGarron.ToString());
@@ -71,7 +74,6 @@ namespace AppLaMejor.controlmanager
             }
             return list;
         }
-
         public static bool InsertGarron(Garron g)
         {
             // Recibe garron para insertar y devuelve el Id de garron insertado

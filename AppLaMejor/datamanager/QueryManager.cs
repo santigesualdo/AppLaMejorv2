@@ -616,6 +616,10 @@ namespace AppLaMejor.datamanager
         }
 
         /* Garron */
+        public string GetGarron(int idGarron)
+        {
+            return "select * from garron where id = '" + idGarron.ToString() + "';";
+        }
         public string GetTipoGarron()
         {
             return "select * from garrontipo;";

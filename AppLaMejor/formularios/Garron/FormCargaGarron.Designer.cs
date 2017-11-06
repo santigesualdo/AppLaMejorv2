@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.mainPanel = new System.Windows.Forms.Panel();
+            this.contentPanel = new System.Windows.Forms.Panel();
+            this.tablePanel = new System.Windows.Forms.TableLayoutPanel();
             this.bottomPanel = new System.Windows.Forms.Panel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.tsslMensaje = new System.Windows.Forms.ToolStripStatusLabel();
@@ -59,9 +61,8 @@
             this.tittleText = new System.Windows.Forms.Label();
             this.topPanel = new System.Windows.Forms.Panel();
             this.formTittleText = new System.Windows.Forms.Label();
-            this.contentPanel = new System.Windows.Forms.Panel();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.mainPanel.SuspendLayout();
+            this.contentPanel.SuspendLayout();
             this.bottomPanel.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.searchPanel.SuspendLayout();
@@ -79,7 +80,6 @@
             this.titlePanel2.SuspendLayout();
             this.titlePanel.SuspendLayout();
             this.topPanel.SuspendLayout();
-            this.contentPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainPanel
@@ -93,6 +93,28 @@
             this.mainPanel.Name = "mainPanel";
             this.mainPanel.Size = new System.Drawing.Size(1291, 744);
             this.mainPanel.TabIndex = 6;
+            // 
+            // contentPanel
+            // 
+            this.contentPanel.AutoScroll = true;
+            this.contentPanel.BackColor = System.Drawing.Color.YellowGreen;
+            this.contentPanel.Controls.Add(this.tablePanel);
+            this.contentPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.contentPanel.Location = new System.Drawing.Point(0, 328);
+            this.contentPanel.Name = "contentPanel";
+            this.contentPanel.Size = new System.Drawing.Size(1291, 366);
+            this.contentPanel.TabIndex = 6;
+            // 
+            // tablePanel
+            // 
+            this.tablePanel.ColumnCount = 1;
+            this.tablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tablePanel.Location = new System.Drawing.Point(0, 0);
+            this.tablePanel.Name = "tablePanel";
+            this.tablePanel.RowCount = 1;
+            this.tablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tablePanel.Size = new System.Drawing.Size(1291, 366);
+            this.tablePanel.TabIndex = 0;
             // 
             // bottomPanel
             // 
@@ -461,28 +483,6 @@
             this.formTittleText.Text = "Garron ";
             this.formTittleText.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // contentPanel
-            // 
-            this.contentPanel.BackColor = System.Drawing.Color.YellowGreen;
-            this.contentPanel.Controls.Add(this.tableLayoutPanel1);
-            this.contentPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.contentPanel.Location = new System.Drawing.Point(0, 328);
-            this.contentPanel.Name = "contentPanel";
-            this.contentPanel.Size = new System.Drawing.Size(1291, 366);
-            this.contentPanel.TabIndex = 6;
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 1;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1291, 366);
-            this.tableLayoutPanel1.TabIndex = 0;
-            // 
             // FormCargaGarron
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -495,6 +495,7 @@
             this.Text = "FormCargaGarron";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.mainPanel.ResumeLayout(false);
+            this.contentPanel.ResumeLayout(false);
             this.bottomPanel.ResumeLayout(false);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
@@ -513,7 +514,6 @@
             this.titlePanel2.ResumeLayout(false);
             this.titlePanel.ResumeLayout(false);
             this.topPanel.ResumeLayout(false);
-            this.contentPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -552,6 +552,6 @@
         private System.Windows.Forms.ComboBox comboTipoGarron;
         private System.Windows.Forms.Label lTittleTipoGarron;
         private System.Windows.Forms.Panel contentPanel;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TableLayoutPanel tablePanel;
     }
 }
