@@ -37,8 +37,9 @@ namespace AppLaMejor.formularios.Util
         MovimientoCuenta movCuenta1 = new MovimientoCuenta();
         Cliente cliente1 = new Cliente();
         int lastClient = 0;
+        int lastCuenta = 1;
 
-        public FormMovDetalle(Object reflection, int modo, int idCliente)
+        public FormMovDetalle(Object reflection, int modo, int idCliente, int idCuenta)
         {
            
 
@@ -48,6 +49,7 @@ namespace AppLaMejor.formularios.Util
             ApplicationLookAndFeel.ApplyThemeToAll(this);
             cargar();
             lastClient = idCliente;
+            lastCuenta = idCuenta;
             calcular(lastClient);
             fillGrid();
             formatearControles();
@@ -133,7 +135,7 @@ namespace AppLaMejor.formularios.Util
 
             debe = pago = saldo = 0;
             dv = new DataView(tableMovCuentas);
-            dv.RowFilter = "id_cliente_cuenta = " + cliente.ToString();
+            dv.RowFilter = "id_cliente = " + cliente.ToString();
             DataTable dvTemp = dv.ToTable();
             //calculo a partir de la columna monto
             for (int a = 0; a < dvTemp.Rows.Count; a++)
@@ -164,7 +166,7 @@ namespace AppLaMejor.formularios.Util
 
             debe = pago = saldo = 0;
             dv = new DataView(tableMovCuentas);
-            dv.RowFilter = "id_cliente_cuenta = " + cliente.ToString();
+            dv.RowFilter = "id_cliente = " + cliente.ToString();
             DataTable dvTemp = dv.ToTable();
             //calculo a partir de la columna monto
             for (int a = 0; a < dvTemp.Rows.Count; a++)
@@ -245,7 +247,7 @@ namespace AppLaMejor.formularios.Util
                     dgvMovCuentasPaginado.Columns["monto"].Width = 140;
                     dgvMovCuentasPaginado.Columns["monto"].DefaultCellStyle.Format = "c";
                     dgvMovCuentasPaginado.Columns["monto"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-                    dgvMovCuentasPaginado.Columns["cobrado"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                 //   dgvMovCuentasPaginado.Columns["cobrado"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
                 }
                 else
@@ -283,7 +285,7 @@ namespace AppLaMejor.formularios.Util
                     dgvMovCuentasPaginado.Columns["monto"].Width = 140;
                     dgvMovCuentasPaginado.Columns["monto"].DefaultCellStyle.Format = "c";
                     dgvMovCuentasPaginado.Columns["monto"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-                    dgvMovCuentasPaginado.Columns["cobrado"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                   // dgvMovCuentasPaginado.Columns["cobrado"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
                 }
                 else
@@ -420,9 +422,11 @@ namespace AppLaMejor.formularios.Util
             movCuenta1 = new MovimientoCuenta();
             TipoMovimiento tp = new TipoMovimiento();
             Cuenta cuenta = new Cuenta();
+            
             Usuario usuario = new Usuario();
             VariablesGlobales.FormMovCuentas_activo = true;
-            cuenta = FuncionesClientes.GetCuentaByIdCliente(lastClient);
+
+            cuenta = FuncionesClientes.GetCuentaById(lastCuenta);
 
             cliente1 = FuncionesClientes.GetClienteById(lastClient);
 

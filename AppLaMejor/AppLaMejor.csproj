@@ -88,6 +88,7 @@
     <Compile Include="datamanager\DataNamesMapper.cs" />
     <Compile Include="datamanager\PropertyMapHelper.cs" />
     <Compile Include="datamanager\QueryManager.cs" />
+    <Compile Include="entidades\Banco.cs" />
     <Compile Include="entidades\Garron.cs" />
     <Compile Include="entidades\GarronParte.cs" />
     <Compile Include="entidades\Medida.cs" />

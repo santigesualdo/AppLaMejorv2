@@ -125,6 +125,56 @@ namespace AppLaMejor.controlmanager
                 return null;
             }
         }
-    
+
+        public static Cuenta GetCuentaById(int lastCuenta)
+        {
+            //lleno cliente
+            string consulta = QueryManager.Instance().GetCuenta(lastCuenta);
+            DataTable dtw = QueryManager.Instance().GetTableResults(ConnecionBD.Instance().Connection, consulta);
+            List<Cuenta> listCuentas;
+            List<Banco> listBancos;
+            Banco banco = new Banco();
+            consulta = QueryManager.Instance().GetBancoById(Convert.ToInt16(dtw.Rows[0]["id_banco"].ToString()));
+            DataTable dtb = QueryManager.Instance().GetTableResults(ConnecionBD.Instance().Connection, consulta);
+
+
+            ////lleno cuentas
+            //string consulta = QueryManager.Instance().GetCuentas();
+            //DataTable dtc = QueryManager.Instance().GetTableResults(ConnecionBD.Instance().Connection, consulta);
+
+            if (!dtw.Rows.Count.Equals(0))
+            {
+                // Creamos mapper de clientes
+                DataNamesMapper<Cuenta> mapper = new DataNamesMapper<Cuenta>();
+                DataNamesMapper<Banco> mapper2 = new DataNamesMapper<Banco>();
+                // Mapeamos la datatable y quedan todos los clientes en ListClientes
+                listCuentas = mapper.Map(dtw).ToList();
+
+                // Como se busca por ID si o si sabemos que el miembro 0 de la lista es el indicado
+                Cuenta gotas = listCuentas.FirstOrDefault();
+
+                listBancos = mapper2.Map(dtb).ToList();
+
+
+                gotas.Banco = listBancos.FirstOrDefault();
+
+                return gotas;
+
+            }
+            else
+            {
+                DialogResult dialogResult = MessageBox.Show("     No hay cuenta asociada al cliente \r\n   ¿Desea crear una cuenta y asociarla?", "Mensaje", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    MessageBox.Show("acá linkear para crear una cuenta"); //do something
+                }
+                else if (dialogResult == DialogResult.No)
+                {
+                    //do something else
+                }
+                return null;
+            }
+        }
+
     }
 }

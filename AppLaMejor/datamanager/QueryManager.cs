@@ -97,9 +97,6 @@ namespace AppLaMejor.datamanager
             "inner join modulo m on m.id = um.id_modulo "+
             " where um.id_usuario = " + idUsuario + ";";
         }
-
-
-
         public string GetUserLogin(string userName, string pass)
         {
             return "select * from usuario where username = '" + userName + "'  and  pass ='" + pass + "'";
@@ -181,6 +178,76 @@ namespace AppLaMejor.datamanager
             return "update cliente set fecha_baja ='" + fechaBaja.ToString() + "' where id = "+ idCliente+";";
         }
 
+        /* Proveedores */
+        public string InsertNuevoProveedor(Proveedor Proveedor)
+        {
+            //revisar
+            return "INSERT INTO Proveedor ( razon_social, domicilio, localidad, civa, id_tipo_cliente, nombre_local, cuit, telefono, nombre_responsable, fecha_desde, fecha_baja, usuario) " +
+                " VALUES ( '" + Proveedor.RazonSocial + "', " +
+                " '" + Proveedor.Domicilio + "', " +
+                " '" + Proveedor.Localidad + "', " +
+                " '" + Proveedor.Iva + "', " +
+                " '" + Proveedor.NombreLocal + "', " +
+                " '" + Proveedor.Cuit + "', " +
+                " '" + Proveedor.Telefono + "', " +
+                " '" + Proveedor.NombreResponsable + "', " +
+                " '" + Proveedor.FechaDesde.ToString("yyyy-MM-dd") + "', " +
+                " null ," +
+                Proveedor.idUsuario + ");";
+
+        }
+        //public string UpdateProveedor(Proveedor Proveedor)
+        //{
+        //    string query = "UPDATE cliente SET " +
+        //        "razon_social ='" + cliente.RazonSocial + "',  " +
+        //        "domicilio ='" + cliente.Domicilio + "',  " +
+        //        "localidad ='" + cliente.Localidad + "',  " +
+        //        "civa ='" + cliente.Iva + "',  " +
+        //        "id_tipo_cliente ='" + cliente.TipoCliente.Id + "',  " +
+        //        "nombre_local ='" + cliente.NombreLocal + "',  " +
+        //        "telefono ='" + cliente.Telefono + "',  " +
+        //        "cuit ='" + cliente.Cuit + "',  " +
+        //        "nombre_responsable ='" + cliente.NombreResponsable + "',  " +
+        //        "fecha_desde ='" + cliente.FechaDesde.ToString("yyyy-MM-dd") + "', " +
+        //        "usuario ='" + cliente.idUsuario + "' " +
+        //        "WHERE id= " + cliente.Id + "";
+        //    return query;
+        //}
+        public string GetProveedores()
+        {
+            return "SELECT * FROM proveedor ORDER BY razon_social;";
+        }
+        public string GetProveedores(int id)
+        {
+            return "SELECT * FROM proveedor  WHERE id = " + id + " ORDER BY razon_social;";
+        }
+        public string GetProveedoresData()
+        {
+            return
+                " SELECT " +
+             "	c.id , " +
+             "	c.razon_social AS RazonSocial, " +
+             "	c.domicilio AS Domicilio, " +
+             "	c.localidad AS Localidad, " +
+             "  c.fecha_desde as FechaDesde, " +
+             "	c.civa AS IVA, " +
+             "	c.cuit AS CUIT, " +
+             "	c.nombre_responsable AS NombreResponsable, " +
+             "	c.nombre_local AS NombreLocal, " +
+             "	c.telefono AS Telefono," +
+             "	c.fecha_baja AS FechaBaja " +
+             " FROM " +
+             "	Proveedor c " +
+             "   order by c.id  ";
+        }        
+        public string GetProveedoresSaldoActual()
+        {
+            //trae el saldo actual y algunos datos de referencia para el form de MovCuentas
+            return "SELECT proveedor.id, proveedor.razon_social AS `razon social`, proveedor.nombre_local AS `nombre local`," +
+        " proveedor.cuit AS cuit,banco.descripcion AS Banco, cuenta.cbu, cuenta.nro_cuenta AS `nro cuenta`, cuenta.saldo_actual AS `saldo actual`, cuenta.fecha_updated AS actualizado, " +
+        " cuenta.usuario, cuenta.fecha_baja FROM proveedor inner join cuentaproveedor cuenta on proveedor.id = cuenta.id_proveedor INNER JOIN banco ON cuenta.id_banco = banco.id order by proveedor.id  ";
+        }
+        
         /* Cuentas */
         public string GetClientesWithCuentaById(int id){
             return "SELECT c.id , " +
@@ -248,6 +315,172 @@ namespace AppLaMejor.datamanager
             newCuenta.SaldoActual + "', '" +
             idCliente + "', " +
             " NOW() , 0 , null );";
+        }
+
+        /* Cuentas proveedores */
+        /* Movimiento Cuentas proveedores */
+        public string GetMovCuentasProveedores()
+        {/* trae todos los movimiento de cuentas de todos los proveedores*/
+            return "SELECT " +
+                    "cm.id, " +
+                    "cm.vob," +
+                    "gc.id," +
+                    "gc.id_proveedor," +
+                    "cm.id_cliente, " +
+                    "cm.id_movimiento_tipo," +
+                    "mt.descripcion, " +
+                    "round(cm.monto, 2) AS monto, " +
+                    "DATE_FORMAT(cm.fecha,'%Y-%m-%d') AS fecha_," +
+                    "cm.cobrado, " +
+                    "cm.usuario " +
+                    "FROM proveedorcuentamovimiento cm INNER JOIN proveedorcuenta gc ON cm.id_cuenta = gc.id " +
+                    "INNER JOIN movimientotipo mt ON cm.id_movimiento_tipo = mt.id " +
+                    "WHERE gc.id_proveedor IS NOT NULL ORDER BY cm.id DESC;";
+        }
+        public string GetProveedoresWithCuentaById(int id)
+        {
+            return "SELECT c.id , " +
+             "	c.razon_social AS RazonSocial, " +
+             "	c.domicilio AS Domicilio, " +
+             "	c.localidad AS Localidad, " +
+             "	cu.id AS IdCuenta, " +
+             "  c.fecha_desde as FechaDesde, " +
+             "	c.civa AS IVA, " +
+             "	c.cuit AS CUIT, " +
+             "	c.nombre_responsable AS NombreResponsable, " +
+             "	c.nombre_local AS NombreLocal, " +
+             "	c.telefono AS Telefono " +
+             " FROM " +
+             "	proveedor c " +
+             " INNER JOIN cuentaproveedor cu ON cu.id_proveedor = c.id " +
+             " WHERE c.id =" + id +
+             "   AND c.fecha_baja is null  " +
+             "   order by c.id  ";
+        }
+        public string GetProveedoresWithCuenta()
+        {
+            return "SELECT c.id , " +
+             "	c.razon_social AS RazonSocial, " +
+             "	c.domicilio AS Domicilio, " +
+             "	c.localidad AS Localidad, " +
+             "	cu.id AS IdCuenta, " +
+             "  c.fecha_desde as FechaDesde, " +
+             "	c.civa AS IVA, " +
+             "	c.cuit AS CUIT, " +
+             "	c.nombre_responsable AS NombreResponsable, " +
+             "	c.nombre_local AS NombreLocal, " +
+             "	c.telefono AS Telefono " +
+             " FROM " +
+             "	proveedor c " +
+             " INNER JOIN cuentaproveedor cu ON cu.id_proveedor = c.id " +
+             " WHERE " +
+             "   c.fecha_baja is null  " +
+             "   order by c.id  ";
+        }
+        public string GetCuentaByIdProveedor(int id)
+        {
+            return "select * from cuentaproveedor where id_proveedor = " + id.ToString();
+        }
+        public string GetCuentaProveedor(int id)
+        {
+            return "select * from cuentaproveedor where id = " + id.ToString();
+        }
+        public string GetCuentasProveedor()
+        {
+            return "select * from cuentaproveedor order by id;";
+        }
+        public string GetCuentasProveedores(int idProveedor)
+        {
+            return "select * from cuentaproveedor where id_proveedor = " + idProveedor + " order by id;";
+        }
+        public string InsertNuevaCuentaProveedor(Cuenta newCuenta, string idProveedor)
+        {
+            return "INSERT INTO cuentaproveedor ( cbu, nro_cuenta, saldo_actual, id_proveedor, fecha_updated, usuario, fecha_baja) " +
+            " VALUES ('" + newCuenta.Cbu + "', '" +
+            newCuenta.Numerocuenta + "', '" +
+            newCuenta.SaldoActual + "', '" +
+            idProveedor + "', " +
+            " NOW() , 0 , null );";
+        }
+        public string GetMovCuentasProveedor(int id, int pInicio, int registros)
+        {
+            /* trae paginando los movimiento de cuentas de un solo cliente*/
+
+            return "SELECT " +
+                    "cm.id, " +
+                    "cm.vob," +
+                    "gc.id," +
+                    "gc.id_proveedor," +
+
+                    "cm.id_movimiento_tipo," +
+                    "mt.descripcion, " +
+                    "round(cm.monto, 2) AS monto, " +
+                    "DATE_FORMAT(cm.fecha,'%Y-%m-%d') AS fecha_," +
+                    "cm.cobrado, " +
+                    "cm.usuario " +
+                    "FROM cuentamovimientoproveedor cm INNER JOIN cuentaproveedor gc ON cm.id_proveedor = gc.id " +
+                    "INNER JOIN movimientotipo mt ON cm.id_movimiento_tipo = mt.id " +
+                    "WHERE gc.id_proveedor =" + id.ToString() + " ORDER BY cm.id DESC LIMIT " +
+                    pInicio.ToString() + ", " + registros.ToString() + ";";
+        }
+
+        public string GetMovCuentasProveedorBetweenDates(int id, int pInicio, int registros, string fdesde, string fhasta)
+        {
+            /* trae paginando los movimiento de cuentas de un solo proveedor*/
+
+            return "SELECT " +
+                    "cm.id, " +
+                    "cm.vob," +
+                    "gc.id," +
+                    "gc.id_proveedor," +
+
+                    "cm.id_movimiento_tipo," +
+                    "mt.descripcion, " +
+                    "round(cm.monto, 2) AS monto, " +
+                    "DATE_FORMAT(cm.fecha,'%Y-%m-%d') AS fecha_," +
+                    "cm.cobrado, " +
+                    "cm.usuario " +
+                    "FROM cuentamovimientoproveedor cm INNER JOIN cuentaproveedor gc ON cm.id_proveedor = gc.id " +
+                    "INNER JOIN movimientotipo mt ON cm.id_movimiento_tipo = mt.id " +
+                    "WHERE gc.id_proveedor =" + id.ToString() + " AND cm.fecha BETWEEN '" + fdesde +
+                    "' AND '" + fhasta + "' ORDER BY cm.id DESC LIMIT " +
+                    pInicio.ToString() + ", " + registros.ToString() + ";";
+        }
+
+        public string GetMovCuentasProveedorContar(int id)
+        {
+            /* cuenta cuantos registros hay en total */
+
+            return "SELECT count(*) " +
+                    "FROM cuentamovimientoproveedor cm INNER JOIN cuentaproveedor gc ON cm.id_cliente = gc.id " +
+                    "INNER JOIN movimientotipo mt ON cm.id_movimiento_tipo = mt.id " +
+                    "WHERE gc.id_proveedor =" + id.ToString() + " ORDER BY cm.id DESC;";
+        }
+        public string InsertMovCuentaProveedor(MovimientoCuenta movCuenta)
+        {
+            /* persiste el movimiento de cuenta*/
+            return "INSERT INTO cuentamovimientoproveedor(" +
+                "vob," +
+                "id_cliente_cuenta," +
+                "id_movimiento_tipo," +
+                "monto," +
+                "fecha," +
+                "cobrado," +
+                "usuario)" +
+                "VALUES (" +
+
+                movCuenta.Vob + "," +
+                movCuenta.Cuenta.Id + "," +
+                movCuenta.TipoMovimiento.Id + "," +
+                movCuenta.Monto + ", NOW(),'" +
+                movCuenta.Cobrado + "'," +
+                movCuenta.idUsuario + ");";
+        }
+        public string ActualizaSaldoProveedor(Cuenta Cuenta)
+        {
+            /* persiste el saldo actual de la cuenta*/
+            return "UPDATE cuentaproveedor set saldo_actual = " +
+                Cuenta.SaldoActual + ", fecha_updated = now() WHERE id = " + Cuenta.Id + ";";
         }
 
         /* Movimiento Cuentas */
@@ -322,7 +555,6 @@ namespace AppLaMejor.datamanager
                     "WHERE gc.id_cliente =" + idCliente.ToString() + " AND cm.fecha BETWEEN '" + fdesde +
                     "' AND '" + fhasta + "' ORDER BY cm.id DESC;";
         }
-
         public string GetMovCuentasProveedoresContarBetweenDates(int idProveedor, string fdesde, string fhasta)
         {
             /* cuenta cuantos registros hay en total */
@@ -342,9 +574,6 @@ namespace AppLaMejor.datamanager
                     "INNER JOIN movimientotipo mt ON cm.id_movimiento_tipo = mt.id " +
                     "WHERE gc.id_cliente =" + id.ToString() + " ORDER BY cm.id DESC;";
         }
-
-
-
         public string InsertMovCuenta(MovimientoCuenta movCuenta)
         {
             /* persiste el movimiento de cuenta*/
@@ -371,7 +600,6 @@ namespace AppLaMejor.datamanager
             return "UPDATE cuenta set saldo_actual = " +
                 Cuenta.SaldoActual + ", fecha_updated = now() WHERE id = " + Cuenta.Id + ";";
         }
-		
         /* Ventas */
         public string GetProductoFromIdCode(string idCode)
         {
@@ -469,76 +697,6 @@ namespace AppLaMejor.datamanager
         public string GetNextVentaId()
         {
             return "SELECT MAX(id)+1 as nextid from venta;";
-        }
-
-        /* Proveedores */
-        public string InsertNuevoProveedor(Proveedor Proveedor)
-        {
-            //revisar
-            return "INSERT INTO Proveedor ( razon_social, domicilio, localidad, civa, id_tipo_cliente, nombre_local, cuit, telefono, nombre_responsable, fecha_desde, fecha_baja, usuario) " +
-                " VALUES ( '" + Proveedor.RazonSocial + "', " +
-                " '" + Proveedor.Domicilio + "', " +
-                " '" + Proveedor.Localidad + "', " +
-                " '" + Proveedor.Iva + "', " +
-                " '" + Proveedor.NombreLocal + "', " +
-                " '" + Proveedor.Cuit + "', " +
-                " '" + Proveedor.Telefono + "', " +
-                " '" + Proveedor.NombreResponsable + "', " +
-                " '" + Proveedor.FechaDesde.ToString("yyyy-MM-dd") + "', " +
-                " null ," +
-                Proveedor.idUsuario + ");";
-
-        }
-        //public string UpdateProveedor(Proveedor Proveedor)
-        //{
-        //    string query = "UPDATE cliente SET " +
-        //        "razon_social ='" + cliente.RazonSocial + "',  " +
-        //        "domicilio ='" + cliente.Domicilio + "',  " +
-        //        "localidad ='" + cliente.Localidad + "',  " +
-        //        "civa ='" + cliente.Iva + "',  " +
-        //        "id_tipo_cliente ='" + cliente.TipoCliente.Id + "',  " +
-        //        "nombre_local ='" + cliente.NombreLocal + "',  " +
-        //        "telefono ='" + cliente.Telefono + "',  " +
-        //        "cuit ='" + cliente.Cuit + "',  " +
-        //        "nombre_responsable ='" + cliente.NombreResponsable + "',  " +
-        //        "fecha_desde ='" + cliente.FechaDesde.ToString("yyyy-MM-dd") + "', " +
-        //        "usuario ='" + cliente.idUsuario + "' " +
-        //        "WHERE id= " + cliente.Id + "";
-        //    return query;
-        //}
-        public string GetProveedores()
-        {
-            return "SELECT * FROM proveedor ORDER BY razon_social;";
-        }
-        public string GetProveedores(int id)
-        {
-            return "SELECT * FROM proveedor  WHERE id = " + id + " ORDER BY razon_social;";
-        }
-        public string GetProveedoresData()
-        {
-            return
-                " SELECT " +
-             "	c.id , " +
-             "	c.razon_social AS RazonSocial, " +
-             "	c.domicilio AS Domicilio, " +
-             "	c.localidad AS Localidad, " +
-             "  c.fecha_desde as FechaDesde, " +
-             "	c.civa AS IVA, " +
-             "	c.cuit AS CUIT, " +
-             "	c.nombre_responsable AS NombreResponsable, " +
-             "	c.nombre_local AS NombreLocal, " +
-             "	c.telefono AS Telefono," +
-             "	c.fecha_baja AS FechaBaja " +
-             " FROM " +
-             "	Proveedor c " +
-             "   order by c.id  ";
-        }
-        //trae el saldo actual y algunos datos de referencia para el form de MovCuentas
-        public string GetProveedoresSaldoActual()
-        {
-            return "SELECT proveedor.id, proveedor.razon_social AS `razon social`, proveedor.nombre_local AS `nombre local`," +
-        " proveedor.cuit AS cuit, cuenta.cbu, cuenta.nro_cuenta AS `nro cuenta`, cuenta.saldo_actual AS `saldo actual`, cuenta.fecha_updated AS actualizado, " +
-        " cuenta.usuario, cuenta.fecha_baja FROM proveedor inner join cuentaproveedor cuenta on proveedor.id = cuenta.id_proveedor order by proveedor.id  ";
         }
 
         /* Productos */
@@ -680,10 +838,17 @@ namespace AppLaMejor.datamanager
             return "select * from garronestado; ";
         }
 
-        public string GetProveedoresWithCuentaById(int id)
+
+        /* Banco */
+        public string GetBanco()
         {
-            throw new NotImplementedException();
+            return "select * from banco order by id;";
         }
+        public string GetBancoById(int idBanco)
+        {
+            return "select * from banco where id = " + idBanco + ";";
+        }
+
     }
 
 

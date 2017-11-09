@@ -38,18 +38,18 @@
             this.textPass = new System.Windows.Forms.TextBox();
             this.lPass = new System.Windows.Forms.Label();
             this.mainPanel = new System.Windows.Forms.Panel();
-            this.topPanel = new System.Windows.Forms.Panel();
-            this.formTittleText = new System.Windows.Forms.Label();
             this.bottomPanel = new System.Windows.Forms.Panel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.tsslMensaje = new System.Windows.Forms.ToolStripStatusLabel();
+            this.topPanel = new System.Windows.Forms.Panel();
+            this.formTittleText = new System.Windows.Forms.Label();
             this.contentPanel.SuspendLayout();
             this.loginPanel.SuspendLayout();
             this.buttonPanel.SuspendLayout();
             this.mainPanel.SuspendLayout();
-            this.topPanel.SuspendLayout();
             this.bottomPanel.SuspendLayout();
             this.statusStrip1.SuspendLayout();
+            this.topPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // contentPanel
@@ -176,29 +176,6 @@
             this.mainPanel.Size = new System.Drawing.Size(1190, 576);
             this.mainPanel.TabIndex = 23;
             // 
-            // topPanel
-            // 
-            this.topPanel.BackColor = System.Drawing.Color.Black;
-            this.topPanel.Controls.Add(this.formTittleText);
-            this.topPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.topPanel.Location = new System.Drawing.Point(0, 0);
-            this.topPanel.Name = "topPanel";
-            this.topPanel.Size = new System.Drawing.Size(1190, 55);
-            this.topPanel.TabIndex = 1;
-            // 
-            // formTittleText
-            // 
-            this.formTittleText.BackColor = System.Drawing.Color.Green;
-            this.formTittleText.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.formTittleText.Font = new System.Drawing.Font("Source Sans Pro", 22F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.formTittleText.Location = new System.Drawing.Point(0, 0);
-            this.formTittleText.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
-            this.formTittleText.Name = "formTittleText";
-            this.formTittleText.Size = new System.Drawing.Size(1190, 55);
-            this.formTittleText.TabIndex = 0;
-            this.formTittleText.Text = "Sistema - Carniceria La Mejor";
-            this.formTittleText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // bottomPanel
             // 
             this.bottomPanel.BackColor = System.Drawing.Color.Green;
@@ -232,6 +209,29 @@
             this.tsslMensaje.Size = new System.Drawing.Size(85, 50);
             this.tsslMensaje.Text = "Mensajero";
             // 
+            // topPanel
+            // 
+            this.topPanel.BackColor = System.Drawing.Color.Black;
+            this.topPanel.Controls.Add(this.formTittleText);
+            this.topPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.topPanel.Location = new System.Drawing.Point(0, 0);
+            this.topPanel.Name = "topPanel";
+            this.topPanel.Size = new System.Drawing.Size(1190, 55);
+            this.topPanel.TabIndex = 1;
+            // 
+            // formTittleText
+            // 
+            this.formTittleText.BackColor = System.Drawing.Color.Green;
+            this.formTittleText.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.formTittleText.Font = new System.Drawing.Font("Source Sans Pro", 22F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.formTittleText.Location = new System.Drawing.Point(0, 0);
+            this.formTittleText.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
+            this.formTittleText.Name = "formTittleText";
+            this.formTittleText.Size = new System.Drawing.Size(1190, 55);
+            this.formTittleText.TabIndex = 0;
+            this.formTittleText.Text = "Sistema - Carniceria La Mejor";
+            this.formTittleText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // FormUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
@@ -252,10 +252,10 @@
             this.loginPanel.PerformLayout();
             this.buttonPanel.ResumeLayout(false);
             this.mainPanel.ResumeLayout(false);
-            this.topPanel.ResumeLayout(false);
             this.bottomPanel.ResumeLayout(false);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.topPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

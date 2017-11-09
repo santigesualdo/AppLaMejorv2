@@ -248,9 +248,9 @@ namespace AppLaMejor.formularios
             int selectedrowindex = dataGridClientes.SelectedCells[0].RowIndex;
             Cliente clientSelected = listClients[selectedrowindex];
             int idCliente = clientSelected.Id;
-
+            int idCuenta = (int)dataGridClientes[6, dataGridClientes.CurrentCell.RowIndex].Value;
             /* Form Entity Input */
-            FormMovDetalle dialog = new FormMovDetalle(null, FormMovDetalle.MODO_VER, idCliente);
+            FormMovDetalle dialog = new FormMovDetalle(null, FormMovDetalle.MODO_VER, idCliente,idCuenta);
             Boolean result = dialog.Execute(clientSelected, idCliente);
         }
 
@@ -260,9 +260,9 @@ namespace AppLaMejor.formularios
             int selectedrowindex = dataGridClientes.SelectedCells[0].RowIndex;
             Cliente clientSelected = listClients[selectedrowindex];
             int idCliente = clientSelected.Id;
-
+            int idCuenta = (int)dataGridClientes[6, dataGridClientes.CurrentCell.RowIndex].Value;
             /* Form Entity Input */
-            FormMovDetalle dialog = new FormMovDetalle(null, FormMovDetalle.MODO_AGREGAR, idCliente);
+            FormMovDetalle dialog = new FormMovDetalle(null, FormMovDetalle.MODO_AGREGAR, idCliente, idCuenta);
             Boolean result = dialog.Execute(clientSelected, idCliente);
         }
 
@@ -349,6 +349,13 @@ namespace AppLaMejor.formularios
         {
             VariablesGlobales.FormMovCuentas_activo = false;
         }
-        
+
+        private void dataGridClientes_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //MessageBox.Show(dataGridClientes[6, dataGridClientes.CurrentCell.RowIndex].Value.ToString());
+
+        //    dataGridView1.CurrentCell.RowIndex,
+        //dataGridView1.CurrentCell.ColumnIndex
+        }
     }
 }

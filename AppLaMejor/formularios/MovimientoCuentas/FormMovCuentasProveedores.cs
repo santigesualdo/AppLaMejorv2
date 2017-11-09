@@ -214,7 +214,7 @@ namespace AppLaMejor.formularios
             int idProveedor = provSelected.Id;
 
             /* Form Entity Input */
-            FormMovDetalle dialog = new FormMovDetalle(null, FormMovDetalle.MODO_VER, idProveedor);
+            FormMovDetalle dialog = new FormMovDetalle(null, FormMovDetalle.MODO_VER, idProveedor, 1);
             Boolean result = dialog.Execute(provSelected, idProveedor);
         }
 
@@ -226,7 +226,7 @@ namespace AppLaMejor.formularios
             int idProveedor = provSelected.Id;
 
             /* Form Entity Input */
-            FormMovDetalle dialog = new FormMovDetalle(null, FormMovDetalle.MODO_AGREGAR, idProveedor);
+            FormMovDetalle dialog = new FormMovDetalle(null, FormMovDetalle.MODO_AGREGAR, idProveedor, 1);
             Boolean result = dialog.Execute(provSelected, idProveedor);
         }
 

@@ -53,6 +53,46 @@ namespace AppLaMejor.formularios.MovimientoCuentas
             consulta = QueryManager.Instance().ActualizaSaldo(movCuenta1.Cuenta);
             QueryManager.Instance().GetTableResults(ConnecionBD.Instance().Connection, consulta);
         }
+        
+        //proveedores
+        public static DataTable fillMovCuentasProveedores()
+        {
+            string consulta = QueryManager.Instance().GetMovCuentasProveedores(); //QueryManager.Instance().GetMovCuentas();
+            return QueryManager.Instance().GetTableResults(ConnecionBD.Instance().Connection, consulta);
+        }
+        public static DataTable fillPaginaProveedores(int lastProv, int ini, int reg)
+        {
+            string consulta = QueryManager.Instance().GetMovCuentasProveedor(lastProv, ini, reg);
+            return QueryManager.Instance().GetTableResults(ConnecionBD.Instance().Connection, consulta);
+        }
+        public static DataTable fillPaginaProveedoresBetweenDates(int lastProv, int ini, int reg, string fdesde, string fhasta)
+        {
+            string consulta = QueryManager.Instance().GetMovCuentasProveedorBetweenDates(lastProv, ini, reg, fdesde, fhasta);
+            return QueryManager.Instance().GetTableResults(ConnecionBD.Instance().Connection, consulta);
+        }
+        public static int contarRegistrosProveedores(int idProveedor)
+        {
+            string consulta = QueryManager.Instance().GetMovCuentasProveedorContar(idProveedor);
+            DataTable dtTotalRegistros = QueryManager.Instance().GetTableResults(ConnecionBD.Instance().Connection, consulta);
+
+            //cuento cuantos movCuentas tiene el cliente
+            return Convert.ToInt32(dtTotalRegistros.Rows[0][0].ToString());
+        }
+        public static int contarRegistrosProveedoresBetweenDates(int idProveedor, string fdesde, string fhasta)
+        {
+            string consulta = QueryManager.Instance().GetMovCuentasProveedoresContarBetweenDates(idProveedor, fdesde, fhasta);
+            DataTable dtTotalRegistros = QueryManager.Instance().GetTableResults(ConnecionBD.Instance().Connection, consulta);
+
+            //cuento cuantos movCuentas tiene el cliente
+            return Convert.ToInt32(dtTotalRegistros.Rows[0][0].ToString());
+        }
+        public static void insertarMovimientoProveedor(MovimientoCuenta movCuenta1)
+        {
+            string consulta = QueryManager.Instance().InsertMovCuentaProveedor(movCuenta1);
+            QueryManager.Instance().GetTableResults(ConnecionBD.Instance().Connection, consulta);
+            consulta = QueryManager.Instance().ActualizaSaldoProveedor(movCuenta1.Cuenta);
+            QueryManager.Instance().GetTableResults(ConnecionBD.Instance().Connection, consulta);
+        }		
 
     }
 }

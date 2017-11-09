@@ -19,6 +19,9 @@ namespace AppLaMejor.entidades
 
         private Nullable<DateTime> fechaUltimaActualizacion;
 
+        [DataNames("banco")]
+        public Banco Banco { get; set; }
+        
         [DataNames("fecha_updated")] 
         public Nullable<DateTime> FechaUltimaActualizacion
         {
