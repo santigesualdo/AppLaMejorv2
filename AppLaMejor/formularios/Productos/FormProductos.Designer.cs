@@ -476,8 +476,8 @@ namespace AppLaMejor.formularios
             this.filter2TextBox.Size = new System.Drawing.Size(140, 26);
             this.filter2TextBox.TabIndex = 6;
             this.filter2TextBox.Text = "-";
-            this.filter2TextBox.TextChanged += new System.EventHandler(this.filter2TextBox_TextChanged);
             this.filter2TextBox.Click += new System.EventHandler(this.filter2TextBox_Click);
+            this.filter2TextBox.TextChanged += new System.EventHandler(this.filter2TextBox_TextChanged);
             // 
             // filter2Text
             // 
@@ -513,8 +513,8 @@ namespace AppLaMejor.formularios
             this.filterTextBox.Size = new System.Drawing.Size(140, 26);
             this.filterTextBox.TabIndex = 5;
             this.filterTextBox.Text = "-";
-            this.filterTextBox.TextChanged += new System.EventHandler(this.filterTextBox_TextChanged);
             this.filterTextBox.Click += new System.EventHandler(this.filterTextBox_Click);
+            this.filterTextBox.TextChanged += new System.EventHandler(this.filterTextBox_TextChanged);
             // 
             // filter3Text
             // 
@@ -579,7 +579,7 @@ namespace AppLaMejor.formularios
             this.Controls.Add(this.mainPanel);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.White;
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormProductos";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormClientes";

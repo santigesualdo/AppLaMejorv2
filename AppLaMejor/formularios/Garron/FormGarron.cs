@@ -15,5 +15,15 @@ namespace AppLaMejor.formularios
         {
             InitializeComponent();
         }
+
+        private void bAceptar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void bCancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

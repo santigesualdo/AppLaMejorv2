@@ -206,5 +206,14 @@ namespace AppLaMejor.formularios
             (dataGridVentas.DataSource as DataTable).DefaultView.RowFilter = string.Empty;
         }
 
+        private void bAceptar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void bCancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

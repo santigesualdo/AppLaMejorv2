@@ -30,17 +30,17 @@
         {
             this.topPanel = new System.Windows.Forms.Panel();
             this.formTittleText = new System.Windows.Forms.Label();
-            this.descriptionPanel = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
             this.contentPanel = new System.Windows.Forms.Panel();
             this.mainPanel = new System.Windows.Forms.Panel();
             this.bottomPanel = new System.Windows.Forms.Panel();
             this.bAceptar = new System.Windows.Forms.Button();
             this.bCancelar = new System.Windows.Forms.Button();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.tsslMensaje = new System.Windows.Forms.ToolStripStatusLabel();
             this.topPanel.SuspendLayout();
-            this.descriptionPanel.SuspendLayout();
             this.mainPanel.SuspendLayout();
             this.bottomPanel.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // topPanel
@@ -65,42 +65,18 @@
             this.formTittleText.Text = "FormInicio";
             this.formTittleText.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // descriptionPanel
-            // 
-            this.descriptionPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.descriptionPanel.Controls.Add(this.label2);
-            this.descriptionPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.descriptionPanel.Location = new System.Drawing.Point(0, 50);
-            this.descriptionPanel.Name = "descriptionPanel";
-            this.descriptionPanel.Padding = new System.Windows.Forms.Padding(5);
-            this.descriptionPanel.Size = new System.Drawing.Size(934, 50);
-            this.descriptionPanel.TabIndex = 2;
-            // 
-            // label2
-            // 
-            this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Font = new System.Drawing.Font("Consolas", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(5, 5);
-            this.label2.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(922, 38);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Seleccione el modulo al que desea ingresar";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // contentPanel
             // 
             this.contentPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.contentPanel.Location = new System.Drawing.Point(0, 100);
+            this.contentPanel.Location = new System.Drawing.Point(0, 50);
             this.contentPanel.Name = "contentPanel";
-            this.contentPanel.Size = new System.Drawing.Size(934, 391);
+            this.contentPanel.Size = new System.Drawing.Size(934, 441);
             this.contentPanel.TabIndex = 3;
             // 
             // mainPanel
             // 
             this.mainPanel.Controls.Add(this.bottomPanel);
             this.mainPanel.Controls.Add(this.contentPanel);
-            this.mainPanel.Controls.Add(this.descriptionPanel);
             this.mainPanel.Controls.Add(this.topPanel);
             this.mainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mainPanel.Location = new System.Drawing.Point(0, 0);
@@ -111,6 +87,7 @@
             // bottomPanel
             // 
             this.bottomPanel.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.bottomPanel.Controls.Add(this.statusStrip1);
             this.bottomPanel.Controls.Add(this.bAceptar);
             this.bottomPanel.Controls.Add(this.bCancelar);
             this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -144,6 +121,29 @@
             this.bCancelar.UseVisualStyleBackColor = true;
             this.bCancelar.Click += new System.EventHandler(this.bCancelar_Click);
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.AutoSize = false;
+            this.statusStrip1.BackColor = System.Drawing.Color.Green;
+            this.statusStrip1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsslMensaje});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 0);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(774, 50);
+            this.statusStrip1.TabIndex = 23;
+            this.statusStrip1.Text = "ssMensajero";
+            // 
+            // tsslMensaje
+            // 
+            this.tsslMensaje.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsslMensaje.Font = new System.Drawing.Font("Lucida Sans", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tsslMensaje.ImageTransparentColor = System.Drawing.Color.Green;
+            this.tsslMensaje.Margin = new System.Windows.Forms.Padding(20, 0, 0, 0);
+            this.tsslMensaje.Name = "tsslMensaje";
+            this.tsslMensaje.Size = new System.Drawing.Size(85, 50);
+            this.tsslMensaje.Text = "Mensajero";
+            // 
             // FormInicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -159,9 +159,10 @@
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.FormInicio_Load);
             this.topPanel.ResumeLayout(false);
-            this.descriptionPanel.ResumeLayout(false);
             this.mainPanel.ResumeLayout(false);
             this.bottomPanel.ResumeLayout(false);
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -170,14 +171,13 @@
 
         private System.Windows.Forms.Panel topPanel;
         private System.Windows.Forms.Label formTittleText;
-        private System.Windows.Forms.Panel descriptionPanel;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel contentPanel;
         private System.Windows.Forms.Panel mainPanel;
         private System.Windows.Forms.Panel bottomPanel;
         private System.Windows.Forms.Button bAceptar;
         private System.Windows.Forms.Button bCancelar;
-
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel tsslMensaje;
     }
 }
 

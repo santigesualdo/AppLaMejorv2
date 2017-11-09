@@ -77,12 +77,12 @@ namespace AppLaMejor.formularios
 
         private void textUser_Enter(object sender, EventArgs e)
         {
-            MyTextTimer.TStartFade("Ingrese nombre usuario.", this.statusStrip1, this.tsslMensaje, 20);
+            MyTextTimer.TStartFade("Ingrese nombre usuario.", this.statusStrip1, this.tsslMensaje, MyTextTimer.TIME_FOREVER);
         }
 
         private void textPass_Enter(object sender, EventArgs e)
         {
-            MyTextTimer.TStartFade("Ingrese contraseña.", this.statusStrip1, this.tsslMensaje, 20);
+            MyTextTimer.TStartFade("Ingrese contraseña.", this.statusStrip1, this.tsslMensaje, MyTextTimer.TIME_FOREVER);
         }
 
         private void textUser_Leave(object sender, EventArgs e)
@@ -93,6 +93,14 @@ namespace AppLaMejor.formularios
         private void textPass_Leave(object sender, EventArgs e)
         {
             MyTextTimer.EndTimerAndResetValues();
+        }
+
+        private void textUser_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Return)
+            {
+                textPass.Focus();
+            }
         }
     }
 }

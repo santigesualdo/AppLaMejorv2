@@ -233,5 +233,15 @@ namespace AppLaMejor.formularios
                 MyTextTimer.TStart("El peso ingresado es incorrecto. ", this.statusStrip1, this.tsslMensaje);
             }
         }
+
+        private void bAceptar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void bCancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

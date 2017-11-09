@@ -1,7 +1,7 @@
 ﻿using System.Windows.Forms;
 using System.Drawing;
 using AppLaMejor.stylemanager;
-
+using System;
 
 public class ApplicationLookAndFeel
 {
@@ -29,9 +29,14 @@ public class ApplicationLookAndFeel
     }
     public static void ApplyTheme(ToolStripStatusLabel c)
     {
-        c.Font = StyleManager.Instance().GetCurrentStyle().MainFont;
+        c.Font = StyleManager.Instance().GetCurrentStyle().MainFontBig;
         c.BackColor = StyleManager.Instance().GetCurrentStyle().MainColor;
         c.ForeColor = StyleManager.Instance().GetCurrentStyle().TextColor;
+    }
+    public static void ApplyTheme(StatusStrip control)
+    {
+        ToolStripStatusLabel label = (ToolStripStatusLabel)control.Items[0];
+        ApplyTheme(label);
     }
     public static void ApplyTheme(Form c)
     {
@@ -236,9 +241,17 @@ public class ApplicationLookAndFeel
                     if (control.Controls.Count > 0)
                         ApplyThemeToChild((Control)c);
                     break;
+                case "System.Windows.Forms.StatusStrip":
+                    control = (StatusStrip)c;
+                    ApplyTheme((StatusStrip)control);
+                    if (control.Controls.Count > 0)
+                        ApplyThemeToChild((Control)c);
+                    break;
             }
         }
     }
+
+
 
     public static void ApplyThemeToAll(Form f)
     {

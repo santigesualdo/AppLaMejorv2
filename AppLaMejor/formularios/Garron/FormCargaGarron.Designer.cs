@@ -112,7 +112,7 @@
             this.tablePanel.Location = new System.Drawing.Point(0, 0);
             this.tablePanel.Name = "tablePanel";
             this.tablePanel.RowCount = 1;
-            this.tablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 366F));
             this.tablePanel.Size = new System.Drawing.Size(1291, 366);
             this.tablePanel.TabIndex = 0;
             // 
@@ -169,6 +169,7 @@
             this.bAceptar.Text = "Aceptar";
             this.bAceptar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.bAceptar.UseVisualStyleBackColor = false;
+            this.bAceptar.Click += new System.EventHandler(this.bAceptar_Click);
             // 
             // bCancelar
             // 
@@ -187,6 +188,7 @@
             this.bCancelar.Text = "Cancelar";
             this.bCancelar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.bCancelar.UseVisualStyleBackColor = false;
+            this.bCancelar.Click += new System.EventHandler(this.bCancelar_Click);
             // 
             // searchPanel
             // 
@@ -489,6 +491,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1291, 744);
             this.Controls.Add(this.mainPanel);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormCargaGarron";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

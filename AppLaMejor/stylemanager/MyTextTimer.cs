@@ -9,6 +9,12 @@ namespace AppLaMejor.stylemanager
 {
     public static class MyTextTimer
     {
+        public static int TIME_SHORT = 20;
+        public static int TIME_LONG = 40;
+        public static int TIME_FOREVER = 0;
+
+        public static int currentTimeMode = 0;
+
 
         static Timer _timer;
         public static int tCount = 0;
@@ -31,8 +37,10 @@ namespace AppLaMejor.stylemanager
             _timer.Tick += _timer_Elapsed;
             _timer.Start();
         }
-        public static void TStartFade(string mensaje, StatusStrip ss, ToolStripStatusLabel label, int timeOn)
+        public static void TStartFade(string mensaje, StatusStrip ss, ToolStripStatusLabel label, int timeMode)
         {
+            currentTimeMode = timeMode;
+
             mVisible = false;
 
             r = label.BackColor.R;
@@ -50,8 +58,21 @@ namespace AppLaMejor.stylemanager
             tssl = label;
             tssl.Text= mensaje;
             tssl.ForeColor = label.BackColor;
-            tCount = -1;
-            tMax = timeOn;
+            tCount = 0;
+
+            if (currentTimeMode.Equals(TIME_SHORT))
+            {
+                tMax = 20;
+            }
+            else if(currentTimeMode.Equals(TIME_LONG))
+            {
+                tMax = 40;
+            }
+            else if (currentTimeMode.Equals(TIME_FOREVER))
+            {
+                tMax = 0;
+            }
+            
             tssl = label;
             _timer = new Timer();
             _timer.Interval = 5;
@@ -72,19 +93,25 @@ namespace AppLaMejor.stylemanager
 
         private static void _timer_Elapsed_fadeInFadeOut(object sender, EventArgs e)
         {
-            if (!mVisible)
-                fadeIn();
-            else
+            if (!tCount.Equals(-1))
             {
-                if (tCount < tMax)
+                if (!mVisible)
+                    fadeIn();
+                else
                 {
-                    tCount++;
-                }else
-                {
-                    fadeOut();
+                    if (!tMax.Equals(0))
+                    {
+                        if (tCount < tMax)
+                        {
+                            tCount++;
+                        }
+                        else
+                        {
+                            fadeOut();
+                        }
+                    }
                 }
-            }
-                
+            }   
         }
 
         private static void fadeIn()

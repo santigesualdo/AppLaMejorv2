@@ -365,7 +365,7 @@ namespace AppLaMejor.formularios
             this.filterTableLayoutPanel.ColumnCount = 3;
             this.filterTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.filterTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.filterTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 310F));
+            this.filterTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 312F));
             this.filterTableLayoutPanel.Controls.Add(this.panel1, 1, 0);
             this.filterTableLayoutPanel.Controls.Add(this.filtro3Panel, 0, 0);
             this.filterTableLayoutPanel.Controls.Add(this.filtro1Panel, 2, 0);
@@ -383,10 +383,10 @@ namespace AppLaMejor.formularios
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.cmbClientes);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(340, 4);
+            this.panel1.Location = new System.Drawing.Point(339, 4);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(5);
-            this.panel1.Size = new System.Drawing.Size(329, 54);
+            this.panel1.Size = new System.Drawing.Size(328, 54);
             this.panel1.TabIndex = 4;
             // 
             // label1
@@ -395,7 +395,7 @@ namespace AppLaMejor.formularios
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(5, 5);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(319, 18);
+            this.label1.Size = new System.Drawing.Size(318, 18);
             this.label1.TabIndex = 4;
             this.label1.Text = "Todos los clientes";
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -421,7 +421,7 @@ namespace AppLaMejor.formularios
             this.filtro3Panel.Location = new System.Drawing.Point(4, 4);
             this.filtro3Panel.Name = "filtro3Panel";
             this.filtro3Panel.Padding = new System.Windows.Forms.Padding(5);
-            this.filtro3Panel.Size = new System.Drawing.Size(329, 54);
+            this.filtro3Panel.Size = new System.Drawing.Size(328, 54);
             this.filtro3Panel.TabIndex = 1;
             // 
             // filterTextBox
@@ -445,7 +445,7 @@ namespace AppLaMejor.formularios
             this.filter3Text.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.filter3Text.Location = new System.Drawing.Point(5, 5);
             this.filter3Text.Name = "filter3Text";
-            this.filter3Text.Size = new System.Drawing.Size(319, 18);
+            this.filter3Text.Size = new System.Drawing.Size(318, 18);
             this.filter3Text.TabIndex = 4;
             this.filter3Text.Text = "Por Cliente con Cuenta";
             this.filter3Text.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -454,7 +454,7 @@ namespace AppLaMejor.formularios
             // 
             this.filtro1Panel.Controls.Add(this.comboTipoFilter);
             this.filtro1Panel.Controls.Add(this.filter1Text);
-            this.filtro1Panel.Location = new System.Drawing.Point(676, 4);
+            this.filtro1Panel.Location = new System.Drawing.Point(674, 4);
             this.filtro1Panel.Name = "filtro1Panel";
             this.filtro1Panel.Padding = new System.Windows.Forms.Padding(5);
             this.filtro1Panel.Size = new System.Drawing.Size(299, 54);
@@ -536,7 +536,7 @@ namespace AppLaMejor.formularios
             this.Controls.Add(this.mainPanel);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.White;
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormMovCuentas";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormMoviCuentas";

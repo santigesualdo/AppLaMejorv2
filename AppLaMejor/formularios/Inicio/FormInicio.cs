@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using AppLaMejor.datamanager;
 using AppLaMejor.controlmanager;
+using AppLaMejor.stylemanager;
 
 namespace AppLaMejor.formularios
 {
@@ -18,10 +19,14 @@ namespace AppLaMejor.formularios
         public FormInicio()
         {
             InitializeComponent();
+
+            ApplicationLookAndFeel.ApplyThemeToAll(this);
+
+            MyTextTimer.TStartFade("Seleccione Modulo.", this.statusStrip1, this.tsslMensaje, MyTextTimer.TIME_FOREVER);
         }
 
-        private void FormInicio_Load(object sender, EventArgs e)
-        {          
+        private void CargarFormInicio()
+        {
             // Obtenemos tabla con la consulta ejecutada
             QueryManager manager = QueryManager.Instance();
             string query = manager.GetUsuariosModulos(VariablesGlobales.userIdLogueado);
@@ -37,13 +42,16 @@ namespace AppLaMejor.formularios
             tablePanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
 
             // Obtenemos los modulos disponibles
-            for (int i = 0; i<dtTablaModulos.Rows.Count; i++)
+            for (int i = 0; i < dtTablaModulos.Rows.Count; i++)
             {
                 string moduleName = dtTablaModulos.Rows[i].ItemArray[1].ToString();
                 AddRowToTablePanel(tablePanel, moduleName);
             }
+        }
 
-            ApplicationLookAndFeel.ApplyThemeToAll(this);
+        private void FormInicio_Load(object sender, EventArgs e)
+        {
+            CargarFormInicio();
         }
 
         private void AddRowToTablePanel(TableLayoutPanel tpanel, string moduloName)

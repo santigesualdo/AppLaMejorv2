@@ -388,8 +388,8 @@ namespace AppLaMejor.formularios
             this.filterTextBox.Size = new System.Drawing.Size(140, 26);
             this.filterTextBox.TabIndex = 5;
             this.filterTextBox.Text = "Ingresar Nombre";
-            this.filterTextBox.TextChanged += new System.EventHandler(this.filterTextBox_TextChanged);
             this.filterTextBox.Click += new System.EventHandler(this.filterTextBox_Click);
+            this.filterTextBox.TextChanged += new System.EventHandler(this.filterTextBox_TextChanged);
             // 
             // filter3Text
             // 
@@ -454,7 +454,7 @@ namespace AppLaMejor.formularios
             this.Controls.Add(this.mainPanel);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.White;
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormMovCuentasProveedores";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Visor";
