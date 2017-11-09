@@ -40,11 +40,16 @@
             this.mainPanel = new System.Windows.Forms.Panel();
             this.topPanel = new System.Windows.Forms.Panel();
             this.formTittleText = new System.Windows.Forms.Label();
+            this.bottomPanel = new System.Windows.Forms.Panel();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.tsslMensaje = new System.Windows.Forms.ToolStripStatusLabel();
             this.contentPanel.SuspendLayout();
             this.loginPanel.SuspendLayout();
             this.buttonPanel.SuspendLayout();
             this.mainPanel.SuspendLayout();
             this.topPanel.SuspendLayout();
+            this.bottomPanel.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // contentPanel
@@ -54,7 +59,7 @@
             this.contentPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.contentPanel.Location = new System.Drawing.Point(0, 55);
             this.contentPanel.Name = "contentPanel";
-            this.contentPanel.Size = new System.Drawing.Size(1370, 615);
+            this.contentPanel.Size = new System.Drawing.Size(1190, 521);
             this.contentPanel.TabIndex = 3;
             // 
             // loginPanel
@@ -67,7 +72,7 @@
             this.loginPanel.Controls.Add(this.lUser);
             this.loginPanel.Controls.Add(this.textPass);
             this.loginPanel.Controls.Add(this.lPass);
-            this.loginPanel.Location = new System.Drawing.Point(317, 80);
+            this.loginPanel.Location = new System.Drawing.Point(227, 33);
             this.loginPanel.Name = "loginPanel";
             this.loginPanel.Size = new System.Drawing.Size(471, 244);
             this.loginPanel.TabIndex = 22;
@@ -126,7 +131,8 @@
             this.textUser.Name = "textUser";
             this.textUser.Size = new System.Drawing.Size(163, 21);
             this.textUser.TabIndex = 0;
-            this.textUser.Text = "a";
+            this.textUser.Enter += new System.EventHandler(this.textUser_Enter);
+            this.textUser.Leave += new System.EventHandler(this.textUser_Leave);
             // 
             // lUser
             // 
@@ -145,7 +151,8 @@
             this.textPass.Name = "textPass";
             this.textPass.Size = new System.Drawing.Size(163, 21);
             this.textPass.TabIndex = 1;
-            this.textPass.Text = "a";
+            this.textPass.Enter += new System.EventHandler(this.textPass_Enter);
+            this.textPass.Leave += new System.EventHandler(this.textPass_Leave);
             // 
             // lPass
             // 
@@ -160,12 +167,13 @@
             // 
             // mainPanel
             // 
+            this.mainPanel.Controls.Add(this.bottomPanel);
             this.mainPanel.Controls.Add(this.contentPanel);
             this.mainPanel.Controls.Add(this.topPanel);
             this.mainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mainPanel.Location = new System.Drawing.Point(0, 0);
             this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(1370, 670);
+            this.mainPanel.Size = new System.Drawing.Size(1190, 576);
             this.mainPanel.TabIndex = 23;
             // 
             // topPanel
@@ -175,7 +183,7 @@
             this.topPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.topPanel.Location = new System.Drawing.Point(0, 0);
             this.topPanel.Name = "topPanel";
-            this.topPanel.Size = new System.Drawing.Size(1370, 55);
+            this.topPanel.Size = new System.Drawing.Size(1190, 55);
             this.topPanel.TabIndex = 1;
             // 
             // formTittleText
@@ -186,16 +194,49 @@
             this.formTittleText.Location = new System.Drawing.Point(0, 0);
             this.formTittleText.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
             this.formTittleText.Name = "formTittleText";
-            this.formTittleText.Size = new System.Drawing.Size(1370, 55);
+            this.formTittleText.Size = new System.Drawing.Size(1190, 55);
             this.formTittleText.TabIndex = 0;
             this.formTittleText.Text = "Sistema - Carniceria La Mejor";
             this.formTittleText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // bottomPanel
+            // 
+            this.bottomPanel.BackColor = System.Drawing.Color.Green;
+            this.bottomPanel.Controls.Add(this.statusStrip1);
+            this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.bottomPanel.Location = new System.Drawing.Point(0, 526);
+            this.bottomPanel.Name = "bottomPanel";
+            this.bottomPanel.Size = new System.Drawing.Size(1190, 50);
+            this.bottomPanel.TabIndex = 6;
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.AutoSize = false;
+            this.statusStrip1.BackColor = System.Drawing.Color.Green;
+            this.statusStrip1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsslMensaje});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 0);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(1190, 50);
+            this.statusStrip1.TabIndex = 22;
+            this.statusStrip1.Text = "ssMensajero";
+            // 
+            // tsslMensaje
+            // 
+            this.tsslMensaje.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsslMensaje.Font = new System.Drawing.Font("Lucida Sans", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tsslMensaje.ImageTransparentColor = System.Drawing.Color.Green;
+            this.tsslMensaje.Margin = new System.Windows.Forms.Padding(20, 0, 0, 0);
+            this.tsslMensaje.Name = "tsslMensaje";
+            this.tsslMensaje.Size = new System.Drawing.Size(85, 50);
+            this.tsslMensaje.Text = "Mensajero";
             // 
             // FormUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1370, 670);
+            this.ClientSize = new System.Drawing.Size(1190, 576);
             this.Controls.Add(this.mainPanel);
             this.Font = new System.Drawing.Font("Source Sans Pro", 8.25F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -212,6 +253,9 @@
             this.buttonPanel.ResumeLayout(false);
             this.mainPanel.ResumeLayout(false);
             this.topPanel.ResumeLayout(false);
+            this.bottomPanel.ResumeLayout(false);
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -230,8 +274,8 @@
         private System.Windows.Forms.Button bLoginCancelar;
         private System.Windows.Forms.Button bLoginAceptar;
         private System.Windows.Forms.Panel buttonPanel;
-
-
-
+        private System.Windows.Forms.Panel bottomPanel;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel tsslMensaje;
     }
 }

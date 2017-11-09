@@ -8,7 +8,8 @@ using System.Text;
 using System.Windows.Forms;
 using AppLaMejor.datamanager;
 using MySql.Data.MySqlClient;
-
+using AppLaMejor.controlmanager;
+using AppLaMejor.stylemanager;
 
 namespace AppLaMejor.formularios
 {
@@ -24,6 +25,11 @@ namespace AppLaMejor.formularios
             loginPanel.Anchor = AnchorStyles.None;
 
             ApplicationLookAndFeel.ApplyThemeToAll(this);
+
+            textUser.Focus();
+
+            ApplicationLookAndFeel.ApplyTheme(tsslMensaje);
+            tsslMensaje.Text = string.Empty;
         }
 
         private void bAceptar_Click(object sender, EventArgs e)
@@ -34,10 +40,9 @@ namespace AppLaMejor.formularios
                 DataTable dtTabla = QueryManager.Instance().GetTableResults(ConnecionBD.Instance().Connection, query);
 
                 if (dtTabla.Rows.Count > 0){
-                    //MessageBox.Show("Usuario : '" + dtTabla.Rows[0].ItemArray[1].ToString() + "' ingreso con exito");
                     int userIdLogueado = (int)dtTabla.Rows[0].ItemArray[0];
                     FormInicio formInicio = new FormInicio();
-                    formInicio.userIdLogueado = userIdLogueado;
+                    VariablesGlobales.userIdLogueado = userIdLogueado;
                     formInicio.Show();
                 }
                 else
@@ -70,7 +75,24 @@ namespace AppLaMejor.formularios
             }
         }
 
+        private void textUser_Enter(object sender, EventArgs e)
+        {
+            MyTextTimer.TStartFade("Ingrese nombre usuario.", this.statusStrip1, this.tsslMensaje, 20);
+        }
 
+        private void textPass_Enter(object sender, EventArgs e)
+        {
+            MyTextTimer.TStartFade("Ingrese contraseña.", this.statusStrip1, this.tsslMensaje, 20);
+        }
 
+        private void textUser_Leave(object sender, EventArgs e)
+        {
+            MyTextTimer.EndTimerAndResetValues();
+        }
+
+        private void textPass_Leave(object sender, EventArgs e)
+        {
+            MyTextTimer.EndTimerAndResetValues();
+        }
     }
 }

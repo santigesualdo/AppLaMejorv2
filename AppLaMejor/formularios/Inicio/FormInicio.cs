@@ -7,14 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using AppLaMejor.datamanager;
+using AppLaMejor.controlmanager;
 
 namespace AppLaMejor.formularios
 {
     public partial class FormInicio : Form
     {
-        /*public string usernameLogueado { get; set; }*/
-        public int userIdLogueado { get; set; }
-
         TableLayoutPanel tablePanel;
 
         public FormInicio()
@@ -26,7 +24,7 @@ namespace AppLaMejor.formularios
         {          
             // Obtenemos tabla con la consulta ejecutada
             QueryManager manager = QueryManager.Instance();
-            string query = manager.GetUsuariosModulos(userIdLogueado);
+            string query = manager.GetUsuariosModulos(VariablesGlobales.userIdLogueado);
             DataTable dtTablaModulos = manager.GetTableResults(ConnecionBD.Instance().Connection, query);
 
             // Preparamos table layout para mostrar los modulos disponibles

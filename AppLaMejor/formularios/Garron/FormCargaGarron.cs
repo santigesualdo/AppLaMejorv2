@@ -1,15 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using AppLaMejor.datamanager;
 using AppLaMejor.controlmanager;
 using AppLaMejor.entidades;
-using AppLaMejor.formularios.Util;
 using AppLaMejor.stylemanager;
 
 namespace AppLaMejor.formularios

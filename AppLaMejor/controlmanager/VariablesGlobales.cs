@@ -9,5 +9,6 @@ namespace AppLaMejor.controlmanager
     {
         public static bool FormMovCuentas_activo = false;
         public static bool FormMovCuentas_comboCargado = false;
+        public static int userIdLogueado;
     }
 }
