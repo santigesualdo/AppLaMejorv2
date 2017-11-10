@@ -14,7 +14,7 @@ namespace AppLaMejor.datamanager
 
 
         //string connstring = "Server=localhost; database=u570713702_jjdev; UID=root; pooling=false";
-        string connstring = "Server=localhost; database=u570713702_jjdev; UID=root;Password=dd74f695; Pooling=false";
+        string connstring = "Server=localhost; database=u570713702_jjdev; UID=root;Password=dd74f695; ";
         //string connstring = "Server=sql52.main-hosting.eu; database=u570713702_jjdev; UID=u570713702_jjdev; Password=dd74f695; Pooling=false";
 
         private MySqlConnection connection = null;

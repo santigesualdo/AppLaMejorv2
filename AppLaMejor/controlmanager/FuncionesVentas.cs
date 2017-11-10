@@ -5,6 +5,8 @@ using System.Text;
 using AppLaMejor.datamanager;
 using AppLaMejor.entidades;
 using System.Data;
+using MySql.Data.MySqlClient;
+using AppLaMejor.formularios.Util;
 
 namespace AppLaMejor.controlmanager
 {
@@ -36,32 +38,57 @@ namespace AppLaMejor.controlmanager
 
         public static bool InsertVenta(List<VentaDetalle> listDetalleVentas)
         {
-            try
+            MySqlConnection connection = ConnecionBD.Instance().Connection;
+            using (connection)
             {
-                QueryManager manager = QueryManager.Instance();
-                string consulta;
-
-                decimal montoTotal = listDetalleVentas.Sum(x => x.Monto);
-                int idVenta = GetNextIdVenta();
-
-                Venta newVenta = new Venta();
-                newVenta.MontoTotal = montoTotal;
-                newVenta.Id = idVenta;
-                consulta = manager.InsertVenta(newVenta);
-                manager.ExecuteSQL(ConnecionBD.Instance().Connection, consulta);
-
-                foreach (VentaDetalle v in listDetalleVentas)
+                MySqlTransaction tran = null;
+                try
                 {
-                    v.Venta = newVenta;
-                    consulta = manager.InsertVentaDetalle(v);
-                    manager.ExecuteSQL(ConnecionBD.Instance().Connection, consulta);
-                }
+                    if (connection.State.Equals(ConnectionState.Closed))
+                    {
+                        connection.Open();
+                    }
+                    
+                    tran = connection.BeginTransaction();
+                    QueryManager manager = QueryManager.Instance();
+                    string consulta;
 
-                return true;
-            }
-            catch (Exception e)
-            {
-                return false;
+                    decimal montoTotal = listDetalleVentas.Sum(x => x.Monto);
+                    int idVenta = GetNextIdVenta();
+
+                    Venta newVenta = new Venta();
+                    newVenta.MontoTotal = montoTotal;
+                    newVenta.Id = idVenta;
+                    consulta = manager.InsertVenta(newVenta);
+
+                    // Transaccion
+                    MySqlCommand command = new MySqlCommand(consulta, connection, tran);
+                    if (!manager.ExecuteSQL(command))
+                    {
+                        tran.Rollback();
+                    }
+
+                    foreach (VentaDetalle v in listDetalleVentas)
+                    {
+                        v.Venta = newVenta;
+                        consulta = manager.InsertVentaDetalle(v);
+                        command.CommandText = consulta;
+                        if (!manager.ExecuteSQL(command))
+                        {
+                            tran.Rollback();
+                        }
+                    }
+
+                    tran.Commit();
+                    return true;
+                }
+                catch (Exception e)
+                {
+                    FormMessageBox dialog = new FormMessageBox();
+                    dialog.ShowErrorDialog("Error: " + e.Message);
+                    tran.Rollback();
+                    return false;
+                }
             }
         }
 

@@ -31,26 +31,37 @@ namespace AppLaMejor.datamanager
         {
             try
             {
-                MySqlCommand cmd = new MySqlCommand(query, conn);
-                cmd.CommandText = query;
-                cmd.CommandType = CommandType.Text;
-                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
-                DataTable dtTabla = new DataTable();
-                da.Fill(dtTabla);
-                return dtTabla;
+                using (conn)
+                {
+                    MySqlCommand cmd = new MySqlCommand(query, conn);
+                    cmd.CommandText = query;
+                    cmd.CommandType = CommandType.Text;
+                    MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                    DataTable dtTabla = new DataTable();
+                    da.Fill(dtTabla);
+                    return dtTabla;
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("GetTableResults: " + ex.Message);
+                FormMessageBox dialog = new FormMessageBox();
+                dialog.ShowErrorDialog("Ocurrio un fallor en la BD: " + ex.Message);
                 return null;
+            }
+            finally
+            {
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
             }
         }
         /* Recibe conexion y consulta y ejecuta update. Retorna true o false, exito o error */
-        public bool ExecuteSQL(MySqlConnection conn, string query )
+        public bool ExecuteSQL(MySqlConnection conn, string query)
         {
             MySqlCommand sqlCommand = new MySqlCommand(query, conn);
             try
-            {
+            {                
                 if (conn.State == ConnectionState.Closed)
                     conn.Open();
                 sqlCommand.ExecuteNonQuery();
@@ -59,7 +70,32 @@ namespace AppLaMejor.datamanager
             }
             catch (Exception ex)
             {
-                MessageBox.Show("ExecuteUpdateFallo: " + ex.Message);
+                FormMessageBox dialog = new FormMessageBox();
+                dialog.ShowErrorDialog("Ocurrio un fallor en la BD: " + ex.Message);
+                return false;
+            }
+            finally
+            {
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+            }
+        }
+
+        // Se usa para transacciones, en caso de escribir varias tablas, si falla alguna, no se escribe nada.
+        public bool ExecuteSQL(MySqlCommand sqlCommand)
+        {
+            try { 
+             if (sqlCommand.Connection.State == ConnectionState.Closed)
+                    sqlCommand.Connection.Open();
+                sqlCommand.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                FormMessageBox dialog = new FormMessageBox();
+                dialog.ShowErrorDialog("Ocurrio un fallor en la BD: " + ex.Message);
                 return false;
             }
         }
@@ -685,7 +721,7 @@ namespace AppLaMejor.datamanager
         }
         public string GetVentasDelDia()
         {
-            return "SELECT * FROM venta v where v.fecha between curdate() and ADDDATE(curdate(),1);";
+            return "SELECT * FROM venta v where v.fecha between curdate() and ADDDATE(curdate(),1) order by v.fecha desc;";
         }
         public string GetVentas()
         {

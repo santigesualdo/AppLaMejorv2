@@ -25,6 +25,11 @@ public class ApplicationLookAndFeel
             c.Font = StyleManager.Instance().GetCurrentStyle().MainFontBig;
             c.BackColor = StyleManager.Instance().GetCurrentStyle().BackColor;
             c.ForeColor = StyleManager.Instance().GetCurrentStyle().TextColor;
+        }else if (c.Name.Equals("labelSubTotal"))
+        {
+            c.Font = StyleManager.Instance().GetCurrentStyle().MainFontBig;
+            c.BackColor = StyleManager.Instance().GetCurrentStyle().BackColor;
+            c.ForeColor = StyleManager.Instance().GetCurrentStyle().TextColor;
         }
         else
         {
