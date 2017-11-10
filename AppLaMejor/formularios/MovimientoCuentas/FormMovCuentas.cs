@@ -114,7 +114,7 @@ namespace AppLaMejor.formularios
             DialogResult dr = MessageBox.Show("¿Eliminar registro del cliente " + razonSocial + " ?", "Confirmar", MessageBoxButtons.YesNo);
             switch(dr){
                case DialogResult.Yes:
-                    string consultaEliminar = QueryManager.Instance().GetDeleteClient(idCliente, new DateTime());
+                    string consultaEliminar = QueryManager.Instance().GetDeleteClient(idCliente, DateTime.Now);
                     if (QueryManager.Instance().ExecuteSQL(ConnecionBD.Instance().Connection, consultaEliminar))
                     {
                         MessageBox.Show("Registro exitosamente eliminado.");
@@ -313,7 +313,7 @@ namespace AppLaMejor.formularios
                     newCuenta.FechaUltimaActualizacion = DateTime.Now;
 
                     /* Form Entity Input */
-                    FormEntityInput dialog = new FormEntityInput(null, FormEntityInput.MODO_INSERTAR);
+                    FormEntityInput dialog = new FormEntityInput(null, FormEntityInput.MODO_INSERTAR, formTittleText.Text);
                     Boolean result = dialog.Execute(newCuenta);
 
                     if (result)

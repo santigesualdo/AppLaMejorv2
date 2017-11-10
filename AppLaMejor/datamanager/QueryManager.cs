@@ -163,6 +163,7 @@ namespace AppLaMejor.datamanager
              "	c.fecha_baja AS FechaBaja " +
              " FROM " +
              "	cliente c " +
+             " WHERE c.fecha_baja is null " +
              "   order by c.id  ";
         }
         //trae el saldo actual y algunos datos de referencia para el form de MovCuentas
@@ -175,7 +176,7 @@ namespace AppLaMejor.datamanager
 		
 		public string GetDeleteClient(string idCliente, DateTime fechaBaja)
         {
-            return "update cliente set fecha_baja ='" + fechaBaja.ToString() + "' where id = "+ idCliente+";";
+            return "update cliente set fecha_baja ='" + fechaBaja.ToString("yyyy-MM-dd") + "' where id = "+ idCliente+";";
         }
 
         /* Proveedores */

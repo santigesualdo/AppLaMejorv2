@@ -29,7 +29,16 @@ namespace AppLaMejor.formularios.Util
             InitializeComponent();
             ApplicationLookAndFeel.ApplyThemeToAll(this);
         }
-
+        public FormEntityInput(Object reflection, int modo, string titulo)
+        {
+            cambiosRealizados = false;
+            currentModo = modo;
+            _reflection = reflection;
+            InitializeComponent();
+            SetTitulo(titulo);
+            MyTextTimer.TStartFade("Complete todos los campos.", this.statusStrip1, this.tsslMensaje, MyTextTimer.TIME_FOREVER);
+            ApplicationLookAndFeel.ApplyThemeToAll(this);
+        }
         private Boolean isBrowsable(PropertyInfo info)
         {
             return info.GetCustomAttributes(typeof(BrowsableAttribute), false).Length>-1;
@@ -38,6 +47,9 @@ namespace AppLaMejor.formularios.Util
         private Object _reflection;
         private TableLayoutPanel controlsTableLayoutPanel =  new TableLayoutPanel{Dock=DockStyle.Fill, CellBorderStyle = TableLayoutPanelCellBorderStyle.None};
         private int Id;
+
+        private bool cambiosRealizados;
+
         List<TipoCliente> listTipoClientes;
         List<TipoProducto> listTipoProductos;
         List<TipoGarron> listTipoGarron;
@@ -138,17 +150,15 @@ namespace AppLaMejor.formularios.Util
         // Definicion de Controles para cada TIPO
         private void TypeInt(PropertyInfo property)
         {
-            var textField = TextBoxCampoInt(property.Name);
+            TextBox textField = TextBoxCampoInt(property.Name);
             controlsTableLayoutPanel.Controls.Add(textField, 2, controlsTableLayoutPanel.RowCount += 1);
             controlsTableLayoutPanel.Controls.Add(GetCampoTitulo(property.Name), 1, controlsTableLayoutPanel.RowCount);
         }
         private void TypeString(PropertyInfo property)
         {
-            var textField = TextBoxCampoString(property.Name);
+            TextBox textField = TextBoxCampoString(property.Name);
             controlsTableLayoutPanel.Controls.Add(textField, 2, controlsTableLayoutPanel.RowCount += 1);
             controlsTableLayoutPanel.Controls.Add(GetCampoTitulo(property.Name), 1, controlsTableLayoutPanel.RowCount);
-
-
         }
         private void TypeNullableDateTime(PropertyInfo property)
         {
@@ -560,10 +570,11 @@ namespace AppLaMejor.formularios.Util
             // Cero tiene que ser el campo vacio
             if (combo.SelectedIndex.Equals(-1) || combo.SelectedIndex.Equals(0))
             {
-                MessageBox.Show("Debe ingresar un valor");
+                MyTextTimer.TStartFade("Se requiere que seleccione un valor.", this.statusStrip1, this.tsslMensaje, MyTextTimer.TIME_LONG);
                 combo.Focus();
             }
         }
+        
         // Validaciones para tipos de datos
         private TextBox TextBoxCampoString(string p)
         {
@@ -598,7 +609,20 @@ namespace AppLaMejor.formularios.Util
             }
             return textField;
         }
-        
+
+        // Setear titulo
+        public void SetTitulo(string titulo)
+        {
+            string modo = string.Empty;
+            switch (currentModo)
+            {
+                case MODO_EDITAR: modo = "Editando : "; break;
+                case MODO_INSERTAR: modo = "Insertando: "; break;
+                case MODO_VER: modo = "Ver: ";  break;
+            }
+            formTittleText.Text = modo + titulo;
+            ApplicationLookAndFeel.ApplyTheme(formTittleText);
+        }
         private Label GetCampoTitulo(string propertyName)
         {
             var propertyLabel = new Label
@@ -610,25 +634,32 @@ namespace AppLaMejor.formularios.Util
             };
             return propertyLabel;
         }
-
         private void bAceptar_Click_1(object sender, EventArgs e)
         {
-            if (currentModo.Equals(MODO_EDITAR) || currentModo.Equals(MODO_INSERTAR))
-            {
-                if (MessageBox.Show("¿Desea aplicar los cambios?", "Confirmar.", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            //if (!CheckCambiosRealizados())
+            //{
+            //    MyTextTimer.TStartFade("No se hicieron cambios.", this.statusStrip1, this.tsslMensaje, MyTextTimer.TIME_LONG);
+            //}
+            //else
+            //{
+                if (currentModo.Equals(MODO_EDITAR) || currentModo.Equals(MODO_INSERTAR))
+                {
+                    if (MessageBox.Show("¿Desea aplicar los cambios?", "Confirmar.", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    {
+                        this.DialogResult = DialogResult.OK;
+                        this.Close();
+                    }
+                }
+                else
                 {
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
-            }
-            else
-            {
-                this.DialogResult = DialogResult.OK;
-                this.Close();
-            }
+            //}
         }
         private void bCancelar_Click(object sender, EventArgs e)
         {
+            
             if (currentModo.Equals(MODO_EDITAR) || currentModo.Equals(MODO_INSERTAR))
             {
                 if (MessageBox.Show("¿Desea descartar los cambios?", "Confirmar.", MessageBoxButtons.YesNo) == DialogResult.Yes)
@@ -636,7 +667,7 @@ namespace AppLaMejor.formularios.Util
                     this.DialogResult = DialogResult.Cancel;
                     this.Close();
                 }
-            }
+            }            
             else
             {
                 this.DialogResult = DialogResult.OK;

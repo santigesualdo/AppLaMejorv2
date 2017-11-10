@@ -115,7 +115,7 @@ namespace AppLaMejor.formularios
             int idProducto = ProdSelected.Id;
 
             /* Form Entity Input */
-            FormEntityInput dialog = new FormEntityInput(null, FormEntityInput.MODO_EDITAR);
+            FormEntityInput dialog = new FormEntityInput(null, FormEntityInput.MODO_EDITAR, formTittleText.Text);
             Boolean result = dialog.Execute(ProdSelected, idProducto);
 
             if (result)
@@ -145,7 +145,7 @@ namespace AppLaMejor.formularios
             int idProducto = ProdSelected.Id;
 
             /* Form Entity Input */
-            FormEntityInput dialog = new FormEntityInput(null,FormEntityInput.MODO_VER);
+            FormEntityInput dialog = new FormEntityInput(null,FormEntityInput.MODO_VER, formTittleText.Text);
             Boolean result = dialog.Execute(ProdSelected, idProducto);
         }
 
@@ -156,7 +156,7 @@ namespace AppLaMejor.formularios
             //newProd.FechaVencimiento = DateTime.Now;
 
             /* Form Entity Input */
-            FormEntityInput dialog = new FormEntityInput(null, FormEntityInput.MODO_INSERTAR);
+            FormEntityInput dialog = new FormEntityInput(null, FormEntityInput.MODO_INSERTAR, formTittleText.Text);
             Boolean result = dialog.Execute(newProd);
 
             if (result)

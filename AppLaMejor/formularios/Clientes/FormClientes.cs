@@ -52,7 +52,8 @@ namespace AppLaMejor.formularios
         {
             // Trae la tabla clientes en DataTable y la mapea a en List<Clientes>
             tableClientes = FuncionesClientes.fillClientes();
-            listClients = FuncionesClientes.listClientes(tableClientes);   
+            listClients = FuncionesClientes.listClientes(tableClientes);
+            ApplicationLookAndFeel.ApplyTheme(dataGridClientes);
 
             for (int j = 0; j < tableClientes.Rows.Count; j++)
             {
@@ -75,14 +76,14 @@ namespace AppLaMejor.formularios
                 dataGridClientes.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                 // Hacemos que todas las columnas cambien su tamaño a lo ancho para que se vea toda la info
                 string name = dataGridClientes.Columns[i].Name;
-                if (name.ToUpper().Equals("ID") || name.ToUpper().Equals("USUARIO") || name.ToUpper().Equals("FECHA_BAJA"))
+                if (name.ToUpper().Equals("ID") || name.ToUpper().Equals("USUARIO") || name.ToUpper().Equals("FECHABAJA"))
                 {
                     dataGridClientes.Columns[i].Visible = false;
                     continue;
                 }
             }
 
-            ApplicationLookAndFeel.ApplyTheme(dataGridClientes);
+            
         }
 
         private void EliminarRegistro(object sender, EventArgs e)
@@ -96,10 +97,10 @@ namespace AppLaMejor.formularios
             DialogResult dr = MessageBox.Show("¿Eliminar registro del cliente " + razonSocial + " ?", "Confirmar", MessageBoxButtons.YesNo);
             switch(dr){
                case DialogResult.Yes:
-                    string consultaEliminar = QueryManager.Instance().GetDeleteClient(idCliente, new DateTime());
+                    string consultaEliminar = QueryManager.Instance().GetDeleteClient(idCliente, DateTime.Now);
                     if (QueryManager.Instance().ExecuteSQL(ConnecionBD.Instance().Connection, consultaEliminar))
                     {
-                        MyTextTimer.TStart("Cliente eliminado correctamente", statusStrip1, tsslMensaje);         
+                        MyTextTimer.TStartFade("Cliente eliminado correctamente", statusStrip1, tsslMensaje, MyTextTimer.TIME_SHORT);
                         CargarDataGrid();
                     }                   
 
@@ -116,7 +117,7 @@ namespace AppLaMejor.formularios
             int idCliente = clientSelected.Id;
 
             /* Form Entity Input */
-            FormEntityInput dialog = new FormEntityInput(null, FormEntityInput.MODO_EDITAR);
+            FormEntityInput dialog = new FormEntityInput(null, FormEntityInput.MODO_EDITAR, formTittleText.Text);
             Boolean result = dialog.Execute(clientSelected, idCliente);
 
             if (result)
@@ -128,12 +129,12 @@ namespace AppLaMejor.formularios
                 {
                     // se actualizo bien
                     CargarDataGrid();
-                    MyTextTimer.TStart("Cliente actualizado correctamente", statusStrip1, tsslMensaje);         
+                    MyTextTimer.TStartFade("Cliente actualizado correctamente", statusStrip1, tsslMensaje, MyTextTimer.TIME_SHORT);
                 }
                 else
                 {
                     // se actualizo mal
-                    MyTextTimer.TStart("Cliente NO se actualizo correctamente", statusStrip1, tsslMensaje);         
+                    MyTextTimer.TStartFade("Cliente NO se actualizo correctamente", statusStrip1, tsslMensaje, MyTextTimer.TIME_SHORT);
                 }
                 
             }
@@ -147,7 +148,7 @@ namespace AppLaMejor.formularios
             int idCliente = clientSelected.Id;
 
             /* Form Entity Input */
-            FormEntityInput dialog = new FormEntityInput(null,FormEntityInput.MODO_VER);
+            FormEntityInput dialog = new FormEntityInput(null,FormEntityInput.MODO_VER, formTittleText.Text);
             Boolean result = dialog.Execute(clientSelected, idCliente);
         }
 
@@ -158,7 +159,7 @@ namespace AppLaMejor.formularios
             newClient.FechaDesde = DateTime.Now;
 
             /* Form Entity Input */
-            FormEntityInput dialog = new FormEntityInput(null, FormEntityInput.MODO_INSERTAR);
+            FormEntityInput dialog = new FormEntityInput(null, FormEntityInput.MODO_INSERTAR, formTittleText.Text);
             Boolean result = dialog.Execute(newClient);
 
             if (result)
@@ -168,11 +169,11 @@ namespace AppLaMejor.formularios
 
                 if (FuncionesClientes.InsertCliente(newClient))
                 {
-                    MyTextTimer.TStart("Se guardo cliente " + newClient.RazonSocial.ToUpper() + ".", statusStrip1, tsslMensaje);         
+                    MyTextTimer.TStartFade("Se guardo cliente " + newClient.RazonSocial.ToUpper() + ".", statusStrip1, tsslMensaje, MyTextTimer.TIME_SHORT);    
                 }
                 else
                 {
-                    MyTextTimer.TStart("No se guardo el cliente. Ocurrio un error.", statusStrip1, tsslMensaje);         
+                    MyTextTimer.TStartFade("No se guardo el cliente. Ocurrio un error.", statusStrip1, tsslMensaje, MyTextTimer.TIME_SHORT);
                 }                    
             }
         }
@@ -303,9 +304,9 @@ namespace AppLaMejor.formularios
             newCuenta.FechaUltimaActualizacion = DateTime.Now;
 
             /* Form Entity Input */
-            FormEntityInput dialog = new FormEntityInput(null, FormEntityInput.MODO_INSERTAR);
+            FormEntityInput dialog = new FormEntityInput(null, FormEntityInput.MODO_INSERTAR, "Cuenta de cliente. ");
             Boolean result = dialog.Execute(newCuenta);
-
+           
             if (result)
             {
                 newCuenta = (Cuenta)dialog.SelectedObject;
@@ -313,11 +314,11 @@ namespace AppLaMejor.formularios
 
                 if (FuncionesClientes.InsertCuenta(newCuenta,idCliente.ToString()))
                 {
-                    MyTextTimer.TStart("Cuenta se guardo correctamente", statusStrip1, tsslMensaje);         
+                    MyTextTimer.TStartFade("Cuenta se guardo correctamente", statusStrip1, tsslMensaje, MyTextTimer.TIME_SHORT);    
                 }
                 else
                 {
-                    MyTextTimer.TStart("No se guardo cuenta.", statusStrip1, tsslMensaje);         
+                    MyTextTimer.TStartFade("No se guardo cuenta.", statusStrip1, tsslMensaje, MyTextTimer.TIME_SHORT);
                 }
 
             }

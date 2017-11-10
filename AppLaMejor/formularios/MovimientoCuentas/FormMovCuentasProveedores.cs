@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using AppLaMejor.datamanager;
 using AppLaMejor.formularios.Util;
 using AppLaMejor.entidades;
 using AppLaMejor.controlmanager;
-using AppLaMejor.stylemanager;
 
 namespace AppLaMejor.formularios
 {
@@ -78,7 +75,7 @@ namespace AppLaMejor.formularios
             DialogResult dr = MessageBox.Show("¿Eliminar registro del proveedor " + razonSocial + " ?", "Confirmar", MessageBoxButtons.YesNo);
             switch(dr){
                case DialogResult.Yes:
-                    string consultaEliminar = QueryManager.Instance().GetDeleteClient(idProveedor, new DateTime());
+                    string consultaEliminar = QueryManager.Instance().GetDeleteClient(idProveedor, DateTime.Now);
                     if (QueryManager.Instance().ExecuteSQL(ConnecionBD.Instance().Connection, consultaEliminar))
                     {
                         MessageBox.Show("Registro exitosamente eliminado.");
