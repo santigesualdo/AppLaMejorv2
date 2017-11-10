@@ -19,6 +19,12 @@ public class ApplicationLookAndFeel
             c.Font = StyleManager.Instance().GetCurrentStyle().MainFormTitle;
             c.BackColor = StyleManager.Instance().GetCurrentStyle().MainColor;
             c.ForeColor = StyleManager.Instance().GetCurrentStyle().TextColor;
+        }else 
+        if (c.Name.Equals("messageBoxLabel"))
+        {
+            c.Font = StyleManager.Instance().GetCurrentStyle().MainFontBig;
+            c.BackColor = StyleManager.Instance().GetCurrentStyle().BackColor;
+            c.ForeColor = StyleManager.Instance().GetCurrentStyle().TextColor;
         }
         else
         {
@@ -164,9 +170,7 @@ public class ApplicationLookAndFeel
     }
     public static void ApplyTheme(TableLayoutPanel c)
     {
-        c.Font = StyleManager.Instance().GetCurrentStyle().MainFont;
-        c.BackColor = StyleManager.Instance().GetCurrentStyle().BackColor;
-        c.ForeColor = StyleManager.Instance().GetCurrentStyle().TextColor;
+        //c.BackColor = StyleManager.Instance().GetCurrentStyle().BackColor;
     }
     public static void ApplyTheme(Button c)
     {
@@ -196,13 +200,19 @@ public class ApplicationLookAndFeel
         c.ForeColor = StyleManager.Instance().GetCurrentStyle().TextColor;
     }
 
+    public static void ApplyTheme(GroupBox c)
+    {
+        c.BackColor = StyleManager.Instance().GetCurrentStyle().BackColor;
+        c.ForeColor = StyleManager.Instance().GetCurrentStyle().TextColor;
+    }
+
     private static object GetCurrentStyle()
     {
         throw new System.NotImplementedException();
     }
 
     public static void ApplyThemeToChild(Control father)
-    {
+    {        
         foreach (var c in father.Controls)
         {
             Control control;
@@ -228,6 +238,12 @@ public class ApplicationLookAndFeel
                     break;
                 case "System.Windows.Forms.Panel":
                     ApplyTheme((Panel)c);
+                    control = (Control)c;
+                    if (control.Controls.Count > 0)
+                        ApplyThemeToChild((Control)c);
+                    break;
+                case "System.Windows.Forms.GroupBox":
+                    ApplyTheme((GroupBox)c);
                     control = (Control)c;
                     if (control.Controls.Count > 0)
                         ApplyThemeToChild((Control)c);

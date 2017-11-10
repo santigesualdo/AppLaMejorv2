@@ -10,6 +10,7 @@ using AppLaMejor.datamanager;
 using MySql.Data.MySqlClient;
 using AppLaMejor.controlmanager;
 using AppLaMejor.stylemanager;
+using AppLaMejor.formularios.Util;
 
 namespace AppLaMejor.formularios
 {
@@ -36,21 +37,35 @@ namespace AppLaMejor.formularios
         {
             try
             {
-                string query = QueryManager.Instance().GetUserLogin(textUser.Text, textPass.Text);
-                DataTable dtTabla = QueryManager.Instance().GetTableResults(ConnecionBD.Instance().Connection, query);
+                if (!textUser.Text.Trim().Equals(string.Empty)) // || textPass.Text.Trim().Equals(string.Empty))
+                {
+                    string query = QueryManager.Instance().GetUserLogin(textUser.Text, textPass.Text);
+                    DataTable dtTabla = QueryManager.Instance().GetTableResults(ConnecionBD.Instance().Connection, query);
 
-                if (dtTabla.Rows.Count > 0){
-                    int userIdLogueado = (int)dtTabla.Rows[0].ItemArray[0];
-                    FormInicio formInicio = new FormInicio();
-                    VariablesGlobales.userIdLogueado = userIdLogueado;
-                    formInicio.Show();
+                    if (dtTabla.Rows.Count > 0)
+                    {
+                        int userIdLogueado = (int)dtTabla.Rows[0].ItemArray[0];
+                        FormInicio formInicio = new FormInicio();
+                        VariablesGlobales.userIdLogueado = userIdLogueado;
+                        formInicio.Show();
+                    }
+                    else
+                    {
+                        FormMessageBox dialog = new FormMessageBox();
+                        dialog.ShowErrorDialog("El usuario o el password no pertenecen a un usuario registrado.");
+                    }
+                        
+                }else
+                {
+                    FormMessageBox dialog = new FormMessageBox();
+                    dialog.ShowErrorDialog("El usuario o el password estan vacios, no se puede continuar.");
                 }
-                else
-                    MessageBox.Show("Usuario : '" + dtTabla.Rows[0].ItemArray[1].ToString() + "' ingreso con exito");
+
             }
             catch (Exception E)
             {
-                MessageBox.Show("Ocurrio un error. Motivo: " + E.Message);
+                FormMessageBox dialog = new FormMessageBox();
+                dialog.ShowErrorDialog("Ocurrio un error. Motivo: ");
             }
         }
 
