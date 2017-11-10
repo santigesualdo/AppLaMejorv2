@@ -36,7 +36,7 @@ namespace AppLaMejor.formularios.Util
             _reflection = reflection;
             InitializeComponent();
             SetTitulo(titulo);
-            MyTextTimer.TStartFade("Complete todos los campos.", this.statusStrip1, this.tsslMensaje, MyTextTimer.TIME_FOREVER);
+            MyTextTimer.TStartFade("Complete todos los campos.", this.statusStripFormEntityInput, this.mensajeroFormEntityInput, MyTextTimer.TIME_FOREVER);
             ApplicationLookAndFeel.ApplyThemeToAll(this);
         }
         private Boolean isBrowsable(PropertyInfo info)
@@ -55,6 +55,8 @@ namespace AppLaMejor.formularios.Util
         List<TipoGarron> listTipoGarron;
         List<TipoEstadoGarron> listTipoEstadoGarron;
 
+        bool first;
+
         public Object SelectedObject
         {
             get
@@ -67,6 +69,12 @@ namespace AppLaMejor.formularios.Util
                 {
                     //clear all controls from the table
                     controlsTableLayoutPanel.Controls.Clear();
+
+                    controlsTableLayoutPanel.ColumnCount = 2;
+                    controlsTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+                    controlsTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+
+                    first = true;
 
                     foreach (var property in _reflection.GetType().GetProperties())
                     {
@@ -110,9 +118,10 @@ namespace AppLaMejor.formularios.Util
                     }
 
                     // 
-                    var panel = new Panel { AutoSize = true };
-                    controlsTableLayoutPanel.Controls.Add(panel, 1, controlsTableLayoutPanel.RowCount += 1);
-                    controlsTableLayoutPanel.Controls.Add(panel, 1, controlsTableLayoutPanel.RowCount);
+                    var emptyPanel = new Panel { AutoSize = true };
+                    emptyPanel.BorderStyle = BorderStyle.FixedSingle;
+                    controlsTableLayoutPanel.Controls.Add(emptyPanel, 0, controlsTableLayoutPanel.RowCount += 1);
+                    controlsTableLayoutPanel.Controls.Add(emptyPanel, 1, controlsTableLayoutPanel.RowCount);
 
                     controlsPanel.Controls.Add(controlsTableLayoutPanel);
                     controlsTableLayoutPanel.BringToFront();
@@ -151,17 +160,19 @@ namespace AppLaMejor.formularios.Util
         private void TypeInt(PropertyInfo property)
         {
             TextBox textField = TextBoxCampoInt(property.Name);
-            controlsTableLayoutPanel.Controls.Add(textField, 2, controlsTableLayoutPanel.RowCount += 1);
-            controlsTableLayoutPanel.Controls.Add(GetCampoTitulo(property.Name), 1, controlsTableLayoutPanel.RowCount);
+            controlsTableLayoutPanel.Controls.Add(GetCampoTitulo(property.Name), 0, controlsTableLayoutPanel.RowCount+=1);
+            controlsTableLayoutPanel.Controls.Add(textField, 1, controlsTableLayoutPanel.RowCount );
         }
         private void TypeString(PropertyInfo property)
         {
             TextBox textField = TextBoxCampoString(property.Name);
-            controlsTableLayoutPanel.Controls.Add(textField, 2, controlsTableLayoutPanel.RowCount += 1);
-            controlsTableLayoutPanel.Controls.Add(GetCampoTitulo(property.Name), 1, controlsTableLayoutPanel.RowCount);
+            controlsTableLayoutPanel.Controls.Add(GetCampoTitulo(property.Name), 0, controlsTableLayoutPanel.RowCount+=1);
+            controlsTableLayoutPanel.Controls.Add(textField, 1, controlsTableLayoutPanel.RowCount);
         }
         private void TypeNullableDateTime(PropertyInfo property)
         {
+            controlsTableLayoutPanel.Controls.Add(GetCampoTitulo(property.Name), 0, controlsTableLayoutPanel.RowCount += 1);
+
             Binding binding = new Binding("Text", _reflection, property.Name);
             var textBox = new TextBox { Dock = DockStyle.Fill, AutoSize = true };
             textBox.DataBindings.Add(binding);
@@ -171,25 +182,23 @@ namespace AppLaMejor.formularios.Util
                 Binding dateBinding = new Binding("Value", _reflection, property.Name);
                 DateTimePicker dtp = new DateTimePicker { Dock = DockStyle.Fill, AutoSize = true };
                 dtp.DataBindings.Add(dateBinding);
-                controlsTableLayoutPanel.Controls.Add(dtp, 2, controlsTableLayoutPanel.RowCount += 1);
+                controlsTableLayoutPanel.Controls.Add(dtp, 1, controlsTableLayoutPanel.RowCount );
             }
             else
             {
                 DateTimePicker dtp = new DateTimePicker { Dock = DockStyle.Fill, AutoSize = true };
                 Binding dateBinding = new Binding("Value", _reflection, property.Name);
                 dtp.DataBindings.Add(dateBinding);
-                controlsTableLayoutPanel.Controls.Add(dtp, 2, controlsTableLayoutPanel.RowCount += 1);
-
+                controlsTableLayoutPanel.Controls.Add(dtp, 1, controlsTableLayoutPanel.RowCount );
             }
-
-            controlsTableLayoutPanel.Controls.Add(GetCampoTitulo(property.Name), 1, controlsTableLayoutPanel.RowCount);
         }
         private void TypeDecimal(PropertyInfo property)
         {
             // decimal
             var textField = TextBoxCampoDecimal(property.Name);
-            controlsTableLayoutPanel.Controls.Add(textField, 2, controlsTableLayoutPanel.RowCount += 1);
-            controlsTableLayoutPanel.Controls.Add(GetCampoTitulo(property.Name), 1, controlsTableLayoutPanel.RowCount);
+            controlsTableLayoutPanel.Controls.Add(GetCampoTitulo(property.Name), 0, controlsTableLayoutPanel.RowCount += 1);
+            controlsTableLayoutPanel.Controls.Add(textField, 1, controlsTableLayoutPanel.RowCount );
+            
         }
         private void TypeDouble(PropertyInfo property)
         {
@@ -199,8 +208,9 @@ namespace AppLaMejor.formularios.Util
             {
                 textField.ReadOnly = true;
             }
-            controlsTableLayoutPanel.Controls.Add(textField, 2, controlsTableLayoutPanel.RowCount += 1);
-            controlsTableLayoutPanel.Controls.Add(GetCampoTitulo(property.Name), 1, controlsTableLayoutPanel.RowCount);
+            controlsTableLayoutPanel.Controls.Add(GetCampoTitulo(property.Name), 0, controlsTableLayoutPanel.RowCount += 1);
+            controlsTableLayoutPanel.Controls.Add(textField, 1, controlsTableLayoutPanel.RowCount );
+            
         }
         private void TypeDateTime(PropertyInfo property)
         {
@@ -210,20 +220,23 @@ namespace AppLaMejor.formularios.Util
             dtp = new DateTimePicker { Dock = DockStyle.Fill, AutoSize = true };
             dtp.DataBindings.Add(binding);
 
-            controlsTableLayoutPanel.Controls.Add(dtp, 2, controlsTableLayoutPanel.RowCount += 1);
-            controlsTableLayoutPanel.Controls.Add(GetCampoTitulo(property.Name), 1, controlsTableLayoutPanel.RowCount);
+            controlsTableLayoutPanel.Controls.Add(GetCampoTitulo(property.Name), 0, controlsTableLayoutPanel.RowCount += 1);
+            controlsTableLayoutPanel.Controls.Add(dtp, 1, controlsTableLayoutPanel.RowCount);
         }
         private void TypeTipoCliente(PropertyInfo property)
         {
             ComboBox combo = new ComboBox { Dock = DockStyle.Fill, AutoSize = true };
             TipoCliente currentTipoCliente;
             BindingList<TipoCliente> objects;
+
+            controlsTableLayoutPanel.Controls.Add(GetCampoTitulo(property.Name), 0, controlsTableLayoutPanel.RowCount+=1);
+
             switch (currentModo)
             {
                 case MODO_VER:
                     TextBox textField = new TextBox { Dock = DockStyle.Fill, AutoSize = true };
                     textField.Text = TiposManager.Instance().GetTipoClienteByIdCliente(Id).Descripcion;
-                    controlsTableLayoutPanel.Controls.Add(textField, 2, controlsTableLayoutPanel.RowCount += 1);
+                    controlsTableLayoutPanel.Controls.Add(textField, 1, controlsTableLayoutPanel.RowCount );
                     textField.ReadOnly = true;
                     break;
                 case MODO_INSERTAR:
@@ -240,7 +253,7 @@ namespace AppLaMejor.formularios.Util
                     combo.DisplayMember = "Descripcion";
                     combo.DataSource = objects;
                     combo.SelectedIndex = -1;
-                    controlsTableLayoutPanel.Controls.Add(combo, 2, controlsTableLayoutPanel.RowCount += 1);
+                    controlsTableLayoutPanel.Controls.Add(combo, 1, controlsTableLayoutPanel.RowCount);
                     break;
                 case MODO_EDITAR:
                     currentTipoCliente = TiposManager.Instance().GetTipoClienteByIdCliente(Id);
@@ -250,10 +263,9 @@ namespace AppLaMejor.formularios.Util
                     combo.ValueMember = null;
                     combo.DisplayMember = "Descripcion";
                     combo.DataSource = objects;
-                    controlsTableLayoutPanel.Controls.Add(combo, 2, controlsTableLayoutPanel.RowCount += 1);
+                    controlsTableLayoutPanel.Controls.Add(combo, 1, controlsTableLayoutPanel.RowCount );
                     break;
             }
-            controlsTableLayoutPanel.Controls.Add(GetCampoTitulo(property.Name), 1, controlsTableLayoutPanel.RowCount);
         }
         private void TypeTipoGarron(PropertyInfo property)
         {
@@ -295,8 +307,9 @@ namespace AppLaMejor.formularios.Util
                     break;
             }
 
-            controlsTableLayoutPanel.Controls.Add(combo, 2, controlsTableLayoutPanel.RowCount += 1);
-            controlsTableLayoutPanel.Controls.Add(GetCampoTitulo(property.Name), 1, controlsTableLayoutPanel.RowCount);
+            controlsTableLayoutPanel.Controls.Add(GetCampoTitulo(property.Name), 0, controlsTableLayoutPanel.RowCount+=1);
+            controlsTableLayoutPanel.Controls.Add(combo, 1, controlsTableLayoutPanel.RowCount );
+            
         }    
         private void TypeTipoEstadoGarron(PropertyInfo property)
         {
@@ -338,12 +351,14 @@ namespace AppLaMejor.formularios.Util
                     break;
             }
 
-            controlsTableLayoutPanel.Controls.Add(combo, 2, controlsTableLayoutPanel.RowCount += 1);
-            controlsTableLayoutPanel.Controls.Add(GetCampoTitulo(property.Name), 1, controlsTableLayoutPanel.RowCount);
+            controlsTableLayoutPanel.Controls.Add(GetCampoTitulo(property.Name), 0, controlsTableLayoutPanel.RowCount += 1);
+            controlsTableLayoutPanel.Controls.Add(combo, 1, controlsTableLayoutPanel.RowCount);
+            
         }
         private void TypeTipoProducto(PropertyInfo property)
         {
-            
+            controlsTableLayoutPanel.Controls.Add(GetCampoTitulo(property.Name), 0, controlsTableLayoutPanel.RowCount+=1);
+
             TipoProducto currentTipoProducto;
             BindingList<TipoProducto> objects;
             switch (currentModo)
@@ -352,7 +367,7 @@ namespace AppLaMejor.formularios.Util
                     TextBox textField = new TextBox { Dock = DockStyle.Fill, AutoSize = true };
                     currentTipoProducto = TiposManager.Instance().GetTipoProductoByIdProducto(Id);
                     textField.Text = currentTipoProducto.Descripcion;
-                    controlsTableLayoutPanel.Controls.Add(textField, 2, controlsTableLayoutPanel.RowCount += 1);
+                    controlsTableLayoutPanel.Controls.Add(textField, 1, controlsTableLayoutPanel.RowCount );
                     textField.ReadOnly = true;
                     break;
                 case MODO_INSERTAR:
@@ -369,7 +384,7 @@ namespace AppLaMejor.formularios.Util
                     combo.ValueMember = null;
                     combo.DisplayMember = "Descripcion";
                     combo.DataSource = objects;
-                    controlsTableLayoutPanel.Controls.Add(combo, 2, controlsTableLayoutPanel.RowCount += 1);
+                    controlsTableLayoutPanel.Controls.Add(combo, 1, controlsTableLayoutPanel.RowCount );
                     combo.SelectedIndex = -1;
                     break;
                 case MODO_EDITAR:
@@ -381,122 +396,11 @@ namespace AppLaMejor.formularios.Util
                     comboE.ValueMember = null;
                     comboE.DisplayMember = "Descripcion";
                     comboE.DataSource = objects;
-                    controlsTableLayoutPanel.Controls.Add(comboE, 2, controlsTableLayoutPanel.RowCount += 1);
+                    controlsTableLayoutPanel.Controls.Add(comboE, 1, controlsTableLayoutPanel.RowCount );
                     break;
             }
             
-            controlsTableLayoutPanel.Controls.Add(GetCampoTitulo(property.Name), 1, controlsTableLayoutPanel.RowCount);
-        }
-        private void TypeTipoProductoEstado(PropertyInfo property)
-        {            
-            //TipoProductoEstado currentTipoProductoEstado;
-            //BindingList<TipoProductoEstado> objects;
-            //switch (currentModo)
-            //{
-            //    case MODO_VER:
-            //        currentTipoProductoEstado = TiposManager.Instance().GetTipoProductoEstadoByIdProducto(Id);
-            //        TextBox textField = new TextBox { Dock = DockStyle.Fill, AutoSize = true };
-            //        textField.Text= currentTipoProductoEstado.Descripcion;
-            //        controlsTableLayoutPanel.Controls.Add(textField, 2, controlsTableLayoutPanel.RowCount += 1);
-            //        break;
-            //    case MODO_INSERTAR:
-            //        ComboBox combo = new ComboBox { Dock = DockStyle.Fill, AutoSize = true };
-            //        combo.SelectedIndexChanged += tipoProductoEstadoComboClicked;
-            //        listTipoProductoEstado = TiposManager.Instance().GetTipoProductoEstadoList();
-            //        ((Producto)_reflection).Estado = listTipoProductoEstado.First();
-            //        objects = new BindingList<TipoProductoEstado>(listTipoProductoEstado);
-            //        combo.ValueMember = null;
-            //        combo.DisplayMember = "Descripcion";
-            //        combo.DataSource = objects;
-            //        controlsTableLayoutPanel.Controls.Add(combo, 2, controlsTableLayoutPanel.RowCount += 1);
-            //        break;
-            //    case MODO_EDITAR:
-            //        ComboBox comboE = new ComboBox { Dock = DockStyle.Fill, AutoSize = true };
-            //        currentTipoProductoEstado = TiposManager.Instance().GetTipoProductoEstadoByIdProducto(Id);
-            //        listTipoProductoEstado = TiposManager.Instance().GetTipoProductoEstadoList().OrderBy(x => x.Descripcion != currentTipoProductoEstado.Descripcion).ToList();
-            //        objects = new BindingList<TipoProductoEstado>(listTipoProductoEstado);
-            //        comboE.SelectedIndexChanged += tipoProductoEstadoComboClicked;
-            //        comboE.ValueMember = null;
-            //        comboE.DisplayMember = "Descripcion";
-            //        comboE.DataSource = objects;
-            //        controlsTableLayoutPanel.Controls.Add(comboE, 2, controlsTableLayoutPanel.RowCount += 1);
-            //        break;
-            //}
-
-            //controlsTableLayoutPanel.Controls.Add(GetCampoTitulo(property.Name), 1, controlsTableLayoutPanel.RowCount);
-        }
-        private void TypeMedida(PropertyInfo property)
-        {
-            /*Medida currentMedida;
-            BindingList<Medida> objects = null;
-            switch (currentModo)
-            {
-                case MODO_VER:
-                    var textBox = new TextBox { Dock = DockStyle.Fill, AutoSize = true };
-                    textBox.Text = TiposManager.Instance().GetMedidaByIdProducto(Id).Descripcion;
-                    controlsTableLayoutPanel.Controls.Add(textBox, 2, controlsTableLayoutPanel.RowCount += 1);
-                    break;
-                case MODO_INSERTAR:
-                    ComboBox comboInsertar = new ComboBox { Dock = DockStyle.Fill, AutoSize = true };
-                    comboInsertar.SelectedIndexChanged += tipoMedidaComboClicked;
-                    listMedidas = TiposManager.Instance().GetMedidaList();
-                    ((Producto)_reflection).Medida = listMedidas.First();
-                    objects = new BindingList<Medida>(listMedidas);
-                    comboInsertar.ValueMember = null;
-                    comboInsertar.DisplayMember = "Descripcion";
-                    comboInsertar.DataSource = objects;
-                    controlsTableLayoutPanel.Controls.Add(comboInsertar, 2, controlsTableLayoutPanel.RowCount += 1);
-                    break;
-                case MODO_EDITAR:
-                    ComboBox comboEdit = new ComboBox { Dock = DockStyle.Fill, AutoSize = true };
-                    currentMedida = TiposManager.Instance().GetMedidaByIdProducto(Id);
-                    listMedidas = TiposManager.Instance().GetMedidaList().OrderBy(x => x.Descripcion != currentMedida.Descripcion).ToList();
-                    objects = new BindingList<Medida>(listMedidas);
-                    comboEdit.SelectedIndexChanged += tipoMedidaComboClicked;
-                    comboEdit.ValueMember = null;
-                    comboEdit.DisplayMember = "Descripcion";
-                    comboEdit.DataSource = objects;
-                    controlsTableLayoutPanel.Controls.Add(comboEdit, 2, controlsTableLayoutPanel.RowCount += 1);
-                    break;
-            }
-
-            controlsTableLayoutPanel.Controls.Add(GetCampoTitulo(property.Name), 1, controlsTableLayoutPanel.RowCount);¨*/
-        }
-        private void TypeTipoPrecio(PropertyInfo property)
-        {
-            /*BindingList<TipoPrecio> objects;
-            switch (currentModo)
-            {
-                case MODO_VER:
-                    var textBox = new TextBox { Dock = DockStyle.Fill, AutoSize = true };
-                    textBox.Text = TiposManager.Instance().GetTipoPrecioByIdProducto(Id).Descripcion;
-                    controlsTableLayoutPanel.Controls.Add(textBox, 2, controlsTableLayoutPanel.RowCount += 1);
-                    break;
-                case MODO_INSERTAR:
-                    ComboBox combo = new ComboBox { Dock = DockStyle.Fill, AutoSize = true };
-                    combo.SelectedIndexChanged += tipoPrecioComboClicked;
-                    listTipoPrecio = TiposManager.Instance().GetTipoPrecioList();
-                    ((Producto)_reflection).TipoPrecio = listTipoPrecio.First();
-                    objects = new BindingList<TipoPrecio>(listTipoPrecio);
-                    combo.ValueMember = null;
-                    combo.DisplayMember = "Descripcion";
-                    combo.DataSource = objects;
-                    controlsTableLayoutPanel.Controls.Add(combo, 2, controlsTableLayoutPanel.RowCount += 1);
-                    break;
-                case MODO_EDITAR:
-                    ComboBox comboEditar = new ComboBox { Dock = DockStyle.Fill, AutoSize = true };
-                    TipoPrecio currentTipoPrecio = TiposManager.Instance().GetTipoPrecioByIdProducto(Id);
-                    listTipoPrecio = TiposManager.Instance().GetTipoPrecioList().OrderBy(x => x.Descripcion != currentTipoPrecio.Descripcion).ToList();
-                    objects = new BindingList<TipoPrecio>(listTipoPrecio);
-                    comboEditar.SelectedIndexChanged += tipoPrecioComboClicked;
-                    comboEditar.ValueMember = null;
-                    comboEditar.DisplayMember = "Descripcion";
-                    comboEditar.DataSource = objects;
-                    controlsTableLayoutPanel.Controls.Add(comboEditar, 2, controlsTableLayoutPanel.RowCount += 1);
-                    break;
-            }
-            controlsTableLayoutPanel.Controls.Add(GetCampoTitulo(property.Name), 1, controlsTableLayoutPanel.RowCount);
-             */
+            
         }
 
         // Eventos para cada tipo
@@ -570,7 +474,7 @@ namespace AppLaMejor.formularios.Util
             // Cero tiene que ser el campo vacio
             if (combo.SelectedIndex.Equals(-1) || combo.SelectedIndex.Equals(0))
             {
-                MyTextTimer.TStartFade("Se requiere que seleccione un valor.", this.statusStrip1, this.tsslMensaje, MyTextTimer.TIME_LONG);
+                MyTextTimer.TStartFade("Se requiere que seleccione un valor.", this.statusStripFormEntityInput, this.mensajeroFormEntityInput, MyTextTimer.TIME_LONG);
                 combo.Focus();
             }
         }
@@ -629,7 +533,8 @@ namespace AppLaMejor.formularios.Util
             {
                 Text = propertyName,
                 Dock = DockStyle.Fill,
-                TextAlign = ContentAlignment.MiddleLeft,
+                TextAlign = ContentAlignment.MiddleRight,
+                Margin = new Padding(0, 0, 20, 0),
                 Font = StyleManager.Instance().GetCurrentStyle().MainFontSmall
             };
             return propertyLabel;

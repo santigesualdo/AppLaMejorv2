@@ -165,7 +165,7 @@ namespace AppLaMejor.datamanager
             QueryManager manager = QueryManager.Instance();
             String consulta = manager.GetProductoDataById(idProducto);
             DataTable table = manager.GetTableResults(ConnecionBD.Instance().Connection, consulta);
-            int idTipoProducto = table.Rows[0].Field<int>("id_producto_tipo");
+            int idTipoProducto = int.Parse(table.Rows[0].Field<string>("TipoProducto"));
             return GetTipoProducto(idTipoProducto);
         }
         public TipoProducto GetTipoProductoByName(string tipoProducto)

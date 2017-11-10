@@ -33,19 +33,19 @@ namespace AppLaMejor.formularios.Util
             this.contentPanel = new System.Windows.Forms.Panel();
             this.controlsPanel = new System.Windows.Forms.Panel();
             this.bottomPanel = new System.Windows.Forms.Panel();
-            this.topPanel = new System.Windows.Forms.Panel();
-            this.formTittleText = new System.Windows.Forms.Label();
             this.bAceptar = new System.Windows.Forms.Button();
             this.bCancelar = new System.Windows.Forms.Button();
             this.tableBottomPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.tsslMensaje = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusStripFormEntityInput = new System.Windows.Forms.StatusStrip();
+            this.mensajeroFormEntityInput = new System.Windows.Forms.ToolStripStatusLabel();
+            this.topPanel = new System.Windows.Forms.Panel();
+            this.formTittleText = new System.Windows.Forms.Label();
             this.mainPanel.SuspendLayout();
             this.contentPanel.SuspendLayout();
             this.bottomPanel.SuspendLayout();
-            this.topPanel.SuspendLayout();
             this.tableBottomPanel.SuspendLayout();
-            this.statusStrip1.SuspendLayout();
+            this.statusStripFormEntityInput.SuspendLayout();
+            this.topPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainPanel
@@ -91,29 +91,6 @@ namespace AppLaMejor.formularios.Util
             this.bottomPanel.Size = new System.Drawing.Size(622, 95);
             this.bottomPanel.TabIndex = 5;
             // 
-            // topPanel
-            // 
-            this.topPanel.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.topPanel.Controls.Add(this.formTittleText);
-            this.topPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.topPanel.Location = new System.Drawing.Point(0, 0);
-            this.topPanel.Name = "topPanel";
-            this.topPanel.Size = new System.Drawing.Size(622, 51);
-            this.topPanel.TabIndex = 1;
-            // 
-            // formTittleText
-            // 
-            this.formTittleText.BackColor = System.Drawing.Color.Green;
-            this.formTittleText.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.formTittleText.Font = new System.Drawing.Font("Source Sans Pro", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.formTittleText.Location = new System.Drawing.Point(0, 0);
-            this.formTittleText.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
-            this.formTittleText.Name = "formTittleText";
-            this.formTittleText.Size = new System.Drawing.Size(622, 51);
-            this.formTittleText.TabIndex = 0;
-            this.formTittleText.Text = "Titulo FormEntityInput";
-            this.formTittleText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // bAceptar
             // 
             this.bAceptar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
@@ -157,7 +134,7 @@ namespace AppLaMejor.formularios.Util
             // 
             this.tableBottomPanel.ColumnCount = 1;
             this.tableBottomPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableBottomPanel.Controls.Add(this.statusStrip1, 0, 0);
+            this.tableBottomPanel.Controls.Add(this.statusStripFormEntityInput, 0, 0);
             this.tableBottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.tableBottomPanel.Location = new System.Drawing.Point(0, 50);
             this.tableBottomPanel.Name = "tableBottomPanel";
@@ -166,28 +143,51 @@ namespace AppLaMejor.formularios.Util
             this.tableBottomPanel.Size = new System.Drawing.Size(622, 45);
             this.tableBottomPanel.TabIndex = 26;
             // 
-            // statusStrip1
+            // statusStripFormEntityInput
             // 
-            this.statusStrip1.AutoSize = false;
-            this.statusStrip1.BackColor = System.Drawing.Color.Green;
-            this.statusStrip1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsslMensaje});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 0);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(622, 45);
-            this.statusStrip1.TabIndex = 23;
-            this.statusStrip1.Text = "ssMensajero";
+            this.statusStripFormEntityInput.AutoSize = false;
+            this.statusStripFormEntityInput.BackColor = System.Drawing.Color.Green;
+            this.statusStripFormEntityInput.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.statusStripFormEntityInput.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mensajeroFormEntityInput});
+            this.statusStripFormEntityInput.Location = new System.Drawing.Point(0, 0);
+            this.statusStripFormEntityInput.Name = "statusStripFormEntityInput";
+            this.statusStripFormEntityInput.Size = new System.Drawing.Size(622, 45);
+            this.statusStripFormEntityInput.TabIndex = 23;
+            this.statusStripFormEntityInput.Text = "ssMensajero";
             // 
-            // tsslMensaje
+            // mensajeroFormEntityInput
             // 
-            this.tsslMensaje.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.tsslMensaje.Font = new System.Drawing.Font("Lucida Sans", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tsslMensaje.ImageTransparentColor = System.Drawing.Color.Green;
-            this.tsslMensaje.Margin = new System.Windows.Forms.Padding(20, 0, 0, 0);
-            this.tsslMensaje.Name = "tsslMensaje";
-            this.tsslMensaje.Size = new System.Drawing.Size(85, 45);
-            this.tsslMensaje.Text = "Mensajero";
+            this.mensajeroFormEntityInput.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.mensajeroFormEntityInput.Font = new System.Drawing.Font("Lucida Sans", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.mensajeroFormEntityInput.ImageTransparentColor = System.Drawing.Color.Green;
+            this.mensajeroFormEntityInput.Margin = new System.Windows.Forms.Padding(20, 0, 0, 0);
+            this.mensajeroFormEntityInput.Name = "mensajeroFormEntityInput";
+            this.mensajeroFormEntityInput.Size = new System.Drawing.Size(85, 45);
+            this.mensajeroFormEntityInput.Text = "Mensajero";
+            // 
+            // topPanel
+            // 
+            this.topPanel.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.topPanel.Controls.Add(this.formTittleText);
+            this.topPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.topPanel.Location = new System.Drawing.Point(0, 0);
+            this.topPanel.Name = "topPanel";
+            this.topPanel.Size = new System.Drawing.Size(622, 51);
+            this.topPanel.TabIndex = 1;
+            // 
+            // formTittleText
+            // 
+            this.formTittleText.BackColor = System.Drawing.Color.Green;
+            this.formTittleText.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.formTittleText.Font = new System.Drawing.Font("Source Sans Pro", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.formTittleText.Location = new System.Drawing.Point(0, 0);
+            this.formTittleText.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
+            this.formTittleText.Name = "formTittleText";
+            this.formTittleText.Size = new System.Drawing.Size(622, 51);
+            this.formTittleText.TabIndex = 0;
+            this.formTittleText.Text = "Titulo FormEntityInput";
+            this.formTittleText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // FormEntityInput
             // 
@@ -204,10 +204,10 @@ namespace AppLaMejor.formularios.Util
             this.mainPanel.ResumeLayout(false);
             this.contentPanel.ResumeLayout(false);
             this.bottomPanel.ResumeLayout(false);
-            this.topPanel.ResumeLayout(false);
             this.tableBottomPanel.ResumeLayout(false);
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
+            this.statusStripFormEntityInput.ResumeLayout(false);
+            this.statusStripFormEntityInput.PerformLayout();
+            this.topPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -223,8 +223,8 @@ namespace AppLaMejor.formularios.Util
         private System.Windows.Forms.Button bAceptar;
         private System.Windows.Forms.Button bCancelar;
         private System.Windows.Forms.TableLayoutPanel tableBottomPanel;
-        private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripStatusLabel tsslMensaje;
+        private System.Windows.Forms.StatusStrip statusStripFormEntityInput;
+        private System.Windows.Forms.ToolStripStatusLabel mensajeroFormEntityInput;
     }
 
 

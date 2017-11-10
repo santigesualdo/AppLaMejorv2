@@ -29,13 +29,25 @@ public class ApplicationLookAndFeel
     }
     public static void ApplyTheme(ToolStripStatusLabel c)
     {
-        c.Font = StyleManager.Instance().GetCurrentStyle().MainFontBig;
-        c.BackColor = StyleManager.Instance().GetCurrentStyle().MainColor;
-        c.ForeColor = StyleManager.Instance().GetCurrentStyle().TextColor;
+        if (c.Name.Equals("mensajeroFormEntityInput"))
+        {
+            c.BackColor = StyleManager.Instance().GetCurrentStyle().MouseDownBackColor;
+        }
+        else
+        {
+            c.Font = StyleManager.Instance().GetCurrentStyle().MainFontBig;
+            c.BackColor = StyleManager.Instance().GetCurrentStyle().MainColor;
+            c.ForeColor = StyleManager.Instance().GetCurrentStyle().TextColor;
+        }
+            
     }
-    public static void ApplyTheme(StatusStrip control)
+    public static void ApplyTheme(StatusStrip c)
     {
-        ToolStripStatusLabel label = (ToolStripStatusLabel)control.Items[0];
+        ToolStripStatusLabel label = (ToolStripStatusLabel)c.Items[0];
+        if (c.Name.Equals("statusStripFormEntityInput"))
+        {
+            c.BackColor = StyleManager.Instance().GetCurrentStyle().MouseDownBackColor;
+        }
         ApplyTheme(label);
     }
     public static void ApplyTheme(Form c)
