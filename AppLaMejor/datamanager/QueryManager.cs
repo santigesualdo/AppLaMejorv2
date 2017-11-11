@@ -10,6 +10,7 @@ using AppLaMejor.formularios.Util;
 using System.Threading;
 using System.Globalization;
 using System.Data.SqlClient;
+using AppLaMejor.controlmanager;
 
 namespace AppLaMejor.datamanager
 {
@@ -152,8 +153,8 @@ namespace AppLaMejor.datamanager
                 " '" + cliente.Telefono+ "', " +
                 " '" + cliente.NombreResponsable + "', " +
                 " '" + cliente.FechaDesde.ToString("yyyy-MM-dd") + "', " +
-                " null ," + 
-                cliente.idUsuario + ");";
+                " null ," +
+                VariablesGlobales.userIdLogueado.ToString() + ");";
 
         }
         public string UpdateCliente(Cliente cliente)
@@ -169,7 +170,7 @@ namespace AppLaMejor.datamanager
                 "cuit ='" + cliente.Cuit + "',  " +
                 "nombre_responsable ='" + cliente.NombreResponsable + "',  " +
                 "fecha_desde ='" + cliente.FechaDesde.ToString("yyyy-MM-dd") + "', " +
-                "usuario ='" + cliente.idUsuario + "' "+
+                "usuario ='" + VariablesGlobales.userIdLogueado.ToString() + "' "+
                 "WHERE id= " + cliente.Id+"";
             return query;
         }
@@ -230,7 +231,7 @@ namespace AppLaMejor.datamanager
                 " '" + Proveedor.NombreResponsable + "', " +
                 " '" + Proveedor.FechaDesde.ToString("yyyy-MM-dd") + "', " +
                 " null ," +
-                Proveedor.idUsuario + ");";
+                VariablesGlobales.userIdLogueado.ToString() + ");";
 
         }
         //public string UpdateProveedor(Proveedor Proveedor)
@@ -351,7 +352,7 @@ namespace AppLaMejor.datamanager
             newCuenta.Numerocuenta + "', '" +
             newCuenta.SaldoActual + "', '" +
             idCliente + "', " +
-            " NOW() , 0 , null );";
+            " NOW() , '"+ VariablesGlobales.userIdLogueado.ToString() +"' , null );";
         }
 
         /* Cuentas proveedores */
@@ -437,7 +438,7 @@ namespace AppLaMejor.datamanager
             newCuenta.Numerocuenta + "', '" +
             newCuenta.SaldoActual + "', '" +
             idProveedor + "', " +
-            " NOW() , 0 , null );";
+            " NOW() , '"+ VariablesGlobales.userIdLogueado.ToString() + "' , null );";
         }
         public string GetMovCuentasProveedor(int id, int pInicio, int registros)
         {
@@ -510,8 +511,8 @@ namespace AppLaMejor.datamanager
                 movCuenta.Cuenta.Id + "," +
                 movCuenta.TipoMovimiento.Id + "," +
                 movCuenta.Monto + ", NOW(),'" +
-                movCuenta.Cobrado + "'," +
-                movCuenta.idUsuario + ");";
+                movCuenta.Cobrado + "','" +
+                VariablesGlobales.userIdLogueado.ToString() + "');";
         }
         public string ActualizaSaldoProveedor(Cuenta Cuenta)
         {
@@ -628,8 +629,8 @@ namespace AppLaMejor.datamanager
                 movCuenta.Cuenta.Id + "," +
                 movCuenta.TipoMovimiento.Id + "," +
                 movCuenta.Monto + ", NOW(),'" +
-                movCuenta.Cobrado + "'," +
-                movCuenta.idUsuario + ");";
+                movCuenta.Cobrado + "','" +
+                VariablesGlobales.userIdLogueado.ToString() + "');";
         }
         public string ActualizaSaldo(Cuenta Cuenta)
         {
@@ -657,15 +658,15 @@ namespace AppLaMejor.datamanager
                 vd.Venta.Id + "', '" +
                 vd.Producto.Id + "', '" +
                 vd.Monto + "', '" +
-                vd.Peso + "', " +
-                vd.idUsuario + ");";
+                vd.Peso + "', '" +
+                VariablesGlobales.userIdLogueado.ToString() + "');";
         }
         public string InsertVenta(Venta v)
         {
             return "INSERT INTO venta (monto_total, fecha, usuario) VALUES ('" +
                 v.MontoTotal + "', " +
-                " NOW() , " +
-                v.idUsuario + ");";
+                " NOW() , '" +
+                VariablesGlobales.userIdLogueado.ToString() + "');";
         }
         public string GetMedidas()
         {
@@ -764,7 +765,7 @@ namespace AppLaMejor.datamanager
                     producto.Cantidad + "', '" +
                     producto.DescripcionBreve + "', '" +
                     producto.DescripcionLarga + "', '" +
-                    producto.idUsuario +", " +
+                    VariablesGlobales.userIdLogueado.ToString() + "', " +
                     "null );";
         }
         public string UpdateProducto(Producto producto)
@@ -839,7 +840,7 @@ namespace AppLaMejor.datamanager
                     g.TipoEstadoGarron.Id + "', '" +
                     g.FechaEntrada.ToString("yyyy-MM-dd")+"', '"+
                     g.Peso + "', '" +
-                    g.Mes + "', '1', " +
+                    g.Mes + "', '"+ VariablesGlobales.userIdLogueado.ToString() + "', " +
                     "null );";
         }
         public string GetLastInsertedGarron()

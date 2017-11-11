@@ -86,6 +86,10 @@ namespace AppLaMejor.controlmanager
                 {
                     FormMessageBox dialog = new FormMessageBox();
                     dialog.ShowErrorDialog("Error: " + e.Message);
+                    if (tran == null)
+                    {
+                        return false;
+                    }
                     tran.Rollback();
                     return false;
                 }

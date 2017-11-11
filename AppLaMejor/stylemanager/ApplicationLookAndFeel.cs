@@ -58,6 +58,9 @@ public class ApplicationLookAndFeel
         if (c.Name.Equals("statusStripFormEntityInput"))
         {
             c.BackColor = StyleManager.Instance().GetCurrentStyle().MouseDownBackColor;
+        }else
+        {
+            c.BackColor = StyleManager.Instance().GetCurrentStyle().MainColor;
         }
         ApplyTheme(label);
     }
