@@ -1,5 +1,6 @@
 ﻿using AppLaMejor.datamanager;
 using AppLaMejor.entidades;
+using AppLaMejor.formularios.Util;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -90,7 +91,8 @@ namespace AppLaMejor.controlmanager
             }
             catch (Exception e)
             {
-                MessageBox.Show("Ocurrio un error : " + e.Message);
+				FormMessageBox dialog = new FormMessageBox();
+                dialog.ShowErrorDialog("Ocurrio un error : " + e.Message);
                 return false;
             }
             return false;

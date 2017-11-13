@@ -145,8 +145,10 @@ namespace AppLaMejor.formularios.Util
                 if (Convert.ToInt16(dvTemp.Rows[a]["id_movimiento_tipo"]) == 2) //2 - HABER
                     pago += Convert.ToDecimal(dvTemp.Rows[a]["monto"].ToString());
                 //pagó es lo que pagó el Proveedor... daaa
-                if (Convert.ToInt16(dvTemp.Rows[a]["id_movimiento_tipo"]) != 2 && Convert.ToInt16(dvTemp.Rows[a]["id_movimiento_tipo"]) != 1)
-                    MessageBox.Show("Hay un error de asiento");
+                if (Convert.ToInt16(dvTemp.Rows[a]["id_movimiento_tipo"]) != 2 && Convert.ToInt16(dvTemp.Rows[a]["id_movimiento_tipo"]) != 1){
+					FormMessageBox dialog = new FormMessageBox();
+					dialog.ShowErrorDialog("Hay un error de asiento");
+				}
             }
 
             lblDebe.Text = debe.ToString("$ #,##0.00");
@@ -176,8 +178,10 @@ namespace AppLaMejor.formularios.Util
                 if (Convert.ToInt16(dvTemp.Rows[a]["id_movimiento_tipo"]) == 2) //2 - HABER
                     pago += Convert.ToDecimal(dvTemp.Rows[a]["monto"].ToString());
                 //pagó es lo que pagó el Proveedor... daaa
-                if (Convert.ToInt16(dvTemp.Rows[a]["id_movimiento_tipo"]) != 2 && Convert.ToInt16(dvTemp.Rows[a]["id_movimiento_tipo"]) != 1)
-                    MessageBox.Show("Hay un error de asiento");
+                if (Convert.ToInt16(dvTemp.Rows[a]["id_movimiento_tipo"]) != 2 && Convert.ToInt16(dvTemp.Rows[a]["id_movimiento_tipo"]) != 1){
+					FormMessageBox dialog = new FormMessageBox();
+					dialog.ShowErrorDialog("Hay un error de asiento");
+				}
             }
 
             lblDebe.Text = debe.ToString("$ #,##0.00");
@@ -417,7 +421,8 @@ namespace AppLaMejor.formularios.Util
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ha ocurrido un error:" + ex.Message);
+				FormMessageBox dialog = new FormMessageBox();
+				dialog.ShowErrorDialog("Ha ocurrido un error:" + ex.Message);
             }
         }
 

@@ -24,7 +24,6 @@ namespace AppLaMejor.datamanager
             TEntity entity = new TEntity();
             foreach (var prop in properties)
             {
-                System.Windows.Forms.MessageBox.Show(prop.PropertyType.ToString());
                 PropertyMapHelper.Map(typeof(TEntity), row, prop, entity);
             }
 

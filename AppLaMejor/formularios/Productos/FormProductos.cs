@@ -93,18 +93,16 @@ namespace AppLaMejor.formularios
             string descripcion = Convert.ToString(selectedRow.Cells["DescripcionBreve"].Value);
             string idProducto = Convert.ToString(selectedRow.Cells["ID"].Value);
 
-            DialogResult dr = MessageBox.Show("¿Eliminar registro del Producto " + descripcion + " ?", "Confirmar", MessageBoxButtons.YesNo);
-            switch(dr){
-               case DialogResult.Yes:
+			FormMessageBox dialog = new FormMessageBox();
+			if (dialog.ShowConfirmationDialog("¿Eliminar registro del Producto " + descripcion + " ?")){
                     string consultaEliminar = QueryManager.Instance().GetDeleteProd(idProducto, new DateTime());
                     if (QueryManager.Instance().ExecuteSQL(ConnecionBD.Instance().Connection, consultaEliminar))
                     {
-                        MessageBox.Show("Registro exitosamente eliminado.");
+						dialog = new FormMessageBox();
+						dialog.ShowErrorDialog("Registro exitosamente eliminado.");
                         CargarDataGrid();
-                    }                   
-                   break;
-               case DialogResult.No: break;
-            }
+                    }                   				
+			}
         }
 
         private void ModoEdicion(object sender, EventArgs e)

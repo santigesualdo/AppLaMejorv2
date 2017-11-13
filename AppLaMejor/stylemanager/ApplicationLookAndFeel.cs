@@ -2,6 +2,7 @@
 using System.Drawing;
 using AppLaMejor.stylemanager;
 using System;
+using AppLaMejor.formularios.Util;
 
 public class ApplicationLookAndFeel
 {
@@ -329,7 +330,8 @@ public class ApplicationLookAndFeel
             }
         }
 
-        MessageBox.Show(text);
+		FormMessageBox dialog = new FormMessageBox();
+		dialog.ShowErrorDialog(text);
     }
 
 

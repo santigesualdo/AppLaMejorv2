@@ -157,7 +157,10 @@ namespace AppLaMejor.formularios.MovimientoCuentas
                     pago += Convert.ToDecimal(dv.Table.Rows[a]["monto"].ToString());
                 //pagó es lo que pagó el cliente... daaa
                 if (Convert.ToInt16(dv.Table.Rows[a]["id_movimiento_tipo"]) != 2 && Convert.ToInt16(dv.Table.Rows[a]["id_movimiento_tipo"]) != 1)
-                    MessageBox.Show("Hay un error de asiento");
+				{
+					FormMessageBox dialog = new FormMessageBox();
+					dialog.ShowErrorDialog("Hay un error de asiento");
+				}
             }
 
             lblDebe.Text = debe.ToString("$ #,##0.00");
@@ -197,8 +200,10 @@ namespace AppLaMejor.formularios.MovimientoCuentas
                         pago += Convert.ToDecimal(dv.Table.Rows[a]["monto"].ToString());
                     //pagó es lo que pagó el cliente... daaa
                     if (Convert.ToInt16(dv.Table.Rows[a]["id_movimiento_tipo"]) != 2 && Convert.ToInt16(dv.Table.Rows[a]["id_movimiento_tipo"]) != 1)
-                        MessageBox.Show("Hay un error de asiento");
-                }
+					{
+						FormMessageBox dialog = new FormMessageBox();
+						dialog.ShowErrorDialog("Hay un error de asiento");                        
+					}
             }
             lblDebePeriodo.Text = debe.ToString("$ #,##0.00");
             lblPagoPeriodo.Text = pago.ToString("$ #,##0.00");

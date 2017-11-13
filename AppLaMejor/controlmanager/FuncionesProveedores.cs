@@ -6,6 +6,7 @@ using AppLaMejor.datamanager;
 using AppLaMejor.entidades;
 using System.Data;
 using System.Windows.Forms;
+using AppLaMejor.formularios.Util;
 
 namespace AppLaMejor.controlmanager
 {
@@ -53,15 +54,10 @@ namespace AppLaMejor.controlmanager
             }
             else
             {
-                DialogResult dialogResult = MessageBox.Show("     No hay cuenta asociada al Proveedor \r\n   ¿Desea crear una cuenta y asociarla?", "Mensaje", MessageBoxButtons.YesNo);
-                if (dialogResult == DialogResult.Yes)
-                {
-                    MessageBox.Show("acá linkear para crear una cuenta"); //do something
-                }
-                else if (dialogResult == DialogResult.No)
-                {
-                    //do something else
-                }
+				FormMessageBox dialog = new FormMessageBox();
+				if (dialog.ShowConfirmationDialog("     No hay cuenta asociada al Proveedor \r\n   ¿Desea crear una cuenta y asociarla?")){
+					MessageBox.Show("acá linkear para crear una cuenta"); //do something
+				}
                 return null;
             }
 

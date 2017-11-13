@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading;
 using AppLaMejor.entidades;
 using System.Windows.Forms;
+using AppLaMejor.formularios.Util;
 
 namespace AppLaMejor.datamanager
 {
@@ -145,7 +146,8 @@ namespace AppLaMejor.datamanager
             }
             catch(InvalidOperationException e)
             {
-                MessageBox.Show("Error: " + e.Message);
+				FormMessageBox dialog = new FormMessageBox();
+				dialog.ShowErrorDialog("Error: " + e.Message);
             }
         }
 

@@ -94,19 +94,16 @@ namespace AppLaMejor.formularios
             string razonSocial = Convert.ToString(selectedRow.Cells["RazonSocial"].Value);
             string idCliente = Convert.ToString(selectedRow.Cells["ID"].Value);
 
-            DialogResult dr = MessageBox.Show("¿Eliminar registro del cliente " + razonSocial + " ?", "Confirmar", MessageBoxButtons.YesNo);
-            switch(dr){
-               case DialogResult.Yes:
+			FormMessageBox dialog = new FormMessageBox();
+			if (dialog.ShowConfirmationDialog("¿Eliminar registro del cliente " + razonSocial + " ?")){
                     string consultaEliminar = QueryManager.Instance().GetDeleteClient(idCliente, DateTime.Now);
                     if (QueryManager.Instance().ExecuteSQL(ConnecionBD.Instance().Connection, consultaEliminar))
                     {
                         MyTextTimer.TStartFade("Cliente eliminado correctamente", statusStrip1, tsslMensaje, MyTextTimer.TIME_SHORT);
                         CargarDataGrid();
                     }                   
-
-                   break;
-               case DialogResult.No: break;
-            }
+				
+			}
         }
 
         private void ModoEdicion(object sender, EventArgs e)
@@ -161,7 +158,6 @@ namespace AppLaMejor.formularios
             /* Form Entity Input */
             FormEntityInput dialog = new FormEntityInput(null, FormEntityInput.MODO_INSERTAR, formTittleText.Text);
             Boolean result = dialog.Execute(newClient);
-
             if (result)
             {
                 newClient = (Cliente)dialog.SelectedObject;

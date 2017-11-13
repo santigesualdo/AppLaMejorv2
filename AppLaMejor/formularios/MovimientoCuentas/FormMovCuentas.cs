@@ -111,19 +111,15 @@ namespace AppLaMejor.formularios
             string razonSocial = Convert.ToString(selectedRow.Cells["RazonSocial"].Value);
             string idCliente = Convert.ToString(selectedRow.Cells["ID"].Value);
 
-            DialogResult dr = MessageBox.Show("¿Eliminar registro del cliente " + razonSocial + " ?", "Confirmar", MessageBoxButtons.YesNo);
-            switch(dr){
-               case DialogResult.Yes:
-                    string consultaEliminar = QueryManager.Instance().GetDeleteClient(idCliente, new DateTime());
-                    if (QueryManager.Instance().ExecuteSQL(ConnecionBD.Instance().Connection, consultaEliminar))
-                    {
-                        MessageBox.Show("Registro exitosamente eliminado.");
-                        CargarDataGrid();
-                    }                   
-
-                   break;
-               case DialogResult.No: break;
-            }
+			FormMessageBox dialog = new FormMessageBox();
+			if (dialog.ShowConfirmationDialog("¿Eliminar registro del cliente " + razonSocial + " ?")){
+				string consultaEliminar = QueryManager.Instance().GetDeleteClient(idCliente, new DateTime());
+				if (QueryManager.Instance().ExecuteSQL(ConnecionBD.Instance().Connection, consultaEliminar))
+				{
+					dialog.ShowErrorDialog("Registro exitosamente eliminado.");
+					CargarDataGrid();
+				}                   				
+			}
         }
 
         
@@ -296,12 +292,8 @@ namespace AppLaMejor.formularios
         void nuevaCuenta()
         {
             VariablesGlobales.FormMovCuentas_comboCargado = false;
-            DialogResult dr = MessageBox.Show("¿Desea agregarle una nueva cuenta?", "Cliente sin cuenta", MessageBoxButtons.YesNo);
-            switch (dr)
-            {
-                case DialogResult.Yes:
-
-
+			FormMessageBox fdialog = new FormMessageBox();
+			if (fdialog.ShowConfirmationDialog("¿Desea agregarle una nueva cuenta?")){
                     // int i = FuncionesGlobales.obtenerIndexDeListFromGrid(dataGridClientes);
                     // Cliente clientSelected = listClients.First(s => s.Id == i);
 
@@ -329,14 +321,10 @@ namespace AppLaMejor.formularios
                         {
                             MyTextTimer.TStart("No se guardo cuenta.", statusStrip1, tsslMensaje);
                         }
+                    }				
+			}
+			
 
-                    }
-
-
-
-                    break;
-                case DialogResult.No: break;
-            }
         }
 
         private void cmbClientes_SelectedValueChanged(object sender, EventArgs e)

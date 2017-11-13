@@ -49,13 +49,21 @@ namespace AppLaMejor.formularios.Util
             return ShowDialog();
         }
 
-        public DialogResult ShowConfirmationDialog(string v)
+        public Boolean ShowConfirmationDialog(string v)
         {
-            messageBoxLabel.Text = v;
-            bOk.Visible = false;
-            bAceptar.Visible = true;
-            bCancelar.Visible = true;
-            return ShowDialog();
+            try
+            {
+                messageBoxLabel.Text = v;
+                bOk.Visible = false;
+                bAceptar.Visible = true;
+                bCancelar.Visible = true;
+                return ShowDialog() == DialogResult.OK;
+            }
+            catch(Exception e)
+            {
+                return false;
+            }
+
         }
     }
 }

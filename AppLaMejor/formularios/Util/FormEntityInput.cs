@@ -130,7 +130,8 @@ namespace AppLaMejor.formularios.Util
                         Controls.Add(controlsTableLayoutPanel);
              
                 }catch (Exception e){
-                    MessageBox.Show("Error : "+ e.Message);
+					FormMessageBox dialog = new FormMessageBox();
+					dialog.ShowErrorDialog("Error : "+ e.Message);
                 }
             }
         }
@@ -453,7 +454,8 @@ namespace AppLaMejor.formularios.Util
 
             if (!decimal.TryParse(strdecimal, out d))
             {
-                MessageBox.Show("Please enter a valid number");
+                FormMessageBox dialog = new FormMessageBox();
+				dialog.ShowErrorDialog("Por favor ingresa un numero decimal valido.");
             }
             else
             {
@@ -465,7 +467,8 @@ namespace AppLaMejor.formularios.Util
             if (e.KeyChar == '.')
             {
                 e.Handled = true;
-                MessageBox.Show("No se puede escribir punto, escriba coma");
+				FormMessageBox dialog = new FormMessageBox();
+				dialog.ShowErrorDialog("No se puede escribir punto, escriba coma");
             }
         }
         private void comboRequiredLeave(object sender, EventArgs e)
@@ -541,33 +544,26 @@ namespace AppLaMejor.formularios.Util
         }
         private void bAceptar_Click_1(object sender, EventArgs e)
         {
-            //if (!CheckCambiosRealizados())
-            //{
-            //    MyTextTimer.TStartFade("No se hicieron cambios.", this.statusStrip1, this.tsslMensaje, MyTextTimer.TIME_LONG);
-            //}
-            //else
-            //{
-                if (currentModo.Equals(MODO_EDITAR) || currentModo.Equals(MODO_INSERTAR))
-                {
-                    if (MessageBox.Show("¿Desea aplicar los cambios?", "Confirmar.", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                    {
-                        this.DialogResult = DialogResult.OK;
-                        this.Close();
-                    }
-                }
-                else
-                {
+            if (currentModo.Equals(MODO_EDITAR) || currentModo.Equals(MODO_INSERTAR))
+            {
+                FormMessageBox dialog = new FormMessageBox();
+                if (dialog.ShowConfirmationDialog("¿Desea aplicar los cambios?"))
                     this.DialogResult = DialogResult.OK;
-                    this.Close();
-                }
-            //}
+                else
+                    this.DialogResult = DialogResult.Cancel;
+            }
+            else
+                this.DialogResult = DialogResult.OK;
+
+            this.Close();
         }
         private void bCancelar_Click(object sender, EventArgs e)
         {
             
             if (currentModo.Equals(MODO_EDITAR) || currentModo.Equals(MODO_INSERTAR))
             {
-                if (MessageBox.Show("¿Desea descartar los cambios?", "Confirmar.", MessageBoxButtons.YesNo) == DialogResult.Yes)
+				FormMessageBox dialog = new FormMessageBox();
+				if (dialog.ShowConfirmationDialog("¿Desea descartar los cambios?"))
                 {
                     this.DialogResult = DialogResult.Cancel;
                     this.Close();

@@ -204,13 +204,13 @@ namespace AppLaMejor.datamanager
              "   order by c.id  ";
         }
         //trae el saldo actual y algunos datos de referencia para el form de MovCuentas
-         public string GetClientesSaldoActual()
+        public string GetClientesSaldoActual()
         {
-            return "SELECT cliente.id, cliente.razon_social AS `razon social`, cliente.nombre_local AS `nombre local`, cast(ct.descripcion as CHAR(50)) AS `Tipo Cliente`, cliente.civa AS iva," +
-        " cliente.cuit AS cuit, cuenta.cbu, cuenta.nro_cuenta AS `nro cuenta`, cuenta.saldo_actual AS `saldo actual`, cuenta.fecha_updated AS actualizado, " +
-        " cuenta.usuario, cuenta.fecha_baja FROM cliente inner join cuenta on cliente.id = cuenta.id_cliente INNER JOIN clientetipo ct ON ct.id = cliente.id_tipo_cliente order by cliente.id  ";
-        }
-		
+            return "SELECT cliente.id, cliente.razon_social AS `razon social`, cliente.nombre_local AS `nombre local`, cliente.civa AS iva, count(cuenta.id) AS cuentas FROM cliente inner join clientecuenta cuenta on cliente.id = cuenta.id_cliente       INNER JOIN banco ON cuenta.id_banco = banco.id INNER JOIN clientetipo ct ON ct.id = cliente.id_tipo_cliente group by cliente.id order by cliente.id";
+																																							  
+																																																																 
+        } 
+  
 		public string GetDeleteClient(string idCliente, DateTime fechaBaja)
         {
             return "update cliente set fecha_baja ='" + fechaBaja.ToString("yyyy-MM-dd") + "' where id = "+ idCliente+";";
@@ -278,9 +278,30 @@ namespace AppLaMejor.datamanager
              "	Proveedor c " +
              "   order by c.id  ";
         }        
+        //trae el saldo actual y algunos datos de referencia para el form de MovCuentas
         public string GetProveedoresSaldoActual()
         {
             return "SELECT proveedor.id, proveedor.razon_social AS `razon social`, proveedor.nombre_local AS `nombre local`, proveedor.civa AS iva, count(cuenta.id) AS cuentas FROM proveedor inner join proveedorcuenta cuenta on proveedor.id = cuenta.id_proveedor       INNER JOIN banco ON cuenta.id_banco = banco.id group by proveedor.id order by proveedor.id";
+        }
+        public string GetDeleteProv(string idProveedor, DateTime fechaBaja)
+        {
+            return "update proveedor set fecha_baja ='" + fechaBaja.ToString() + "' where id = " + idProveedor + ";";
+        }
+        public string UpdateProveedor(Proveedor proveedor)
+        {
+            string query = "UPDATE proveedor SET " +
+                "razon_social ='" + proveedor.RazonSocial + "',  " +
+                "domicilio ='" + proveedor.Domicilio + "',  " +
+                "localidad ='" + proveedor.Localidad + "',  " +
+                "civa ='" + proveedor.Iva + "',  " +
+                "nombre_local ='" + proveedor.NombreLocal + "',  " +
+                "telefono ='" + proveedor.Telefono + "',  " +
+                "cuit ='" + proveedor.Cuit + "',  " +
+                "nombre_responsable ='" + proveedor.NombreResponsable + "',  " +
+                "fecha_desde ='" + proveedor.FechaDesde.ToString("yyyy-MM-dd") + "', " +
+                "usuario ='" + proveedor.idUsuario + "' " +
+                "WHERE id= " + proveedor.Id + "";
+            return query;
         }
         
         /* Cuentas */
@@ -299,7 +320,7 @@ namespace AppLaMejor.datamanager
              "	c.telefono AS Telefono " +
              " FROM " +
              "	cliente c " +
-             " INNER JOIN clientetipo ct ON ct.id = c.id_tipo_cliente INNER JOIN cuenta cu ON cu.id_cliente = c.id " +
+             " INNER JOIN clientetipo ct ON ct.id = c.id_tipo_cliente INNER JOIN clientecuenta cu ON cu.id_cliente = c.id " +
              " WHERE c.id =" + id +
              "   AND c.fecha_baja is null  " +
              "   order by c.id  ";
@@ -320,19 +341,19 @@ namespace AppLaMejor.datamanager
              "	c.telefono AS Telefono " +
              " FROM " +
              "	cliente c " +
-             " INNER JOIN clientetipo ct ON ct.id = c.id_tipo_cliente INNER JOIN cuenta cu ON cu.id_cliente = c.id " +
+             " INNER JOIN clientetipo ct ON ct.id = c.id_tipo_cliente INNER JOIN clientecuenta cu ON cu.id_cliente = c.id " +
              " WHERE " +
              "   c.fecha_baja is null  " +
              "   order by c.id  ";
         }
         public string GetCuentaByIdCliente(int id)
         {
-            return "select * from cuenta where id_cliente = " + id.ToString() ;
+            return "select * from clientecuenta where id_cliente = " + id.ToString() ;
         }
-		
+  
         public string GetCuenta(int id)
         {
-            return "select * from cuenta where id = " + id.ToString() ;
+            return "select * from clientecuenta where id = " + id.ToString() ;
         }
         public string GetCuentas()
         {
@@ -345,20 +366,15 @@ namespace AppLaMejor.datamanager
         }
         public string InsertNuevaCuenta(Cuenta newCuenta, string idCliente)
         {
-            return "INSERT INTO cuenta ( cbu, nro_cuenta, saldo_actual, id_cliente, fecha_updated, usuario, fecha_baja) " +
+            return "INSERT INTO clientecuenta ( cbu, nro_cuenta, id_cliente, fecha_updated, usuario, fecha_baja) " +
             " VALUES ('" + newCuenta.Cbu + "', '" +
             newCuenta.Numerocuenta + "', '" +
-            newCuenta.SaldoActual + "', '" +
             idCliente + "', " +
-            " NOW() , '"+ VariablesGlobales.userIdLogueado.ToString() +"' , null );";
+            " NOW() , 0 , null );";
         }
 
         /* Cuentas proveedores */
         /* Movimiento Cuentas proveedores */
-        public string GetMovCuentasProveedores()
-        {/* trae todos los movimiento de cuentas de todos los proveedores*/
-            return "SELECT cm.id, cm.vob, gc.id, gc.id_proveedor, cm.id_cuenta, cm.id_movimiento_tipo, mt.descripcion, gc.id_banco, round(cm.monto, 2) AS monto, DATE_FORMAT(cm.fecha, '%Y-%m-%d') AS fecha_,  cm.cobrado, cm.usuario FROM proveedorcuentamovimiento cm INNER JOIN proveedorcuenta gc ON cm.id_cuenta = gc.id INNER JOIN movimientotipo mt ON cm.id_movimiento_tipo = mt.id WHERE gc.id_proveedor IS NOT NULL ORDER BY cm.id DESC;";
-        }
         public string GetProveedoresWithCuentaById(int id)
         {
             return "SELECT c.id , " +
@@ -374,7 +390,7 @@ namespace AppLaMejor.datamanager
              "	c.telefono AS Telefono " +
              " FROM " +
              "	proveedor c " +
-             " INNER JOIN cuentaproveedor cu ON cu.id_proveedor = c.id " +
+             " INNER JOIN proveedorcuenta cu ON cu.id_proveedor = c.id " +
              " WHERE c.id =" + id +
              "   AND c.fecha_baja is null  " +
              "   order by c.id  ";
@@ -401,30 +417,150 @@ namespace AppLaMejor.datamanager
         }
         public string GetCuentaByIdProveedor(int id)
         {
-            return "select * from cuentaproveedor where id_proveedor = " + id.ToString();
+            return "select * from proveedorcuenta where id_proveedor = " + id.ToString();
         }
+
         public string GetCuentaProveedor(int id)
         {
-            return "select * from cuentaproveedor where id = " + id.ToString();
+            return "select * from proveedorcuenta where id = " + id.ToString();
         }
         public string GetCuentasProveedor()
         {
-            return "select * from cuentaproveedor order by id;";
+            return "select * from proveedorcuenta order by id;";
         }
         public string GetCuentasProveedores(int idProveedor)
         {
-            return "select * from cuentaproveedor where id_proveedor = " + idProveedor + " order by id;";
+            return "select * from proveedorcuenta where id_proveedor = " + idProveedor + " order by id;";
         }
         public string InsertNuevaCuentaProveedor(Cuenta newCuenta, string idProveedor)
         {
-            return "INSERT INTO cuentaproveedor ( cbu, nro_cuenta, saldo_actual, id_proveedor, fecha_updated, usuario, fecha_baja) " +
+            return "INSERT INTO proveedorcuenta ( cbu, nro_cuenta, id_proveedor, fecha_updated, usuario, fecha_baja) " +
             " VALUES ('" + newCuenta.Cbu + "', '" +
             newCuenta.Numerocuenta + "', '" +
-            newCuenta.SaldoActual + "', '" +
+											
             idProveedor + "', " +
-            " NOW() , '"+ VariablesGlobales.userIdLogueado.ToString() + "' , null );";
+            " NOW() , 0 , null );";
         }
-        public string GetMovCuentasProveedor(int id, int pInicio, int registros)
+
+        /* Movimiento Cuentas */
+        public string GetMovCuentas()
+        {/* trae todos los movimiento de cuentas de todos los clientes*/
+            return "SELECT " +
+                    "cm.id, " +
+                    "cm.vob," +
+                    "gc.id," +
+                    "gc.id_cliente," +
+                    "cm.id_cuenta, " +
+                    "cm.id_movimiento_tipo," +
+                    "mt.descripcion, " +
+                    "gc.id_banco, " +
+                    "round(cm.monto, 2) AS monto, " +
+                    "DATE_FORMAT(cm.fecha,'%Y-%m-%d') AS fecha_," +
+                    "cm.cobrado, " +
+                    "cm.usuario " +
+                    "FROM clientecuentamovimiento cm INNER JOIN clientecuenta gc ON cm.id_cuenta = gc.id " +
+                    "INNER JOIN movimientotipo mt ON cm.id_movimiento_tipo = mt.id " +
+                    "WHERE gc.id_cliente IS NOT NULL ORDER BY cm.id DESC;";
+        } 
+     												   
+		public string GetMovCuentas(int id, int pInicio, int registros)
+        {
+            /* trae paginando los movimiento de cuentas de un solo cliente*/
+
+            return "SELECT " +
+                    "cm.id, " +
+                    "cm.vob," +
+                    "cc.id," +
+                    "cc.id_cliente," +
+                    "banco.descripcion as Banco, " +
+                    "cm.id_movimiento_tipo," +
+                    "mt.descripcion, " +
+                    "banco.descripcion as Banco, " +
+                    "round(cm.monto, 2) AS monto, " +
+                    "DATE_FORMAT(cm.fecha,'%Y-%m-%d') AS fecha_" +
+                    //"cm.cobrado, " +
+                    //"cm.usuario " +
+                    " FROM clientecuentamovimiento cm INNER JOIN clientecuenta cc ON cm.id_cuenta = cc.id " +
+                    "INNER JOIN movimientotipo mt ON cm.id_movimiento_tipo = mt.id " +
+                    "INNER JOIN banco ON banco.id = cc.id_banco WHERE cc.id_cliente =" + id.ToString() + " ORDER BY cm.id DESC LIMIT " +
+                    pInicio.ToString() + ", " + registros.ToString() + ";";
+        }        
+        public string GetMovCuentasBetweenDates(int id, int pInicio, int registros, string fdesde, string fhasta)
+        {
+            /* trae paginando los movimiento de cuentas de un solo cliente*/
+
+            return "SELECT " +
+                    "cm.id, " +
+                    "cm.vob," +
+                    "gc.id," +
+                    "gc.id_cliente," +
+                    "cm.id_cuenta, " +
+                    "cm.id_movimiento_tipo," +
+                    "mt.descripcion, " +
+                    "banco.descripcion as Banco, " +
+                    "round(cm.monto, 2) AS monto, " +
+                    "DATE_FORMAT(cm.fecha,'%Y-%m-%d') AS fecha_" +
+                    //"cm.cobrado, " +
+                    //"cm.usuario " +
+                    " FROM clientecuentamovimiento cm INNER JOIN clientecuenta gc ON cm.id_cuenta = gc.id " +
+                    "INNER JOIN movimientotipo mt ON cm.id_movimiento_tipo = mt.id " +
+                    "INNER JOIN banco ON banco.id = gc.id_banco WHERE gc.id_cliente =" + id.ToString() + " AND cm.fecha BETWEEN '" + fdesde + 
+                    "' AND '" + fhasta  + "' ORDER BY cm.id DESC LIMIT " +
+                    pInicio.ToString() + ", " + registros.ToString() + ";";
+        } 		
+		public string GetMovCuentasContarBetweenDates(int idCliente, string fdesde, string fhasta)				
+        {
+            /* cuenta cuantos registros hay en total */
+
+            return "SELECT count(*) FROM clientecuentamovimiento cm INNER JOIN clientecuenta gc ON cm.id_cuenta = gc.id INNER JOIN movimientotipo mt ON cm.id_movimiento_tipo = mt.id WHERE gc.id_cliente = " + idCliente.ToString() + " AND cm.fecha BETWEEN '" + fdesde +
+                    "' AND '" + fhasta + "' ORDER BY cm.id DESC;";
+        }
+
+        public string GetMovCuentasProveedoresContarBetweenDates(int idProveedor, string fdesde, string fhasta)
+        {
+            /* cuenta cuantos registros hay en total */
+
+            return "SELECT count(*) FROM proveedorcuentamovimiento cm INNER JOIN proveedorcuenta gc ON cm.id_cuenta = gc.id INNER JOIN movimientotipo mt ON cm.id_movimiento_tipo = mt.id WHERE gc.id_proveedor = " + idProveedor.ToString() + " AND cm.fecha BETWEEN '" + fdesde +
+                    "' AND '" + fhasta + "' ORDER BY cm.id DESC;";           
+        }		
+
+        public string GetMovCuentasContar(int id)
+														  
+        {
+            /* cuenta cuantos registros hay en total */
+
+            return "SELECT count(*) " +
+                    "FROM clientecuentamovimiento cm INNER JOIN clientecuenta gc ON cm.id_cuenta = gc.id " +
+                    "INNER JOIN movimientotipo mt ON cm.id_movimiento_tipo = mt.id " +
+                    "WHERE gc.id_cliente =" + id.ToString() + " ORDER BY cm.id DESC;";
+        }       
+        public string InsertMovCuenta(MovimientoCuenta movCuenta)
+        {
+            /* persiste el movimiento de cuenta*/
+            return "INSERT INTO clientecuentamovimiento(" +
+                "vob," +
+                "id_cuenta," +
+                "id_movimiento_tipo," +
+                "monto," +
+                "fecha," +
+                "cobrado," +
+                "usuario)" +
+                "VALUES (" +
+
+                movCuenta.Vob + "," +
+                movCuenta.Cuenta.Id + "," +
+                movCuenta.TipoMovimiento.Id + "," +
+                movCuenta.Monto + ", NOW(),'" +
+                movCuenta.Cobrado + "'," +
+                movCuenta.idUsuario + ");";
+        }			
+        /* Movimiento Cuentas proveedores */
+        public string GetMovCuentasProveedores()
+        {
+            /* trae todos los movimiento de cuentas de todos los proveedores*/
+            return "SELECT cm.id, cm.vob, gc.id, gc.id_proveedor, cm.id_cuenta, cm.id_movimiento_tipo, mt.descripcion, gc.id_banco, round(cm.monto, 2) AS monto, DATE_FORMAT(cm.fecha, '%Y-%m-%d') AS fecha_,  cm.cobrado, cm.usuario FROM proveedorcuentamovimiento cm INNER JOIN proveedorcuenta gc ON cm.id_cuenta = gc.id INNER JOIN movimientotipo mt ON cm.id_movimiento_tipo = mt.id WHERE gc.id_proveedor IS NOT NULL ORDER BY cm.id DESC;";
+        }		
+		public string GetMovCuentasProveedor(int id, int pInicio, int registros)												   
         {
             /* trae paginando los movimiento de cuentas de un solo cliente*/
 
@@ -446,8 +582,7 @@ namespace AppLaMejor.datamanager
                     "INNER JOIN banco ON banco.id = gc.id_banco WHERE gc.id_proveedor = " + id.ToString() + " ORDER BY cm.id DESC LIMIT " +
                     pInicio.ToString() + ", " + registros.ToString() + ";";
         }
-
-        public string GetMovCuentasProveedorBetweenDates(int id, int pInicio, int registros, string fdesde, string fhasta)
+        public string GetMovCuentasProveedorBetweenDates(int id, int pInicio, int registros, string fdesde, string fhasta)															   
         {
             /* trae paginando los movimiento de cuentas de un solo proveedor*/
 
@@ -456,35 +591,36 @@ namespace AppLaMejor.datamanager
                     "cm.vob," +
                     "gc.id," +
                     "gc.id_proveedor," +
-
+                    "cm.id_cuenta, " +
                     "cm.id_movimiento_tipo," +
                     "mt.descripcion, " +
+                    "banco.descripcion as Banco, " +
                     "round(cm.monto, 2) AS monto, " +
                     "DATE_FORMAT(cm.fecha,'%Y-%m-%d') AS fecha_," +
-                    "cm.cobrado, " +
-                    "cm.usuario " +
-                    "FROM cuentamovimientoproveedor cm INNER JOIN cuentaproveedor gc ON cm.id_proveedor = gc.id " +
-                    "INNER JOIN movimientotipo mt ON cm.id_movimiento_tipo = mt.id " +
-                    "WHERE gc.id_proveedor =" + id.ToString() + " AND cm.fecha BETWEEN '" + fdesde +
+                    //"cm.cobrado, " +
+                    //"cm.usuario " +
+                    "FROM proveedorcuentamovimiento cm INNER JOIN proveedorcuenta gc ON cm.id_proveedor = gc.id " +
+                    "INNER JOIN movimientotipo mt ON cm.id_movimiento_tipo = mt.id " +															  
+                    "INNER JOIN banco ON banco.id = gc.id_banco WHERE gc.id_proveedor =" + id.ToString() + " AND cm.fecha BETWEEN '" + fdesde +
                     "' AND '" + fhasta + "' ORDER BY cm.id DESC LIMIT " +
                     pInicio.ToString() + ", " + registros.ToString() + ";";
-        }
-
+        }		
         public string GetMovCuentasProveedorContar(int id)
         {
             /* cuenta cuantos registros hay en total */
 
             return "SELECT count(*) " +
-                    "FROM cuentamovimientoproveedor cm INNER JOIN cuentaproveedor gc ON cm.id_cliente = gc.id " +
+                    "FROM proveedorcuentamovimiento cm INNER JOIN proveedorcuenta gc ON cm.id_cuenta = gc.id " +
                     "INNER JOIN movimientotipo mt ON cm.id_movimiento_tipo = mt.id " +
                     "WHERE gc.id_proveedor =" + id.ToString() + " ORDER BY cm.id DESC;";
+																  
         }
         public string InsertMovCuentaProveedor(MovimientoCuenta movCuenta)
         {
             /* persiste el movimiento de cuenta*/
-            return "INSERT INTO cuentamovimientoproveedor(" +
+            return "INSERT INTO proveedorcuentamovimiento(" +
                 "vob," +
-                "id_cliente_cuenta," +
+                "id_cuenta," +
                 "id_movimiento_tipo," +
                 "monto," +
                 "fecha," +
@@ -496,138 +632,17 @@ namespace AppLaMejor.datamanager
                 movCuenta.Cuenta.Id + "," +
                 movCuenta.TipoMovimiento.Id + "," +
                 movCuenta.Monto + ", NOW(),'" +
-                movCuenta.Cobrado + "','" +
-                VariablesGlobales.userIdLogueado.ToString() + "');";
-        }
-        public string ActualizaSaldoProveedor(Cuenta Cuenta)
-        {
-            /* persiste el saldo actual de la cuenta*/
-            return "UPDATE cuentaproveedor set saldo_actual = " +
-                Cuenta.SaldoActual + ", fecha_updated = now() WHERE id = " + Cuenta.Id + ";";
-        }
-
-        /* Movimiento Cuentas */
-        public string GetMovCuentas()
-        {/* trae todos los movimiento de cuentas de todos los clientes*/
-            return "SELECT " +
-                    "cm.id, " +
-                    "cm.vob," +
-                    "gc.id," +
-                    "gc.id_cliente," +
-                    "cm.id_cliente_cuenta, " +
-                    "cm.id_movimiento_tipo," +
-                    "mt.descripcion, " +
-                    "round(cm.monto, 2) AS monto, " +
-                    "DATE_FORMAT(cm.fecha,'%Y-%m-%d') AS fecha_," +
-                    "cm.cobrado, " +
-                    "cm.usuario " +
-                    "FROM cuentamovimiento cm INNER JOIN cuenta gc ON cm.id_cliente_cuenta = gc.id " +
-                    "INNER JOIN movimientotipo mt ON cm.id_movimiento_tipo = mt.id " +
-                    "WHERE gc.id_cliente IS NOT NULL ORDER BY cm.id DESC;";
-        }        
-        public string GetMovCuentas(int id, int pInicio, int registros)
-        {
-            /* trae paginando los movimiento de cuentas de un solo cliente*/
-
-            return "SELECT " +
-                    "cm.id, " +
-                    "cm.vob," +
-                    "gc.id," +
-                    "gc.id_cliente," +
-                    "cm.id_cliente_cuenta, " +
-                    "cm.id_movimiento_tipo," +
-                    "mt.descripcion, " +
-                    "round(cm.monto, 2) AS monto, " +
-                    "DATE_FORMAT(cm.fecha,'%Y-%m-%d') AS fecha_," +
-                    "cm.cobrado, " +
-                    "cm.usuario " +
-                    "FROM cuentamovimiento cm INNER JOIN cuenta gc ON cm.id_cliente_cuenta = gc.id " +
-                    "INNER JOIN movimientotipo mt ON cm.id_movimiento_tipo = mt.id " +
-                    "WHERE gc.id_cliente =" + id.ToString() + " ORDER BY cm.id DESC LIMIT " +
-                    pInicio.ToString() + ", " + registros.ToString() + ";";
-        }        
-        public string GetMovCuentasBetweenDates(int id, int pInicio, int registros, string fdesde, string fhasta)
-        {
-            /* trae paginando los movimiento de cuentas de un solo cliente*/
-
-            return "SELECT " +
-                    "cm.id, " +
-                    "cm.vob," +
-                    "gc.id," +
-                    "gc.id_cliente," +
-                    "cm.id_cliente_cuenta, " +
-                    "cm.id_movimiento_tipo," +
-                    "mt.descripcion, " +
-                    "round(cm.monto, 2) AS monto, " +
-                    "DATE_FORMAT(cm.fecha,'%Y-%m-%d') AS fecha_," +
-                    "cm.cobrado, " +
-                    "cm.usuario " +
-                    "FROM cuentamovimiento cm INNER JOIN cuenta gc ON cm.id_cliente_cuenta = gc.id " +
-                    "INNER JOIN movimientotipo mt ON cm.id_movimiento_tipo = mt.id " +
-                    "WHERE gc.id_cliente =" + id.ToString() + " AND cm.fecha BETWEEN '" + fdesde + 
-                    "' AND '" + fhasta  + "' ORDER BY cm.id DESC LIMIT " +
-                    pInicio.ToString() + ", " + registros.ToString() + ";";
-        }
-        public string GetMovCuentasContarBetweenDates(int idCliente, string fdesde, string fhasta)
-        {
-            /* cuenta cuantos registros hay en total */
-
-            return "SELECT count(*) " +
-                    "FROM cuentamovimiento cm INNER JOIN cuenta gc ON cm.id_cliente_cuenta = gc.id " +
-                    "INNER JOIN movimientotipo mt ON cm.id_movimiento_tipo = mt.id " +
-                    "WHERE gc.id_cliente =" + idCliente.ToString() + " AND cm.fecha BETWEEN '" + fdesde +
-                    "' AND '" + fhasta + "' ORDER BY cm.id DESC;";
-        }
-        public string GetMovCuentasProveedoresContarBetweenDates(int idProveedor, string fdesde, string fhasta)
-        {
-            /* cuenta cuantos registros hay en total */
-
-            return "SELECT count(*) " +
-                    "FROM cuentamovimiento cm INNER JOIN cuentaproveedor gc ON cm.id_cliente_cuenta = gc.id " +
-                    "INNER JOIN movimientotipo mt ON cm.id_movimiento_tipo = mt.id " +
-                    "WHERE gc.id_proveedor =" + idProveedor.ToString() + " AND cm.fecha BETWEEN '" + fdesde +
-                    "' AND '" + fhasta + "' ORDER BY cm.id DESC;";
-        }
-        public string GetMovCuentasContar(int id)
-        {
-            /* cuenta cuantos registros hay en total */
-
-            return "SELECT count(*) " +
-                    "FROM cuentamovimiento cm INNER JOIN cuenta gc ON cm.id_cliente_cuenta = gc.id " +
-                    "INNER JOIN movimientotipo mt ON cm.id_movimiento_tipo = mt.id " +
-                    "WHERE gc.id_cliente =" + id.ToString() + " ORDER BY cm.id DESC;";
-        }
-        public string InsertMovCuenta(MovimientoCuenta movCuenta)
-        {
-            /* persiste el movimiento de cuenta*/
-            return "INSERT INTO cuentamovimiento(" +
-                "vob," +
-                "id_cliente_cuenta," +
-                "id_movimiento_tipo," +
-                "monto," +
-                "fecha," +
-                "cobrado," +
-                "usuario)" +
-                "VALUES (" +
-
-                movCuenta.Vob + "," +
-                movCuenta.Cuenta.Id + "," +
-                movCuenta.TipoMovimiento.Id + "," +
-                movCuenta.Monto + ", NOW(),'" +
-                movCuenta.Cobrado + "','" +
-                VariablesGlobales.userIdLogueado.ToString() + "');";
-        }
-        public string ActualizaSaldo(Cuenta Cuenta)
-        {
-            /* persiste el saldo actual de la cuenta*/
-            return "UPDATE cuenta set saldo_actual = " +
-                Cuenta.SaldoActual + ", fecha_updated = now() WHERE id = " + Cuenta.Id + ";";
-        }
+                movCuenta.Cobrado + "'," +
+                movCuenta.idUsuario + ");";
+        }		
         /* Ventas */
         public string GetProductoFromIdCode(string idCode)
         {
             return GetProductosData() +
                 " and id_codigo_barra like '" + idCode + "'";
+        }
+        public string GetProductoById(int id){
+            return "select * From producto where id = "+id+";";
         }
         public string GetTipoProductoEstado()
         {
@@ -762,10 +777,6 @@ namespace AppLaMejor.datamanager
                     " precio ='" + producto.Precio + "',  " +
                     " cantidad ='" + producto.Cantidad +"' " +
                     " WHERE id= " + producto.Id + "";
-        }
-        public string GetProductoById(int id)
-        {
-            return "select * From producto where id = " + id + ";";
         }
         public string GetProductoDataById(int id)
         {

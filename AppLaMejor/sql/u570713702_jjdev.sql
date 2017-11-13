@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2017-11-12 20:57:26
+Date: 2017-11-13 17:36:08
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -61,11 +61,11 @@ CREATE TABLE `cliente` (
 -- ----------------------------
 INSERT INTO `cliente` VALUES ('1', 'WTF', 'asd', 'asd', 'asd', '1', 'asd', 'asd', 'asd', 'asd', '2017-09-05', null, '1');
 INSERT INTO `cliente` VALUES ('2', 'Juanjo', 'j de la rosa 1252', 'santa fe', 'CF', '2', 'DESAROLLO SANTA', '', '', '', '2017-09-05', null, '0');
-INSERT INTO `cliente` VALUES ('3', 'A.D.U.L.', 'Pje. Martinez 2666', 'Santa Fe', 'CF', '4', 'defaultLocal', '30-55597562-3', '4553992', 'NombreResponsable', '2017-09-05', null, '1');
+INSERT INTO `cliente` VALUES ('3', 'A.D.U.L.', 'Pje. Martinez 26661', 'Santa Fe', 'CF', '4', 'defaultLocal', '30-55597562-3', '4553992', 'NombreResponsable', '2017-09-05', null, '1');
 INSERT INTO `cliente` VALUES ('4', 'A.N.S.E.S.', 'SAN MARTIN N 2533', 'Santa Fe', 'CF', '1', 'defaultLocal', '33-63761744-9', '4156256', 'NombreResponsable', '2017-09-05', null, '1');
 INSERT INTO `cliente` VALUES ('5', 'A.PE.L - Asoc.Pers.Legislativo', 'San Jeronimo N  1.791', 'Santa Fe', 'CF', '1', 'defaultLocal', '30-64955281-5', '4598277', 'NombreResponsable', '2017-09-05', null, '1');
 INSERT INTO `cliente` VALUES ('6', 'ACANTILADOS S.A. (VALMOTORS)', 'SAN LUIS N 3102', 'Santa Fe', 'CF', '1', 'defaultLocal', '30-70941478-6', '4530606', 'NombreResponsable', '2017-09-06', null, '1');
-INSERT INTO `cliente` VALUES ('7', 'ACOSTA MARTÃ–N SEBASTIÂµN', 'Pje. E.del Crespo N 7103/Berutti 5725', 'Santa Fe', 'CF', '1', 'defaultLocal', '30-64955281-5', '4530606', 'NombreResponsable', '2017-09-06', null, '1');
+INSERT INTO `cliente` VALUES ('7', 'ACOSTA MARTÃ–N SEBASTIÂµN', 'Pje. E.del Crespo N 7103/Berutti 5725', 'Santa Fe', 'CF', '2', 'defaultLocal', '30-64955281-5', '4530606', 'NombreResponsable', '2017-09-06', null, '1');
 INSERT INTO `cliente` VALUES ('8', 'AdministraciÂ¢n Provincial de Impuestos-A.P.I', 'AVDA.PTE.ILLIA NÂ§ 1.151', 'Santa Fe', 'CF', '2', 'defaultLocal', '30-65520017-3', '4557996', 'NombreResponsable', '2017-09-06', null, '0');
 INSERT INTO `cliente` VALUES ('9', 'Agencia Provincial de Seguridad Vial', '25 DE MAYO N  2.208', 'Santa Fe', 'CF', '1', 'defaultLocal', '30-99901844-7', '4574822', 'NombreResponsable', '2017-09-06', null, '1');
 INSERT INTO `cliente` VALUES ('10', 'AGOSTINI OSVALDO OMAR', 'AVDA. GORRITI N 3014', 'Santa Fe', 'CF', '2', 'defaultLocal', '20-05261057-6', '4695406', 'NombreResponsable', '2017-09-06', '2001-01-01 00:00:00', '1');
@@ -94,29 +94,108 @@ CREATE TABLE `clientecuenta` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `cbu` varchar(40) NOT NULL,
   `nro_cuenta` varchar(50) NOT NULL,
-  `saldo_actual` double(10,2) NOT NULL,
   `id_cliente` int(11) DEFAULT NULL,
   `fecha_updated` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `usuario` int(11) DEFAULT NULL,
   `fecha_baja` datetime DEFAULT NULL,
   `id_banco` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_banco` (`id_banco`)
+  KEY `fk_banco` (`id_banco`),
+  CONSTRAINT `fk_banco` FOREIGN KEY (`id_banco`) REFERENCES `banco` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of clientecuenta
 -- ----------------------------
-INSERT INTO `clientecuenta` VALUES ('1', '1238238923892234', '12-1238238923892234', '-200.85', '1', '2017-11-06 21:07:59', '1', null, '1');
-INSERT INTO `clientecuenta` VALUES ('2', '1238238923892236', '12-1238238923893434', '435.60', '2', '2017-11-06 21:08:00', '1', null, '1');
-INSERT INTO `clientecuenta` VALUES ('3', '2222', '22222', '252.52', '1', '2017-11-06 21:08:00', '0', null, '2');
-INSERT INTO `clientecuenta` VALUES ('4', 'aaa', '12312', '123243.00', '6', '2017-11-06 21:08:01', '0', null, '3');
-INSERT INTO `clientecuenta` VALUES ('5', '11111111', '11111111', '0.00', '17', '2017-11-06 21:08:02', '0', null, '4');
-INSERT INTO `clientecuenta` VALUES ('6', '22222', '22222', '0.00', '2', '2017-11-06 21:08:03', '0', null, '1');
-INSERT INTO `clientecuenta` VALUES ('7', '4444', '4444', '0.00', '2', '2017-11-06 21:08:03', '0', null, '2');
-INSERT INTO `clientecuenta` VALUES ('8', '555', '555', '0.00', '3', '2017-11-06 21:08:03', '0', null, '3');
-INSERT INTO `clientecuenta` VALUES ('9', '123', '', '0.00', '14', '2017-11-06 21:08:04', '0', null, '4');
-INSERT INTO `clientecuenta` VALUES ('10', '11', '11', '0.00', '25', '2017-11-06 21:08:05', '0', null, '1');
+INSERT INTO `clientecuenta` VALUES ('1', '1238238923892234', '12-1238238923892234', '1', '2017-11-06 21:07:59', '1', null, '1');
+INSERT INTO `clientecuenta` VALUES ('2', '1238238923892236', '12-1238238923893434', '2', '2017-11-06 21:08:00', '1', null, '1');
+INSERT INTO `clientecuenta` VALUES ('3', '2222', '22222', '1', '2017-11-06 21:08:00', '0', null, '2');
+INSERT INTO `clientecuenta` VALUES ('4', 'aaa', '12312', '6', '2017-11-06 21:08:01', '0', null, '3');
+INSERT INTO `clientecuenta` VALUES ('5', '11111111', '11111111', '17', '2017-11-06 21:08:02', '0', null, '4');
+INSERT INTO `clientecuenta` VALUES ('6', '22222', '22222', '2', '2017-11-06 21:08:03', '0', null, '1');
+INSERT INTO `clientecuenta` VALUES ('7', '4444', '4444', '2', '2017-11-08 22:04:46', '0', null, '2');
+INSERT INTO `clientecuenta` VALUES ('8', '555', '555', '3', '2017-11-06 21:08:03', '0', null, '3');
+INSERT INTO `clientecuenta` VALUES ('9', '123', '', '14', '2017-11-06 21:08:04', '0', null, '4');
+INSERT INTO `clientecuenta` VALUES ('10', '11', '11', '25', '2017-11-06 21:08:05', '0', null, '1');
+
+-- ----------------------------
+-- Table structure for clientecuentamovimiento
+-- ----------------------------
+DROP TABLE IF EXISTS `clientecuentamovimiento`;
+CREATE TABLE `clientecuentamovimiento` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `vob` char(1) NOT NULL COMMENT '(V)arias o (B)ancarias',
+  `id_cuenta` int(11) NOT NULL,
+  `id_movimiento_tipo` int(11) NOT NULL COMMENT '1 - DEBE| 2 - HABER',
+  `monto` double NOT NULL,
+  `fecha` datetime NOT NULL,
+  `cobrado` char(1) NOT NULL DEFAULT 'N',
+  `usuario` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of clientecuentamovimiento
+-- ----------------------------
+INSERT INTO `clientecuentamovimiento` VALUES ('1', '1', '1', '1', '500.5', '2017-09-14 14:22:14', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('2', '1', '1', '1', '352.8', '2017-09-14 09:21:22', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('4', '1', '2', '1', '100.1', '2017-09-14 10:00:00', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('5', '1', '1', '2', '400.9', '2017-09-14 11:00:00', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('6', '1', '1', '2', '33.3', '2017-09-14 11:00:00', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('7', '1', '1', '2', '33', '2017-09-14 14:13:51', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('8', '1', '1', '2', '100', '2017-09-15 10:49:46', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('9', '1', '1', '2', '6', '2017-09-15 11:00:48', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('10', '1', '1', '2', '80', '2017-09-15 11:08:10', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('11', '1', '1', '2', '2', '2017-09-15 11:09:48', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('12', '1', '1', '2', '1', '2017-09-15 11:11:44', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('13', '1', '1', '2', '7', '2017-09-15 11:17:03', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('14', '1', '1', '2', '10', '2017-09-15 11:24:58', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('15', '1', '1', '2', '11', '2017-09-17 09:23:38', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('16', '1', '1', '2', '77', '2017-09-17 09:48:18', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('19', '1', '1', '1', '7', '0000-00-00 00:00:00', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('20', '1', '1', '1', '1', '2017-09-22 16:02:29', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('21', '1', '1', '1', '20', '2017-09-22 23:05:13', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('22', '1', '2', '1', '7', '2017-09-24 13:41:55', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('23', '1', '2', '1', '5', '2017-09-25 23:39:50', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('24', '1', '2', '1', '4', '2017-09-25 23:41:08', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('25', '1', '2', '1', '3', '2017-09-25 23:42:01', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('26', '1', '2', '1', '30', '2017-09-26 00:07:36', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('27', '1', '2', '1', '5', '2017-09-26 00:43:20', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('28', '1', '2', '1', '2', '2017-09-26 00:46:07', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('29', '1', '2', '1', '2', '2017-09-26 00:47:22', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('30', '1', '2', '1', '2', '2017-09-26 00:47:51', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('31', '1', '2', '2', '100', '2017-09-26 00:51:52', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('33', '1', '2', '1', '4', '2017-09-26 01:03:42', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('34', '1', '2', '1', '150', '2017-09-26 01:04:31', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('35', '1', '2', '2', '133', '2017-09-26 01:05:03', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('36', '1', '2', '1', '10', '2017-09-26 01:17:31', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('37', '1', '2', '1', '11', '2017-09-26 01:40:33', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('38', '1', '2', '1', '5', '2017-09-26 11:41:52', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('39', '1', '2', '1', '339', '2017-09-27 15:33:55', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('40', '1', '2', '2', '61', '2017-09-27 15:34:36', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('41', '1', '2', '1', '3851', '2017-09-27 15:35:03', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('42', '1', '2', '1', '4236', '2017-09-27 15:35:26', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('43', '1', '2', '2', '847210', '2017-09-27 15:36:08', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('44', '1', '2', '1', '900000', '2017-09-27 15:37:44', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('45', '1', '2', '2', '60000', '2017-09-27 15:38:43', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('46', '1', '2', '1', '200', '2017-09-28 14:44:57', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('47', '1', '2', '1', '6210', '2017-09-28 14:45:16', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('48', '1', '2', '1', '12', '2017-09-28 14:57:41', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('49', '1', '2', '1', '4.9', '2017-09-28 15:00:47', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('50', '1', '2', '1', '55.2', '2017-09-28 15:02:56', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('51', '1', '2', '1', '44.2', '2017-09-28 15:15:16', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('52', '1', '1', '2', '200', '2017-09-28 15:19:54', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('53', '1', '2', '2', '12', '2017-09-29 11:10:03', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('54', '1', '2', '2', '12', '2017-09-29 11:13:38', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('55', '1', '2', '2', '700', '2017-09-29 13:55:11', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('56', '1', '2', '1', '500', '2017-10-02 01:08:47', 'N', '0');
+INSERT INTO `clientecuentamovimiento` VALUES ('57', '1', '2', '2', '8000', '2017-11-06 20:52:46', 'N', '0');
+INSERT INTO `clientecuentamovimiento` VALUES ('58', '1', '7', '1', '1000', '2017-11-08 22:04:46', 'N', '0');
+INSERT INTO `clientecuentamovimiento` VALUES ('59', '1', '7', '1', '22', '2017-11-10 17:44:56', 'N', '0');
+INSERT INTO `clientecuentamovimiento` VALUES ('60', '1', '1', '2', '600', '2017-11-10 18:24:57', 'N', '0');
+INSERT INTO `clientecuentamovimiento` VALUES ('61', '1', '1', '1', '700', '2017-11-10 19:55:10', 'N', '0');
+INSERT INTO `clientecuentamovimiento` VALUES ('62', '1', '1', '2', '222', '2017-11-10 19:56:19', 'N', '0');
+INSERT INTO `clientecuentamovimiento` VALUES ('63', '1', '6', '2', '123', '2017-11-10 20:02:10', 'N', '0');
 
 -- ----------------------------
 -- Table structure for clientetipo
@@ -764,11 +843,13 @@ CREATE TABLE `proveedorcuentamovimiento` (
   PRIMARY KEY (`id`),
   KEY `fk_movtipo` (`id_movimiento_tipo`),
   CONSTRAINT `proveedorcuentamovimiento_ibfk_2` FOREIGN KEY (`id_movimiento_tipo`) REFERENCES `movimientotipo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of proveedorcuentamovimiento
 -- ----------------------------
+INSERT INTO `proveedorcuentamovimiento` VALUES ('1', '1', '1', '1', '500', '2017-11-13 17:34:38', 'N', '0');
+INSERT INTO `proveedorcuentamovimiento` VALUES ('2', '1', '1', '2', '1000', '2017-11-13 17:34:50', 'N', '0');
 
 -- ----------------------------
 -- Table structure for proveedortipo

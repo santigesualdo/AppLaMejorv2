@@ -75,19 +75,15 @@ namespace AppLaMejor.formularios
             string razonSocial = Convert.ToString(selectedRow.Cells["RazonSocial"].Value);
             string idProveedor = Convert.ToString(selectedRow.Cells["ID"].Value);
 
-            DialogResult dr = MessageBox.Show("¿Eliminar registro del proveedor " + razonSocial + " ?", "Confirmar", MessageBoxButtons.YesNo);
-            switch(dr){
-               case DialogResult.Yes:
-                    string consultaEliminar = QueryManager.Instance().GetDeleteClient(idProveedor, new DateTime());
-                    if (QueryManager.Instance().ExecuteSQL(ConnecionBD.Instance().Connection, consultaEliminar))
-                    {
-                        MessageBox.Show("Registro exitosamente eliminado.");
-                        CargarDataGrid();
-                    }                   
-
-                   break;
-               case DialogResult.No: break;
-            }
+			FormMessageBox dialog = new FormMessageBox();
+			if (dialog.ShowConfirmationDialog("¿Eliminar registro del proveedor " + razonSocial + " ?")){
+				string consultaEliminar = QueryManager.Instance().GetDeleteClient(idProveedor, new DateTime());
+				if (QueryManager.Instance().ExecuteSQL(ConnecionBD.Instance().Connection, consultaEliminar))
+				{
+					dialog = new FormMessageBox();
+					dialog.ShowErrorDialog("Registro exitosamente eliminado.");
+				}     				
+			}
         }
 
         
