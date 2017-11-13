@@ -17,9 +17,7 @@ namespace AppLaMejor.formularios.Util
 {
     public partial class FormMovDetalleProveedores : Form
     {
-        DataTable tableProveedores;
-        DataTable tableMovCuentas;
-        DataTable TableMovCuentasPaginator;
+        DataTable tableProveedores, tableCuentas, tableMovCuentas, tableMovCuentasPaginator;
         DataView dv;
 
         public const int MODO_EDITAR = 0;
@@ -35,8 +33,9 @@ namespace AppLaMejor.formularios.Util
         string dtDesde, dtHasta;
 
         MovimientoCuenta movCuenta1 = new MovimientoCuenta();
-        Proveedor proveedor1 = new Proveedor();
+        Proveedor Proveedor1 = new Proveedor();
         int lastProv = 0;
+        int lastCuenta = 1;
 
         public FormMovDetalleProveedores(Object reflection, int modo, int idProveedor)
         {
@@ -48,8 +47,10 @@ namespace AppLaMejor.formularios.Util
             ApplicationLookAndFeel.ApplyThemeToAll(this);
             cargar();
             lastProv = idProveedor;
+            
             calcular(lastProv);
             fillGrid();
+            fillGridCuentas(lastProv);
             formatearControles();
             
         }
@@ -125,25 +126,25 @@ namespace AppLaMejor.formularios.Util
         }
 
 
-        void calcularBetweenDates(int proveedor)
+        void calcularBetweenDates(int Proveedor)
         {
-            //cuento cuantos movimientos tiene el cliente
+            //cuento cuantos movimientos tiene el Proveedor
 
-            totalRegistros = FuncionesMovCuentas.contarRegistrosProveedoresBetweenDates(proveedor, dtDesde, dtHasta);
+            totalRegistros = FuncionesMovCuentas.contarRegistrosBetweenDates(Proveedor, dtDesde, dtHasta);
 
             debe = pago = saldo = 0;
             dv = new DataView(tableMovCuentas);
-            dv.RowFilter = "id_cliente_cuenta = " + proveedor.ToString();
+            dv.RowFilter = "id_Proveedor = " + Proveedor.ToString();
             DataTable dvTemp = dv.ToTable();
             //calculo a partir de la columna monto
             for (int a = 0; a < dvTemp.Rows.Count; a++)
             {
                 if (Convert.ToInt16(dvTemp.Rows[a]["id_movimiento_tipo"]) == 1) //1 - DEBE
                     debe += Convert.ToDecimal(dvTemp.Rows[a]["monto"]);
-                //debe es el negativo, lo que me debe el cliente
+                //debe es el negativo, lo que me debe el Proveedor
                 if (Convert.ToInt16(dvTemp.Rows[a]["id_movimiento_tipo"]) == 2) //2 - HABER
                     pago += Convert.ToDecimal(dvTemp.Rows[a]["monto"].ToString());
-                //pagó es lo que pagó el cliente... daaa
+                //pagó es lo que pagó el Proveedor... daaa
                 if (Convert.ToInt16(dvTemp.Rows[a]["id_movimiento_tipo"]) != 2 && Convert.ToInt16(dvTemp.Rows[a]["id_movimiento_tipo"]) != 1)
                     MessageBox.Show("Hay un error de asiento");
             }
@@ -156,25 +157,25 @@ namespace AppLaMejor.formularios.Util
             lblCantidad.Text = "Cantidad de movimientos: " + dvTemp.Rows.Count.ToString();
         }
 
-        void calcular(int proveedor)
+        void calcular(int Proveedor)
         {
-            //cuento cuantos movimientos tiene el cliente
+            //cuento cuantos movimientos tiene el Proveedor
 
-            totalRegistros = FuncionesMovCuentas.contarRegistrosProveedores(proveedor);
+            totalRegistros = FuncionesMovCuentas.contarRegistros(Proveedor);
 
             debe = pago = saldo = 0;
             dv = new DataView(tableMovCuentas);
-            dv.RowFilter = "id_cliente_cuenta = " + proveedor.ToString();
+            dv.RowFilter = "id_Proveedor = " + Proveedor.ToString();
             DataTable dvTemp = dv.ToTable();
             //calculo a partir de la columna monto
             for (int a = 0; a < dvTemp.Rows.Count; a++)
             {
                 if (Convert.ToInt16(dvTemp.Rows[a]["id_movimiento_tipo"]) == 1) //1 - DEBE
                     debe += Convert.ToDecimal(dvTemp.Rows[a]["monto"]);
-                //debe es el negativo, lo que me debe el cliente
+                //debe es el negativo, lo que me debe el Proveedor
                 if (Convert.ToInt16(dvTemp.Rows[a]["id_movimiento_tipo"]) == 2) //2 - HABER
                     pago += Convert.ToDecimal(dvTemp.Rows[a]["monto"].ToString());
-                //pagó es lo que pagó el cliente... daaa
+                //pagó es lo que pagó el Proveedor... daaa
                 if (Convert.ToInt16(dvTemp.Rows[a]["id_movimiento_tipo"]) != 2 && Convert.ToInt16(dvTemp.Rows[a]["id_movimiento_tipo"]) != 1)
                     MessageBox.Show("Hay un error de asiento");
             }
@@ -232,20 +233,20 @@ namespace AppLaMejor.formularios.Util
 
             if (ini < totalRegistros)
             {
-                TableMovCuentasPaginator = FuncionesMovCuentas.fillPaginaProveedores(lastProv, ini, reg);
+                tableMovCuentasPaginator = FuncionesMovCuentas.fillPaginaProveedores(lastProv, ini, reg);
 
                 //            debe = pago = saldo = 0;
 
-                if (TableMovCuentasPaginator.Rows.Count > 0)
+                if (tableMovCuentasPaginator.Rows.Count > 0)
                 {
-                    dgvMovCuentasPaginado.DataSource = TableMovCuentasPaginator;
+                    dgvMovCuentasPaginado.DataSource = tableMovCuentasPaginator;
                     dgvMovCuentasPaginado.AutoResizeColumns();
 
                     verMenos(false);
                     dgvMovCuentasPaginado.Columns["monto"].Width = 140;
                     dgvMovCuentasPaginado.Columns["monto"].DefaultCellStyle.Format = "c";
                     dgvMovCuentasPaginado.Columns["monto"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-                    dgvMovCuentasPaginado.Columns["cobrado"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                 //   dgvMovCuentasPaginado.Columns["cobrado"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
                 }
                 else
@@ -270,20 +271,20 @@ namespace AppLaMejor.formularios.Util
 
             if (ini < totalRegistros)
             {
-                TableMovCuentasPaginator = FuncionesMovCuentas.fillPaginaProveedoresBetweenDates(lastProv, ini, reg, dDesde, dHasta);
+                tableMovCuentasPaginator = FuncionesMovCuentas.fillPaginaBetweenDates(lastProv, ini, reg, dDesde, dHasta);
 
                 //            debe = pago = saldo = 0;
 
-                if (TableMovCuentasPaginator.Rows.Count > 0)
+                if (tableMovCuentasPaginator.Rows.Count > 0)
                 {
-                    dgvMovCuentasPaginado.DataSource = TableMovCuentasPaginator;
+                    dgvMovCuentasPaginado.DataSource = tableMovCuentasPaginator;
                     dgvMovCuentasPaginado.AutoResizeColumns();
 
                     verMenos(false);
                     dgvMovCuentasPaginado.Columns["monto"].Width = 140;
                     dgvMovCuentasPaginado.Columns["monto"].DefaultCellStyle.Format = "c";
                     dgvMovCuentasPaginado.Columns["monto"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-                    dgvMovCuentasPaginado.Columns["cobrado"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                   // dgvMovCuentasPaginado.Columns["cobrado"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
                 }
                 else
@@ -352,14 +353,19 @@ namespace AppLaMejor.formularios.Util
 
             //dtpDesde.Value = new DateTime(2017, 1, 1);
 
-            // Trae clientes con cuenta 
+            // Trae Proveedores con cuenta 
             consulta = QueryManager.Instance().GetProveedoresWithCuenta();
             tableProveedores = QueryManager.Instance().GetTableResults(ConnecionBD.Instance().Connection, consulta);
 
-
-
+           
             //lleno movCuentas
             tableMovCuentas = FuncionesMovCuentas.fillMovCuentasProveedores();
+        }
+
+        void fillGridCuentas(int idProveedor)
+        {
+            tableCuentas = FuncionesMovCuentas.fillCuentasByProveedor(idProveedor);
+            dgvCuentas.DataSource = tableCuentas;
         }
 
         private void btnNextPage_Click(object sender, EventArgs e)
@@ -415,34 +421,32 @@ namespace AppLaMejor.formularios.Util
             }
         }
 
+        private void dgvCuentas_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+            lastCuenta = (int)dgvCuentas["id_cuenta", dgvCuentas.CurrentCell.RowIndex].Value;
+        }
+
         void enviar()
         {
             movCuenta1 = new MovimientoCuenta();
             TipoMovimiento tp = new TipoMovimiento();
             Cuenta cuenta = new Cuenta();
+            
             Usuario usuario = new Usuario();
             VariablesGlobales.FormMovCuentas_activo = true;
-            cuenta = FuncionesProveedores.GetCuentaByIdProveedor(lastProv);
 
-            proveedor1 = FuncionesProveedores.GetProveedorById(lastProv);
+            cuenta = FuncionesProveedores.GetCuentaByIdProveedor(lastCuenta);
 
-            if (proveedor1 != null)
+            Proveedor1 = FuncionesProveedores.GetProveedorById(lastProv);
+
+            if (Proveedor1 != null)
             {
                 tp.Id = cmbBoton.SelectedIndex + 1;
                 movCuenta1.TipoMovimiento = tp;
 
                 movCuenta1.Vob = '1';
                 
-                switch(tp.Id)
-                {
-                    case 1:
-                        cuenta.SaldoActual = saldo - Convert.ToDecimal(tbImporte.Text);
-                        break;
-                    case 2:
-                        cuenta.SaldoActual = saldo + Convert.ToDecimal(tbImporte.Text);
-                        break;
-                }
-                //cuenta.Saldo_actual = saldo + Convert.ToDecimal(tbImporte.Text);
                 movCuenta1.Cuenta = cuenta;
                 Decimal montoto = Convert.ToDecimal(tbImporte.Text);
                 movCuenta1.Monto = montoto;

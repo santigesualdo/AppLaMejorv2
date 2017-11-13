@@ -114,7 +114,7 @@ namespace AppLaMejor.formularios
             DialogResult dr = MessageBox.Show("¿Eliminar registro del cliente " + razonSocial + " ?", "Confirmar", MessageBoxButtons.YesNo);
             switch(dr){
                case DialogResult.Yes:
-                    string consultaEliminar = QueryManager.Instance().GetDeleteClient(idCliente, DateTime.Now);
+                    string consultaEliminar = QueryManager.Instance().GetDeleteClient(idCliente, new DateTime());
                     if (QueryManager.Instance().ExecuteSQL(ConnecionBD.Instance().Connection, consultaEliminar))
                     {
                         MessageBox.Show("Registro exitosamente eliminado.");
@@ -248,9 +248,9 @@ namespace AppLaMejor.formularios
             int selectedrowindex = dataGridClientes.SelectedCells[0].RowIndex;
             Cliente clientSelected = listClients[selectedrowindex];
             int idCliente = clientSelected.Id;
-            int idCuenta = (int)dataGridClientes[6, dataGridClientes.CurrentCell.RowIndex].Value;
+            //int idCuenta = (int)dataGridClientes[6, dataGridClientes.CurrentCell.RowIndex].Value;
             /* Form Entity Input */
-            FormMovDetalle dialog = new FormMovDetalle(null, FormMovDetalle.MODO_VER, idCliente,idCuenta);
+            FormMovDetalle dialog = new FormMovDetalle(null, FormMovDetalle.MODO_VER, idCliente);
             Boolean result = dialog.Execute(clientSelected, idCliente);
         }
 
@@ -260,9 +260,9 @@ namespace AppLaMejor.formularios
             int selectedrowindex = dataGridClientes.SelectedCells[0].RowIndex;
             Cliente clientSelected = listClients[selectedrowindex];
             int idCliente = clientSelected.Id;
-            int idCuenta = (int)dataGridClientes[6, dataGridClientes.CurrentCell.RowIndex].Value;
+            //int idCuenta = (int)dataGridClientes["cuentas", dataGridClientes.CurrentCell.RowIndex].Value;
             /* Form Entity Input */
-            FormMovDetalle dialog = new FormMovDetalle(null, FormMovDetalle.MODO_AGREGAR, idCliente, idCuenta);
+            FormMovDetalle dialog = new FormMovDetalle(null, FormMovDetalle.MODO_AGREGAR, idCliente);
             Boolean result = dialog.Execute(clientSelected, idCliente);
         }
 
@@ -313,7 +313,7 @@ namespace AppLaMejor.formularios
                     newCuenta.FechaUltimaActualizacion = DateTime.Now;
 
                     /* Form Entity Input */
-                    FormEntityInput dialog = new FormEntityInput(null, FormEntityInput.MODO_INSERTAR, formTittleText.Text);
+                    FormEntityInput dialog = new FormEntityInput(null, FormEntityInput.MODO_INSERTAR);
                     Boolean result = dialog.Execute(newCuenta);
 
                     if (result)

@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using AppLaMejor.datamanager;
 using AppLaMejor.formularios.Util;
 using AppLaMejor.entidades;
 using AppLaMejor.controlmanager;
+using AppLaMejor.stylemanager;
 
 namespace AppLaMejor.formularios
 {
@@ -75,7 +78,7 @@ namespace AppLaMejor.formularios
             DialogResult dr = MessageBox.Show("¿Eliminar registro del proveedor " + razonSocial + " ?", "Confirmar", MessageBoxButtons.YesNo);
             switch(dr){
                case DialogResult.Yes:
-                    string consultaEliminar = QueryManager.Instance().GetDeleteClient(idProveedor, DateTime.Now);
+                    string consultaEliminar = QueryManager.Instance().GetDeleteClient(idProveedor, new DateTime());
                     if (QueryManager.Instance().ExecuteSQL(ConnecionBD.Instance().Connection, consultaEliminar))
                     {
                         MessageBox.Show("Registro exitosamente eliminado.");
@@ -211,7 +214,7 @@ namespace AppLaMejor.formularios
             int idProveedor = provSelected.Id;
 
             /* Form Entity Input */
-            FormMovDetalle dialog = new FormMovDetalle(null, FormMovDetalle.MODO_VER, idProveedor, 1);
+            FormMovDetalleProveedores dialog = new FormMovDetalleProveedores(null, FormMovDetalleProveedores.MODO_VER, idProveedor);
             Boolean result = dialog.Execute(provSelected, idProveedor);
         }
 
@@ -223,7 +226,7 @@ namespace AppLaMejor.formularios
             int idProveedor = provSelected.Id;
 
             /* Form Entity Input */
-            FormMovDetalle dialog = new FormMovDetalle(null, FormMovDetalle.MODO_AGREGAR, idProveedor, 1);
+            FormMovDetalleProveedores dialog = new FormMovDetalleProveedores(null, FormMovDetalleProveedores.MODO_AGREGAR, idProveedor);
             Boolean result = dialog.Execute(provSelected, idProveedor);
         }
 

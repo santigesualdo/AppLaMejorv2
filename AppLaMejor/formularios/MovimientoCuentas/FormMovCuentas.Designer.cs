@@ -97,10 +97,10 @@ namespace AppLaMejor.formularios
             // 
             // contentPanel
             // 
+            this.contentPanel.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.contentPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.contentPanel.Controls.Add(this.groupDataGrid);
             this.contentPanel.Controls.Add(this.navigationPanel);
-            this.contentPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.contentPanel.Location = new System.Drawing.Point(0, 213);
             this.contentPanel.Name = "contentPanel";
             this.contentPanel.Padding = new System.Windows.Forms.Padding(15);
@@ -365,7 +365,7 @@ namespace AppLaMejor.formularios
             this.filterTableLayoutPanel.ColumnCount = 3;
             this.filterTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.filterTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.filterTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 312F));
+            this.filterTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 314F));
             this.filterTableLayoutPanel.Controls.Add(this.panel1, 1, 0);
             this.filterTableLayoutPanel.Controls.Add(this.filtro3Panel, 0, 0);
             this.filterTableLayoutPanel.Controls.Add(this.filtro1Panel, 2, 0);
@@ -383,10 +383,10 @@ namespace AppLaMejor.formularios
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.cmbClientes);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(339, 4);
+            this.panel1.Location = new System.Drawing.Point(338, 4);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(5);
-            this.panel1.Size = new System.Drawing.Size(328, 54);
+            this.panel1.Size = new System.Drawing.Size(327, 54);
             this.panel1.TabIndex = 4;
             // 
             // label1
@@ -395,7 +395,7 @@ namespace AppLaMejor.formularios
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(5, 5);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(318, 18);
+            this.label1.Size = new System.Drawing.Size(317, 18);
             this.label1.TabIndex = 4;
             this.label1.Text = "Todos los clientes";
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -421,7 +421,7 @@ namespace AppLaMejor.formularios
             this.filtro3Panel.Location = new System.Drawing.Point(4, 4);
             this.filtro3Panel.Name = "filtro3Panel";
             this.filtro3Panel.Padding = new System.Windows.Forms.Padding(5);
-            this.filtro3Panel.Size = new System.Drawing.Size(328, 54);
+            this.filtro3Panel.Size = new System.Drawing.Size(327, 54);
             this.filtro3Panel.TabIndex = 1;
             // 
             // filterTextBox
@@ -429,7 +429,7 @@ namespace AppLaMejor.formularios
             this.filterTextBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.filterTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.filterTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.filterTextBox.Location = new System.Drawing.Point(95, 26);
+            this.filterTextBox.Location = new System.Drawing.Point(94, 26);
             this.filterTextBox.MaximumSize = new System.Drawing.Size(140, 30);
             this.filterTextBox.MinimumSize = new System.Drawing.Size(140, 22);
             this.filterTextBox.Name = "filterTextBox";
@@ -445,7 +445,7 @@ namespace AppLaMejor.formularios
             this.filter3Text.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.filter3Text.Location = new System.Drawing.Point(5, 5);
             this.filter3Text.Name = "filter3Text";
-            this.filter3Text.Size = new System.Drawing.Size(318, 18);
+            this.filter3Text.Size = new System.Drawing.Size(317, 18);
             this.filter3Text.TabIndex = 4;
             this.filter3Text.Text = "Por Cliente con Cuenta";
             this.filter3Text.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -454,7 +454,7 @@ namespace AppLaMejor.formularios
             // 
             this.filtro1Panel.Controls.Add(this.comboTipoFilter);
             this.filtro1Panel.Controls.Add(this.filter1Text);
-            this.filtro1Panel.Location = new System.Drawing.Point(674, 4);
+            this.filtro1Panel.Location = new System.Drawing.Point(672, 4);
             this.filtro1Panel.Name = "filtro1Panel";
             this.filtro1Panel.Padding = new System.Windows.Forms.Padding(5);
             this.filtro1Panel.Size = new System.Drawing.Size(299, 54);

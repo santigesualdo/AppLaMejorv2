@@ -241,7 +241,7 @@
             this.ClientSize = new System.Drawing.Size(1190, 576);
             this.Controls.Add(this.mainPanel);
             this.Font = new System.Drawing.Font("Source Sans Pro", 8.25F);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
             this.Name = "FormUsuario";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;

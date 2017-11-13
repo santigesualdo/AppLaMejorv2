@@ -17,9 +17,7 @@ namespace AppLaMejor.formularios.Util
 {
     public partial class FormMovDetalle : Form
     {
-        DataTable tableClientes;
-        DataTable tableMovCuentas;
-        DataTable TableMovCuentasPaginator;
+        DataTable tableClientes, tableCuentas, tableMovCuentas, tableMovCuentasPaginator;
         DataView dv;
 
         public const int MODO_EDITAR = 0;
@@ -39,7 +37,7 @@ namespace AppLaMejor.formularios.Util
         int lastClient = 0;
         int lastCuenta = 1;
 
-        public FormMovDetalle(Object reflection, int modo, int idCliente, int idCuenta)
+        public FormMovDetalle(Object reflection, int modo, int idCliente)
         {
            
 
@@ -49,9 +47,10 @@ namespace AppLaMejor.formularios.Util
             ApplicationLookAndFeel.ApplyThemeToAll(this);
             cargar();
             lastClient = idCliente;
-            lastCuenta = idCuenta;
+            
             calcular(lastClient);
             fillGrid();
+            fillGridCuentas(lastClient);
             formatearControles();
             
         }
@@ -234,13 +233,13 @@ namespace AppLaMejor.formularios.Util
 
             if (ini < totalRegistros)
             {
-                TableMovCuentasPaginator = FuncionesMovCuentas.fillPagina(lastClient, ini, reg);
+                tableMovCuentasPaginator = FuncionesMovCuentas.fillPagina(lastClient, ini, reg);
 
                 //            debe = pago = saldo = 0;
 
-                if (TableMovCuentasPaginator.Rows.Count > 0)
+                if (tableMovCuentasPaginator.Rows.Count > 0)
                 {
-                    dgvMovCuentasPaginado.DataSource = TableMovCuentasPaginator;
+                    dgvMovCuentasPaginado.DataSource = tableMovCuentasPaginator;
                     dgvMovCuentasPaginado.AutoResizeColumns();
 
                     verMenos(false);
@@ -272,13 +271,13 @@ namespace AppLaMejor.formularios.Util
 
             if (ini < totalRegistros)
             {
-                TableMovCuentasPaginator = FuncionesMovCuentas.fillPaginaBetweenDates(lastClient, ini, reg, dDesde, dHasta);
+                tableMovCuentasPaginator = FuncionesMovCuentas.fillPaginaBetweenDates(lastClient, ini, reg, dDesde, dHasta);
 
                 //            debe = pago = saldo = 0;
 
-                if (TableMovCuentasPaginator.Rows.Count > 0)
+                if (tableMovCuentasPaginator.Rows.Count > 0)
                 {
-                    dgvMovCuentasPaginado.DataSource = TableMovCuentasPaginator;
+                    dgvMovCuentasPaginado.DataSource = tableMovCuentasPaginator;
                     dgvMovCuentasPaginado.AutoResizeColumns();
 
                     verMenos(false);
@@ -358,10 +357,15 @@ namespace AppLaMejor.formularios.Util
             consulta = QueryManager.Instance().GetClientesWithCuenta();
             tableClientes = QueryManager.Instance().GetTableResults(ConnecionBD.Instance().Connection, consulta);
 
-
-
+           
             //lleno movCuentas
             tableMovCuentas = FuncionesMovCuentas.fillMovCuentas();
+        }
+
+        void fillGridCuentas(int idCliente)
+        {
+            tableCuentas = FuncionesMovCuentas.fillCuentasByCliente(idCliente);
+            dgvCuentas.DataSource = tableCuentas;
         }
 
         private void btnNextPage_Click(object sender, EventArgs e)
@@ -417,6 +421,12 @@ namespace AppLaMejor.formularios.Util
             }
         }
 
+        private void dgvCuentas_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+            lastCuenta = (int)dgvCuentas["id_cuenta", dgvCuentas.CurrentCell.RowIndex].Value;
+        }
+
         void enviar()
         {
             movCuenta1 = new MovimientoCuenta();
@@ -437,16 +447,6 @@ namespace AppLaMejor.formularios.Util
 
                 movCuenta1.Vob = '1';
                 
-                switch(tp.Id)
-                {
-                    case 1:
-                        cuenta.SaldoActual = saldo - Convert.ToDecimal(tbImporte.Text);
-                        break;
-                    case 2:
-                        cuenta.SaldoActual = saldo + Convert.ToDecimal(tbImporte.Text);
-                        break;
-                }
-                //cuenta.Saldo_actual = saldo + Convert.ToDecimal(tbImporte.Text);
                 movCuenta1.Cuenta = cuenta;
                 Decimal montoto = Convert.ToDecimal(tbImporte.Text);
                 movCuenta1.Monto = montoto;

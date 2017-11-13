@@ -10,10 +10,28 @@ Target Server Type    : MYSQL
 Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2017-11-03 20:05:25
+Date: 2017-11-12 20:57:26
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for banco
+-- ----------------------------
+DROP TABLE IF EXISTS `banco`;
+CREATE TABLE `banco` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `descripcion` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of banco
+-- ----------------------------
+INSERT INTO `banco` VALUES ('1', 'Macro');
+INSERT INTO `banco` VALUES ('2', 'Santander');
+INSERT INTO `banco` VALUES ('3', 'Santa Fe');
+INSERT INTO `banco` VALUES ('4', 'Nación');
 
 -- ----------------------------
 -- Table structure for cliente
@@ -36,13 +54,13 @@ CREATE TABLE `cliente` (
   PRIMARY KEY (`id`),
   KEY `id_tipo_cliente` (`id_tipo_cliente`),
   CONSTRAINT `fk_tipo_cliente` FOREIGN KEY (`id_tipo_cliente`) REFERENCES `clientetipo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of cliente
 -- ----------------------------
 INSERT INTO `cliente` VALUES ('1', 'WTF', 'asd', 'asd', 'asd', '1', 'asd', 'asd', 'asd', 'asd', '2017-09-05', null, '1');
-INSERT INTO `cliente` VALUES ('2', 'Juanjo', 'j de la rosa 1234', 'santa fe', 'CF', '2', 'DESAROLLO SANTA', null, null, null, '2017-09-05', null, '1');
+INSERT INTO `cliente` VALUES ('2', 'Juanjo', 'j de la rosa 1252', 'santa fe', 'CF', '2', 'DESAROLLO SANTA', '', '', '', '2017-09-05', null, '0');
 INSERT INTO `cliente` VALUES ('3', 'A.D.U.L.', 'Pje. Martinez 2666', 'Santa Fe', 'CF', '4', 'defaultLocal', '30-55597562-3', '4553992', 'NombreResponsable', '2017-09-05', null, '1');
 INSERT INTO `cliente` VALUES ('4', 'A.N.S.E.S.', 'SAN MARTIN N 2533', 'Santa Fe', 'CF', '1', 'defaultLocal', '33-63761744-9', '4156256', 'NombreResponsable', '2017-09-05', null, '1');
 INSERT INTO `cliente` VALUES ('5', 'A.PE.L - Asoc.Pers.Legislativo', 'San Jeronimo N  1.791', 'Santa Fe', 'CF', '1', 'defaultLocal', '30-64955281-5', '4598277', 'NombreResponsable', '2017-09-05', null, '1');
@@ -53,10 +71,10 @@ INSERT INTO `cliente` VALUES ('9', 'Agencia Provincial de Seguridad Vial', '25 D
 INSERT INTO `cliente` VALUES ('10', 'AGOSTINI OSVALDO OMAR', 'AVDA. GORRITI N 3014', 'Santa Fe', 'CF', '2', 'defaultLocal', '20-05261057-6', '4695406', 'NombreResponsable', '2017-09-06', '2001-01-01 00:00:00', '1');
 INSERT INTO `cliente` VALUES ('11', 'AICACYP-Ente Cooperador Ley 23.979', 'Moreno N 1420  (p/Facturar)', 'Santa Fe', 'CF', '2', 'defaultLocal', '30-55597562-3', '4574822', 'NombreResponsable', '2017-09-07', null, '1');
 INSERT INTO `cliente` VALUES ('12', 'AICACYP-Ente Cooperador Ley 23.979', 'RENAR: Francia N 3550 - Santa Fe', 'Santa Fe', 'CF', '2', 'defaultLocal', '011-4384-7900', '4557996', 'NombreResponsable', '2017-09-07', null, '1');
-INSERT INTO `cliente` VALUES ('13', 'ALBERTO J. MACUA S.A.', 'LOPEZ Y PLANES N 4250', 'Santa Fe', 'CF', '2', 'defaultLocal', '30-60541628-0', '4555070', 'NombreResponsable', '2017-09-07', null, '1');
+INSERT INTO `cliente` VALUES ('13', 'ALBERTO J. MACUA S.A.', 'LOPEZ Y PLANES N 4250', 'Santa Fe', 'CF', '2', 'defaultLocal', '30-60541628-0', '4555070', 'NombreResponsable', '2017-09-07', '2001-01-01 00:00:00', '1');
 INSERT INTO `cliente` VALUES ('14', 'ALMEIDA JUAN CARLOS F.', 'RUPERTO PEREZ 1944', 'Santa Fe', 'CF', '2', 'defaultLocal', '24-06218372-8', '4553228', 'NombreResponsable', '2017-09-07', null, '1');
 INSERT INTO `cliente` VALUES ('15', 'ALONSO EDGARDO JAVIER', 'SAN MARTÃ–N N 3364-Piso 10-Dpto B', 'Santa Fe', 'CF', '2', 'defaultLocal', '20-13925831-3', '4585068', 'NombreResponsable', '2017-09-07', null, '1');
-INSERT INTO `cliente` VALUES ('16', 'ALONSO  GRACIELA CRISTINA', 'MARTIN ZAPATA 3870', 'Santa Fe', 'CF', '2', 'defaultLocal', '27-13163585-6', '4537003', 'NombreResponsable', '2017-09-07', null, '1');
+INSERT INTO `cliente` VALUES ('16', 'ALONSO  GRACIELA CRISTINA', 'MARTIN ZAPATA 3870', 'Santa Fe', 'CF', '2', 'defaultLocal', '27-13163585-6', '4537003', 'NombreResponsable', '2017-09-07', '2001-01-01 00:00:00', '1');
 INSERT INTO `cliente` VALUES ('17', 'ALLOATTI ROBERTO', 'SAN MARTIN N 2088', 'Santa Fe', 'CF', '2', 'defaultLocal', '30-60541628-0', '4537003', 'NombreResponsable', '2017-09-07', null, '1');
 INSERT INTO `cliente` VALUES ('18', 'AMATTI  CLAUDIO', 'SAN MARTIN N 2088', 'Santa Fe', 'CF', '3', 'defaultLocal', '30-60541628-0', '4537003', 'NombreResponsable', '2017-09-10', null, '1');
 INSERT INTO `cliente` VALUES ('19', 'AMRAD S. H. de Liponezky Virginia  Victor y Santiago ', 'Salvador del Carril N 968', 'Santa Fe', 'CF', '3', 'defaultLocal', '30-71120617-1', '4537003', 'NombreResponsable', '2017-09-10', null, '1');
@@ -66,6 +84,39 @@ INSERT INTO `cliente` VALUES ('22', 'ANTONIAZZI HNOS.', 'PIETRANERA n 3350', 'Sa
 INSERT INTO `cliente` VALUES ('23', 'ANTONIAZZI  GERMAN', 'RIVADAVIA N 3396', 'Santa Fe', 'CF', '4', 'defaultLocal', '20-26460065-1', '4500162', 'NombreResponsable', '2017-09-10', null, '1');
 INSERT INTO `cliente` VALUES ('24', 'ARCINI MARTÃ–N', '9 DE JULIO N 2722', 'Santa Fe', 'CF', '4', 'defaultLocal', '20-06264349-9', '4537003', 'NombreResponsable', '2017-09-10', null, '1');
 INSERT INTO `cliente` VALUES ('25', 'ARCOLEN S.A.', 'SUIPACHA 2695', 'Santa Fe', 'CF', '4', 'defaultLocal', '30-64385640-5', '4561538', 'NombreResponsable', '2017-09-10', null, '1');
+INSERT INTO `cliente` VALUES ('26', 'Cliente 1', 'La Rioja 2081', 'Santa Fe', 'CF', '1', 'asd', '203295621342', 'asd', 'sd', '2017-11-09', null, '0');
+
+-- ----------------------------
+-- Table structure for clientecuenta
+-- ----------------------------
+DROP TABLE IF EXISTS `clientecuenta`;
+CREATE TABLE `clientecuenta` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `cbu` varchar(40) NOT NULL,
+  `nro_cuenta` varchar(50) NOT NULL,
+  `saldo_actual` double(10,2) NOT NULL,
+  `id_cliente` int(11) DEFAULT NULL,
+  `fecha_updated` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `usuario` int(11) DEFAULT NULL,
+  `fecha_baja` datetime DEFAULT NULL,
+  `id_banco` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_banco` (`id_banco`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of clientecuenta
+-- ----------------------------
+INSERT INTO `clientecuenta` VALUES ('1', '1238238923892234', '12-1238238923892234', '-200.85', '1', '2017-11-06 21:07:59', '1', null, '1');
+INSERT INTO `clientecuenta` VALUES ('2', '1238238923892236', '12-1238238923893434', '435.60', '2', '2017-11-06 21:08:00', '1', null, '1');
+INSERT INTO `clientecuenta` VALUES ('3', '2222', '22222', '252.52', '1', '2017-11-06 21:08:00', '0', null, '2');
+INSERT INTO `clientecuenta` VALUES ('4', 'aaa', '12312', '123243.00', '6', '2017-11-06 21:08:01', '0', null, '3');
+INSERT INTO `clientecuenta` VALUES ('5', '11111111', '11111111', '0.00', '17', '2017-11-06 21:08:02', '0', null, '4');
+INSERT INTO `clientecuenta` VALUES ('6', '22222', '22222', '0.00', '2', '2017-11-06 21:08:03', '0', null, '1');
+INSERT INTO `clientecuenta` VALUES ('7', '4444', '4444', '0.00', '2', '2017-11-06 21:08:03', '0', null, '2');
+INSERT INTO `clientecuenta` VALUES ('8', '555', '555', '0.00', '3', '2017-11-06 21:08:03', '0', null, '3');
+INSERT INTO `clientecuenta` VALUES ('9', '123', '', '0.00', '14', '2017-11-06 21:08:04', '0', null, '4');
+INSERT INTO `clientecuenta` VALUES ('10', '11', '11', '0.00', '25', '2017-11-06 21:08:05', '0', null, '1');
 
 -- ----------------------------
 -- Table structure for clientetipo
@@ -149,6 +200,7 @@ DROP TABLE IF EXISTS `cuenta`;
 CREATE TABLE `cuenta` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `cbu` varchar(40) NOT NULL,
+  `id_banco` int(11) DEFAULT NULL,
   `nro_cuenta` varchar(50) NOT NULL,
   `saldo_actual` double(10,2) NOT NULL,
   `id_cliente` int(11) DEFAULT NULL,
@@ -161,10 +213,10 @@ CREATE TABLE `cuenta` (
 -- ----------------------------
 -- Records of cuenta
 -- ----------------------------
-INSERT INTO `cuenta` VALUES ('1', '1238238923892234', '12-1238238923892234', '-200.85', '1', '2017-09-30 14:54:58', '1', null);
-INSERT INTO `cuenta` VALUES ('2', '1238238923892236', '12-1238238923893434', '500.85', '2', '2017-09-30 14:54:58', '1', null);
-INSERT INTO `cuenta` VALUES ('3', '2222', '22222', '252.52', '1', '2017-10-24 20:52:55', '0', null);
-INSERT INTO `cuenta` VALUES ('4', 'aaa', '12312', '123243.00', '6', '2017-10-24 20:55:13', '0', null);
+INSERT INTO `cuenta` VALUES ('1', '1238238923892234', '1', '12-1238238923892234', '-200.85', '1', '2017-11-12 20:55:11', '1', null);
+INSERT INTO `cuenta` VALUES ('2', '1238238923892236', '1', '12-1238238923893434', '500.85', '2', '2017-11-12 20:55:12', '1', null);
+INSERT INTO `cuenta` VALUES ('3', '2222', '1', '22222', '252.52', '1', '2017-11-12 20:55:13', '0', null);
+INSERT INTO `cuenta` VALUES ('4', 'aaa', '1', '12312', '123243.00', '6', '2017-11-12 20:55:18', '0', null);
 
 -- ----------------------------
 -- Table structure for cuentamovimiento
@@ -184,7 +236,7 @@ CREATE TABLE `cuentamovimiento` (
   KEY `fk_movtipo` (`id_movimiento_tipo`),
   CONSTRAINT `fk_cuenta_c` FOREIGN KEY (`id_cliente_cuenta`) REFERENCES `cuenta` (`id`),
   CONSTRAINT `fk_movtipo` FOREIGN KEY (`id_movimiento_tipo`) REFERENCES `movimientotipo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of cuentamovimiento
@@ -241,6 +293,32 @@ INSERT INTO `cuentamovimiento` VALUES ('53', '1', '2', '2', '12', '2017-09-29 11
 INSERT INTO `cuentamovimiento` VALUES ('54', '1', '2', '2', '12', '2017-09-29 11:13:38', 'N', '1');
 INSERT INTO `cuentamovimiento` VALUES ('55', '1', '2', '2', '700', '2017-09-29 13:55:11', 'N', '1');
 INSERT INTO `cuentamovimiento` VALUES ('56', '1', '2', '1', '500', '2017-10-02 01:08:47', 'N', '0');
+INSERT INTO `cuentamovimiento` VALUES ('57', '1', '3', '1', '1500', '2017-11-12 20:55:47', 'N', '1');
+INSERT INTO `cuentamovimiento` VALUES ('58', '1', '1', '1', '100', '2017-11-12 20:56:26', 'N', '1');
+
+-- ----------------------------
+-- Table structure for cuentaproveedor
+-- ----------------------------
+DROP TABLE IF EXISTS `cuentaproveedor`;
+CREATE TABLE `cuentaproveedor` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `cbu` varchar(40) NOT NULL,
+  `nro_cuenta` varchar(50) NOT NULL,
+  `saldo_actual` double(10,2) NOT NULL,
+  `id_proveedor` int(11) DEFAULT NULL,
+  `fecha_updated` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `usuario` int(11) DEFAULT NULL,
+  `fecha_baja` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of cuentaproveedor
+-- ----------------------------
+INSERT INTO `cuentaproveedor` VALUES ('1', '1238238923892234', '12-1238238923892234', '-200.85', '1', '2017-09-30 14:54:58', '1', null);
+INSERT INTO `cuentaproveedor` VALUES ('2', '1238238923892236', '12-1238238923893434', '500.85', '2', '2017-09-30 14:54:58', '1', null);
+INSERT INTO `cuentaproveedor` VALUES ('3', '2222', '22222', '252.52', '1', '2017-10-24 20:52:55', '0', null);
+INSERT INTO `cuentaproveedor` VALUES ('4', 'aaa', '12312', '123243.00', '6', '2017-10-24 20:55:13', '0', null);
 
 -- ----------------------------
 -- Table structure for garron
@@ -257,13 +335,25 @@ CREATE TABLE `garron` (
   `usuario` int(11) DEFAULT NULL,
   `fecha_baja` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of garron
 -- ----------------------------
-INSERT INTO `garron` VALUES ('1', '230', '1', '1', '2017-11-03 16:10:27', '75.421', '10', '1', '2017-11-03 16:10:27');
-INSERT INTO `garron` VALUES ('2', '231', '1', '2', '2017-11-03 16:15:12', '76.496', '10', '1', '2017-11-03 16:15:12');
+INSERT INTO `garron` VALUES ('1', '230', '1', '1', '2017-11-04 20:08:45', '75.421', '10', '1', null);
+INSERT INTO `garron` VALUES ('2', '231', '1', '2', '2017-11-04 20:08:45', '76.496', '10', '1', null);
+INSERT INTO `garron` VALUES ('3', '254', '4', '1', '2017-11-17 00:00:00', '75.854', '11', '1', null);
+INSERT INTO `garron` VALUES ('4', '745', '1', '1', '2017-11-04 00:00:00', '78.520', '11', '1', null);
+INSERT INTO `garron` VALUES ('5', '123', '1', '1', '2017-11-04 00:00:00', '78.245', '11', '1', null);
+INSERT INTO `garron` VALUES ('6', '66', '1', '1', '2017-11-04 00:00:00', '98.245', '11', '1', null);
+INSERT INTO `garron` VALUES ('7', '542', '1', '1', '2017-11-04 00:00:00', '65.250', '11', '1', null);
+INSERT INTO `garron` VALUES ('8', '321', '1', '1', '2017-11-04 00:00:00', '88.250', '11', '1', null);
+INSERT INTO `garron` VALUES ('9', '11', '1', '1', '2017-11-04 00:00:00', '98.250', '11', '1', null);
+INSERT INTO `garron` VALUES ('10', '111', '1', '1', '2017-11-04 00:00:00', '78.525', '11', '1', null);
+INSERT INTO `garron` VALUES ('11', '652', '1', '1', '2017-11-04 00:00:00', '88.000', '12', '1', null);
+INSERT INTO `garron` VALUES ('12', '111', '1', '1', '2017-11-04 00:00:00', '11.000', '11', '1', null);
+INSERT INTO `garron` VALUES ('13', '425', '1', '1', '2017-11-06 00:00:00', '142.250', '11', '1', null);
+INSERT INTO `garron` VALUES ('14', '458', '1', '1', '2017-11-06 00:00:00', '14.256', '11', '1', null);
 
 -- ----------------------------
 -- Table structure for garrondeposteparcial
@@ -315,7 +405,6 @@ CREATE TABLE `garronproductodef` (
 -- ----------------------------
 -- Records of garronproductodef
 -- ----------------------------
-INSERT INTO `garronproductodef` VALUES ('1', '1', '1');
 INSERT INTO `garronproductodef` VALUES ('2', '1', '6');
 INSERT INTO `garronproductodef` VALUES ('3', '1', '7');
 INSERT INTO `garronproductodef` VALUES ('4', '1', '8');
@@ -424,7 +513,7 @@ CREATE TABLE `modulo` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of modulo
@@ -439,7 +528,8 @@ INSERT INTO `modulo` VALUES ('7', 'Movimiento Cuentas');
 INSERT INTO `modulo` VALUES ('8', 'Gestion Usuarios');
 INSERT INTO `modulo` VALUES ('9', 'Productos');
 INSERT INTO `modulo` VALUES ('10', 'Ventas Caja');
-INSERT INTO `modulo` VALUES ('11', 'Carga Garron');
+INSERT INTO `modulo` VALUES ('11', 'Movimiento Cuentas Proveedores');
+INSERT INTO `modulo` VALUES ('12', 'Carga Garron');
 
 -- ----------------------------
 -- Table structure for movimientotipo
@@ -614,22 +704,71 @@ CREATE TABLE `productoubicacion` (
 DROP TABLE IF EXISTS `proveedor`;
 CREATE TABLE `proveedor` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_tipo_proveedor` int(11) NOT NULL,
-  `razon_social` varchar(50) NOT NULL,
-  `cuit` varchar(12) NOT NULL,
-  `direccion` varchar(50) NOT NULL,
-  `direccion_adjunto` varchar(50) DEFAULT NULL,
-  `telefono` varchar(50) NOT NULL,
-  `nombre_persona_contacto` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_tipo_proveedor` (`id_tipo_proveedor`),
-  CONSTRAINT `fk_tipo_pro` FOREIGN KEY (`id_tipo_proveedor`) REFERENCES `proveedortipo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+  `razon_social` varchar(100) NOT NULL,
+  `domicilio` varchar(50) NOT NULL,
+  `localidad` varchar(30) NOT NULL,
+  `civa` varchar(3) NOT NULL,
+  `nombre_local` varchar(50) NOT NULL,
+  `cuit` varchar(15) DEFAULT NULL,
+  `telefono` varchar(20) DEFAULT NULL,
+  `nombre_responsable` varchar(50) DEFAULT NULL,
+  `fecha_desde` date DEFAULT NULL,
+  `fecha_baja` datetime DEFAULT NULL,
+  `usuario` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of proveedor
 -- ----------------------------
-INSERT INTO `proveedor` VALUES ('1', '1', 'DSA', 'DSA', 'DSA', 'DSA', 'DSA', 'DSA');
+INSERT INTO `proveedor` VALUES ('1', 'Friar', 'santiago del estero 1234', 'santa fe', 'RI', 'Friar S.A.', '20-12345678-1', '034212345678', 'Federico Lopez', null, null, null);
+
+-- ----------------------------
+-- Table structure for proveedorcuenta
+-- ----------------------------
+DROP TABLE IF EXISTS `proveedorcuenta`;
+CREATE TABLE `proveedorcuenta` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `cbu` varchar(40) NOT NULL,
+  `nro_cuenta` varchar(50) NOT NULL,
+  `saldo_actual` double(10,2) NOT NULL,
+  `id_proveedor` int(11) DEFAULT NULL,
+  `fecha_updated` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `id_banco` int(11) DEFAULT NULL,
+  `usuario` int(11) DEFAULT NULL,
+  `fecha_baja` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of proveedorcuenta
+-- ----------------------------
+INSERT INTO `proveedorcuenta` VALUES ('1', '1238238923892234', '12-1238238923892234', '-200.85', '1', '2017-11-12 19:53:42', '1', '1', null);
+INSERT INTO `proveedorcuenta` VALUES ('2', '1238238923892236', '12-1238238923893434', '500.85', '2', '2017-11-12 19:53:39', '2', '1', null);
+INSERT INTO `proveedorcuenta` VALUES ('3', '2222', '22222', '252.52', '1', '2017-11-12 19:53:29', '4', '0', null);
+INSERT INTO `proveedorcuenta` VALUES ('4', 'aaa', '12312', '123243.00', '6', '2017-11-12 19:53:32', '3', '0', null);
+
+-- ----------------------------
+-- Table structure for proveedorcuentamovimiento
+-- ----------------------------
+DROP TABLE IF EXISTS `proveedorcuentamovimiento`;
+CREATE TABLE `proveedorcuentamovimiento` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `vob` char(1) NOT NULL COMMENT '(V)arias o (B)ancarias',
+  `id_cuenta` int(11) NOT NULL,
+  `id_movimiento_tipo` int(11) NOT NULL COMMENT '1 - DEBE| 2 - HABER',
+  `monto` double NOT NULL,
+  `fecha` datetime NOT NULL,
+  `cobrado` char(1) NOT NULL DEFAULT 'N',
+  `usuario` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_movtipo` (`id_movimiento_tipo`),
+  CONSTRAINT `proveedorcuentamovimiento_ibfk_2` FOREIGN KEY (`id_movimiento_tipo`) REFERENCES `movimientotipo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of proveedorcuentamovimiento
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for proveedortipo
@@ -694,12 +833,13 @@ CREATE TABLE `usuario` (
   `pass` varchar(20) NOT NULL,
   `nombre` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of usuario
 -- ----------------------------
 INSERT INTO `usuario` VALUES ('1', 'a', 'a', 'aa');
+INSERT INTO `usuario` VALUES ('2', 'prueba', 'prueba', 'prueba');
 
 -- ----------------------------
 -- Table structure for usuarioingreso
@@ -733,7 +873,7 @@ CREATE TABLE `usuariomodulo` (
   KEY `fk_us` (`id_usuario`),
   CONSTRAINT `fk_mod` FOREIGN KEY (`id_modulo`) REFERENCES `modulo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_us` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of usuariomodulo
@@ -746,6 +886,13 @@ INSERT INTO `usuariomodulo` VALUES ('5', '1', '7');
 INSERT INTO `usuariomodulo` VALUES ('6', '1', '9');
 INSERT INTO `usuariomodulo` VALUES ('7', '1', '10');
 INSERT INTO `usuariomodulo` VALUES ('8', '1', '11');
+INSERT INTO `usuariomodulo` VALUES ('9', '2', '1');
+INSERT INTO `usuariomodulo` VALUES ('10', '2', '2');
+INSERT INTO `usuariomodulo` VALUES ('11', '2', '4');
+INSERT INTO `usuariomodulo` VALUES ('12', '2', '7');
+INSERT INTO `usuariomodulo` VALUES ('13', '2', '8');
+INSERT INTO `usuariomodulo` VALUES ('14', '2', '11');
+INSERT INTO `usuariomodulo` VALUES ('15', '1', '12');
 
 -- ----------------------------
 -- Table structure for venta
@@ -758,7 +905,7 @@ CREATE TABLE `venta` (
   `usuario` int(11) DEFAULT NULL,
   `fecha_baja` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of venta
@@ -777,6 +924,13 @@ INSERT INTO `venta` VALUES ('11', '1787.210', '2017-10-26 20:25:40', '0', null);
 INSERT INTO `venta` VALUES ('12', '2069.254', '2017-10-27 18:55:55', '0', null);
 INSERT INTO `venta` VALUES ('13', '2307.482', '2017-10-30 18:56:35', '0', null);
 INSERT INTO `venta` VALUES ('14', '2152.872', '2017-11-02 21:17:32', '0', null);
+INSERT INTO `venta` VALUES ('24', '4493.712', '2017-11-10 19:57:18', '0', null);
+INSERT INTO `venta` VALUES ('25', '2495.296', '2017-11-10 20:01:24', '0', null);
+INSERT INTO `venta` VALUES ('26', '1658.880', '2017-11-10 20:15:42', '0', null);
+INSERT INTO `venta` VALUES ('27', '1871.472', '2017-11-10 20:20:55', '0', null);
+INSERT INTO `venta` VALUES ('28', '3086.878', '2017-11-10 20:25:17', '0', null);
+INSERT INTO `venta` VALUES ('29', '1244.160', '2017-11-10 20:27:03', '0', null);
+INSERT INTO `venta` VALUES ('30', '3744.760', '2017-11-11 10:38:21', '0', null);
 
 -- ----------------------------
 -- Table structure for ventadetalle
@@ -793,7 +947,7 @@ CREATE TABLE `ventadetalle` (
   PRIMARY KEY (`id`),
   KEY `fk_liquidacion` (`id_venta`),
   KEY `fk_produ` (`id_producto`)
-) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=203 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of ventadetalle
@@ -872,3 +1026,128 @@ INSERT INTO `ventadetalle` VALUES ('74', '14', '39', '703.127', '4.849', '1', nu
 INSERT INTO `ventadetalle` VALUES ('75', '14', '35', '311.912', '2.151', '1', null);
 INSERT INTO `ventadetalle` VALUES ('76', '14', '23', '748.952', '5.547', '1', null);
 INSERT INTO `ventadetalle` VALUES ('77', '14', '6', '178.621', '2.101', '1', null);
+INSERT INTO `ventadetalle` VALUES ('78', '15', '6', '178.621', '2.101', '1', null);
+INSERT INTO `ventadetalle` VALUES ('79', '15', '6', '178.621', '2.101', '1', null);
+INSERT INTO `ventadetalle` VALUES ('80', '15', '6', '178.621', '2.101', '1', null);
+INSERT INTO `ventadetalle` VALUES ('81', '15', '6', '178.621', '2.101', '1', null);
+INSERT INTO `ventadetalle` VALUES ('82', '15', '6', '178.621', '2.101', '1', null);
+INSERT INTO `ventadetalle` VALUES ('83', '15', '6', '178.621', '2.101', '1', null);
+INSERT INTO `ventadetalle` VALUES ('84', '15', '6', '178.621', '2.101', '1', null);
+INSERT INTO `ventadetalle` VALUES ('85', '15', '6', '178.621', '2.101', '1', null);
+INSERT INTO `ventadetalle` VALUES ('86', '15', '6', '178.621', '2.101', '1', null);
+INSERT INTO `ventadetalle` VALUES ('87', '15', '6', '178.621', '2.101', '1', null);
+INSERT INTO `ventadetalle` VALUES ('88', '15', '6', '178.621', '2.101', '1', null);
+INSERT INTO `ventadetalle` VALUES ('89', '15', '6', '178.621', '2.101', '1', null);
+INSERT INTO `ventadetalle` VALUES ('90', '15', '6', '178.621', '2.101', '1', null);
+INSERT INTO `ventadetalle` VALUES ('91', '15', '6', '451.294', '5.309', '1', null);
+INSERT INTO `ventadetalle` VALUES ('92', '15', '6', '451.294', '5.309', '1', null);
+INSERT INTO `ventadetalle` VALUES ('93', '15', '6', '451.294', '5.309', '1', null);
+INSERT INTO `ventadetalle` VALUES ('94', '15', '6', '451.294', '5.309', '1', null);
+INSERT INTO `ventadetalle` VALUES ('95', '15', '6', '451.294', '5.309', '1', null);
+INSERT INTO `ventadetalle` VALUES ('96', '15', '6', '451.294', '5.309', '1', null);
+INSERT INTO `ventadetalle` VALUES ('97', '15', '6', '451.294', '5.309', '1', null);
+INSERT INTO `ventadetalle` VALUES ('98', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('99', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('100', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('101', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('102', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('103', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('104', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('105', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('106', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('107', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('108', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('109', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('110', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('111', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('112', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('113', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('114', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('115', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('116', '15', '35', '311.912', '2.151', '1', null);
+INSERT INTO `ventadetalle` VALUES ('117', '15', '35', '311.912', '2.151', '1', null);
+INSERT INTO `ventadetalle` VALUES ('118', '15', '35', '311.912', '2.151', '1', null);
+INSERT INTO `ventadetalle` VALUES ('119', '15', '35', '311.912', '2.151', '1', null);
+INSERT INTO `ventadetalle` VALUES ('120', '15', '35', '311.912', '2.151', '1', null);
+INSERT INTO `ventadetalle` VALUES ('121', '15', '35', '311.912', '2.151', '1', null);
+INSERT INTO `ventadetalle` VALUES ('122', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('123', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('124', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('125', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('126', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('127', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('128', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('129', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('130', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('131', '15', '39', '703.127', '4.849', '1', null);
+INSERT INTO `ventadetalle` VALUES ('132', '15', '39', '703.127', '4.849', '1', null);
+INSERT INTO `ventadetalle` VALUES ('133', '15', '39', '703.127', '4.849', '1', null);
+INSERT INTO `ventadetalle` VALUES ('134', '15', '39', '703.127', '4.849', '1', null);
+INSERT INTO `ventadetalle` VALUES ('135', '15', '39', '703.127', '4.849', '1', null);
+INSERT INTO `ventadetalle` VALUES ('136', '15', '39', '703.127', '4.849', '1', null);
+INSERT INTO `ventadetalle` VALUES ('137', '15', '39', '703.127', '4.849', '1', null);
+INSERT INTO `ventadetalle` VALUES ('138', '15', '39', '703.127', '4.849', '1', null);
+INSERT INTO `ventadetalle` VALUES ('139', '15', '39', '703.127', '4.849', '1', null);
+INSERT INTO `ventadetalle` VALUES ('140', '15', '39', '703.127', '4.849', '1', null);
+INSERT INTO `ventadetalle` VALUES ('141', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('142', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('143', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('144', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('145', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('146', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('147', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('148', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('149', '15', '35', '311.912', '2.151', '1', null);
+INSERT INTO `ventadetalle` VALUES ('150', '15', '35', '311.912', '2.151', '1', null);
+INSERT INTO `ventadetalle` VALUES ('151', '15', '35', '311.912', '2.151', '1', null);
+INSERT INTO `ventadetalle` VALUES ('152', '15', '35', '311.912', '2.151', '1', null);
+INSERT INTO `ventadetalle` VALUES ('153', '15', '35', '311.912', '2.151', '1', null);
+INSERT INTO `ventadetalle` VALUES ('154', '15', '35', '311.912', '2.151', '1', null);
+INSERT INTO `ventadetalle` VALUES ('155', '15', '35', '311.912', '2.151', '1', null);
+INSERT INTO `ventadetalle` VALUES ('156', '15', '35', '311.912', '2.151', '1', null);
+INSERT INTO `ventadetalle` VALUES ('157', '15', '35', '311.912', '2.151', '1', null);
+INSERT INTO `ventadetalle` VALUES ('158', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('159', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('160', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('161', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('162', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('163', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('164', '25', '35', '311.912', '2.151', '1', null);
+INSERT INTO `ventadetalle` VALUES ('165', '25', '35', '311.912', '2.151', '1', null);
+INSERT INTO `ventadetalle` VALUES ('166', '25', '35', '311.912', '2.151', '1', null);
+INSERT INTO `ventadetalle` VALUES ('167', '25', '35', '311.912', '2.151', '1', null);
+INSERT INTO `ventadetalle` VALUES ('168', '25', '35', '311.912', '2.151', '1', null);
+INSERT INTO `ventadetalle` VALUES ('169', '25', '35', '311.912', '2.151', '1', null);
+INSERT INTO `ventadetalle` VALUES ('170', '25', '35', '311.912', '2.151', '1', null);
+INSERT INTO `ventadetalle` VALUES ('171', '25', '35', '311.912', '2.151', '1', null);
+INSERT INTO `ventadetalle` VALUES ('172', '26', '24', '207.360', '1.481', '1', null);
+INSERT INTO `ventadetalle` VALUES ('173', '26', '24', '207.360', '1.481', '1', null);
+INSERT INTO `ventadetalle` VALUES ('174', '26', '24', '207.360', '1.481', '1', null);
+INSERT INTO `ventadetalle` VALUES ('175', '26', '24', '207.360', '1.481', '1', null);
+INSERT INTO `ventadetalle` VALUES ('176', '26', '24', '207.360', '1.481', '1', null);
+INSERT INTO `ventadetalle` VALUES ('177', '26', '24', '207.360', '1.481', '1', null);
+INSERT INTO `ventadetalle` VALUES ('178', '26', '24', '207.360', '1.481', '1', null);
+INSERT INTO `ventadetalle` VALUES ('179', '26', '24', '207.360', '1.481', '1', null);
+INSERT INTO `ventadetalle` VALUES ('180', '27', '35', '311.912', '2.151', '1', null);
+INSERT INTO `ventadetalle` VALUES ('181', '27', '35', '311.912', '2.151', '1', null);
+INSERT INTO `ventadetalle` VALUES ('182', '27', '35', '311.912', '2.151', '1', null);
+INSERT INTO `ventadetalle` VALUES ('183', '27', '35', '311.912', '2.151', '1', null);
+INSERT INTO `ventadetalle` VALUES ('184', '27', '35', '311.912', '2.151', '1', null);
+INSERT INTO `ventadetalle` VALUES ('185', '27', '35', '311.912', '2.151', '1', null);
+INSERT INTO `ventadetalle` VALUES ('186', '28', '39', '703.127', '4.849', '1', null);
+INSERT INTO `ventadetalle` VALUES ('187', '28', '39', '703.127', '4.849', '1', null);
+INSERT INTO `ventadetalle` VALUES ('188', '28', '24', '207.360', '1.481', '1', null);
+INSERT INTO `ventadetalle` VALUES ('189', '28', '24', '207.360', '1.481', '1', null);
+INSERT INTO `ventadetalle` VALUES ('190', '28', '5', '632.952', '5.503', '1', null);
+INSERT INTO `ventadetalle` VALUES ('191', '28', '5', '632.952', '5.503', '1', null);
+INSERT INTO `ventadetalle` VALUES ('192', '29', '24', '207.360', '1.481', '1', null);
+INSERT INTO `ventadetalle` VALUES ('193', '29', '24', '207.360', '1.481', '1', null);
+INSERT INTO `ventadetalle` VALUES ('194', '29', '24', '207.360', '1.481', '1', null);
+INSERT INTO `ventadetalle` VALUES ('195', '29', '24', '207.360', '1.481', '1', null);
+INSERT INTO `ventadetalle` VALUES ('196', '29', '24', '207.360', '1.481', '1', null);
+INSERT INTO `ventadetalle` VALUES ('197', '29', '24', '207.360', '1.481', '1', null);
+INSERT INTO `ventadetalle` VALUES ('198', '30', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('199', '30', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('200', '30', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('201', '30', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('202', '30', '23', '748.952', '5.547', '1', null);

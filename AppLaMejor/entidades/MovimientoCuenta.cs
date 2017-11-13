@@ -11,7 +11,8 @@ namespace AppLaMejor.entidades
         [DataNames("vob")]
         public char Vob { get; set; }
 
-        [DataNames("ïd_cliente_cuenta")]
+        //se deja id_cliente_cuenta para que no se rompa en el sql y para usar la misma clase en el proyecto
+        [DataNames("ïd_cuenta")]
         public Cuenta Cuenta { get; set; }
 
         [DataNames("id_movimiento_tipo")]

@@ -280,10 +280,7 @@ namespace AppLaMejor.datamanager
         }        
         public string GetProveedoresSaldoActual()
         {
-            //trae el saldo actual y algunos datos de referencia para el form de MovCuentas
-            return "SELECT proveedor.id, proveedor.razon_social AS `razon social`, proveedor.nombre_local AS `nombre local`," +
-        " proveedor.cuit AS cuit,banco.descripcion AS Banco, cuenta.cbu, cuenta.nro_cuenta AS `nro cuenta`, cuenta.saldo_actual AS `saldo actual`, cuenta.fecha_updated AS actualizado, " +
-        " cuenta.usuario, cuenta.fecha_baja FROM proveedor inner join cuentaproveedor cuenta on proveedor.id = cuenta.id_proveedor INNER JOIN banco ON cuenta.id_banco = banco.id order by proveedor.id  ";
+            return "SELECT proveedor.id, proveedor.razon_social AS `razon social`, proveedor.nombre_local AS `nombre local`, proveedor.civa AS iva, count(cuenta.id) AS cuentas FROM proveedor inner join proveedorcuenta cuenta on proveedor.id = cuenta.id_proveedor       INNER JOIN banco ON cuenta.id_banco = banco.id group by proveedor.id order by proveedor.id";
         }
         
         /* Cuentas */
@@ -339,11 +336,12 @@ namespace AppLaMejor.datamanager
         }
         public string GetCuentas()
         {
-            return "select * from cuenta order by id;";
+            return "select * from clientecuenta order by id;";
         }
         public string GetCuentas(int idCliente)
         {
-            return "select * from cuenta where id_cliente_cuenta = " + idCliente + " order by id;";
+            return "SELECT banco.descripcion, cuenta.id as id_cuenta, cuenta.cbu, cuenta.nro_cuenta, cuenta.fecha_updated FROM cliente inner join clientecuenta cuenta on cliente.id = cuenta.id_cliente" +
+                " INNER JOIN banco ON cuenta.id_banco = banco.id INNER JOIN clientetipo ct ON ct.id = cliente.id_tipo_cliente where cliente.id = " + idCliente + " order by cuenta.id;";
         }
         public string InsertNuevaCuenta(Cuenta newCuenta, string idCliente)
         {
@@ -359,21 +357,7 @@ namespace AppLaMejor.datamanager
         /* Movimiento Cuentas proveedores */
         public string GetMovCuentasProveedores()
         {/* trae todos los movimiento de cuentas de todos los proveedores*/
-            return "SELECT " +
-                    "cm.id, " +
-                    "cm.vob," +
-                    "gc.id," +
-                    "gc.id_proveedor," +
-                    "cm.id_cliente, " +
-                    "cm.id_movimiento_tipo," +
-                    "mt.descripcion, " +
-                    "round(cm.monto, 2) AS monto, " +
-                    "DATE_FORMAT(cm.fecha,'%Y-%m-%d') AS fecha_," +
-                    "cm.cobrado, " +
-                    "cm.usuario " +
-                    "FROM proveedorcuentamovimiento cm INNER JOIN proveedorcuenta gc ON cm.id_cuenta = gc.id " +
-                    "INNER JOIN movimientotipo mt ON cm.id_movimiento_tipo = mt.id " +
-                    "WHERE gc.id_proveedor IS NOT NULL ORDER BY cm.id DESC;";
+            return "SELECT cm.id, cm.vob, gc.id, gc.id_proveedor, cm.id_cuenta, cm.id_movimiento_tipo, mt.descripcion, gc.id_banco, round(cm.monto, 2) AS monto, DATE_FORMAT(cm.fecha, '%Y-%m-%d') AS fecha_,  cm.cobrado, cm.usuario FROM proveedorcuentamovimiento cm INNER JOIN proveedorcuenta gc ON cm.id_cuenta = gc.id INNER JOIN movimientotipo mt ON cm.id_movimiento_tipo = mt.id WHERE gc.id_proveedor IS NOT NULL ORDER BY cm.id DESC;";
         }
         public string GetProveedoresWithCuentaById(int id)
         {
@@ -410,7 +394,7 @@ namespace AppLaMejor.datamanager
              "	c.telefono AS Telefono " +
              " FROM " +
              "	proveedor c " +
-             " INNER JOIN cuentaproveedor cu ON cu.id_proveedor = c.id " +
+             " INNER JOIN proveedorcuenta cu ON cu.id_proveedor = c.id " +
              " WHERE " +
              "   c.fecha_baja is null  " +
              "   order by c.id  ";
@@ -449,16 +433,17 @@ namespace AppLaMejor.datamanager
                     "cm.vob," +
                     "gc.id," +
                     "gc.id_proveedor," +
-
+                    "banco.descripcion as Banco, " +
                     "cm.id_movimiento_tipo," +
                     "mt.descripcion, " +
+                    "banco.descripcion as Banco, " +
                     "round(cm.monto, 2) AS monto, " +
-                    "DATE_FORMAT(cm.fecha,'%Y-%m-%d') AS fecha_," +
-                    "cm.cobrado, " +
-                    "cm.usuario " +
-                    "FROM cuentamovimientoproveedor cm INNER JOIN cuentaproveedor gc ON cm.id_proveedor = gc.id " +
+                    "DATE_FORMAT(cm.fecha,'%Y-%m-%d') AS fecha_" +
+                    //"cm.cobrado, " +
+                    //"cm.usuario " +
+                    " FROM proveedorcuentamovimiento cm INNER JOIN proveedorcuenta gc ON cm.id_cuenta = gc.id " +
                     "INNER JOIN movimientotipo mt ON cm.id_movimiento_tipo = mt.id " +
-                    "WHERE gc.id_proveedor =" + id.ToString() + " ORDER BY cm.id DESC LIMIT " +
+                    "INNER JOIN banco ON banco.id = gc.id_banco WHERE gc.id_proveedor = " + id.ToString() + " ORDER BY cm.id DESC LIMIT " +
                     pInicio.ToString() + ", " + registros.ToString() + ";";
         }
 
@@ -886,6 +871,7 @@ namespace AppLaMejor.datamanager
         {
             return "select * from banco where id = " + idBanco + ";";
         }
+
 
     }
 
