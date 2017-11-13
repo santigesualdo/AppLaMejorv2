@@ -11,6 +11,7 @@ namespace AppLaMejor.formularios.MovimientoCuentas
 {
     public class FuncionesMovCuentas
     {
+        //clientes
         public static DataTable fillMovCuentas()
         {
             string consulta = QueryManager.Instance().GetMovCuentas(); //QueryManager.Instance().GetMovCuentas();
@@ -21,13 +22,16 @@ namespace AppLaMejor.formularios.MovimientoCuentas
             string consulta = QueryManager.Instance().GetMovCuentas(lastClient, ini, reg);
             return QueryManager.Instance().GetTableResults(ConnecionBD.Instance().Connection, consulta);
         }
-
         public static DataTable fillPaginaBetweenDates(int lastClient, int ini, int reg, string fdesde, string fhasta)
         {
             string consulta = QueryManager.Instance().GetMovCuentasBetweenDates(lastClient, ini, reg, fdesde, fhasta);
             return QueryManager.Instance().GetTableResults(ConnecionBD.Instance().Connection, consulta);
         }
-
+        public static DataTable fillCuentasByCliente(int idCliente)
+        {
+            string consulta = QueryManager.Instance().GetCuentas(idCliente); 
+            return QueryManager.Instance().GetTableResults(ConnecionBD.Instance().Connection, consulta);
+        }
         public static int contarRegistros(int idCliente)
         {
             string consulta = QueryManager.Instance().GetMovCuentasContar(idCliente);
@@ -36,7 +40,6 @@ namespace AppLaMejor.formularios.MovimientoCuentas
             //cuento cuantos movCuentas tiene el cliente
             return Convert.ToInt32(dtTotalRegistros.Rows[0][0].ToString());
         }
-
         public static int contarRegistrosBetweenDates(int idCliente, string fdesde, string fhasta)
         {
             string consulta = QueryManager.Instance().GetMovCuentasContarBetweenDates(idCliente, fdesde, fhasta);
@@ -45,12 +48,9 @@ namespace AppLaMejor.formularios.MovimientoCuentas
             //cuento cuantos movCuentas tiene el cliente
             return Convert.ToInt32(dtTotalRegistros.Rows[0][0].ToString());
         }
-
         public static void insertarMovimiento(MovimientoCuenta movCuenta1)
         {
             string consulta = QueryManager.Instance().InsertMovCuenta(movCuenta1);
-            QueryManager.Instance().GetTableResults(ConnecionBD.Instance().Connection, consulta);
-            consulta = QueryManager.Instance().ActualizaSaldo(movCuenta1.Cuenta);
             QueryManager.Instance().GetTableResults(ConnecionBD.Instance().Connection, consulta);
         }
         
@@ -68,6 +68,11 @@ namespace AppLaMejor.formularios.MovimientoCuentas
         public static DataTable fillPaginaProveedoresBetweenDates(int lastProv, int ini, int reg, string fdesde, string fhasta)
         {
             string consulta = QueryManager.Instance().GetMovCuentasProveedorBetweenDates(lastProv, ini, reg, fdesde, fhasta);
+            return QueryManager.Instance().GetTableResults(ConnecionBD.Instance().Connection, consulta);
+        }
+        public static DataTable fillCuentasByProveedor(int idProveedor)
+        {
+            string consulta = QueryManager.Instance().GetCuentaProveedor(idProveedor);
             return QueryManager.Instance().GetTableResults(ConnecionBD.Instance().Connection, consulta);
         }
         public static int contarRegistrosProveedores(int idProveedor)
@@ -90,9 +95,6 @@ namespace AppLaMejor.formularios.MovimientoCuentas
         {
             string consulta = QueryManager.Instance().InsertMovCuentaProveedor(movCuenta1);
             QueryManager.Instance().GetTableResults(ConnecionBD.Instance().Connection, consulta);
-            consulta = QueryManager.Instance().ActualizaSaldoProveedor(movCuenta1.Cuenta);
-            QueryManager.Instance().GetTableResults(ConnecionBD.Instance().Connection, consulta);
-        }		
-
+        }
     }
 }
