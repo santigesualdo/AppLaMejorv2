@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 using System.Text;
 using MySql.Data.MySqlClient;
 using System.Windows.Forms;
-
+using AppLaMejor.formularios.Util;
 
 namespace AppLaMejor.datamanager
 {
@@ -13,8 +13,8 @@ namespace AppLaMejor.datamanager
       public class ConnecionBD{
 
 
-        //string connstring = "Server=localhost; database=u570713702_jjdev; UID=root; pooling=false";
-        string connstring = "Server=localhost; database=u570713702_jjdev; UID=root;Password=dd74f695; ";
+        string connstring = "Server=localhost; database=u570713702_jjdev; UID=root; pooling=false";
+        //string connstring = "Server=localhost; database=u570713702_jjdev; UID=root;Password=dd74f695; ";
         //string connstring = "Server=sql52.main-hosting.eu; database=u570713702_jjdev; UID=u570713702_jjdev; Password=dd74f695; Pooling=false";
 
         private MySqlConnection connection = null;
@@ -49,7 +49,8 @@ namespace AppLaMejor.datamanager
             }
             catch (Exception E)
             {
-                MessageBox.Show("No se pudo establecer conexion con la Base de Datos. Saliendo...");
+                FormMessageBox dialog = new FormMessageBox();
+                dialog.ShowErrorDialog("No se pudo establecer conexion con la Base de Datos. Saliendo del sistema. \nMotivo: "+E.Message);
                 result = false;
             }
             
