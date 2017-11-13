@@ -78,6 +78,7 @@
     <Compile Include="controlmanager\FuncionesClientes.cs" />
     <Compile Include="controlmanager\FuncionesGarron.cs" />
     <Compile Include="controlmanager\FuncionesGlobales.cs" />
+    <Compile Include="controlmanager\FuncionesMovCuentas.cs" />
     <Compile Include="controlmanager\FuncionesProductos.cs" />
     <Compile Include="controlmanager\FuncionesProveedores.cs" />
     <Compile Include="controlmanager\FuncionesVentas.cs" />
@@ -159,7 +160,6 @@
     <Compile Include="formularios\MovimientoCuentas\FormMovCuentas.Designer.cs">
       <DependentUpon>FormMovCuentas.cs</DependentUpon>
     </Compile>
-    <Compile Include="controlmanager\FuncionesMovCuentas.cs" />
     <Compile Include="formularios\MovimientoCuentas\FormMovCuentasProveedores.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -171,6 +171,12 @@
     </Compile>
     <Compile Include="formularios\MovimientoCuentas\FormMovDetalle.Designer.cs">
       <DependentUpon>FormMovDetalle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="formularios\MovimientoCuentas\FormMovDetalleProveedores.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formularios\MovimientoCuentas\FormMovDetalleProveedores.Designer.cs">
+      <DependentUpon>FormMovDetalleProveedores.cs</DependentUpon>
     </Compile>
     <Compile Include="formularios\Productos\FormProductos.cs">
       <SubType>Form</SubType>
@@ -260,6 +266,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="formularios\MovimientoCuentas\FormMovDetalle.resx">
       <DependentUpon>FormMovDetalle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formularios\MovimientoCuentas\FormMovDetalleProveedores.resx">
+      <DependentUpon>FormMovDetalleProveedores.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="formularios\Productos\FormProductos.resx">
       <DependentUpon>FormProductos.cs</DependentUpon>
