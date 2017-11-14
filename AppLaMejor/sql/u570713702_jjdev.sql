@@ -827,9 +827,6 @@ INSERT INTO `proveedorcuenta` VALUES ('2', '1238238923892236', '12-1238238923893
 INSERT INTO `proveedorcuenta` VALUES ('3', '2222', '22222', '252.52', '1', '2017-11-12 19:53:29', '4', '0', null);
 INSERT INTO `proveedorcuenta` VALUES ('4', 'aaa', '12312', '123243.00', '6', '2017-11-12 19:53:32', '3', '0', null);
 
--- ----------------------------
--- Table structure for proveedorcuentamovimiento
--- ----------------------------
 DROP TABLE IF EXISTS `proveedorcuentamovimiento`;
 CREATE TABLE `proveedorcuentamovimiento` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -843,7 +840,7 @@ CREATE TABLE `proveedorcuentamovimiento` (
   PRIMARY KEY (`id`),
   KEY `fk_movtipo` (`id_movimiento_tipo`),
   CONSTRAINT `proveedorcuentamovimiento_ibfk_2` FOREIGN KEY (`id_movimiento_tipo`) REFERENCES `movimientotipo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of proveedorcuentamovimiento
