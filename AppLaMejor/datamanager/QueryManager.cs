@@ -281,7 +281,7 @@ namespace AppLaMejor.datamanager
         //trae el saldo actual y algunos datos de referencia para el form de MovCuentas
         public string GetProveedoresSaldoActual()
         {
-            return "SELECT proveedor.id, proveedor.razon_social AS `razon social`, proveedor.nombre_local AS `nombre local`, proveedor.civa AS iva, count(cuenta.id) AS cuentas FROM proveedor inner join proveedorcuenta cuenta on proveedor.id = cuenta.id_proveedor       INNER JOIN banco ON cuenta.id_banco = banco.id group by proveedor.id order by proveedor.id";
+            return "SELECT proveedor.id, proveedor.razon_social AS `razon social`, proveedor.nombre_local AS `nombre local`, proveedor.civa AS iva, count(proveedorcuenta.id) AS cuentas FROM proveedor inner join proveedorcuenta on proveedor.id = proveedorcuenta.id_proveedor  INNER JOIN banco ON proveedorcuenta.id_banco = banco.id group by proveedor.id order by proveedor.id ";
         }
         public string GetDeleteProv(string idProveedor, DateTime fechaBaja)
         {
@@ -430,7 +430,8 @@ namespace AppLaMejor.datamanager
         }
         public string GetCuentasProveedores(int idProveedor)
         {
-            return "select * from proveedorcuenta where id_proveedor = " + idProveedor + " order by id;";
+            return "SELECT banco.descripcion, cuenta.id as id_cuenta, cuenta.cbu, cuenta.nro_cuenta, cuenta.fecha_updated FROM proveedor inner join proveedorcuenta cuenta on proveedor.id = cuenta.id_proveedor" +
+                " INNER JOIN banco ON cuenta.id_banco = banco.id  WHERE proveedor.id = " + idProveedor + " order by cuenta.id;";
         }
         public string InsertNuevaCuentaProveedor(Cuenta newCuenta, string idProveedor)
         {

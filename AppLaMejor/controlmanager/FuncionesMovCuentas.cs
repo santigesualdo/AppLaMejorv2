@@ -72,7 +72,7 @@ namespace AppLaMejor.formularios.MovimientoCuentas
         }
         public static DataTable fillCuentasByProveedor(int idProveedor)
         {
-            string consulta = QueryManager.Instance().GetCuentaProveedor(idProveedor);
+            string consulta = QueryManager.Instance().GetCuentasProveedores(idProveedor);
             return QueryManager.Instance().GetTableResults(ConnecionBD.Instance().Connection, consulta);
         }
         public static int contarRegistrosProveedores(int idProveedor)
