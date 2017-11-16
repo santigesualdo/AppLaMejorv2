@@ -24,6 +24,8 @@ namespace AppLaMejor.formularios.Util
         
         public FormEntityInput(Object reflection, int modo)
         {
+            Size actualSize = this.Size;
+            this.Size = new Size(actualSize.Width, Screen.PrimaryScreen.Bounds.Height);
             currentModo = modo;
             _reflection = reflection;
             InitializeComponent();
@@ -31,6 +33,8 @@ namespace AppLaMejor.formularios.Util
         }
         public FormEntityInput(Object reflection, int modo, string titulo)
         {
+            Size actualSize = this.Size;
+            this.Size = new Size(actualSize.Width, Screen.PrimaryScreen.Bounds.Height);
             cambiosRealizados = false;
             currentModo = modo;
             _reflection = reflection;

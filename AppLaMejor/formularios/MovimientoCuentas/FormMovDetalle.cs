@@ -6,6 +6,7 @@ using AppLaMejor.entidades;
 using AppLaMejor.formularios.MovimientoCuentas;
 using AppLaMejor.stylemanager;
 using AppLaMejor.controlmanager;
+using System.Drawing;
 
 namespace AppLaMejor.formularios.Util
 {
@@ -35,11 +36,17 @@ namespace AppLaMejor.formularios.Util
         public FormMovDetalle(int modo, Cliente client)
         {
             Iniciar(modo, client);
+
+            Size actualSize = this.Size;
+            this.Size = new Size(actualSize.Width, Screen.PrimaryScreen.Bounds.Height - 25);
         }
 
         public FormMovDetalle(int modo, Proveedor proveedor)
         {
             Iniciar(modo, proveedor);
+
+            Size actualSize = this.Size;
+            this.Size = new Size(actualSize.Width, Screen.PrimaryScreen.Bounds.Height - 25);
         }
 
         public void SetTitulo(string titulo)
@@ -259,6 +266,7 @@ namespace AppLaMejor.formularios.Util
                                 name.ToUpper().Equals("ID_CLIENTE") ||
                                 name.ToUpper().Equals("ID_MOVIMIENTO_TIPO") ||
                                 name.ToUpper().Equals("BANCO1") ||
+                                name.ToUpper().Equals("ID_CUENTA") ||
                                 name.ToUpper().Equals("ID_PROVEEDOR"))
                             {
                                 dgvMovCuentasPaginado.Columns[i].Visible = false;
@@ -310,6 +318,7 @@ namespace AppLaMejor.formularios.Util
                                 name.ToUpper().Equals("ID_MOVIMIENTO_TIPO") ||
                                 name.ToUpper().Equals("BANCO1") ||
                                 name.ToUpper().Equals("BANCO1") ||
+                                name.ToUpper().Equals("ID_CUENTA") ||
                                 name.ToUpper().Equals("ID_PROVEEDOR"))
                             {
                                 dgvMovCuentasPaginado.Columns[i].Visible = false;
@@ -474,6 +483,10 @@ namespace AppLaMejor.formularios.Util
                 for (int i = 0; i < dgvCuentas.ColumnCount; i++)
                 {
                     dgvCuentas.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    if (dgvCuentas.Columns[i].Name.ToUpper().Equals("ID_CUENTA"))
+                    {
+                        dgvCuentas.Columns[i].Visible = false;
+                    }
                 }
             }else if (tipo.Equals("Proveedor"))
             {
@@ -482,8 +495,11 @@ namespace AppLaMejor.formularios.Util
                 dgvCuentas.AllowUserToAddRows = false;
                 for (int i = 0; i < dgvCuentas.ColumnCount; i++)
                 {
-
                     dgvCuentas.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    if (dgvCuentas.Columns[i].Name.ToUpper().Equals("ID_CUENTA"))
+                    {
+                        dgvCuentas.Columns[i].Visible = false;
+                    }
                 }
             }
             
@@ -542,6 +558,9 @@ namespace AppLaMejor.formularios.Util
         }
         void enviar()
         {
+            // Se toma el valor que este seleccionado en la grid para tomar la cuenta
+            lastCuenta = (int)dgvCuentas["id_cuenta", dgvCuentas.CurrentCell.RowIndex].Value;
+
             if (tipo.Equals("Cliente"))
             {
                 MovimientoCuenta movCuenta1 = new MovimientoCuenta();
@@ -656,7 +675,6 @@ namespace AppLaMejor.formularios.Util
 
         private void dgvCuentas_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            // TODO: validar aca que tenga cuenta
             lastCuenta = (int)dgvCuentas["id_cuenta", dgvCuentas.CurrentCell.RowIndex].Value;
         }
         

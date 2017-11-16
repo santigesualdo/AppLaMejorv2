@@ -107,7 +107,7 @@ namespace AppLaMejor.formularios
 
             /* Form Entity Input */
             FormMovDetalle dialog = new FormMovDetalle(FormMovDetalle.MODO_VER, provSelected);
-            dialog.SetTitulo("Ver Movimientos - Proveedor: " + provSelected.RazonSocial);
+            dialog.SetTitulo("Proveedor: " + provSelected.RazonSocial);
             Boolean result = dialog.Execute(provSelected.Id);
         }
 
@@ -119,7 +119,7 @@ namespace AppLaMejor.formularios
 
             /* Form Entity Input */
             FormMovDetalle dialog = new FormMovDetalle(FormMovDetalle.MODO_AGREGAR, provSelected);
-            dialog.SetTitulo("Agregar Movimiento - Proveedor: " + provSelected.RazonSocial);
+            dialog.SetTitulo("Proveedor: " + provSelected.RazonSocial);
             Boolean result = dialog.Execute(provSelected.Id);
         }
 
