@@ -131,7 +131,6 @@
             this.textUser.Name = "textUser";
             this.textUser.Size = new System.Drawing.Size(163, 21);
             this.textUser.TabIndex = 0;
-            this.textUser.Text = "a";
             this.textUser.Enter += new System.EventHandler(this.textUser_Enter);
             this.textUser.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textUser_KeyUp);
             this.textUser.Leave += new System.EventHandler(this.textUser_Leave);
@@ -154,7 +153,6 @@
             this.textPass.Name = "textPass";
             this.textPass.Size = new System.Drawing.Size(163, 21);
             this.textPass.TabIndex = 1;
-            this.textPass.Text = "a";
             this.textPass.Enter += new System.EventHandler(this.textPass_Enter);
             this.textPass.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textPass_KeyUp);
             this.textPass.Leave += new System.EventHandler(this.textPass_Leave);

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2017-11-16 00:57:57
+Date: 2017-11-16 18:09:20
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -102,7 +102,7 @@ CREATE TABLE `clientecuenta` (
   PRIMARY KEY (`id`),
   KEY `fk_banco` (`id_banco`),
   CONSTRAINT `fk_banco` FOREIGN KEY (`id_banco`) REFERENCES `banco` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of clientecuenta
@@ -124,6 +124,8 @@ INSERT INTO `clientecuenta` VALUES ('14', 'aa', '22', '4', '2017-11-16 00:17:29'
 INSERT INTO `clientecuenta` VALUES ('15', '142541232', '21452', '4', '2017-11-16 00:43:22', '0', null, null);
 INSERT INTO `clientecuenta` VALUES ('16', '0316541561', '13216546', '4', '2017-11-16 00:50:54', '0', null, '2');
 INSERT INTO `clientecuenta` VALUES ('17', '13213', '1231', '22', '2017-11-16 00:53:54', '0', null, '2');
+INSERT INTO `clientecuenta` VALUES ('18', '132132', '0321132', '22', '2017-11-16 16:36:07', '0', null, '1');
+INSERT INTO `clientecuenta` VALUES ('19', '13513', '132132', '26', '2017-11-16 16:36:47', '0', null, '1');
 
 -- ----------------------------
 -- Table structure for clientecuentamovimiento
@@ -139,7 +141,7 @@ CREATE TABLE `clientecuentamovimiento` (
   `cobrado` char(1) NOT NULL DEFAULT 'N',
   `usuario` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of clientecuentamovimiento
@@ -208,6 +210,8 @@ INSERT INTO `clientecuentamovimiento` VALUES ('65', '1', '7', '1', '1000', '2017
 INSERT INTO `clientecuentamovimiento` VALUES ('66', '1', '2', '2', '1000', '2017-11-15 10:21:38', 'N', '0');
 INSERT INTO `clientecuentamovimiento` VALUES ('67', '1', '2', '2', '500', '2017-11-15 10:21:45', 'N', '0');
 INSERT INTO `clientecuentamovimiento` VALUES ('68', '1', '1', '1', '1000', '2017-11-16 00:54:50', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('69', '1', '19', '1', '850', '2017-11-16 16:37:28', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('70', '1', '19', '2', '5555', '2017-11-16 16:37:36', 'N', '1');
 
 -- ----------------------------
 -- Table structure for clientetipo
@@ -807,12 +811,14 @@ CREATE TABLE `proveedor` (
   `fecha_baja` datetime DEFAULT NULL,
   `usuario` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of proveedor
 -- ----------------------------
-INSERT INTO `proveedor` VALUES ('1', 'Friar', 'santiago del estero 1234', 'santa fe', 'RI', 'Friar S.A.', '20-12345678-1', '034212345678', 'Federico Lopez', null, null, null);
+INSERT INTO `proveedor` VALUES ('1', 'Friar', 'santiago del estero 1234', 'santa fe', 'RI', 'Friar S.A.', '20-12345678-1', '034212345678', 'Federico Lopez', '2017-11-16', null, null);
+INSERT INTO `proveedor` VALUES ('2', 'Frigar', 'urquiza 1810', 'santa fe', 'CF', 'LOCAL', '20315634231', '3239487', 'HUGO', '2017-11-17', null, '0');
+INSERT INTO `proveedor` VALUES ('3', 'prov', 'provsad', 'prov', 'poa', 'orpo', 'por', 'ops', 'poasdp', '2017-11-24', null, '1');
 
 -- ----------------------------
 -- Table structure for proveedorcuenta
@@ -822,22 +828,23 @@ CREATE TABLE `proveedorcuenta` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `cbu` varchar(40) NOT NULL,
   `nro_cuenta` varchar(50) NOT NULL,
-  `saldo_actual` double(10,2) NOT NULL,
   `id_proveedor` int(11) DEFAULT NULL,
   `fecha_updated` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `id_banco` int(11) DEFAULT NULL,
   `usuario` int(11) DEFAULT NULL,
   `fecha_baja` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of proveedorcuenta
 -- ----------------------------
-INSERT INTO `proveedorcuenta` VALUES ('1', '1238238923892234', '12-1238238923892234', '-200.85', '1', '2017-11-12 19:53:42', '1', '1', null);
-INSERT INTO `proveedorcuenta` VALUES ('2', '1238238923892236', '12-1238238923893434', '500.85', '2', '2017-11-12 19:53:39', '2', '1', null);
-INSERT INTO `proveedorcuenta` VALUES ('3', '2222', '22222', '252.52', '1', '2017-11-12 19:53:29', '4', '0', null);
-INSERT INTO `proveedorcuenta` VALUES ('4', 'aaa', '12312', '123243.00', '6', '2017-11-12 19:53:32', '3', '0', null);
+INSERT INTO `proveedorcuenta` VALUES ('1', '1238238923892234', '12-1238238923892234', '1', '2017-11-12 19:53:42', '1', '1', null);
+INSERT INTO `proveedorcuenta` VALUES ('2', '1238238923892236', '12-1238238923893434', '2', '2017-11-12 19:53:39', '2', '1', null);
+INSERT INTO `proveedorcuenta` VALUES ('3', '2222', '22222', '1', '2017-11-12 19:53:29', '4', '0', null);
+INSERT INTO `proveedorcuenta` VALUES ('4', 'aaa', '12312', '6', '2017-11-12 19:53:32', '3', '0', null);
+INSERT INTO `proveedorcuenta` VALUES ('5', '52145312', '2312156432', '0', '2017-11-16 17:36:32', null, '0', null);
+INSERT INTO `proveedorcuenta` VALUES ('6', '12313', '123123', '0', '2017-11-16 17:51:57', null, '0', null);
 
 -- ----------------------------
 -- Table structure for proveedorcuentamovimiento
@@ -968,7 +975,7 @@ CREATE TABLE `usuariomodulo` (
   KEY `fk_us` (`id_usuario`),
   CONSTRAINT `fk_mod` FOREIGN KEY (`id_modulo`) REFERENCES `modulo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_us` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of usuariomodulo
@@ -981,13 +988,13 @@ INSERT INTO `usuariomodulo` VALUES ('5', '1', '7');
 INSERT INTO `usuariomodulo` VALUES ('6', '1', '9');
 INSERT INTO `usuariomodulo` VALUES ('7', '1', '10');
 INSERT INTO `usuariomodulo` VALUES ('8', '1', '11');
-INSERT INTO `usuariomodulo` VALUES ('9', '2', '1');
-INSERT INTO `usuariomodulo` VALUES ('10', '2', '2');
-INSERT INTO `usuariomodulo` VALUES ('11', '2', '4');
-INSERT INTO `usuariomodulo` VALUES ('12', '2', '7');
-INSERT INTO `usuariomodulo` VALUES ('13', '2', '8');
-INSERT INTO `usuariomodulo` VALUES ('14', '2', '11');
-INSERT INTO `usuariomodulo` VALUES ('15', '1', '12');
+INSERT INTO `usuariomodulo` VALUES ('15', '2', '12');
+INSERT INTO `usuariomodulo` VALUES ('16', '2', '1');
+INSERT INTO `usuariomodulo` VALUES ('17', '2', '2');
+INSERT INTO `usuariomodulo` VALUES ('18', '2', '4');
+INSERT INTO `usuariomodulo` VALUES ('19', '2', '9');
+INSERT INTO `usuariomodulo` VALUES ('20', '2', '11');
+INSERT INTO `usuariomodulo` VALUES ('21', '2', '12');
 
 -- ----------------------------
 -- Table structure for venta
