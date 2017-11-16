@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Reflection;
-using System.Text;
 using System.Windows.Forms;
 using AppLaMejor.datamanager;
 using AppLaMejor.entidades;
@@ -17,12 +11,15 @@ namespace AppLaMejor.formularios.Util
 {
     public partial class FormMovDetalle : Form
     {
-        DataTable tableClientes, tableCuentas, tableMovCuentas, tableMovCuentasPaginator;
+        DataTable table, tableCuentas, tableMovCuentas, tableMovCuentasPaginator;
         DataView dv;
 
         public const int MODO_EDITAR = 0;
         public const int MODO_AGREGAR = 1;
         public const int MODO_VER = 2;
+
+        public const int ROWCOUNTPAGINATION = 8;
+
         decimal debe, pago, saldo;
         int currentModo;
         int pageCount;
@@ -30,111 +27,99 @@ namespace AppLaMejor.formularios.Util
         public int currentPage;
         int totalRegistros;
 
-        string dtDesde, dtHasta;
+        string tipo;
 
-        MovimientoCuenta movCuenta1 = new MovimientoCuenta();
-        Cliente cliente1 = new Cliente();
-        int lastClient = 0;
+        int lastEntityId = 0;
         int lastCuenta = 1;
 
-        public FormMovDetalle(Object reflection, int modo, int idCliente)
+        public FormMovDetalle(int modo, Cliente client)
         {
-           
+            Iniciar(modo, client);
+        }
 
+        public FormMovDetalle(int modo, Proveedor proveedor)
+        {
+            Iniciar(modo, proveedor);
+        }
+
+        public void SetTitulo(string titulo)
+        {
+            this.formTittleText.Text = titulo;
+        }
+
+        private void Iniciar(int modo, Cliente client)
+        {
             currentModo = modo;
-            _reflection = reflection;
+            tipo = "Cliente";
+
             InitializeComponent();
-            ApplicationLookAndFeel.ApplyThemeToAll(this);
+
             cargar();
-            lastClient = idCliente;
-            
-            calcular(lastClient);
+            lastEntityId = client.Id;
+
+            calcular(lastEntityId);
             fillGrid();
-            fillGridCuentas(lastClient);
-            formatearControles();
-            
+            fillGridCuentas(lastEntityId);
+            ApplicationLookAndFeel.ApplyThemeToAll(this);
         }
 
-        private void formatearControles()
+        private void Iniciar(int modo, Proveedor proveedor)
         {
-            btEnviar.Width = 156;
-            btEnviar.Height = 34;
-            btFiltrar.Width = 156;
-            btFiltrar.Height = 34;
-            
-            lblDebe.Font = StyleManager.Instance().GetCurrentStyle().MainFont;
-            lblPago.Font = StyleManager.Instance().GetCurrentStyle().MainFont;
-            lblSaldo.Font = StyleManager.Instance().GetCurrentStyle().MainFont;
-            lblImporte.Font = StyleManager.Instance().GetCurrentStyle().MainFont;
-            lblTituloDebe.Font = StyleManager.Instance().GetCurrentStyle().MainFont;
-            lblTituloPago.Font = StyleManager.Instance().GetCurrentStyle().MainFont;
-            lblTituloSaldo.Font = StyleManager.Instance().GetCurrentStyle().MainFont;
-            lblCantidad.Font = StyleManager.Instance().GetCurrentStyle().MainFont;
-            lblDesde.Font = StyleManager.Instance().GetCurrentStyle().MainFont;
-            lblHasta.Font = StyleManager.Instance().GetCurrentStyle().MainFont;
-        }
+            currentModo = modo;
+            tipo = "Proveedor";
+            InitializeComponent();
 
-        private Boolean isBrowsable(PropertyInfo info)
-        {
-            return info.GetCustomAttributes(typeof(BrowsableAttribute), false).Length>-1;
-        }
+            cargar();
+            lastEntityId = proveedor.Id;
 
-        private Object _reflection;
-        private TableLayoutPanel controlsTableLayoutPanel = new TableLayoutPanel { Dock = DockStyle.Fill, CellBorderStyle = TableLayoutPanelCellBorderStyle.None };
+            calcular(lastEntityId);
+            fillGrid();
+            fillGridCuentas(lastEntityId);
+            ApplicationLookAndFeel.ApplyThemeToAll(this);
+        }
         private int Id;
 
         private void bAceptar_Click(object sender, EventArgs e)
         {
-            
-
-            //this.DialogResult = DialogResult.OK;
-            //this.Close();
+            this.DialogResult = DialogResult.OK;
+            this.Close();
         }
 
         private void bCancelar_Click(object sender, EventArgs e)
-        {
-            
+        {            
             this.DialogResult = DialogResult.OK;
-
             this.Close();
         }
-        public Boolean Execute(Object reflection, int entityId)
+
+        public Boolean Execute(int entityId)
         {
             Id = entityId;
-            _reflection = reflection;
-            SelectedObject = _reflection;
             return ShowDialog() == DialogResult.OK;
         }
 
-        public Boolean Execute(Object reflection)
+        void calcularBetweenDates(int entityId,  string desde, string hasta)
         {
-            _reflection = reflection;
-            SelectedObject = _reflection;
-            return ShowDialog() == DialogResult.OK;
-        }
-
-        public Object SelectedObject
-        {
-            get
+            if (tipo.Equals("Cliente"))
             {
-                return _reflection;
+                //cuento cuantos movimientos tiene el cliente
+
+                totalRegistros = FuncionesMovCuentas.contarRegistrosBetweenDates(entityId, desde, hasta);
+
+                debe = pago = saldo = 0;
+                dv = new DataView(tableMovCuentas);
+                dv.RowFilter = "id_cliente = " + entityId.ToString();
+
+
             }
-            set
+            else if (tipo.Equals("Proveedor"))
             {
-                
+                totalRegistros = FuncionesMovCuentas.contarRegistrosProveedoresBetweenDates(entityId, desde, hasta);
+
+                debe = pago = saldo = 0;
+                dv = new DataView(tableMovCuentas);
+                dv.RowFilter = "id_proveedor = " + entityId.ToString();
             }
-        }
 
-
-        void calcularBetweenDates(int cliente)
-        {
-            //cuento cuantos movimientos tiene el cliente
-
-            totalRegistros = FuncionesMovCuentas.contarRegistrosBetweenDates(cliente, dtDesde, dtHasta);
-
-            debe = pago = saldo = 0;
-            dv = new DataView(tableMovCuentas);
-            dv.RowFilter = "id_cliente = " + cliente.ToString();
             DataTable dvTemp = dv.ToTable();
             //calculo a partir de la columna monto
             for (int a = 0; a < dvTemp.Rows.Count; a++)
@@ -146,10 +131,10 @@ namespace AppLaMejor.formularios.Util
                     pago += Convert.ToDecimal(dvTemp.Rows[a]["monto"].ToString());
                 //pagó es lo que pagó el cliente... daaa
                 if (Convert.ToInt16(dvTemp.Rows[a]["id_movimiento_tipo"]) != 2 && Convert.ToInt16(dvTemp.Rows[a]["id_movimiento_tipo"]) != 1)
-				{
-					FormMessageBox dialog = new FormMessageBox();
-					dialog.ShowErrorDialog("Hay un error de asiento");
-				}
+                {
+                    FormMessageBox dialog = new FormMessageBox();
+                    dialog.ShowErrorDialog("Hay un error de asiento");
+                }
             }
 
             lblDebe.Text = debe.ToString("$ #,##0.00");
@@ -157,28 +142,41 @@ namespace AppLaMejor.formularios.Util
             saldo = pago - debe;
             lblSaldo.Text = saldo.ToString("$ #,##0.00");
 
-            lblCantidad.Text = "Cantidad de movimientos: " + dvTemp.Rows.Count.ToString();
+            lblCantidad.Text = "Cantidad de movimientos: " + totalRegistros.ToString();
+            DisplayPageInfo();
+
         }
 
-        void calcular(int cliente)
+        void calcular(int entitiId)
         {
-            //cuento cuantos movimientos tiene el cliente
+            if (tipo.Equals("Cliente"))
+            {
+                //cuento cuantos movimientos tiene el cliente
+                totalRegistros = FuncionesMovCuentas.contarRegistros(entitiId);
+                debe = pago = saldo = 0;
+                dv = new DataView(tableMovCuentas);
+                dv.RowFilter = "id_cliente = " + entitiId.ToString();
+            }
+            else if (tipo.Equals("Proveedor"))
+            {
+                //cuento cuantos movimientos tiene el proveedor
+                totalRegistros = FuncionesMovCuentas.contarRegistrosProveedores(entitiId);
+                debe = pago = saldo = 0;
+                dv = new DataView(tableMovCuentas);
+                dv.RowFilter = "id_proveedor = " + entitiId.ToString();                
+            }
 
-            totalRegistros = FuncionesMovCuentas.contarRegistros(cliente);
+            DataTable dvTemp = dv.ToTable();            
 
-            debe = pago = saldo = 0;
-            dv = new DataView(tableMovCuentas);
-            dv.RowFilter = "id_cliente = " + cliente.ToString();
-            DataTable dvTemp = dv.ToTable();
             //calculo a partir de la columna monto
             for (int a = 0; a < dvTemp.Rows.Count; a++)
             {
                 if (Convert.ToInt16(dvTemp.Rows[a]["id_movimiento_tipo"]) == 1) //1 - DEBE
                     debe += Convert.ToDecimal(dvTemp.Rows[a]["monto"]);
-                //debe es el negativo, lo que me debe el cliente
+                //debe es el negativo, lo que me debe 
                 if (Convert.ToInt16(dvTemp.Rows[a]["id_movimiento_tipo"]) == 2) //2 - HABER
                     pago += Convert.ToDecimal(dvTemp.Rows[a]["monto"].ToString());
-                //pagó es lo que pagó el cliente... daaa
+                //pagó es lo que pagó 
                 if (Convert.ToInt16(dvTemp.Rows[a]["id_movimiento_tipo"]) != 2 && Convert.ToInt16(dvTemp.Rows[a]["id_movimiento_tipo"]) != 1)
 				{
 					FormMessageBox dialog = new FormMessageBox();
@@ -207,7 +205,7 @@ namespace AppLaMejor.formularios.Util
         {
             pageCount = 0;
             currentPage = 0;
-            pageSize = 12;
+            pageSize = ROWCOUNTPAGINATION;
             pageCount = (totalRegistros / pageSize) + 1;
             LoadPage(0, pageSize);
             DisplayPageInfo();
@@ -227,102 +225,195 @@ namespace AppLaMejor.formularios.Util
             else
             {
                 currentPage += 1;
-
-                mensajeEnTimer("Ha llegado al inicio");
+                MyTextTimer.TStartFade("Ha llegado al inicio.", this.statusStripFormEntityInput, this.mensajeroFormEntityInput, MyTextTimer.TIME_SHORT);
             }
         }
 
         private void LoadPage(int cp, int reg)
         {
-
-            int ini = cp * reg;
-
-            if (ini < totalRegistros)
+            if (tipo.Equals("Cliente"))
             {
-                tableMovCuentasPaginator = FuncionesMovCuentas.fillPagina(lastClient, ini, reg);
+                int ini = cp * reg;
 
-                //            debe = pago = saldo = 0;
-
-                if (tableMovCuentasPaginator.Rows.Count > 0)
+                if (ini < totalRegistros)
                 {
-                    dgvMovCuentasPaginado.DataSource = tableMovCuentasPaginator;
-                    dgvMovCuentasPaginado.AutoResizeColumns();
+                    tableMovCuentasPaginator = FuncionesMovCuentas.fillPagina(lastEntityId, ini, reg);
 
-                    verMenos(false);
-                    dgvMovCuentasPaginado.Columns["monto"].Width = 140;
-                    dgvMovCuentasPaginado.Columns["monto"].DefaultCellStyle.Format = "c";
-                    dgvMovCuentasPaginado.Columns["monto"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-                 //   dgvMovCuentasPaginado.Columns["cobrado"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    //            debe = pago = saldo = 0;
+
+                    if (tableMovCuentasPaginator.Rows.Count > 0)
+                    {
+
+                        dgvMovCuentasPaginado.DataSource = tableMovCuentasPaginator;
+                        dgvMovCuentasPaginado.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                        for (int i = 0; i < dgvMovCuentasPaginado.Columns.Count; i++)
+                        {
+                            //dgvMovCuentasPaginado.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                            dgvMovCuentasPaginado.Columns[i].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                            string name = dgvMovCuentasPaginado.Columns[i].Name;
+                            if (name.ToUpper().Equals("ID") ||
+                                name.ToUpper().Equals("USUARIO") ||
+                                name.ToUpper().Equals("FECHABAJA") ||
+                                name.ToUpper().Equals("VOB") ||
+                                name.ToUpper().Equals("ID1") ||
+                                name.ToUpper().Equals("ID_CLIENTE") ||
+                                name.ToUpper().Equals("ID_MOVIMIENTO_TIPO") ||
+                                name.ToUpper().Equals("BANCO1") ||
+                                name.ToUpper().Equals("ID_PROVEEDOR"))
+                            {
+                                dgvMovCuentasPaginado.Columns[i].Visible = false;
+                                continue;
+                            }
+                        }
+
+                    }
+                    else
+                    {
+                        currentPage -= 1;
+                    }
+                    DisplayPageInfo();
 
                 }
                 else
                 {
-                    currentPage -= 1;
+                    ini = ini - reg;
+                    currentPage--;
+                    MyTextTimer.TStartFade("Ha llegado al final", this.statusStripFormEntityInput, this.mensajeroFormEntityInput, MyTextTimer.TIME_SHORT);
                 }
-                DisplayPageInfo();
-
             }
-            else
+            else if (tipo.Equals("Proveedor"))
             {
-                ini = ini - reg;
-                currentPage--;
-                mensajeEnTimer("Ha llegado al final");
+                int ini = cp * reg;
+
+                if (ini < totalRegistros)
+                {
+                    tableMovCuentasPaginator = FuncionesMovCuentas.fillPaginaProveedores(lastEntityId, ini, reg);
+
+                    //            debe = pago = saldo = 0;
+
+                    if (tableMovCuentasPaginator.Rows.Count > 0)
+                    {
+
+                        dgvMovCuentasPaginado.DataSource = tableMovCuentasPaginator;
+                        dgvMovCuentasPaginado.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                        for (int i = 0; i < dgvMovCuentasPaginado.Columns.Count; i++)
+                        {
+                            //dgvMovCuentasPaginado.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                            dgvMovCuentasPaginado.Columns[i].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                            string name = dgvMovCuentasPaginado.Columns[i].Name;
+                            if (name.ToUpper().Equals("ID") ||
+                                name.ToUpper().Equals("USUARIO") ||
+                                name.ToUpper().Equals("FECHABAJA") ||
+                                name.ToUpper().Equals("VOB") ||
+                                name.ToUpper().Equals("ID1") ||
+                                name.ToUpper().Equals("ID_CLIENTE") ||
+                                name.ToUpper().Equals("ID_MOVIMIENTO_TIPO") ||
+                                name.ToUpper().Equals("BANCO1") ||
+                                name.ToUpper().Equals("BANCO1") ||
+                                name.ToUpper().Equals("ID_PROVEEDOR"))
+                            {
+                                dgvMovCuentasPaginado.Columns[i].Visible = false;
+                                continue;
+                            }
+                        }
+
+                    }
+                    else
+                    {
+                        currentPage -= 1;
+                    }
+                    DisplayPageInfo();
+
+                }
+                else
+                {
+                    ini = ini - reg;
+                    currentPage--;
+                    MyTextTimer.TStartFade("Ha llegado al final", this.statusStripFormEntityInput, this.mensajeroFormEntityInput, MyTextTimer.TIME_SHORT);
+                }
             }
+
+
         }
 
         private void LoadPage(int cp, int reg, string dDesde, string dHasta)
         {
-
-            int ini = cp * reg;
-
-            if (ini < totalRegistros)
+            if (tipo.Equals("Cliente"))
             {
-                tableMovCuentasPaginator = FuncionesMovCuentas.fillPaginaBetweenDates(lastClient, ini, reg, dDesde, dHasta);
+                int ini = cp * reg;
 
-                //            debe = pago = saldo = 0;
-
-                if (tableMovCuentasPaginator.Rows.Count > 0)
+                if (ini < totalRegistros)
                 {
-                    dgvMovCuentasPaginado.DataSource = tableMovCuentasPaginator;
-                    dgvMovCuentasPaginado.AutoResizeColumns();
+                    tableMovCuentasPaginator = FuncionesMovCuentas.fillPaginaBetweenDates(lastEntityId, ini, reg, dDesde, dHasta);
 
-                    verMenos(false);
-                    dgvMovCuentasPaginado.Columns["monto"].Width = 140;
-                    dgvMovCuentasPaginado.Columns["monto"].DefaultCellStyle.Format = "c";
-                    dgvMovCuentasPaginado.Columns["monto"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-                   // dgvMovCuentasPaginado.Columns["cobrado"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    //            debe = pago = saldo = 0;
+
+                    if (tableMovCuentasPaginator.Rows.Count > 0)
+                    {
+                        dgvMovCuentasPaginado.DataSource = tableMovCuentasPaginator;
+                        dgvMovCuentasPaginado.AutoResizeColumns();
+
+                        verMenos(false);
+                        dgvMovCuentasPaginado.Columns["monto"].Width = 140;
+                        dgvMovCuentasPaginado.Columns["monto"].DefaultCellStyle.Format = "c";
+                        dgvMovCuentasPaginado.Columns["monto"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                        //dgvMovCuentasPaginado.Columns["cobrado"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+                    }
+                    else
+                    {
+                        dgvMovCuentasPaginado.DataSource = null;
+                        currentPage -= 1;
+                    }
+                    DisplayPageInfo();
 
                 }
                 else
                 {
-                    dgvMovCuentasPaginado.DataSource = null;
-                    currentPage -= 1;
+                    ini = ini - reg;
+                    currentPage--;
+                    MyTextTimer.TStartFade("Ha llegado al final", this.statusStripFormEntityInput, this.mensajeroFormEntityInput, MyTextTimer.TIME_SHORT);
                 }
-                DisplayPageInfo();
-
             }
-            else
+            else if (tipo.Equals("Proveedor"))
             {
-                ini = ini - reg;
-                currentPage--;
-                mensajeEnTimer("Ha llegado al final");
+                int ini = cp * reg;
+
+                if (ini < totalRegistros)
+                {
+                    tableMovCuentasPaginator = FuncionesMovCuentas.fillPaginaProveedoresBetweenDates(lastEntityId, ini, reg, dDesde, dHasta);
+
+                    //            debe = pago = saldo = 0;
+
+                    if (tableMovCuentasPaginator.Rows.Count > 0)
+                    {
+                        dgvMovCuentasPaginado.DataSource = tableMovCuentasPaginator;
+                        dgvMovCuentasPaginado.AutoResizeColumns();
+
+                        verMenos(false);
+                        dgvMovCuentasPaginado.Columns["monto"].Width = 140;
+                        dgvMovCuentasPaginado.Columns["monto"].DefaultCellStyle.Format = "c";
+                        dgvMovCuentasPaginado.Columns["monto"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                        //dgvMovCuentasPaginado.Columns["cobrado"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+                    }
+                    else
+                    {
+                        dgvMovCuentasPaginado.DataSource = null;
+                        currentPage -= 1;
+                    }
+                    DisplayPageInfo();
+
+                }
+                else
+                {
+                    ini = ini - reg;
+                    currentPage--;
+                    MyTextTimer.TStartFade("Ha llegado al final", this.statusStripFormEntityInput, this.mensajeroFormEntityInput, MyTextTimer.TIME_SHORT);
+                }
             }
         }
 
-
-        private int counter;
-
-        private void mensajeEnTimer(string mensaje)
-        {
-            counter = 0;
-            tsslMensaje.Text = mensaje;
-            timer1.Enabled = true;
-        }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-
-        }
         void verMenos(bool estado)
         {
 
@@ -333,45 +424,69 @@ namespace AppLaMejor.formularios.Util
             dgvMovCuentasPaginado.Columns[5].Visible = estado;
         }
 
-      
-
         void cargar()
         {
+            tbImporte.Clear();
+
+            string consulta = string.Empty;
+            if (tipo.Equals("Cliente"))
+            {
+                // Trae clientes con cuenta 
+                consulta = QueryManager.Instance().GetClientesWithCuenta();
+                table = QueryManager.Instance().GetTableResults(ConnecionBD.Instance().Connection, consulta);
+
+                //lleno movCuentas
+                tableMovCuentas = FuncionesMovCuentas.fillMovCuentas();
+            }
+            else if (tipo.Equals("Proveedor"))
+            {
+                consulta = QueryManager.Instance().GetProveedoresWithCuenta();
+                table = QueryManager.Instance().GetTableResults(ConnecionBD.Instance().Connection, consulta);
+
+                //lleno movCuentas
+                tableMovCuentas = FuncionesMovCuentas.fillMovCuentasProveedores();
+            }
+
             switch (currentModo)
             {
-                case 0: 
+                case 0:
                     break;
                 case 1:
+                    labelTitulo.Text = "Agregar nuevo movimiento.";
+                    tableAgregarMovimiento.BringToFront();
                     msFiltro.Visible = false;
-                    plOperacion.Visible = true;
-                    plGridPaginado.Visible = false;
-                    
                     break;
                 case 2:
+                    labelTitulo.Text = "Ver Operaciones";
+                    plGridPaginado.BringToFront();
                     msFiltro.Visible = true;
-                    plOperacion.Visible = false;
-                    plGridPaginado.Visible = true;
                     break;
-            }
-            cmbBoton.SelectedIndex = 0;
-            tbImporte.Clear();
-            String consulta = null;
-
-            //dtpDesde.Value = new DateTime(2017, 1, 1);
-
-            // Trae clientes con cuenta 
-            consulta = QueryManager.Instance().GetClientesWithCuenta();
-            tableClientes = QueryManager.Instance().GetTableResults(ConnecionBD.Instance().Connection, consulta);
-
-           
-            //lleno movCuentas
-            tableMovCuentas = FuncionesMovCuentas.fillMovCuentas();
+            }           
         }
 
-        void fillGridCuentas(int idCliente)
+        void fillGridCuentas(int entityId)
         {
-            tableCuentas = FuncionesMovCuentas.fillCuentasByCliente(idCliente);
-            dgvCuentas.DataSource = tableCuentas;
+            if (tipo.Equals("Cliente"))
+            {
+                tableCuentas = FuncionesMovCuentas.fillCuentasByCliente(entityId);
+                dgvCuentas.DataSource = tableCuentas;
+                dgvCuentas.AllowUserToAddRows = false;
+                for (int i = 0; i < dgvCuentas.ColumnCount; i++)
+                {
+                    dgvCuentas.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                }
+            }else if (tipo.Equals("Proveedor"))
+            {
+                tableCuentas = FuncionesMovCuentas.fillCuentasByProveedor(entityId);
+                dgvCuentas.DataSource = tableCuentas;
+                dgvCuentas.AllowUserToAddRows = false;
+                for (int i = 0; i < dgvCuentas.ColumnCount; i++)
+                {
+
+                    dgvCuentas.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                }
+            }
+            
         }
 
         private void btnNextPage_Click(object sender, EventArgs e)
@@ -379,8 +494,6 @@ namespace AppLaMejor.formularios.Util
             currentPage += 1;
             LoadPage(currentPage, pageSize);
         }
-
-        
 
         private void tbImporte_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -396,23 +509,23 @@ namespace AppLaMejor.formularios.Util
             }
         }
 
-        private void tbImporte_TextChanged(object sender, EventArgs e)
+        private void btFiltroFecha_Click(object sender, EventArgs e)
         {
-            if (tbImporte.Text.Trim() != "") //&& (cmbCuentas.Text != ""))
-                btEnviar.Enabled = true;
-            else btEnviar.Enabled = false;
-        }
 
-        private void cmbBoton_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            switch (cmbBoton.SelectedIndex)
+            if (btFiltroFecha.Text.Equals("Aplicar"))
             {
-                case 0:
-                    btEnviar.Text = "DEBITAR!";
-                    break;
-                case 1: btEnviar.Text = "ACREDITAR!";
-                    break;
+                string d = dtpDesde.Value.ToString("yyyy-MM-dd");
+                string h = dtpHasta.Value.ToString("yyyy-MM-dd");
+                calcularBetweenDates(lastEntityId,d,h);
+                fillGridBetweenDates(d,h);
+                btFiltroFecha.Text = "Quitar";
+            }else if (btFiltroFecha.Text.Equals("Quitar"))
+            {
+                calcular(lastEntityId);
+                fillGrid();
+                btFiltroFecha.Text = "Aplicar";
             }
+
         }
 
         private void btEnviar_Click(object sender, EventArgs e)
@@ -427,87 +540,134 @@ namespace AppLaMejor.formularios.Util
 				dialog.ShowErrorDialog("Ha ocurrido un error: " + ex.Message);				
             }
         }
+        void enviar()
+        {
+            if (tipo.Equals("Cliente"))
+            {
+                MovimientoCuenta movCuenta1 = new MovimientoCuenta();
+                TipoMovimiento tp = new TipoMovimiento();
+                Cuenta cuenta = new Cuenta();
+
+                VariablesGlobales.FormMovCuentas_activo = true;
+
+                cuenta = FuncionesClientes.GetCuentaById(lastCuenta);
+
+                Cliente cliente = FuncionesClientes.GetClienteById(lastEntityId);
+
+                if (cliente != null)
+                {
+                    string op = string.Empty;
+                    if (rDebitar.Checked)
+                    {
+                        op = "debitar";
+                        tp.Id = 1;
+                    }
+                    else
+                    {
+                        op = "acreditar";
+                        tp.Id = 2;
+                    }
+
+                    string textDialog = "¿Esta seguro que desea " + op + " $" + tbImporte.Text + " al cliente: " + cliente.RazonSocial + " ?";
+                    FormMessageBox dialog = new FormMessageBox();
+                    if (dialog.ShowConfirmationDialog(textDialog))
+                    {
+                        movCuenta1.TipoMovimiento = tp;
+
+                        movCuenta1.Vob = '1';
+
+                        movCuenta1.Cuenta = cuenta;
+                        Decimal montoto = Convert.ToDecimal(tbImporte.Text);
+                        movCuenta1.Monto = montoto;
+                        movCuenta1.Fecha = DateTime.Now.AddDays(0);
+                        movCuenta1.Cobrado = 'N';
+                        movCuenta1.idUsuario = VariablesGlobales.userIdLogueado;
+
+                        // TODO: Validar buena insercion movimiento cuenta cliente con booelan
+
+                        FuncionesMovCuentas.insertarMovimiento(movCuenta1);
+
+                        MyTextTimer.TStartFade("Hecho", this.statusStripFormEntityInput, this.mensajeroFormEntityInput, MyTextTimer.TIME_SHORT);
+
+                        cargar();
+
+                        tableMovCuentas.AcceptChanges();
+
+                        calcular(lastEntityId);
+                    }
+                }
+            }
+            else if (tipo.Equals("Proveedor"))
+            {
+                MovimientoCuenta movCuenta1 = new MovimientoCuenta();
+                TipoMovimiento tp = new TipoMovimiento();
+                Cuenta cuenta = new Cuenta();
+
+                VariablesGlobales.FormMovCuentas_activo = true;
+
+                cuenta = FuncionesClientes.GetCuentaById(lastCuenta);
+
+                Proveedor prov = FuncionesProveedores.GetProveedorById(lastEntityId);
+
+                if (prov != null)
+                {
+                    string op = string.Empty;
+                    if (rDebitar.Checked)
+                    {
+                        op = "debitar";
+                        tp.Id = 1;
+                    }
+                    else
+                    {
+                        op = "acreditar";
+                        tp.Id = 2;
+                    }
+
+                    string textDialog = "¿Esta seguro que desea " + op + " $" + tbImporte.Text + " al proveedor: " + prov.RazonSocial + " ?";
+                    FormMessageBox dialog = new FormMessageBox();
+                    if (dialog.ShowConfirmationDialog(textDialog))
+                    {
+                        movCuenta1.TipoMovimiento = tp;
+
+                        movCuenta1.Vob = '1';
+
+                        movCuenta1.Cuenta = cuenta;
+                        Decimal montoto = Convert.ToDecimal(tbImporte.Text);
+                        movCuenta1.Monto = montoto;
+                        movCuenta1.Fecha = DateTime.Now.AddDays(0);
+                        movCuenta1.Cobrado = 'N';
+                        movCuenta1.idUsuario = VariablesGlobales.userIdLogueado;
+
+                        // TODO: Validar buena insercion movimiento cuenta proveedor con booelan
+                        FuncionesMovCuentas.insertarMovimientoProveedor(movCuenta1);
+
+                        MyTextTimer.TStartFade("Hecho", this.statusStripFormEntityInput, this.mensajeroFormEntityInput, MyTextTimer.TIME_SHORT);
+
+                        cargar();
+
+                        tableMovCuentas.AcceptChanges();
+
+                        calcular(lastEntityId);
+                    }
+                }
+            }
+
+        }
 
         private void dgvCuentas_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            // TODO: validar aca que tenga cuenta
             lastCuenta = (int)dgvCuentas["id_cuenta", dgvCuentas.CurrentCell.RowIndex].Value;
         }
-
-        void enviar()
-        {
-            movCuenta1 = new MovimientoCuenta();
-            TipoMovimiento tp = new TipoMovimiento();
-            Cuenta cuenta = new Cuenta();
-            
-            Usuario usuario = new Usuario();
-            VariablesGlobales.FormMovCuentas_activo = true;
-
-            cuenta = FuncionesClientes.GetCuentaById(lastCuenta);
-
-            cliente1 = FuncionesClientes.GetClienteById(lastClient);
-
-            if (cliente1 != null)
-            {
-                tp.Id = cmbBoton.SelectedIndex + 1;
-                movCuenta1.TipoMovimiento = tp;
-
-                movCuenta1.Vob = '1';
-                
-                movCuenta1.Cuenta = cuenta;
-                Decimal montoto = Convert.ToDecimal(tbImporte.Text);
-                movCuenta1.Monto = montoto;
-                movCuenta1.Fecha = DateTime.Now.AddDays(0);
-                movCuenta1.Cobrado = 'N';
-                usuario.Id = 1;
-                //movCuenta1.Usuario = usuario;
-
-                FuncionesMovCuentas.insertarMovimiento(movCuenta1);
-
-                mensajeEnTimer("Hecho");
-
-                cargar();
-
-                tableMovCuentas.AcceptChanges();
-
-                calcular(lastClient);
-            }
-        }
-
-        private void xzxToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            plFiltro.Visible = true;
-            msFiltro.Visible = false;
-        }
-
-        private void btFiltrar_Click(object sender, EventArgs e)
-        {
-            calcularBetweenDates(lastClient);
-            //hacer el filtro acá
-            
-            fillGridBetweenDates();
-            plFiltro.Visible = false;
-            msFiltro.Visible = true;
-        }
-
-        private void fillGridBetweenDates()
+        
+        private void fillGridBetweenDates(string fechaDesde, string fechaHasta)
         {
             pageCount = 0;
             currentPage = 0;
-            pageSize = 12;
+            pageSize = ROWCOUNTPAGINATION;
             pageCount = (totalRegistros / pageSize) + 1;
-            LoadPage(0, pageSize, dtDesde, dtHasta);
+            LoadPage(0, pageSize, fechaDesde, fechaHasta);
             DisplayPageInfo();
-        }
-
-        private void dtpDesde_ValueChanged(object sender, EventArgs e)
-        {
-            dtDesde = dtpDesde.Value.ToString("yyyy-MM-dd");
-        }
-
-        private void dtpHasta_ValueChanged(object sender, EventArgs e)
-        {
-            dtHasta = dtpHasta.Value.ToString("yyyy-MM-dd");
         }
 
       

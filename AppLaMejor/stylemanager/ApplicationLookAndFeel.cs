@@ -6,7 +6,12 @@ using AppLaMejor.formularios.Util;
 
 public class ApplicationLookAndFeel
 {
-
+    public static void ApplyTheme(RadioButton c)
+    {
+        c.Font = StyleManager.Instance().GetCurrentStyle().MainFont;
+        c.BackColor = StyleManager.Instance().GetCurrentStyle().BackColor;
+        c.ForeColor = StyleManager.Instance().GetCurrentStyle().TextColor;
+    }
     public static void ApplyTheme(TextBox c)
     {
         c.Font = StyleManager.Instance().GetCurrentStyle().MainFont;
@@ -15,29 +20,109 @@ public class ApplicationLookAndFeel
     }
     public static void ApplyTheme(Label c)
     {
-        if (c.Name.Equals("formTittleText"))
+        Boolean bold = false;
+        Boolean big = false;
+        Boolean title = false;
+        Boolean small = false;
+        Boolean inverted = false;
+        
+        // Si se ingresa en TAG:  big small titlle rompe todo 
+        if (c.Tag != null)
         {
-            c.Font = StyleManager.Instance().GetCurrentStyle().MainFormTitle;
-            c.BackColor = StyleManager.Instance().GetCurrentStyle().MainColor;
+            if (c.Tag.ToString().Contains("bold")) bold = true;
+            if (c.Tag.ToString().Contains("title")) title = true;
+            if (c.Tag.ToString().Contains("big")) big = true;
+            if (c.Tag.ToString().Contains("small")) small = true;
+            if (c.Tag.ToString().Contains("inverted")) inverted = true;
+
+            Font fontSelected = null;
+            if (bold)
+            {
+                if (title)
+                {
+                    fontSelected = StyleManager.Instance().GetCurrentStyle().MainFontTitleBold;
+                }
+                else if (big)
+                {
+                    fontSelected = StyleManager.Instance().GetCurrentStyle().MainFontBigBold;
+                }
+                else if (small)
+                {
+                    fontSelected = StyleManager.Instance().GetCurrentStyle().MainFontSmallBold;
+                }
+            }
+            else
+            {
+                if (title)
+                {
+                    fontSelected = StyleManager.Instance().GetCurrentStyle().MainFontTitle;
+                }
+                else if (big)
+                {
+                    fontSelected = StyleManager.Instance().GetCurrentStyle().MainFontBig;
+                }
+                else if (small)
+                {
+                    fontSelected = StyleManager.Instance().GetCurrentStyle().MainFontSmall;
+                }
+            }
+            c.Font = fontSelected;
+
+            if (inverted)
+            {
+                c.BackColor = StyleManager.Instance().GetCurrentStyle().MainColor;
+            }else
+            {
+                c.BackColor = StyleManager.Instance().GetCurrentStyle().BackColor;
+            }            
             c.ForeColor = StyleManager.Instance().GetCurrentStyle().TextColor;
-        }else 
-        if (c.Name.Equals("messageBoxLabel"))
-        {
-            c.Font = StyleManager.Instance().GetCurrentStyle().MainFontBig;
-            c.BackColor = StyleManager.Instance().GetCurrentStyle().BackColor;
-            c.ForeColor = StyleManager.Instance().GetCurrentStyle().TextColor;
-        }else if (c.Name.Equals("labelSubTotal"))
-        {
-            c.Font = StyleManager.Instance().GetCurrentStyle().MainFontBig;
-            c.BackColor = StyleManager.Instance().GetCurrentStyle().BackColor;
-            c.ForeColor = StyleManager.Instance().GetCurrentStyle().TextColor;
-        }
-        else
+        }else
         {
             c.Font = StyleManager.Instance().GetCurrentStyle().MainFontSmall;
             c.BackColor = StyleManager.Instance().GetCurrentStyle().BackColor;
             c.ForeColor = StyleManager.Instance().GetCurrentStyle().TextColor;
         }
+
+
+        //if (c.Name.Equals("formTittleText"))
+        //{
+        //    if (c.Tag.ToString().Contains("Bold"))
+        //    {
+        //        c.Font = StyleManager.Instance().GetCurrentStyle().MainFontTitleBold;
+        //    }
+        //    else
+        //    {
+        //        c.Font = StyleManager.Instance().GetCurrentStyle().MainFontTitle;
+        //    }
+
+        //    c.BackColor = StyleManager.Instance().GetCurrentStyle().MainColor;
+        //    c.ForeColor = StyleManager.Instance().GetCurrentStyle().TextColor;
+        //}
+        //else
+        //if (c.Name.Equals("messageBoxLabel"))
+        //{
+        //    c.Font = StyleManager.Instance().GetCurrentStyle().MainFontBig;
+        //    c.BackColor = StyleManager.Instance().GetCurrentStyle().BackColor;
+        //    c.ForeColor = StyleManager.Instance().GetCurrentStyle().TextColor;
+        //}
+        //else if (c.Name.Equals("labelSubTotal"))
+        //{
+        //    c.Font = StyleManager.Instance().GetCurrentStyle().MainFontBig;
+        //    c.BackColor = StyleManager.Instance().GetCurrentStyle().BackColor;
+        //    c.ForeColor = StyleManager.Instance().GetCurrentStyle().TextColor;
+        //}
+        //else if (c.Name.Equals("lblTituloSaldo"))
+        //{
+        //    c.Font = StyleManager.Instance().GetCurrentStyle().MainFontBig;
+        //    c.BackColor = StyleManager.Instance().GetCurrentStyle().BackColor;
+        //    c.ForeColor = StyleManager.Instance().GetCurrentStyle().TextColor;
+        //}
+        //else
+        //{
+        //    c.Font = StyleManager.Instance().GetCurrentStyle().MainFontSmall;
+        //    c.BackColor = StyleManager.Instance().GetCurrentStyle().BackColor;
+        //    c.ForeColor = StyleManager.Instance().GetCurrentStyle().TextColor;
+        //}
     }
     public static void ApplyTheme(ToolStripStatusLabel c)
     {

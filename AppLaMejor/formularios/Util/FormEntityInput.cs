@@ -54,6 +54,7 @@ namespace AppLaMejor.formularios.Util
         List<TipoProducto> listTipoProductos;
         List<TipoGarron> listTipoGarron;
         List<TipoEstadoGarron> listTipoEstadoGarron;
+        List<Banco> listBanco;
 
         bool first;
 
@@ -114,6 +115,8 @@ namespace AppLaMejor.formularios.Util
                             else
                             if (property.PropertyType == typeof(TipoEstadoGarron))
 	                            TypeTipoEstadoGarron(property);
+                            if (property.PropertyType == typeof(Banco))
+                                TypeBanco(property);
                         }
                     }
 
@@ -402,6 +405,49 @@ namespace AppLaMejor.formularios.Util
             }
             
             
+        }  
+        private void TypeBanco(PropertyInfo property)
+        {
+            ComboBox combo = new ComboBox { Dock = DockStyle.Fill, AutoSize = true };
+            Banco currentBanco;
+            BindingList<Banco> objects;            
+            switch (currentModo)
+            {
+                case MODO_VER:
+                    currentBanco = TiposManager.Instance().GetBancoById(Id);
+                    combo.Enabled = false;
+                    combo.ValueMember = null;
+                    combo.DisplayMember = "Descripcion";
+                    combo.DataSource = currentBanco.Descripcion;
+                    break;
+                case MODO_INSERTAR:
+                    Banco bvacio = new Banco();
+                    bvacio.Id = 0;
+                    bvacio.Descripcion = "";
+                    combo.SelectedIndexChanged += bancoComboClicked;//tipoClienteComboClicked;
+                    combo.Leave += comboRequiredLeave;
+                    listBanco = TiposManager.Instance().GetBancoList();
+                    listBanco.Add(bvacio);
+                    listBanco = listBanco.OrderBy(x => x.Id).ToList();
+                    objects = new BindingList<Banco>(listBanco);
+                    combo.DisplayMember = "Descripcion";
+                    combo.ValueMember = null;
+                    combo.DataSource = objects;
+                    combo.SelectedIndex = -1;
+                    break;
+                case MODO_EDITAR:
+                    currentBanco = TiposManager.Instance().GetBancoById(Id);
+                    listBanco = TiposManager.Instance().GetBancoList().OrderBy(x => x.Descripcion != currentBanco.Descripcion).ToList();
+                    objects = new BindingList<Banco>(listBanco);
+                    combo.SelectedIndexChanged += bancoComboClicked;
+                    combo.ValueMember = null;
+                    combo.DisplayMember = "Descripcion";
+                    combo.DataSource = objects;
+                    break;
+            }
+
+            controlsTableLayoutPanel.Controls.Add(GetCampoTitulo(property.Name), 0, controlsTableLayoutPanel.RowCount += 1);
+            controlsTableLayoutPanel.Controls.Add(combo, 1, controlsTableLayoutPanel.RowCount);
         }
 
         // Eventos para cada tipo
@@ -434,6 +480,12 @@ namespace AppLaMejor.formularios.Util
             //ComboBox combo = (ComboBox)sender;
             //TipoProductoEstado tipoProductoEstado = (TipoProductoEstado)combo.SelectedValue;
             //((Producto)_reflection).Estado = tipoProductoEstado;
+        }
+        private void bancoComboClicked(object sender, EventArgs e)
+        {
+            ComboBox combo = (ComboBox)sender;
+            Banco banco= (Banco)combo.SelectedValue;
+            ((AppLaMejor.entidades.Cuenta)_reflection).Banco = banco;
         }
         private void KeyDownIntegerTextField(object sender, KeyPressEventArgs e)
         {

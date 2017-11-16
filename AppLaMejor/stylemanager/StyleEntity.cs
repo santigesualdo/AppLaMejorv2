@@ -4,13 +4,18 @@ namespace AppLaMejor.stylemanager
     class StyleEntity
     {
 
-        public StyleEntity(Font _mainFont, Font _mainFontSmall, Font _mainFontBig, Font _mainFontFormTitle, 
+        public StyleEntity(Font _mainFont, Font _mainFontSmall, Font _mainFontBig, Font _mainFontFormTitle,
+            Font _mainFontBold, Font _mainFontSmallBold, Font _mainFontBigBold, Font _mainFontFormTitleBold,
             Color _backColor, Color _mainColor, Color _textColor, Color _mouseDownBackColor, Color _mouseOverBackColor)
         {
             mainFont = _mainFont;
             mainFontSmall = _mainFontSmall;
             mainFontBig = _mainFontBig;
             mainFormTitle = _mainFontFormTitle;
+            mainFontBold = _mainFontBold;
+            mainFontSmallBold = _mainFontSmallBold;
+            mainFontBigBold = _mainFontBigBold;
+            mainFormTitleBold = _mainFontFormTitleBold;
             backColor = _backColor;
             mainColor = _mainColor;
             textColor = _textColor;
@@ -42,7 +47,37 @@ namespace AppLaMejor.stylemanager
 
         Font mainFormTitle;
 
-        public Font MainFormTitle
+        public Font MainFontTitle
+        {
+            get { return mainFormTitle; }
+            set { mainFormTitle = value; }
+        }
+
+        Font mainFontBold;
+
+        public Font MainFontBold
+        {
+            get { return mainFontBold; }
+            set { mainFontBold = value; }
+        }
+        Font mainFontSmallBold;
+
+        public Font MainFontSmallBold
+        {
+            get { return mainFontSmallBold; }
+            set { mainFontSmallBold = value; }
+        }
+        Font mainFontBigBold;
+
+        public Font MainFontBigBold
+        {
+            get { return mainFontBigBold; }
+            set { mainFontBigBold = value; }
+        }
+
+        Font mainFormTitleBold;
+
+        public Font MainFontTitleBold
         {
             get { return mainFormTitle; }
             set { mainFormTitle = value; }
@@ -83,5 +118,6 @@ namespace AppLaMejor.stylemanager
             get { return mouseOverBackColor; }
             set { mouseOverBackColor = value; }
         }
+        
     }
 }

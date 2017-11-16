@@ -206,7 +206,7 @@ namespace AppLaMejor.datamanager
         //trae el saldo actual y algunos datos de referencia para el form de MovCuentas
         public string GetClientesSaldoActual()
         {
-            return "SELECT cliente.id, cliente.razon_social AS `razon social`, cliente.nombre_local AS `nombre local`, cliente.civa AS iva, count(cuenta.id) AS cuentas FROM cliente inner join clientecuenta cuenta on cliente.id = cuenta.id_cliente       INNER JOIN banco ON cuenta.id_banco = banco.id INNER JOIN clientetipo ct ON ct.id = cliente.id_tipo_cliente group by cliente.id order by cliente.id";
+            return "SELECT cliente.id, cliente.razon_social AS `RazonSocial`, cliente.nombre_local AS `NombreLocal`, cliente.civa AS IVA, cast(cliente.id_tipo_cliente as CHAR(50)) AS TipoCliente,count(cuenta.id) AS CantidadCuentas FROM cliente inner join clientecuenta cuenta on cliente.id = cuenta.id_cliente       INNER JOIN banco ON cuenta.id_banco = banco.id INNER JOIN clientetipo ct ON ct.id = cliente.id_tipo_cliente group by cliente.id order by cliente.id";
 																																							  
 																																																																 
         } 
@@ -366,10 +366,11 @@ namespace AppLaMejor.datamanager
         }
         public string InsertNuevaCuenta(Cuenta newCuenta, string idCliente)
         {
-            return "INSERT INTO clientecuenta ( cbu, nro_cuenta, id_cliente, fecha_updated, usuario, fecha_baja) " +
+            return "INSERT INTO clientecuenta ( cbu, nro_cuenta, id_cliente, id_banco, fecha_updated, usuario, fecha_baja) " +
             " VALUES ('" + newCuenta.Cbu + "', '" +
             newCuenta.Numerocuenta + "', '" +
-            idCliente + "', " +
+            idCliente + "', '" +
+            newCuenta.Banco.Id+"', "+
             " NOW() , 0 , null );";
         }
 
@@ -462,8 +463,7 @@ namespace AppLaMejor.datamanager
                     "FROM clientecuentamovimiento cm INNER JOIN clientecuenta gc ON cm.id_cuenta = gc.id " +
                     "INNER JOIN movimientotipo mt ON cm.id_movimiento_tipo = mt.id " +
                     "WHERE gc.id_cliente IS NOT NULL ORDER BY cm.id DESC;";
-        } 
-     												   
+        }      												   
 		public string GetMovCuentas(int id, int pInicio, int registros)
         {
             /* trae paginando los movimiento de cuentas de un solo cliente*/
@@ -479,8 +479,6 @@ namespace AppLaMejor.datamanager
                     "banco.descripcion as Banco, " +
                     "round(cm.monto, 2) AS monto, " +
                     "DATE_FORMAT(cm.fecha,'%Y-%m-%d') AS fecha_" +
-                    //"cm.cobrado, " +
-                    //"cm.usuario " +
                     " FROM clientecuentamovimiento cm INNER JOIN clientecuenta cc ON cm.id_cuenta = cc.id " +
                     "INNER JOIN movimientotipo mt ON cm.id_movimiento_tipo = mt.id " +
                     "INNER JOIN banco ON banco.id = cc.id_banco WHERE cc.id_cliente =" + id.ToString() + " ORDER BY cm.id DESC LIMIT " +
@@ -501,11 +499,10 @@ namespace AppLaMejor.datamanager
                     "banco.descripcion as Banco, " +
                     "round(cm.monto, 2) AS monto, " +
                     "DATE_FORMAT(cm.fecha,'%Y-%m-%d') AS fecha_" +
-                    //"cm.cobrado, " +
-                    //"cm.usuario " +
+
                     " FROM clientecuentamovimiento cm INNER JOIN clientecuenta gc ON cm.id_cuenta = gc.id " +
                     "INNER JOIN movimientotipo mt ON cm.id_movimiento_tipo = mt.id " +
-                    "INNER JOIN banco ON banco.id = gc.id_banco WHERE gc.id_cliente =" + id.ToString() + " AND cm.fecha BETWEEN '" + fdesde + 
+                    "INNER JOIN banco ON banco.id = gc.id_banco WHERE gc.id_cliente =" + id.ToString() + " AND DATE_FORMAT(cm.fecha, '%Y-%m-%d') BETWEEN '" + fdesde + 
                     "' AND '" + fhasta  + "' ORDER BY cm.id DESC LIMIT " +
                     pInicio.ToString() + ", " + registros.ToString() + ";";
         } 		
@@ -513,18 +510,16 @@ namespace AppLaMejor.datamanager
         {
             /* cuenta cuantos registros hay en total */
 
-            return "SELECT count(*) FROM clientecuentamovimiento cm INNER JOIN clientecuenta gc ON cm.id_cuenta = gc.id INNER JOIN movimientotipo mt ON cm.id_movimiento_tipo = mt.id WHERE gc.id_cliente = " + idCliente.ToString() + " AND cm.fecha BETWEEN '" + fdesde +
+            return "SELECT count(*) FROM clientecuentamovimiento cm INNER JOIN clientecuenta gc ON cm.id_cuenta = gc.id INNER JOIN movimientotipo mt ON cm.id_movimiento_tipo = mt.id WHERE gc.id_cliente = " + idCliente.ToString() + " AND DATE(cm.fecha) BETWEEN '" + fdesde +
                     "' AND '" + fhasta + "' ORDER BY cm.id DESC;";
         }
-
         public string GetMovCuentasProveedoresContarBetweenDates(int idProveedor, string fdesde, string fhasta)
         {
             /* cuenta cuantos registros hay en total */
 
-            return "SELECT count(*) FROM proveedorcuentamovimiento cm INNER JOIN proveedorcuenta gc ON cm.id_cuenta = gc.id INNER JOIN movimientotipo mt ON cm.id_movimiento_tipo = mt.id WHERE gc.id_proveedor = " + idProveedor.ToString() + " AND cm.fecha BETWEEN '" + fdesde +
+            return "SELECT count(*) FROM proveedorcuentamovimiento cm INNER JOIN proveedorcuenta gc ON cm.id_cuenta = gc.id INNER JOIN movimientotipo mt ON cm.id_movimiento_tipo = mt.id WHERE gc.id_proveedor = " + idProveedor.ToString() + " AND DATE(cm.fecha) BETWEEN '" + fdesde +
                     "' AND '" + fhasta + "' ORDER BY cm.id DESC;";           
         }		
-
         public string GetMovCuentasContar(int id)
 														  
         {
@@ -576,8 +571,6 @@ namespace AppLaMejor.datamanager
                     "banco.descripcion as Banco, " +
                     "round(cm.monto, 2) AS monto, " +
                     "DATE_FORMAT(cm.fecha,'%Y-%m-%d') AS fecha_" +
-                    //"cm.cobrado, " +
-                    //"cm.usuario " +
                     " FROM proveedorcuentamovimiento cm INNER JOIN proveedorcuenta gc ON cm.id_cuenta = gc.id " +
                     "INNER JOIN movimientotipo mt ON cm.id_movimiento_tipo = mt.id " +
                     "INNER JOIN banco ON banco.id = gc.id_banco WHERE gc.id_proveedor = " + id.ToString() + " ORDER BY cm.id DESC LIMIT " +
@@ -597,12 +590,10 @@ namespace AppLaMejor.datamanager
                     "mt.descripcion, " +
                     "banco.descripcion as Banco, " +
                     "round(cm.monto, 2) AS monto, " +
-                    "DATE_FORMAT(cm.fecha,'%Y-%m-%d') AS fecha_," +
-                    //"cm.cobrado, " +
-                    //"cm.usuario " +
-                    "FROM proveedorcuentamovimiento cm INNER JOIN proveedorcuenta gc ON cm.id_proveedor = gc.id " +
+                    "DATE_FORMAT(cm.fecha,'%Y-%m-%d') AS fecha_ " +
+                    "FROM proveedorcuentamovimiento cm INNER JOIN proveedorcuenta gc ON cm.id_cuenta = gc.id " +
                     "INNER JOIN movimientotipo mt ON cm.id_movimiento_tipo = mt.id " +															  
-                    "INNER JOIN banco ON banco.id = gc.id_banco WHERE gc.id_proveedor =" + id.ToString() + " AND cm.fecha BETWEEN '" + fdesde +
+                    "INNER JOIN banco ON banco.id = gc.id_banco WHERE gc.id_proveedor =" + id.ToString() + " AND DATE_FORMAT(cm.fecha, '%Y-%m-%d') BETWEEN '" + fdesde +
                     "' AND '" + fhasta + "' ORDER BY cm.id DESC LIMIT " +
                     pInicio.ToString() + ", " + registros.ToString() + ";";
         }		
@@ -883,7 +874,14 @@ namespace AppLaMejor.datamanager
         {
             return "select * from banco where id = " + idBanco + ";";
         }
-
+        public string GetBancoByIdCuentaCliente(int idCuenta)
+        {
+            return "select id_banco from clientecuenta where id = '" + idCuenta.ToString() + "';";
+        }
+        public string GetBancoByIdCuentaProveedor(int idCuenta)
+        {
+            return "select id_banco from proveedorcuenta where id = '" + idCuenta.ToString() + "';";
+        }
 
     }
 

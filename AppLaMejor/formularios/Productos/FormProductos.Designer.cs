@@ -544,6 +544,7 @@ namespace AppLaMejor.formularios
             this.tittleText.Name = "tittleText";
             this.tittleText.Size = new System.Drawing.Size(985, 64);
             this.tittleText.TabIndex = 2;
+            this.tittleText.Tag = "big ";
             this.tittleText.Text = "Buscador de Productos";
             this.tittleText.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -567,6 +568,7 @@ namespace AppLaMejor.formularios
             this.formTittleText.Name = "formTittleText";
             this.formTittleText.Size = new System.Drawing.Size(1017, 50);
             this.formTittleText.TabIndex = 0;
+            this.formTittleText.Tag = "title bold inverted";
             this.formTittleText.Text = "Productos";
             this.formTittleText.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 

@@ -153,6 +153,7 @@
             this.groupMensaje.Size = new System.Drawing.Size(925, 209);
             this.groupMensaje.TabIndex = 0;
             this.groupMensaje.TabStop = false;
+            this.groupMensaje.Tag = "big";
             this.groupMensaje.Text = "Aviso";
             // 
             // panelMessage
@@ -170,6 +171,7 @@
             this.messageBoxLabel.Name = "messageBoxLabel";
             this.messageBoxLabel.Size = new System.Drawing.Size(907, 72);
             this.messageBoxLabel.TabIndex = 3;
+            this.messageBoxLabel.Tag = "big";
             this.messageBoxLabel.Text = "label1";
             this.messageBoxLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 

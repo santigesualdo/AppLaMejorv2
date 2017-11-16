@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2017-11-13 17:36:08
+Date: 2017-11-16 00:57:57
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -102,7 +102,7 @@ CREATE TABLE `clientecuenta` (
   PRIMARY KEY (`id`),
   KEY `fk_banco` (`id_banco`),
   CONSTRAINT `fk_banco` FOREIGN KEY (`id_banco`) REFERENCES `banco` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of clientecuenta
@@ -117,6 +117,13 @@ INSERT INTO `clientecuenta` VALUES ('7', '4444', '4444', '2', '2017-11-08 22:04:
 INSERT INTO `clientecuenta` VALUES ('8', '555', '555', '3', '2017-11-06 21:08:03', '0', null, '3');
 INSERT INTO `clientecuenta` VALUES ('9', '123', '', '14', '2017-11-06 21:08:04', '0', null, '4');
 INSERT INTO `clientecuenta` VALUES ('10', '11', '11', '25', '2017-11-06 21:08:05', '0', null, '1');
+INSERT INTO `clientecuenta` VALUES ('11', '14524521452', '14552/142', '22', '2017-11-15 23:45:05', '0', null, null);
+INSERT INTO `clientecuenta` VALUES ('12', '1233213', '333112', '1', '2017-11-15 23:47:45', '0', null, null);
+INSERT INTO `clientecuenta` VALUES ('13', 'aaa122', '123123', '26', '2017-11-16 00:15:28', '0', null, null);
+INSERT INTO `clientecuenta` VALUES ('14', 'aa', '22', '4', '2017-11-16 00:17:29', '0', null, null);
+INSERT INTO `clientecuenta` VALUES ('15', '142541232', '21452', '4', '2017-11-16 00:43:22', '0', null, null);
+INSERT INTO `clientecuenta` VALUES ('16', '0316541561', '13216546', '4', '2017-11-16 00:50:54', '0', null, '2');
+INSERT INTO `clientecuenta` VALUES ('17', '13213', '1231', '22', '2017-11-16 00:53:54', '0', null, '2');
 
 -- ----------------------------
 -- Table structure for clientecuentamovimiento
@@ -132,7 +139,7 @@ CREATE TABLE `clientecuentamovimiento` (
   `cobrado` char(1) NOT NULL DEFAULT 'N',
   `usuario` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of clientecuentamovimiento
@@ -196,6 +203,11 @@ INSERT INTO `clientecuentamovimiento` VALUES ('60', '1', '1', '2', '600', '2017-
 INSERT INTO `clientecuentamovimiento` VALUES ('61', '1', '1', '1', '700', '2017-11-10 19:55:10', 'N', '0');
 INSERT INTO `clientecuentamovimiento` VALUES ('62', '1', '1', '2', '222', '2017-11-10 19:56:19', 'N', '0');
 INSERT INTO `clientecuentamovimiento` VALUES ('63', '1', '6', '2', '123', '2017-11-10 20:02:10', 'N', '0');
+INSERT INTO `clientecuentamovimiento` VALUES ('64', '1', '1', '1', '14785', '2017-11-15 00:26:03', 'N', '0');
+INSERT INTO `clientecuentamovimiento` VALUES ('65', '1', '7', '1', '1000', '2017-11-15 10:18:40', 'N', '0');
+INSERT INTO `clientecuentamovimiento` VALUES ('66', '1', '2', '2', '1000', '2017-11-15 10:21:38', 'N', '0');
+INSERT INTO `clientecuentamovimiento` VALUES ('67', '1', '2', '2', '500', '2017-11-15 10:21:45', 'N', '0');
+INSERT INTO `clientecuentamovimiento` VALUES ('68', '1', '1', '1', '1000', '2017-11-16 00:54:50', 'N', '1');
 
 -- ----------------------------
 -- Table structure for clientetipo
@@ -624,7 +636,7 @@ CREATE TABLE `movimientotipo` (
 -- Records of movimientotipo
 -- ----------------------------
 INSERT INTO `movimientotipo` VALUES ('1', 'DEBE');
-INSERT INTO `movimientotipo` VALUES ('2', 'PAGÃ“');
+INSERT INTO `movimientotipo` VALUES ('2', 'PAGO');
 
 -- ----------------------------
 -- Table structure for preciotipo
@@ -795,7 +807,7 @@ CREATE TABLE `proveedor` (
   `fecha_baja` datetime DEFAULT NULL,
   `usuario` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of proveedor
@@ -827,6 +839,9 @@ INSERT INTO `proveedorcuenta` VALUES ('2', '1238238923892236', '12-1238238923893
 INSERT INTO `proveedorcuenta` VALUES ('3', '2222', '22222', '252.52', '1', '2017-11-12 19:53:29', '4', '0', null);
 INSERT INTO `proveedorcuenta` VALUES ('4', 'aaa', '12312', '123243.00', '6', '2017-11-12 19:53:32', '3', '0', null);
 
+-- ----------------------------
+-- Table structure for proveedorcuentamovimiento
+-- ----------------------------
 DROP TABLE IF EXISTS `proveedorcuentamovimiento`;
 CREATE TABLE `proveedorcuentamovimiento` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -840,13 +855,15 @@ CREATE TABLE `proveedorcuentamovimiento` (
   PRIMARY KEY (`id`),
   KEY `fk_movtipo` (`id_movimiento_tipo`),
   CONSTRAINT `proveedorcuentamovimiento_ibfk_2` FOREIGN KEY (`id_movimiento_tipo`) REFERENCES `movimientotipo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of proveedorcuentamovimiento
 -- ----------------------------
-INSERT INTO `proveedorcuentamovimiento` VALUES ('1', '1', '1', '1', '500', '2017-11-13 17:34:38', 'N', '0');
-INSERT INTO `proveedorcuentamovimiento` VALUES ('2', '1', '1', '2', '1000', '2017-11-13 17:34:50', 'N', '0');
+INSERT INTO `proveedorcuentamovimiento` VALUES ('1', '1', '1', '1', '600', '2017-11-14 17:24:30', 'N', '0');
+INSERT INTO `proveedorcuentamovimiento` VALUES ('2', '1', '1', '2', '600', '2017-11-15 11:54:13', 'N', '1');
+INSERT INTO `proveedorcuentamovimiento` VALUES ('3', '1', '3', '1', '500', '2017-11-15 11:55:15', 'N', '1');
+INSERT INTO `proveedorcuentamovimiento` VALUES ('4', '1', '3', '2', '1000', '2017-11-15 12:00:06', 'N', '1');
 
 -- ----------------------------
 -- Table structure for proveedortipo

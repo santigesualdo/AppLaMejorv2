@@ -117,5 +117,10 @@ namespace AppLaMejor.formularios
                 textPass.Focus();
             }
         }
+
+        private void FormUsuario_Load(object sender, EventArgs e)
+        {
+            bLoginAceptar.Focus();
+        }
     }
 }

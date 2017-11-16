@@ -369,5 +369,33 @@ namespace AppLaMejor.datamanager
         {
             throw new NotImplementedException();
         }
+
+        /* Nomenclador de Bancos */
+        List<Banco> listBanco;
+        /*public Banco GetBancoByCuenta(int idCuenta)
+        {
+            QueryManager manager = QueryManager.Instance();
+            String consulta = manager.GetBancoByIdCuenta(idCuenta);
+            DataTable table = manager.GetTableResults(ConnecionBD.Instance().Connection, consulta);
+            int idBanco= table.Rows[0].Field<int>("id_banco");
+            return GetBancoById(idBanco);
+        }*/
+        public Banco GetBancoById(int idBanco)
+        {
+            QueryManager manager = QueryManager.Instance();
+            String consulta = manager.GetBancoById(idBanco);
+            DataTable table = manager.GetTableResults(ConnecionBD.Instance().Connection, consulta);
+            DataNamesMapper<Banco> dmb = new DataNamesMapper<Banco>();
+            return dmb.Map(table).ToList().First();
+        }
+        public List<Banco> GetBancoList()
+        {
+            QueryManager manager = QueryManager.Instance();
+            String consulta = manager.GetBanco();
+            DataTable table = manager.GetTableResults(ConnecionBD.Instance().Connection, consulta);
+            DataNamesMapper<Banco> dmb = new DataNamesMapper<Banco>();
+            return dmb.Map(table).ToList();
+        }
+
     }
 }

@@ -534,6 +534,7 @@
             this.tittleText.Name = "tittleText";
             this.tittleText.Size = new System.Drawing.Size(1272, 64);
             this.tittleText.TabIndex = 2;
+            this.tittleText.Tag = "big ";
             this.tittleText.Text = "Buscador";
             this.tittleText.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -557,6 +558,7 @@
             this.formTittleText.Name = "formTittleText";
             this.formTittleText.Size = new System.Drawing.Size(1304, 50);
             this.formTittleText.TabIndex = 0;
+            this.formTittleText.Tag = "title bold inverted";
             this.formTittleText.Text = "Ventas Caja";
             this.formTittleText.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 

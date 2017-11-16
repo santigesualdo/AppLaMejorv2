@@ -33,10 +33,10 @@
             this.contentPanel = new System.Windows.Forms.Panel();
             this.mainPanel = new System.Windows.Forms.Panel();
             this.bottomPanel = new System.Windows.Forms.Panel();
-            this.bAceptar = new System.Windows.Forms.Button();
-            this.bCancelar = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.tsslMensaje = new System.Windows.Forms.ToolStripStatusLabel();
+            this.bAceptar = new System.Windows.Forms.Button();
+            this.bCancelar = new System.Windows.Forms.Button();
             this.topPanel.SuspendLayout();
             this.mainPanel.SuspendLayout();
             this.bottomPanel.SuspendLayout();
@@ -62,6 +62,7 @@
             this.formTittleText.Name = "formTittleText";
             this.formTittleText.Size = new System.Drawing.Size(934, 50);
             this.formTittleText.TabIndex = 0;
+            this.formTittleText.Tag = "title bold inverted";
             this.formTittleText.Text = "FormInicio";
             this.formTittleText.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -96,6 +97,29 @@
             this.bottomPanel.Size = new System.Drawing.Size(934, 50);
             this.bottomPanel.TabIndex = 0;
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.AutoSize = false;
+            this.statusStrip1.BackColor = System.Drawing.Color.Green;
+            this.statusStrip1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsslMensaje});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 0);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(774, 50);
+            this.statusStrip1.TabIndex = 23;
+            this.statusStrip1.Text = "ssMensajero";
+            // 
+            // tsslMensaje
+            // 
+            this.tsslMensaje.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsslMensaje.Font = new System.Drawing.Font("Lucida Sans", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tsslMensaje.ImageTransparentColor = System.Drawing.Color.Green;
+            this.tsslMensaje.Margin = new System.Windows.Forms.Padding(20, 0, 0, 0);
+            this.tsslMensaje.Name = "tsslMensaje";
+            this.tsslMensaje.Size = new System.Drawing.Size(85, 50);
+            this.tsslMensaje.Text = "Mensajero";
+            // 
             // bAceptar
             // 
             this.bAceptar.Dock = System.Windows.Forms.DockStyle.Right;
@@ -120,29 +144,6 @@
             this.bCancelar.Text = "Salir";
             this.bCancelar.UseVisualStyleBackColor = true;
             this.bCancelar.Click += new System.EventHandler(this.bCancelar_Click);
-            // 
-            // statusStrip1
-            // 
-            this.statusStrip1.AutoSize = false;
-            this.statusStrip1.BackColor = System.Drawing.Color.Green;
-            this.statusStrip1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsslMensaje});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 0);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(774, 50);
-            this.statusStrip1.TabIndex = 23;
-            this.statusStrip1.Text = "ssMensajero";
-            // 
-            // tsslMensaje
-            // 
-            this.tsslMensaje.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.tsslMensaje.Font = new System.Drawing.Font("Lucida Sans", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tsslMensaje.ImageTransparentColor = System.Drawing.Color.Green;
-            this.tsslMensaje.Margin = new System.Windows.Forms.Padding(20, 0, 0, 0);
-            this.tsslMensaje.Name = "tsslMensaje";
-            this.tsslMensaje.Size = new System.Drawing.Size(85, 50);
-            this.tsslMensaje.Text = "Mensajero";
             // 
             // FormInicio
             // 

@@ -131,6 +131,7 @@
             this.textUser.Name = "textUser";
             this.textUser.Size = new System.Drawing.Size(163, 21);
             this.textUser.TabIndex = 0;
+            this.textUser.Text = "a";
             this.textUser.Enter += new System.EventHandler(this.textUser_Enter);
             this.textUser.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textUser_KeyUp);
             this.textUser.Leave += new System.EventHandler(this.textUser_Leave);
@@ -144,6 +145,7 @@
             this.lUser.Name = "lUser";
             this.lUser.Size = new System.Drawing.Size(89, 16);
             this.lUser.TabIndex = 24;
+            this.lUser.Tag = "bold";
             this.lUser.Text = "Ingrese Usuario";
             // 
             // textPass
@@ -152,6 +154,7 @@
             this.textPass.Name = "textPass";
             this.textPass.Size = new System.Drawing.Size(163, 21);
             this.textPass.TabIndex = 1;
+            this.textPass.Text = "a";
             this.textPass.Enter += new System.EventHandler(this.textPass_Enter);
             this.textPass.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textPass_KeyUp);
             this.textPass.Leave += new System.EventHandler(this.textPass_Leave);
@@ -165,6 +168,7 @@
             this.lPass.Name = "lPass";
             this.lPass.Size = new System.Drawing.Size(99, 16);
             this.lPass.TabIndex = 25;
+            this.lPass.Tag = "bold";
             this.lPass.Text = "Ingrese Password";
             // 
             // mainPanel
@@ -231,6 +235,7 @@
             this.formTittleText.Name = "formTittleText";
             this.formTittleText.Size = new System.Drawing.Size(1190, 55);
             this.formTittleText.TabIndex = 0;
+            this.formTittleText.Tag = "bold title inverted";
             this.formTittleText.Text = "Sistema - Carniceria La Mejor";
             this.formTittleText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -249,6 +254,7 @@
             this.Text = "FormUsuario";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Activated += new System.EventHandler(this.FormUsuario_Activated);
+            this.Load += new System.EventHandler(this.FormUsuario_Load);
             this.contentPanel.ResumeLayout(false);
             this.loginPanel.ResumeLayout(false);
             this.loginPanel.PerformLayout();

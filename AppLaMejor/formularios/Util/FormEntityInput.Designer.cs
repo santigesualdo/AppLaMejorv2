@@ -33,9 +33,9 @@ namespace AppLaMejor.formularios.Util
             this.contentPanel = new System.Windows.Forms.Panel();
             this.controlsPanel = new System.Windows.Forms.Panel();
             this.bottomPanel = new System.Windows.Forms.Panel();
-            this.bAceptar = new System.Windows.Forms.Button();
-            this.bCancelar = new System.Windows.Forms.Button();
             this.tableBottomPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.bCancelar = new System.Windows.Forms.Button();
+            this.bAceptar = new System.Windows.Forms.Button();
             this.statusStripFormEntityInput = new System.Windows.Forms.StatusStrip();
             this.mensajeroFormEntityInput = new System.Windows.Forms.ToolStripStatusLabel();
             this.topPanel = new System.Windows.Forms.Panel();
@@ -67,7 +67,7 @@ namespace AppLaMejor.formularios.Util
             this.contentPanel.Location = new System.Drawing.Point(0, 51);
             this.contentPanel.Name = "contentPanel";
             this.contentPanel.Padding = new System.Windows.Forms.Padding(15);
-            this.contentPanel.Size = new System.Drawing.Size(622, 592);
+            this.contentPanel.Size = new System.Drawing.Size(622, 639);
             this.contentPanel.TabIndex = 3;
             // 
             // controlsPanel
@@ -76,83 +76,85 @@ namespace AppLaMejor.formularios.Util
             this.controlsPanel.Location = new System.Drawing.Point(15, 15);
             this.controlsPanel.Name = "controlsPanel";
             this.controlsPanel.Padding = new System.Windows.Forms.Padding(5);
-            this.controlsPanel.Size = new System.Drawing.Size(592, 562);
+            this.controlsPanel.Size = new System.Drawing.Size(592, 609);
             this.controlsPanel.TabIndex = 7;
             // 
             // bottomPanel
             // 
             this.bottomPanel.BackColor = System.Drawing.Color.Green;
-            this.bottomPanel.Controls.Add(this.bAceptar);
-            this.bottomPanel.Controls.Add(this.bCancelar);
             this.bottomPanel.Controls.Add(this.tableBottomPanel);
             this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bottomPanel.Location = new System.Drawing.Point(0, 643);
+            this.bottomPanel.Location = new System.Drawing.Point(0, 690);
             this.bottomPanel.Name = "bottomPanel";
-            this.bottomPanel.Size = new System.Drawing.Size(622, 95);
+            this.bottomPanel.Size = new System.Drawing.Size(622, 48);
             this.bottomPanel.TabIndex = 5;
             // 
-            // bAceptar
+            // tableBottomPanel
             // 
-            this.bAceptar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.bAceptar.BackColor = System.Drawing.Color.Black;
-            this.bAceptar.Dock = System.Windows.Forms.DockStyle.Right;
-            this.bAceptar.FlatAppearance.BorderColor = System.Drawing.Color.Green;
-            this.bAceptar.FlatAppearance.BorderSize = 2;
-            this.bAceptar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.MediumSeaGreen;
-            this.bAceptar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkSlateGray;
-            this.bAceptar.Font = new System.Drawing.Font("Source Sans Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bAceptar.Location = new System.Drawing.Point(222, 0);
-            this.bAceptar.MinimumSize = new System.Drawing.Size(150, 30);
-            this.bAceptar.Name = "bAceptar";
-            this.bAceptar.Size = new System.Drawing.Size(200, 50);
-            this.bAceptar.TabIndex = 24;
-            this.bAceptar.Text = "Aceptar";
-            this.bAceptar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.bAceptar.UseVisualStyleBackColor = false;
-            this.bAceptar.Click += new System.EventHandler(this.bAceptar_Click_1);
+            this.tableBottomPanel.ColumnCount = 3;
+            this.tableBottomPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
+            this.tableBottomPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableBottomPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableBottomPanel.Controls.Add(this.bCancelar, 0, 0);
+            this.tableBottomPanel.Controls.Add(this.bAceptar, 0, 0);
+            this.tableBottomPanel.Controls.Add(this.statusStripFormEntityInput, 0, 0);
+            this.tableBottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.tableBottomPanel.Location = new System.Drawing.Point(0, 3);
+            this.tableBottomPanel.Name = "tableBottomPanel";
+            this.tableBottomPanel.RowCount = 1;
+            this.tableBottomPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableBottomPanel.Size = new System.Drawing.Size(622, 45);
+            this.tableBottomPanel.TabIndex = 26;
             // 
             // bCancelar
             // 
             this.bCancelar.BackColor = System.Drawing.Color.Black;
-            this.bCancelar.Dock = System.Windows.Forms.DockStyle.Right;
+            this.bCancelar.Dock = System.Windows.Forms.DockStyle.Fill;
             this.bCancelar.FlatAppearance.BorderColor = System.Drawing.Color.Green;
             this.bCancelar.FlatAppearance.BorderSize = 2;
             this.bCancelar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.MediumSeaGreen;
             this.bCancelar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkSlateGray;
             this.bCancelar.Font = new System.Drawing.Font("Source Sans Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bCancelar.Location = new System.Drawing.Point(422, 0);
-            this.bCancelar.MinimumSize = new System.Drawing.Size(150, 30);
+            this.bCancelar.Location = new System.Drawing.Point(500, 3);
+            this.bCancelar.MinimumSize = new System.Drawing.Size(100, 30);
             this.bCancelar.Name = "bCancelar";
-            this.bCancelar.Size = new System.Drawing.Size(200, 50);
-            this.bCancelar.TabIndex = 25;
+            this.bCancelar.Size = new System.Drawing.Size(119, 39);
+            this.bCancelar.TabIndex = 26;
             this.bCancelar.Text = "Cancelar";
             this.bCancelar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.bCancelar.UseVisualStyleBackColor = false;
             this.bCancelar.Click += new System.EventHandler(this.bCancelar_Click);
             // 
-            // tableBottomPanel
+            // bAceptar
             // 
-            this.tableBottomPanel.ColumnCount = 1;
-            this.tableBottomPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableBottomPanel.Controls.Add(this.statusStripFormEntityInput, 0, 0);
-            this.tableBottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tableBottomPanel.Location = new System.Drawing.Point(0, 50);
-            this.tableBottomPanel.Name = "tableBottomPanel";
-            this.tableBottomPanel.RowCount = 1;
-            this.tableBottomPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableBottomPanel.Size = new System.Drawing.Size(622, 45);
-            this.tableBottomPanel.TabIndex = 26;
+            this.bAceptar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.bAceptar.BackColor = System.Drawing.Color.Black;
+            this.bAceptar.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.bAceptar.FlatAppearance.BorderColor = System.Drawing.Color.Green;
+            this.bAceptar.FlatAppearance.BorderSize = 2;
+            this.bAceptar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.MediumSeaGreen;
+            this.bAceptar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkSlateGray;
+            this.bAceptar.Font = new System.Drawing.Font("Source Sans Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bAceptar.Location = new System.Drawing.Point(376, 3);
+            this.bAceptar.MinimumSize = new System.Drawing.Size(100, 30);
+            this.bAceptar.Name = "bAceptar";
+            this.bAceptar.Size = new System.Drawing.Size(118, 39);
+            this.bAceptar.TabIndex = 25;
+            this.bAceptar.Text = "Aceptar";
+            this.bAceptar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.bAceptar.UseVisualStyleBackColor = false;
+            this.bAceptar.Click += new System.EventHandler(this.bAceptar_Click_1);
             // 
             // statusStripFormEntityInput
             // 
             this.statusStripFormEntityInput.AutoSize = false;
             this.statusStripFormEntityInput.BackColor = System.Drawing.Color.Green;
-            this.statusStripFormEntityInput.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.statusStripFormEntityInput.Dock = System.Windows.Forms.DockStyle.None;
             this.statusStripFormEntityInput.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mensajeroFormEntityInput});
             this.statusStripFormEntityInput.Location = new System.Drawing.Point(0, 0);
             this.statusStripFormEntityInput.Name = "statusStripFormEntityInput";
-            this.statusStripFormEntityInput.Size = new System.Drawing.Size(622, 45);
+            this.statusStripFormEntityInput.Size = new System.Drawing.Size(373, 45);
             this.statusStripFormEntityInput.TabIndex = 23;
             this.statusStripFormEntityInput.Text = "ssMensajero";
             // 
@@ -186,6 +188,7 @@ namespace AppLaMejor.formularios.Util
             this.formTittleText.Name = "formTittleText";
             this.formTittleText.Size = new System.Drawing.Size(622, 51);
             this.formTittleText.TabIndex = 0;
+            this.formTittleText.Tag = "title bold inverted";
             this.formTittleText.Text = "Titulo FormEntityInput";
             this.formTittleText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -220,11 +223,11 @@ namespace AppLaMejor.formularios.Util
         private System.Windows.Forms.Label formTittleText;
         private System.Windows.Forms.Panel bottomPanel;
         private System.Windows.Forms.Panel controlsPanel;
-        private System.Windows.Forms.Button bAceptar;
-        private System.Windows.Forms.Button bCancelar;
         private System.Windows.Forms.TableLayoutPanel tableBottomPanel;
         private System.Windows.Forms.StatusStrip statusStripFormEntityInput;
         private System.Windows.Forms.ToolStripStatusLabel mensajeroFormEntityInput;
+        private System.Windows.Forms.Button bCancelar;
+        private System.Windows.Forms.Button bAceptar;
     }
 
 

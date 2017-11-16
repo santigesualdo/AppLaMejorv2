@@ -28,29 +28,29 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.mainPanel = new System.Windows.Forms.Panel();
             this.contentPanel = new System.Windows.Forms.Panel();
-            this.groupVentasAnterioresDataGrid = new System.Windows.Forms.GroupBox();
-            this.dataGridVentas = new System.Windows.Forms.DataGridView();
             this.nuevaVentaPanel = new System.Windows.Forms.Panel();
             this.groupNuevaVentaDataGrid = new System.Windows.Forms.GroupBox();
-            this.navTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.agregarVenta = new System.Windows.Forms.Button();
+            this.dataGridNuevaVentaDetalle = new System.Windows.Forms.DataGridView();
             this.panelSubTotal = new System.Windows.Forms.Panel();
             this.labelSubTotal = new System.Windows.Forms.Label();
-            this.dataGridNuevaVentaDetalle = new System.Windows.Forms.DataGridView();
+            this.navTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.agregarVenta = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.textCodigo = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.lTittle = new System.Windows.Forms.Label();
+            this.groupVentasAnterioresDataGrid = new System.Windows.Forms.GroupBox();
+            this.dataGridVentas = new System.Windows.Forms.DataGridView();
             this.bottomPanel = new System.Windows.Forms.Panel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.tsslMensaje = new System.Windows.Forms.ToolStripStatusLabel();
@@ -76,14 +76,14 @@
             this.button1 = new System.Windows.Forms.Button();
             this.mainPanel.SuspendLayout();
             this.contentPanel.SuspendLayout();
-            this.groupVentasAnterioresDataGrid.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridVentas)).BeginInit();
             this.nuevaVentaPanel.SuspendLayout();
             this.groupNuevaVentaDataGrid.SuspendLayout();
-            this.navTableLayoutPanel.SuspendLayout();
-            this.panelSubTotal.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridNuevaVentaDetalle)).BeginInit();
+            this.panelSubTotal.SuspendLayout();
+            this.navTableLayoutPanel.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.groupVentasAnterioresDataGrid.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridVentas)).BeginInit();
             this.bottomPanel.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.topPanel.SuspendLayout();
@@ -118,6 +118,205 @@
             this.contentPanel.Padding = new System.Windows.Forms.Padding(15);
             this.contentPanel.Size = new System.Drawing.Size(1173, 830);
             this.contentPanel.TabIndex = 3;
+            // 
+            // nuevaVentaPanel
+            // 
+            this.nuevaVentaPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.nuevaVentaPanel.Controls.Add(this.groupNuevaVentaDataGrid);
+            this.nuevaVentaPanel.Controls.Add(this.panel3);
+            this.nuevaVentaPanel.Controls.Add(this.lTittle);
+            this.nuevaVentaPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.nuevaVentaPanel.Location = new System.Drawing.Point(15, 15);
+            this.nuevaVentaPanel.Margin = new System.Windows.Forms.Padding(0);
+            this.nuevaVentaPanel.Name = "nuevaVentaPanel";
+            this.nuevaVentaPanel.Size = new System.Drawing.Size(1143, 500);
+            this.nuevaVentaPanel.TabIndex = 0;
+            // 
+            // groupNuevaVentaDataGrid
+            // 
+            this.groupNuevaVentaDataGrid.AutoSize = true;
+            this.groupNuevaVentaDataGrid.Controls.Add(this.dataGridNuevaVentaDetalle);
+            this.groupNuevaVentaDataGrid.Controls.Add(this.panelSubTotal);
+            this.groupNuevaVentaDataGrid.Controls.Add(this.navTableLayoutPanel);
+            this.groupNuevaVentaDataGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupNuevaVentaDataGrid.ForeColor = System.Drawing.Color.White;
+            this.groupNuevaVentaDataGrid.Location = new System.Drawing.Point(0, 100);
+            this.groupNuevaVentaDataGrid.MinimumSize = new System.Drawing.Size(0, 300);
+            this.groupNuevaVentaDataGrid.Name = "groupNuevaVentaDataGrid";
+            this.groupNuevaVentaDataGrid.Padding = new System.Windows.Forms.Padding(20, 22, 20, 22);
+            this.groupNuevaVentaDataGrid.Size = new System.Drawing.Size(1143, 400);
+            this.groupNuevaVentaDataGrid.TabIndex = 10;
+            this.groupNuevaVentaDataGrid.TabStop = false;
+            this.groupNuevaVentaDataGrid.Text = "Nueva Venta";
+            // 
+            // dataGridNuevaVentaDetalle
+            // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.DimGray;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Source Sans Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Green;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            this.dataGridNuevaVentaDetalle.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridNuevaVentaDetalle.BackgroundColor = System.Drawing.Color.Black;
+            this.dataGridNuevaVentaDetalle.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Source Sans Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.Green;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridNuevaVentaDetalle.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.dataGridNuevaVentaDetalle.ColumnHeadersHeight = 40;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Source Sans Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.MediumSeaGreen;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.DarkSlateGray;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridNuevaVentaDetalle.DefaultCellStyle = dataGridViewCellStyle3;
+            this.dataGridNuevaVentaDetalle.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridNuevaVentaDetalle.EnableHeadersVisualStyles = false;
+            this.dataGridNuevaVentaDetalle.GridColor = System.Drawing.Color.Green;
+            this.dataGridNuevaVentaDetalle.Location = new System.Drawing.Point(20, 35);
+            this.dataGridNuevaVentaDetalle.MinimumSize = new System.Drawing.Size(0, 200);
+            this.dataGridNuevaVentaDetalle.Name = "dataGridNuevaVentaDetalle";
+            this.dataGridNuevaVentaDetalle.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Source Sans Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.MediumSeaGreen;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.DarkSlateGray;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridNuevaVentaDetalle.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.dataGridNuevaVentaDetalle.RowHeadersVisible = false;
+            this.dataGridNuevaVentaDetalle.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            this.dataGridNuevaVentaDetalle.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridNuevaVentaDetalle.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.MediumSeaGreen;
+            this.dataGridNuevaVentaDetalle.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Source Sans Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridNuevaVentaDetalle.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.White;
+            this.dataGridNuevaVentaDetalle.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.Green;
+            this.dataGridNuevaVentaDetalle.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black;
+            this.dataGridNuevaVentaDetalle.RowTemplate.DefaultCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridNuevaVentaDetalle.RowTemplate.Height = 35;
+            this.dataGridNuevaVentaDetalle.RowTemplate.ReadOnly = true;
+            this.dataGridNuevaVentaDetalle.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridNuevaVentaDetalle.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridNuevaVentaDetalle.Size = new System.Drawing.Size(1103, 236);
+            this.dataGridNuevaVentaDetalle.TabIndex = 11;
+            this.dataGridNuevaVentaDetalle.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridNuevaVentaDetalle_CellClick);
+            // 
+            // panelSubTotal
+            // 
+            this.panelSubTotal.Controls.Add(this.labelSubTotal);
+            this.panelSubTotal.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panelSubTotal.Location = new System.Drawing.Point(20, 271);
+            this.panelSubTotal.MaximumSize = new System.Drawing.Size(0, 50);
+            this.panelSubTotal.MinimumSize = new System.Drawing.Size(0, 50);
+            this.panelSubTotal.Name = "panelSubTotal";
+            this.panelSubTotal.Size = new System.Drawing.Size(1103, 50);
+            this.panelSubTotal.TabIndex = 2;
+            // 
+            // labelSubTotal
+            // 
+            this.labelSubTotal.Dock = System.Windows.Forms.DockStyle.Right;
+            this.labelSubTotal.Location = new System.Drawing.Point(707, 0);
+            this.labelSubTotal.Name = "labelSubTotal";
+            this.labelSubTotal.Size = new System.Drawing.Size(396, 50);
+            this.labelSubTotal.TabIndex = 0;
+            this.labelSubTotal.Text = "label3";
+            this.labelSubTotal.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // navTableLayoutPanel
+            // 
+            this.navTableLayoutPanel.AllowDrop = true;
+            this.navTableLayoutPanel.AutoSize = true;
+            this.navTableLayoutPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.navTableLayoutPanel.ColumnCount = 5;
+            this.navTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.navTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.navTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.navTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.navTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.navTableLayoutPanel.Controls.Add(this.agregarVenta, 2, 0);
+            this.navTableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.navTableLayoutPanel.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize;
+            this.navTableLayoutPanel.Location = new System.Drawing.Point(20, 321);
+            this.navTableLayoutPanel.Name = "navTableLayoutPanel";
+            this.navTableLayoutPanel.RowCount = 1;
+            this.navTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.navTableLayoutPanel.Size = new System.Drawing.Size(1103, 57);
+            this.navTableLayoutPanel.TabIndex = 10;
+            // 
+            // agregarVenta
+            // 
+            this.agregarVenta.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.agregarVenta.FlatAppearance.BorderColor = System.Drawing.Color.Green;
+            this.agregarVenta.FlatAppearance.BorderSize = 2;
+            this.agregarVenta.FlatAppearance.MouseDownBackColor = System.Drawing.Color.MediumSeaGreen;
+            this.agregarVenta.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkSlateGray;
+            this.agregarVenta.Font = new System.Drawing.Font("Source Sans Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.agregarVenta.Image = global::AppLaMejor.Properties.Resources.add_icon_30x30_green;
+            this.agregarVenta.Location = new System.Drawing.Point(443, 3);
+            this.agregarVenta.Name = "agregarVenta";
+            this.agregarVenta.Size = new System.Drawing.Size(214, 51);
+            this.agregarVenta.TabIndex = 12;
+            this.agregarVenta.Text = "Confirmar Venta";
+            this.agregarVenta.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.agregarVenta.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.agregarVenta.UseVisualStyleBackColor = false;
+            this.agregarVenta.Click += new System.EventHandler(this.agregarVenta_Click);
+            // 
+            // panel3
+            // 
+            this.panel3.AutoSize = true;
+            this.panel3.Controls.Add(this.textCodigo);
+            this.panel3.Controls.Add(this.label5);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel3.Location = new System.Drawing.Point(0, 32);
+            this.panel3.Name = "panel3";
+            this.panel3.Padding = new System.Windows.Forms.Padding(5);
+            this.panel3.Size = new System.Drawing.Size(1143, 68);
+            this.panel3.TabIndex = 11;
+            // 
+            // textCodigo
+            // 
+            this.textCodigo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textCodigo.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.textCodigo.Font = new System.Drawing.Font("Source Sans Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textCodigo.Location = new System.Drawing.Point(5, 35);
+            this.textCodigo.MaximumSize = new System.Drawing.Size(250, 30);
+            this.textCodigo.MinimumSize = new System.Drawing.Size(200, 22);
+            this.textCodigo.Name = "textCodigo";
+            this.textCodigo.Size = new System.Drawing.Size(250, 28);
+            this.textCodigo.TabIndex = 5;
+            this.textCodigo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textCodigo.TextChanged += new System.EventHandler(this.textCodigo_TextChanged);
+            this.textCodigo.Enter += new System.EventHandler(this.textCodigo_Enter);
+            // 
+            // label5
+            // 
+            this.label5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label5.Font = new System.Drawing.Font("Source Sans Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(5, 5);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(1133, 30);
+            this.label5.TabIndex = 4;
+            this.label5.Text = "Codigo nueva venta";
+            // 
+            // lTittle
+            // 
+            this.lTittle.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lTittle.Location = new System.Drawing.Point(0, 0);
+            this.lTittle.Name = "lTittle";
+            this.lTittle.Size = new System.Drawing.Size(1143, 32);
+            this.lTittle.TabIndex = 0;
+            this.lTittle.Tag = "big ";
+            this.lTittle.Text = "Cargar nueva venta";
+            this.lTittle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // groupVentasAnterioresDataGrid
             // 
@@ -192,204 +391,6 @@
             this.dataGridVentas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridVentas.Size = new System.Drawing.Size(1083, 243);
             this.dataGridVentas.TabIndex = 1;
-            // 
-            // nuevaVentaPanel
-            // 
-            this.nuevaVentaPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.nuevaVentaPanel.Controls.Add(this.groupNuevaVentaDataGrid);
-            this.nuevaVentaPanel.Controls.Add(this.panel3);
-            this.nuevaVentaPanel.Controls.Add(this.lTittle);
-            this.nuevaVentaPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.nuevaVentaPanel.Location = new System.Drawing.Point(15, 15);
-            this.nuevaVentaPanel.Margin = new System.Windows.Forms.Padding(0);
-            this.nuevaVentaPanel.Name = "nuevaVentaPanel";
-            this.nuevaVentaPanel.Size = new System.Drawing.Size(1143, 500);
-            this.nuevaVentaPanel.TabIndex = 0;
-            // 
-            // groupNuevaVentaDataGrid
-            // 
-            this.groupNuevaVentaDataGrid.AutoSize = true;
-            this.groupNuevaVentaDataGrid.Controls.Add(this.dataGridNuevaVentaDetalle);
-            this.groupNuevaVentaDataGrid.Controls.Add(this.panelSubTotal);
-            this.groupNuevaVentaDataGrid.Controls.Add(this.navTableLayoutPanel);
-            this.groupNuevaVentaDataGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupNuevaVentaDataGrid.ForeColor = System.Drawing.Color.White;
-            this.groupNuevaVentaDataGrid.Location = new System.Drawing.Point(0, 100);
-            this.groupNuevaVentaDataGrid.MinimumSize = new System.Drawing.Size(0, 300);
-            this.groupNuevaVentaDataGrid.Name = "groupNuevaVentaDataGrid";
-            this.groupNuevaVentaDataGrid.Padding = new System.Windows.Forms.Padding(20, 22, 20, 22);
-            this.groupNuevaVentaDataGrid.Size = new System.Drawing.Size(1143, 400);
-            this.groupNuevaVentaDataGrid.TabIndex = 10;
-            this.groupNuevaVentaDataGrid.TabStop = false;
-            this.groupNuevaVentaDataGrid.Text = "Nueva Venta";
-            // 
-            // navTableLayoutPanel
-            // 
-            this.navTableLayoutPanel.AllowDrop = true;
-            this.navTableLayoutPanel.AutoSize = true;
-            this.navTableLayoutPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.navTableLayoutPanel.ColumnCount = 5;
-            this.navTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.navTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.navTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.navTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.navTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.navTableLayoutPanel.Controls.Add(this.agregarVenta, 2, 0);
-            this.navTableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.navTableLayoutPanel.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize;
-            this.navTableLayoutPanel.Location = new System.Drawing.Point(20, 321);
-            this.navTableLayoutPanel.Name = "navTableLayoutPanel";
-            this.navTableLayoutPanel.RowCount = 1;
-            this.navTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.navTableLayoutPanel.Size = new System.Drawing.Size(1103, 57);
-            this.navTableLayoutPanel.TabIndex = 10;
-            // 
-            // agregarVenta
-            // 
-            this.agregarVenta.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.agregarVenta.FlatAppearance.BorderColor = System.Drawing.Color.Green;
-            this.agregarVenta.FlatAppearance.BorderSize = 2;
-            this.agregarVenta.FlatAppearance.MouseDownBackColor = System.Drawing.Color.MediumSeaGreen;
-            this.agregarVenta.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkSlateGray;
-            this.agregarVenta.Font = new System.Drawing.Font("Source Sans Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.agregarVenta.Image = global::AppLaMejor.Properties.Resources.add_icon_30x30_green;
-            this.agregarVenta.Location = new System.Drawing.Point(443, 3);
-            this.agregarVenta.Name = "agregarVenta";
-            this.agregarVenta.Size = new System.Drawing.Size(214, 51);
-            this.agregarVenta.TabIndex = 12;
-            this.agregarVenta.Text = "Confirmar Venta";
-            this.agregarVenta.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.agregarVenta.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.agregarVenta.UseVisualStyleBackColor = false;
-            this.agregarVenta.Click += new System.EventHandler(this.agregarVenta_Click);
-            // 
-            // panelSubTotal
-            // 
-            this.panelSubTotal.Controls.Add(this.labelSubTotal);
-            this.panelSubTotal.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelSubTotal.Location = new System.Drawing.Point(20, 271);
-            this.panelSubTotal.MaximumSize = new System.Drawing.Size(0, 50);
-            this.panelSubTotal.MinimumSize = new System.Drawing.Size(0, 50);
-            this.panelSubTotal.Name = "panelSubTotal";
-            this.panelSubTotal.Size = new System.Drawing.Size(1103, 50);
-            this.panelSubTotal.TabIndex = 2;
-            // 
-            // labelSubTotal
-            // 
-            this.labelSubTotal.Dock = System.Windows.Forms.DockStyle.Right;
-            this.labelSubTotal.Location = new System.Drawing.Point(707, 0);
-            this.labelSubTotal.Name = "labelSubTotal";
-            this.labelSubTotal.Size = new System.Drawing.Size(396, 50);
-            this.labelSubTotal.TabIndex = 0;
-            this.labelSubTotal.Text = "label3";
-            this.labelSubTotal.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // dataGridNuevaVentaDetalle
-            // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.DimGray;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Source Sans Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Green;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
-            this.dataGridNuevaVentaDetalle.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridNuevaVentaDetalle.BackgroundColor = System.Drawing.Color.Black;
-            this.dataGridNuevaVentaDetalle.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Source Sans Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.Green;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridNuevaVentaDetalle.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.dataGridNuevaVentaDetalle.ColumnHeadersHeight = 40;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Source Sans Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.MediumSeaGreen;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.DarkSlateGray;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridNuevaVentaDetalle.DefaultCellStyle = dataGridViewCellStyle3;
-            this.dataGridNuevaVentaDetalle.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridNuevaVentaDetalle.EnableHeadersVisualStyles = false;
-            this.dataGridNuevaVentaDetalle.GridColor = System.Drawing.Color.Green;
-            this.dataGridNuevaVentaDetalle.Location = new System.Drawing.Point(20, 35);
-            this.dataGridNuevaVentaDetalle.MinimumSize = new System.Drawing.Size(0, 200);
-            this.dataGridNuevaVentaDetalle.Name = "dataGridNuevaVentaDetalle";
-            this.dataGridNuevaVentaDetalle.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Source Sans Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.MediumSeaGreen;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.DarkSlateGray;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridNuevaVentaDetalle.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
-            this.dataGridNuevaVentaDetalle.RowHeadersVisible = false;
-            this.dataGridNuevaVentaDetalle.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            this.dataGridNuevaVentaDetalle.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridNuevaVentaDetalle.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.MediumSeaGreen;
-            this.dataGridNuevaVentaDetalle.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Source Sans Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridNuevaVentaDetalle.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.White;
-            this.dataGridNuevaVentaDetalle.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.Green;
-            this.dataGridNuevaVentaDetalle.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black;
-            this.dataGridNuevaVentaDetalle.RowTemplate.DefaultCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridNuevaVentaDetalle.RowTemplate.Height = 35;
-            this.dataGridNuevaVentaDetalle.RowTemplate.ReadOnly = true;
-            this.dataGridNuevaVentaDetalle.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridNuevaVentaDetalle.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridNuevaVentaDetalle.Size = new System.Drawing.Size(1103, 236);
-            this.dataGridNuevaVentaDetalle.TabIndex = 11;
-            this.dataGridNuevaVentaDetalle.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridNuevaVentaDetalle_CellClick);
-            // 
-            // panel3
-            // 
-            this.panel3.AutoSize = true;
-            this.panel3.Controls.Add(this.textCodigo);
-            this.panel3.Controls.Add(this.label5);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel3.Location = new System.Drawing.Point(0, 32);
-            this.panel3.Name = "panel3";
-            this.panel3.Padding = new System.Windows.Forms.Padding(5);
-            this.panel3.Size = new System.Drawing.Size(1143, 68);
-            this.panel3.TabIndex = 11;
-            // 
-            // textCodigo
-            // 
-            this.textCodigo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textCodigo.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.textCodigo.Font = new System.Drawing.Font("Source Sans Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textCodigo.Location = new System.Drawing.Point(5, 35);
-            this.textCodigo.MaximumSize = new System.Drawing.Size(250, 30);
-            this.textCodigo.MinimumSize = new System.Drawing.Size(200, 22);
-            this.textCodigo.Name = "textCodigo";
-            this.textCodigo.Size = new System.Drawing.Size(250, 28);
-            this.textCodigo.TabIndex = 5;
-            this.textCodigo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textCodigo.TextChanged += new System.EventHandler(this.textCodigo_TextChanged);
-            this.textCodigo.Enter += new System.EventHandler(this.textCodigo_Enter);
-            // 
-            // label5
-            // 
-            this.label5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label5.Font = new System.Drawing.Font("Source Sans Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(5, 5);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(1133, 30);
-            this.label5.TabIndex = 4;
-            this.label5.Text = "Codigo nueva venta";
-            // 
-            // lTittle
-            // 
-            this.lTittle.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lTittle.Location = new System.Drawing.Point(0, 0);
-            this.lTittle.Name = "lTittle";
-            this.lTittle.Size = new System.Drawing.Size(1143, 32);
-            this.lTittle.TabIndex = 0;
-            this.lTittle.Text = "Nuevas Ventas";
-            this.lTittle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // bottomPanel
             // 
@@ -485,6 +486,7 @@
             this.formTittleText.Name = "formTittleText";
             this.formTittleText.Size = new System.Drawing.Size(1173, 50);
             this.formTittleText.TabIndex = 0;
+            this.formTittleText.Tag = "title bold inverted";
             this.formTittleText.Text = "Caja";
             this.formTittleText.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -718,17 +720,17 @@
             this.mainPanel.ResumeLayout(false);
             this.mainPanel.PerformLayout();
             this.contentPanel.ResumeLayout(false);
-            this.groupVentasAnterioresDataGrid.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridVentas)).EndInit();
             this.nuevaVentaPanel.ResumeLayout(false);
             this.nuevaVentaPanel.PerformLayout();
             this.groupNuevaVentaDataGrid.ResumeLayout(false);
             this.groupNuevaVentaDataGrid.PerformLayout();
-            this.navTableLayoutPanel.ResumeLayout(false);
-            this.panelSubTotal.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridNuevaVentaDetalle)).EndInit();
+            this.panelSubTotal.ResumeLayout(false);
+            this.navTableLayoutPanel.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            this.groupVentasAnterioresDataGrid.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridVentas)).EndInit();
             this.bottomPanel.ResumeLayout(false);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();

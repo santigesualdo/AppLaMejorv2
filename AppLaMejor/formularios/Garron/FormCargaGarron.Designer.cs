@@ -341,6 +341,7 @@
             this.pTittleGarronCompleto.Name = "pTittleGarronCompleto";
             this.pTittleGarronCompleto.Size = new System.Drawing.Size(432, 35);
             this.pTittleGarronCompleto.TabIndex = 3;
+            this.pTittleGarronCompleto.Tag = "big ";
             this.pTittleGarronCompleto.Text = "Elegir Garron Completo";
             this.pTittleGarronCompleto.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -361,6 +362,7 @@
             this.pTittleGarronParcial.Name = "pTittleGarronParcial";
             this.pTittleGarronParcial.Size = new System.Drawing.Size(432, 35);
             this.pTittleGarronParcial.TabIndex = 3;
+            this.pTittleGarronParcial.Tag = "big ";
             this.pTittleGarronParcial.Text = "Elegir Garron Deposte Parcial";
             this.pTittleGarronParcial.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -418,6 +420,7 @@
             this.lTittleTipoGarron.Name = "lTittleTipoGarron";
             this.lTittleTipoGarron.Size = new System.Drawing.Size(870, 44);
             this.lTittleTipoGarron.TabIndex = 4;
+            this.lTittleTipoGarron.Tag = "big ";
             this.lTittleTipoGarron.Text = "Elegir Tipo Garron";
             this.lTittleTipoGarron.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -439,6 +442,7 @@
             this.lTittleCargarNuevo.Name = "lTittleCargarNuevo";
             this.lTittleCargarNuevo.Size = new System.Drawing.Size(373, 56);
             this.lTittleCargarNuevo.TabIndex = 2;
+            this.lTittleCargarNuevo.Tag = "big ";
             this.lTittleCargarNuevo.Text = "Cargar Nuevo Garron";
             this.lTittleCargarNuevo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -459,6 +463,7 @@
             this.tittleText.Name = "tittleText";
             this.tittleText.Size = new System.Drawing.Size(876, 56);
             this.tittleText.TabIndex = 2;
+            this.tittleText.Tag = "big ";
             this.tittleText.Text = "Elegir Garron Disponible para Depostar";
             this.tittleText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -482,6 +487,7 @@
             this.formTittleText.Name = "formTittleText";
             this.formTittleText.Size = new System.Drawing.Size(1291, 50);
             this.formTittleText.TabIndex = 0;
+            this.formTittleText.Tag = "title bold inverted";
             this.formTittleText.Text = "Garron ";
             this.formTittleText.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
