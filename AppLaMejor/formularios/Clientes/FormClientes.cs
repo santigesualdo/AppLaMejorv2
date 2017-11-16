@@ -87,16 +87,14 @@ namespace AppLaMejor.formularios
         }
 
         private void EliminarRegistro(object sender, EventArgs e)
-        {       
+        {
             // Seteamos fecha baja en el registro por ID de Cliente
-            int selectedrowindex = dataGridClientes.SelectedCells[0].RowIndex;
-            DataGridViewRow selectedRow = dataGridClientes.Rows[selectedrowindex];
-            string razonSocial = Convert.ToString(selectedRow.Cells["RazonSocial"].Value);
-            string idCliente = Convert.ToString(selectedRow.Cells["ID"].Value);
+            int i = FuncionesGlobales.obtenerIndexDeListFromGrid(dataGridClientes);
+            Cliente clientSelected = listClients.First(s => s.Id == i);
 
-			FormMessageBox dialog = new FormMessageBox();
-			if (dialog.ShowConfirmationDialog("¿Eliminar registro del cliente " + razonSocial + " ?")){
-                    string consultaEliminar = QueryManager.Instance().GetDeleteClient(idCliente, DateTime.Now);
+            FormMessageBox dialog = new FormMessageBox();
+			if (dialog.ShowConfirmationDialog("¿Eliminar registro del cliente " + clientSelected.RazonSocial + " ?")){
+                    string consultaEliminar = QueryManager.Instance().GetDeleteClient(clientSelected.Id.ToString(), DateTime.Now);
                     if (QueryManager.Instance().ExecuteSQL(ConnecionBD.Instance().Connection, consultaEliminar))
                     {
                         MyTextTimer.TStartFade("Cliente eliminado correctamente", statusStrip1, tsslMensaje, MyTextTimer.TIME_SHORT);
@@ -165,6 +163,7 @@ namespace AppLaMejor.formularios
 
                 if (FuncionesClientes.InsertCliente(newClient))
                 {
+                    CargarDataGrid();
                     MyTextTimer.TStartFade("Se guardo cliente " + newClient.RazonSocial.ToUpper() + ".", statusStrip1, tsslMensaje, MyTextTimer.TIME_SHORT);    
                 }
                 else

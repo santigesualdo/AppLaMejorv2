@@ -267,7 +267,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="formularios\Proveedores\FormProveedores.resx">
       <DependentUpon>FormProveedores.cs</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="formularios\Stock\FormStock.resx">
       <DependentUpon>FormStock.cs</DependentUpon>
@@ -355,6 +354,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

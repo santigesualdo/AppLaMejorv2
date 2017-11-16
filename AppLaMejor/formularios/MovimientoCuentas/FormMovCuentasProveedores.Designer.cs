@@ -54,10 +54,13 @@ namespace AppLaMejor.formularios
             this.filtro3Panel = new System.Windows.Forms.Panel();
             this.filterTextBox = new System.Windows.Forms.TextBox();
             this.filter3Text = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.titlePanel = new System.Windows.Forms.Panel();
             this.tittleText = new System.Windows.Forms.Label();
             this.topPanel = new System.Windows.Forms.Panel();
             this.formTittleText = new System.Windows.Forms.Label();
+            this.cmbProv = new System.Windows.Forms.ComboBox();
             this.mainPanel.SuspendLayout();
             this.contentPanel.SuspendLayout();
             this.groupDataGrid.SuspendLayout();
@@ -71,6 +74,7 @@ namespace AppLaMejor.formularios
             this.filterPanel.SuspendLayout();
             this.filterTableLayoutPanel.SuspendLayout();
             this.filtro3Panel.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.titlePanel.SuspendLayout();
             this.topPanel.SuspendLayout();
             this.SuspendLayout();
@@ -353,9 +357,11 @@ namespace AppLaMejor.formularios
             this.filterTableLayoutPanel.AutoSize = true;
             this.filterTableLayoutPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.filterTableLayoutPanel.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
-            this.filterTableLayoutPanel.ColumnCount = 1;
-            this.filterTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.filterTableLayoutPanel.ColumnCount = 2;
+            this.filterTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.filterTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.filterTableLayoutPanel.Controls.Add(this.filtro3Panel, 0, 0);
+            this.filterTableLayoutPanel.Controls.Add(this.panel1, 1, 0);
             this.filterTableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.filterTableLayoutPanel.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize;
             this.filterTableLayoutPanel.Location = new System.Drawing.Point(0, 0);
@@ -373,7 +379,7 @@ namespace AppLaMejor.formularios
             this.filtro3Panel.Location = new System.Drawing.Point(4, 4);
             this.filtro3Panel.Name = "filtro3Panel";
             this.filtro3Panel.Padding = new System.Windows.Forms.Padding(5);
-            this.filtro3Panel.Size = new System.Drawing.Size(977, 54);
+            this.filtro3Panel.Size = new System.Drawing.Size(485, 54);
             this.filtro3Panel.TabIndex = 1;
             // 
             // filterTextBox
@@ -381,7 +387,7 @@ namespace AppLaMejor.formularios
             this.filterTextBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.filterTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.filterTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.filterTextBox.Location = new System.Drawing.Point(436, 26);
+            this.filterTextBox.Location = new System.Drawing.Point(190, 26);
             this.filterTextBox.MaximumSize = new System.Drawing.Size(140, 30);
             this.filterTextBox.MinimumSize = new System.Drawing.Size(140, 22);
             this.filterTextBox.Name = "filterTextBox";
@@ -397,10 +403,31 @@ namespace AppLaMejor.formularios
             this.filter3Text.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.filter3Text.Location = new System.Drawing.Point(5, 5);
             this.filter3Text.Name = "filter3Text";
-            this.filter3Text.Size = new System.Drawing.Size(967, 18);
+            this.filter3Text.Size = new System.Drawing.Size(475, 18);
             this.filter3Text.TabIndex = 4;
             this.filter3Text.Text = "Por Nombre";
             this.filter3Text.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.cmbProv);
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(496, 4);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(485, 54);
+            this.panel1.TabIndex = 2;
+            // 
+            // label1
+            // 
+            this.label1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(0, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(485, 18);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Agregar Cuenta a Proveedor";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // titlePanel
             // 
@@ -447,6 +474,18 @@ namespace AppLaMejor.formularios
             this.formTittleText.Text = "Movimiento de cuentas";
             this.formTittleText.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // cmbProv
+            // 
+            this.cmbProv.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.cmbProv.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbProv.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbProv.FormattingEnabled = true;
+            this.cmbProv.Location = new System.Drawing.Point(131, 21);
+            this.cmbProv.Name = "cmbProv";
+            this.cmbProv.Size = new System.Drawing.Size(231, 28);
+            this.cmbProv.TabIndex = 9;
+            this.cmbProv.SelectionChangeCommitted += new System.EventHandler(this.cmbProv_SelectionChangeCommitted);
+            // 
             // FormMovCuentasProveedores
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -461,7 +500,6 @@ namespace AppLaMejor.formularios
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Visor";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Activated += new System.EventHandler(this.FormMovCuentas_Activated);
             this.mainPanel.ResumeLayout(false);
             this.contentPanel.ResumeLayout(false);
             this.groupDataGrid.ResumeLayout(false);
@@ -480,6 +518,7 @@ namespace AppLaMejor.formularios
             this.filterTableLayoutPanel.ResumeLayout(false);
             this.filtro3Panel.ResumeLayout(false);
             this.filtro3Panel.PerformLayout();
+            this.panel1.ResumeLayout(false);
             this.titlePanel.ResumeLayout(false);
             this.topPanel.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -512,6 +551,8 @@ namespace AppLaMejor.formularios
         private System.Windows.Forms.Label filter3Text;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel tsslMensaje;
-
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox cmbProv;
     }
 }

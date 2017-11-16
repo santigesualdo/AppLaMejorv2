@@ -396,9 +396,9 @@ namespace AppLaMejor.formularios
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(99, 1);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(135, 20);
+            this.label1.Size = new System.Drawing.Size(196, 20);
             this.label1.TabIndex = 4;
-            this.label1.Text = "Todos los clientes";
+            this.label1.Text = "Agregar Cuenta a Clientes";
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // cmbClientes

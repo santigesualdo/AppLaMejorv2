@@ -211,7 +211,16 @@ namespace AppLaMejor.formularios
 
         private void cmbClientes_SelectionChangeCommitted(object sender, EventArgs e)
         {
-
+            ComboBox combo = (ComboBox)sender;
+            if (combo.SelectedIndex != -1)
+            {
+                Cliente client = (Cliente)combo.SelectedValue;
+                if (nuevaCuenta(client) != null)
+                {
+                    // TODO: la cuenta nueva insertada no registra nuevos movimientos
+                    CargarDataGrid();
+                }
+            }
         }
 
         private void cmbClientes_KeyPress(object sender, KeyPressEventArgs e)
@@ -271,19 +280,9 @@ namespace AppLaMejor.formularios
         private void cmbClientes_SelectedValueChanged(object sender, EventArgs e)
         {
 
-            if (VariablesGlobales.FormMovCuentas_comboCargado)
-            {
-                ComboBox combo = (ComboBox)sender;
-                if (combo.SelectedIndex != -1)
-                {
-                    Cliente client = (Cliente)combo.SelectedValue;
-                    if (nuevaCuenta(client) != null)
-                    {
-                        // TODO: la cuenta nueva insertada no registra nuevos movimientos
-                        CargarDataGrid();
-                    }
-                }
-            }
+            //if (VariablesGlobales.FormMovCuentas_comboCargado)
+            //{
+            //}
         }
 
         private void FormMovCuentas_FormClosing(object sender, FormClosingEventArgs e)

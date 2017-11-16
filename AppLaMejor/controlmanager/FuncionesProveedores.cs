@@ -30,7 +30,7 @@ namespace AppLaMejor.controlmanager
         public static bool InsertCuenta(Cuenta newCuenta, string idProveedor)
         {
             QueryManager manager = QueryManager.Instance();
-            string consulta = manager.InsertNuevaCuenta(newCuenta, idProveedor);
+            string consulta = manager.InsertNuevaCuentaProveedor(newCuenta, idProveedor);
             return manager.ExecuteSQL(ConnecionBD.Instance().Connection, consulta);
         }
 
@@ -96,6 +96,19 @@ namespace AppLaMejor.controlmanager
                 return null;
             }
         }
-    
+
+        public static bool UpdateProv(Proveedor prov)
+        {
+            QueryManager manager = QueryManager.Instance();
+            string consulta = manager.UpdateProveedor(prov);
+            return manager.ExecuteSQL(ConnecionBD.Instance().Connection, consulta);
+        }
+
+        public static bool InsertProveedor(Proveedor newProv)
+        {
+            QueryManager manager = QueryManager.Instance();
+            string consulta = manager.InsertNuevoProveedor(newProv);
+            return manager.ExecuteSQL(ConnecionBD.Instance().Connection, consulta);
+        }
     }
 }

@@ -11,8 +11,6 @@ namespace AppLaMejor.entidades
         [DataNames("nro_cuenta")]
         public string Numerocuenta { get; set; }
 
-        [DataNames("saldo_actual")]
-        public decimal SaldoActual { get; set; }
         private Nullable<DateTime> fechaUltimaActualizacion;
 
         [DataNames("banco")]

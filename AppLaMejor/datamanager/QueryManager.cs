@@ -220,7 +220,7 @@ namespace AppLaMejor.datamanager
         public string InsertNuevoProveedor(Proveedor Proveedor)
         {
             //revisar
-            return "INSERT INTO Proveedor ( razon_social, domicilio, localidad, civa, id_tipo_cliente, nombre_local, cuit, telefono, nombre_responsable, fecha_desde, fecha_baja, usuario) " +
+            return "INSERT INTO Proveedor ( razon_social, domicilio, localidad, civa, nombre_local, cuit, telefono, nombre_responsable, fecha_desde, fecha_baja, usuario) " +
                 " VALUES ( '" + Proveedor.RazonSocial + "', " +
                 " '" + Proveedor.Domicilio + "', " +
                 " '" + Proveedor.Localidad + "', " +
@@ -276,6 +276,7 @@ namespace AppLaMejor.datamanager
              "	c.fecha_baja AS FechaBaja " +
              " FROM " +
              "	Proveedor c " +
+             "  WHERE c.fecha_baja is null " +
              "   order by c.id  ";
         }        
         //trae el saldo actual y algunos datos de referencia para el form de MovCuentas
@@ -285,7 +286,7 @@ namespace AppLaMejor.datamanager
         }
         public string GetDeleteProv(string idProveedor, DateTime fechaBaja)
         {
-            return "update proveedor set fecha_baja ='" + fechaBaja.ToString() + "' where id = " + idProveedor + ";";
+            return "update proveedor set fecha_baja ='" + fechaBaja.ToString("yyyy-MM-dd") + "' where id = " + idProveedor + ";";
         }
         public string UpdateProveedor(Proveedor proveedor)
         {

@@ -20,12 +20,12 @@ namespace AppLaMejor.formularios
         List<Proveedor> listProvs;
         DataTable tableProveedores;
 
-
+        // TODO: falta poder agregar cuenta proveedor
         public FormMovCuentasProveedores()
         {
             InitializeComponent();
             CargarDataGrid();
-            //CargarFilterComboTipoCliente();
+            CargarFilterComboProveedoresSinCuenta();
             dataGridProveedores.Location = new Point(this.ClientSize.Width / 2 - dataGridProveedores.Size.Width / 2, this.ClientSize.Height / 2 - dataGridProveedores.Size.Height / 2);
             dataGridProveedores.Anchor = AnchorStyles.None;
             ApplicationLookAndFeel.ApplyTheme(this.tsslMensaje);
@@ -37,9 +37,10 @@ namespace AppLaMejor.formularios
         {
             // Trae la tabla clientes en DataTable y la mapea a en List<Proveedores>
             tableProveedores = FuncionesProveedores.fillProveedoresSaldoActual();
-            listProvs = FuncionesProveedores.listProveedores(tableProveedores);   
-            
+            listProvs = FuncionesProveedores.listProveedores(tableProveedores);
+
             dataGridProveedores.DataSource = tableProveedores;
+            dataGridProveedores.AllowUserToAddRows = false;
 
             // Hacemos que todas las columnas cambien su tamaño a lo ancho para que se vea toda la info
             for (int i = 0; i < dataGridProveedores.Columns.Count; i++)
@@ -48,18 +49,32 @@ namespace AppLaMejor.formularios
             }
             ApplicationLookAndFeel.ApplyTheme(dataGridProveedores);
         }
-    
+
+        private void CargarFilterComboProveedoresSinCuenta()
+        {
+            tableProveedores = FuncionesProveedores.fillProveedores();
+            listProvs = FuncionesProveedores.listProveedores(tableProveedores);
+
+            BindingList<Proveedor> objects = new BindingList<Proveedor>(listProvs);
+
+            cmbProv.ValueMember = null;
+            cmbProv.DisplayMember = "RazonSocial";
+            cmbProv.DataSource = objects;
+
+            cmbProv.SelectedIndex = -1;
+        }
+
 
         private void bAceptar_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-        
+
         private void bAgregar_Click(object sender, EventArgs e)
         {
             ModoAgregar(sender, e);
         }
-        
+
         private void bVer_Click(object sender, EventArgs e)
         {
             ModoVer(sender, e);
@@ -123,13 +138,58 @@ namespace AppLaMejor.formularios
             Boolean result = dialog.Execute(provSelected.Id);
         }
 
-        private void FormMovCuentas_Activated(object sender, EventArgs e)
+        private void cmbProv_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            if (VariablesGlobales.FormMovCuentas_activo)
+            ComboBox combo = (ComboBox)sender;
+            if (combo.SelectedIndex != -1)
             {
-                CargarDataGrid();
-                VariablesGlobales.FormMovCuentas_activo = false;
+                Proveedor prov = (Proveedor)combo.SelectedValue;
+                if (nuevaCuenta(prov) != null)
+                {
+                    CargarDataGrid();
+                }
             }
+        }
+
+        Cuenta nuevaCuenta(Proveedor prov)
+        {
+            FormMessageBox fdialog = new FormMessageBox();
+            fdialog = new FormMessageBox();
+
+
+            if (prov != null)
+            {
+                if (fdialog.ShowConfirmationDialog("¿Desea agregarle una nueva cuenta a : " + prov.RazonSocial + "?"))
+                {
+                    /* Obtenemos los datos de la fila seleccionada y la convertimos a entidad Cliente */
+                    Cuenta newCuenta = new Cuenta();
+                    newCuenta.FechaUltimaActualizacion = DateTime.Now;
+
+                    /* Form Entity Input */
+                    FormEntityInput dialog = new FormEntityInput(null, FormEntityInput.MODO_INSERTAR);
+                    dialog.SetTitulo("Nueva cuenta para : " + prov.RazonSocial);
+                    Boolean result = dialog.Execute(newCuenta);
+                    if (result)
+                    {
+                        newCuenta = (Cuenta)dialog.SelectedObject;
+                        /* Insert en BD */
+
+                        // TODO: Al insertar cuenta, el campo "saldoactual" no tiene sentido ingresarlo.
+
+                        if (FuncionesProveedores.InsertCuenta(newCuenta, prov.Id.ToString()))
+                        {
+                            MyTextTimer.TStartFade("Cuenta se guardo correctamente", statusStrip1, tsslMensaje, MyTextTimer.TIME_LONG);
+                            return newCuenta;
+                        }
+                        else
+                        {
+                            MyTextTimer.TStartFade("No se guardo cuenta.", statusStrip1, tsslMensaje, MyTextTimer.TIME_LONG);
+                            return null;
+                        }
+                    }
+                }
+            }
+            return null;
         }
     }
 }

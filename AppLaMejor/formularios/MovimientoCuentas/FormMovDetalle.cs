@@ -657,7 +657,6 @@ namespace AppLaMejor.formularios.Util
                         movCuenta1.Cobrado = 'N';
                         movCuenta1.idUsuario = VariablesGlobales.userIdLogueado;
 
-                        // TODO: Validar buena insercion movimiento cuenta proveedor con booelan
                         FuncionesMovCuentas.insertarMovimientoProveedor(movCuenta1);
 
                         MyTextTimer.TStartFade("Hecho", this.statusStripFormEntityInput, this.mensajeroFormEntityInput, MyTextTimer.TIME_SHORT);
