@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Data.SqlClient;
-using System.Text;
 using MySql.Data.MySqlClient;
-using System.Windows.Forms;
 using AppLaMejor.formularios.Util;
 
 namespace AppLaMejor.datamanager
@@ -12,9 +7,8 @@ namespace AppLaMejor.datamanager
      /* Clase singleton para conectar a la bd */
       public class ConnecionBD{
 
-
-        string connstring = "Server=localhost; database=u570713702_jjdev; UID=root; pooling=false; Password=dd74f695;";
-        //string connstring = "Server=sql52.main-hosting.eu; database=u570713702_jjdev; UID=u570713702_jjdev; Password=dd74f695; Pooling=false";
+        // TODO: leer string de coneccion desde un archivo
+        string connstring = "Server=localhost; database=u570713702_jjdev; UID=root; Password=dd74f695; pooling=false;";
 
         private MySqlConnection connection = null;
         private static ConnecionBD _instance = null;
