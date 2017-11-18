@@ -10,6 +10,7 @@ using System.Reflection;
 using AppLaMejor.entidades;
 using AppLaMejor.datamanager;
 using AppLaMejor.stylemanager;
+using AppLaMejor.controlmanager;
 
 namespace AppLaMejor.formularios.Util
 {
@@ -600,6 +601,16 @@ namespace AppLaMejor.formularios.Util
         }
         private void bAceptar_Click_1(object sender, EventArgs e)
         {
+            // Valida el objeto actual
+            string message = ValidateObject();
+
+            if (!message.Equals(string.Empty))
+            {
+                FormMessageBox dialogValidation = new FormMessageBox();
+                dialogValidation.ShowErrorDialog("Faltan datos. Corregir los siguientes campos: \n" + message);
+                return;
+            }
+
             if (currentModo.Equals(MODO_EDITAR) || currentModo.Equals(MODO_INSERTAR))
             {
                 FormMessageBox dialog = new FormMessageBox();
@@ -613,6 +624,20 @@ namespace AppLaMejor.formularios.Util
 
             this.Close();
         }
+
+        private string ValidateObject()
+        {
+            IEnumerable<string> results = Validator.Validate(_reflection);
+
+            string resultStr = string.Empty;
+            foreach( String str  in results)
+            {
+                resultStr += str +" \n";
+            }
+
+            return resultStr;
+        }
+
         private void bCancelar_Click(object sender, EventArgs e)
         {
             

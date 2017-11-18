@@ -116,11 +116,6 @@ namespace AppLaMejor.datamanager
                     TipoProducto tp = TiposManager.Instance().GetTipoProducto(int.Parse(value.ToString()));
                     prop.SetValue(entity, tp, null);
                 }
-                else if (prop.PropertyType == typeof(Medida))
-                {
-                    Medida medida = TiposManager.Instance().GetMedidaById(int.Parse(value.ToString()));
-                    prop.SetValue(entity, medida, null);
-                }
                 else if (prop.PropertyType == typeof(Producto))
                 {
                     int rowValue = int.Parse(value.ToString());

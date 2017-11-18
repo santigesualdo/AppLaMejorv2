@@ -52,7 +52,7 @@ namespace AppLaMejor.formularios
                     else
                     {
                         FormMessageBox dialog = new FormMessageBox();
-                        dialog.ShowErrorDialog("El usuario o el password no pertenecen a un usuario registrado.");
+                        dialog.ShowErrorDialog("El \nusuario o el \npassword no \npertenecen a un \nusuario \nregistrado.");
                     }
                         
                 }else

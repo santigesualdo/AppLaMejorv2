@@ -13,6 +13,9 @@ File Encoding         : 65001
 Date: 2017-11-16 18:09:20
 */
 
+CREATE DATABASE `u570713702_jjdev`;
+USE `u570713702_jjdev`;
+
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
@@ -39,6 +42,7 @@ INSERT INTO `banco` VALUES ('4', 'Nación');
 DROP TABLE IF EXISTS `cliente`;
 CREATE TABLE `cliente` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `cod_cliente` varchar(4) NOT NULL,
   `razon_social` varchar(100) NOT NULL,
   `domicilio` varchar(50) NOT NULL,
   `localidad` varchar(30) NOT NULL,
@@ -54,37 +58,34 @@ CREATE TABLE `cliente` (
   PRIMARY KEY (`id`),
   KEY `id_tipo_cliente` (`id_tipo_cliente`),
   CONSTRAINT `fk_tipo_cliente` FOREIGN KEY (`id_tipo_cliente`) REFERENCES `clientetipo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
 
--- ----------------------------
--- Records of cliente
--- ----------------------------
-INSERT INTO `cliente` VALUES ('1', 'WTF', 'asd', 'asd', 'asd', '1', 'asd', 'asd', 'asd', 'asd', '2017-09-05', null, '1');
-INSERT INTO `cliente` VALUES ('2', 'Juanjo', 'j de la rosa 1252', 'santa fe', 'CF', '2', 'DESAROLLO SANTA', '', '', '', '2017-09-05', null, '0');
-INSERT INTO `cliente` VALUES ('3', 'A.D.U.L.', 'Pje. Martinez 26661', 'Santa Fe', 'CF', '4', 'defaultLocal', '30-55597562-3', '4553992', 'NombreResponsable', '2017-09-05', null, '1');
-INSERT INTO `cliente` VALUES ('4', 'A.N.S.E.S.', 'SAN MARTIN N 2533', 'Santa Fe', 'CF', '1', 'defaultLocal', '33-63761744-9', '4156256', 'NombreResponsable', '2017-09-05', null, '1');
-INSERT INTO `cliente` VALUES ('5', 'A.PE.L - Asoc.Pers.Legislativo', 'San Jeronimo N  1.791', 'Santa Fe', 'CF', '1', 'defaultLocal', '30-64955281-5', '4598277', 'NombreResponsable', '2017-09-05', null, '1');
-INSERT INTO `cliente` VALUES ('6', 'ACANTILADOS S.A. (VALMOTORS)', 'SAN LUIS N 3102', 'Santa Fe', 'CF', '1', 'defaultLocal', '30-70941478-6', '4530606', 'NombreResponsable', '2017-09-06', null, '1');
-INSERT INTO `cliente` VALUES ('7', 'ACOSTA MARTÃ–N SEBASTIÂµN', 'Pje. E.del Crespo N 7103/Berutti 5725', 'Santa Fe', 'CF', '2', 'defaultLocal', '30-64955281-5', '4530606', 'NombreResponsable', '2017-09-06', null, '1');
-INSERT INTO `cliente` VALUES ('8', 'AdministraciÂ¢n Provincial de Impuestos-A.P.I', 'AVDA.PTE.ILLIA NÂ§ 1.151', 'Santa Fe', 'CF', '2', 'defaultLocal', '30-65520017-3', '4557996', 'NombreResponsable', '2017-09-06', null, '0');
-INSERT INTO `cliente` VALUES ('9', 'Agencia Provincial de Seguridad Vial', '25 DE MAYO N  2.208', 'Santa Fe', 'CF', '1', 'defaultLocal', '30-99901844-7', '4574822', 'NombreResponsable', '2017-09-06', null, '1');
-INSERT INTO `cliente` VALUES ('10', 'AGOSTINI OSVALDO OMAR', 'AVDA. GORRITI N 3014', 'Santa Fe', 'CF', '2', 'defaultLocal', '20-05261057-6', '4695406', 'NombreResponsable', '2017-09-06', '2001-01-01 00:00:00', '1');
-INSERT INTO `cliente` VALUES ('11', 'AICACYP-Ente Cooperador Ley 23.979', 'Moreno N 1420  (p/Facturar)', 'Santa Fe', 'CF', '2', 'defaultLocal', '30-55597562-3', '4574822', 'NombreResponsable', '2017-09-07', null, '1');
-INSERT INTO `cliente` VALUES ('12', 'AICACYP-Ente Cooperador Ley 23.979', 'RENAR: Francia N 3550 - Santa Fe', 'Santa Fe', 'CF', '2', 'defaultLocal', '011-4384-7900', '4557996', 'NombreResponsable', '2017-09-07', null, '1');
-INSERT INTO `cliente` VALUES ('13', 'ALBERTO J. MACUA S.A.', 'LOPEZ Y PLANES N 4250', 'Santa Fe', 'CF', '2', 'defaultLocal', '30-60541628-0', '4555070', 'NombreResponsable', '2017-09-07', '2001-01-01 00:00:00', '1');
-INSERT INTO `cliente` VALUES ('14', 'ALMEIDA JUAN CARLOS F.', 'RUPERTO PEREZ 1944', 'Santa Fe', 'CF', '2', 'defaultLocal', '24-06218372-8', '4553228', 'NombreResponsable', '2017-09-07', null, '1');
-INSERT INTO `cliente` VALUES ('15', 'ALONSO EDGARDO JAVIER', 'SAN MARTÃ–N N 3364-Piso 10-Dpto B', 'Santa Fe', 'CF', '2', 'defaultLocal', '20-13925831-3', '4585068', 'NombreResponsable', '2017-09-07', null, '1');
-INSERT INTO `cliente` VALUES ('16', 'ALONSO  GRACIELA CRISTINA', 'MARTIN ZAPATA 3870', 'Santa Fe', 'CF', '2', 'defaultLocal', '27-13163585-6', '4537003', 'NombreResponsable', '2017-09-07', '2001-01-01 00:00:00', '1');
-INSERT INTO `cliente` VALUES ('17', 'ALLOATTI ROBERTO', 'SAN MARTIN N 2088', 'Santa Fe', 'CF', '2', 'defaultLocal', '30-60541628-0', '4537003', 'NombreResponsable', '2017-09-07', null, '1');
-INSERT INTO `cliente` VALUES ('18', 'AMATTI  CLAUDIO', 'SAN MARTIN N 2088', 'Santa Fe', 'CF', '3', 'defaultLocal', '30-60541628-0', '4537003', 'NombreResponsable', '2017-09-10', null, '1');
-INSERT INTO `cliente` VALUES ('19', 'AMRAD S. H. de Liponezky Virginia  Victor y Santiago ', 'Salvador del Carril N 968', 'Santa Fe', 'CF', '3', 'defaultLocal', '30-71120617-1', '4537003', 'NombreResponsable', '2017-09-10', null, '1');
-INSERT INTO `cliente` VALUES ('20', 'ANGEL BOSCARINO Construcciones S.A.', 'MARCIAL CANDIOTI  N 5180', 'Santa Fe', 'CF', '3', 'defaultLocal', '30-60541628-0', '4538585', 'NombreResponsable', '2017-09-10', null, '1');
-INSERT INTO `cliente` VALUES ('21', 'ANSKOHL  RICARDO', 'E. ZEBALLOS 4334', 'Santa Fe', 'CF', '3', 'defaultLocal', '20-06264349-9', '4537003', 'NombreResponsable', '2017-09-10', null, '1');
-INSERT INTO `cliente` VALUES ('22', 'ANTONIAZZI HNOS.', 'PIETRANERA n 3350', 'Santa Fe', 'CF', '4', 'defaultLocal', '30-55418898-9', '4592295', 'NombreResponsable', '2017-09-10', null, '1');
-INSERT INTO `cliente` VALUES ('23', 'ANTONIAZZI  GERMAN', 'RIVADAVIA N 3396', 'Santa Fe', 'CF', '4', 'defaultLocal', '20-26460065-1', '4500162', 'NombreResponsable', '2017-09-10', null, '1');
-INSERT INTO `cliente` VALUES ('24', 'ARCINI MARTÃ–N', '9 DE JULIO N 2722', 'Santa Fe', 'CF', '4', 'defaultLocal', '20-06264349-9', '4537003', 'NombreResponsable', '2017-09-10', null, '1');
-INSERT INTO `cliente` VALUES ('25', 'ARCOLEN S.A.', 'SUIPACHA 2695', 'Santa Fe', 'CF', '4', 'defaultLocal', '30-64385640-5', '4561538', 'NombreResponsable', '2017-09-10', null, '1');
-INSERT INTO `cliente` VALUES ('26', 'Cliente 1', 'La Rioja 2081', 'Santa Fe', 'CF', '1', 'asd', '203295621342', 'asd', 'sd', '2017-11-09', null, '0');
+INSERT INTO `cliente` VALUES ('1', '111','WTF', 'asd', 'asd', 'asd', '1', 'asd', 'asd', 'asd', 'asd', '2017-09-05', null, '1');
+INSERT INTO `cliente` VALUES ('2', '112','Juanjo', 'j de la rosa 1252', 'santa fe', 'CF', '2', 'DESAROLLO SANTA', '', '', '', '2017-09-05', null, '0');
+INSERT INTO `cliente` VALUES ('3', '113','A.D.U.L.', 'Pje. Martinez 26661', 'Santa Fe', 'CF', '4', 'defaultLocal', '30-55597562-3', '4553992', 'NombreResponsable', '2017-09-05', null, '1');
+INSERT INTO `cliente` VALUES ('4', '114','A.N.S.E.S.', 'SAN MARTIN N 2533', 'Santa Fe', 'CF', '1', 'defaultLocal', '33-63761744-9', '4156256', 'NombreResponsable', '2017-09-05', null, '1');
+INSERT INTO `cliente` VALUES ('5', '115','A.PE.L - Asoc.Pers.Legislativo', 'San Jeronimo N  1.791', 'Santa Fe', 'CF', '1', 'defaultLocal', '30-64955281-5', '4598277', 'NombreResponsable', '2017-09-05', null, '1');
+INSERT INTO `cliente` VALUES ('6', '116','ACANTILADOS S.A. (VALMOTORS)', 'SAN LUIS N 3102', 'Santa Fe', 'CF', '1', 'defaultLocal', '30-70941478-6', '4530606', 'NombreResponsable', '2017-09-06', null, '1');
+INSERT INTO `cliente` VALUES ('7', '117','ACOSTA MARTIN SEBASTIAN', 'Pje. E.del Crespo N 7103/Berutti 5725', 'Santa Fe', 'CF', '2', 'defaultLocal', '30-64955281-5', '4530606', 'NombreResponsable', '2017-09-06', null, '1');
+INSERT INTO `cliente` VALUES ('8', '118','AdministraciÂ¢n Provincial de Impuestos-A.P.I', 'AVDA.PTE.ILLIA NÂ§ 1.151', 'Santa Fe', 'CF', '2', 'defaultLocal', '30-65520017-3', '4557996', 'NombreResponsable', '2017-09-06', null, '0');
+INSERT INTO `cliente` VALUES ('9', '119','Agencia Provincial de Seguridad Vial', '25 DE MAYO N  2.208', 'Santa Fe', 'CF', '1', 'defaultLocal', '30-99901844-7', '4574822', 'NombreResponsable', '2017-09-06', null, '1');
+INSERT INTO `cliente` VALUES ('10', '120','AGOSTINI OSVALDO OMAR', 'AVDA. GORRITI N 3014', 'Santa Fe', 'CF', '2', 'defaultLocal', '20-05261057-6', '4695406', 'NombreResponsable', '2017-09-06', '2001-01-01 00:00:00', '1');
+INSERT INTO `cliente` VALUES ('11', '121','AICACYP-Ente Cooperador Ley 23.979', 'Moreno N 1420  (p/Facturar)', 'Santa Fe', 'CF', '2', 'defaultLocal', '30-55597562-3', '4574822', 'NombreResponsable', '2017-09-07', null, '1');
+INSERT INTO `cliente` VALUES ('12', '122','AICACYP-Ente Cooperador Ley 23.979', 'RENAR: Francia N 3550 - Santa Fe', 'Santa Fe', 'CF', '2', 'defaultLocal', '011-4384-7900', '4557996', 'NombreResponsable', '2017-09-07', null, '1');
+INSERT INTO `cliente` VALUES ('13', '123','ALBERTO J. MACUA S.A.', 'LOPEZ Y PLANES N 4250', 'Santa Fe', 'CF', '2', 'defaultLocal', '30-60541628-0', '4555070', 'NombreResponsable', '2017-09-07', '2001-01-01 00:00:00', '1');
+INSERT INTO `cliente` VALUES ('14', '124','ALMEIDA JUAN CARLOS F.', 'RUPERTO PEREZ 1944', 'Santa Fe', 'CF', '2', 'defaultLocal', '24-06218372-8', '4553228', 'NombreResponsable', '2017-09-07', null, '1');
+INSERT INTO `cliente` VALUES ('15', '125','ALONSO EDGARDO JAVIER', 'SAN MARTÃ–N N 3364-Piso 10-Dpto B', 'Santa Fe', 'CF', '2', 'defaultLocal', '20-13925831-3', '4585068', 'NombreResponsable', '2017-09-07', null, '1');
+INSERT INTO `cliente` VALUES ('16', '126','ALONSO  GRACIELA CRISTINA', 'MARTIN ZAPATA 3870', 'Santa Fe', 'CF', '2', 'defaultLocal', '27-13163585-6', '4537003', 'NombreResponsable', '2017-09-07', '2001-01-01 00:00:00', '1');
+INSERT INTO `cliente` VALUES ('17', '127','ALLOATTI ROBERTO', 'SAN MARTIN N 2088', 'Santa Fe', 'CF', '2', 'defaultLocal', '30-60541628-0', '4537003', 'NombreResponsable', '2017-09-07', null, '1');
+INSERT INTO `cliente` VALUES ('18', '128','AMATTI  CLAUDIO', 'SAN MARTIN N 2088', 'Santa Fe', 'CF', '3', 'defaultLocal', '30-60541628-0', '4537003', 'NombreResponsable', '2017-09-10', null, '1');
+INSERT INTO `cliente` VALUES ('19', '129','AMRAD S. H. de Liponezky Virginia  Victor y Santiago ', 'Salvador del Carril N 968', 'Santa Fe', 'CF', '3', 'defaultLocal', '30-71120617-1', '4537003', 'NombreResponsable', '2017-09-10', null, '1');
+INSERT INTO `cliente` VALUES ('20', '130','ANGEL BOSCARINO Construcciones S.A.', 'MARCIAL CANDIOTI  N 5180', 'Santa Fe', 'CF', '3', 'defaultLocal', '30-60541628-0', '4538585', 'NombreResponsable', '2017-09-10', null, '1');
+INSERT INTO `cliente` VALUES ('21', '131','ANSKOHL  RICARDO', 'E. ZEBALLOS 4334', 'Santa Fe', 'CF', '3', 'defaultLocal', '20-06264349-9', '4537003', 'NombreResponsable', '2017-09-10', null, '1');
+INSERT INTO `cliente` VALUES ('22', '132','ANTONIAZZI HNOS.', 'PIETRANERA n 3350', 'Santa Fe', 'CF', '4', 'defaultLocal', '30-55418898-9', '4592295', 'NombreResponsable', '2017-09-10', null, '1');
+INSERT INTO `cliente` VALUES ('23', '133','ANTONIAZZI  GERMAN', 'RIVADAVIA N 3396', 'Santa Fe', 'CF', '4', 'defaultLocal', '20-26460065-1', '4500162', 'NombreResponsable', '2017-09-10', null, '1');
+INSERT INTO `cliente` VALUES ('24', '134','ARCINI MARTÃ–N', '9 DE JULIO N 2722', 'Santa Fe', 'CF', '4', 'defaultLocal', '20-06264349-9', '4537003', 'NombreResponsable', '2017-09-10', null, '1');
+INSERT INTO `cliente` VALUES ('25', '135','ARCOLEN S.A.', 'SUIPACHA 2695', 'Santa Fe', 'CF', '4', 'defaultLocal', '30-64385640-5', '4561538', 'NombreResponsable', '2017-09-10', null, '1');
+INSERT INTO `cliente` VALUES ('26', '136','Cliente 1', 'La Rioja 2081', 'Santa Fe', 'CF', '1', 'asd', '203295621342', 'asd', 'sd', '2017-11-09', null, '0');
 
 -- ----------------------------
 -- Table structure for clientecuenta

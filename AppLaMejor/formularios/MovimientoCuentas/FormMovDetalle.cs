@@ -602,17 +602,28 @@ namespace AppLaMejor.formularios.Util
                         movCuenta1.Cobrado = 'N';
                         movCuenta1.idUsuario = VariablesGlobales.userIdLogueado;
 
-                        // TODO: Validar buena insercion movimiento cuenta cliente con booelan
 
-                        FuncionesMovCuentas.insertarMovimiento(movCuenta1);
+                        if (FuncionesMovCuentas.insertarMovimiento(movCuenta1))
+                        {
+                            if (tp.Id.Equals(1))
+                            {
+                                MyTextTimer.TStartFade("Debito realizado. ", this.statusStripFormEntityInput, this.mensajeroFormEntityInput, MyTextTimer.TIME_LONG);
+                            }
+                            else
+                            {
+                                MyTextTimer.TStartFade("Acreditacion realizada.", this.statusStripFormEntityInput, this.mensajeroFormEntityInput, MyTextTimer.TIME_LONG);
+                            }
 
-                        MyTextTimer.TStartFade("Hecho", this.statusStripFormEntityInput, this.mensajeroFormEntityInput, MyTextTimer.TIME_SHORT);
+                            cargar();
 
-                        cargar();
+                            tableMovCuentas.AcceptChanges();
 
-                        tableMovCuentas.AcceptChanges();
+                            calcular(lastEntityId);
+                        };
 
-                        calcular(lastEntityId);
+                        
+
+
                     }
                 }
             }
@@ -657,15 +668,23 @@ namespace AppLaMejor.formularios.Util
                         movCuenta1.Cobrado = 'N';
                         movCuenta1.idUsuario = VariablesGlobales.userIdLogueado;
 
-                        FuncionesMovCuentas.insertarMovimientoProveedor(movCuenta1);
+                        if (FuncionesMovCuentas.insertarMovimientoProveedor(movCuenta1))
+                        {
+                            if (tp.Id.Equals(1))
+                            {
+                                MyTextTimer.TStartFade("Debito realizado. ", this.statusStripFormEntityInput, this.mensajeroFormEntityInput, MyTextTimer.TIME_LONG);
+                            }
+                            else
+                            {
+                                MyTextTimer.TStartFade("Acreditacion realizada.", this.statusStripFormEntityInput, this.mensajeroFormEntityInput, MyTextTimer.TIME_LONG);
+                            }
 
-                        MyTextTimer.TStartFade("Hecho", this.statusStripFormEntityInput, this.mensajeroFormEntityInput, MyTextTimer.TIME_SHORT);
+                            cargar();
 
-                        cargar();
+                            tableMovCuentas.AcceptChanges();
 
-                        tableMovCuentas.AcceptChanges();
-
-                        calcular(lastEntityId);
+                            calcular(lastEntityId);
+                        };
                     }
                 }
             }

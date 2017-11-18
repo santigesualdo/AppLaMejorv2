@@ -1,10 +1,12 @@
 ﻿using System;
 using AppLaMejor.datamanager;
+using System.ComponentModel.DataAnnotations;
 
 namespace AppLaMejor.entidades
 {
     public class Cuenta : BaseEntity
     {
+        [Required(ErrorMessage = "CBU es informacion obligatoria. ")]
         [DataNames("cbu")]
         public string Cbu { get; set; }
 
@@ -13,6 +15,7 @@ namespace AppLaMejor.entidades
 
         private Nullable<DateTime> fechaUltimaActualizacion;
 
+        [Required(ErrorMessage = "Banco es informacion obligatoria. ")]
         [DataNames("banco")]
         public Banco Banco { get; set; }
         

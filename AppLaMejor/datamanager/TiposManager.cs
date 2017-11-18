@@ -182,104 +182,7 @@ namespace AppLaMejor.datamanager
             return null;
         }
 
-        /* Nomenclador TipoPrecio*/
-        List<TipoPrecio> listTipoPrecio;
-        public List<TipoPrecio> GetTipoPrecioList()
-        {
-            QueryManager manager = QueryManager.Instance();
-            String consulta = manager.GetTipoPrecio();
-            DataTable table = manager.GetTableResults(ConnecionBD.Instance().Connection, consulta);
-            listTipoPrecio = new List<TipoPrecio>();
-
-            DataNamesMapper<TipoPrecio> m = new DataNamesMapper<TipoPrecio>();
-            listTipoPrecio = m.Map(table).ToList();
-
-            return listTipoPrecio;
-        }
-        public TipoPrecio GetTipoPrecioByIdProducto(int Id)
-        {
-            QueryManager manager = QueryManager.Instance();
-            String consulta = manager.GetTipoPrecioByIdProducto(Id);
-            DataTable table = manager.GetTableResults(ConnecionBD.Instance().Connection, consulta);
-            int idTipoPrecio = table.Rows[0].Field<int>("id_tipo_precio");
-            return GetTipoPrecio(idTipoPrecio);
-        }
-        public TipoPrecio GetTipoPrecio(int idTipoPrecio)
-        {
-            if (listTipoPrecio == null) GetTipoPrecioList();
-
-            foreach (TipoPrecio tipopre in listTipoPrecio)
-            {
-                if (tipopre.Id.Equals(idTipoPrecio))
-                {
-                    return tipopre;
-                }
-            }
-            return null;
-        }
-        public TipoPrecio GetTipoPrecioByName(string tipoPrecio)
-        {
-            if (listTipoPrecio == null) GetTipoPrecioList();
-
-            foreach (TipoPrecio tipo in listTipoPrecio)
-            {
-                if (tipo.Equals(tipoPrecio))
-                {
-                    return tipo;
-                }
-            }
-            return null;
-        }
-        
-        /* Nomenclador Medida*/
-        List<Medida> listMedida;
-        public List<Medida> GetMedidaList()
-        {
-            QueryManager manager = QueryManager.Instance();
-            String consulta = manager.GetMedidas();
-            DataTable table = manager.GetTableResults(ConnecionBD.Instance().Connection, consulta);
-            listMedida = new List<Medida>();
-
-            DataNamesMapper<Medida> m = new DataNamesMapper<Medida>();
-            listMedida = m.Map(table).ToList();
-
-            return listMedida;
-        }
-        public Medida GetMedidaById(int idMedida)
-        {
-            if (listMedida == null) GetMedidaList();
-
-            foreach (Medida medida in listMedida)
-            {
-                if (medida.Id.Equals(idMedida))
-                {
-                    return medida;
-                }
-            }
-            return null;
-        }
-        public Medida GetMedidaByName(string medidaName)
-        {
-            if (listMedida == null) GetMedidaList();
-
-            foreach (Medida tipo in listMedida)
-            {
-                if (tipo.Equals(medidaName))
-                {
-                    return tipo;
-                }
-            }
-            return null;
-        }
-        public Medida GetMedidaByIdProducto(int idProducto)
-        {
-            QueryManager manager = QueryManager.Instance();
-            String consulta = manager.GetProductoDataById(idProducto);
-            DataTable table = manager.GetTableResults(ConnecionBD.Instance().Connection, consulta);
-            int idMedida = table.Rows[0].Field<int>("id_medida");
-            return GetMedidaById(idMedida);
-        }
-
+       
         /* Nomenclador TipoGarron*/
         List<TipoGarron> listTipoGarron;
         public TipoGarron GetTipoGarron(int p)
@@ -372,14 +275,6 @@ namespace AppLaMejor.datamanager
 
         /* Nomenclador de Bancos */
         List<Banco> listBanco;
-        /*public Banco GetBancoByCuenta(int idCuenta)
-        {
-            QueryManager manager = QueryManager.Instance();
-            String consulta = manager.GetBancoByIdCuenta(idCuenta);
-            DataTable table = manager.GetTableResults(ConnecionBD.Instance().Connection, consulta);
-            int idBanco= table.Rows[0].Field<int>("id_banco");
-            return GetBancoById(idBanco);
-        }*/
         public Banco GetBancoById(int idBanco)
         {
             QueryManager manager = QueryManager.Instance();

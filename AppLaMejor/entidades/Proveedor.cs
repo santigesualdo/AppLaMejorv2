@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 using AppLaMejor.datamanager;
+using System.ComponentModel.DataAnnotations;
 
 namespace AppLaMejor.entidades
 {
     public class Proveedor : BaseEntity
     {
+        [Required(ErrorMessage = "RazonSocial es informacion obligatoria. ")]
         [DataNames("RazonSocial")]
         public string RazonSocial { get; set; }
 
@@ -15,10 +17,7 @@ namespace AppLaMejor.entidades
 
         [DataNames("Localidad")]
         public string Localidad { get; set; }
-
-        //[DataNames("TipoProveedor")]
-        //public TipoProveedor TipoCliente{ get; set; }
-
+        
         [DataNames("Iva")]
         public string Iva { get; set; }
 

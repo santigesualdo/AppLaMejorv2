@@ -68,6 +68,7 @@
   <ItemGroup>
     <Reference Include="MySql.Data, Version=5.2.3.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -95,6 +96,7 @@
     <Compile Include="controlmanager\FuncionesProductos.cs" />
     <Compile Include="controlmanager\FuncionesProveedores.cs" />
     <Compile Include="controlmanager\FuncionesVentas.cs" />
+    <Compile Include="controlmanager\Validator.cs" />
     <Compile Include="controlmanager\VariablesGlobales.cs" />
     <Compile Include="datamanager\AttributeHelper.cs" />
     <Compile Include="datamanager\ConeccionBD.cs" />
@@ -105,7 +107,6 @@
     <Compile Include="entidades\Banco.cs" />
     <Compile Include="entidades\Garron.cs" />
     <Compile Include="entidades\GarronParte.cs" />
-    <Compile Include="entidades\Medida.cs" />
     <Compile Include="entidades\Producto.cs" />
     <Compile Include="entidades\Proveedor.cs" />
     <Compile Include="entidades\TipoEstadoGarron.cs" />
@@ -314,7 +315,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="AppLaMejor_ClaveTemporal.pfx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

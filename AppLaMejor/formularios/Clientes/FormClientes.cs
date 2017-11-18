@@ -221,6 +221,24 @@ namespace AppLaMejor.formularios
             }
         }
 
+        private void filterCodClienteTextBox_TextChanged(object sender, EventArgs e)
+        {
+            // Aplicar filtro a data grid por texto en Razon Social
+            if (!filterTextBox.Text.Equals(""))
+            {
+                StringBuilder filter = new StringBuilder();
+                if (!(string.IsNullOrEmpty(filterTextBox.Text)))
+                {
+                    filter.Append("CodCliente Like '%" + filterTextBox.Text + "%'");
+                    (dataGridClientes.DataSource as DataTable).DefaultView.RowFilter = filter.ToString();
+                }
+            }
+            else
+            {
+                (dataGridClientes.DataSource as DataTable).DefaultView.RowFilter = string.Empty;
+            }
+
+        }
         private void dtpFilter_ValueChanged(object sender, EventArgs e)
         {
             string theDate = dtpFilter.Value.Date.ToString("yyyy-MM-dd");

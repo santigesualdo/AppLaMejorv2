@@ -117,4 +117,382 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="tableBotones.ColumnCount" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="bCancelar.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="bCancelar.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Source Sans Pro, 12pt</value>
+  </data>
+  <data name="bCancelar.Location" type="System.Drawing.Point, System.Drawing">
+    <value>662, 3</value>
+  </data>
+  <data name="bCancelar.MaximumSize" type="System.Drawing.Size, System.Drawing">
+    <value>250, 40</value>
+  </data>
+  <data name="bCancelar.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>200, 40</value>
+  </data>
+  <data name="bCancelar.Size" type="System.Drawing.Size, System.Drawing">
+    <value>200, 40</value>
+  </data>
+  <data name="bCancelar.TabIndex" type="System.Int32, mscorlib">
+    <value>38</value>
+  </data>
+  <data name="bCancelar.Text" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="bCancelar.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <value>ImageBeforeText</value>
+  </data>
+  <data name="&gt;&gt;bCancelar.Name" xml:space="preserve">
+    <value>bCancelar</value>
+  </data>
+  <data name="&gt;&gt;bCancelar.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;bCancelar.Parent" xml:space="preserve">
+    <value>tableBotones</value>
+  </data>
+  <data name="&gt;&gt;bCancelar.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="bOk.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="bOk.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Source Sans Pro, 12pt</value>
+  </data>
+  <data name="bOk.Location" type="System.Drawing.Point, System.Drawing">
+    <value>357, 3</value>
+  </data>
+  <data name="bOk.MaximumSize" type="System.Drawing.Size, System.Drawing">
+    <value>250, 40</value>
+  </data>
+  <data name="bOk.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>200, 40</value>
+  </data>
+  <data name="bOk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>200, 40</value>
+  </data>
+  <data name="bOk.TabIndex" type="System.Int32, mscorlib">
+    <value>37</value>
+  </data>
+  <data name="bOk.Text" xml:space="preserve">
+    <value>Ok</value>
+  </data>
+  <data name="bOk.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <value>ImageBeforeText</value>
+  </data>
+  <data name="&gt;&gt;bOk.Name" xml:space="preserve">
+    <value>bOk</value>
+  </data>
+  <data name="&gt;&gt;bOk.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;bOk.Parent" xml:space="preserve">
+    <value>tableBotones</value>
+  </data>
+  <data name="&gt;&gt;bOk.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="bAceptar.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="bAceptar.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="bAceptar.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Source Sans Pro, 12pt</value>
+  </data>
+  <data name="bAceptar.Location" type="System.Drawing.Point, System.Drawing">
+    <value>52, 3</value>
+  </data>
+  <data name="bAceptar.MaximumSize" type="System.Drawing.Size, System.Drawing">
+    <value>250, 40</value>
+  </data>
+  <data name="bAceptar.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>200, 40</value>
+  </data>
+  <data name="bAceptar.Size" type="System.Drawing.Size, System.Drawing">
+    <value>200, 40</value>
+  </data>
+  <data name="bAceptar.TabIndex" type="System.Int32, mscorlib">
+    <value>36</value>
+  </data>
+  <data name="bAceptar.Text" xml:space="preserve">
+    <value>Aceptar</value>
+  </data>
+  <data name="bAceptar.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <value>ImageBeforeText</value>
+  </data>
+  <data name="&gt;&gt;bAceptar.Name" xml:space="preserve">
+    <value>bAceptar</value>
+  </data>
+  <data name="&gt;&gt;bAceptar.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;bAceptar.Parent" xml:space="preserve">
+    <value>tableBotones</value>
+  </data>
+  <data name="&gt;&gt;bAceptar.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="tableBotones.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="tableBotones.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 111</value>
+  </data>
+  <data name="tableBotones.RowCount" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tableBotones.Size" type="System.Drawing.Size, System.Drawing">
+    <value>915, 67</value>
+  </data>
+  <data name="tableBotones.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tableBotones.Name" xml:space="preserve">
+    <value>tableBotones</value>
+  </data>
+  <data name="&gt;&gt;tableBotones.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableBotones.Parent" xml:space="preserve">
+    <value>groupMensaje</value>
+  </data>
+  <data name="&gt;&gt;tableBotones.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tableBotones.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="bCancelar" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="bOk" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="bAceptar" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,33.33333,Percent,33.33333,Percent,33.33333" /&gt;&lt;Rows Styles="Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="mainPanel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="messagePanel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;groupMensaje.Name" xml:space="preserve">
+    <value>groupMensaje</value>
+  </data>
+  <data name="&gt;&gt;groupMensaje.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupMensaje.Parent" xml:space="preserve">
+    <value>messagePanel</value>
+  </data>
+  <data name="&gt;&gt;groupMensaje.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="messagePanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="messagePanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="messagePanel.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>10, 10, 10, 10</value>
+  </data>
+  <data name="messagePanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>945, 203</value>
+  </data>
+  <data name="messagePanel.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;messagePanel.Name" xml:space="preserve">
+    <value>messagePanel</value>
+  </data>
+  <data name="&gt;&gt;messagePanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;messagePanel.Parent" xml:space="preserve">
+    <value>mainPanel</value>
+  </data>
+  <data name="&gt;&gt;messagePanel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="mainPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="mainPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="mainPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>945, 204</value>
+  </data>
+  <data name="mainPanel.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;mainPanel.Name" xml:space="preserve">
+    <value>mainPanel</value>
+  </data>
+  <data name="&gt;&gt;mainPanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mainPanel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;mainPanel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="groupMensaje.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="groupMensaje.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="&gt;&gt;panelMessage.Name" xml:space="preserve">
+    <value>panelMessage</value>
+  </data>
+  <data name="&gt;&gt;panelMessage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelMessage.Parent" xml:space="preserve">
+    <value>groupMensaje</value>
+  </data>
+  <data name="&gt;&gt;panelMessage.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="groupMensaje.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="groupMensaje.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 10</value>
+  </data>
+  <data name="groupMensaje.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 5, 5, 5</value>
+  </data>
+  <data name="groupMensaje.Size" type="System.Drawing.Size, System.Drawing">
+    <value>925, 183</value>
+  </data>
+  <data name="groupMensaje.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="groupMensaje.Text" xml:space="preserve">
+    <value>Aviso</value>
+  </data>
+  <data name="&gt;&gt;groupMensaje.Name" xml:space="preserve">
+    <value>groupMensaje</value>
+  </data>
+  <data name="&gt;&gt;groupMensaje.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupMensaje.Parent" xml:space="preserve">
+    <value>messagePanel</value>
+  </data>
+  <data name="&gt;&gt;groupMensaje.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="panelMessage.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;messageBoxLabel.Name" xml:space="preserve">
+    <value>messageBoxLabel</value>
+  </data>
+  <data name="&gt;&gt;messageBoxLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;messageBoxLabel.Parent" xml:space="preserve">
+    <value>panelMessage</value>
+  </data>
+  <data name="&gt;&gt;messageBoxLabel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="panelMessage.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="panelMessage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 18</value>
+  </data>
+  <data name="panelMessage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>915, 93</value>
+  </data>
+  <data name="panelMessage.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;panelMessage.Name" xml:space="preserve">
+    <value>panelMessage</value>
+  </data>
+  <data name="&gt;&gt;panelMessage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelMessage.Parent" xml:space="preserve">
+    <value>groupMensaje</value>
+  </data>
+  <data name="&gt;&gt;panelMessage.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="messageBoxLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="messageBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 11</value>
+  </data>
+  <data name="messageBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 5, 5, 10</value>
+  </data>
+  <data name="messageBoxLabel.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>907, 72</value>
+  </data>
+  <data name="messageBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>907, 72</value>
+  </data>
+  <data name="messageBoxLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="messageBoxLabel.Text" xml:space="preserve">
+    <value>label1</value>
+  </data>
+  <data name="messageBoxLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;messageBoxLabel.Name" xml:space="preserve">
+    <value>messageBoxLabel</value>
+  </data>
+  <data name="&gt;&gt;messageBoxLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;messageBoxLabel.Parent" xml:space="preserve">
+    <value>panelMessage</value>
+  </data>
+  <data name="&gt;&gt;messageBoxLabel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="$this.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>945, 204</value>
+  </data>
+  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>945, 204</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterScreen</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>FormMessageBox</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>FormMessageBox</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

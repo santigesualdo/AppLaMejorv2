@@ -48,10 +48,10 @@ namespace AppLaMejor.formularios.MovimientoCuentas
             //cuento cuantos movCuentas tiene el cliente
             return Convert.ToInt32(dtTotalRegistros.Rows[0][0].ToString());
         }
-        public static void insertarMovimiento(MovimientoCuenta movCuenta1)
+        public static bool insertarMovimiento(MovimientoCuenta movCuenta1)
         {
             string consulta = QueryManager.Instance().InsertMovCuenta(movCuenta1);
-            QueryManager.Instance().GetTableResults(ConnecionBD.Instance().Connection, consulta);
+            return QueryManager.Instance().ExecuteSQL(ConnecionBD.Instance().Connection, consulta);
         }
         
         //proveedores
@@ -91,10 +91,10 @@ namespace AppLaMejor.formularios.MovimientoCuentas
             //cuento cuantos movCuentas tiene el cliente
             return Convert.ToInt32(dtTotalRegistros.Rows[0][0].ToString());
         }
-        public static void insertarMovimientoProveedor(MovimientoCuenta movCuenta1)
+        public static bool insertarMovimientoProveedor(MovimientoCuenta movCuenta1)
         {
             string consulta = QueryManager.Instance().InsertMovCuentaProveedor(movCuenta1);
-            QueryManager.Instance().GetTableResults(ConnecionBD.Instance().Connection, consulta);
+            return QueryManager.Instance().ExecuteSQL(ConnecionBD.Instance().Connection, consulta);
         }
     }
 }

@@ -30,10 +30,10 @@ namespace AppLaMejor.formularios
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
             this.mainPanel = new System.Windows.Forms.Panel();
             this.contentPanel = new System.Windows.Forms.Panel();
             this.groupDataGrid = new System.Windows.Forms.GroupBox();
@@ -61,12 +61,15 @@ namespace AppLaMejor.formularios
             this.dtpFilter = new System.Windows.Forms.DateTimePicker();
             this.filter2Text = new System.Windows.Forms.Label();
             this.filtro3Panel = new System.Windows.Forms.Panel();
-            this.filterTextBox = new System.Windows.Forms.TextBox();
-            this.filter3Text = new System.Windows.Forms.Label();
             this.titlePanel = new System.Windows.Forms.Panel();
             this.tittleText = new System.Windows.Forms.Label();
             this.topPanel = new System.Windows.Forms.Panel();
             this.formTittleText = new System.Windows.Forms.Label();
+            this.filtro4Panel = new System.Windows.Forms.Panel();
+            this.filter4TextBox = new System.Windows.Forms.TextBox();
+            this.filter4Label = new System.Windows.Forms.Label();
+            this.filter3Text = new System.Windows.Forms.Label();
+            this.filterTextBox = new System.Windows.Forms.TextBox();
             this.mainPanel.SuspendLayout();
             this.contentPanel.SuspendLayout();
             this.groupDataGrid.SuspendLayout();
@@ -84,6 +87,7 @@ namespace AppLaMejor.formularios
             this.filtro3Panel.SuspendLayout();
             this.titlePanel.SuspendLayout();
             this.topPanel.SuspendLayout();
+            this.filtro4Panel.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainPanel
@@ -125,45 +129,45 @@ namespace AppLaMejor.formularios
             // 
             // dataGridClientes
             // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.DimGray;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Source Sans Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Green;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
-            this.dataGridClientes.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle21.BackColor = System.Drawing.Color.DimGray;
+            dataGridViewCellStyle21.Font = new System.Drawing.Font("Source Sans Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle21.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle21.SelectionBackColor = System.Drawing.Color.Green;
+            dataGridViewCellStyle21.SelectionForeColor = System.Drawing.Color.Black;
+            this.dataGridClientes.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle21;
             this.dataGridClientes.BackgroundColor = System.Drawing.Color.Black;
             this.dataGridClientes.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Source Sans Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.Green;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridClientes.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle22.BackColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle22.Font = new System.Drawing.Font("Source Sans Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle22.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle22.SelectionBackColor = System.Drawing.Color.Green;
+            dataGridViewCellStyle22.SelectionForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            dataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridClientes.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle22;
             this.dataGridClientes.ColumnHeadersHeight = 40;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Source Sans Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.MediumSeaGreen;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.DarkSlateGray;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridClientes.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle23.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle23.Font = new System.Drawing.Font("Source Sans Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle23.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle23.SelectionBackColor = System.Drawing.Color.MediumSeaGreen;
+            dataGridViewCellStyle23.SelectionForeColor = System.Drawing.Color.DarkSlateGray;
+            dataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridClientes.DefaultCellStyle = dataGridViewCellStyle23;
             this.dataGridClientes.EnableHeadersVisualStyles = false;
             this.dataGridClientes.GridColor = System.Drawing.Color.Green;
             this.dataGridClientes.Location = new System.Drawing.Point(20, 43);
             this.dataGridClientes.Name = "dataGridClientes";
             this.dataGridClientes.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Source Sans Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.MediumSeaGreen;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.DarkSlateGray;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridClientes.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle24.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle24.Font = new System.Drawing.Font("Source Sans Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle24.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            dataGridViewCellStyle24.SelectionBackColor = System.Drawing.Color.MediumSeaGreen;
+            dataGridViewCellStyle24.SelectionForeColor = System.Drawing.Color.DarkSlateGray;
+            dataGridViewCellStyle24.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridClientes.RowHeadersDefaultCellStyle = dataGridViewCellStyle24;
             this.dataGridClientes.RowHeadersVisible = false;
             this.dataGridClientes.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.dataGridClientes.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
@@ -424,13 +428,15 @@ namespace AppLaMejor.formularios
             this.filterTableLayoutPanel.AutoSize = true;
             this.filterTableLayoutPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.filterTableLayoutPanel.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
-            this.filterTableLayoutPanel.ColumnCount = 3;
-            this.filterTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.filterTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.filterTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.filterTableLayoutPanel.ColumnCount = 4;
+            this.filterTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.filterTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.filterTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.filterTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.filterTableLayoutPanel.Controls.Add(this.filtro1Panel, 0, 0);
             this.filterTableLayoutPanel.Controls.Add(this.filtro2Panel, 0, 0);
             this.filterTableLayoutPanel.Controls.Add(this.filtro3Panel, 0, 0);
+            this.filterTableLayoutPanel.Controls.Add(this.filtro4Panel, 3, 0);
             this.filterTableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.filterTableLayoutPanel.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize;
             this.filterTableLayoutPanel.Location = new System.Drawing.Point(0, 0);
@@ -445,17 +451,17 @@ namespace AppLaMejor.formularios
             this.filtro1Panel.Controls.Add(this.comboTipoFilter);
             this.filtro1Panel.Controls.Add(this.filter1Text);
             this.filtro1Panel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.filtro1Panel.Location = new System.Drawing.Point(660, 4);
+            this.filtro1Panel.Location = new System.Drawing.Point(496, 4);
             this.filtro1Panel.Name = "filtro1Panel";
             this.filtro1Panel.Padding = new System.Windows.Forms.Padding(5);
-            this.filtro1Panel.Size = new System.Drawing.Size(321, 54);
+            this.filtro1Panel.Size = new System.Drawing.Size(239, 54);
             this.filtro1Panel.TabIndex = 3;
             // 
             // comboTipoFilter
             // 
             this.comboTipoFilter.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.comboTipoFilter.FormattingEnabled = true;
-            this.comboTipoFilter.Location = new System.Drawing.Point(105, 26);
+            this.comboTipoFilter.Location = new System.Drawing.Point(64, 26);
             this.comboTipoFilter.MaximumSize = new System.Drawing.Size(120, 0);
             this.comboTipoFilter.MinimumSize = new System.Drawing.Size(140, 0);
             this.comboTipoFilter.Name = "comboTipoFilter";
@@ -465,12 +471,12 @@ namespace AppLaMejor.formularios
             // 
             // filter1Text
             // 
-            this.filter1Text.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.filter1Text.Dock = System.Windows.Forms.DockStyle.Top;
             this.filter1Text.Font = new System.Drawing.Font("Source Sans Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.filter1Text.Location = new System.Drawing.Point(1, 5);
+            this.filter1Text.Location = new System.Drawing.Point(5, 5);
             this.filter1Text.Margin = new System.Windows.Forms.Padding(0);
             this.filter1Text.Name = "filter1Text";
-            this.filter1Text.Size = new System.Drawing.Size(308, 18);
+            this.filter1Text.Size = new System.Drawing.Size(229, 18);
             this.filter1Text.TabIndex = 1;
             this.filter1Text.Text = "Por Tipo";
             this.filter1Text.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -480,10 +486,10 @@ namespace AppLaMejor.formularios
             this.filtro2Panel.Controls.Add(this.dtpFilter);
             this.filtro2Panel.Controls.Add(this.filter2Text);
             this.filtro2Panel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.filtro2Panel.Location = new System.Drawing.Point(332, 4);
+            this.filtro2Panel.Location = new System.Drawing.Point(250, 4);
             this.filtro2Panel.Name = "filtro2Panel";
             this.filtro2Panel.Padding = new System.Windows.Forms.Padding(5);
-            this.filtro2Panel.Size = new System.Drawing.Size(321, 54);
+            this.filtro2Panel.Size = new System.Drawing.Size(239, 54);
             this.filtro2Panel.TabIndex = 2;
             // 
             // dtpFilter
@@ -492,7 +498,7 @@ namespace AppLaMejor.formularios
             this.dtpFilter.DropDownAlign = System.Windows.Forms.LeftRightAlignment.Right;
             this.dtpFilter.Font = new System.Drawing.Font("Source Sans Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpFilter.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpFilter.Location = new System.Drawing.Point(109, 26);
+            this.dtpFilter.Location = new System.Drawing.Point(68, 26);
             this.dtpFilter.MaximumSize = new System.Drawing.Size(140, 30);
             this.dtpFilter.MinimumSize = new System.Drawing.Size(140, 22);
             this.dtpFilter.Name = "dtpFilter";
@@ -506,7 +512,7 @@ namespace AppLaMejor.formularios
             this.filter2Text.Font = new System.Drawing.Font("Source Sans Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.filter2Text.Location = new System.Drawing.Point(5, 5);
             this.filter2Text.Name = "filter2Text";
-            this.filter2Text.Size = new System.Drawing.Size(311, 18);
+            this.filter2Text.Size = new System.Drawing.Size(229, 18);
             this.filter2Text.TabIndex = 1;
             this.filter2Text.Text = "Por Fecha";
             this.filter2Text.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -519,34 +525,8 @@ namespace AppLaMejor.formularios
             this.filtro3Panel.Location = new System.Drawing.Point(4, 4);
             this.filtro3Panel.Name = "filtro3Panel";
             this.filtro3Panel.Padding = new System.Windows.Forms.Padding(5);
-            this.filtro3Panel.Size = new System.Drawing.Size(321, 54);
+            this.filtro3Panel.Size = new System.Drawing.Size(239, 54);
             this.filtro3Panel.TabIndex = 1;
-            // 
-            // filterTextBox
-            // 
-            this.filterTextBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.filterTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.filterTextBox.Font = new System.Drawing.Font("Source Sans Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.filterTextBox.Location = new System.Drawing.Point(108, 26);
-            this.filterTextBox.MaximumSize = new System.Drawing.Size(140, 30);
-            this.filterTextBox.MinimumSize = new System.Drawing.Size(140, 22);
-            this.filterTextBox.Name = "filterTextBox";
-            this.filterTextBox.Size = new System.Drawing.Size(140, 28);
-            this.filterTextBox.TabIndex = 5;
-            this.filterTextBox.Text = "Nombre Cliente";
-            this.filterTextBox.Click += new System.EventHandler(this.filterTextBox_Click);
-            this.filterTextBox.TextChanged += new System.EventHandler(this.filterTextBox_TextChanged);
-            // 
-            // filter3Text
-            // 
-            this.filter3Text.Dock = System.Windows.Forms.DockStyle.Top;
-            this.filter3Text.Font = new System.Drawing.Font("Source Sans Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.filter3Text.Location = new System.Drawing.Point(5, 5);
-            this.filter3Text.Name = "filter3Text";
-            this.filter3Text.Size = new System.Drawing.Size(311, 18);
-            this.filter3Text.TabIndex = 4;
-            this.filter3Text.Text = "Por Cliente";
-            this.filter3Text.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // titlePanel
             // 
@@ -593,6 +573,69 @@ namespace AppLaMejor.formularios
             this.formTittleText.Text = "Clientes";
             this.formTittleText.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // filtro4Panel
+            // 
+            this.filtro4Panel.Controls.Add(this.filter4TextBox);
+            this.filtro4Panel.Controls.Add(this.filter4Label);
+            this.filtro4Panel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.filtro4Panel.Location = new System.Drawing.Point(742, 4);
+            this.filtro4Panel.Name = "filtro4Panel";
+            this.filtro4Panel.Padding = new System.Windows.Forms.Padding(5);
+            this.filtro4Panel.Size = new System.Drawing.Size(239, 54);
+            this.filtro4Panel.TabIndex = 4;
+            // 
+            // filter4TextBox
+            // 
+            this.filter4TextBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.filter4TextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.filter4TextBox.Font = new System.Drawing.Font("Source Sans Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.filter4TextBox.Location = new System.Drawing.Point(67, 26);
+            this.filter4TextBox.MaximumSize = new System.Drawing.Size(140, 30);
+            this.filter4TextBox.MinimumSize = new System.Drawing.Size(140, 22);
+            this.filter4TextBox.Name = "filter4TextBox";
+            this.filter4TextBox.Size = new System.Drawing.Size(140, 28);
+            this.filter4TextBox.TabIndex = 5;
+            this.filter4TextBox.Text = "Nombre Cliente";
+            this.filter4TextBox.Click += new System.EventHandler(this.filterTextBox_Click);
+            this.filter4TextBox.TextChanged += new System.EventHandler(this.filterTextBox_TextChanged);
+            // 
+            // filter4Label
+            // 
+            this.filter4Label.Dock = System.Windows.Forms.DockStyle.Top;
+            this.filter4Label.Font = new System.Drawing.Font("Source Sans Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.filter4Label.Location = new System.Drawing.Point(5, 5);
+            this.filter4Label.Name = "filter4Label";
+            this.filter4Label.Size = new System.Drawing.Size(229, 18);
+            this.filter4Label.TabIndex = 4;
+            this.filter4Label.Text = "Por RazonSocial";
+            this.filter4Label.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // filter3Text
+            // 
+            this.filter3Text.Dock = System.Windows.Forms.DockStyle.Top;
+            this.filter3Text.Font = new System.Drawing.Font("Source Sans Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.filter3Text.Location = new System.Drawing.Point(5, 5);
+            this.filter3Text.Name = "filter3Text";
+            this.filter3Text.Size = new System.Drawing.Size(229, 18);
+            this.filter3Text.TabIndex = 4;
+            this.filter3Text.Text = "Por Codigo Cliente";
+            this.filter3Text.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // filterTextBox
+            // 
+            this.filterTextBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.filterTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.filterTextBox.Font = new System.Drawing.Font("Source Sans Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.filterTextBox.Location = new System.Drawing.Point(67, 26);
+            this.filterTextBox.MaximumSize = new System.Drawing.Size(140, 30);
+            this.filterTextBox.MinimumSize = new System.Drawing.Size(140, 22);
+            this.filterTextBox.Name = "filterTextBox";
+            this.filterTextBox.Size = new System.Drawing.Size(140, 28);
+            this.filterTextBox.TabIndex = 5;
+            this.filterTextBox.Text = "Nombre Cliente";
+            this.filterTextBox.Click += new System.EventHandler(this.filterTextBox_Click);
+            this.filterTextBox.TextChanged += new System.EventHandler(this.filterCodClienteTextBox_TextChanged);
+            // 
             // FormClientes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -629,6 +672,8 @@ namespace AppLaMejor.formularios
             this.filtro3Panel.PerformLayout();
             this.titlePanel.ResumeLayout(false);
             this.topPanel.ResumeLayout(false);
+            this.filtro4Panel.ResumeLayout(false);
+            this.filtro4Panel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -661,13 +706,15 @@ namespace AppLaMejor.formularios
         private System.Windows.Forms.Label filter2Text;
         private System.Windows.Forms.Panel filtro3Panel;
         private System.Windows.Forms.Panel searchMainPanel;
-        private System.Windows.Forms.TextBox filterTextBox;
-        private System.Windows.Forms.Label filter3Text;
         private System.Windows.Forms.DateTimePicker dtpFilter;
         private System.Windows.Forms.ComboBox comboTipoFilter;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel tsslMensaje;
         private System.Windows.Forms.Button bAgregarCuenta;
-
+        private System.Windows.Forms.Panel filtro4Panel;
+        private System.Windows.Forms.TextBox filter4TextBox;
+        private System.Windows.Forms.Label filter4Label;
+        private System.Windows.Forms.TextBox filterTextBox;
+        private System.Windows.Forms.Label filter3Text;
     }
 }

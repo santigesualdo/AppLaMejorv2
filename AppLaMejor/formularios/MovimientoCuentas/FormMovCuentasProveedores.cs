@@ -20,7 +20,6 @@ namespace AppLaMejor.formularios
         List<Proveedor> listProvs;
         DataTable tableProveedores;
 
-        // TODO: falta poder agregar cuenta proveedor
         public FormMovCuentasProveedores()
         {
             InitializeComponent();
@@ -173,9 +172,6 @@ namespace AppLaMejor.formularios
                     {
                         newCuenta = (Cuenta)dialog.SelectedObject;
                         /* Insert en BD */
-
-                        // TODO: Al insertar cuenta, el campo "saldoactual" no tiene sentido ingresarlo.
-
                         if (FuncionesProveedores.InsertCuenta(newCuenta, prov.Id.ToString()))
                         {
                             MyTextTimer.TStartFade("Cuenta se guardo correctamente", statusStrip1, tsslMensaje, MyTextTimer.TIME_LONG);

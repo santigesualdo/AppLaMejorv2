@@ -142,8 +142,9 @@ namespace AppLaMejor.datamanager
         /* Clientes */
         public string InsertNuevoCliente(Cliente cliente)
         {
-            return "INSERT INTO cliente ( razon_social, domicilio, localidad, civa, id_tipo_cliente, nombre_local, cuit, telefono, nombre_responsable, fecha_desde, fecha_baja, usuario) " +
+            return "INSERT INTO cliente ( razon_social, cod_cliente, domicilio, localidad, civa, id_tipo_cliente, nombre_local, cuit, telefono, nombre_responsable, fecha_desde, fecha_baja, usuario) " +
                 " VALUES ( '" + cliente.RazonSocial + "', " +
+                " '" + cliente.CodCliente + "', "+
                 " '" + cliente.Domicilio + "', " +
                 " '" + cliente.Localidad + "', " +
                 " '" + cliente.Iva + "', " +
@@ -160,6 +161,7 @@ namespace AppLaMejor.datamanager
         public string UpdateCliente(Cliente cliente)
         {
             string query = "UPDATE cliente SET " +
+                "cod_cliente ='" + cliente.CodCliente+ "',  " +
                 "razon_social ='" + cliente.RazonSocial + "',  " +
                 "domicilio ='" + cliente.Domicilio + "',  " +
                 "localidad ='" + cliente.Localidad + "',  " +
@@ -187,6 +189,7 @@ namespace AppLaMejor.datamanager
             return
                 " SELECT " +
              "	c.id , " +
+             "	c.cod_cliente as CodCliente , " +
              "	c.razon_social AS RazonSocial, " +
              "	c.domicilio AS Domicilio, " +
              "	c.localidad AS Localidad, " +										  
@@ -206,7 +209,7 @@ namespace AppLaMejor.datamanager
         //trae el saldo actual y algunos datos de referencia para el form de MovCuentas
         public string GetClientesSaldoActual()
         {
-            return "SELECT cliente.id, cliente.razon_social AS `RazonSocial`, cliente.nombre_local AS `NombreLocal`, cliente.civa AS IVA, cast(cliente.id_tipo_cliente as CHAR(50)) AS TipoCliente,count(cuenta.id) AS CantidadCuentas FROM cliente inner join clientecuenta cuenta on cliente.id = cuenta.id_cliente       INNER JOIN banco ON cuenta.id_banco = banco.id INNER JOIN clientetipo ct ON ct.id = cliente.id_tipo_cliente group by cliente.id order by cliente.id";
+            return "SELECT cliente.id, cliente.cod_cliente as CodCliente, cliente.razon_social AS `RazonSocial`, cliente.nombre_local AS `NombreLocal`, cliente.civa AS IVA, cast(cliente.id_tipo_cliente as CHAR(50)) AS TipoCliente,count(cuenta.id) AS CantidadCuentas FROM cliente inner join clientecuenta cuenta on cliente.id = cuenta.id_cliente       INNER JOIN banco ON cuenta.id_banco = banco.id INNER JOIN clientetipo ct ON ct.id = cliente.id_tipo_cliente group by cliente.id order by cliente.id";
 																																							  
 																																																																 
         } 
@@ -308,6 +311,7 @@ namespace AppLaMejor.datamanager
         /* Cuentas */
         public string GetClientesWithCuentaById(int id){
             return "SELECT c.id , " +
+             "	c.cod_cliente AS CodCliente, " +
              "	c.razon_social AS RazonSocial, " +
              "	c.domicilio AS Domicilio, " +
              "	c.localidad AS Localidad, " +
@@ -329,6 +333,7 @@ namespace AppLaMejor.datamanager
         public string GetClientesWithCuenta()
         {
             return "SELECT c.id , " +
+             "	c.cod_cliente AS CodCliente, " +
              "	c.razon_social AS RazonSocial, " +
              "	c.domicilio AS Domicilio, " +
              "	c.localidad AS Localidad, " +
