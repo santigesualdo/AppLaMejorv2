@@ -57,6 +57,44 @@ namespace AppLaMejor.datamanager
                 }
             }
         }
+
+        public AutoCompleteStringCollection GetAutoCompleteCollection(MySqlConnection conn, string query, int sourceIndex)
+        {
+            try
+            {
+                using (conn)
+                {
+                    if (conn.State == ConnectionState.Closed)
+                        conn.Open();
+                    MySqlCommand cmd = new MySqlCommand(query, conn);
+                    cmd.CommandText = query;
+                    cmd.CommandType = CommandType.Text;
+                    MySqlDataReader reader = cmd.ExecuteReader();
+                    AutoCompleteStringCollection collection = new AutoCompleteStringCollection();
+                    while (reader.Read())
+                    {
+                        // Campo RazonSocial
+                        collection.Add(reader.GetString(sourceIndex));
+                    }
+
+                    return collection;
+                }
+            }
+            catch (Exception ex)
+            {
+                FormMessageBox dialog = new FormMessageBox();
+                dialog.ShowErrorDialog("Ocurrio un fallor en la BD: " + ex.Message);
+                return null;
+            }
+            finally
+            {
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+            }
+        }
+
         /* Recibe conexion y consulta y ejecuta update. Retorna true o false, exito o error */
         public bool ExecuteSQL(MySqlConnection conn, string query)
         {
@@ -237,23 +275,7 @@ namespace AppLaMejor.datamanager
                 VariablesGlobales.userIdLogueado.ToString() + ");";
 
         }
-        //public string UpdateProveedor(Proveedor Proveedor)
-        //{
-        //    string query = "UPDATE cliente SET " +
-        //        "razon_social ='" + cliente.RazonSocial + "',  " +
-        //        "domicilio ='" + cliente.Domicilio + "',  " +
-        //        "localidad ='" + cliente.Localidad + "',  " +
-        //        "civa ='" + cliente.Iva + "',  " +
-        //        "id_tipo_cliente ='" + cliente.TipoCliente.Id + "',  " +
-        //        "nombre_local ='" + cliente.NombreLocal + "',  " +
-        //        "telefono ='" + cliente.Telefono + "',  " +
-        //        "cuit ='" + cliente.Cuit + "',  " +
-        //        "nombre_responsable ='" + cliente.NombreResponsable + "',  " +
-        //        "fecha_desde ='" + cliente.FechaDesde.ToString("yyyy-MM-dd") + "', " +
-        //        "usuario ='" + cliente.idUsuario + "' " +
-        //        "WHERE id= " + cliente.Id + "";
-        //    return query;
-        //}
+    
         public string GetProveedores()
         {
             return "SELECT * FROM proveedor ORDER BY razon_social;";
@@ -307,7 +329,28 @@ namespace AppLaMejor.datamanager
                 "WHERE id= " + proveedor.Id + "";
             return query;
         }
-        
+
+        public string GetProveedorByName(string text)
+        {
+            return
+                " SELECT " +
+             "	c.id , " +
+             "	c.razon_social AS RazonSocial, " +
+             "	c.domicilio AS Domicilio, " +
+             "	c.localidad AS Localidad, " +
+             "  c.fecha_desde as FechaDesde, " +
+             "	c.civa AS IVA, " +
+             "	c.cuit AS CUIT, " +
+             "	c.nombre_responsable AS NombreResponsable, " +
+             "	c.nombre_local AS NombreLocal, " +
+             "	c.telefono AS Telefono," +
+             "	c.fecha_baja AS FechaBaja " +
+             " FROM " +
+             "	Proveedor c " +
+             "  WHERE c.fecha_baja is null " +
+             "  AND c.razon_social LIKE '%"+text+"%'";
+        }
+
         /* Cuentas */
         public string GetClientesWithCuentaById(int id){
             return "SELECT c.id , " +
@@ -750,6 +793,30 @@ namespace AppLaMejor.datamanager
             " producto p " +
             " where p.fecha_baja is null ";
         }
+
+        public string GetProductosSearchData()
+        {
+            return " SELECT" +
+            " p.id," +
+            " substring(p.id_codigo_barra,2,4) as CodigoBarra," +
+            " p.descripcion_breve AS DescripcionBreve "+
+            " FROM " +
+            " producto p " +
+            " where p.fecha_baja is null ";
+        }
+
+        public string GetProductoByPLU(string plu)
+        {
+            return GetProductosData() +
+                " and substr(p.id_codigo_barra,2,4) = '" + plu +"';";
+        }
+
+        public string GetProductoByDescripBreve(string descripbreve)
+        {
+            return GetProductosData() +
+                " and p.descripcion_breve LIKE '%" + descripbreve + "%';";
+        }
+
         public string GetDeleteProd(string idProd, DateTime fechaBaja)
         {
             return "update producto set fecha_baja ='" + fechaBaja.ToString() + "' where id = " + idProd + ";";

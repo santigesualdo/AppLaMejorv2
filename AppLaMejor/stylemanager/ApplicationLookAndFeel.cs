@@ -25,6 +25,9 @@ public class ApplicationLookAndFeel
         Boolean title = false;
         Boolean small = false;
         Boolean inverted = false;
+
+        Boolean saldoBien = false;
+        Boolean saldoMal = false;
         
         // Si se ingresa en TAG:  big small titlle rompe todo 
         if (c.Tag != null)
@@ -34,6 +37,8 @@ public class ApplicationLookAndFeel
             if (c.Tag.ToString().Contains("big")) big = true;
             if (c.Tag.ToString().Contains("small")) small = true;
             if (c.Tag.ToString().Contains("inverted")) inverted = true;
+            if (c.Tag.ToString().Contains("saldobien")) saldoBien = true;
+            if (c.Tag.ToString().Contains("saldomal")) saldoMal = true;
 
             Font fontSelected = null;
             if (bold)
@@ -75,6 +80,15 @@ public class ApplicationLookAndFeel
             {
                 c.BackColor = StyleManager.Instance().GetCurrentStyle().BackColor;
             }            
+
+            if (saldoBien)
+            {
+                c.ForeColor = Color.Lime;
+            }else if (saldoMal)
+            {
+                c.ForeColor = Color.Red;
+            }
+
             c.ForeColor = StyleManager.Instance().GetCurrentStyle().TextColor;
         }else
         {
@@ -82,47 +96,6 @@ public class ApplicationLookAndFeel
             c.BackColor = StyleManager.Instance().GetCurrentStyle().BackColor;
             c.ForeColor = StyleManager.Instance().GetCurrentStyle().TextColor;
         }
-
-
-        //if (c.Name.Equals("formTittleText"))
-        //{
-        //    if (c.Tag.ToString().Contains("Bold"))
-        //    {
-        //        c.Font = StyleManager.Instance().GetCurrentStyle().MainFontTitleBold;
-        //    }
-        //    else
-        //    {
-        //        c.Font = StyleManager.Instance().GetCurrentStyle().MainFontTitle;
-        //    }
-
-        //    c.BackColor = StyleManager.Instance().GetCurrentStyle().MainColor;
-        //    c.ForeColor = StyleManager.Instance().GetCurrentStyle().TextColor;
-        //}
-        //else
-        //if (c.Name.Equals("messageBoxLabel"))
-        //{
-        //    c.Font = StyleManager.Instance().GetCurrentStyle().MainFontBig;
-        //    c.BackColor = StyleManager.Instance().GetCurrentStyle().BackColor;
-        //    c.ForeColor = StyleManager.Instance().GetCurrentStyle().TextColor;
-        //}
-        //else if (c.Name.Equals("labelSubTotal"))
-        //{
-        //    c.Font = StyleManager.Instance().GetCurrentStyle().MainFontBig;
-        //    c.BackColor = StyleManager.Instance().GetCurrentStyle().BackColor;
-        //    c.ForeColor = StyleManager.Instance().GetCurrentStyle().TextColor;
-        //}
-        //else if (c.Name.Equals("lblTituloSaldo"))
-        //{
-        //    c.Font = StyleManager.Instance().GetCurrentStyle().MainFontBig;
-        //    c.BackColor = StyleManager.Instance().GetCurrentStyle().BackColor;
-        //    c.ForeColor = StyleManager.Instance().GetCurrentStyle().TextColor;
-        //}
-        //else
-        //{
-        //    c.Font = StyleManager.Instance().GetCurrentStyle().MainFontSmall;
-        //    c.BackColor = StyleManager.Instance().GetCurrentStyle().BackColor;
-        //    c.ForeColor = StyleManager.Instance().GetCurrentStyle().TextColor;
-        //}
     }
     public static void ApplyTheme(ToolStripStatusLabel c)
     {
@@ -418,6 +391,5 @@ public class ApplicationLookAndFeel
 		FormMessageBox dialog = new FormMessageBox();
 		dialog.ShowErrorDialog(text);
     }
-
 
 }

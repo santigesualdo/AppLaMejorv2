@@ -126,27 +126,14 @@ namespace AppLaMejor.formularios
 
         private void AgregarProveedor()
         {
-            /* Obtenemos los datos de la fila seleccionada y la convertimos a entidad Proveedor */
-            Proveedor newProv = new Proveedor();
-            newProv.FechaDesde = DateTime.Now;
-
-            /* Form Entity Input */
-            FormEntityInput dialog = new FormEntityInput(null, FormEntityInput.MODO_INSERTAR, formTittleText.Text);
-            Boolean result = dialog.Execute(newProv);
-            if (result)
+            Proveedor newProv = FuncionesProveedores.AgregarProveedor(formTittleText.Text);
+            if (newProv!= null)
             {
-                newProv = (Proveedor)dialog.SelectedObject;
-                /* Insert en BD */
-
-                if (FuncionesProveedores.InsertProveedor(newProv))
-                {
-                    MyTextTimer.TStartFade("Se guardo Proveedor " + newProv.RazonSocial.ToUpper() + ".", statusStrip1, tsslMensaje, MyTextTimer.TIME_SHORT);
-                    CargarDataGrid();
-                }
-                else
-                {
-                    MyTextTimer.TStartFade("No se guardo el Proveedor. Ocurrio un error.", statusStrip1, tsslMensaje, MyTextTimer.TIME_SHORT);
-                }
+                MyTextTimer.TStartFade("Se guardo Proveedor " + newProv.RazonSocial.ToUpper() + ".", statusStrip1, tsslMensaje, MyTextTimer.TIME_SHORT);
+                CargarDataGrid();
+            }else
+            {
+                MyTextTimer.TStartFade("No se guardo el Proveedor. Ocurrio un error.", statusStrip1, tsslMensaje, MyTextTimer.TIME_SHORT);
             }
         }
 

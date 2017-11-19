@@ -147,6 +147,8 @@ namespace AppLaMejor.formularios
             //    }
 
             //}
+
+            // TODO: borrar hardcodeada carga garron
             Garron g = FuncionesGarron.GetGarron(5);
             CargarGarronCompletoEnTablePanel(g);
         }

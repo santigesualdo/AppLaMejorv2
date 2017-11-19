@@ -1,6 +1,7 @@
 ﻿using AppLaMejor.datamanager;
 using AppLaMejor.entidades;
 using AppLaMejor.formularios.Util;
+using AppLaMejor.stylemanager;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -97,5 +98,49 @@ namespace AppLaMejor.controlmanager
             }
             return false;
         }
+
+        public static Garron AgregarGarron(string v)
+        {
+            Garron g = new Garron();
+            g.FechaEntrada = DateTime.Now;
+            FormEntityInput dialog = new FormEntityInput(g, FormEntityInput.MODO_INSERTAR, v);
+            Boolean result = dialog.Execute(g);
+
+            if (result)
+            {
+                g = (Garron)dialog.SelectedObject;
+                // Desde este form solo se carga garron estado COMPLETO = 1
+                g.TipoEstadoGarron = TiposManager.Instance().GetTipoEstadoGarron(1);
+                /* Insert en BD */
+                if (FuncionesGarron.InsertGarron(g))
+                {
+                    return g;
+                }
+                else
+                {
+                    return null;
+                }
+
+            }
+            return null;
+        }
+        public static Garron AgregarGarronSinBD(string v)
+        {
+            Garron g = new Garron();
+            g.FechaEntrada = DateTime.Now;
+            FormEntityInput dialog = new FormEntityInput(g, FormEntityInput.MODO_INSERTAR, v);
+            Boolean result = dialog.Execute(g);
+
+            if (result)
+            {
+                g = (Garron)dialog.SelectedObject;
+                // Desde este form solo se carga garron estado COMPLETO = 1
+                g.TipoEstadoGarron = TiposManager.Instance().GetTipoEstadoGarron(1);
+                /* Insert en BD */
+                    return g;
+            }
+            return null;
+        }
+
     }
 }

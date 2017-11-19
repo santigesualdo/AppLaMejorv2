@@ -97,6 +97,14 @@ namespace AppLaMejor.controlmanager
             }
         }
 
+        public static Proveedor GetProveedorByName(string text)
+        {
+            QueryManager manager = QueryManager.Instance();
+            DataTable table = manager.GetTableResults(ConnecionBD.Instance().Connection, manager.GetProveedorByName(text));
+            DataNamesMapper<Proveedor> mapperProv = new DataNamesMapper<Proveedor>();
+            return mapperProv.Map(table).ToList().First();
+        }
+
         public static bool UpdateProv(Proveedor prov)
         {
             QueryManager manager = QueryManager.Instance();
@@ -110,5 +118,32 @@ namespace AppLaMejor.controlmanager
             string consulta = manager.InsertNuevoProveedor(newProv);
             return manager.ExecuteSQL(ConnecionBD.Instance().Connection, consulta);
         }
+
+        public static Proveedor AgregarProveedor(string title)
+        {
+            /* Obtenemos los datos de la fila seleccionada y la convertimos a entidad Proveedor */
+            Proveedor newProv = new Proveedor();
+            newProv.FechaDesde = DateTime.Now;
+
+            /* Form Entity Input */
+            FormEntityInput dialog = new FormEntityInput(null, FormEntityInput.MODO_INSERTAR, title);
+            Boolean result = dialog.Execute(newProv);
+            if (result)
+            {
+                newProv = (Proveedor)dialog.SelectedObject;
+                /* Insert en BD */
+
+                if (FuncionesProveedores.InsertProveedor(newProv))
+                {
+                    return newProv;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            else return null;
+        }
+
     }
 }

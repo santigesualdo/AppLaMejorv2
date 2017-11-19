@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using AppLaMejor.datamanager;
 using AppLaMejor.controlmanager;
 using AppLaMejor.stylemanager;
+using AppLaMejor.formularios.Compras;
 
 namespace AppLaMejor.formularios
 {
@@ -89,6 +90,7 @@ namespace AppLaMejor.formularios
                 case "Movimiento Cuentas Proveedores": boton.Click += new System.EventHandler(IniciarMovimientoCuentasProveedores); break;
                 case "Ventas Caja": boton.Click += new System.EventHandler(IniciarVentasCaja); break;
                 case "Carga Garron": boton.Click += new System.EventHandler(IniciarCargaGarron); break;
+                case "Compras": boton.Click += new System.EventHandler(IniciarCompras); break;
             }
             return boton;
         }
@@ -137,6 +139,11 @@ namespace AppLaMejor.formularios
         {
             FormMovCuentasProveedores formMovCuentasProveedores = new FormMovCuentasProveedores();
             formMovCuentasProveedores.ShowDialog();
+        }
+        private void IniciarCompras(object sender, EventArgs e)
+        {
+            FormCargaCompras formCompras = new FormCargaCompras();
+            formCompras.ShowDialog();
         }
         private void bCancelar_Click(object sender, EventArgs e)
         {

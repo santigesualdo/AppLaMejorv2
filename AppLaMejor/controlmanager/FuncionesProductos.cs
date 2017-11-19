@@ -42,5 +42,21 @@ namespace AppLaMejor.controlmanager
             string consulta = manager.InsertNuevoProducto(prod);
             return manager.ExecuteSQL(ConnecionBD.Instance().Connection, consulta);
         }
+
+        public static Producto GetProductoByPlu(string text)
+        {
+            QueryManager manager = QueryManager.Instance();
+            DataTable table = manager.GetTableResults(ConnecionBD.Instance().Connection, manager.GetProductoByPLU(text));
+            DataNamesMapper<Producto> mapperProd = new DataNamesMapper<Producto>();
+            return mapperProd.Map(table).ToList().First();
+        }
+
+        public static Producto GetProductoByDescrip(string text)
+        {
+            QueryManager manager = QueryManager.Instance();
+            DataTable table = manager.GetTableResults(ConnecionBD.Instance().Connection, manager.GetProductoByDescripBreve(text));
+            DataNamesMapper<Producto> mapperProd = new DataNamesMapper<Producto>();
+            return mapperProd.Map(table).ToList().First();
+        }
     }
 }
