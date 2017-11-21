@@ -39,13 +39,12 @@
             this.mainPanel = new System.Windows.Forms.Panel();
             this.contentPanel = new System.Windows.Forms.Panel();
             this.nuevaVentaPanel = new System.Windows.Forms.Panel();
-            this.groupNuevaVentaDataGrid = new System.Windows.Forms.GroupBox();
             this.dataGridNuevaVentaDetalle = new System.Windows.Forms.DataGridView();
             this.panelSubTotal = new System.Windows.Forms.Panel();
             this.labelSubTotal = new System.Windows.Forms.Label();
             this.navTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.agregarVenta = new System.Windows.Forms.Button();
-            this.panel3 = new System.Windows.Forms.Panel();
+            this.panelBusqueda = new System.Windows.Forms.Panel();
             this.textCodigo = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.lTittle = new System.Windows.Forms.Label();
@@ -74,14 +73,14 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.groupNuevaVenta = new System.Windows.Forms.GroupBox();
             this.mainPanel.SuspendLayout();
             this.contentPanel.SuspendLayout();
             this.nuevaVentaPanel.SuspendLayout();
-            this.groupNuevaVentaDataGrid.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridNuevaVentaDetalle)).BeginInit();
             this.panelSubTotal.SuspendLayout();
             this.navTableLayoutPanel.SuspendLayout();
-            this.panel3.SuspendLayout();
+            this.panelBusqueda.SuspendLayout();
             this.groupVentasAnterioresDataGrid.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridVentas)).BeginInit();
             this.bottomPanel.SuspendLayout();
@@ -93,6 +92,7 @@
             this.tableLayoutPanel3.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.groupNuevaVenta.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainPanel
@@ -103,7 +103,7 @@
             this.mainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mainPanel.Location = new System.Drawing.Point(0, 0);
             this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(1173, 930);
+            this.mainPanel.Size = new System.Drawing.Size(1173, 780);
             this.mainPanel.TabIndex = 5;
             // 
             // contentPanel
@@ -116,38 +116,23 @@
             this.contentPanel.Location = new System.Drawing.Point(0, 50);
             this.contentPanel.Name = "contentPanel";
             this.contentPanel.Padding = new System.Windows.Forms.Padding(15);
-            this.contentPanel.Size = new System.Drawing.Size(1173, 830);
+            this.contentPanel.Size = new System.Drawing.Size(1173, 680);
             this.contentPanel.TabIndex = 3;
             // 
             // nuevaVentaPanel
             // 
             this.nuevaVentaPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.nuevaVentaPanel.Controls.Add(this.groupNuevaVentaDataGrid);
-            this.nuevaVentaPanel.Controls.Add(this.panel3);
+            this.nuevaVentaPanel.Controls.Add(this.groupNuevaVenta);
+            this.nuevaVentaPanel.Controls.Add(this.panelSubTotal);
+            this.nuevaVentaPanel.Controls.Add(this.navTableLayoutPanel);
+            this.nuevaVentaPanel.Controls.Add(this.panelBusqueda);
             this.nuevaVentaPanel.Controls.Add(this.lTittle);
             this.nuevaVentaPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.nuevaVentaPanel.Location = new System.Drawing.Point(15, 15);
             this.nuevaVentaPanel.Margin = new System.Windows.Forms.Padding(0);
             this.nuevaVentaPanel.Name = "nuevaVentaPanel";
-            this.nuevaVentaPanel.Size = new System.Drawing.Size(1143, 500);
+            this.nuevaVentaPanel.Size = new System.Drawing.Size(1143, 405);
             this.nuevaVentaPanel.TabIndex = 0;
-            // 
-            // groupNuevaVentaDataGrid
-            // 
-            this.groupNuevaVentaDataGrid.AutoSize = true;
-            this.groupNuevaVentaDataGrid.Controls.Add(this.dataGridNuevaVentaDetalle);
-            this.groupNuevaVentaDataGrid.Controls.Add(this.panelSubTotal);
-            this.groupNuevaVentaDataGrid.Controls.Add(this.navTableLayoutPanel);
-            this.groupNuevaVentaDataGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupNuevaVentaDataGrid.ForeColor = System.Drawing.Color.White;
-            this.groupNuevaVentaDataGrid.Location = new System.Drawing.Point(0, 100);
-            this.groupNuevaVentaDataGrid.MinimumSize = new System.Drawing.Size(0, 300);
-            this.groupNuevaVentaDataGrid.Name = "groupNuevaVentaDataGrid";
-            this.groupNuevaVentaDataGrid.Padding = new System.Windows.Forms.Padding(20, 22, 20, 22);
-            this.groupNuevaVentaDataGrid.Size = new System.Drawing.Size(1143, 400);
-            this.groupNuevaVentaDataGrid.TabIndex = 10;
-            this.groupNuevaVentaDataGrid.TabStop = false;
-            this.groupNuevaVentaDataGrid.Text = "Nueva Venta";
             // 
             // dataGridNuevaVentaDetalle
             // 
@@ -172,7 +157,7 @@
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Source Sans Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.MediumSeaGreen;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.DarkSlateGray;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
@@ -180,8 +165,8 @@
             this.dataGridNuevaVentaDetalle.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridNuevaVentaDetalle.EnableHeadersVisualStyles = false;
             this.dataGridNuevaVentaDetalle.GridColor = System.Drawing.Color.Green;
-            this.dataGridNuevaVentaDetalle.Location = new System.Drawing.Point(20, 35);
-            this.dataGridNuevaVentaDetalle.MinimumSize = new System.Drawing.Size(0, 200);
+            this.dataGridNuevaVentaDetalle.Location = new System.Drawing.Point(7, 20);
+            this.dataGridNuevaVentaDetalle.Margin = new System.Windows.Forms.Padding(5);
             this.dataGridNuevaVentaDetalle.Name = "dataGridNuevaVentaDetalle";
             this.dataGridNuevaVentaDetalle.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
@@ -205,7 +190,7 @@
             this.dataGridNuevaVentaDetalle.RowTemplate.ReadOnly = true;
             this.dataGridNuevaVentaDetalle.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridNuevaVentaDetalle.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridNuevaVentaDetalle.Size = new System.Drawing.Size(1103, 236);
+            this.dataGridNuevaVentaDetalle.Size = new System.Drawing.Size(1129, 171);
             this.dataGridNuevaVentaDetalle.TabIndex = 11;
             this.dataGridNuevaVentaDetalle.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridNuevaVentaDetalle_CellClick);
             // 
@@ -213,17 +198,17 @@
             // 
             this.panelSubTotal.Controls.Add(this.labelSubTotal);
             this.panelSubTotal.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelSubTotal.Location = new System.Drawing.Point(20, 271);
+            this.panelSubTotal.Location = new System.Drawing.Point(0, 298);
             this.panelSubTotal.MaximumSize = new System.Drawing.Size(0, 50);
             this.panelSubTotal.MinimumSize = new System.Drawing.Size(0, 50);
             this.panelSubTotal.Name = "panelSubTotal";
-            this.panelSubTotal.Size = new System.Drawing.Size(1103, 50);
+            this.panelSubTotal.Size = new System.Drawing.Size(1143, 50);
             this.panelSubTotal.TabIndex = 2;
             // 
             // labelSubTotal
             // 
             this.labelSubTotal.Dock = System.Windows.Forms.DockStyle.Right;
-            this.labelSubTotal.Location = new System.Drawing.Point(707, 0);
+            this.labelSubTotal.Location = new System.Drawing.Point(747, 0);
             this.labelSubTotal.Name = "labelSubTotal";
             this.labelSubTotal.Size = new System.Drawing.Size(396, 50);
             this.labelSubTotal.TabIndex = 0;
@@ -244,11 +229,11 @@
             this.navTableLayoutPanel.Controls.Add(this.agregarVenta, 2, 0);
             this.navTableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.navTableLayoutPanel.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize;
-            this.navTableLayoutPanel.Location = new System.Drawing.Point(20, 321);
+            this.navTableLayoutPanel.Location = new System.Drawing.Point(0, 348);
             this.navTableLayoutPanel.Name = "navTableLayoutPanel";
             this.navTableLayoutPanel.RowCount = 1;
             this.navTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.navTableLayoutPanel.Size = new System.Drawing.Size(1103, 57);
+            this.navTableLayoutPanel.Size = new System.Drawing.Size(1143, 57);
             this.navTableLayoutPanel.TabIndex = 10;
             // 
             // agregarVenta
@@ -260,9 +245,9 @@
             this.agregarVenta.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkSlateGray;
             this.agregarVenta.Font = new System.Drawing.Font("Source Sans Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.agregarVenta.Image = global::AppLaMejor.Properties.Resources.add_icon_30x30_green;
-            this.agregarVenta.Location = new System.Drawing.Point(443, 3);
+            this.agregarVenta.Location = new System.Drawing.Point(459, 3);
             this.agregarVenta.Name = "agregarVenta";
-            this.agregarVenta.Size = new System.Drawing.Size(214, 51);
+            this.agregarVenta.Size = new System.Drawing.Size(222, 51);
             this.agregarVenta.TabIndex = 12;
             this.agregarVenta.Text = "Confirmar Venta";
             this.agregarVenta.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -270,17 +255,17 @@
             this.agregarVenta.UseVisualStyleBackColor = false;
             this.agregarVenta.Click += new System.EventHandler(this.agregarVenta_Click);
             // 
-            // panel3
+            // panelBusqueda
             // 
-            this.panel3.AutoSize = true;
-            this.panel3.Controls.Add(this.textCodigo);
-            this.panel3.Controls.Add(this.label5);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel3.Location = new System.Drawing.Point(0, 32);
-            this.panel3.Name = "panel3";
-            this.panel3.Padding = new System.Windows.Forms.Padding(5);
-            this.panel3.Size = new System.Drawing.Size(1143, 68);
-            this.panel3.TabIndex = 11;
+            this.panelBusqueda.AutoSize = true;
+            this.panelBusqueda.Controls.Add(this.textCodigo);
+            this.panelBusqueda.Controls.Add(this.label5);
+            this.panelBusqueda.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelBusqueda.Location = new System.Drawing.Point(0, 32);
+            this.panelBusqueda.Name = "panelBusqueda";
+            this.panelBusqueda.Padding = new System.Windows.Forms.Padding(5);
+            this.panelBusqueda.Size = new System.Drawing.Size(1143, 68);
+            this.panelBusqueda.TabIndex = 11;
             // 
             // textCodigo
             // 
@@ -324,11 +309,11 @@
             this.groupVentasAnterioresDataGrid.Controls.Add(this.dataGridVentas);
             this.groupVentasAnterioresDataGrid.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.groupVentasAnterioresDataGrid.ForeColor = System.Drawing.Color.White;
-            this.groupVentasAnterioresDataGrid.Location = new System.Drawing.Point(15, 515);
+            this.groupVentasAnterioresDataGrid.Location = new System.Drawing.Point(15, 420);
             this.groupVentasAnterioresDataGrid.MaximumSize = new System.Drawing.Size(0, 300);
             this.groupVentasAnterioresDataGrid.Name = "groupVentasAnterioresDataGrid";
             this.groupVentasAnterioresDataGrid.Padding = new System.Windows.Forms.Padding(40, 22, 20, 22);
-            this.groupVentasAnterioresDataGrid.Size = new System.Drawing.Size(1143, 300);
+            this.groupVentasAnterioresDataGrid.Size = new System.Drawing.Size(1143, 245);
             this.groupVentasAnterioresDataGrid.TabIndex = 4;
             this.groupVentasAnterioresDataGrid.TabStop = false;
             this.groupVentasAnterioresDataGrid.Text = "Venta Actual";
@@ -389,7 +374,7 @@
             this.dataGridVentas.RowTemplate.ReadOnly = true;
             this.dataGridVentas.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridVentas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridVentas.Size = new System.Drawing.Size(1083, 243);
+            this.dataGridVentas.Size = new System.Drawing.Size(1083, 188);
             this.dataGridVentas.TabIndex = 1;
             // 
             // bottomPanel
@@ -399,7 +384,7 @@
             this.bottomPanel.Controls.Add(this.bAceptar);
             this.bottomPanel.Controls.Add(this.bCancelar);
             this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bottomPanel.Location = new System.Drawing.Point(0, 880);
+            this.bottomPanel.Location = new System.Drawing.Point(0, 730);
             this.bottomPanel.Name = "bottomPanel";
             this.bottomPanel.Size = new System.Drawing.Size(1173, 50);
             this.bottomPanel.TabIndex = 5;
@@ -706,11 +691,23 @@
             this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.button1.UseVisualStyleBackColor = false;
             // 
+            // groupNuevaVenta
+            // 
+            this.groupNuevaVenta.Controls.Add(this.dataGridNuevaVentaDetalle);
+            this.groupNuevaVenta.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupNuevaVenta.Location = new System.Drawing.Point(0, 100);
+            this.groupNuevaVenta.Name = "groupNuevaVenta";
+            this.groupNuevaVenta.Padding = new System.Windows.Forms.Padding(7);
+            this.groupNuevaVenta.Size = new System.Drawing.Size(1143, 198);
+            this.groupNuevaVenta.TabIndex = 12;
+            this.groupNuevaVenta.TabStop = false;
+            this.groupNuevaVenta.Text = "Nueva Venta";
+            // 
             // FormCaja
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1173, 930);
+            this.ClientSize = new System.Drawing.Size(1173, 780);
             this.Controls.Add(this.mainPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormCaja";
@@ -722,13 +719,11 @@
             this.contentPanel.ResumeLayout(false);
             this.nuevaVentaPanel.ResumeLayout(false);
             this.nuevaVentaPanel.PerformLayout();
-            this.groupNuevaVentaDataGrid.ResumeLayout(false);
-            this.groupNuevaVentaDataGrid.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridNuevaVentaDetalle)).EndInit();
             this.panelSubTotal.ResumeLayout(false);
             this.navTableLayoutPanel.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
+            this.panelBusqueda.ResumeLayout(false);
+            this.panelBusqueda.PerformLayout();
             this.groupVentasAnterioresDataGrid.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridVentas)).EndInit();
             this.bottomPanel.ResumeLayout(false);
@@ -747,6 +742,7 @@
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.groupNuevaVenta.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -768,7 +764,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.GroupBox groupVentasAnterioresDataGrid;
         private System.Windows.Forms.DataGridView dataGridVentas;
-        private System.Windows.Forms.GroupBox groupNuevaVentaDataGrid;
         private System.Windows.Forms.Panel panelSubTotal;
         private System.Windows.Forms.Label labelSubTotal;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
@@ -787,9 +782,10 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TableLayoutPanel navTableLayoutPanel;
         private System.Windows.Forms.Button agregarVenta;
-        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel panelBusqueda;
         private System.Windows.Forms.TextBox textCodigo;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.DataGridView dataGridNuevaVentaDetalle;
+        private System.Windows.Forms.GroupBox groupNuevaVenta;
     }
 }
