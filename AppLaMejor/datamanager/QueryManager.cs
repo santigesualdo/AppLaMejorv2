@@ -142,47 +142,45 @@ namespace AppLaMejor.datamanager
         /* Tipos */
         public string GetTipoMovimiento()
         {
-            return "select * from movimientotipo order by id;";
+            return "CALL listarMovimientoTipo();";
         }
         public string GetTipoCliente()
         {
-            return "select * from clientetipo order by id;";
+            return "CALL listarTipoCliente();";
         }
         public string GetTipoClienteByIdCliente(int idCliente)
         {
-            return "select id_tipo_cliente from cliente where id = " + idCliente.ToString();
+            return "CALL obtenerTipoClientePorIdCliente( " + idCliente.ToString() + ");";
         }
         public string GetTipoProducto()
         {
-            return "select * from productotipo order by id;";
+            return "CALL listarTipoProducto();";
         }
         public string GetTipoProductoByIdProducto(int idProducto)
         {
-            return "select id_producto_tipo from producto where id = " + idProducto.ToString();
+            return "CALL obtenerTipoProdutoPorIdProducto(" + idProducto.ToString() + ");";
         }
         
         /* Usuarios */
         public string GetUsuarioByName(string name){
-            return "select * from usuario where username = '" + name + "' ;";
+            return "CALL obtenerUsuarioPorNombre('" + name + "';";
         }
         public string GetUsuariosModulos(int idUsuario)
 
         {
-            return "SELECT m.* FROM usuariomodulo um " +
-            "inner join modulo m on m.id = um.id_modulo "+
-            " where um.id_usuario = " + idUsuario + ";";
+            return "CALL obtenerUsuariosModulos(" + idUsuario.ToString() + ");";
         }
         public string GetUserLogin(string userName, string pass)
         {
             return "select * from usuario where username = '" + userName + "'  and  pass ='" + pass + "'";
+            //CALL obtenerUsuarioLogin no anda, problema de collattion
         }
         
         /* Clientes */
         public string InsertNuevoCliente(Cliente cliente)
         {
-            return "INSERT INTO cliente ( razon_social, cod_cliente, domicilio, localidad, civa, id_tipo_cliente, nombre_local, cuit, telefono, nombre_responsable, fecha_desde, fecha_baja, usuario) " +
-                " VALUES ( '" + cliente.RazonSocial + "', " +
-                " '" + cliente.CodCliente + "', "+
+            string consulta;
+            consulta = "call grabarNuevoCLiente('" + cliente.CodCliente + "','" + cliente.RazonSocial + "', " +
                 " '" + cliente.Domicilio + "', " +
                 " '" + cliente.Localidad + "', " +
                 " '" + cliente.Iva + "', " +
@@ -191,36 +189,27 @@ namespace AppLaMejor.datamanager
                 " '" + cliente.Cuit + "', " +
                 " '" + cliente.Telefono+ "', " +
                 " '" + cliente.NombreResponsable + "', " +
-                " '" + cliente.FechaDesde.ToString("yyyy-MM-dd") + "', " +
-                " null ," +
+                " '" + cliente.FechaDesde.ToString("yyyy-MM-dd") + "'," +
                 VariablesGlobales.userIdLogueado.ToString() + ");";
 
+            return consulta;
         }
         public string UpdateCliente(Cliente cliente)
         {
-            string query = "UPDATE cliente SET " +
-                "cod_cliente ='" + cliente.CodCliente+ "',  " +
-                "razon_social ='" + cliente.RazonSocial + "',  " +
-                "domicilio ='" + cliente.Domicilio + "',  " +
-                "localidad ='" + cliente.Localidad + "',  " +
-                "civa ='" + cliente.Iva + "',  " +
-                "id_tipo_cliente ='" + cliente.TipoCliente.Id + "',  " +
-                "nombre_local ='" + cliente.NombreLocal + "',  " +
-                "telefono ='" + cliente.Telefono + "',  " +
-                "cuit ='" + cliente.Cuit + "',  " +
-                "nombre_responsable ='" + cliente.NombreResponsable + "',  " +
-                "fecha_desde ='" + cliente.FechaDesde.ToString("yyyy-MM-dd") + "', " +
-                "usuario ='" + VariablesGlobales.userIdLogueado.ToString() + "' "+
-                "WHERE id= " + cliente.Id+"";
+            string query = "call actualizarCliente(" + cliente.Id.ToString() + ",'" + cliente.CodCliente + "',  " +
+                "'" + cliente.RazonSocial + "','" + cliente.Domicilio + "','" + cliente.Localidad + "',  " +
+                "'" + cliente.Iva + "','" + cliente.TipoCliente.Id + "','" + cliente.NombreLocal + "',  " +
+                "'" + cliente.Telefono + "','" + cliente.Cuit + "','" + cliente.NombreResponsable + "',  " +
+                "'" + cliente.FechaDesde.ToString("yyyy-MM-dd") + "','" + VariablesGlobales.userIdLogueado.ToString() + "');";
             return query;
         }
         public string GetClientes()
         {
-            return "SELECT * FROM cliente ORDER BY razon_social;";
+            return "call obtenerClientes();";
         }
         public string GetClientes(int id)
         {
-            return "SELECT * FROM cliente  WHERE id = " + id + " ORDER BY razon_social;";
+            return "call obtenerClientes(" + id + ");";
         }
         public string GetClientesData()
         {
@@ -307,28 +296,29 @@ namespace AppLaMejor.datamanager
         //trae el saldo actual y algunos datos de referencia para el form de MovCuentas
         public string GetProveedoresSaldoActual()
         {
-            return "SELECT proveedor.id, proveedor.razon_social AS `razon social`, proveedor.nombre_local AS `nombre local`, proveedor.civa AS iva, count(proveedorcuenta.id) AS cuentas FROM proveedor inner join proveedorcuenta on proveedor.id = proveedorcuenta.id_proveedor  INNER JOIN banco ON proveedorcuenta.id_banco = banco.id group by proveedor.id order by proveedor.id ";
+            return "call obtenerProveedoresSaldoActual()";
         }
         public string GetDeleteProv(string idProveedor, DateTime fechaBaja)
         {
-            return "update proveedor set fecha_baja ='" + fechaBaja.ToString("yyyy-MM-dd") + "' where id = " + idProveedor + ";";
+            return "call borrarProveedor('" + idProveedor.ToString() + "','" + fechaBaja.ToString("yyyy-MM-dd") + "')";
         }
         public string UpdateProveedor(Proveedor proveedor)
         {
-            string query = "UPDATE proveedor SET " +
-                "razon_social ='" + proveedor.RazonSocial + "',  " +
-                "domicilio ='" + proveedor.Domicilio + "',  " +
-                "localidad ='" + proveedor.Localidad + "',  " +
-                "civa ='" + proveedor.Iva + "',  " +
-                "nombre_local ='" + proveedor.NombreLocal + "',  " +
-                "telefono ='" + proveedor.Telefono + "',  " +
-                "cuit ='" + proveedor.Cuit + "',  " +
-                "nombre_responsable ='" + proveedor.NombreResponsable + "',  " +
-                "fecha_desde ='" + proveedor.FechaDesde.ToString("yyyy-MM-dd") + "', " +
-                "usuario ='" + proveedor.idUsuario + "' " +
-                "WHERE id= " + proveedor.Id + "";
+            string query = "call actualizarProveedor(" +
+                "'" + proveedor.Id + "',  " +
+                "'" + proveedor.RazonSocial + "',  " +
+                "'" + proveedor.Domicilio + "',  " +
+                "'" + proveedor.Localidad + "',  " +
+                "'" + proveedor.Iva + "',  " +
+                "'" + proveedor.NombreLocal + "',  " +
+                "'" + proveedor.Telefono + "',  " +
+                "'" + proveedor.Cuit + "',  " +
+                "'" + proveedor.NombreResponsable + "',  " +
+                "'" + proveedor.FechaDesde.ToString("yyyy-MM-dd") + "', " +
+                "'" + proveedor.idUsuario + "');";
             return query;
         }
+        
 
         public string GetProveedorByName(string text)
         {
@@ -349,30 +339,23 @@ namespace AppLaMejor.datamanager
              "	Proveedor c " +
              "  WHERE c.fecha_baja is null " +
              "  AND c.razon_social LIKE '%"+text+"%'";
+
+            /*
+             * CALL obtenerProveedorPorNombre tiene problemas de collation
+             * 
+                select id, razon_social AS RazonSocial, domicilio AS Domicilio, localidad AS Localidad, fecha_desde as FechaDesde,
+                civa AS IVA, cuit AS CUIT, nombre_responsable AS NombreResponsable, nombre_local AS NombreLocal,
+                telefono AS Telefono, fecha_baja AS FechaBaja FROM proveedor WHERE fecha_baja is NULL
+                AND razon_social LIKE CONCAT('%',name_,'%')
+             */
         }
 
         /* Cuentas */
         public string GetClientesWithCuentaById(int id){
-            return "SELECT c.id , " +
-             "	c.cod_cliente AS CodCliente, " +
-             "	c.razon_social AS RazonSocial, " +
-             "	c.domicilio AS Domicilio, " +
-             "	c.localidad AS Localidad, " +
-             "	cast(ct.id as CHAR(50)) AS TipoCliente, " +
-             "	cu.id AS IdCuenta, " +
-             "  c.fecha_desde as FechaDesde, " +
-             "	c.civa AS IVA, " +
-             "	c.cuit AS CUIT, " +
-             "	c.nombre_responsable AS NombreResponsable, " +
-             "	c.nombre_local AS NombreLocal, " +
-             "	c.telefono AS Telefono " +
-             " FROM " +
-             "	cliente c " +
-             " INNER JOIN clientetipo ct ON ct.id = c.id_tipo_cliente INNER JOIN clientecuenta cu ON cu.id_cliente = c.id " +
-             " WHERE c.id =" + id +
-             "   AND c.fecha_baja is null  " +
-             "   order by c.id  ";
+            return "CALL obtenerClienteConCuentaPorIdCliente("+ id.ToString() +");";
         }
+
+        //HASTA ACA PAPAA
         public string GetClientesWithCuenta()
         {
             return "SELECT c.id , " +
