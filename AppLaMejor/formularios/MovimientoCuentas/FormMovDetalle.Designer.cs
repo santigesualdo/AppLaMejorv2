@@ -235,12 +235,12 @@ namespace AppLaMejor.formularios.Util
             this.btEnviar.FlatAppearance.BorderSize = 2;
             this.btEnviar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.MediumSeaGreen;
             this.btEnviar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkSlateGray;
-            this.btEnviar.Font = new System.Drawing.Font("Source Sans Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btEnviar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btEnviar.Location = new System.Drawing.Point(13, 233);
             this.btEnviar.MinimumSize = new System.Drawing.Size(100, 30);
             this.btEnviar.Name = "btEnviar";
             this.btEnviar.Padding = new System.Windows.Forms.Padding(10);
-            this.btEnviar.Size = new System.Drawing.Size(180, 50);
+            this.btEnviar.Size = new System.Drawing.Size(182, 50);
             this.btEnviar.TabIndex = 39;
             this.btEnviar.Text = "Confirmar operacion";
             this.btEnviar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -743,7 +743,7 @@ namespace AppLaMejor.formularios.Util
             this.bCancelar.FlatAppearance.BorderSize = 2;
             this.bCancelar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.MediumSeaGreen;
             this.bCancelar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkSlateGray;
-            this.bCancelar.Font = new System.Drawing.Font("Source Sans Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bCancelar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bCancelar.Location = new System.Drawing.Point(592, 3);
             this.bCancelar.MinimumSize = new System.Drawing.Size(100, 30);
             this.bCancelar.Name = "bCancelar";
@@ -763,7 +763,7 @@ namespace AppLaMejor.formularios.Util
             this.bAceptar.FlatAppearance.BorderSize = 2;
             this.bAceptar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.MediumSeaGreen;
             this.bAceptar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkSlateGray;
-            this.bAceptar.Font = new System.Drawing.Font("Source Sans Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bAceptar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bAceptar.Location = new System.Drawing.Point(445, 3);
             this.bAceptar.MinimumSize = new System.Drawing.Size(100, 30);
             this.bAceptar.Name = "bAceptar";

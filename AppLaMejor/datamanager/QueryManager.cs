@@ -355,9 +355,10 @@ namespace AppLaMejor.datamanager
             return "CALL obtenerClienteConCuentaPorIdCliente("+ id.ToString() +");";
         }
 
-        //HASTA ACA PAPAA
         public string GetClientesWithCuenta()
         {
+            //return "CALL obtenerClientesConCuenta()";
+            //POR ALGUNA RAZON ESTO EN SP NO FUNCIONA
             return "SELECT c.id , " +
              "	c.cod_cliente AS CodCliente, " +
              "	c.razon_social AS RazonSocial, " +
@@ -380,92 +381,66 @@ namespace AppLaMejor.datamanager
         }
         public string GetCuentaByIdCliente(int id)
         {
-            return "select * from clientecuenta where id_cliente = " + id.ToString() ;
+            return "CALL obtenerCuentasPorIdCliente(" + id.ToString() + ");";
         }
   
         public string GetCuenta(int id)
         {
-            return "select * from clientecuenta where id = " + id.ToString() ;
+            return "CALL obtenerClienteCuentaPorId(" + id.ToString() + ");";
         }
         public string GetCuentas()
         {
-            return "select * from clientecuenta order by id;";
+            return "CALL obtenerClienteCuentas();";
         }
         public string GetCuentas(int idCliente)
         {
-            return "SELECT banco.descripcion, cuenta.id as id_cuenta, cuenta.cbu, cuenta.nro_cuenta, cuenta.fecha_updated FROM cliente inner join clientecuenta cuenta on cliente.id = cuenta.id_cliente" +
-                " INNER JOIN banco ON cuenta.id_banco = banco.id INNER JOIN clientetipo ct ON ct.id = cliente.id_tipo_cliente where cliente.id = " + idCliente + " order by cuenta.id;";
+            string hini = "CALL obtenerTodasCuentasPorCliente(" + idCliente.ToString() + ");"; //es muy bueeeeno string-hini
+            return hini;
         }
         public string InsertNuevaCuenta(Cuenta newCuenta, string idCliente)
         {
-            return "INSERT INTO clientecuenta ( cbu, nro_cuenta, id_cliente, id_banco, fecha_updated, usuario, fecha_baja) " +
-            " VALUES ('" + newCuenta.Cbu + "', '" +
+            return "CALL grabarNuevaClienteCuenta('" + newCuenta.Cbu + "', '" +
             newCuenta.Numerocuenta + "', '" +
             idCliente + "', '" +
             newCuenta.Banco.Id+"', "+
-            " NOW() , 0 , null );";
+            " NOW() , '"+ VariablesGlobales.userIdLogueado.ToString() + "', null );";
         }
 
         /* Cuentas proveedores */
         /* Movimiento Cuentas proveedores */
         public string GetProveedoresWithCuentaById(int id)
         {
-            return "SELECT c.id , " +
-             "	c.razon_social AS RazonSocial, " +
-             "	c.domicilio AS Domicilio, " +
-             "	c.localidad AS Localidad, " +
-             "	cu.id AS IdCuenta, " +
-             "  c.fecha_desde as FechaDesde, " +
-             "	c.civa AS IVA, " +
-             "	c.cuit AS CUIT, " +
-             "	c.nombre_responsable AS NombreResponsable, " +
-             "	c.nombre_local AS NombreLocal, " +
-             "	c.telefono AS Telefono " +
-             " FROM " +
-             "	proveedor c " +
-             " INNER JOIN proveedorcuenta cu ON cu.id_proveedor = c.id " +
-             " WHERE c.id =" + id +
-             "   AND c.fecha_baja is null  " +
-             "   order by c.id  ";
+            string hini = "CALL obtenerProveedorConCuentasPorIdProveedor(" + id.ToString() + ");";
+            return hini;
         }
         public string GetProveedoresWithCuenta()
         {
-            return "SELECT c.id , " +
-             "	c.razon_social AS RazonSocial, " +
-             "	c.domicilio AS Domicilio, " +
-             "	c.localidad AS Localidad, " +
-             "	cu.id AS IdCuenta, " +
-             "  c.fecha_desde as FechaDesde, " +
-             "	c.civa AS IVA, " +
-             "	c.cuit AS CUIT, " +
-             "	c.nombre_responsable AS NombreResponsable, " +
-             "	c.nombre_local AS NombreLocal, " +
-             "	c.telefono AS Telefono " +
-             " FROM " +
-             "	proveedor c " +
-             " INNER JOIN proveedorcuenta cu ON cu.id_proveedor = c.id " +
-             " WHERE " +
-             "   c.fecha_baja is null  " +
-             "   order by c.id  ";
+            string hini = "CALL obtenerProveedoresConCuenta();";
+            return hini;
         }
         public string GetCuentaByIdProveedor(int id)
         {
-            return "select * from proveedorcuenta where id_proveedor = " + id.ToString();
+            string hini = "CALL obtenerProveedoresConCuenta(" + id.ToString() + ");";
+            return hini;
         }
 
         public string GetCuentaProveedor(int id)
         {
-            return "select * from proveedorcuenta where id = " + id.ToString();
+            string hini = "CALL obtenerProveedorCuentaPorId(" + id.ToString() + ");";
+            return hini;
         }
         public string GetCuentasProveedor()
         {
-            return "select * from proveedorcuenta order by id;";
+            string hini = "CALL obtenerProveedorCuentas();";
+            return hini;
         }
         public string GetCuentasProveedores(int idProveedor)
         {
-            return "SELECT banco.descripcion, cuenta.id as id_cuenta, cuenta.cbu, cuenta.nro_cuenta, cuenta.fecha_updated FROM proveedor inner join proveedorcuenta cuenta on proveedor.id = cuenta.id_proveedor" +
-                " INNER JOIN banco ON cuenta.id_banco = banco.id  WHERE proveedor.id = " + idProveedor + " order by cuenta.id;";
+            string hini = "CALL obtenerProveedorConCuentasPorIdProveedor(" + idProveedor.ToString() + "); ";
+            return hini;
         }
+
+        //HASTA ACAAAAAAAAAA PAPAAAAAAAAA
         public string InsertNuevaCuentaProveedor(Cuenta newCuenta, string idProveedor)
         {
             return "INSERT INTO proveedorcuenta ( cbu, nro_cuenta, id_proveedor, fecha_updated, usuario, fecha_baja) " +

@@ -2,7 +2,7 @@
 MySQL Backup
 Source Server Version: 5.6.28
 Source Database: u570713702_jjdev
-Date: 22/11/2017 14:24:17
+Date: 24/11/2017 13:18:31
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -652,6 +652,18 @@ update proveedor set fecha_baja = fecha_ where id = id_
 DELIMITER ;
 
 -- ----------------------------
+--  Procedure definition for `grabarNuevaClienteCuenta`
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `grabarNuevaClienteCuenta`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `grabarNuevaClienteCuenta`(`cbu_` varchar(40),`nro_` varchar(50),`idCliente_` int,`idBanco_` int,`idUsuario_` int)
+INSERT INTO clientecuenta 
+( cbu, nro_cuenta, id_cliente, id_banco, fecha_updated, usuario, fecha_baja) 
+ VALUES (cbu_, nro_,idCliente_,idBanco_NOW(),idUsuario_,null)
+;;
+DELIMITER ;
+
+-- ----------------------------
 --  Procedure definition for `grabarNuevoCliente`
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `grabarNuevoCliente`;
@@ -821,12 +833,47 @@ INNER JOIN clientecuenta cu ON cu.id_cliente = c.id  WHERE c.id = id_
 DELIMITER ;
 
 -- ----------------------------
+--  Procedure definition for `obtenerClienteCuentaPorId`
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `obtenerClienteCuentaPorId`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerClienteCuentaPorId`(`id_` int)
+select * from clientecuenta where id = id_
+;;
+DELIMITER ;
+
+-- ----------------------------
+--  Procedure definition for `obtenerClienteCuentas`
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `obtenerClienteCuentas`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerClienteCuentas`()
+select * from clientecuenta order by id
+;;
+DELIMITER ;
+
+-- ----------------------------
 --  Procedure definition for `obtenerClientes`
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `obtenerClientes`;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerClientes`()
 SELECT * FROM cliente ORDER BY razon_social
+;;
+DELIMITER ;
+
+-- ----------------------------
+--  Procedure definition for `obtenerClientesConCuenta`
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `obtenerClientesConCuenta`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerClientesConCuenta`()
+SELECT c.id ,	c.cod_cliente AS CodCliente, 	c.razon_social AS RazonSocial, 	c.domicilio AS Domicilio,
+c.localidad AS Localidad,cast(ct.id as CHAR(50)) AS TipoCliente, cu.id AS IdCuenta, 
+c.fecha_desde as FechaDesde, c.civa AS IVA, c.cuit AS CUIT,c.nombre_responsable AS NombreResponsable,
+c.nombre_local AS NombreLocal,c.telefono AS Telefono FROM	cliente c 
+INNER JOIN clientetipo ct ON ct.id = c.id_tipo_cliente 
+INNER JOIN clientecuenta cu ON cu.id_cliente = c.id  AND c.fecha_baja is null order by c.id
 ;;
 DELIMITER ;
 
@@ -853,6 +900,26 @@ SELECT * FROM cliente  WHERE id = id_ ORDER BY razon_social
 DELIMITER ;
 
 -- ----------------------------
+--  Procedure definition for `obtenerCuentasPorIdCliente`
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `obtenerCuentasPorIdCliente`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerCuentasPorIdCliente`(`id_` int)
+select * from clientecuenta where id_cliente = id_
+;;
+DELIMITER ;
+
+-- ----------------------------
+--  Procedure definition for `obtenerCuentasPorIdProveedor`
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `obtenerCuentasPorIdProveedor`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerCuentasPorIdProveedor`(`id_` int)
+select * from proveedorcuenta where id_proveedor = id_
+;;
+DELIMITER ;
+
+-- ----------------------------
 --  Procedure definition for `obtenerMovCuentasClientes`
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `obtenerMovCuentasClientes`;
@@ -868,12 +935,73 @@ cm.cobrado, cm.usuario
 DELIMITER ;
 
 -- ----------------------------
+--  Procedure definition for `obtenerProveedorConCuentasPorIdProveedor`
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `obtenerProveedorConCuentasPorIdProveedor`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerProveedorConCuentasPorIdProveedor`(`id_` int)
+SELECT 
+banco.descripcion, 
+cuenta.id as id_cuenta, 
+cuenta.cbu, 
+cuenta.nro_cuenta, 
+cuenta.fecha_updated 
+FROM proveedor 
+inner join proveedorcuenta cuenta on proveedor.id = cuenta.id_proveedor
+INNER JOIN banco ON cuenta.id_banco = banco.id  
+WHERE proveedor.id = id_ order by cuenta.id
+;;
+DELIMITER ;
+
+-- ----------------------------
+--  Procedure definition for `obtenerProveedorCuentaPorId`
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `obtenerProveedorCuentaPorId`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerProveedorCuentaPorId`(`id_` int)
+select * from proveedorcuenta where id = id_
+;;
+DELIMITER ;
+
+-- ----------------------------
+--  Procedure definition for `obtenerProveedorCuentas`
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `obtenerProveedorCuentas`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerProveedorCuentas`()
+select * from proveedorcuenta order by id
+;;
+DELIMITER ;
+
+-- ----------------------------
 --  Procedure definition for `obtenerProveedores`
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `obtenerProveedores`;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerProveedores`()
 SELECT * FROM proveedor ORDER BY razon_social
+;;
+DELIMITER ;
+
+-- ----------------------------
+--  Procedure definition for `obtenerProveedoresConCuenta`
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `obtenerProveedoresConCuenta`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerProveedoresConCuenta`()
+SELECT c.id , 
+c.razon_social AS RazonSocial, 
+	c.domicilio AS Domicilio, 
+	c.localidad AS Localidad,
+cu.id AS IdCuenta, 
+ c.fecha_desde as FechaDesde, 
+c.civa AS IVA, 
+	c.cuit AS CUIT, 
+	c.nombre_responsable AS NombreResponsable,
+	c.nombre_local AS NombreLocal,
+c.telefono AS Telefono  FROM 	proveedor c 
+ INNER JOIN proveedorcuenta cu ON cu.id_proveedor = c.id 
+ WHERE  c.fecha_baja is null  order by c.id
 ;;
 DELIMITER ;
 
@@ -955,6 +1083,26 @@ DROP PROCEDURE IF EXISTS `obtenerTipoProdutoPorIdProducto`;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerTipoProdutoPorIdProducto`(id_ int)
 select id_producto_tipo from producto where id = id_
+;;
+DELIMITER ;
+
+-- ----------------------------
+--  Procedure definition for `obtenerTodasCuentasPorCliente`
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `obtenerTodasCuentasPorCliente`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerTodasCuentasPorCliente`(`id_` int)
+SELECT 
+banco.descripcion, 
+c.id AS id_cuenta, 
+c.cbu, 
+c.nro_cuenta, 
+c.fecha_updated 
+FROM cliente
+INNER JOIN clientecuenta c ON cliente.id = c.id_cliente
+INNER JOIN banco ON c.id_banco = banco.id 
+INNER JOIN clientetipo ct ON ct.id = cliente.id_tipo_cliente 
+WHERE cliente.id = id_ ORDER BY c.id
 ;;
 DELIMITER ;
 

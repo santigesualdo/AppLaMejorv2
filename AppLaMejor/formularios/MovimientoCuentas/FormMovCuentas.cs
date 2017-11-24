@@ -123,7 +123,7 @@ namespace AppLaMejor.formularios
                 StringBuilder filter = new StringBuilder();
                 if (!(string.IsNullOrEmpty(filterTextBox.Text)))
                 {
-                    filter.Append("`Razon Social` Like '%" + filterTextBox.Text + "%'");
+                    filter.Append("`RazonSocial` Like '%" + filterTextBox.Text + "%'");
                     (dataGridClientes.DataSource as DataTable).DefaultView.RowFilter = filter.ToString();
                 }
             }
