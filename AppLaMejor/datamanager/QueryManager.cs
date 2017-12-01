@@ -213,37 +213,20 @@ namespace AppLaMejor.datamanager
         }
         public string GetClientesData()
         {
-            return
-                " SELECT " +
-             "	c.id , " +
-             "	c.cod_cliente as CodCliente , " +
-             "	c.razon_social AS RazonSocial, " +
-             "	c.domicilio AS Domicilio, " +
-             "	c.localidad AS Localidad, " +										  
-             "	cast(c.id_tipo_cliente as CHAR(50)) AS TipoCliente, " +
-             "  c.fecha_desde as FechaDesde, " +
-             "	c.civa AS IVA, " +
-             "	c.cuit AS CUIT, " +
-             "	c.nombre_responsable AS NombreResponsable, " +
-             "	c.nombre_local AS NombreLocal, " +
-             "	c.telefono AS Telefono," +
-             "	c.fecha_baja AS FechaBaja " +
-             " FROM " +
-             "	cliente c " +
-             " WHERE c.fecha_baja is null " +
-             "   order by c.id  ";
+            return "CALL obtenerClientesData();";
         }
         //trae el saldo actual y algunos datos de referencia para el form de MovCuentas
         public string GetClientesSaldoActual()
         {
+           // return "CALL obtenerClientesSaldoActual()";
             return "SELECT cliente.id, cliente.cod_cliente as CodCliente, cliente.razon_social AS `RazonSocial`, cliente.nombre_local AS `NombreLocal`, cliente.civa AS IVA, cast(cliente.id_tipo_cliente as CHAR(50)) AS TipoCliente,count(cuenta.id) AS CantidadCuentas FROM cliente inner join clientecuenta cuenta on cliente.id = cuenta.id_cliente       INNER JOIN banco ON cuenta.id_banco = banco.id INNER JOIN clientetipo ct ON ct.id = cliente.id_tipo_cliente group by cliente.id order by cliente.id";
-																																							  
-																																																																 
-        } 
-  
-		public string GetDeleteClient(string idCliente, DateTime fechaBaja)
+
+        }
+
+        public string GetDeleteClient(string idCliente, DateTime fechaBaja)
         {
-            return "update cliente set fecha_baja ='" + fechaBaja.ToString("yyyy-MM-dd") + "' where id = "+ idCliente+";";
+            //return "update cliente set fecha_baja ='" + fechaBaja.ToString("yyyy-MM-dd") + "' where id = "+ idCliente+";";
+            return "CALL borrarCliente(" + idCliente.ToString() + ",'" + fechaBaja.ToString("yyyy-MM-dd") + "')";
         }
 
         /* Proveedores */
@@ -267,31 +250,15 @@ namespace AppLaMejor.datamanager
     
         public string GetProveedores()
         {
-            return "SELECT * FROM proveedor ORDER BY razon_social;";
+            return "CALL obtenerProveedores();";
         }
         public string GetProveedores(int id)
         {
-            return "SELECT * FROM proveedor  WHERE id = " + id + " ORDER BY razon_social;";
+            return "CALL obtenerProveedoresPorId(" + id + ");";
         }
         public string GetProveedoresData()
         {
-            return
-                " SELECT " +
-             "	c.id , " +
-             "	c.razon_social AS RazonSocial, " +
-             "	c.domicilio AS Domicilio, " +
-             "	c.localidad AS Localidad, " +
-             "  c.fecha_desde as FechaDesde, " +
-             "	c.civa AS IVA, " +
-             "	c.cuit AS CUIT, " +
-             "	c.nombre_responsable AS NombreResponsable, " +
-             "	c.nombre_local AS NombreLocal, " +
-             "	c.telefono AS Telefono," +
-             "	c.fecha_baja AS FechaBaja " +
-             " FROM " +
-             "	Proveedor c " +
-             "  WHERE c.fecha_baja is null " +
-             "   order by c.id  ";
+            return "CALL obtenerProveedoresData();";
         }        
         //trae el saldo actual y algunos datos de referencia para el form de MovCuentas
         public string GetProveedoresSaldoActual()
@@ -352,7 +319,26 @@ namespace AppLaMejor.datamanager
 
         /* Cuentas */
         public string GetClientesWithCuentaById(int id){
-            return "CALL obtenerClienteConCuentaPorIdCliente("+ id.ToString() +");";
+            return "SELECT c.id , " +
+            "	c.cod_cliente AS CodCliente, " +
+            "	c.razon_social AS 'Razon Social', " +
+            "	c.domicilio AS Domicilio, " +
+            "	c.localidad AS Localidad, " +
+            "	cast(ct.id as CHAR(50)) AS TipoCliente, " +
+            "	cu.id AS IdCuenta, " +
+            "  c.fecha_desde as FechaDesde, " +
+            "	c.civa AS IVA, " +
+            "	c.cuit AS CUIT, " +
+            "	c.nombre_responsable AS NombreResponsable, " +
+            "	c.nombre_local AS NombreLocal, " +
+            "	c.telefono AS Telefono " +
+            " FROM " +
+            "	cliente c " +
+            " INNER JOIN clientetipo ct ON ct.id = c.id_tipo_cliente INNER JOIN clientecuenta cu ON cu.id_cliente = c.id " +
+            " WHERE c.id =" + id +
+            "   AND c.fecha_baja is null  " +
+            "   order by c.id  ";
+
         }
 
         public string GetClientesWithCuenta()
@@ -394,16 +380,25 @@ namespace AppLaMejor.datamanager
         }
         public string GetCuentas(int idCliente)
         {
-            string hini = "CALL obtenerTodasCuentasPorCliente(" + idCliente.ToString() + ");"; //es muy bueeeeno string-hini
+            //string hini = "CALL obtenerTodasCuentasPorCliente(" + idCliente.ToString() + ");"; //es muy bueeeeno string-hini
+
+            //string hini = "SELECT banco.descripcion, cuenta.id as id_cuenta, cuenta.cbu, cuenta.nro_cuenta, cuenta.fecha_updated " +
+            //    " FROM cliente inner join clientecuenta cuenta on cliente.id = cuenta.id_cliente" +
+            //    " INNER JOIN banco ON cuenta.id_banco = banco.id INNER JOIN clientetipo ct ON ct.id = cliente.id_tipo_cliente where cliente.id = " + idCliente + " order by cuenta.id;";
+
+
+            string hini = "SELECT banco.descripcion as Banco,  c.id AS id_cuenta,  c.cbu,  c.descripcion,  c.fecha_updated " +
+                " FROM cliente INNER JOIN clientecuenta c ON cliente.id = c.id_cliente " + 
+                " INNER JOIN banco ON c.id_banco = banco.id INNER JOIN clientetipo ct ON ct.id = cliente.id_tipo_cliente WHERE cliente.id = "+ idCliente +" ORDER BY c.id ";
+
             return hini;
         }
         public string InsertNuevaCuenta(Cuenta newCuenta, string idCliente)
         {
             return "CALL grabarNuevaClienteCuenta('" + newCuenta.Cbu + "', '" +
-            newCuenta.Numerocuenta + "', '" +
+            newCuenta.Descripcion + "', '" +
             idCliente + "', '" +
-            newCuenta.Banco.Id+"', "+
-            " NOW() , '"+ VariablesGlobales.userIdLogueado.ToString() + "', null );";
+            newCuenta.Banco.Id+"','"+ VariablesGlobales.userIdLogueado.ToString() + "');";
         }
 
         /* Cuentas proveedores */
@@ -443,9 +438,9 @@ namespace AppLaMejor.datamanager
         //HASTA ACAAAAAAAAAA PAPAAAAAAAAA
         public string InsertNuevaCuentaProveedor(Cuenta newCuenta, string idProveedor)
         {
-            return "INSERT INTO proveedorcuenta ( cbu, nro_cuenta, id_proveedor, fecha_updated, usuario, fecha_baja) " +
+            return "INSERT INTO proveedorcuenta ( cbu, descripcion, id_proveedor, fecha_updated, usuario, fecha_baja) " +
             " VALUES ('" + newCuenta.Cbu + "', '" +
-            newCuenta.Numerocuenta + "', '" +
+            newCuenta.Descripcion + "', '" +
 											
             idProveedor + "', " +
             " NOW() , 0 , null );";
@@ -894,7 +889,6 @@ namespace AppLaMejor.datamanager
         {
             return "select * from garronestado; ";
         }
-
 
         /* Banco */
         public string GetBanco()

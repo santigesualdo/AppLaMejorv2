@@ -10,8 +10,8 @@ namespace AppLaMejor.entidades
         [DataNames("cbu")]
         public string Cbu { get; set; }
 
-        [DataNames("nro_cuenta")]
-        public string Numerocuenta { get; set; }
+        [DataNames("descripcion")]
+        public string Descripcion { get; set; }
 
         private Nullable<DateTime> fechaUltimaActualizacion;
 
