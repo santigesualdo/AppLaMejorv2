@@ -213,7 +213,9 @@ namespace AppLaMejor.datamanager
         }
         public string GetClientesData()
         {
-            return "CALL obtenerClientesData();";
+            return " SELECT c.id, c.razon_social AS RazonSocial, c.domicilio AS Domicilio, c.localidad AS Localidad, cast(c.id_tipo_cliente as CHAR(50)) AS TipoCliente, " +
+                " c.fecha_desde as FechaDesde, c.civa AS IVA, c.cuit AS CUIT, c.nombre_responsable AS NombreResponsable, c.nombre_local AS NombreLocal, c.telefono AS Telefono, "+
+                " c.fecha_baja AS FechaBaja FROM cliente c order by c.id";
         }
         //trae el saldo actual y algunos datos de referencia para el form de MovCuentas
         public string GetClientesSaldoActual()
