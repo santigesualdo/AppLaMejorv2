@@ -11,6 +11,9 @@ using AppLaMejor.formularios.Util;
 using AppLaMejor.entidades;
 using AppLaMejor.controlmanager;
 using AppLaMejor.stylemanager;
+using AppLaMejor.formularios.Productos;
+using System.IO;
+using System.Diagnostics;
 
 namespace AppLaMejor.formularios
 {
@@ -291,5 +294,102 @@ namespace AppLaMejor.formularios
             }
         }
 
+        private void bHistoricoPrecios_Click(object sender, EventArgs e)
+        {
+            ShowHistoricoPrecios();
+        }
+
+        private void bActualizarPrecios_Click(object sender, EventArgs e)
+        {
+            FormActualizarPrecios formActualizarPrecios = new FormActualizarPrecios();
+            formActualizarPrecios.ShowDialog();
+        }
+
+        private void dataGridProductos_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+
+        }
+
+        private void dataGridProductos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            ShowHistoricoPrecios();
+            // TODO: ir al modificado en la grilla
+        }
+
+        private void ShowHistoricoPrecios()
+        {
+            // HistoricoPrecio
+
+            int index = dataGridProductos.CurrentRow.Index;
+            
+            int i = FuncionesGlobales.obtenerIndexDeListFromGrid(dataGridProductos);
+            Producto ProdSelected = listProds.First(s => s.Id == i);
+            int idProducto = ProdSelected.Id;
+
+            VariablesGlobales.idProductoHistorico = idProducto;
+
+            FormHistoricoPrecios formHistoricoPrecios = new FormHistoricoPrecios();
+            formHistoricoPrecios.ShowDialog();
+
+            CargarDataGrid();
+
+            dataGridProductos.Rows[0].Selected = false;
+            dataGridProductos.Rows[index].Selected = true;
+            dataGridProductos.FirstDisplayedScrollingRowIndex = dataGridProductos.SelectedRows[0].Index;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ExportarPreciosCsv();
+        }
+
+        private void ExportarPreciosCsv()
+        {
+            FormMessageBox dialog = new FormMessageBox();
+            try
+            {
+                // Confirmamos que el usuario este seguro 
+
+                if (dialog.ShowConfirmationDialog("¿Esta seguro de guardar los precios en Balanza Digital?"))
+                {
+                    // Exigimos que Qendra este abierto. Sino, lo abrimos.
+                    if (!FuncionesGlobales.IsProccessOpen("Qendra"))
+                    {
+                        dialog.ShowConfirmationDialog("Es necesario abrir la App QENDRA para actualizar precios. \nAbriendo QENDRA, intente nuevamente cuando la aplicacion este abierta.");
+                        String path = FuncionesGlobales.GetParametro(VariablesGlobales.QENDRAPATH_PARAMNAME);
+
+                        // Abrimos la aplicacion y cortamos la exportación hasta que Qendra este activo.
+                        Process.Start(path);
+                        return;
+                    }
+                    else
+                    {
+                        dialog.ShowConfirmationDialog("Qendra abierto. Exportando.. ");
+                    }
+                }
+                else
+                    return;
+
+
+                // Quendra esta activo, creamos el CSV.
+                StringBuilder sb = new StringBuilder();
+                DataTable dt = FuncionesPrecios.GetPreciosToExport();
+                foreach (DataRow row in dt.Rows)
+                {
+                    string[] fields = row.ItemArray.Select(field => field.ToString()).ToArray();
+                    sb.AppendLine(string.Join(",", fields));
+                }
+
+                string savePath = FuncionesGlobales.GetParametro(VariablesGlobales.FILEPRECIOSSAVE_PARAMNAME);
+                File.WriteAllText(savePath + "applamejorprecios.csv", sb.ToString());
+                MyTextTimer.TStart("Precios exportados correctamente. Aguarde el mensaje de confirmación.", statusStrip1, tsslMensaje);
+
+            }
+            catch (Exception E)
+            {
+                dialog.ShowErrorDialog("Ocurrio un problema. Motivo: " + E.Message);
+            }
+        }
     }
 }

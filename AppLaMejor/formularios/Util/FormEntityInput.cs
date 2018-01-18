@@ -59,7 +59,7 @@ namespace AppLaMejor.formularios.Util
         List<TipoProducto> listTipoProductos;
         List<TipoGarron> listTipoGarron;
         List<TipoEstadoGarron> listTipoEstadoGarron;
-        List<Banco> listBanco;
+        List<Banco> listBanco;        
 
         bool first;
 
@@ -120,6 +120,7 @@ namespace AppLaMejor.formularios.Util
                             else
                             if (property.PropertyType == typeof(TipoEstadoGarron))
 	                            TypeTipoEstadoGarron(property);
+                            else
                             if (property.PropertyType == typeof(Banco))
                                 TypeBanco(property);
                         }
@@ -178,29 +179,7 @@ namespace AppLaMejor.formularios.Util
             controlsTableLayoutPanel.Controls.Add(GetCampoTitulo(property.Name), 0, controlsTableLayoutPanel.RowCount+=1);
             controlsTableLayoutPanel.Controls.Add(textField, 1, controlsTableLayoutPanel.RowCount);
         }
-        private void TypeNullableDateTime(PropertyInfo property)
-        {
-            controlsTableLayoutPanel.Controls.Add(GetCampoTitulo(property.Name), 0, controlsTableLayoutPanel.RowCount += 1);
 
-            Binding binding = new Binding("Text", _reflection, property.Name);
-            var textBox = new TextBox { Dock = DockStyle.Fill, AutoSize = true };
-            textBox.DataBindings.Add(binding);
-
-            if (!textBox.Text.Equals(""))
-            {
-                Binding dateBinding = new Binding("Value", _reflection, property.Name);
-                DateTimePicker dtp = new DateTimePicker { Dock = DockStyle.Fill, AutoSize = true };
-                dtp.DataBindings.Add(dateBinding);
-                controlsTableLayoutPanel.Controls.Add(dtp, 1, controlsTableLayoutPanel.RowCount );
-            }
-            else
-            {
-                DateTimePicker dtp = new DateTimePicker { Dock = DockStyle.Fill, AutoSize = true };
-                Binding dateBinding = new Binding("Value", _reflection, property.Name);
-                dtp.DataBindings.Add(dateBinding);
-                controlsTableLayoutPanel.Controls.Add(dtp, 1, controlsTableLayoutPanel.RowCount );
-            }
-        }
         private void TypeDecimal(PropertyInfo property)
         {
             // decimal
@@ -229,9 +208,36 @@ namespace AppLaMejor.formularios.Util
             dtp = new DateTimePicker { Dock = DockStyle.Fill, AutoSize = true };
             dtp.DataBindings.Add(binding);
 
+            if (currentModo.Equals(MODO_VER))
+                dtp.Enabled = false;
+       
             controlsTableLayoutPanel.Controls.Add(GetCampoTitulo(property.Name), 0, controlsTableLayoutPanel.RowCount += 1);
             controlsTableLayoutPanel.Controls.Add(dtp, 1, controlsTableLayoutPanel.RowCount);
         }
+
+        private void TypeNullableDateTime(PropertyInfo property)
+        {
+            controlsTableLayoutPanel.Controls.Add(GetCampoTitulo(property.Name), 0, controlsTableLayoutPanel.RowCount += 1);
+
+            Binding binding = new Binding("Text", _reflection, property.Name);
+            var textBox = new TextBox { Dock = DockStyle.Fill, AutoSize = true };
+            textBox.DataBindings.Add(binding);
+
+            if (textBox.Text.Equals(""))
+            {
+                TextBox dtp = new TextBox { Dock = DockStyle.Fill, AutoSize = true };
+                dtp.ReadOnly = true;
+                controlsTableLayoutPanel.Controls.Add(dtp, 1, controlsTableLayoutPanel.RowCount);
+            }
+            else
+            {
+                DateTimePicker dtp = new DateTimePicker { Dock = DockStyle.Fill, AutoSize = true };
+                Binding dateBinding = new Binding("Value", _reflection, property.Name);
+                dtp.DataBindings.Add(dateBinding);
+                controlsTableLayoutPanel.Controls.Add(dtp, 1, controlsTableLayoutPanel.RowCount);
+            }
+        }
+
         private void TypeTipoCliente(PropertyInfo property)
         {
             ComboBox combo = new ComboBox { Dock = DockStyle.Fill, AutoSize = true };

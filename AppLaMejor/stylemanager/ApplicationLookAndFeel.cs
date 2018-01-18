@@ -150,6 +150,7 @@ public class ApplicationLookAndFeel
         c.RowTemplate.DefaultCellStyle.ForeColor = c.ForeColor;
         c.RowTemplate.DefaultCellStyle.SelectionBackColor = style.MainColor;
         c.RowTemplate.DefaultCellStyle.SelectionForeColor = c.BackColor;
+        c.RowTemplate.Height = 35;
 
         dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
         dataGridViewCellStyle1.BackColor = c.ForeColor;

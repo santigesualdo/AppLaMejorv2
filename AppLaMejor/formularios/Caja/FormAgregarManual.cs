@@ -16,6 +16,8 @@ namespace AppLaMejor.formularios.Caja
 {
     public partial class FormAgregarManual : Form
     {
+        // TODO: Validar que todos los botones tengan la info que requieren.
+
         public Producto product = new Producto();
         public string codigomanual;
         public FormAgregarManual()

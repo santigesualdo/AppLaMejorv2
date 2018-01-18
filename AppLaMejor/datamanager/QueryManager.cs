@@ -933,6 +933,45 @@ namespace AppLaMejor.datamanager
             return "select id_banco from proveedorcuenta where id = '" + idCuenta.ToString() + "';";
         }
 
+        /* Precios */
+        public string GetPrecioHistoricoData()
+        {
+            return "select id, cast(id_producto as char) as Producto, desde as FechaDesde, hasta as FechaHasta, precio as Precio, id_usuario, fecha_baja from preciohistorico " +
+                   "order by id_producto, hasta";
+        }
+        public string GetPrecioHistoricoByProducto(int idProducto)
+        {
+            return "select id, cast(id_producto as char) as Producto, desde as FechaDesde, hasta as FechaHasta, precio as Precio, id_usuario, fecha_baja from preciohistorico " +
+                   " where id_producto = '" + idProducto.ToString() + "' " +
+                   " order by desde desc";
+        }
+        public string ClosePrecioHistorico(int id)
+        {
+            return " UPDATE preciohistorico set hasta = DATE_SUB(now(),interval 1 day) where id = '" + id.ToString() + "'";
+        }
+        public string CreateHistoricoNuevo(decimal precioNuevo, int idProducto)
+        {
+            return " INSERT INTO preciohistorico(id_producto, desde, hasta, precio, id_usuario, fecha_baja) " +
+                " VALUES('" + idProducto.ToString() + "', NOW(), NULL, '" + precioNuevo.ToString() + "',  '" + VariablesGlobales.userIdLogueado.ToString() + "', NULL);";
+        }
+        public string UpdateProductoPrecio(decimal precioNuevo, int idProducto)
+        {
+            return " UPDATE producto set precio = '" + precioNuevo + "' WHERE id = '" + idProducto.ToString() + "';";
+        }
+        public string UpdatePrecioHistorico(decimal precioNuevo, int idProducto)
+        {
+            return " UPDATE preciohistorico set precio = '" + precioNuevo + "' WHERE hasta is null and id_producto = '" + idProducto.ToString() + "';";
+        }
+        public string GetPreciosToExport()
+        {
+            return "SELECT CONCAT('CARNICERIA;',cast(SUBSTR(p.id_codigo_barra, 2, 4) AS UNSIGNED),';',p.descripcion_breve,';',cast(SUBSTR(p.id_codigo_barra, 2, 4) AS UNSIGNED),';',p.precio,';','0.00;P;0;;'	) " +
+                    "FROM producto p";
+        }
+        public string GetParametroByName(string name)
+        {
+            return "SELECT value FROM parametros where name = '" + name + "';";
+        }
+
     }
 
 
