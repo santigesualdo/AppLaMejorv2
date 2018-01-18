@@ -630,7 +630,13 @@ namespace AppLaMejor.datamanager
                 movCuenta.Monto + ", NOW(),'" +
                 movCuenta.Cobrado + "'," +
                 movCuenta.idUsuario + ");";
-        }		
+        }
+
+        public string GetNextMovCuentaId()
+        {
+            return "SELECT MAX(id)+1 as nextid from clientecuentamovimiento;";
+        }
+
         /* Ventas */
         public string GetProductoFromIdCode(string idCode)
         {
@@ -664,6 +670,17 @@ namespace AppLaMejor.datamanager
                 " NOW() , '" +
                 VariablesGlobales.userIdLogueado.ToString() + "');";
         }
+
+        public string InsertOperacion(Operacion o)
+        {
+            string consulta = "INSERT INTO operacion (id_tipo_operacion, id_venta, id_cliente, id_mov_cuenta, fecha, usuario) VALUES (" +
+                o.tipoOperacion.Id + "," + o.venta.Id + "," + o.cliente.Id + "," + o.movCuenta.Id +
+                ",NOW()," +
+                VariablesGlobales.userIdLogueado.ToString() + ");";
+
+            return consulta;
+        }
+
         public string GetMedidas()
         {
             return "select * From medida;";
@@ -731,6 +748,12 @@ namespace AppLaMejor.datamanager
         public string GetNextVentaId()
         {
             return "SELECT MAX(id)+1 as nextid from venta;";
+        }
+
+        /* Operacion */
+        public string GetNextOperacionId()
+        {
+            return "SELECT MAX(id)+1 as nextid from operacion;";
         }
 
         /* Productos */

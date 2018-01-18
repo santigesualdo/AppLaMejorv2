@@ -53,7 +53,15 @@ namespace AppLaMejor.formularios.MovimientoCuentas
             string consulta = QueryManager.Instance().InsertMovCuenta(movCuenta1);
             return QueryManager.Instance().ExecuteSQL(ConnecionBD.Instance().Connection, consulta);
         }
-        
+
+        public static int GetNextIdMovCuenta()
+        {
+            QueryManager manager = QueryManager.Instance();
+            string consulta = manager.GetNextMovCuentaId();
+            DataTable result = manager.GetTableResults(ConnecionBD.Instance().Connection, consulta);
+            return Int32.Parse(result.Rows[0][0].ToString());
+        }
+
         //proveedores
         public static DataTable fillMovCuentasProveedores()
         {

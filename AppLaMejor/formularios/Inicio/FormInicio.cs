@@ -91,6 +91,7 @@ namespace AppLaMejor.formularios
                 case "Ventas Caja": boton.Click += new System.EventHandler(IniciarVentasCaja); break;
                 case "Carga Garron": boton.Click += new System.EventHandler(IniciarCargaGarron); break;
                 case "Compras": boton.Click += new System.EventHandler(IniciarCompras); break;
+                case "Caja Mayorista": boton.Click += new System.EventHandler(IniciarCajaMay); break;
             }
             return boton;
         }
@@ -124,6 +125,12 @@ namespace AppLaMejor.formularios
         {
             FormCaja formCaja = new FormCaja();
             formCaja.ShowDialog();
+        }
+
+        private void IniciarCajaMay(object sender, EventArgs e)
+        {
+            FormCajaMayorista formCajaMay = new FormCajaMayorista();
+            formCajaMay.ShowDialog();
         }
         private void IniciarVentasCaja(object sender, EventArgs e)
         {

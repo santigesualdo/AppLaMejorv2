@@ -12,6 +12,9 @@ namespace AppLaMejor.formularios.Util
 {
     public partial class FormMovDetalle : Form
     {
+        // TODO: Validar que exista una cuenta para iniciar.
+        // TODO: Validar al "Confirmar Operacion" que exista una cuenta tambien.
+
         DataTable table, tableCuentas, tableMovCuentas, tableMovCuentasPaginator;
         DataView dv;
 
@@ -41,6 +44,14 @@ namespace AppLaMejor.formularios.Util
             this.Size = new Size(actualSize.Width, Screen.PrimaryScreen.Bounds.Height - 25);
         }
 
+        public FormMovDetalle(int modo, Cliente client, string importe)
+        {
+            Iniciar(modo, client, importe);
+
+            Size actualSize = this.Size;
+            this.Size = new Size(actualSize.Width, Screen.PrimaryScreen.Bounds.Height - 25);
+        }
+
         public FormMovDetalle(int modo, Proveedor proveedor)
         {
             Iniciar(modo, proveedor);
@@ -64,6 +75,25 @@ namespace AppLaMejor.formularios.Util
             cargar();
             lastEntityId = client.Id;
 
+            calcular(lastEntityId);
+            fillGrid();
+            fillGridCuentas(lastEntityId);
+            ApplicationLookAndFeel.ApplyThemeToAll(this);
+        }
+
+        private void Iniciar(int modo, Cliente client, string importe)
+        {
+            currentModo = modo;
+            tipo = "Cliente";
+
+            InitializeComponent();
+
+            cargar();
+            tbImporte.Text = importe;
+            lastEntityId = client.Id;
+            rAcreditar.Checked = true;
+            rDebitar.Checked = false;
+            rDebitar.Enabled = false;
             calcular(lastEntityId);
             fillGrid();
             fillGridCuentas(lastEntityId);
@@ -619,6 +649,11 @@ namespace AppLaMejor.formularios.Util
                             tableMovCuentas.AcceptChanges();
 
                             calcular(lastEntityId);
+
+                            //obtengo el idMovCuenta para Venta Mayorista
+
+                            VariablesGlobales.idMovCuenta_VentaMay = FuncionesMovCuentas.GetNextIdMovCuenta();
+                            VariablesGlobales.Cuenta_VentaMay = cuenta;
                         };
 
                         

@@ -1,24 +1,41 @@
 /*
-MySQL Backup
-Source Server Version: 5.6.28
-Source Database: u570713702_jjdev
-Date: 24/11/2017 13:18:31
+Navicat MySQL Data Transfer
+
+Source Server         : local host connection
+Source Server Version : 50617
+Source Host           : localhost:3306
+Source Database       : johnbranch_bd
+
+Target Server Type    : MYSQL
+Target Server Version : 50617
+File Encoding         : 65001
+
+Date: 2018-01-18 19:43:55
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
---  Table structure for `banco`
+-- Table structure for banco
 -- ----------------------------
 DROP TABLE IF EXISTS `banco`;
 CREATE TABLE `banco` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
---  Table structure for `cliente`
+-- Records of banco
+-- ----------------------------
+INSERT INTO `banco` VALUES ('1', 'Macro');
+INSERT INTO `banco` VALUES ('2', 'Santander');
+INSERT INTO `banco` VALUES ('3', 'Santa Fe');
+INSERT INTO `banco` VALUES ('4', 'Nación');
+INSERT INTO `banco` VALUES ('5', 'Cuenta Corriente');
+
+-- ----------------------------
+-- Table structure for cliente
 -- ----------------------------
 DROP TABLE IF EXISTS `cliente`;
 CREATE TABLE `cliente` (
@@ -42,11 +59,44 @@ CREATE TABLE `cliente` (
 ) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
---  Table structure for `clientecuenta`
+-- Records of cliente
+-- ----------------------------
+INSERT INTO `cliente` VALUES ('1', '111', 'WTF', 'asd', 'asd', 'asd', '1', 'asd', 'asd', 'asd', 'asd', '2017-09-05', null, '1');
+INSERT INTO `cliente` VALUES ('2', 'nke', 'Juanjo', 'j de la rosa 1252', 'santa fe', 'CF', '2', 'DESAROLLO SANTA', '2', '1', '3', '2017-09-05', null, '1');
+INSERT INTO `cliente` VALUES ('3', 'kkk', 'A.D.U.L.', 'Pje. Martinez 26661', 'Santa Fe', 'CF', '4', 'defaultLocal', '30-55597562-3', '4553992', 'NombreResponsable', '2017-09-05', null, '1');
+INSERT INTO `cliente` VALUES ('4', '114', 'A.N.S.E.S.', 'SAN MARTIN N 2533', 'Santa Fe', 'CF', '1', 'defaultLocal', '33-63761744-9', '4156256', 'NombreResponsable', '2017-09-05', null, '1');
+INSERT INTO `cliente` VALUES ('5', '115', 'A.PE.L - Asoc.Pers.Legislativo', 'San Jeronimo N  1.791', 'Santa Fe', 'CF', '1', 'defaultLocal', '30-64955281-5', '4598277', 'NombreResponsable', '2017-09-05', null, '1');
+INSERT INTO `cliente` VALUES ('6', '116', 'ACANTILADOS S.A. (VALMOTORS)', 'SAN LUIS N 3102', 'Santa Fe', 'CF', '1', 'defaultLocal', '30-70941478-6', '4530606', 'NombreResponsable', '2017-09-06', null, '1');
+INSERT INTO `cliente` VALUES ('7', '117', 'ACOSTA MARTIN SEBASTIAN', 'Pje. E.del Crespo N 7103/Berutti 5725', 'Santa Fe', 'CF', '2', 'defaultLocal', '30-64955281-5', '4530606', 'NombreResponsable', '2017-09-06', null, '1');
+INSERT INTO `cliente` VALUES ('8', '118', 'AdministraciÂ¢n Provincial de Impuestos-A.P.I', 'AVDA.PTE.ILLIA NÂ§ 1.151', 'Santa Fe', 'CF', '2', 'defaultLocal', '30-65520017-3', '4557996', 'NombreResponsable', '2017-09-06', null, '0');
+INSERT INTO `cliente` VALUES ('9', '119', 'Agencia Provincial de Seguridad Vial', '25 DE MAYO N  2.208', 'Santa Fe', 'CF', '1', 'defaultLocal', '30-99901844-7', '4574822', 'NombreResponsable', '2017-09-06', null, '1');
+INSERT INTO `cliente` VALUES ('10', '120', 'AGOSTINI OSVALDO OMAR', 'AVDA. GORRITI N 3014', 'Santa Fe', 'CF', '2', 'defaultLocal', '20-05261057-6', '4695406', 'NombreResponsable', '2017-09-06', '2001-01-01 00:00:00', '1');
+INSERT INTO `cliente` VALUES ('11', '121', 'AICACYP-Ente Cooperador Ley 23.979', 'Moreno N 1420  (p/Facturar)', 'Santa Fe', 'CF', '2', 'defaultLocal', '30-55597562-3', '4574822', 'NombreResponsable', '2017-09-07', null, '1');
+INSERT INTO `cliente` VALUES ('12', '122', 'AICACYP-Ente Cooperador Ley 23.979', 'RENAR: Francia N 3550 - Santa Fe', 'Santa Fe', 'CF', '2', 'defaultLocal', '011-4384-7900', '4557996', 'NombreResponsable', '2017-09-07', null, '1');
+INSERT INTO `cliente` VALUES ('13', '123', 'ALBERTO J. MACUA S.A.', 'LOPEZ Y PLANES N 4250', 'Santa Fe', 'CF', '2', 'defaultLocal', '30-60541628-0', '4555070', 'NombreResponsable', '2017-09-07', '2001-01-01 00:00:00', '1');
+INSERT INTO `cliente` VALUES ('14', '124', 'ALMEIDA JUAN CARLOS F.', 'RUPERTO PEREZ 1944', 'Santa Fe', 'CF', '2', 'defaultLocal', '24-06218372-8', '4553228', 'NombreResponsable', '2017-09-07', null, '1');
+INSERT INTO `cliente` VALUES ('15', '125', 'ALONSO EDGARDO JAVIER', 'SAN MARTÃ–N N 3364-Piso 10-Dpto B', 'Santa Fe', 'CF', '2', 'defaultLocal', '20-13925831-3', '4585068', 'NombreResponsable', '2017-09-07', null, '1');
+INSERT INTO `cliente` VALUES ('16', '126', 'ALONSO  GRACIELA CRISTINA', 'MARTIN ZAPATA 3870', 'Santa Fe', 'CF', '2', 'defaultLocal', '27-13163585-6', '4537003', 'NombreResponsable', '2017-09-07', '2001-01-01 00:00:00', '1');
+INSERT INTO `cliente` VALUES ('17', '127', 'ALLOATTI ROBERTO', 'SAN MARTIN N 2088', 'Santa Fe', 'CF', '2', 'defaultLocal', '30-60541628-0', '4537003', 'NombreResponsable', '2017-09-07', null, '1');
+INSERT INTO `cliente` VALUES ('18', '128', 'AMATTI  CLAUDIO', 'SAN MARTIN N 2088', 'Santa Fe', 'CF', '3', 'defaultLocal', '30-60541628-0', '4537003', 'NombreResponsable', '2017-09-10', null, '1');
+INSERT INTO `cliente` VALUES ('19', '129', 'AMRAD S. H. de Liponezky Virginia  Victor y Santiago ', 'Salvador del Carril N 968', 'Santa Fe', 'CF', '3', 'defaultLocal', '30-71120617-1', '4537003', 'NombreResponsable', '2017-09-10', null, '1');
+INSERT INTO `cliente` VALUES ('20', '130', 'ANGEL BOSCARINO Construcciones S.A.', 'MARCIAL CANDIOTI  N 5180', 'Santa Fe', 'CF', '3', 'defaultLocal', '30-60541628-0', '4538585', 'NombreResponsable', '2017-09-10', null, '1');
+INSERT INTO `cliente` VALUES ('21', '131', 'ANSKOHL  RICARDO', 'E. ZEBALLOS 4334', 'Santa Fe', 'CF', '3', 'defaultLocal', '20-06264349-9', '4537003', 'NombreResponsable', '2017-09-10', null, '1');
+INSERT INTO `cliente` VALUES ('22', '132', 'ANTONIAZZI HNOS.', 'PIETRANERA n 3350', 'Santa Fe', 'CF', '4', 'defaultLocal', '30-55418898-9', '4592295', 'NombreResponsable', '2017-09-10', null, '1');
+INSERT INTO `cliente` VALUES ('23', '133', 'ANTONIAZZI  GERMAN', 'RIVADAVIA N 3396', 'Santa Fe', 'CF', '4', 'defaultLocal', '20-26460065-1', '4500162', 'NombreResponsable', '2017-09-10', null, '1');
+INSERT INTO `cliente` VALUES ('24', '134', 'ARCINI MARTÃ–N', '9 DE JULIO N 2722', 'Santa Fe', 'CF', '4', 'defaultLocal', '20-06264349-9', '4537003', 'NombreResponsable', '2017-09-10', null, '1');
+INSERT INTO `cliente` VALUES ('25', '135', 'ARCOLEN S.A.', 'SUIPACHA 2695', 'Santa Fe', 'CF', '4', 'defaultLocal', '30-64385640-5', '4561538', 'NombreResponsable', '2017-09-10', null, '1');
+INSERT INTO `cliente` VALUES ('26', '136', 'Cliente 1', 'La Rioja 2081', 'Santa Fe', 'CF', '1', 'asd', '203295621342', 'asd', 'sd', '2017-11-09', null, '0');
+INSERT INTO `cliente` VALUES ('27', 'aaa', 'aaa', 'aaa', 'aaa', 'aaa', '2', 'aaa', 'aaa', 'aaa', 'aaa', '2017-11-22', null, '1');
+INSERT INTO `cliente` VALUES ('28', 'aab', 'bbb', 'bbb', 'bbb', 'bbb', '1', 'bbb', 'bbb', 'bbb', 'bbb', '2017-11-22', null, '1');
+
+-- ----------------------------
+-- Table structure for clientecuenta
 -- ----------------------------
 DROP TABLE IF EXISTS `clientecuenta`;
 CREATE TABLE `clientecuenta` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `descripcion` varchar(100) DEFAULT NULL,
   `cbu` varchar(40) NOT NULL,
   `nro_cuenta` varchar(50) NOT NULL,
   `id_cliente` int(11) DEFAULT NULL,
@@ -60,7 +110,30 @@ CREATE TABLE `clientecuenta` (
 ) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
---  Table structure for `clientecuentamovimiento`
+-- Records of clientecuenta
+-- ----------------------------
+INSERT INTO `clientecuenta` VALUES ('1', null, '1238238923892234', '12-1238238923892234', '1', '2017-11-06 21:07:59', '1', null, '1');
+INSERT INTO `clientecuenta` VALUES ('2', null, '1238238923892236', '12-1238238923893434', '2', '2017-11-06 21:08:00', '1', null, '1');
+INSERT INTO `clientecuenta` VALUES ('3', null, '2222', '22222', '1', '2017-11-06 21:08:00', '0', null, '2');
+INSERT INTO `clientecuenta` VALUES ('4', null, 'aaa', '12312', '6', '2017-11-06 21:08:01', '0', null, '3');
+INSERT INTO `clientecuenta` VALUES ('5', null, '11111111', '11111111', '17', '2017-11-06 21:08:02', '0', null, '4');
+INSERT INTO `clientecuenta` VALUES ('6', null, '22222', '22222', '2', '2017-11-06 21:08:03', '0', null, '1');
+INSERT INTO `clientecuenta` VALUES ('7', null, '4444', '4444', '2', '2017-11-08 22:04:46', '0', null, '2');
+INSERT INTO `clientecuenta` VALUES ('8', null, '555', '555', '3', '2017-11-06 21:08:03', '0', null, '3');
+INSERT INTO `clientecuenta` VALUES ('9', null, '123', '', '14', '2017-11-06 21:08:04', '0', null, '4');
+INSERT INTO `clientecuenta` VALUES ('10', null, '11', '11', '25', '2017-11-06 21:08:05', '0', null, '1');
+INSERT INTO `clientecuenta` VALUES ('11', null, '14524521452', '14552/142', '22', '2017-11-15 23:45:05', '0', null, null);
+INSERT INTO `clientecuenta` VALUES ('12', null, '1233213', '333112', '1', '2017-11-15 23:47:45', '0', null, null);
+INSERT INTO `clientecuenta` VALUES ('13', null, 'aaa122', '123123', '26', '2017-11-16 00:15:28', '0', null, null);
+INSERT INTO `clientecuenta` VALUES ('14', null, 'aa', '22', '4', '2017-11-16 00:17:29', '0', null, null);
+INSERT INTO `clientecuenta` VALUES ('15', null, '142541232', '21452', '4', '2017-11-16 00:43:22', '0', null, null);
+INSERT INTO `clientecuenta` VALUES ('16', null, '0316541561', '13216546', '4', '2017-11-16 00:50:54', '0', null, '2');
+INSERT INTO `clientecuenta` VALUES ('17', null, '13213', '1231', '22', '2017-11-16 00:53:54', '0', null, '2');
+INSERT INTO `clientecuenta` VALUES ('18', null, '132132', '0321132', '22', '2017-11-16 16:36:07', '0', null, '1');
+INSERT INTO `clientecuenta` VALUES ('19', null, '13513', '132132', '26', '2017-11-16 16:36:47', '0', null, '1');
+
+-- ----------------------------
+-- Table structure for clientecuentamovimiento
 -- ----------------------------
 DROP TABLE IF EXISTS `clientecuentamovimiento`;
 CREATE TABLE `clientecuentamovimiento` (
@@ -73,10 +146,81 @@ CREATE TABLE `clientecuentamovimiento` (
   `cobrado` char(1) NOT NULL DEFAULT 'N',
   `usuario` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
---  Table structure for `clientetipo`
+-- Records of clientecuentamovimiento
+-- ----------------------------
+INSERT INTO `clientecuentamovimiento` VALUES ('1', '1', '1', '1', '500.5', '2017-09-14 14:22:14', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('2', '1', '1', '1', '352.8', '2017-09-14 09:21:22', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('4', '1', '2', '1', '100.1', '2017-09-14 10:00:00', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('5', '1', '1', '2', '400.9', '2017-09-14 11:00:00', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('6', '1', '1', '2', '33.3', '2017-09-14 11:00:00', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('7', '1', '1', '2', '33', '2017-09-14 14:13:51', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('8', '1', '1', '2', '100', '2017-09-15 10:49:46', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('9', '1', '1', '2', '6', '2017-09-15 11:00:48', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('10', '1', '1', '2', '80', '2017-09-15 11:08:10', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('11', '1', '1', '2', '2', '2017-09-15 11:09:48', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('12', '1', '1', '2', '1', '2017-09-15 11:11:44', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('13', '1', '1', '2', '7', '2017-09-15 11:17:03', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('14', '1', '1', '2', '10', '2017-09-15 11:24:58', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('15', '1', '1', '2', '11', '2017-09-17 09:23:38', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('16', '1', '1', '2', '77', '2017-09-17 09:48:18', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('19', '1', '1', '1', '7', '0000-00-00 00:00:00', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('20', '1', '1', '1', '1', '2017-09-22 16:02:29', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('21', '1', '1', '1', '20', '2017-09-22 23:05:13', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('22', '1', '2', '1', '7', '2017-09-24 13:41:55', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('23', '1', '2', '1', '5', '2017-09-25 23:39:50', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('24', '1', '2', '1', '4', '2017-09-25 23:41:08', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('25', '1', '2', '1', '3', '2017-09-25 23:42:01', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('26', '1', '2', '1', '30', '2017-09-26 00:07:36', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('27', '1', '2', '1', '5', '2017-09-26 00:43:20', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('28', '1', '2', '1', '2', '2017-09-26 00:46:07', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('29', '1', '2', '1', '2', '2017-09-26 00:47:22', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('30', '1', '2', '1', '2', '2017-09-26 00:47:51', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('31', '1', '2', '2', '100', '2017-09-26 00:51:52', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('33', '1', '2', '1', '4', '2017-09-26 01:03:42', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('34', '1', '2', '1', '150', '2017-09-26 01:04:31', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('35', '1', '2', '2', '133', '2017-09-26 01:05:03', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('36', '1', '2', '1', '10', '2017-09-26 01:17:31', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('37', '1', '2', '1', '11', '2017-09-26 01:40:33', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('38', '1', '2', '1', '5', '2017-09-26 11:41:52', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('39', '1', '2', '1', '339', '2017-09-27 15:33:55', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('40', '1', '2', '2', '61', '2017-09-27 15:34:36', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('41', '1', '2', '1', '3851', '2017-09-27 15:35:03', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('42', '1', '2', '1', '4236', '2017-09-27 15:35:26', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('43', '1', '2', '2', '847210', '2017-09-27 15:36:08', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('44', '1', '2', '1', '900000', '2017-09-27 15:37:44', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('45', '1', '2', '2', '60000', '2017-09-27 15:38:43', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('46', '1', '2', '1', '200', '2017-09-28 14:44:57', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('47', '1', '2', '1', '6210', '2017-09-28 14:45:16', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('48', '1', '2', '1', '12', '2017-09-28 14:57:41', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('49', '1', '2', '1', '4.9', '2017-09-28 15:00:47', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('50', '1', '2', '1', '55.2', '2017-09-28 15:02:56', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('51', '1', '2', '1', '44.2', '2017-09-28 15:15:16', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('52', '1', '1', '2', '200', '2017-09-28 15:19:54', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('53', '1', '2', '2', '12', '2017-09-29 11:10:03', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('54', '1', '2', '2', '12', '2017-09-29 11:13:38', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('55', '1', '2', '2', '700', '2017-09-29 13:55:11', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('56', '1', '2', '1', '500', '2017-10-02 01:08:47', 'N', '0');
+INSERT INTO `clientecuentamovimiento` VALUES ('57', '1', '2', '2', '8000', '2017-11-06 20:52:46', 'N', '0');
+INSERT INTO `clientecuentamovimiento` VALUES ('58', '1', '7', '1', '1000', '2017-11-08 22:04:46', 'N', '0');
+INSERT INTO `clientecuentamovimiento` VALUES ('59', '1', '7', '1', '22', '2017-11-10 17:44:56', 'N', '0');
+INSERT INTO `clientecuentamovimiento` VALUES ('60', '1', '1', '2', '600', '2017-11-10 18:24:57', 'N', '0');
+INSERT INTO `clientecuentamovimiento` VALUES ('61', '1', '1', '1', '700', '2017-11-10 19:55:10', 'N', '0');
+INSERT INTO `clientecuentamovimiento` VALUES ('62', '1', '1', '2', '222', '2017-11-10 19:56:19', 'N', '0');
+INSERT INTO `clientecuentamovimiento` VALUES ('63', '1', '6', '2', '123', '2017-11-10 20:02:10', 'N', '0');
+INSERT INTO `clientecuentamovimiento` VALUES ('64', '1', '1', '1', '14785', '2017-11-15 00:26:03', 'N', '0');
+INSERT INTO `clientecuentamovimiento` VALUES ('65', '1', '7', '1', '1000', '2017-11-15 10:18:40', 'N', '0');
+INSERT INTO `clientecuentamovimiento` VALUES ('66', '1', '2', '2', '1000', '2017-11-15 10:21:38', 'N', '0');
+INSERT INTO `clientecuentamovimiento` VALUES ('67', '1', '2', '2', '500', '2017-11-15 10:21:45', 'N', '0');
+INSERT INTO `clientecuentamovimiento` VALUES ('68', '1', '1', '1', '1000', '2017-11-16 00:54:50', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('69', '1', '19', '1', '850', '2017-11-16 16:37:28', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('70', '1', '19', '2', '5555', '2017-11-16 16:37:36', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('71', '1', '1', '2', '525.65', '2018-01-18 19:34:10', 'N', '1');
+
+-- ----------------------------
+-- Table structure for clientetipo
 -- ----------------------------
 DROP TABLE IF EXISTS `clientetipo`;
 CREATE TABLE `clientetipo` (
@@ -86,7 +230,15 @@ CREATE TABLE `clientetipo` (
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
---  Table structure for `compra`
+-- Records of clientetipo
+-- ----------------------------
+INSERT INTO `clientetipo` VALUES ('1', 'Mayorista');
+INSERT INTO `clientetipo` VALUES ('2', 'Minorista');
+INSERT INTO `clientetipo` VALUES ('3', 'TipoCliente');
+INSERT INTO `clientetipo` VALUES ('4', 'ClienteTipo');
+
+-- ----------------------------
+-- Table structure for compra
 -- ----------------------------
 DROP TABLE IF EXISTS `compra`;
 CREATE TABLE `compra` (
@@ -105,7 +257,11 @@ CREATE TABLE `compra` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
---  Table structure for `compradetalle`
+-- Records of compra
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for compradetalle
 -- ----------------------------
 DROP TABLE IF EXISTS `compradetalle`;
 CREATE TABLE `compradetalle` (
@@ -121,7 +277,11 @@ CREATE TABLE `compradetalle` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
---  Table structure for `compraestado`
+-- Records of compradetalle
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for compraestado
 -- ----------------------------
 DROP TABLE IF EXISTS `compraestado`;
 CREATE TABLE `compraestado` (
@@ -131,7 +291,11 @@ CREATE TABLE `compraestado` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
---  Table structure for `cuenta`
+-- Records of compraestado
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for cuenta
 -- ----------------------------
 DROP TABLE IF EXISTS `cuenta`;
 CREATE TABLE `cuenta` (
@@ -148,7 +312,15 @@ CREATE TABLE `cuenta` (
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
---  Table structure for `cuentamovimiento`
+-- Records of cuenta
+-- ----------------------------
+INSERT INTO `cuenta` VALUES ('1', '1238238923892234', '1', '12-1238238923892234', '-200.85', '1', '2017-11-12 20:55:11', '1', null);
+INSERT INTO `cuenta` VALUES ('2', '1238238923892236', '1', '12-1238238923893434', '500.85', '2', '2017-11-12 20:55:12', '1', null);
+INSERT INTO `cuenta` VALUES ('3', '2222', '1', '22222', '252.52', '1', '2017-11-12 20:55:13', '0', null);
+INSERT INTO `cuenta` VALUES ('4', 'aaa', '1', '12312', '123243.00', '6', '2017-11-12 20:55:18', '0', null);
+
+-- ----------------------------
+-- Table structure for cuentamovimiento
 -- ----------------------------
 DROP TABLE IF EXISTS `cuentamovimiento`;
 CREATE TABLE `cuentamovimiento` (
@@ -168,7 +340,65 @@ CREATE TABLE `cuentamovimiento` (
 ) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
---  Table structure for `cuentamovimientoproveedor`
+-- Records of cuentamovimiento
+-- ----------------------------
+INSERT INTO `cuentamovimiento` VALUES ('1', '1', '1', '1', '500.5', '2017-09-14 14:22:14', 'N', '1');
+INSERT INTO `cuentamovimiento` VALUES ('2', '1', '1', '1', '352.8', '2017-09-14 09:21:22', 'N', '1');
+INSERT INTO `cuentamovimiento` VALUES ('4', '1', '2', '1', '100.1', '2017-09-14 10:00:00', 'N', '1');
+INSERT INTO `cuentamovimiento` VALUES ('5', '1', '1', '2', '400.9', '2017-09-14 11:00:00', 'N', '1');
+INSERT INTO `cuentamovimiento` VALUES ('6', '1', '1', '2', '33.3', '2017-09-14 11:00:00', 'N', '1');
+INSERT INTO `cuentamovimiento` VALUES ('7', '1', '1', '2', '33', '2017-09-14 14:13:51', 'N', '1');
+INSERT INTO `cuentamovimiento` VALUES ('8', '1', '1', '2', '100', '2017-09-15 10:49:46', 'N', '1');
+INSERT INTO `cuentamovimiento` VALUES ('9', '1', '1', '2', '6', '2017-09-15 11:00:48', 'N', '1');
+INSERT INTO `cuentamovimiento` VALUES ('10', '1', '1', '2', '80', '2017-09-15 11:08:10', 'N', '1');
+INSERT INTO `cuentamovimiento` VALUES ('11', '1', '1', '2', '2', '2017-09-15 11:09:48', 'N', '1');
+INSERT INTO `cuentamovimiento` VALUES ('12', '1', '1', '2', '1', '2017-09-15 11:11:44', 'N', '1');
+INSERT INTO `cuentamovimiento` VALUES ('13', '1', '1', '2', '7', '2017-09-15 11:17:03', 'N', '1');
+INSERT INTO `cuentamovimiento` VALUES ('14', '1', '1', '2', '10', '2017-09-15 11:24:58', 'N', '1');
+INSERT INTO `cuentamovimiento` VALUES ('15', '1', '1', '2', '11', '2017-09-17 09:23:38', 'N', '1');
+INSERT INTO `cuentamovimiento` VALUES ('16', '1', '1', '2', '77', '2017-09-17 09:48:18', 'N', '1');
+INSERT INTO `cuentamovimiento` VALUES ('19', '1', '1', '1', '7', '0000-00-00 00:00:00', 'N', '1');
+INSERT INTO `cuentamovimiento` VALUES ('20', '1', '1', '1', '1', '2017-09-22 16:02:29', 'N', '1');
+INSERT INTO `cuentamovimiento` VALUES ('21', '1', '1', '1', '20', '2017-09-22 23:05:13', 'N', '1');
+INSERT INTO `cuentamovimiento` VALUES ('22', '1', '2', '1', '7', '2017-09-24 13:41:55', 'N', '1');
+INSERT INTO `cuentamovimiento` VALUES ('23', '1', '2', '1', '5', '2017-09-25 23:39:50', 'N', '1');
+INSERT INTO `cuentamovimiento` VALUES ('24', '1', '2', '1', '4', '2017-09-25 23:41:08', 'N', '1');
+INSERT INTO `cuentamovimiento` VALUES ('25', '1', '2', '1', '3', '2017-09-25 23:42:01', 'N', '1');
+INSERT INTO `cuentamovimiento` VALUES ('26', '1', '2', '1', '30', '2017-09-26 00:07:36', 'N', '1');
+INSERT INTO `cuentamovimiento` VALUES ('27', '1', '2', '1', '5', '2017-09-26 00:43:20', 'N', '1');
+INSERT INTO `cuentamovimiento` VALUES ('28', '1', '2', '1', '2', '2017-09-26 00:46:07', 'N', '1');
+INSERT INTO `cuentamovimiento` VALUES ('29', '1', '2', '1', '2', '2017-09-26 00:47:22', 'N', '1');
+INSERT INTO `cuentamovimiento` VALUES ('30', '1', '2', '1', '2', '2017-09-26 00:47:51', 'N', '1');
+INSERT INTO `cuentamovimiento` VALUES ('31', '1', '2', '2', '100', '2017-09-26 00:51:52', 'N', '1');
+INSERT INTO `cuentamovimiento` VALUES ('33', '1', '2', '1', '4', '2017-09-26 01:03:42', 'N', '1');
+INSERT INTO `cuentamovimiento` VALUES ('34', '1', '2', '1', '150', '2017-09-26 01:04:31', 'N', '1');
+INSERT INTO `cuentamovimiento` VALUES ('35', '1', '2', '2', '133', '2017-09-26 01:05:03', 'N', '1');
+INSERT INTO `cuentamovimiento` VALUES ('36', '1', '2', '1', '10', '2017-09-26 01:17:31', 'N', '1');
+INSERT INTO `cuentamovimiento` VALUES ('37', '1', '2', '1', '11', '2017-09-26 01:40:33', 'N', '1');
+INSERT INTO `cuentamovimiento` VALUES ('38', '1', '2', '1', '5', '2017-09-26 11:41:52', 'N', '1');
+INSERT INTO `cuentamovimiento` VALUES ('39', '1', '2', '1', '339', '2017-09-27 15:33:55', 'N', '1');
+INSERT INTO `cuentamovimiento` VALUES ('40', '1', '2', '2', '61', '2017-09-27 15:34:36', 'N', '1');
+INSERT INTO `cuentamovimiento` VALUES ('41', '1', '2', '1', '3851', '2017-09-27 15:35:03', 'N', '1');
+INSERT INTO `cuentamovimiento` VALUES ('42', '1', '2', '1', '4236', '2017-09-27 15:35:26', 'N', '1');
+INSERT INTO `cuentamovimiento` VALUES ('43', '1', '2', '2', '847210', '2017-09-27 15:36:08', 'N', '1');
+INSERT INTO `cuentamovimiento` VALUES ('44', '1', '2', '1', '900000', '2017-09-27 15:37:44', 'N', '1');
+INSERT INTO `cuentamovimiento` VALUES ('45', '1', '2', '2', '60000', '2017-09-27 15:38:43', 'N', '1');
+INSERT INTO `cuentamovimiento` VALUES ('46', '1', '2', '1', '200', '2017-09-28 14:44:57', 'N', '1');
+INSERT INTO `cuentamovimiento` VALUES ('47', '1', '2', '1', '6210', '2017-09-28 14:45:16', 'N', '1');
+INSERT INTO `cuentamovimiento` VALUES ('48', '1', '2', '1', '12', '2017-09-28 14:57:41', 'N', '1');
+INSERT INTO `cuentamovimiento` VALUES ('49', '1', '2', '1', '4.9', '2017-09-28 15:00:47', 'N', '1');
+INSERT INTO `cuentamovimiento` VALUES ('50', '1', '2', '1', '55.2', '2017-09-28 15:02:56', 'N', '1');
+INSERT INTO `cuentamovimiento` VALUES ('51', '1', '2', '1', '44.2', '2017-09-28 15:15:16', 'N', '1');
+INSERT INTO `cuentamovimiento` VALUES ('52', '1', '1', '2', '200', '2017-09-28 15:19:54', 'N', '1');
+INSERT INTO `cuentamovimiento` VALUES ('53', '1', '2', '2', '12', '2017-09-29 11:10:03', 'N', '1');
+INSERT INTO `cuentamovimiento` VALUES ('54', '1', '2', '2', '12', '2017-09-29 11:13:38', 'N', '1');
+INSERT INTO `cuentamovimiento` VALUES ('55', '1', '2', '2', '700', '2017-09-29 13:55:11', 'N', '1');
+INSERT INTO `cuentamovimiento` VALUES ('56', '1', '2', '1', '500', '2017-10-02 01:08:47', 'N', '0');
+INSERT INTO `cuentamovimiento` VALUES ('57', '1', '3', '1', '1500', '2017-11-12 20:55:47', 'N', '1');
+INSERT INTO `cuentamovimiento` VALUES ('58', '1', '1', '1', '100', '2017-11-12 20:56:26', 'N', '1');
+
+-- ----------------------------
+-- Table structure for cuentamovimientoproveedor
 -- ----------------------------
 DROP TABLE IF EXISTS `cuentamovimientoproveedor`;
 CREATE TABLE `cuentamovimientoproveedor` (
@@ -186,7 +416,11 @@ CREATE TABLE `cuentamovimientoproveedor` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
---  Table structure for `cuentaproveedor`
+-- Records of cuentamovimientoproveedor
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for cuentaproveedor
 -- ----------------------------
 DROP TABLE IF EXISTS `cuentaproveedor`;
 CREATE TABLE `cuentaproveedor` (
@@ -202,7 +436,15 @@ CREATE TABLE `cuentaproveedor` (
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
---  Table structure for `garron`
+-- Records of cuentaproveedor
+-- ----------------------------
+INSERT INTO `cuentaproveedor` VALUES ('1', '1238238923892234', '12-1238238923892234', '-200.85', '1', '2017-09-30 14:54:58', '1', null);
+INSERT INTO `cuentaproveedor` VALUES ('2', '1238238923892236', '12-1238238923893434', '500.85', '2', '2017-09-30 14:54:58', '1', null);
+INSERT INTO `cuentaproveedor` VALUES ('3', '2222', '22222', '252.52', '1', '2017-10-24 20:52:55', '0', null);
+INSERT INTO `cuentaproveedor` VALUES ('4', 'aaa', '12312', '123243.00', '6', '2017-10-24 20:55:13', '0', null);
+
+-- ----------------------------
+-- Table structure for garron
 -- ----------------------------
 DROP TABLE IF EXISTS `garron`;
 CREATE TABLE `garron` (
@@ -219,7 +461,25 @@ CREATE TABLE `garron` (
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
---  Table structure for `garrondeposteparcial`
+-- Records of garron
+-- ----------------------------
+INSERT INTO `garron` VALUES ('1', '230', '1', '1', '2017-11-04 20:08:45', '75.421', '10', '1', null);
+INSERT INTO `garron` VALUES ('2', '231', '1', '2', '2017-11-04 20:08:45', '76.496', '10', '1', null);
+INSERT INTO `garron` VALUES ('3', '254', '4', '1', '2017-11-17 00:00:00', '75.854', '11', '1', null);
+INSERT INTO `garron` VALUES ('4', '745', '1', '1', '2017-11-04 00:00:00', '78.520', '11', '1', null);
+INSERT INTO `garron` VALUES ('5', '123', '1', '1', '2017-11-04 00:00:00', '78.245', '11', '1', null);
+INSERT INTO `garron` VALUES ('6', '66', '1', '1', '2017-11-04 00:00:00', '98.245', '11', '1', null);
+INSERT INTO `garron` VALUES ('7', '542', '1', '1', '2017-11-04 00:00:00', '65.250', '11', '1', null);
+INSERT INTO `garron` VALUES ('8', '321', '1', '1', '2017-11-04 00:00:00', '88.250', '11', '1', null);
+INSERT INTO `garron` VALUES ('9', '11', '1', '1', '2017-11-04 00:00:00', '98.250', '11', '1', null);
+INSERT INTO `garron` VALUES ('10', '111', '1', '1', '2017-11-04 00:00:00', '78.525', '11', '1', null);
+INSERT INTO `garron` VALUES ('11', '652', '1', '1', '2017-11-04 00:00:00', '88.000', '12', '1', null);
+INSERT INTO `garron` VALUES ('12', '111', '1', '1', '2017-11-04 00:00:00', '11.000', '11', '1', null);
+INSERT INTO `garron` VALUES ('13', '425', '1', '1', '2017-11-06 00:00:00', '142.250', '11', '1', null);
+INSERT INTO `garron` VALUES ('14', '458', '1', '1', '2017-11-06 00:00:00', '14.256', '11', '1', null);
+
+-- ----------------------------
+-- Table structure for garrondeposteparcial
 -- ----------------------------
 DROP TABLE IF EXISTS `garrondeposteparcial`;
 CREATE TABLE `garrondeposteparcial` (
@@ -231,7 +491,14 @@ CREATE TABLE `garrondeposteparcial` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
---  Table structure for `garronestado`
+-- Records of garrondeposteparcial
+-- ----------------------------
+INSERT INTO `garrondeposteparcial` VALUES ('1', '2', '6', '10.256');
+INSERT INTO `garrondeposteparcial` VALUES ('2', '2', '7', '18.620');
+INSERT INTO `garrondeposteparcial` VALUES ('3', '2', '8', '20.680');
+
+-- ----------------------------
+-- Table structure for garronestado
 -- ----------------------------
 DROP TABLE IF EXISTS `garronestado`;
 CREATE TABLE `garronestado` (
@@ -241,7 +508,14 @@ CREATE TABLE `garronestado` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
---  Table structure for `garronproductodef`
+-- Records of garronestado
+-- ----------------------------
+INSERT INTO `garronestado` VALUES ('1', 'COMPLETO');
+INSERT INTO `garronestado` VALUES ('2', 'DEPOSTE PARCIAL');
+INSERT INTO `garronestado` VALUES ('3', 'DEPOSTADO');
+
+-- ----------------------------
+-- Table structure for garronproductodef
 -- ----------------------------
 DROP TABLE IF EXISTS `garronproductodef`;
 CREATE TABLE `garronproductodef` (
@@ -252,7 +526,49 @@ CREATE TABLE `garronproductodef` (
 ) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
---  Table structure for `garrontipo`
+-- Records of garronproductodef
+-- ----------------------------
+INSERT INTO `garronproductodef` VALUES ('2', '1', '6');
+INSERT INTO `garronproductodef` VALUES ('3', '1', '7');
+INSERT INTO `garronproductodef` VALUES ('4', '1', '8');
+INSERT INTO `garronproductodef` VALUES ('5', '1', '9');
+INSERT INTO `garronproductodef` VALUES ('6', '1', '10');
+INSERT INTO `garronproductodef` VALUES ('7', '1', '11');
+INSERT INTO `garronproductodef` VALUES ('8', '1', '12');
+INSERT INTO `garronproductodef` VALUES ('9', '1', '13');
+INSERT INTO `garronproductodef` VALUES ('10', '1', '14');
+INSERT INTO `garronproductodef` VALUES ('11', '1', '15');
+INSERT INTO `garronproductodef` VALUES ('12', '1', '16');
+INSERT INTO `garronproductodef` VALUES ('13', '1', '17');
+INSERT INTO `garronproductodef` VALUES ('14', '1', '18');
+INSERT INTO `garronproductodef` VALUES ('15', '1', '19');
+INSERT INTO `garronproductodef` VALUES ('16', '2', '6');
+INSERT INTO `garronproductodef` VALUES ('17', '2', '7');
+INSERT INTO `garronproductodef` VALUES ('18', '2', '8');
+INSERT INTO `garronproductodef` VALUES ('19', '2', '9');
+INSERT INTO `garronproductodef` VALUES ('20', '2', '10');
+INSERT INTO `garronproductodef` VALUES ('21', '2', '11');
+INSERT INTO `garronproductodef` VALUES ('22', '2', '12');
+INSERT INTO `garronproductodef` VALUES ('23', '2', '13');
+INSERT INTO `garronproductodef` VALUES ('24', '2', '14');
+INSERT INTO `garronproductodef` VALUES ('25', '2', '15');
+INSERT INTO `garronproductodef` VALUES ('26', '2', '16');
+INSERT INTO `garronproductodef` VALUES ('27', '2', '17');
+INSERT INTO `garronproductodef` VALUES ('28', '2', '18');
+INSERT INTO `garronproductodef` VALUES ('29', '2', '19');
+INSERT INTO `garronproductodef` VALUES ('30', '3', '6');
+INSERT INTO `garronproductodef` VALUES ('31', '3', '7');
+INSERT INTO `garronproductodef` VALUES ('32', '3', '8');
+INSERT INTO `garronproductodef` VALUES ('33', '3', '9');
+INSERT INTO `garronproductodef` VALUES ('34', '3', '10');
+INSERT INTO `garronproductodef` VALUES ('35', '3', '11');
+INSERT INTO `garronproductodef` VALUES ('36', '3', '12');
+INSERT INTO `garronproductodef` VALUES ('37', '3', '13');
+INSERT INTO `garronproductodef` VALUES ('38', '3', '14');
+INSERT INTO `garronproductodef` VALUES ('39', '3', '15');
+
+-- ----------------------------
+-- Table structure for garrontipo
 -- ----------------------------
 DROP TABLE IF EXISTS `garrontipo`;
 CREATE TABLE `garrontipo` (
@@ -262,7 +578,17 @@ CREATE TABLE `garrontipo` (
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
---  Table structure for `gestorcuentas`
+-- Records of garrontipo
+-- ----------------------------
+INSERT INTO `garrontipo` VALUES ('1', 'TERNERA');
+INSERT INTO `garrontipo` VALUES ('2', 'NOVILLITO');
+INSERT INTO `garrontipo` VALUES ('3', 'NOVILLO');
+INSERT INTO `garrontipo` VALUES ('4', 'VAQUILLONA');
+INSERT INTO `garrontipo` VALUES ('5', 'VACA');
+INSERT INTO `garrontipo` VALUES ('6', 'TORO');
+
+-- ----------------------------
+-- Table structure for gestorcuentas
 -- ----------------------------
 DROP TABLE IF EXISTS `gestorcuentas`;
 CREATE TABLE `gestorcuentas` (
@@ -280,7 +606,27 @@ CREATE TABLE `gestorcuentas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
---  Table structure for `medida`
+-- Records of gestorcuentas
+-- ----------------------------
+INSERT INTO `gestorcuentas` VALUES ('1', '1', '1', null, null, null);
+INSERT INTO `gestorcuentas` VALUES ('2', '2', null, '1', null, null);
+
+-- ----------------------------
+-- Table structure for grupomovcuenta
+-- ----------------------------
+DROP TABLE IF EXISTS `grupomovcuenta`;
+CREATE TABLE `grupomovcuenta` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_mov_cuenta` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of grupomovcuenta
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for medida
 -- ----------------------------
 DROP TABLE IF EXISTS `medida`;
 CREATE TABLE `medida` (
@@ -290,17 +636,41 @@ CREATE TABLE `medida` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
---  Table structure for `modulo`
+-- Records of medida
+-- ----------------------------
+INSERT INTO `medida` VALUES ('1', 'cm');
+INSERT INTO `medida` VALUES ('2', 'kg');
+INSERT INTO `medida` VALUES ('3', 'lts');
+
+-- ----------------------------
+-- Table structure for modulo
 -- ----------------------------
 DROP TABLE IF EXISTS `modulo`;
 CREATE TABLE `modulo` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
---  Table structure for `movimientotipo`
+-- Records of modulo
+-- ----------------------------
+INSERT INTO `modulo` VALUES ('1', 'Clientes');
+INSERT INTO `modulo` VALUES ('2', 'Proveedores');
+INSERT INTO `modulo` VALUES ('3', 'Stock');
+INSERT INTO `modulo` VALUES ('4', 'Caja');
+INSERT INTO `modulo` VALUES ('5', 'Ventas');
+INSERT INTO `modulo` VALUES ('6', 'Compras');
+INSERT INTO `modulo` VALUES ('7', 'Movimiento Cuentas');
+INSERT INTO `modulo` VALUES ('8', 'Gestion Usuarios');
+INSERT INTO `modulo` VALUES ('9', 'Productos');
+INSERT INTO `modulo` VALUES ('10', 'Ventas Caja');
+INSERT INTO `modulo` VALUES ('11', 'Movimiento Cuentas Proveedores');
+INSERT INTO `modulo` VALUES ('12', 'Carga Garron');
+INSERT INTO `modulo` VALUES ('13', 'Caja Mayorista');
+
+-- ----------------------------
+-- Table structure for movimientotipo
 -- ----------------------------
 DROP TABLE IF EXISTS `movimientotipo`;
 CREATE TABLE `movimientotipo` (
@@ -310,7 +680,56 @@ CREATE TABLE `movimientotipo` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
---  Table structure for `precio`
+-- Records of movimientotipo
+-- ----------------------------
+INSERT INTO `movimientotipo` VALUES ('1', 'DEBE');
+INSERT INTO `movimientotipo` VALUES ('2', 'PAGO');
+
+-- ----------------------------
+-- Table structure for operacion
+-- ----------------------------
+DROP TABLE IF EXISTS `operacion`;
+CREATE TABLE `operacion` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Id_tipo_operacion` int(11) NOT NULL,
+  `Id_venta` int(11) NOT NULL,
+  `id_cliente` int(11) NOT NULL,
+  `id_grupo_mov_cuenta` int(11) NOT NULL,
+  `fecha` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `usuario` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_to` (`Id_tipo_operacion`),
+  KEY `fk_vent` (`Id_venta`),
+  KEY `fk_cl` (`id_cliente`),
+  KEY `fk_gmc` (`id_grupo_mov_cuenta`),
+  CONSTRAINT `fk_to` FOREIGN KEY (`Id_tipo_operacion`) REFERENCES `operaciontipo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_vent` FOREIGN KEY (`Id_venta`) REFERENCES `venta` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_cl` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_gmc` FOREIGN KEY (`id_grupo_mov_cuenta`) REFERENCES `grupomovcuenta` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of operacion
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for operaciontipo
+-- ----------------------------
+DROP TABLE IF EXISTS `operaciontipo`;
+CREATE TABLE `operaciontipo` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `descripcion` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of operaciontipo
+-- ----------------------------
+INSERT INTO `operaciontipo` VALUES ('1', 'Venta mayorista');
+INSERT INTO `operaciontipo` VALUES ('2', 'Compra mayorista');
+
+-- ----------------------------
+-- Table structure for precio
 -- ----------------------------
 DROP TABLE IF EXISTS `precio`;
 CREATE TABLE `precio` (
@@ -325,7 +744,14 @@ CREATE TABLE `precio` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
---  Table structure for `preciotipo`
+-- Records of precio
+-- ----------------------------
+INSERT INTO `precio` VALUES ('1', '1', '145', null, null);
+INSERT INTO `precio` VALUES ('2', '1', '500', null, null);
+INSERT INTO `precio` VALUES ('3', '1', '425', null, null);
+
+-- ----------------------------
+-- Table structure for preciotipo
 -- ----------------------------
 DROP TABLE IF EXISTS `preciotipo`;
 CREATE TABLE `preciotipo` (
@@ -335,7 +761,13 @@ CREATE TABLE `preciotipo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
---  Table structure for `producto`
+-- Records of preciotipo
+-- ----------------------------
+INSERT INTO `preciotipo` VALUES ('1', 'por kg');
+INSERT INTO `preciotipo` VALUES ('2', 'por unidad');
+
+-- ----------------------------
+-- Table structure for producto
 -- ----------------------------
 DROP TABLE IF EXISTS `producto`;
 CREATE TABLE `producto` (
@@ -353,7 +785,85 @@ CREATE TABLE `producto` (
 ) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
---  Table structure for `productoestado`
+-- Records of producto
+-- ----------------------------
+INSERT INTO `producto` VALUES ('5', '1', '010990', '115.000', '1.00', 'CHORIZO ESPECIAL', 'CHORIZO ESPECIAL', '0', null);
+INSERT INTO `producto` VALUES ('6', '1', '011000', '85.000', '1.00', 'CHORIZO PARRILLERO', 'CHORIZO PARRILLERO', '0', null);
+INSERT INTO `producto` VALUES ('7', '1', '011010', '0.000', '1.00', 'CHORIZO DE CERDO', 'CHORIZO DE CERDO', '0', null);
+INSERT INTO `producto` VALUES ('8', '1', '011020', '115.000', '1.00', 'CHORIZO COLORADO', 'CHORIZO COLORADO', '0', null);
+INSERT INTO `producto` VALUES ('9', '1', '011030', '98.000', '1.00', 'SALCHICHA PARRILLERA', 'SALCHICHA PARRILLERA', '0', null);
+INSERT INTO `producto` VALUES ('10', '1', '011040', '90.000', '1.00', 'MORCILLA', 'MORCILLA', '0', null);
+INSERT INTO `producto` VALUES ('11', '1', '011050', '90.000', '1.00', 'MORCILLA', 'MORCILLA BOMBON', '0', null);
+INSERT INTO `producto` VALUES ('12', '1', '011060', '90.000', '1.00', 'SALCHICHAS SNACK', 'SALCHICHAS SNACK', '0', null);
+INSERT INTO `producto` VALUES ('13', '1', '011070', '80.000', '1.00', 'PATE', 'PATE', '0', null);
+INSERT INTO `producto` VALUES ('14', '1', '011080', '80.000', '1.00', 'QUESO DE CERDO', 'QUESO DE CERDO', '0', null);
+INSERT INTO `producto` VALUES ('15', '1', '011100', '90.000', '1.00', 'PICADA COMUN', 'PICADA COMUN', '0', null);
+INSERT INTO `producto` VALUES ('16', '1', '011110', '100.000', '1.00', 'PICADA INTERMEDIA', 'PICADA INTERMEDIA', '0', null);
+INSERT INTO `producto` VALUES ('17', '1', '011120', '135.000', '1.00', 'PICADA ESPECIAL', 'PICADA ESPECIAL', '0', null);
+INSERT INTO `producto` VALUES ('18', '1', '011130', '50.000', '1.00', 'PUCHERO COMUN', 'PUCHERO COMUN', '0', null);
+INSERT INTO `producto` VALUES ('19', '1', '011140', '89.000', '1.00', 'PUCHERO ESPECIAL', 'PUCHERO ESPECIAL', '0', null);
+INSERT INTO `producto` VALUES ('20', '1', '011150', '10.000', '1.00', 'CANINO', 'CANINO', '0', null);
+INSERT INTO `producto` VALUES ('21', '1', '011160', '145.000', '1.00', 'MATAMBRE', 'MATAMBRE', '0', null);
+INSERT INTO `producto` VALUES ('22', '1', '011170', '140.000', '1.00', 'VACIO', 'VACIO', '0', null);
+INSERT INTO `producto` VALUES ('23', '1', '011180', '135.000', '1.00', 'ALA DE PECHO', 'ALA DE PECHO', '0', null);
+INSERT INTO `producto` VALUES ('24', '1', '011190', '140.000', '1.00', 'COSTILLA', 'COSTILLA', '0', null);
+INSERT INTO `producto` VALUES ('25', '1', '011200', '125.000', '1.00', 'MARUCHA', 'MARUCHA', '0', null);
+INSERT INTO `producto` VALUES ('26', '1', '011210', '135.000', '1.00', 'TAPA DE NALGA', 'TAPA DE NALGA', '0', null);
+INSERT INTO `producto` VALUES ('27', '1', '011220', '160.000', '1.00', 'CORTE MALVINA', 'CORTE MALVINA', '0', null);
+INSERT INTO `producto` VALUES ('28', '1', '011230', '92.000', '1.00', 'FALDA', 'FALDA', '0', null);
+INSERT INTO `producto` VALUES ('29', '1', '011240', '125.000', '1.00', 'COSTELETAS', 'COSTELETAS', '0', null);
+INSERT INTO `producto` VALUES ('30', '1', '011250', '99.000', '1.00', 'AGUJA', 'AGUJA', '0', null);
+INSERT INTO `producto` VALUES ('31', '1', '011260', '125.000', '1.00', 'BRAZUELO', 'BRAZUELO', '0', null);
+INSERT INTO `producto` VALUES ('32', '1', '011270', '170.000', '1.00', 'BIFE ANCHO/ANGOSTO', 'BIFE ANCHO/ANGOSTO', '0', null);
+INSERT INTO `producto` VALUES ('33', '1', '011280', '170.000', '1.00', 'ENTRECOT', 'ENTRECOT', '0', null);
+INSERT INTO `producto` VALUES ('34', '1', '011290', '180.000', '1.00', 'ROAST BEEF', 'ROAST BEEF', '0', null);
+INSERT INTO `producto` VALUES ('35', '1', '011300', '145.000', '1.00', 'NALGAS', 'NALGAS', '0', null);
+INSERT INTO `producto` VALUES ('36', '1', '011310', '180.000', '1.00', 'LOMO', 'LOMO', '0', null);
+INSERT INTO `producto` VALUES ('37', '1', '011320', '145.000', '1.00', 'PECETO', 'PECETO', '0', null);
+INSERT INTO `producto` VALUES ('38', '1', '011330', '145.000', '1.00', 'CUADRIL', 'CUADRIL', '0', null);
+INSERT INTO `producto` VALUES ('39', '1', '011340', '145.000', '1.00', 'PALOMITA', 'PALOMITA', '0', null);
+INSERT INTO `producto` VALUES ('40', '1', '011350', '145.000', '1.00', 'JAMON CUADRADO', 'JAMON CUADRADO', '0', null);
+INSERT INTO `producto` VALUES ('41', '1', '011360', '140.000', '1.00', 'CABEZA DE LOMO', 'CABEZA DE LOMO', '0', null);
+INSERT INTO `producto` VALUES ('42', '1', '011370', '140.000', '1.00', 'PULPA BRAZUELO', 'PULPA BRAZUELO', '0', null);
+INSERT INTO `producto` VALUES ('43', '1', '011380', '135.000', '1.00', 'PULPA PALETA', 'PULPA PALETA', '0', null);
+INSERT INTO `producto` VALUES ('44', '1', '011390', '140.000', '1.00', 'TORTUGUITA', 'TORTUGUITA', '0', null);
+INSERT INTO `producto` VALUES ('45', '1', '011400', '120.000', '1.00', 'MILANESAS DE CARNE', 'MILANESAS DE CARNE', '0', null);
+INSERT INTO `producto` VALUES ('46', '1', '011410', '89.000', '1.00', 'MILANESAS DE POLLO', 'MILANESAS DE POLLO', '0', null);
+INSERT INTO `producto` VALUES ('47', '1', '011420', '99.000', '1.00', 'HAMBURGUESAS', 'HAMBURGUESAS', '0', null);
+INSERT INTO `producto` VALUES ('48', '1', '011430', '99.000', '1.00', 'ALBONDIGAS', 'ALBONDIGAS', '0', null);
+INSERT INTO `producto` VALUES ('49', '1', '011440', '0.000', '1.00', 'COSTELETAS', 'COSTELETAS', '0', null);
+INSERT INTO `producto` VALUES ('50', '1', '011450', '0.000', '1.00', 'BONDIOLA', 'BONDIOLA', '0', null);
+INSERT INTO `producto` VALUES ('51', '1', '011460', '0.000', '1.00', 'MATAMBRITO', 'MATAMBRITO', '0', null);
+INSERT INTO `producto` VALUES ('52', '1', '011470', '0.000', '1.00', 'COSTILLA/PECHITO', 'COSTILLA/PECHITO', '0', null);
+INSERT INTO `producto` VALUES ('53', '1', '011480', '0.000', '1.00', 'PULPAS', 'PULPAS', '0', null);
+INSERT INTO `producto` VALUES ('54', '1', '011490', '0.000', '1.00', 'MARUCHA', 'MARUCHA', '0', null);
+INSERT INTO `producto` VALUES ('55', '1', '011500', '0.000', '1.00', 'CARACU', 'CARACU', '0', null);
+INSERT INTO `producto` VALUES ('56', '1', '011510', '0.000', '1.00', 'PATITAS/HUESITOS/CUERITO', 'PATITAS/HUESITOS/CUERITO', '0', null);
+INSERT INTO `producto` VALUES ('57', '1', '011520', '0.000', '1.00', 'MILANESAS', 'MILANESAS', '0', null);
+INSERT INTO `producto` VALUES ('58', '1', '011530', '0.000', '1.00', 'HAMBURGUESAS', 'HAMBURGUESAS', '0', null);
+INSERT INTO `producto` VALUES ('59', '1', '011540', '0.000', '1.00', 'PATAMUSLO', 'PATAMUSLO', '0', null);
+INSERT INTO `producto` VALUES ('60', '1', '011550', '0.000', '1.00', 'TROZADO', 'TROZADO', '0', null);
+INSERT INTO `producto` VALUES ('61', '1', '011560', '0.000', '1.00', 'PECHUGA', 'PECHUGA', '0', null);
+INSERT INTO `producto` VALUES ('62', '1', '011570', '0.000', '1.00', 'FILET', 'FILET', '0', null);
+INSERT INTO `producto` VALUES ('63', '1', '011580', '0.000', '1.00', 'BROCHET', 'BROCHET', '0', null);
+INSERT INTO `producto` VALUES ('64', '1', '011590', '0.000', '1.00', 'BONDIOLA', 'BONDIOLA', '0', null);
+INSERT INTO `producto` VALUES ('65', '1', '011600', '0.000', '1.00', 'PALETA', 'PALETA', '0', null);
+INSERT INTO `producto` VALUES ('66', '1', '011610', '0.000', '1.00', 'JAMON COCIDO', 'JAMON COCIDO', '0', null);
+INSERT INTO `producto` VALUES ('67', '1', '011620', '0.000', '1.00', 'JAMON CRUDO', 'JAMON CRUDO', '0', null);
+INSERT INTO `producto` VALUES ('68', '1', '011630', '0.000', '1.00', 'SALAME MILAN', 'SALAME MILAN', '0', null);
+INSERT INTO `producto` VALUES ('69', '1', '011640', '0.000', '1.00', 'SALAMIN', 'SALAMIN', '0', null);
+INSERT INTO `producto` VALUES ('70', '1', '011650', '0.000', '1.00', 'QUESO BARRA', 'QUESO BARRA', '0', null);
+INSERT INTO `producto` VALUES ('71', '1', '011660', '0.000', '1.00', 'CREMOSO', 'CREMOSO', '0', null);
+INSERT INTO `producto` VALUES ('72', '1', '011670', '0.000', '1.00', 'CASCARA COLORADA', 'CASCARA COLORADA', '0', null);
+INSERT INTO `producto` VALUES ('73', '1', '011680', '0.000', '1.00', 'QUESO CRE', 'QUESO CREMOSO', '0', null);
+INSERT INTO `producto` VALUES ('74', '1', '011690', '0.000', '1.00', 'QUESO TREEMBLAY', 'QUESO TREEMBLAY', '0', null);
+INSERT INTO `producto` VALUES ('75', '1', '011700', '0.000', '1.00', 'QUESO PROVOLETA', 'QUESO PROVOLETA', '0', null);
+INSERT INTO `producto` VALUES ('76', '1', '011710', '0.000', '1.00', 'QUESO SARDO', 'QUESO SARDO', '0', null);
+INSERT INTO `producto` VALUES ('77', '1', '011720', '0.000', '1.00', 'MORTADELA', 'MORTADELA', '0', null);
+INSERT INTO `producto` VALUES ('78', '1', '011730', '0.000', '1.00', 'MORTADELA', 'MORTADELA', '0', null);
+
+-- ----------------------------
+-- Table structure for productoestado
 -- ----------------------------
 DROP TABLE IF EXISTS `productoestado`;
 CREATE TABLE `productoestado` (
@@ -363,7 +873,13 @@ CREATE TABLE `productoestado` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
---  Table structure for `productoestadotipo`
+-- Records of productoestado
+-- ----------------------------
+INSERT INTO `productoestado` VALUES ('1', 'CONGELADO');
+INSERT INTO `productoestado` VALUES ('2', 'NORMAL');
+
+-- ----------------------------
+-- Table structure for productoestadotipo
 -- ----------------------------
 DROP TABLE IF EXISTS `productoestadotipo`;
 CREATE TABLE `productoestadotipo` (
@@ -373,7 +889,13 @@ CREATE TABLE `productoestadotipo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
---  Table structure for `productotipo`
+-- Records of productoestadotipo
+-- ----------------------------
+INSERT INTO `productoestadotipo` VALUES ('1', 'CONGELADO');
+INSERT INTO `productoestadotipo` VALUES ('2', 'NORMAL');
+
+-- ----------------------------
+-- Table structure for productotipo
 -- ----------------------------
 DROP TABLE IF EXISTS `productotipo`;
 CREATE TABLE `productotipo` (
@@ -383,7 +905,14 @@ CREATE TABLE `productotipo` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
---  Table structure for `productoubicacion`
+-- Records of productotipo
+-- ----------------------------
+INSERT INTO `productotipo` VALUES ('1', 'CARNE');
+INSERT INTO `productotipo` VALUES ('2', 'EMBUTIDO');
+INSERT INTO `productotipo` VALUES ('3', 'ALGO');
+
+-- ----------------------------
+-- Table structure for productoubicacion
 -- ----------------------------
 DROP TABLE IF EXISTS `productoubicacion`;
 CREATE TABLE `productoubicacion` (
@@ -401,7 +930,11 @@ CREATE TABLE `productoubicacion` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
---  Table structure for `proveedor`
+-- Records of productoubicacion
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for proveedor
 -- ----------------------------
 DROP TABLE IF EXISTS `proveedor`;
 CREATE TABLE `proveedor` (
@@ -421,7 +954,14 @@ CREATE TABLE `proveedor` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
---  Table structure for `proveedorcuenta`
+-- Records of proveedor
+-- ----------------------------
+INSERT INTO `proveedor` VALUES ('1', 'Friar', 'santiago del estero 1234', 'santa fe', 'RI', 'Friar S.A.', '20-12345678-1', '034212345678', 'Federico Lopez', '2017-11-16', null, null);
+INSERT INTO `proveedor` VALUES ('2', 'Frigar', 'urquiza 1810', 'santa fe', 'CF', 'LOCAL', '20315634231', '3239487', 'HUGO', '2017-11-17', null, '0');
+INSERT INTO `proveedor` VALUES ('3', 'este proveedor', 'provsad', 'prov', 'poa', 'orpo', 'ops', 'por', 'poasdp', '2017-11-24', null, '0');
+
+-- ----------------------------
+-- Table structure for proveedorcuenta
 -- ----------------------------
 DROP TABLE IF EXISTS `proveedorcuenta`;
 CREATE TABLE `proveedorcuenta` (
@@ -437,7 +977,17 @@ CREATE TABLE `proveedorcuenta` (
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
---  Table structure for `proveedorcuentamovimiento`
+-- Records of proveedorcuenta
+-- ----------------------------
+INSERT INTO `proveedorcuenta` VALUES ('1', '1238238923892234', '12-1238238923892234', '1', '2017-11-12 19:53:42', '1', '1', null);
+INSERT INTO `proveedorcuenta` VALUES ('2', '1238238923892236', '12-1238238923893434', '2', '2017-11-12 19:53:39', '2', '1', null);
+INSERT INTO `proveedorcuenta` VALUES ('3', '2222', '22222', '1', '2017-11-12 19:53:29', '4', '0', null);
+INSERT INTO `proveedorcuenta` VALUES ('4', 'aaa', '12312', '6', '2017-11-12 19:53:32', '3', '0', null);
+INSERT INTO `proveedorcuenta` VALUES ('5', '52145312', '2312156432', '0', '2017-11-16 17:36:32', null, '0', null);
+INSERT INTO `proveedorcuenta` VALUES ('6', '12313', '123123', '0', '2017-11-16 17:51:57', null, '0', null);
+
+-- ----------------------------
+-- Table structure for proveedorcuentamovimiento
 -- ----------------------------
 DROP TABLE IF EXISTS `proveedorcuentamovimiento`;
 CREATE TABLE `proveedorcuentamovimiento` (
@@ -455,7 +1005,15 @@ CREATE TABLE `proveedorcuentamovimiento` (
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
---  Table structure for `proveedores_eliminar_esta_tabla`
+-- Records of proveedorcuentamovimiento
+-- ----------------------------
+INSERT INTO `proveedorcuentamovimiento` VALUES ('1', '1', '1', '1', '600', '2017-11-14 17:24:30', 'N', '0');
+INSERT INTO `proveedorcuentamovimiento` VALUES ('2', '1', '1', '2', '600', '2017-11-15 11:54:13', 'N', '1');
+INSERT INTO `proveedorcuentamovimiento` VALUES ('3', '1', '3', '1', '500', '2017-11-15 11:55:15', 'N', '1');
+INSERT INTO `proveedorcuentamovimiento` VALUES ('4', '1', '3', '2', '1000', '2017-11-15 12:00:06', 'N', '1');
+
+-- ----------------------------
+-- Table structure for proveedores_eliminar_esta_tabla
 -- ----------------------------
 DROP TABLE IF EXISTS `proveedores_eliminar_esta_tabla`;
 CREATE TABLE `proveedores_eliminar_esta_tabla` (
@@ -470,7 +1028,12 @@ CREATE TABLE `proveedores_eliminar_esta_tabla` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
---  Table structure for `proveedortipo`
+-- Records of proveedores_eliminar_esta_tabla
+-- ----------------------------
+INSERT INTO `proveedores_eliminar_esta_tabla` VALUES ('1', 'DSA', 'DSA', 'DSA', 'DSA', 'DSA', 'DSA');
+
+-- ----------------------------
+-- Table structure for proveedortipo
 -- ----------------------------
 DROP TABLE IF EXISTS `proveedortipo`;
 CREATE TABLE `proveedortipo` (
@@ -480,7 +1043,12 @@ CREATE TABLE `proveedortipo` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
---  Table structure for `ubicacion`
+-- Records of proveedortipo
+-- ----------------------------
+INSERT INTO `proveedortipo` VALUES ('1', 'Grande');
+
+-- ----------------------------
+-- Table structure for ubicacion
 -- ----------------------------
 DROP TABLE IF EXISTS `ubicacion`;
 CREATE TABLE `ubicacion` (
@@ -495,7 +1063,14 @@ CREATE TABLE `ubicacion` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
---  Table structure for `ubicaciontipo`
+-- Records of ubicacion
+-- ----------------------------
+INSERT INTO `ubicacion` VALUES ('1', '1', 'ALA ESTE', null, null);
+INSERT INTO `ubicacion` VALUES ('2', '1', 'ALA OESTE', null, null);
+INSERT INTO `ubicacion` VALUES ('3', '2', 'ALA SUROESTE', null, '2017-10-11 17:33:43');
+
+-- ----------------------------
+-- Table structure for ubicaciontipo
 -- ----------------------------
 DROP TABLE IF EXISTS `ubicaciontipo`;
 CREATE TABLE `ubicaciontipo` (
@@ -505,7 +1080,13 @@ CREATE TABLE `ubicaciontipo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
---  Table structure for `usuario`
+-- Records of ubicaciontipo
+-- ----------------------------
+INSERT INTO `ubicaciontipo` VALUES ('1', 'FRIGORIFICO');
+INSERT INTO `ubicaciontipo` VALUES ('2', 'DEPOSITO');
+
+-- ----------------------------
+-- Table structure for usuario
 -- ----------------------------
 DROP TABLE IF EXISTS `usuario`;
 CREATE TABLE `usuario` (
@@ -517,7 +1098,13 @@ CREATE TABLE `usuario` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 
 -- ----------------------------
---  Table structure for `usuarioingreso`
+-- Records of usuario
+-- ----------------------------
+INSERT INTO `usuario` VALUES ('1', 'a', 'a', 'aa');
+INSERT INTO `usuario` VALUES ('2', 'prueba', 'prueba', 'prueba');
+
+-- ----------------------------
+-- Table structure for usuarioingreso
 -- ----------------------------
 DROP TABLE IF EXISTS `usuarioingreso`;
 CREATE TABLE `usuarioingreso` (
@@ -531,7 +1118,12 @@ CREATE TABLE `usuarioingreso` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 
 -- ----------------------------
---  Table structure for `usuariomodulo`
+-- Records of usuarioingreso
+-- ----------------------------
+INSERT INTO `usuarioingreso` VALUES ('1', '1', '2017-09-02', '11:26:00');
+
+-- ----------------------------
+-- Table structure for usuariomodulo
 -- ----------------------------
 DROP TABLE IF EXISTS `usuariomodulo`;
 CREATE TABLE `usuariomodulo` (
@@ -543,10 +1135,31 @@ CREATE TABLE `usuariomodulo` (
   KEY `fk_us` (`id_usuario`),
   CONSTRAINT `fk_mod` FOREIGN KEY (`id_modulo`) REFERENCES `modulo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_us` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
---  Table structure for `venta`
+-- Records of usuariomodulo
+-- ----------------------------
+INSERT INTO `usuariomodulo` VALUES ('1', '1', '1');
+INSERT INTO `usuariomodulo` VALUES ('2', '1', '2');
+INSERT INTO `usuariomodulo` VALUES ('3', '1', '3');
+INSERT INTO `usuariomodulo` VALUES ('4', '1', '4');
+INSERT INTO `usuariomodulo` VALUES ('5', '1', '7');
+INSERT INTO `usuariomodulo` VALUES ('6', '1', '9');
+INSERT INTO `usuariomodulo` VALUES ('7', '1', '10');
+INSERT INTO `usuariomodulo` VALUES ('8', '1', '11');
+INSERT INTO `usuariomodulo` VALUES ('15', '2', '12');
+INSERT INTO `usuariomodulo` VALUES ('16', '2', '1');
+INSERT INTO `usuariomodulo` VALUES ('17', '2', '2');
+INSERT INTO `usuariomodulo` VALUES ('18', '2', '4');
+INSERT INTO `usuariomodulo` VALUES ('19', '2', '9');
+INSERT INTO `usuariomodulo` VALUES ('20', '2', '11');
+INSERT INTO `usuariomodulo` VALUES ('21', '2', '12');
+INSERT INTO `usuariomodulo` VALUES ('22', '1', '13');
+INSERT INTO `usuariomodulo` VALUES ('23', '1', '12');
+
+-- ----------------------------
+-- Table structure for venta
 -- ----------------------------
 DROP TABLE IF EXISTS `venta`;
 CREATE TABLE `venta` (
@@ -559,7 +1172,32 @@ CREATE TABLE `venta` (
 ) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
---  Table structure for `ventadetalle`
+-- Records of venta
+-- ----------------------------
+INSERT INTO `venta` VALUES ('1', '1108.000', '2017-10-23 20:04:26', '0', null);
+INSERT INTO `venta` VALUES ('2', '1108.000', '2017-10-23 20:07:48', '0', null);
+INSERT INTO `venta` VALUES ('3', '1108.000', '2017-10-23 20:08:00', '0', null);
+INSERT INTO `venta` VALUES ('4', '1108.000', '2017-10-23 20:18:15', '0', null);
+INSERT INTO `venta` VALUES ('5', '1108.000', '2017-10-23 20:20:11', '0', null);
+INSERT INTO `venta` VALUES ('6', '1108.004', '2017-10-23 20:22:11', '0', null);
+INSERT INTO `venta` VALUES ('7', '1110.042', '2017-10-24 19:45:11', '0', null);
+INSERT INTO `venta` VALUES ('8', '1858.994', '2017-10-24 20:10:55', '0', null);
+INSERT INTO `venta` VALUES ('9', '630.780', '2017-10-26 20:25:29', '0', null);
+INSERT INTO `venta` VALUES ('10', '1261.560', '2017-10-26 20:25:35', '0', null);
+INSERT INTO `venta` VALUES ('11', '1787.210', '2017-10-26 20:25:40', '0', null);
+INSERT INTO `venta` VALUES ('12', '2069.254', '2017-10-27 18:55:55', '0', null);
+INSERT INTO `venta` VALUES ('13', '2307.482', '2017-10-30 18:56:35', '0', null);
+INSERT INTO `venta` VALUES ('14', '2152.872', '2017-11-02 21:17:32', '0', null);
+INSERT INTO `venta` VALUES ('24', '4493.712', '2017-11-10 19:57:18', '0', null);
+INSERT INTO `venta` VALUES ('25', '2495.296', '2017-11-10 20:01:24', '0', null);
+INSERT INTO `venta` VALUES ('26', '1658.880', '2017-11-10 20:15:42', '0', null);
+INSERT INTO `venta` VALUES ('27', '1871.472', '2017-11-10 20:20:55', '0', null);
+INSERT INTO `venta` VALUES ('28', '3086.878', '2017-11-10 20:25:17', '0', null);
+INSERT INTO `venta` VALUES ('29', '1244.160', '2017-11-10 20:27:03', '0', null);
+INSERT INTO `venta` VALUES ('30', '3744.760', '2017-11-11 10:38:21', '0', null);
+
+-- ----------------------------
+-- Table structure for ventadetalle
 -- ----------------------------
 DROP TABLE IF EXISTS `ventadetalle`;
 CREATE TABLE `ventadetalle` (
@@ -576,7 +1214,210 @@ CREATE TABLE `ventadetalle` (
 ) ENGINE=InnoDB AUTO_INCREMENT=203 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
---  Procedure definition for `ActualizarCliente`
+-- Records of ventadetalle
+-- ----------------------------
+INSERT INTO `ventadetalle` VALUES ('4', '0', '1', '105.000', '0.000', '1', null);
+INSERT INTO `ventadetalle` VALUES ('5', '0', '2', '328.000', '1.000', '1', null);
+INSERT INTO `ventadetalle` VALUES ('6', '0', '3', '674.000', '3.000', '1', null);
+INSERT INTO `ventadetalle` VALUES ('7', '0', '3', '674.000', '3.000', '1', null);
+INSERT INTO `ventadetalle` VALUES ('8', '0', '2', '328.000', '1.000', '1', null);
+INSERT INTO `ventadetalle` VALUES ('9', '0', '1', '105.000', '0.000', '1', null);
+INSERT INTO `ventadetalle` VALUES ('10', '0', '3', '674.000', '3.000', '1', null);
+INSERT INTO `ventadetalle` VALUES ('11', '0', '2', '328.000', '1.000', '1', null);
+INSERT INTO `ventadetalle` VALUES ('12', '0', '1', '105.000', '0.000', '1', null);
+INSERT INTO `ventadetalle` VALUES ('13', '4', '3', '674.000', '3.000', '1', null);
+INSERT INTO `ventadetalle` VALUES ('14', '4', '2', '328.000', '1.000', '1', null);
+INSERT INTO `ventadetalle` VALUES ('15', '4', '1', '105.000', '0.000', '1', null);
+INSERT INTO `ventadetalle` VALUES ('16', '5', '1', '105.000', '0.000', '1', null);
+INSERT INTO `ventadetalle` VALUES ('17', '6', '3', '674.525', '3.646', '1', null);
+INSERT INTO `ventadetalle` VALUES ('18', '6', '2', '328.349', '1.427', '1', null);
+INSERT INTO `ventadetalle` VALUES ('19', '6', '1', '105.130', '0.725', '1', null);
+INSERT INTO `ventadetalle` VALUES ('20', '7', '1', '105.130', '0.725', '1', null);
+INSERT INTO `ventadetalle` VALUES ('21', '7', '2', '451.294', '1.962', '1', null);
+INSERT INTO `ventadetalle` VALUES ('22', '7', '3', '553.618', '2.992', '1', null);
+INSERT INTO `ventadetalle` VALUES ('23', '8', '2', '451.294', '1.962', '1', null);
+INSERT INTO `ventadetalle` VALUES ('24', '8', '3', '553.618', '2.992', '1', null);
+INSERT INTO `ventadetalle` VALUES ('25', '8', '2', '748.952', '3.256', '1', null);
+INSERT INTO `ventadetalle` VALUES ('26', '8', '1', '105.130', '0.725', '1', null);
+INSERT INTO `ventadetalle` VALUES ('27', '9', '1', '105.130', '0.725', '1', null);
+INSERT INTO `ventadetalle` VALUES ('28', '9', '1', '105.130', '0.725', '1', null);
+INSERT INTO `ventadetalle` VALUES ('29', '9', '1', '105.130', '0.725', '1', null);
+INSERT INTO `ventadetalle` VALUES ('30', '9', '1', '105.130', '0.725', '1', null);
+INSERT INTO `ventadetalle` VALUES ('31', '9', '1', '105.130', '0.725', '1', null);
+INSERT INTO `ventadetalle` VALUES ('32', '9', '1', '105.130', '0.725', '1', null);
+INSERT INTO `ventadetalle` VALUES ('33', '10', '1', '105.130', '0.725', '1', null);
+INSERT INTO `ventadetalle` VALUES ('34', '10', '1', '105.130', '0.725', '1', null);
+INSERT INTO `ventadetalle` VALUES ('35', '10', '1', '105.130', '0.725', '1', null);
+INSERT INTO `ventadetalle` VALUES ('36', '10', '1', '105.130', '0.725', '1', null);
+INSERT INTO `ventadetalle` VALUES ('37', '10', '1', '105.130', '0.725', '1', null);
+INSERT INTO `ventadetalle` VALUES ('38', '10', '1', '105.130', '0.725', '1', null);
+INSERT INTO `ventadetalle` VALUES ('39', '10', '1', '105.130', '0.725', '1', null);
+INSERT INTO `ventadetalle` VALUES ('40', '10', '1', '105.130', '0.725', '1', null);
+INSERT INTO `ventadetalle` VALUES ('41', '10', '1', '105.130', '0.725', '1', null);
+INSERT INTO `ventadetalle` VALUES ('42', '10', '1', '105.130', '0.725', '1', null);
+INSERT INTO `ventadetalle` VALUES ('43', '10', '1', '105.130', '0.725', '1', null);
+INSERT INTO `ventadetalle` VALUES ('44', '10', '1', '105.130', '0.725', '1', null);
+INSERT INTO `ventadetalle` VALUES ('45', '11', '1', '105.130', '0.725', '1', null);
+INSERT INTO `ventadetalle` VALUES ('46', '11', '1', '105.130', '0.725', '1', null);
+INSERT INTO `ventadetalle` VALUES ('47', '11', '1', '105.130', '0.725', '1', null);
+INSERT INTO `ventadetalle` VALUES ('48', '11', '1', '105.130', '0.725', '1', null);
+INSERT INTO `ventadetalle` VALUES ('49', '11', '1', '105.130', '0.725', '1', null);
+INSERT INTO `ventadetalle` VALUES ('50', '11', '1', '105.130', '0.725', '1', null);
+INSERT INTO `ventadetalle` VALUES ('51', '11', '1', '105.130', '0.725', '1', null);
+INSERT INTO `ventadetalle` VALUES ('52', '11', '1', '105.130', '0.725', '1', null);
+INSERT INTO `ventadetalle` VALUES ('53', '11', '1', '105.130', '0.725', '1', null);
+INSERT INTO `ventadetalle` VALUES ('54', '11', '1', '105.130', '0.725', '1', null);
+INSERT INTO `ventadetalle` VALUES ('55', '11', '1', '105.130', '0.725', '1', null);
+INSERT INTO `ventadetalle` VALUES ('56', '11', '1', '105.130', '0.725', '1', null);
+INSERT INTO `ventadetalle` VALUES ('57', '11', '1', '105.130', '0.725', '1', null);
+INSERT INTO `ventadetalle` VALUES ('58', '11', '1', '105.130', '0.725', '1', null);
+INSERT INTO `ventadetalle` VALUES ('59', '11', '1', '105.130', '0.725', '1', null);
+INSERT INTO `ventadetalle` VALUES ('60', '11', '1', '105.130', '0.725', '1', null);
+INSERT INTO `ventadetalle` VALUES ('61', '11', '1', '105.130', '0.725', '1', null);
+INSERT INTO `ventadetalle` VALUES ('62', '12', '1', '105.130', '0.725', '1', null);
+INSERT INTO `ventadetalle` VALUES ('63', '12', '1', '105.130', '0.725', '1', null);
+INSERT INTO `ventadetalle` VALUES ('64', '12', '1', '105.130', '0.725', '1', null);
+INSERT INTO `ventadetalle` VALUES ('65', '12', '2', '451.294', '1.962', '1', null);
+INSERT INTO `ventadetalle` VALUES ('66', '12', '3', '553.618', '2.992', '1', null);
+INSERT INTO `ventadetalle` VALUES ('67', '12', '2', '748.952', '3.256', '1', null);
+INSERT INTO `ventadetalle` VALUES ('68', '13', '2', '748.952', '3.256', '1', null);
+INSERT INTO `ventadetalle` VALUES ('69', '13', '2', '451.294', '1.962', '1', null);
+INSERT INTO `ventadetalle` VALUES ('70', '13', '3', '553.618', '2.992', '1', null);
+INSERT INTO `ventadetalle` VALUES ('71', '13', '3', '553.618', '2.992', '1', null);
+INSERT INTO `ventadetalle` VALUES ('72', '14', '35', '105.130', '0.725', '1', null);
+INSERT INTO `ventadetalle` VALUES ('73', '14', '35', '105.130', '0.725', '1', null);
+INSERT INTO `ventadetalle` VALUES ('74', '14', '39', '703.127', '4.849', '1', null);
+INSERT INTO `ventadetalle` VALUES ('75', '14', '35', '311.912', '2.151', '1', null);
+INSERT INTO `ventadetalle` VALUES ('76', '14', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('77', '14', '6', '178.621', '2.101', '1', null);
+INSERT INTO `ventadetalle` VALUES ('78', '15', '6', '178.621', '2.101', '1', null);
+INSERT INTO `ventadetalle` VALUES ('79', '15', '6', '178.621', '2.101', '1', null);
+INSERT INTO `ventadetalle` VALUES ('80', '15', '6', '178.621', '2.101', '1', null);
+INSERT INTO `ventadetalle` VALUES ('81', '15', '6', '178.621', '2.101', '1', null);
+INSERT INTO `ventadetalle` VALUES ('82', '15', '6', '178.621', '2.101', '1', null);
+INSERT INTO `ventadetalle` VALUES ('83', '15', '6', '178.621', '2.101', '1', null);
+INSERT INTO `ventadetalle` VALUES ('84', '15', '6', '178.621', '2.101', '1', null);
+INSERT INTO `ventadetalle` VALUES ('85', '15', '6', '178.621', '2.101', '1', null);
+INSERT INTO `ventadetalle` VALUES ('86', '15', '6', '178.621', '2.101', '1', null);
+INSERT INTO `ventadetalle` VALUES ('87', '15', '6', '178.621', '2.101', '1', null);
+INSERT INTO `ventadetalle` VALUES ('88', '15', '6', '178.621', '2.101', '1', null);
+INSERT INTO `ventadetalle` VALUES ('89', '15', '6', '178.621', '2.101', '1', null);
+INSERT INTO `ventadetalle` VALUES ('90', '15', '6', '178.621', '2.101', '1', null);
+INSERT INTO `ventadetalle` VALUES ('91', '15', '6', '451.294', '5.309', '1', null);
+INSERT INTO `ventadetalle` VALUES ('92', '15', '6', '451.294', '5.309', '1', null);
+INSERT INTO `ventadetalle` VALUES ('93', '15', '6', '451.294', '5.309', '1', null);
+INSERT INTO `ventadetalle` VALUES ('94', '15', '6', '451.294', '5.309', '1', null);
+INSERT INTO `ventadetalle` VALUES ('95', '15', '6', '451.294', '5.309', '1', null);
+INSERT INTO `ventadetalle` VALUES ('96', '15', '6', '451.294', '5.309', '1', null);
+INSERT INTO `ventadetalle` VALUES ('97', '15', '6', '451.294', '5.309', '1', null);
+INSERT INTO `ventadetalle` VALUES ('98', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('99', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('100', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('101', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('102', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('103', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('104', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('105', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('106', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('107', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('108', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('109', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('110', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('111', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('112', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('113', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('114', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('115', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('116', '15', '35', '311.912', '2.151', '1', null);
+INSERT INTO `ventadetalle` VALUES ('117', '15', '35', '311.912', '2.151', '1', null);
+INSERT INTO `ventadetalle` VALUES ('118', '15', '35', '311.912', '2.151', '1', null);
+INSERT INTO `ventadetalle` VALUES ('119', '15', '35', '311.912', '2.151', '1', null);
+INSERT INTO `ventadetalle` VALUES ('120', '15', '35', '311.912', '2.151', '1', null);
+INSERT INTO `ventadetalle` VALUES ('121', '15', '35', '311.912', '2.151', '1', null);
+INSERT INTO `ventadetalle` VALUES ('122', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('123', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('124', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('125', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('126', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('127', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('128', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('129', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('130', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('131', '15', '39', '703.127', '4.849', '1', null);
+INSERT INTO `ventadetalle` VALUES ('132', '15', '39', '703.127', '4.849', '1', null);
+INSERT INTO `ventadetalle` VALUES ('133', '15', '39', '703.127', '4.849', '1', null);
+INSERT INTO `ventadetalle` VALUES ('134', '15', '39', '703.127', '4.849', '1', null);
+INSERT INTO `ventadetalle` VALUES ('135', '15', '39', '703.127', '4.849', '1', null);
+INSERT INTO `ventadetalle` VALUES ('136', '15', '39', '703.127', '4.849', '1', null);
+INSERT INTO `ventadetalle` VALUES ('137', '15', '39', '703.127', '4.849', '1', null);
+INSERT INTO `ventadetalle` VALUES ('138', '15', '39', '703.127', '4.849', '1', null);
+INSERT INTO `ventadetalle` VALUES ('139', '15', '39', '703.127', '4.849', '1', null);
+INSERT INTO `ventadetalle` VALUES ('140', '15', '39', '703.127', '4.849', '1', null);
+INSERT INTO `ventadetalle` VALUES ('141', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('142', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('143', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('144', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('145', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('146', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('147', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('148', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('149', '15', '35', '311.912', '2.151', '1', null);
+INSERT INTO `ventadetalle` VALUES ('150', '15', '35', '311.912', '2.151', '1', null);
+INSERT INTO `ventadetalle` VALUES ('151', '15', '35', '311.912', '2.151', '1', null);
+INSERT INTO `ventadetalle` VALUES ('152', '15', '35', '311.912', '2.151', '1', null);
+INSERT INTO `ventadetalle` VALUES ('153', '15', '35', '311.912', '2.151', '1', null);
+INSERT INTO `ventadetalle` VALUES ('154', '15', '35', '311.912', '2.151', '1', null);
+INSERT INTO `ventadetalle` VALUES ('155', '15', '35', '311.912', '2.151', '1', null);
+INSERT INTO `ventadetalle` VALUES ('156', '15', '35', '311.912', '2.151', '1', null);
+INSERT INTO `ventadetalle` VALUES ('157', '15', '35', '311.912', '2.151', '1', null);
+INSERT INTO `ventadetalle` VALUES ('158', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('159', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('160', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('161', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('162', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('163', '15', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('164', '25', '35', '311.912', '2.151', '1', null);
+INSERT INTO `ventadetalle` VALUES ('165', '25', '35', '311.912', '2.151', '1', null);
+INSERT INTO `ventadetalle` VALUES ('166', '25', '35', '311.912', '2.151', '1', null);
+INSERT INTO `ventadetalle` VALUES ('167', '25', '35', '311.912', '2.151', '1', null);
+INSERT INTO `ventadetalle` VALUES ('168', '25', '35', '311.912', '2.151', '1', null);
+INSERT INTO `ventadetalle` VALUES ('169', '25', '35', '311.912', '2.151', '1', null);
+INSERT INTO `ventadetalle` VALUES ('170', '25', '35', '311.912', '2.151', '1', null);
+INSERT INTO `ventadetalle` VALUES ('171', '25', '35', '311.912', '2.151', '1', null);
+INSERT INTO `ventadetalle` VALUES ('172', '26', '24', '207.360', '1.481', '1', null);
+INSERT INTO `ventadetalle` VALUES ('173', '26', '24', '207.360', '1.481', '1', null);
+INSERT INTO `ventadetalle` VALUES ('174', '26', '24', '207.360', '1.481', '1', null);
+INSERT INTO `ventadetalle` VALUES ('175', '26', '24', '207.360', '1.481', '1', null);
+INSERT INTO `ventadetalle` VALUES ('176', '26', '24', '207.360', '1.481', '1', null);
+INSERT INTO `ventadetalle` VALUES ('177', '26', '24', '207.360', '1.481', '1', null);
+INSERT INTO `ventadetalle` VALUES ('178', '26', '24', '207.360', '1.481', '1', null);
+INSERT INTO `ventadetalle` VALUES ('179', '26', '24', '207.360', '1.481', '1', null);
+INSERT INTO `ventadetalle` VALUES ('180', '27', '35', '311.912', '2.151', '1', null);
+INSERT INTO `ventadetalle` VALUES ('181', '27', '35', '311.912', '2.151', '1', null);
+INSERT INTO `ventadetalle` VALUES ('182', '27', '35', '311.912', '2.151', '1', null);
+INSERT INTO `ventadetalle` VALUES ('183', '27', '35', '311.912', '2.151', '1', null);
+INSERT INTO `ventadetalle` VALUES ('184', '27', '35', '311.912', '2.151', '1', null);
+INSERT INTO `ventadetalle` VALUES ('185', '27', '35', '311.912', '2.151', '1', null);
+INSERT INTO `ventadetalle` VALUES ('186', '28', '39', '703.127', '4.849', '1', null);
+INSERT INTO `ventadetalle` VALUES ('187', '28', '39', '703.127', '4.849', '1', null);
+INSERT INTO `ventadetalle` VALUES ('188', '28', '24', '207.360', '1.481', '1', null);
+INSERT INTO `ventadetalle` VALUES ('189', '28', '24', '207.360', '1.481', '1', null);
+INSERT INTO `ventadetalle` VALUES ('190', '28', '5', '632.952', '5.503', '1', null);
+INSERT INTO `ventadetalle` VALUES ('191', '28', '5', '632.952', '5.503', '1', null);
+INSERT INTO `ventadetalle` VALUES ('192', '29', '24', '207.360', '1.481', '1', null);
+INSERT INTO `ventadetalle` VALUES ('193', '29', '24', '207.360', '1.481', '1', null);
+INSERT INTO `ventadetalle` VALUES ('194', '29', '24', '207.360', '1.481', '1', null);
+INSERT INTO `ventadetalle` VALUES ('195', '29', '24', '207.360', '1.481', '1', null);
+INSERT INTO `ventadetalle` VALUES ('196', '29', '24', '207.360', '1.481', '1', null);
+INSERT INTO `ventadetalle` VALUES ('197', '29', '24', '207.360', '1.481', '1', null);
+INSERT INTO `ventadetalle` VALUES ('198', '30', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('199', '30', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('200', '30', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('201', '30', '23', '748.952', '5.547', '1', null);
+INSERT INTO `ventadetalle` VALUES ('202', '30', '23', '748.952', '5.547', '1', null);
+
+-- ----------------------------
+-- Procedure structure for ActualizarCliente
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `ActualizarCliente`;
 DELIMITER ;;
@@ -610,7 +1451,7 @@ WHERE id = id_
 DELIMITER ;
 
 -- ----------------------------
---  Procedure definition for `actualizarProveedor`
+-- Procedure structure for actualizarProveedor
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `actualizarProveedor`;
 DELIMITER ;;
@@ -642,7 +1483,7 @@ WHERE id = id_
 DELIMITER ;
 
 -- ----------------------------
---  Procedure definition for `borrarProveedor`
+-- Procedure structure for borrarProveedor
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `borrarProveedor`;
 DELIMITER ;;
@@ -652,7 +1493,7 @@ update proveedor set fecha_baja = fecha_ where id = id_
 DELIMITER ;
 
 -- ----------------------------
---  Procedure definition for `grabarNuevaClienteCuenta`
+-- Procedure structure for grabarNuevaClienteCuenta
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `grabarNuevaClienteCuenta`;
 DELIMITER ;;
@@ -664,7 +1505,7 @@ INSERT INTO clientecuenta
 DELIMITER ;
 
 -- ----------------------------
---  Procedure definition for `grabarNuevoCliente`
+-- Procedure structure for grabarNuevoCliente
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `grabarNuevoCliente`;
 DELIMITER ;;
@@ -707,7 +1548,7 @@ idu)
 DELIMITER ;
 
 -- ----------------------------
---  Procedure definition for `grabarNuevoProveedor`
+-- Procedure structure for grabarNuevoProveedor
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `grabarNuevoProveedor`;
 DELIMITER ;;
@@ -747,7 +1588,7 @@ idu)
 DELIMITER ;
 
 -- ----------------------------
---  Procedure definition for `listarClienteCuentaConSaldo`
+-- Procedure structure for listarClienteCuentaConSaldo
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `listarClienteCuentaConSaldo`;
 DELIMITER ;;
@@ -769,7 +1610,7 @@ group by cliente.id order by cliente.id
 DELIMITER ;
 
 -- ----------------------------
---  Procedure definition for `listarCuentasByIdCliente`
+-- Procedure structure for listarCuentasByIdCliente
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `listarCuentasByIdCliente`;
 DELIMITER ;;
@@ -787,7 +1628,7 @@ WHERE cc.id_cliente = Id_
 DELIMITER ;
 
 -- ----------------------------
---  Procedure definition for `listarMovimientoTipo`
+-- Procedure structure for listarMovimientoTipo
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `listarMovimientoTipo`;
 DELIMITER ;;
@@ -797,7 +1638,7 @@ select * from movimientotipo order by id
 DELIMITER ;
 
 -- ----------------------------
---  Procedure definition for `listarTipoCliente`
+-- Procedure structure for listarTipoCliente
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `listarTipoCliente`;
 DELIMITER ;;
@@ -807,7 +1648,7 @@ select * from clientetipo order by id
 DELIMITER ;
 
 -- ----------------------------
---  Procedure definition for `listarTipoProducto`
+-- Procedure structure for listarTipoProducto
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `listarTipoProducto`;
 DELIMITER ;;
@@ -817,7 +1658,7 @@ select * from productotipo order by id
 DELIMITER ;
 
 -- ----------------------------
---  Procedure definition for `obtenerClienteConCuentasPorIdCliente`
+-- Procedure structure for obtenerClienteConCuentasPorIdCliente
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `obtenerClienteConCuentasPorIdCliente`;
 DELIMITER ;;
@@ -833,7 +1674,7 @@ INNER JOIN clientecuenta cu ON cu.id_cliente = c.id  WHERE c.id = id_
 DELIMITER ;
 
 -- ----------------------------
---  Procedure definition for `obtenerClienteCuentaPorId`
+-- Procedure structure for obtenerClienteCuentaPorId
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `obtenerClienteCuentaPorId`;
 DELIMITER ;;
@@ -843,7 +1684,7 @@ select * from clientecuenta where id = id_
 DELIMITER ;
 
 -- ----------------------------
---  Procedure definition for `obtenerClienteCuentas`
+-- Procedure structure for obtenerClienteCuentas
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `obtenerClienteCuentas`;
 DELIMITER ;;
@@ -853,7 +1694,7 @@ select * from clientecuenta order by id
 DELIMITER ;
 
 -- ----------------------------
---  Procedure definition for `obtenerClientes`
+-- Procedure structure for obtenerClientes
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `obtenerClientes`;
 DELIMITER ;;
@@ -863,7 +1704,7 @@ SELECT * FROM cliente ORDER BY razon_social
 DELIMITER ;
 
 -- ----------------------------
---  Procedure definition for `obtenerClientesConCuenta`
+-- Procedure structure for obtenerClientesConCuenta
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `obtenerClientesConCuenta`;
 DELIMITER ;;
@@ -878,7 +1719,7 @@ INNER JOIN clientecuenta cu ON cu.id_cliente = c.id  AND c.fecha_baja is null or
 DELIMITER ;
 
 -- ----------------------------
---  Procedure definition for `obtenerClientesData`
+-- Procedure structure for obtenerClientesData
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `obtenerClientesData`;
 DELIMITER ;;
@@ -890,7 +1731,7 @@ c.fecha_baja AS FechaBaja  FROM cliente c order by c.id
 DELIMITER ;
 
 -- ----------------------------
---  Procedure definition for `obtenerClientesPorId`
+-- Procedure structure for obtenerClientesPorId
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `obtenerClientesPorId`;
 DELIMITER ;;
@@ -900,7 +1741,7 @@ SELECT * FROM cliente  WHERE id = id_ ORDER BY razon_social
 DELIMITER ;
 
 -- ----------------------------
---  Procedure definition for `obtenerCuentasPorIdCliente`
+-- Procedure structure for obtenerCuentasPorIdCliente
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `obtenerCuentasPorIdCliente`;
 DELIMITER ;;
@@ -910,7 +1751,7 @@ select * from clientecuenta where id_cliente = id_
 DELIMITER ;
 
 -- ----------------------------
---  Procedure definition for `obtenerCuentasPorIdProveedor`
+-- Procedure structure for obtenerCuentasPorIdProveedor
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `obtenerCuentasPorIdProveedor`;
 DELIMITER ;;
@@ -920,7 +1761,7 @@ select * from proveedorcuenta where id_proveedor = id_
 DELIMITER ;
 
 -- ----------------------------
---  Procedure definition for `obtenerMovCuentasClientes`
+-- Procedure structure for obtenerMovCuentasClientes
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `obtenerMovCuentasClientes`;
 DELIMITER ;;
@@ -935,7 +1776,7 @@ cm.cobrado, cm.usuario
 DELIMITER ;
 
 -- ----------------------------
---  Procedure definition for `obtenerProveedorConCuentasPorIdProveedor`
+-- Procedure structure for obtenerProveedorConCuentasPorIdProveedor
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `obtenerProveedorConCuentasPorIdProveedor`;
 DELIMITER ;;
@@ -954,7 +1795,7 @@ WHERE proveedor.id = id_ order by cuenta.id
 DELIMITER ;
 
 -- ----------------------------
---  Procedure definition for `obtenerProveedorCuentaPorId`
+-- Procedure structure for obtenerProveedorCuentaPorId
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `obtenerProveedorCuentaPorId`;
 DELIMITER ;;
@@ -964,7 +1805,7 @@ select * from proveedorcuenta where id = id_
 DELIMITER ;
 
 -- ----------------------------
---  Procedure definition for `obtenerProveedorCuentas`
+-- Procedure structure for obtenerProveedorCuentas
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `obtenerProveedorCuentas`;
 DELIMITER ;;
@@ -974,7 +1815,7 @@ select * from proveedorcuenta order by id
 DELIMITER ;
 
 -- ----------------------------
---  Procedure definition for `obtenerProveedores`
+-- Procedure structure for obtenerProveedores
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `obtenerProveedores`;
 DELIMITER ;;
@@ -984,7 +1825,7 @@ SELECT * FROM proveedor ORDER BY razon_social
 DELIMITER ;
 
 -- ----------------------------
---  Procedure definition for `obtenerProveedoresConCuenta`
+-- Procedure structure for obtenerProveedoresConCuenta
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `obtenerProveedoresConCuenta`;
 DELIMITER ;;
@@ -1006,7 +1847,7 @@ c.telefono AS Telefono  FROM 	proveedor c
 DELIMITER ;
 
 -- ----------------------------
---  Procedure definition for `obtenerProveedoresData`
+-- Procedure structure for obtenerProveedoresData
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `obtenerProveedoresData`;
 DELIMITER ;;
@@ -1026,7 +1867,7 @@ c.fecha_baja AS FechaBaja  FROM proveedor c order by c.id
 DELIMITER ;
 
 -- ----------------------------
---  Procedure definition for `obtenerProveedoresPorId`
+-- Procedure structure for obtenerProveedoresPorId
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `obtenerProveedoresPorId`;
 DELIMITER ;;
@@ -1036,7 +1877,7 @@ SELECT * FROM proveedor WHERE id = id_ ORDER BY razon_social
 DELIMITER ;
 
 -- ----------------------------
---  Procedure definition for `obtenerProveedoresSaldoActual`
+-- Procedure structure for obtenerProveedoresSaldoActual
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `obtenerProveedoresSaldoActual`;
 DELIMITER ;;
@@ -1054,7 +1895,7 @@ group by proveedor.id order by proveedor.id
 DELIMITER ;
 
 -- ----------------------------
---  Procedure definition for `obtenerProveedorPorNombre`
+-- Procedure structure for obtenerProveedorPorNombre
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `obtenerProveedorPorNombre`;
 DELIMITER ;;
@@ -1067,7 +1908,7 @@ AND razon_social LIKE CONCAT('%',name_,'%')
 DELIMITER ;
 
 -- ----------------------------
---  Procedure definition for `obtenerTipoClientePorIdCliente`
+-- Procedure structure for obtenerTipoClientePorIdCliente
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `obtenerTipoClientePorIdCliente`;
 DELIMITER ;;
@@ -1077,7 +1918,7 @@ select id_tipo_cliente from cliente where id = id_
 DELIMITER ;
 
 -- ----------------------------
---  Procedure definition for `obtenerTipoProdutoPorIdProducto`
+-- Procedure structure for obtenerTipoProdutoPorIdProducto
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `obtenerTipoProdutoPorIdProducto`;
 DELIMITER ;;
@@ -1087,7 +1928,7 @@ select id_producto_tipo from producto where id = id_
 DELIMITER ;
 
 -- ----------------------------
---  Procedure definition for `obtenerTodasCuentasPorCliente`
+-- Procedure structure for obtenerTodasCuentasPorCliente
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `obtenerTodasCuentasPorCliente`;
 DELIMITER ;;
@@ -1107,7 +1948,7 @@ WHERE cliente.id = id_ ORDER BY c.id
 DELIMITER ;
 
 -- ----------------------------
---  Procedure definition for `obtenerUsuarioPorNombre`
+-- Procedure structure for obtenerUsuarioPorNombre
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `obtenerUsuarioPorNombre`;
 DELIMITER ;;
@@ -1117,7 +1958,7 @@ select * from usuario where username like name_
 DELIMITER ;
 
 -- ----------------------------
---  Procedure definition for `obtenerUsuariosModulos`
+-- Procedure structure for obtenerUsuariosModulos
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `obtenerUsuariosModulos`;
 DELIMITER ;;
@@ -1125,43 +1966,3 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerUsuariosModulos`(id_ int)
 SELECT m.* FROM usuariomodulo um inner join modulo m on m.id = um.id_modulo where um.id_usuario = id_
 ;;
 DELIMITER ;
-
--- ----------------------------
---  Records 
--- ----------------------------
-INSERT INTO `banco` VALUES ('1','Macro'), ('2','Santander'), ('3','Santa Fe'), ('4','Nación');
-INSERT INTO `cliente` VALUES ('1','111','WTF','asd','asd','asd','1','asd','asd','asd','asd','2017-09-05',NULL,'1'), ('2','nke','Juanjo','j de la rosa 1252','santa fe','CF','2','DESAROLLO SANTA','2','1','3','2017-09-05',NULL,'1'), ('3','kkk','A.D.U.L.','Pje. Martinez 26661','Santa Fe','CF','4','defaultLocal','30-55597562-3','4553992','NombreResponsable','2017-09-05',NULL,'1'), ('4','114','A.N.S.E.S.','SAN MARTIN N 2533','Santa Fe','CF','1','defaultLocal','33-63761744-9','4156256','NombreResponsable','2017-09-05',NULL,'1'), ('5','115','A.PE.L - Asoc.Pers.Legislativo','San Jeronimo N  1.791','Santa Fe','CF','1','defaultLocal','30-64955281-5','4598277','NombreResponsable','2017-09-05',NULL,'1'), ('6','116','ACANTILADOS S.A. (VALMOTORS)','SAN LUIS N 3102','Santa Fe','CF','1','defaultLocal','30-70941478-6','4530606','NombreResponsable','2017-09-06',NULL,'1'), ('7','117','ACOSTA MARTIN SEBASTIAN','Pje. E.del Crespo N 7103/Berutti 5725','Santa Fe','CF','2','defaultLocal','30-64955281-5','4530606','NombreResponsable','2017-09-06',NULL,'1'), ('8','118','AdministraciÂ¢n Provincial de Impuestos-A.P.I','AVDA.PTE.ILLIA NÂ§ 1.151','Santa Fe','CF','2','defaultLocal','30-65520017-3','4557996','NombreResponsable','2017-09-06',NULL,'0'), ('9','119','Agencia Provincial de Seguridad Vial','25 DE MAYO N  2.208','Santa Fe','CF','1','defaultLocal','30-99901844-7','4574822','NombreResponsable','2017-09-06',NULL,'1'), ('10','120','AGOSTINI OSVALDO OMAR','AVDA. GORRITI N 3014','Santa Fe','CF','2','defaultLocal','20-05261057-6','4695406','NombreResponsable','2017-09-06','2001-01-01 00:00:00','1'), ('11','121','AICACYP-Ente Cooperador Ley 23.979','Moreno N 1420  (p/Facturar)','Santa Fe','CF','2','defaultLocal','30-55597562-3','4574822','NombreResponsable','2017-09-07',NULL,'1'), ('12','122','AICACYP-Ente Cooperador Ley 23.979','RENAR: Francia N 3550 - Santa Fe','Santa Fe','CF','2','defaultLocal','011-4384-7900','4557996','NombreResponsable','2017-09-07',NULL,'1'), ('13','123','ALBERTO J. MACUA S.A.','LOPEZ Y PLANES N 4250','Santa Fe','CF','2','defaultLocal','30-60541628-0','4555070','NombreResponsable','2017-09-07','2001-01-01 00:00:00','1'), ('14','124','ALMEIDA JUAN CARLOS F.','RUPERTO PEREZ 1944','Santa Fe','CF','2','defaultLocal','24-06218372-8','4553228','NombreResponsable','2017-09-07',NULL,'1'), ('15','125','ALONSO EDGARDO JAVIER','SAN MARTÃ–N N 3364-Piso 10-Dpto B','Santa Fe','CF','2','defaultLocal','20-13925831-3','4585068','NombreResponsable','2017-09-07',NULL,'1'), ('16','126','ALONSO  GRACIELA CRISTINA','MARTIN ZAPATA 3870','Santa Fe','CF','2','defaultLocal','27-13163585-6','4537003','NombreResponsable','2017-09-07','2001-01-01 00:00:00','1'), ('17','127','ALLOATTI ROBERTO','SAN MARTIN N 2088','Santa Fe','CF','2','defaultLocal','30-60541628-0','4537003','NombreResponsable','2017-09-07',NULL,'1'), ('18','128','AMATTI  CLAUDIO','SAN MARTIN N 2088','Santa Fe','CF','3','defaultLocal','30-60541628-0','4537003','NombreResponsable','2017-09-10',NULL,'1'), ('19','129','AMRAD S. H. de Liponezky Virginia  Victor y Santiago ','Salvador del Carril N 968','Santa Fe','CF','3','defaultLocal','30-71120617-1','4537003','NombreResponsable','2017-09-10',NULL,'1'), ('20','130','ANGEL BOSCARINO Construcciones S.A.','MARCIAL CANDIOTI  N 5180','Santa Fe','CF','3','defaultLocal','30-60541628-0','4538585','NombreResponsable','2017-09-10',NULL,'1'), ('21','131','ANSKOHL  RICARDO','E. ZEBALLOS 4334','Santa Fe','CF','3','defaultLocal','20-06264349-9','4537003','NombreResponsable','2017-09-10',NULL,'1'), ('22','132','ANTONIAZZI HNOS.','PIETRANERA n 3350','Santa Fe','CF','4','defaultLocal','30-55418898-9','4592295','NombreResponsable','2017-09-10',NULL,'1'), ('23','133','ANTONIAZZI  GERMAN','RIVADAVIA N 3396','Santa Fe','CF','4','defaultLocal','20-26460065-1','4500162','NombreResponsable','2017-09-10',NULL,'1'), ('24','134','ARCINI MARTÃ–N','9 DE JULIO N 2722','Santa Fe','CF','4','defaultLocal','20-06264349-9','4537003','NombreResponsable','2017-09-10',NULL,'1'), ('25','135','ARCOLEN S.A.','SUIPACHA 2695','Santa Fe','CF','4','defaultLocal','30-64385640-5','4561538','NombreResponsable','2017-09-10',NULL,'1'), ('26','136','Cliente 1','La Rioja 2081','Santa Fe','CF','1','asd','203295621342','asd','sd','2017-11-09',NULL,'0'), ('27','aaa','aaa','aaa','aaa','aaa','2','aaa','aaa','aaa','aaa','2017-11-22',NULL,'1'), ('28','aab','bbb','bbb','bbb','bbb','1','bbb','bbb','bbb','bbb','2017-11-22',NULL,'1');
-INSERT INTO `clientecuenta` VALUES ('1','1238238923892234','12-1238238923892234','1','2017-11-06 21:07:59','1',NULL,'1'), ('2','1238238923892236','12-1238238923893434','2','2017-11-06 21:08:00','1',NULL,'1'), ('3','2222','22222','1','2017-11-06 21:08:00','0',NULL,'2'), ('4','aaa','12312','6','2017-11-06 21:08:01','0',NULL,'3'), ('5','11111111','11111111','17','2017-11-06 21:08:02','0',NULL,'4'), ('6','22222','22222','2','2017-11-06 21:08:03','0',NULL,'1'), ('7','4444','4444','2','2017-11-08 22:04:46','0',NULL,'2'), ('8','555','555','3','2017-11-06 21:08:03','0',NULL,'3'), ('9','123','','14','2017-11-06 21:08:04','0',NULL,'4'), ('10','11','11','25','2017-11-06 21:08:05','0',NULL,'1'), ('11','14524521452','14552/142','22','2017-11-15 23:45:05','0',NULL,NULL), ('12','1233213','333112','1','2017-11-15 23:47:45','0',NULL,NULL), ('13','aaa122','123123','26','2017-11-16 00:15:28','0',NULL,NULL), ('14','aa','22','4','2017-11-16 00:17:29','0',NULL,NULL), ('15','142541232','21452','4','2017-11-16 00:43:22','0',NULL,NULL), ('16','0316541561','13216546','4','2017-11-16 00:50:54','0',NULL,'2'), ('17','13213','1231','22','2017-11-16 00:53:54','0',NULL,'2'), ('18','132132','0321132','22','2017-11-16 16:36:07','0',NULL,'1'), ('19','13513','132132','26','2017-11-16 16:36:47','0',NULL,'1');
-INSERT INTO `clientecuentamovimiento` VALUES ('1','1','1','1','500.5','2017-09-14 14:22:14','N','1'), ('2','1','1','1','352.8','2017-09-14 09:21:22','N','1'), ('4','1','2','1','100.1','2017-09-14 10:00:00','N','1'), ('5','1','1','2','400.9','2017-09-14 11:00:00','N','1'), ('6','1','1','2','33.3','2017-09-14 11:00:00','N','1'), ('7','1','1','2','33','2017-09-14 14:13:51','N','1'), ('8','1','1','2','100','2017-09-15 10:49:46','N','1'), ('9','1','1','2','6','2017-09-15 11:00:48','N','1'), ('10','1','1','2','80','2017-09-15 11:08:10','N','1'), ('11','1','1','2','2','2017-09-15 11:09:48','N','1'), ('12','1','1','2','1','2017-09-15 11:11:44','N','1'), ('13','1','1','2','7','2017-09-15 11:17:03','N','1'), ('14','1','1','2','10','2017-09-15 11:24:58','N','1'), ('15','1','1','2','11','2017-09-17 09:23:38','N','1'), ('16','1','1','2','77','2017-09-17 09:48:18','N','1'), ('19','1','1','1','7','0000-00-00 00:00:00','N','1'), ('20','1','1','1','1','2017-09-22 16:02:29','N','1'), ('21','1','1','1','20','2017-09-22 23:05:13','N','1'), ('22','1','2','1','7','2017-09-24 13:41:55','N','1'), ('23','1','2','1','5','2017-09-25 23:39:50','N','1'), ('24','1','2','1','4','2017-09-25 23:41:08','N','1'), ('25','1','2','1','3','2017-09-25 23:42:01','N','1'), ('26','1','2','1','30','2017-09-26 00:07:36','N','1'), ('27','1','2','1','5','2017-09-26 00:43:20','N','1'), ('28','1','2','1','2','2017-09-26 00:46:07','N','1'), ('29','1','2','1','2','2017-09-26 00:47:22','N','1'), ('30','1','2','1','2','2017-09-26 00:47:51','N','1'), ('31','1','2','2','100','2017-09-26 00:51:52','N','1'), ('33','1','2','1','4','2017-09-26 01:03:42','N','1'), ('34','1','2','1','150','2017-09-26 01:04:31','N','1'), ('35','1','2','2','133','2017-09-26 01:05:03','N','1'), ('36','1','2','1','10','2017-09-26 01:17:31','N','1'), ('37','1','2','1','11','2017-09-26 01:40:33','N','1'), ('38','1','2','1','5','2017-09-26 11:41:52','N','1'), ('39','1','2','1','339','2017-09-27 15:33:55','N','1'), ('40','1','2','2','61','2017-09-27 15:34:36','N','1'), ('41','1','2','1','3851','2017-09-27 15:35:03','N','1'), ('42','1','2','1','4236','2017-09-27 15:35:26','N','1'), ('43','1','2','2','847210','2017-09-27 15:36:08','N','1'), ('44','1','2','1','900000','2017-09-27 15:37:44','N','1'), ('45','1','2','2','60000','2017-09-27 15:38:43','N','1'), ('46','1','2','1','200','2017-09-28 14:44:57','N','1'), ('47','1','2','1','6210','2017-09-28 14:45:16','N','1'), ('48','1','2','1','12','2017-09-28 14:57:41','N','1'), ('49','1','2','1','4.9','2017-09-28 15:00:47','N','1'), ('50','1','2','1','55.2','2017-09-28 15:02:56','N','1'), ('51','1','2','1','44.2','2017-09-28 15:15:16','N','1'), ('52','1','1','2','200','2017-09-28 15:19:54','N','1'), ('53','1','2','2','12','2017-09-29 11:10:03','N','1'), ('54','1','2','2','12','2017-09-29 11:13:38','N','1'), ('55','1','2','2','700','2017-09-29 13:55:11','N','1'), ('56','1','2','1','500','2017-10-02 01:08:47','N','0'), ('57','1','2','2','8000','2017-11-06 20:52:46','N','0'), ('58','1','7','1','1000','2017-11-08 22:04:46','N','0'), ('59','1','7','1','22','2017-11-10 17:44:56','N','0'), ('60','1','1','2','600','2017-11-10 18:24:57','N','0'), ('61','1','1','1','700','2017-11-10 19:55:10','N','0'), ('62','1','1','2','222','2017-11-10 19:56:19','N','0'), ('63','1','6','2','123','2017-11-10 20:02:10','N','0'), ('64','1','1','1','14785','2017-11-15 00:26:03','N','0'), ('65','1','7','1','1000','2017-11-15 10:18:40','N','0'), ('66','1','2','2','1000','2017-11-15 10:21:38','N','0'), ('67','1','2','2','500','2017-11-15 10:21:45','N','0'), ('68','1','1','1','1000','2017-11-16 00:54:50','N','1'), ('69','1','19','1','850','2017-11-16 16:37:28','N','1'), ('70','1','19','2','5555','2017-11-16 16:37:36','N','1');
-INSERT INTO `clientetipo` VALUES ('1','Mayorista'), ('2','Minorista'), ('3','TipoCliente'), ('4','ClienteTipo');
-INSERT INTO `cuenta` VALUES ('1','1238238923892234','1','12-1238238923892234','-200.85','1','2017-11-12 20:55:11','1',NULL), ('2','1238238923892236','1','12-1238238923893434','500.85','2','2017-11-12 20:55:12','1',NULL), ('3','2222','1','22222','252.52','1','2017-11-12 20:55:13','0',NULL), ('4','aaa','1','12312','123243.00','6','2017-11-12 20:55:18','0',NULL);
-INSERT INTO `cuentamovimiento` VALUES ('1','1','1','1','500.5','2017-09-14 14:22:14','N','1'), ('2','1','1','1','352.8','2017-09-14 09:21:22','N','1'), ('4','1','2','1','100.1','2017-09-14 10:00:00','N','1'), ('5','1','1','2','400.9','2017-09-14 11:00:00','N','1'), ('6','1','1','2','33.3','2017-09-14 11:00:00','N','1'), ('7','1','1','2','33','2017-09-14 14:13:51','N','1'), ('8','1','1','2','100','2017-09-15 10:49:46','N','1'), ('9','1','1','2','6','2017-09-15 11:00:48','N','1'), ('10','1','1','2','80','2017-09-15 11:08:10','N','1'), ('11','1','1','2','2','2017-09-15 11:09:48','N','1'), ('12','1','1','2','1','2017-09-15 11:11:44','N','1'), ('13','1','1','2','7','2017-09-15 11:17:03','N','1'), ('14','1','1','2','10','2017-09-15 11:24:58','N','1'), ('15','1','1','2','11','2017-09-17 09:23:38','N','1'), ('16','1','1','2','77','2017-09-17 09:48:18','N','1'), ('19','1','1','1','7','0000-00-00 00:00:00','N','1'), ('20','1','1','1','1','2017-09-22 16:02:29','N','1'), ('21','1','1','1','20','2017-09-22 23:05:13','N','1'), ('22','1','2','1','7','2017-09-24 13:41:55','N','1'), ('23','1','2','1','5','2017-09-25 23:39:50','N','1'), ('24','1','2','1','4','2017-09-25 23:41:08','N','1'), ('25','1','2','1','3','2017-09-25 23:42:01','N','1'), ('26','1','2','1','30','2017-09-26 00:07:36','N','1'), ('27','1','2','1','5','2017-09-26 00:43:20','N','1'), ('28','1','2','1','2','2017-09-26 00:46:07','N','1'), ('29','1','2','1','2','2017-09-26 00:47:22','N','1'), ('30','1','2','1','2','2017-09-26 00:47:51','N','1'), ('31','1','2','2','100','2017-09-26 00:51:52','N','1'), ('33','1','2','1','4','2017-09-26 01:03:42','N','1'), ('34','1','2','1','150','2017-09-26 01:04:31','N','1'), ('35','1','2','2','133','2017-09-26 01:05:03','N','1'), ('36','1','2','1','10','2017-09-26 01:17:31','N','1'), ('37','1','2','1','11','2017-09-26 01:40:33','N','1'), ('38','1','2','1','5','2017-09-26 11:41:52','N','1'), ('39','1','2','1','339','2017-09-27 15:33:55','N','1'), ('40','1','2','2','61','2017-09-27 15:34:36','N','1'), ('41','1','2','1','3851','2017-09-27 15:35:03','N','1'), ('42','1','2','1','4236','2017-09-27 15:35:26','N','1'), ('43','1','2','2','847210','2017-09-27 15:36:08','N','1'), ('44','1','2','1','900000','2017-09-27 15:37:44','N','1'), ('45','1','2','2','60000','2017-09-27 15:38:43','N','1'), ('46','1','2','1','200','2017-09-28 14:44:57','N','1'), ('47','1','2','1','6210','2017-09-28 14:45:16','N','1'), ('48','1','2','1','12','2017-09-28 14:57:41','N','1'), ('49','1','2','1','4.9','2017-09-28 15:00:47','N','1'), ('50','1','2','1','55.2','2017-09-28 15:02:56','N','1'), ('51','1','2','1','44.2','2017-09-28 15:15:16','N','1'), ('52','1','1','2','200','2017-09-28 15:19:54','N','1'), ('53','1','2','2','12','2017-09-29 11:10:03','N','1'), ('54','1','2','2','12','2017-09-29 11:13:38','N','1'), ('55','1','2','2','700','2017-09-29 13:55:11','N','1'), ('56','1','2','1','500','2017-10-02 01:08:47','N','0'), ('57','1','3','1','1500','2017-11-12 20:55:47','N','1'), ('58','1','1','1','100','2017-11-12 20:56:26','N','1');
-INSERT INTO `cuentaproveedor` VALUES ('1','1238238923892234','12-1238238923892234','-200.85','1','2017-09-30 14:54:58','1',NULL), ('2','1238238923892236','12-1238238923893434','500.85','2','2017-09-30 14:54:58','1',NULL), ('3','2222','22222','252.52','1','2017-10-24 20:52:55','0',NULL), ('4','aaa','12312','123243.00','6','2017-10-24 20:55:13','0',NULL);
-INSERT INTO `garron` VALUES ('1','230','1','1','2017-11-04 20:08:45','75.421','10','1',NULL), ('2','231','1','2','2017-11-04 20:08:45','76.496','10','1',NULL), ('3','254','4','1','2017-11-17 00:00:00','75.854','11','1',NULL), ('4','745','1','1','2017-11-04 00:00:00','78.520','11','1',NULL), ('5','123','1','1','2017-11-04 00:00:00','78.245','11','1',NULL), ('6','66','1','1','2017-11-04 00:00:00','98.245','11','1',NULL), ('7','542','1','1','2017-11-04 00:00:00','65.250','11','1',NULL), ('8','321','1','1','2017-11-04 00:00:00','88.250','11','1',NULL), ('9','11','1','1','2017-11-04 00:00:00','98.250','11','1',NULL), ('10','111','1','1','2017-11-04 00:00:00','78.525','11','1',NULL), ('11','652','1','1','2017-11-04 00:00:00','88.000','12','1',NULL), ('12','111','1','1','2017-11-04 00:00:00','11.000','11','1',NULL), ('13','425','1','1','2017-11-06 00:00:00','142.250','11','1',NULL), ('14','458','1','1','2017-11-06 00:00:00','14.256','11','1',NULL);
-INSERT INTO `garrondeposteparcial` VALUES ('1','2','6','10.256'), ('2','2','7','18.620'), ('3','2','8','20.680');
-INSERT INTO `garronestado` VALUES ('1','COMPLETO'), ('2','DEPOSTE PARCIAL'), ('3','DEPOSTADO');
-INSERT INTO `garronproductodef` VALUES ('2','1','6'), ('3','1','7'), ('4','1','8'), ('5','1','9'), ('6','1','10'), ('7','1','11'), ('8','1','12'), ('9','1','13'), ('10','1','14'), ('11','1','15'), ('12','1','16'), ('13','1','17'), ('14','1','18'), ('15','1','19'), ('16','2','6'), ('17','2','7'), ('18','2','8'), ('19','2','9'), ('20','2','10'), ('21','2','11'), ('22','2','12'), ('23','2','13'), ('24','2','14'), ('25','2','15'), ('26','2','16'), ('27','2','17'), ('28','2','18'), ('29','2','19'), ('30','3','6'), ('31','3','7'), ('32','3','8'), ('33','3','9'), ('34','3','10'), ('35','3','11'), ('36','3','12'), ('37','3','13'), ('38','3','14'), ('39','3','15');
-INSERT INTO `garrontipo` VALUES ('1','TERNERA'), ('2','NOVILLITO'), ('3','NOVILLO'), ('4','VAQUILLONA'), ('5','VACA'), ('6','TORO');
-INSERT INTO `gestorcuentas` VALUES ('1','1','1',NULL,NULL,NULL), ('2','2',NULL,'1',NULL,NULL);
-INSERT INTO `medida` VALUES ('1','cm'), ('2','kg'), ('3','lts');
-INSERT INTO `modulo` VALUES ('1','Clientes'), ('2','Proveedores'), ('3','Stock'), ('4','Caja'), ('5','Ventas'), ('6','Compras'), ('7','Movimiento Cuentas'), ('8','Gestion Usuarios'), ('9','Productos'), ('10','Ventas Caja'), ('11','Movimiento Cuentas Proveedores'), ('12','Carga Garron');
-INSERT INTO `movimientotipo` VALUES ('1','DEBE'), ('2','PAGO');
-INSERT INTO `precio` VALUES ('1','1','145',NULL,NULL), ('2','1','500',NULL,NULL), ('3','1','425',NULL,NULL);
-INSERT INTO `preciotipo` VALUES ('1','por kg'), ('2','por unidad');
-INSERT INTO `producto` VALUES ('5','1','010990','115.000','1.00','CHORIZO ESPECIAL','CHORIZO ESPECIAL','0',NULL), ('6','1','011000','85.000','1.00','CHORIZO PARRILLERO','CHORIZO PARRILLERO','0',NULL), ('7','1','011010','0.000','1.00','CHORIZO DE CERDO','CHORIZO DE CERDO','0',NULL), ('8','1','011020','115.000','1.00','CHORIZO COLORADO','CHORIZO COLORADO','0',NULL), ('9','1','011030','98.000','1.00','SALCHICHA PARRILLERA','SALCHICHA PARRILLERA','0',NULL), ('10','1','011040','90.000','1.00','MORCILLA','MORCILLA','0',NULL), ('11','1','011050','90.000','1.00','MORCILLA','MORCILLA BOMBON','0',NULL), ('12','1','011060','90.000','1.00','SALCHICHAS SNACK','SALCHICHAS SNACK','0',NULL), ('13','1','011070','80.000','1.00','PATE','PATE','0',NULL), ('14','1','011080','80.000','1.00','QUESO DE CERDO','QUESO DE CERDO','0',NULL), ('15','1','011100','90.000','1.00','PICADA COMUN','PICADA COMUN','0',NULL), ('16','1','011110','100.000','1.00','PICADA INTERMEDIA','PICADA INTERMEDIA','0',NULL), ('17','1','011120','135.000','1.00','PICADA ESPECIAL','PICADA ESPECIAL','0',NULL), ('18','1','011130','50.000','1.00','PUCHERO COMUN','PUCHERO COMUN','0',NULL), ('19','1','011140','89.000','1.00','PUCHERO ESPECIAL','PUCHERO ESPECIAL','0',NULL), ('20','1','011150','10.000','1.00','CANINO','CANINO','0',NULL), ('21','1','011160','145.000','1.00','MATAMBRE','MATAMBRE','0',NULL), ('22','1','011170','140.000','1.00','VACIO','VACIO','0',NULL), ('23','1','011180','135.000','1.00','ALA DE PECHO','ALA DE PECHO','0',NULL), ('24','1','011190','140.000','1.00','COSTILLA','COSTILLA','0',NULL), ('25','1','011200','125.000','1.00','MARUCHA','MARUCHA','0',NULL), ('26','1','011210','135.000','1.00','TAPA DE NALGA','TAPA DE NALGA','0',NULL), ('27','1','011220','160.000','1.00','CORTE MALVINA','CORTE MALVINA','0',NULL), ('28','1','011230','92.000','1.00','FALDA','FALDA','0',NULL), ('29','1','011240','125.000','1.00','COSTELETAS','COSTELETAS','0',NULL), ('30','1','011250','99.000','1.00','AGUJA','AGUJA','0',NULL), ('31','1','011260','125.000','1.00','BRAZUELO','BRAZUELO','0',NULL), ('32','1','011270','170.000','1.00','BIFE ANCHO/ANGOSTO','BIFE ANCHO/ANGOSTO','0',NULL), ('33','1','011280','170.000','1.00','ENTRECOT','ENTRECOT','0',NULL), ('34','1','011290','180.000','1.00','ROAST BEEF','ROAST BEEF','0',NULL), ('35','1','011300','145.000','1.00','NALGAS','NALGAS','0',NULL), ('36','1','011310','180.000','1.00','LOMO','LOMO','0',NULL), ('37','1','011320','145.000','1.00','PECETO','PECETO','0',NULL), ('38','1','011330','145.000','1.00','CUADRIL','CUADRIL','0',NULL), ('39','1','011340','145.000','1.00','PALOMITA','PALOMITA','0',NULL), ('40','1','011350','145.000','1.00','JAMON CUADRADO','JAMON CUADRADO','0',NULL), ('41','1','011360','140.000','1.00','CABEZA DE LOMO','CABEZA DE LOMO','0',NULL), ('42','1','011370','140.000','1.00','PULPA BRAZUELO','PULPA BRAZUELO','0',NULL), ('43','1','011380','135.000','1.00','PULPA PALETA','PULPA PALETA','0',NULL), ('44','1','011390','140.000','1.00','TORTUGUITA','TORTUGUITA','0',NULL), ('45','1','011400','120.000','1.00','MILANESAS DE CARNE','MILANESAS DE CARNE','0',NULL), ('46','1','011410','89.000','1.00','MILANESAS DE POLLO','MILANESAS DE POLLO','0',NULL), ('47','1','011420','99.000','1.00','HAMBURGUESAS','HAMBURGUESAS','0',NULL), ('48','1','011430','99.000','1.00','ALBONDIGAS','ALBONDIGAS','0',NULL), ('49','1','011440','0.000','1.00','COSTELETAS','COSTELETAS','0',NULL), ('50','1','011450','0.000','1.00','BONDIOLA','BONDIOLA','0',NULL), ('51','1','011460','0.000','1.00','MATAMBRITO','MATAMBRITO','0',NULL), ('52','1','011470','0.000','1.00','COSTILLA/PECHITO','COSTILLA/PECHITO','0',NULL), ('53','1','011480','0.000','1.00','PULPAS','PULPAS','0',NULL), ('54','1','011490','0.000','1.00','MARUCHA','MARUCHA','0',NULL), ('55','1','011500','0.000','1.00','CARACU','CARACU','0',NULL), ('56','1','011510','0.000','1.00','PATITAS/HUESITOS/CUERITO','PATITAS/HUESITOS/CUERITO','0',NULL), ('57','1','011520','0.000','1.00','MILANESAS','MILANESAS','0',NULL), ('58','1','011530','0.000','1.00','HAMBURGUESAS','HAMBURGUESAS','0',NULL), ('59','1','011540','0.000','1.00','PATAMUSLO','PATAMUSLO','0',NULL), ('60','1','011550','0.000','1.00','TROZADO','TROZADO','0',NULL), ('61','1','011560','0.000','1.00','PECHUGA','PECHUGA','0',NULL), ('62','1','011570','0.000','1.00','FILET','FILET','0',NULL), ('63','1','011580','0.000','1.00','BROCHET','BROCHET','0',NULL), ('64','1','011590','0.000','1.00','BONDIOLA','BONDIOLA','0',NULL), ('65','1','011600','0.000','1.00','PALETA','PALETA','0',NULL), ('66','1','011610','0.000','1.00','JAMON COCIDO','JAMON COCIDO','0',NULL), ('67','1','011620','0.000','1.00','JAMON CRUDO','JAMON CRUDO','0',NULL), ('68','1','011630','0.000','1.00','SALAME MILAN','SALAME MILAN','0',NULL), ('69','1','011640','0.000','1.00','SALAMIN','SALAMIN','0',NULL), ('70','1','011650','0.000','1.00','QUESO BARRA','QUESO BARRA','0',NULL), ('71','1','011660','0.000','1.00','CREMOSO','CREMOSO','0',NULL), ('72','1','011670','0.000','1.00','CASCARA COLORADA','CASCARA COLORADA','0',NULL), ('73','1','011680','0.000','1.00','QUESO CRE','QUESO CREMOSO','0',NULL), ('74','1','011690','0.000','1.00','QUESO TREEMBLAY','QUESO TREEMBLAY','0',NULL), ('75','1','011700','0.000','1.00','QUESO PROVOLETA','QUESO PROVOLETA','0',NULL), ('76','1','011710','0.000','1.00','QUESO SARDO','QUESO SARDO','0',NULL), ('77','1','011720','0.000','1.00','MORTADELA','MORTADELA','0',NULL), ('78','1','011730','0.000','1.00','MORTADELA','MORTADELA','0',NULL);
-INSERT INTO `productoestado` VALUES ('1','CONGELADO'), ('2','NORMAL');
-INSERT INTO `productoestadotipo` VALUES ('1','CONGELADO'), ('2','NORMAL');
-INSERT INTO `productotipo` VALUES ('1','CARNE'), ('2','EMBUTIDO'), ('3','ALGO');
-INSERT INTO `proveedor` VALUES ('1','Friar','santiago del estero 1234','santa fe','RI','Friar S.A.','20-12345678-1','034212345678','Federico Lopez','2017-11-16',NULL,NULL), ('2','Frigar','urquiza 1810','santa fe','CF','LOCAL','20315634231','3239487','HUGO','2017-11-17',NULL,'0'), ('3','este proveedor','provsad','prov','poa','orpo','ops','por','poasdp','2017-11-24',NULL,'0');
-INSERT INTO `proveedorcuenta` VALUES ('1','1238238923892234','12-1238238923892234','1','2017-11-12 19:53:42','1','1',NULL), ('2','1238238923892236','12-1238238923893434','2','2017-11-12 19:53:39','2','1',NULL), ('3','2222','22222','1','2017-11-12 19:53:29','4','0',NULL), ('4','aaa','12312','6','2017-11-12 19:53:32','3','0',NULL), ('5','52145312','2312156432','0','2017-11-16 17:36:32',NULL,'0',NULL), ('6','12313','123123','0','2017-11-16 17:51:57',NULL,'0',NULL);
-INSERT INTO `proveedorcuentamovimiento` VALUES ('1','1','1','1','600','2017-11-14 17:24:30','N','0'), ('2','1','1','2','600','2017-11-15 11:54:13','N','1'), ('3','1','3','1','500','2017-11-15 11:55:15','N','1'), ('4','1','3','2','1000','2017-11-15 12:00:06','N','1');
-INSERT INTO `proveedores_eliminar_esta_tabla` VALUES ('1','DSA','DSA','DSA','DSA','DSA','DSA');
-INSERT INTO `proveedortipo` VALUES ('1','Grande');
-INSERT INTO `ubicacion` VALUES ('1','1','ALA ESTE',NULL,NULL), ('2','1','ALA OESTE',NULL,NULL), ('3','2','ALA SUROESTE',NULL,'2017-10-11 17:33:43');
-INSERT INTO `ubicaciontipo` VALUES ('1','FRIGORIFICO'), ('2','DEPOSITO');
-INSERT INTO `usuario` VALUES ('1','a','a','aa'), ('2','prueba','prueba','prueba');
-INSERT INTO `usuarioingreso` VALUES ('1','1','2017-09-02','11:26:00');
-INSERT INTO `usuariomodulo` VALUES ('1','1','1'), ('2','1','2'), ('3','1','3'), ('4','1','4'), ('5','1','7'), ('6','1','9'), ('7','1','10'), ('8','1','11'), ('15','2','12'), ('16','2','1'), ('17','2','2'), ('18','2','4'), ('19','2','9'), ('20','2','11'), ('21','2','12');
-INSERT INTO `venta` VALUES ('1','1108.000','2017-10-23 20:04:26','0',NULL), ('2','1108.000','2017-10-23 20:07:48','0',NULL), ('3','1108.000','2017-10-23 20:08:00','0',NULL), ('4','1108.000','2017-10-23 20:18:15','0',NULL), ('5','1108.000','2017-10-23 20:20:11','0',NULL), ('6','1108.004','2017-10-23 20:22:11','0',NULL), ('7','1110.042','2017-10-24 19:45:11','0',NULL), ('8','1858.994','2017-10-24 20:10:55','0',NULL), ('9','630.780','2017-10-26 20:25:29','0',NULL), ('10','1261.560','2017-10-26 20:25:35','0',NULL), ('11','1787.210','2017-10-26 20:25:40','0',NULL), ('12','2069.254','2017-10-27 18:55:55','0',NULL), ('13','2307.482','2017-10-30 18:56:35','0',NULL), ('14','2152.872','2017-11-02 21:17:32','0',NULL), ('24','4493.712','2017-11-10 19:57:18','0',NULL), ('25','2495.296','2017-11-10 20:01:24','0',NULL), ('26','1658.880','2017-11-10 20:15:42','0',NULL), ('27','1871.472','2017-11-10 20:20:55','0',NULL), ('28','3086.878','2017-11-10 20:25:17','0',NULL), ('29','1244.160','2017-11-10 20:27:03','0',NULL), ('30','3744.760','2017-11-11 10:38:21','0',NULL);
-INSERT INTO `ventadetalle` VALUES ('4','0','1','105.000','0.000','1',NULL), ('5','0','2','328.000','1.000','1',NULL), ('6','0','3','674.000','3.000','1',NULL), ('7','0','3','674.000','3.000','1',NULL), ('8','0','2','328.000','1.000','1',NULL), ('9','0','1','105.000','0.000','1',NULL), ('10','0','3','674.000','3.000','1',NULL), ('11','0','2','328.000','1.000','1',NULL), ('12','0','1','105.000','0.000','1',NULL), ('13','4','3','674.000','3.000','1',NULL), ('14','4','2','328.000','1.000','1',NULL), ('15','4','1','105.000','0.000','1',NULL), ('16','5','1','105.000','0.000','1',NULL), ('17','6','3','674.525','3.646','1',NULL), ('18','6','2','328.349','1.427','1',NULL), ('19','6','1','105.130','0.725','1',NULL), ('20','7','1','105.130','0.725','1',NULL), ('21','7','2','451.294','1.962','1',NULL), ('22','7','3','553.618','2.992','1',NULL), ('23','8','2','451.294','1.962','1',NULL), ('24','8','3','553.618','2.992','1',NULL), ('25','8','2','748.952','3.256','1',NULL), ('26','8','1','105.130','0.725','1',NULL), ('27','9','1','105.130','0.725','1',NULL), ('28','9','1','105.130','0.725','1',NULL), ('29','9','1','105.130','0.725','1',NULL), ('30','9','1','105.130','0.725','1',NULL), ('31','9','1','105.130','0.725','1',NULL), ('32','9','1','105.130','0.725','1',NULL), ('33','10','1','105.130','0.725','1',NULL), ('34','10','1','105.130','0.725','1',NULL), ('35','10','1','105.130','0.725','1',NULL), ('36','10','1','105.130','0.725','1',NULL), ('37','10','1','105.130','0.725','1',NULL), ('38','10','1','105.130','0.725','1',NULL), ('39','10','1','105.130','0.725','1',NULL), ('40','10','1','105.130','0.725','1',NULL), ('41','10','1','105.130','0.725','1',NULL), ('42','10','1','105.130','0.725','1',NULL), ('43','10','1','105.130','0.725','1',NULL), ('44','10','1','105.130','0.725','1',NULL), ('45','11','1','105.130','0.725','1',NULL), ('46','11','1','105.130','0.725','1',NULL), ('47','11','1','105.130','0.725','1',NULL), ('48','11','1','105.130','0.725','1',NULL), ('49','11','1','105.130','0.725','1',NULL), ('50','11','1','105.130','0.725','1',NULL), ('51','11','1','105.130','0.725','1',NULL), ('52','11','1','105.130','0.725','1',NULL), ('53','11','1','105.130','0.725','1',NULL), ('54','11','1','105.130','0.725','1',NULL), ('55','11','1','105.130','0.725','1',NULL), ('56','11','1','105.130','0.725','1',NULL), ('57','11','1','105.130','0.725','1',NULL), ('58','11','1','105.130','0.725','1',NULL), ('59','11','1','105.130','0.725','1',NULL), ('60','11','1','105.130','0.725','1',NULL), ('61','11','1','105.130','0.725','1',NULL), ('62','12','1','105.130','0.725','1',NULL), ('63','12','1','105.130','0.725','1',NULL), ('64','12','1','105.130','0.725','1',NULL), ('65','12','2','451.294','1.962','1',NULL), ('66','12','3','553.618','2.992','1',NULL), ('67','12','2','748.952','3.256','1',NULL), ('68','13','2','748.952','3.256','1',NULL), ('69','13','2','451.294','1.962','1',NULL), ('70','13','3','553.618','2.992','1',NULL), ('71','13','3','553.618','2.992','1',NULL), ('72','14','35','105.130','0.725','1',NULL), ('73','14','35','105.130','0.725','1',NULL), ('74','14','39','703.127','4.849','1',NULL), ('75','14','35','311.912','2.151','1',NULL), ('76','14','23','748.952','5.547','1',NULL), ('77','14','6','178.621','2.101','1',NULL), ('78','15','6','178.621','2.101','1',NULL), ('79','15','6','178.621','2.101','1',NULL), ('80','15','6','178.621','2.101','1',NULL), ('81','15','6','178.621','2.101','1',NULL), ('82','15','6','178.621','2.101','1',NULL), ('83','15','6','178.621','2.101','1',NULL), ('84','15','6','178.621','2.101','1',NULL), ('85','15','6','178.621','2.101','1',NULL), ('86','15','6','178.621','2.101','1',NULL), ('87','15','6','178.621','2.101','1',NULL), ('88','15','6','178.621','2.101','1',NULL), ('89','15','6','178.621','2.101','1',NULL), ('90','15','6','178.621','2.101','1',NULL), ('91','15','6','451.294','5.309','1',NULL), ('92','15','6','451.294','5.309','1',NULL), ('93','15','6','451.294','5.309','1',NULL), ('94','15','6','451.294','5.309','1',NULL), ('95','15','6','451.294','5.309','1',NULL), ('96','15','6','451.294','5.309','1',NULL), ('97','15','6','451.294','5.309','1',NULL), ('98','15','23','748.952','5.547','1',NULL), ('99','15','23','748.952','5.547','1',NULL), ('100','15','23','748.952','5.547','1',NULL), ('101','15','23','748.952','5.547','1',NULL), ('102','15','23','748.952','5.547','1',NULL), ('103','15','23','748.952','5.547','1',NULL);
-INSERT INTO `ventadetalle` VALUES ('104','15','23','748.952','5.547','1',NULL), ('105','15','23','748.952','5.547','1',NULL), ('106','15','23','748.952','5.547','1',NULL), ('107','15','23','748.952','5.547','1',NULL), ('108','15','23','748.952','5.547','1',NULL), ('109','15','23','748.952','5.547','1',NULL), ('110','15','23','748.952','5.547','1',NULL), ('111','15','23','748.952','5.547','1',NULL), ('112','15','23','748.952','5.547','1',NULL), ('113','15','23','748.952','5.547','1',NULL), ('114','15','23','748.952','5.547','1',NULL), ('115','15','23','748.952','5.547','1',NULL), ('116','15','35','311.912','2.151','1',NULL), ('117','15','35','311.912','2.151','1',NULL), ('118','15','35','311.912','2.151','1',NULL), ('119','15','35','311.912','2.151','1',NULL), ('120','15','35','311.912','2.151','1',NULL), ('121','15','35','311.912','2.151','1',NULL), ('122','15','23','748.952','5.547','1',NULL), ('123','15','23','748.952','5.547','1',NULL), ('124','15','23','748.952','5.547','1',NULL), ('125','15','23','748.952','5.547','1',NULL), ('126','15','23','748.952','5.547','1',NULL), ('127','15','23','748.952','5.547','1',NULL), ('128','15','23','748.952','5.547','1',NULL), ('129','15','23','748.952','5.547','1',NULL), ('130','15','23','748.952','5.547','1',NULL), ('131','15','39','703.127','4.849','1',NULL), ('132','15','39','703.127','4.849','1',NULL), ('133','15','39','703.127','4.849','1',NULL), ('134','15','39','703.127','4.849','1',NULL), ('135','15','39','703.127','4.849','1',NULL), ('136','15','39','703.127','4.849','1',NULL), ('137','15','39','703.127','4.849','1',NULL), ('138','15','39','703.127','4.849','1',NULL), ('139','15','39','703.127','4.849','1',NULL), ('140','15','39','703.127','4.849','1',NULL), ('141','15','23','748.952','5.547','1',NULL), ('142','15','23','748.952','5.547','1',NULL), ('143','15','23','748.952','5.547','1',NULL), ('144','15','23','748.952','5.547','1',NULL), ('145','15','23','748.952','5.547','1',NULL), ('146','15','23','748.952','5.547','1',NULL), ('147','15','23','748.952','5.547','1',NULL), ('148','15','23','748.952','5.547','1',NULL), ('149','15','35','311.912','2.151','1',NULL), ('150','15','35','311.912','2.151','1',NULL), ('151','15','35','311.912','2.151','1',NULL), ('152','15','35','311.912','2.151','1',NULL), ('153','15','35','311.912','2.151','1',NULL), ('154','15','35','311.912','2.151','1',NULL), ('155','15','35','311.912','2.151','1',NULL), ('156','15','35','311.912','2.151','1',NULL), ('157','15','35','311.912','2.151','1',NULL), ('158','15','23','748.952','5.547','1',NULL), ('159','15','23','748.952','5.547','1',NULL), ('160','15','23','748.952','5.547','1',NULL), ('161','15','23','748.952','5.547','1',NULL), ('162','15','23','748.952','5.547','1',NULL), ('163','15','23','748.952','5.547','1',NULL), ('164','25','35','311.912','2.151','1',NULL), ('165','25','35','311.912','2.151','1',NULL), ('166','25','35','311.912','2.151','1',NULL), ('167','25','35','311.912','2.151','1',NULL), ('168','25','35','311.912','2.151','1',NULL), ('169','25','35','311.912','2.151','1',NULL), ('170','25','35','311.912','2.151','1',NULL), ('171','25','35','311.912','2.151','1',NULL), ('172','26','24','207.360','1.481','1',NULL), ('173','26','24','207.360','1.481','1',NULL), ('174','26','24','207.360','1.481','1',NULL), ('175','26','24','207.360','1.481','1',NULL), ('176','26','24','207.360','1.481','1',NULL), ('177','26','24','207.360','1.481','1',NULL), ('178','26','24','207.360','1.481','1',NULL), ('179','26','24','207.360','1.481','1',NULL), ('180','27','35','311.912','2.151','1',NULL), ('181','27','35','311.912','2.151','1',NULL), ('182','27','35','311.912','2.151','1',NULL), ('183','27','35','311.912','2.151','1',NULL), ('184','27','35','311.912','2.151','1',NULL), ('185','27','35','311.912','2.151','1',NULL), ('186','28','39','703.127','4.849','1',NULL), ('187','28','39','703.127','4.849','1',NULL), ('188','28','24','207.360','1.481','1',NULL), ('189','28','24','207.360','1.481','1',NULL), ('190','28','5','632.952','5.503','1',NULL), ('191','28','5','632.952','5.503','1',NULL), ('192','29','24','207.360','1.481','1',NULL), ('193','29','24','207.360','1.481','1',NULL), ('194','29','24','207.360','1.481','1',NULL), ('195','29','24','207.360','1.481','1',NULL), ('196','29','24','207.360','1.481','1',NULL), ('197','29','24','207.360','1.481','1',NULL), ('198','30','23','748.952','5.547','1',NULL), ('199','30','23','748.952','5.547','1',NULL), ('200','30','23','748.952','5.547','1',NULL), ('201','30','23','748.952','5.547','1',NULL), ('202','30','23','748.952','5.547','1',NULL);

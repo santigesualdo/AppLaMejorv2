@@ -20,7 +20,7 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>3.5</OldToolsVersion>
-    <PublishUrl>publish\</PublishUrl>
+    <PublishUrl>C:\Users\juanj\Desktop\JuanjoBranch\publish_2018_enero\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -30,7 +30,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>7</ApplicationRevision>
+    <ApplicationRevision>9</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -108,10 +108,12 @@
     <Compile Include="entidades\Banco.cs" />
     <Compile Include="entidades\Garron.cs" />
     <Compile Include="entidades\GarronParte.cs" />
+    <Compile Include="entidades\Operacion.cs" />
     <Compile Include="entidades\Producto.cs" />
     <Compile Include="entidades\Proveedor.cs" />
     <Compile Include="entidades\TipoEstadoGarron.cs" />
     <Compile Include="entidades\TipoGarron.cs" />
+    <Compile Include="entidades\TipoOperacion.cs" />
     <Compile Include="entidades\TipoPrecio.cs" />
     <Compile Include="entidades\TipoProducto.cs" />
     <Compile Include="entidades\TipoUbicacion.cs" />
@@ -127,11 +129,23 @@
     <Compile Include="entidades\TipoCliente.cs" />
     <Compile Include="entidades\TipoMovimiento.cs" />
     <Compile Include="entidades\Usuario.cs" />
+    <Compile Include="formularios\Caja\FormCajaMayorista.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formularios\Caja\FormCajaMayorista.Designer.cs">
+      <DependentUpon>FormCajaMayorista.cs</DependentUpon>
+    </Compile>
     <Compile Include="formularios\Caja\FormCaja.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="formularios\Caja\FormCaja.Designer.cs">
       <DependentUpon>FormCaja.cs</DependentUpon>
+    </Compile>
+    <Compile Include="formularios\Caja\FormAgregarManual.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formularios\Caja\FormAgregarManual.Designer.cs">
+      <DependentUpon>FormAgregarManual.cs</DependentUpon>
     </Compile>
     <Compile Include="formularios\Caja\FormVentasCaja.cs">
       <SubType>Form</SubType>
@@ -237,8 +251,16 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="formularios\Caja\FormCajaMayorista.resx">
+      <DependentUpon>FormCajaMayorista.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="formularios\Caja\FormCaja.resx">
       <DependentUpon>FormCaja.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formularios\Caja\FormAgregarManual.resx">
+      <DependentUpon>FormAgregarManual.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="formularios\Caja\FormVentasCaja.resx">
