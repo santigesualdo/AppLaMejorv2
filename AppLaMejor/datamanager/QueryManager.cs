@@ -965,7 +965,7 @@ namespace AppLaMejor.datamanager
         public string GetPreciosToExport()
         {
             return "SELECT CONCAT('CARNICERIA;',cast(SUBSTR(p.id_codigo_barra, 2, 4) AS UNSIGNED),';',p.descripcion_breve,';',cast(SUBSTR(p.id_codigo_barra, 2, 4) AS UNSIGNED),';',p.precio,';','0.00;P;0;;'	) " +
-                    "FROM producto p";
+                    "FROM producto p where p.id_producto_tipo = 1";
         }
         public string GetParametroByName(string name)
         {

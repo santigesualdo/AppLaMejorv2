@@ -13,6 +13,9 @@ File Encoding         : 65001
 Date: 2018-01-18 20:51:34
 */
 
+CREATE DATABASE `u570713702_jjdev`;
+USE `u570713702_jjdev`;
+
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
