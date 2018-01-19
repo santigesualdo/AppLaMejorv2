@@ -166,7 +166,7 @@ namespace AppLaMejor.formularios
 
             if (fDesde > fHasta)
             {
-                MyTextTimer.TStart("La fecha desde no puede ser mayor a la fecha hasta: FechaDesde: " + fDesde.ToString() + " - FechHasta: " + fHasta.ToString(), this.statusStrip1, this.tsslMensaje);
+                MyTextTimer.TStartFade("La fecha desde no puede ser mayor a la fecha hasta: FechaDesde: " + fDesde.ToString() + " - FechHasta: " + fHasta.ToString(), this.statusStrip1, this.tsslMensaje, MyTextTimer.TIME_LONG);
                 return;
             }
 
@@ -182,13 +182,13 @@ namespace AppLaMejor.formularios
 
                 if (!decimal.TryParse(textMontoDesde.Text, out montoDesde) || montoDesde < 0)
                 {
-                    MyTextTimer.TStart("El monto inicial indicado es incorrecto, intente nuevamente.", this.statusStrip1, this.tsslMensaje);
+                    MyTextTimer.TStartFade("El monto inicial indicado es incorrecto, intente nuevamente.", this.statusStrip1, this.tsslMensaje, MyTextTimer.TIME_LONG);
                     return;
                 }
 
                 if (!decimal.TryParse(textMontoHasta.Text, out montoHasta) || montoHasta < 0)
                 {
-                    MyTextTimer.TStart("El monto final indicado es incorrecto, intente nuevamente.", this.statusStrip1, this.tsslMensaje);
+                    MyTextTimer.TStartFade("El monto final indicado es incorrecto, intente nuevamente.", this.statusStrip1, this.tsslMensaje, MyTextTimer.TIME_LONG);
                     return;
                 }
 

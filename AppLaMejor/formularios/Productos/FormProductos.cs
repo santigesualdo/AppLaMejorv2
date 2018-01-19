@@ -128,11 +128,11 @@ namespace AppLaMejor.formularios
                 {
                     // se actualizo bien
                     CargarDataGrid();
-                    MyTextTimer.TStart("Producto actualizado correctamente", statusStrip1, tsslMensaje);         
+                    MyTextTimer.TStartFade("Producto actualizado correctamente", statusStrip1, tsslMensaje, MyTextTimer.TIME_LONG);
                 }
                 else
                 {
-                    MyTextTimer.TStart("Producto no se pudo actualizar actualizado correctamente.", statusStrip1, tsslMensaje);         
+                    MyTextTimer.TStartFade("Producto no se pudo actualizar actualizado correctamente.", statusStrip1, tsslMensaje, MyTextTimer.TIME_LONG);
                 }
                 
             }
@@ -168,11 +168,11 @@ namespace AppLaMejor.formularios
                 if (FuncionesProductos.InsertProducto(newProd))
                 {
                     CargarDataGrid();
-                    MyTextTimer.TStart("Producto '" +  newProd.DescripcionBreve + "' creado correctamente", statusStrip1, tsslMensaje);         
+                    MyTextTimer.TStartFade("Producto '" +  newProd.DescripcionBreve + "' creado correctamente", statusStrip1, tsslMensaje, MyTextTimer.TIME_LONG);
                 }
                 else
                 {
-                    MyTextTimer.TStart("Producto '" + newProd.DescripcionBreve + "' actualizado correctamente", statusStrip1, tsslMensaje);         
+                    MyTextTimer.TStartFade("Producto '" + newProd.DescripcionBreve + "' actualizado correctamente", statusStrip1, tsslMensaje, MyTextTimer.TIME_LONG);
                 }   
             }
         }
@@ -383,7 +383,7 @@ namespace AppLaMejor.formularios
 
                 string savePath = FuncionesGlobales.GetParametro(VariablesGlobales.FILEPRECIOSSAVE_PARAMNAME);
                 File.WriteAllText(savePath + "applamejorprecios.csv", sb.ToString());
-                MyTextTimer.TStart("Precios exportados correctamente. Aguarde el mensaje de confirmación.", statusStrip1, tsslMensaje);
+                MyTextTimer.TStartFade("Precios exportados correctamente. Aguarde el mensaje de confirmación.", this.statusStrip1, this.tsslMensaje, MyTextTimer.TIME_LONG);
 
             }
             catch (Exception E)

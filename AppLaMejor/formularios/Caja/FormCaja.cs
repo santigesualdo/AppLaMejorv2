@@ -113,7 +113,7 @@ namespace AppLaMejor.formularios
             // Sino encuentra producto, sale
             if (product == null)
             {
-                MyTextTimer.TStart("No se encontro PLU de Producto. Verificar codigo de barra.", statusStrip1, tsslMensaje);
+                MyTextTimer.TStartFade("No se encontro PLU de Producto. Verificar codigo de barra.", statusStrip1, tsslMensaje, MyTextTimer.TIME_LONG);
                 return;
             }
 
@@ -183,20 +183,20 @@ namespace AppLaMejor.formularios
         {
 
             if (listDetalleVentas.Count.Equals(0)) {
-                MyTextTimer.TStart("No se encontro PLU de Producto. Verificar codigo de barra.", statusStrip1, tsslMensaje);
+                MyTextTimer.TStartFade("No se encontro PLU de Producto. Verificar codigo de barra.", statusStrip1, tsslMensaje, MyTextTimer.TIME_LONG);
                 return;
             }
 
             if (FuncionesVentas.InsertVenta(listDetalleVentas))
             {
-                MyTextTimer.TStart("Se inserto venta  correctamente.", statusStrip1, tsslMensaje);
+                MyTextTimer.TStartFade("Se inserto venta  correctamente.", statusStrip1, tsslMensaje, MyTextTimer.TIME_LONG);
                 currentVentasDetalle.Clear();
                 listDetalleVentas.Clear();
                 Cargar();
             }
             else
             {
-                MyTextTimer.TStart("Fallo la nueva venta. Intente nuevamente.", statusStrip1, tsslMensaje);
+                MyTextTimer.TStartFade("Fallo la nueva venta. Intente nuevamente.", statusStrip1, tsslMensaje, MyTextTimer.TIME_LONG);
             }
         }
 
