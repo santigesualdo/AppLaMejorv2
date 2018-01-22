@@ -299,18 +299,6 @@ namespace AppLaMejor.formularios
             ShowHistoricoPrecios();
         }
 
-        private void bActualizarPrecios_Click(object sender, EventArgs e)
-        {
-            FormActualizarPrecios formActualizarPrecios = new FormActualizarPrecios();
-            formActualizarPrecios.ShowDialog();
-        }
-
-        private void dataGridProductos_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-
-        }
-
         private void dataGridProductos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             ShowHistoricoPrecios();

@@ -94,6 +94,7 @@
     <Compile Include="controlmanager\FuncionesGarron.cs" />
     <Compile Include="controlmanager\FuncionesGlobales.cs" />
     <Compile Include="controlmanager\FuncionesMovCuentas.cs" />
+    <Compile Include="controlmanager\FuncionesPrecios.cs" />
     <Compile Include="controlmanager\FuncionesProductos.cs" />
     <Compile Include="controlmanager\FuncionesProveedores.cs" />
     <Compile Include="controlmanager\FuncionesVentas.cs" />
@@ -109,6 +110,7 @@
     <Compile Include="entidades\Garron.cs" />
     <Compile Include="entidades\GarronParte.cs" />
     <Compile Include="entidades\Operacion.cs" />
+    <Compile Include="entidades\PrecioHistorico.cs" />
     <Compile Include="entidades\Producto.cs" />
     <Compile Include="entidades\Proveedor.cs" />
     <Compile Include="entidades\TipoEstadoGarron.cs" />
@@ -200,6 +202,12 @@
     </Compile>
     <Compile Include="formularios\MovimientoCuentas\FormMovDetalle.Designer.cs">
       <DependentUpon>FormMovDetalle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="formularios\Productos\FormHistoricoPrecios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formularios\Productos\FormHistoricoPrecios.designer.cs">
+      <DependentUpon>FormHistoricoPrecios.cs</DependentUpon>
     </Compile>
     <Compile Include="formularios\Productos\FormProductos.cs">
       <SubType>Form</SubType>
@@ -297,6 +305,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="formularios\MovimientoCuentas\FormMovDetalle.resx">
       <DependentUpon>FormMovDetalle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formularios\Productos\FormHistoricoPrecios.resx">
+      <DependentUpon>FormHistoricoPrecios.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="formularios\Productos\FormProductos.resx">
       <DependentUpon>FormProductos.cs</DependentUpon>
