@@ -24,6 +24,12 @@ namespace AppLaMejor.controlmanager
         {
             return QueryManager.Instance().GetTableResults(ConnecionBD.Instance().Connection, QueryManager.Instance().GetProductosData());
         }
+
+        public static DataTable fillProductos(int tipoProducto)
+        {
+            return QueryManager.Instance().GetTableResults(ConnecionBD.Instance().Connection, QueryManager.Instance().GetProductosDataByTipo(tipoProducto));
+        }
+
         public static List<Producto> listProductos(DataTable table)
         {
             DataNamesMapper<Producto> mapper = new DataNamesMapper<Producto>();

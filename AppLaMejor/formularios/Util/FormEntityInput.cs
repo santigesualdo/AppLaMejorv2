@@ -59,7 +59,7 @@ namespace AppLaMejor.formularios.Util
         List<TipoProducto> listTipoProductos;
         List<TipoGarron> listTipoGarron;
         List<TipoEstadoGarron> listTipoEstadoGarron;
-        List<Banco> listBanco;        
+        List<Banco> listBanco;
 
         bool first;
 
@@ -210,7 +210,7 @@ namespace AppLaMejor.formularios.Util
 
             if (currentModo.Equals(MODO_VER))
                 dtp.Enabled = false;
-       
+
             controlsTableLayoutPanel.Controls.Add(GetCampoTitulo(property.Name), 0, controlsTableLayoutPanel.RowCount += 1);
             controlsTableLayoutPanel.Controls.Add(dtp, 1, controlsTableLayoutPanel.RowCount);
         }

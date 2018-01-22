@@ -12,37 +12,30 @@ using AppLaMejor.datamanager;
 using AppLaMejor.stylemanager;
 using AppLaMejor.controlmanager;
 
-namespace AppLaMejor.formularios.Caja   
+namespace AppLaMejor.formularios.Caja
 {
     public partial class FormAgregarManual : Form
     {
-        // TODO: Validar que todos los botones tengan la info que requieren.
-
+        // TODO: Validar que todos los botones tengan la info que requieren cuando se les hace click.
         public Producto product = new Producto();
+        public decimal cantidad;
+        public decimal precioFinal;
         public string codigomanual;
+
+        DataTable tableProductos;
+        List<Producto> listProds = new List<Producto>();
         public FormAgregarManual()
         {
             Size actualSize = this.Size;
             this.Size = new Size(actualSize.Width, Screen.PrimaryScreen.Bounds.Height);
-            InitializeComponent();         
+            InitializeComponent();
             ApplicationLookAndFeel.ApplyThemeToAll(this);
-            
+            cargar();
             tbCodigo.Focus();
-        }
-
-        private void tbCodigo_TextChanged(object sender, EventArgs e)
-        {
-            if (tbCodigo.Text.Length == 6)
-            {
-                ProcesarBarra(tbCodigo.Text);
-
-            }
         }
 
         private void ProcesarBarra(string text)
         {
-           
-
             // Obtenemos producto por plu
             product = controlmanager.FuncionesVentas.GetProductoByCode(text);
 
@@ -50,28 +43,10 @@ namespace AppLaMejor.formularios.Caja
             if (product == null)
             {
                 MessageBox.Show("No se encontro PLU de Producto. Verificar codigo de barra.");
-                //MyTextTimer.TStart("No se encontro PLU de Producto. Verificar codigo de barra.", statusStrip1, tsslMensaje);
                 return;
             }
-
-            
-            // Nueva sub-venta, ventadetalle
-            //VentaDetalle vd = new VentaDetalle();
-            //vd.Monto = montoTicket;
-            //vd.Peso = FuncionesProductos.GetPesoProductoPrecio(montoTicket, product);
-            //vd.idUsuario = 1;
-            //vd.Producto = product;
-
-            // Agregamos a la lista y mostramos en grid
-            //listDetalleVentas.Add(vd);
-
-            //currentVentasDetalle.Rows.Add(vd.Producto.DescripcionLarga, "$ " + vd.Monto, vd.Peso.ToString() + " kg.");
-            lblDescripcion.Text = product.DescripcionLarga;
+            cmbProductos.Text = product.DescripcionLarga;
             tbCantidad.Focus();
-            //tbPrecio.Text = vd.Monto;
-
-            //labelSubTotal.Text = " TOTAL : $ " + currentMontoTotal.ToString();
-
         }
 
         private void tbCantidad_TextChanged(object sender, EventArgs e)
@@ -83,8 +58,9 @@ namespace AppLaMejor.formularios.Caja
         {
             if (tbCantidad.Text.Length > 0)
             {
-                lblCantidad.Text = tbCantidad.Text + " kg.";
-                tbPrecio.Text = (Convert.ToDecimal(tbCantidad.Text) * product.Precio).ToString("00.00");
+                precioFinal = Convert.ToDecimal(tbCantidad.Text) * product.Precio;
+                tbPrecio.Text = precioFinal.ToString("00.00");
+                cantidad = Convert.ToDecimal(tbCantidad.Text);
                 tbPrecio.Focus();
             }
         }
@@ -93,44 +69,88 @@ namespace AppLaMejor.formularios.Caja
         {
             if (tbPrecio.Text.Length > 0)
             {
-                if (Convert.ToDecimal(tbPrecio.Text) < 1000)
-                    lblPrecio.Text = "$ " + tbPrecio.Text;
-                else { MessageBox.Show("Consultar como operar aquí");
-                        tbPrecio.Text = "0.00";
-                    tbPrecio.Focus();
-                        }
+                tbPrecioFinal.Text = tbPrecio.Text;
+                precioFinal = Convert.ToDecimal(tbPrecioFinal.Text);
             }
         }
 
         private void bAceptar_Click(object sender, EventArgs e)
         {
-            string entero = "000";
-            string decimales = "00";
-            if (Convert.ToDecimal(tbPrecio.Text) < 1000 && Convert.ToDecimal(tbPrecio.Text) > 99)
-            {
-                entero = tbPrecio.Text.Substring(0, 3);
-                decimales = tbPrecio.Text.Substring(4, 2);
-            }
-            else if (Convert.ToDecimal(tbPrecio.Text) < 100 && Convert.ToDecimal(tbPrecio.Text) > 9)
-            {
-                entero = "0" + tbPrecio.Text.Substring(0, 2);
-                decimales = tbPrecio.Text.Substring(3, 2);
-            }
-            // Monto entero 3 posiciones desde posicion 7
-            else if (Convert.ToDecimal(tbPrecio.Text) < 10)
-            {
-                entero = "00" + tbPrecio.Text.Substring(0, 1);
-                decimales = tbPrecio.Text.Substring(2, 2);
-            }
-            // Monto entero 3 posiciones desde posicion 10
-           
-            // Monto concatenado en string y operatoria para obtener decimal de 3 posiciones
-            string monto = entero + decimales + "0";
-
-
-            codigomanual = "2" + tbCodigo.Text + monto;
             DialogResult = DialogResult.OK;
             this.Close();
         }
+
+        void cargar()
+        {
+            tableProductos = FuncionesProductos.fillProductos(3);
+            listProds = FuncionesProductos.listProductos(tableProductos);
+            BindingList<Producto> objects = new BindingList<Producto>(listProds);
+            cmbProductos.ValueMember = null;
+            cmbProductos.DisplayMember = "DescripcionBreve";
+            cmbProductos.DataSource = objects;
+            cmbProductos.SelectedIndex = -1;
+        }
+
+        private void bCancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void cmbProductos_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            ComboBox combo = (ComboBox)sender;
+            if (combo.SelectedIndex != -1)
+            {
+                Producto prod = (Producto)combo.SelectedValue;
+                product = prod;
+                tbPrecio.Text = prod.Precio.ToString();
+                tbCantidad.Focus();
+            }
+        }
+
+        private void cmbProductos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void cmbProductos_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
+        (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+            //    // only allow one decimal point
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void cmbProductos_Leave(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void tbCantidad_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
+         (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+            //    // only allow one decimal point
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            {
+                e.Handled = true;
+            }
+
+            
+        }
+
+        private void tbPrecio_TextChanged(object sender, EventArgs e)
+        {
+            tbPrecioFinal.Text = tbPrecio.Text;
+        }
     }
-    }
+}

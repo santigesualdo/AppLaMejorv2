@@ -772,6 +772,22 @@ namespace AppLaMejor.datamanager
             " where p.fecha_baja is null ";
         }
 
+        public string GetProductosDataByTipo(int tp)
+        {
+            return " SELECT" +
+            " p.id," +
+            " p.id_codigo_barra as CodigoBarra," +
+            " p.descripcion_breve AS DescripcionBreve," +
+            " cast(p.id_producto_tipo AS CHAR (50)) AS TipoProducto," +
+            " p.precio as Precio," +
+            " p.cantidad AS Cantidad, " +
+            " p.descripcion_larga AS DescripcionLarga " +
+            " FROM " +
+            " producto p " +
+            " where p.fecha_baja is null AND p.id_producto_tipo = " + tp.ToString();
+        }
+
+
         public string GetProductosSearchData()
         {
             return " SELECT" +

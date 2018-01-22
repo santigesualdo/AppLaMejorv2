@@ -217,14 +217,13 @@ namespace AppLaMejor.formularios
             if (FuncionesVentas.InsertVentaMayorista(listDetalleVentas, miCliente, miMovCuenta))
             {
 
-                MyTextTimer.TStartFade("Se inserto venta  correctamente.", statusStrip1, tsslMensaje, MyTextTimer.TIME_LONG); ;
-                currentVentasDetalle.Clear();
+                MyTextTimer.TStartFade("Se inserto venta  correctamente.", statusStrip1, tsslMensaje, MyTextTimer.TIME_LONG);
                 listDetalleVentas.Clear();
                 Cargar();
             }
             else
             {
-                MyTextTimer.TStartFade("Fallo la nueva venta. Intente nuevamente.", statusStrip1, tsslMensaje, MyTextTimer.TIME_LONG); ;
+                MyTextTimer.TStartFade("Fallo la nueva venta. Intente nuevamente.", statusStrip1, tsslMensaje, MyTextTimer.TIME_LONG);
             }
         }
 
@@ -260,7 +259,28 @@ namespace AppLaMejor.formularios
             FormAgregarManual formAgregarManual = new FormAgregarManual();
             if (formAgregarManual.ShowDialog() == DialogResult.OK)
             {
-                textCodigo.Text = formAgregarManual.codigomanual;
+                //textCodigo.Text = formAgregarManual.codigomanual;
+
+                //string monto = entero + decimales;
+                //int imonto = Int32.Parse(monto);
+                //decimal montoTicket = (decimal)imonto / 1000;
+
+                // Nueva sub-venta, ventadetalle
+                VentaDetalle vd = new VentaDetalle();
+                vd.Monto = formAgregarManual.precioFinal;
+                vd.Peso = FuncionesProductos.GetPesoProductoPrecio(vd.Monto, formAgregarManual.product);
+                vd.idUsuario = 1;
+                vd.Producto = formAgregarManual.product;
+
+                // Agregamos a la lista y mostramos en grid
+                listDetalleVentas.Add(vd);
+
+                currentVentasDetalle.Rows.Add(vd.Producto.DescripcionLarga, "$ " + vd.Monto, vd.Peso.ToString() + " kg.");
+
+                currentMontoTotal += vd.Monto;
+
+                labelSubTotal.Text = " TOTAL : $ " + currentMontoTotal.ToString();
+
             }
                 //formAgregarManual.ShowDialog();
 
