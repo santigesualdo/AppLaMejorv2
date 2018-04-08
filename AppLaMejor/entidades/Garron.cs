@@ -26,6 +26,14 @@ namespace AppLaMejor.entidades
         [DataNames("mes")]
         public string Mes { get; set; }
 
+        [DataNames("observacion")]
+        public string Observacion { get; set; }
+
+        // Se usa solo para guardar el monto de la compra del garron.
+
+        [DataNames("montocompra")]
+        public decimal MontoCompra { get; set; }
+
 
     }
 }

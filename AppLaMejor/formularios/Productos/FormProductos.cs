@@ -302,7 +302,6 @@ namespace AppLaMejor.formularios
         private void dataGridProductos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             ShowHistoricoPrecios();
-            // TODO: ir al modificado en la grilla
         }
 
         private void ShowHistoricoPrecios()
@@ -378,6 +377,11 @@ namespace AppLaMejor.formularios
             {
                 dialog.ShowErrorDialog("Ocurrio un problema. Motivo: " + E.Message);
             }
+        }
+
+        private void bUbicacion_Click(object sender, EventArgs e)
+        {
+            // TODO: FUNCIONALIDAD Muestra form ubicacion, muestra ubicacion del producto seleccionado
         }
     }
 }

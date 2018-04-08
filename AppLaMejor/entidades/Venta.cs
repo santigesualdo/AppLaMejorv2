@@ -15,5 +15,7 @@ namespace AppLaMejor.entidades
         [DataNames("fecha")]
         public DateTime Fecha { get; set; }
 
+		[DataNames("id_operacion")]
+        public Operacion Operacion { get; set; }						   
     }
 }

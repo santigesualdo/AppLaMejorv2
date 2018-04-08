@@ -18,7 +18,15 @@ namespace AppLaMejor.controlmanager
 
         //operacion
         public static int idMovCuenta_VentaMay = 0;
+		public static int idOperacion = 0;
         public static Cuenta Cuenta_VentaMay = new Cuenta();
+
+        // Formatos de fecha
+        public static string dateTimeFormat = "yyyy-MM-dd HH:mm:ss";
+        public static string dateFormat = "yyyy-MM-dd";
+
+        // Ubicacion
+        public static string ubicacionInicialCompra = "4"; // Mesa de Entrada
 
     }
 }

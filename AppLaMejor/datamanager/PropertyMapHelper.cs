@@ -106,6 +106,16 @@ namespace AppLaMejor.datamanager
                     TipoGarron tg = TiposManager.Instance().GetTipoGarron(int.Parse(value.ToString()));
                     prop.SetValue(entity, tg, null);
                 }
+                else if (prop.PropertyType == typeof(TipoEstadoGarron))
+                {
+                    TipoEstadoGarron teg = TiposManager.Instance().GetTipoEstadoGarron(int.Parse(value.ToString()));
+                    prop.SetValue(entity, teg, null);
+                }
+                else if (prop.PropertyType == typeof(Ubicacion))
+                {
+                    Ubicacion u = TiposManager.Instance().GetUbicacionById(int.Parse(value.ToString()));
+                    prop.SetValue(entity, u, null);
+                }
                 else if (prop.PropertyType == typeof(TipoMovimiento))
                 {
                     TipoMovimiento tm = TiposManager.Instance().GetTipoMovimiento(int.Parse(value.ToString()));

@@ -21,7 +21,7 @@ namespace AppLaMejor.datamanager
             listTipos.Add("TipoProductoEstado");
             listTipos.Add("TipoPrecio");
             listTipos.Add("Medida");
-            listTipos.Add("TipoUbicacion");
+            listTipos.Add("Ubicacion");
 
         }
 
@@ -119,6 +119,9 @@ namespace AppLaMejor.datamanager
             }
             return result;
         }
+
+
+
         private List<TipoMovimiento> GetTipoMovimientoList()
         {
             QueryManager manager = QueryManager.Instance();
@@ -232,6 +235,34 @@ namespace AppLaMejor.datamanager
             return GetTipoGarron(idTipoGarron);
         }
 
+        /* Nomenclador TipoGarron*/
+        List<Ubicacion> listUbicacion;
+        public Ubicacion GetUbicacionById(int p)
+        {
+            if (listUbicacion == null) listUbicacion = GetUbicacionList();
+
+            foreach (Ubicacion t in listUbicacion)
+            {
+                if (t.Id.Equals(p))
+                {
+                    return t;
+                }
+            }
+            return null;
+        }
+        public List<Ubicacion> GetUbicacionList()
+        {
+            QueryManager manager = QueryManager.Instance();
+            String consulta = manager.GetUbicacion();
+            DataTable table = manager.GetTableResults(ConnecionBD.Instance().Connection, consulta);
+            listUbicacion = new List<Ubicacion>();
+
+            DataNamesMapper<Ubicacion> m = new DataNamesMapper<Ubicacion>();
+            listUbicacion = m.Map(table).ToList();
+
+            return listUbicacion;
+        }
+
         /* Nomenclador TipoEstadoGarron */
         List<TipoEstadoGarron> listTipoEstadoGarron;
         public TipoEstadoGarron GetTipoEstadoGarronByGarronId(int id)
@@ -274,7 +305,6 @@ namespace AppLaMejor.datamanager
         }
 
         /* Nomenclador de Bancos */
-        List<Banco> listBanco;
         public Banco GetBancoById(int idBanco)
         {
             QueryManager manager = QueryManager.Instance();
@@ -292,5 +322,21 @@ namespace AppLaMejor.datamanager
             return dmb.Map(table).ToList();
         }
 
+        public Ubicacion GetTipoUbicacionById(string ubicacionInicialCompra)
+        {
+            QueryManager manager = QueryManager.Instance();
+            String consulta = manager.GetUbicacionById(int.Parse(ubicacionInicialCompra));
+            DataTable table = manager.GetTableResults(ConnecionBD.Instance().Connection, consulta);
+            DataNamesMapper<Ubicacion> dmb = new DataNamesMapper<Ubicacion>();
+            return dmb.Map(table).ToList().First();
+        }
+        public List<Ubicacion> GetUbicacionListDestino(int idOrigen)
+        {
+            QueryManager manager = QueryManager.Instance();
+            String consulta = manager.GetUbicacionDestino(idOrigen);
+            DataTable table = manager.GetTableResults(ConnecionBD.Instance().Connection, consulta);
+            DataNamesMapper<Ubicacion> dmb = new DataNamesMapper<Ubicacion>();
+            return dmb.Map(table).ToList();
+        }
     }
 }

@@ -159,8 +159,7 @@ namespace AppLaMejor.datamanager
         public string GetTipoProductoByIdProducto(int idProducto)
         {
             return "CALL obtenerTipoProdutoPorIdProducto(" + idProducto.ToString() + ");";
-        }
-        
+        }        
         /* Usuarios */
         public string GetUsuarioByName(string name){
             return "CALL obtenerUsuarioPorNombre('" + name + "';";
@@ -175,7 +174,7 @@ namespace AppLaMejor.datamanager
             return "select * from usuario where username = '" + userName + "'  and  pass ='" + pass + "'";
             //CALL obtenerUsuarioLogin no anda, problema de collattion
         }
-        
+
         /* Clientes */
         public string InsertNuevoCliente(Cliente cliente)
         {
@@ -189,7 +188,7 @@ namespace AppLaMejor.datamanager
                 " '" + cliente.Cuit + "', " +
                 " '" + cliente.Telefono+ "', " +
                 " '" + cliente.NombreResponsable + "', " +
-                " '" + cliente.FechaDesde.ToString("yyyy-MM-dd") + "'," +
+                " '" + cliente.FechaDesde.ToString(VariablesGlobales.dateFormat) + "'," +
                 VariablesGlobales.userIdLogueado.ToString() + ");";
 
             return consulta;
@@ -200,7 +199,7 @@ namespace AppLaMejor.datamanager
                 "'" + cliente.RazonSocial + "','" + cliente.Domicilio + "','" + cliente.Localidad + "',  " +
                 "'" + cliente.Iva + "','" + cliente.TipoCliente.Id + "','" + cliente.NombreLocal + "',  " +
                 "'" + cliente.Telefono + "','" + cliente.Cuit + "','" + cliente.NombreResponsable + "',  " +
-                "'" + cliente.FechaDesde.ToString("yyyy-MM-dd") + "','" + VariablesGlobales.userIdLogueado.ToString() + "');";
+                "'" + cliente.FechaDesde.ToString(VariablesGlobales.dateFormat) + "','" + VariablesGlobales.userIdLogueado.ToString() + "');";
             return query;
         }
         public string GetClientes()
@@ -224,13 +223,10 @@ namespace AppLaMejor.datamanager
             return "SELECT cliente.id, cliente.cod_cliente as CodCliente, cliente.razon_social AS `RazonSocial`, cliente.nombre_local AS `NombreLocal`, cliente.civa AS IVA, cast(cliente.id_tipo_cliente as CHAR(50)) AS TipoCliente,count(cuenta.id) AS CantidadCuentas FROM cliente inner join clientecuenta cuenta on cliente.id = cuenta.id_cliente       INNER JOIN banco ON cuenta.id_banco = banco.id INNER JOIN clientetipo ct ON ct.id = cliente.id_tipo_cliente group by cliente.id order by cliente.id";
 
         }
-
         public string GetDeleteClient(string idCliente, DateTime fechaBaja)
         {
-            //return "update cliente set fecha_baja ='" + fechaBaja.ToString("yyyy-MM-dd") + "' where id = "+ idCliente+";";
-            return "CALL borrarCliente(" + idCliente.ToString() + ",'" + fechaBaja.ToString("yyyy-MM-dd") + "')";
+            return "CALL borrarCliente(" + idCliente.ToString() + ",'" + fechaBaja.ToString(VariablesGlobales.dateFormat) + "')";
         }
-
         /* Proveedores */
         public string InsertNuevoProveedor(Proveedor Proveedor)
         {
@@ -244,12 +240,11 @@ namespace AppLaMejor.datamanager
                 " '" + Proveedor.Cuit + "', " +
                 " '" + Proveedor.Telefono + "', " +
                 " '" + Proveedor.NombreResponsable + "', " +
-                " '" + Proveedor.FechaDesde.ToString("yyyy-MM-dd") + "', " +
+                " '" + Proveedor.FechaDesde.ToString(VariablesGlobales.dateFormat) + "', " +
                 " null ," +
                 VariablesGlobales.userIdLogueado.ToString() + ");";
 
-        }
-    
+        }    
         public string GetProveedores()
         {
             return "CALL obtenerProveedores();";
@@ -261,15 +256,14 @@ namespace AppLaMejor.datamanager
         public string GetProveedoresData()
         {
             return "CALL obtenerProveedoresData();";
-        }        
-        //trae el saldo actual y algunos datos de referencia para el form de MovCuentas
+        }
         public string GetProveedoresSaldoActual()
         {
             return "call obtenerProveedoresSaldoActual()";
         }
         public string GetDeleteProv(string idProveedor, DateTime fechaBaja)
         {
-            return "call borrarProveedor('" + idProveedor.ToString() + "','" + fechaBaja.ToString("yyyy-MM-dd") + "')";
+            return "call borrarProveedor('" + idProveedor.ToString() + "','" + fechaBaja.ToString(VariablesGlobales.dateFormat) + "')";
         }
         public string UpdateProveedor(Proveedor proveedor)
         {
@@ -283,12 +277,10 @@ namespace AppLaMejor.datamanager
                 "'" + proveedor.Telefono + "',  " +
                 "'" + proveedor.Cuit + "',  " +
                 "'" + proveedor.NombreResponsable + "',  " +
-                "'" + proveedor.FechaDesde.ToString("yyyy-MM-dd") + "', " +
+                "'" + proveedor.FechaDesde.ToString(VariablesGlobales.dateFormat) + "', " +
                 "'" + proveedor.idUsuario + "');";
             return query;
         }
-        
-
         public string GetProveedorByName(string text)
         {
             return
@@ -318,7 +310,6 @@ namespace AppLaMejor.datamanager
                 AND razon_social LIKE CONCAT('%',name_,'%')
              */
         }
-
         /* Cuentas */
         public string GetClientesWithCuentaById(int id){
             return "SELECT c.id , " +
@@ -342,7 +333,6 @@ namespace AppLaMejor.datamanager
             "   order by c.id  ";
 
         }
-
         public string GetClientesWithCuenta()
         {
             //return "CALL obtenerClientesConCuenta()";
@@ -371,7 +361,6 @@ namespace AppLaMejor.datamanager
         {
             return "CALL obtenerCuentasPorIdCliente(" + id.ToString() + ");";
         }
-  
         public string GetCuenta(int id)
         {
             return "CALL obtenerClienteCuentaPorId(" + id.ToString() + ");";
@@ -402,7 +391,6 @@ namespace AppLaMejor.datamanager
             idCliente + "', '" +
             newCuenta.Banco.Id+"','"+ VariablesGlobales.userIdLogueado.ToString() + "');";
         }
-
         /* Cuentas proveedores */
         /* Movimiento Cuentas proveedores */
         public string GetProveedoresWithCuentaById(int id)
@@ -420,7 +408,6 @@ namespace AppLaMejor.datamanager
             string hini = "CALL obtenerProveedoresConCuenta(" + id.ToString() + ");";
             return hini;
         }
-
         public string GetCuentaProveedor(int id)
         {
             string hini = "CALL obtenerProveedorCuentaPorId(" + id.ToString() + ");";
@@ -436,24 +423,20 @@ namespace AppLaMejor.datamanager
             string hini = "CALL obtenerProveedorConCuentasPorIdProveedor(" + idProveedor.ToString() + "); ";
             return hini;
         }
-
-        //HASTA ACAAAAAAAAAA PAPAAAAAAAAA
         public string InsertNuevaCuentaProveedor(Cuenta newCuenta, string idProveedor)
         {
             return "INSERT INTO proveedorcuenta ( cbu, descripcion, id_proveedor, fecha_updated, usuario, fecha_baja) " +
             " VALUES ('" + newCuenta.Cbu + "', '" +
-            newCuenta.Descripcion + "', '" +
-											
+            newCuenta.Descripcion + "', '" +		
             idProveedor + "', " +
             " NOW() , 0 , null );";
         }
-
         /* Movimiento Cuentas */
         public string GetMovCuentas()
         {/* trae todos los movimiento de cuentas de todos los clientes*/
             return "SELECT " +
                     "cm.id, " +
-                    "cm.vob," +
+                    "cm.id_operacion," +
                     "gc.id," +
                     "gc.id_cliente," +
                     "cm.id_cuenta, " +
@@ -474,7 +457,7 @@ namespace AppLaMejor.datamanager
 
             return "SELECT " +
                     "cm.id, " +
-                    "cm.vob," +
+                    "cm.id_operacion," +
                     "cc.id," +
                     "cc.id_cliente," +
                     "banco.descripcion as Banco, " +
@@ -494,7 +477,7 @@ namespace AppLaMejor.datamanager
 
             return "SELECT " +
                     "cm.id, " +
-                    "cm.vob," +
+                    "cm.id_operacion," +
                     "gc.id," +
                     "gc.id_cliente," +
                     "cm.id_cuenta, " +
@@ -538,7 +521,7 @@ namespace AppLaMejor.datamanager
         {
             /* persiste el movimiento de cuenta*/
             return "INSERT INTO clientecuentamovimiento(" +
-                "vob," +
+                "id_operacion," +
                 "id_cuenta," +
                 "id_movimiento_tipo," +
                 "monto," +
@@ -547,7 +530,7 @@ namespace AppLaMejor.datamanager
                 "usuario)" +
                 "VALUES (" +
 
-                movCuenta.Vob + "," +
+                movCuenta.Operacion.Id + "," +
                 movCuenta.Cuenta.Id + "," +
                 movCuenta.TipoMovimiento.Id + "," +
                 movCuenta.Monto + ", NOW(),'" +
@@ -558,15 +541,15 @@ namespace AppLaMejor.datamanager
         public string GetMovCuentasProveedores()
         {
             /* trae todos los movimiento de cuentas de todos los proveedores*/
-            return "SELECT cm.id, cm.vob, gc.id, gc.id_proveedor, cm.id_cuenta, cm.id_movimiento_tipo, mt.descripcion, gc.id_banco, round(cm.monto, 2) AS monto, DATE_FORMAT(cm.fecha, '%Y-%m-%d') AS fecha_,  cm.cobrado, cm.usuario FROM proveedorcuentamovimiento cm INNER JOIN proveedorcuenta gc ON cm.id_cuenta = gc.id INNER JOIN movimientotipo mt ON cm.id_movimiento_tipo = mt.id WHERE gc.id_proveedor IS NOT NULL ORDER BY cm.id DESC;";
+            return "SELECT cm.id, cm.id_operacion, gc.id, gc.id_proveedor, cm.id_cuenta, cm.id_movimiento_tipo, mt.descripcion, gc.id_banco, round(cm.monto, 2) AS monto, DATE_FORMAT(cm.fecha, '%Y-%m-%d') AS fecha_,  cm.cobrado, cm.usuario FROM proveedorcuentamovimiento cm INNER JOIN proveedorcuenta gc ON cm.id_cuenta = gc.id INNER JOIN movimientotipo mt ON cm.id_movimiento_tipo = mt.id WHERE gc.id_proveedor IS NOT NULL ORDER BY cm.id DESC;";
         }		
-		public string GetMovCuentasProveedor(int id, int pInicio, int registros)												   
+		public string GetMovCuentasProveedor(int id, int pInicio, int registros)
         {
             /* trae paginando los movimiento de cuentas de un solo cliente*/
 
             return "SELECT " +
                     "cm.id, " +
-                    "cm.vob," +
+                    "cm.id_operacion," +
                     "gc.id," +
                     "gc.id_proveedor," +
                     "banco.descripcion as Banco, " +
@@ -580,13 +563,13 @@ namespace AppLaMejor.datamanager
                     "INNER JOIN banco ON banco.id = gc.id_banco WHERE gc.id_proveedor = " + id.ToString() + " ORDER BY cm.id DESC LIMIT " +
                     pInicio.ToString() + ", " + registros.ToString() + ";";
         }
-        public string GetMovCuentasProveedorBetweenDates(int id, int pInicio, int registros, string fdesde, string fhasta)															   
+        public string GetMovCuentasProveedorBetweenDates(int id, int pInicio, int registros, string fdesde, string fhasta)
         {
             /* trae paginando los movimiento de cuentas de un solo proveedor*/
 
             return "SELECT " +
                     "cm.id, " +
-                    "cm.vob," +
+                    "cm.id_operacion," +
                     "gc.id," +
                     "gc.id_proveedor," +
                     "cm.id_cuenta, " +
@@ -615,7 +598,7 @@ namespace AppLaMejor.datamanager
         {
             /* persiste el movimiento de cuenta*/
             return "INSERT INTO proveedorcuentamovimiento(" +
-                "vob," +
+                "id_operacion," +
                 "id_cuenta," +
                 "id_movimiento_tipo," +
                 "monto," +
@@ -624,27 +607,30 @@ namespace AppLaMejor.datamanager
                 "usuario)" +
                 "VALUES (" +
 
-                movCuenta.Vob + "," +
+                movCuenta.Operacion.Id + "," +
                 movCuenta.Cuenta.Id + "," +
                 movCuenta.TipoMovimiento.Id + "," +
                 movCuenta.Monto + ", NOW(),'" +
                 movCuenta.Cobrado + "'," +
                 movCuenta.idUsuario + ");";
         }
-
         public string GetNextMovCuentaId()
         {
             return "SELECT MAX(id)+1 as nextid from clientecuentamovimiento;";
         }
-
         /* Ventas */
         public string GetProductoFromIdCode(string idCode)
         {
             return GetProductosData() +
-                " and id_codigo_barra like '" + idCode + "'";
+                " and id_codigo_barra like '%" + idCode + "%'";
         }
         public string GetProductoById(int id){
             return "select * From producto where id = "+id+";";
+        }
+        public string GetProductosDeposte()
+        {
+            // Retorna los productos de Venta Minorista y Venta Mayorista (estado 2 y 3)
+            return GetProductosData() + " and id_producto_tipo in (2,3)";
         }
         public string GetTipoProductoEstado()
         {
@@ -665,29 +651,23 @@ namespace AppLaMejor.datamanager
         }
         public string InsertVenta(Venta v)
         {
-            return "INSERT INTO venta (monto_total, fecha, usuario) VALUES ('" +
+            return "INSERT INTO venta (monto_total, fecha, usuario, id_operacion) VALUES ('" +
                 v.MontoTotal + "', " +
                 " NOW() , '" +
-                VariablesGlobales.userIdLogueado.ToString() + "');";
+                VariablesGlobales.userIdLogueado.ToString() + "'," + v.Operacion.Id + ");";
         }
-
         public string InsertOperacion(Operacion o)
         {
-            string consulta = "INSERT INTO operacion (id_tipo_operacion, id_venta, id_cliente, id_mov_cuenta, fecha, usuario) VALUES (" +
-                o.tipoOperacion.Id + "," + o.venta.Id + "," + o.cliente.Id + "," + o.movCuenta.Id +
-                ",NOW()," +
+            string consulta = "INSERT INTO operacion (id_tipo_operacion, id_cliente, fecha, usuario) VALUES (" +
+                o.tipoOperacion.Id + "," + o.cliente.Id + ", NOW()," +
+						   
                 VariablesGlobales.userIdLogueado.ToString() + ");";
 
             return consulta;
         }
-
-        public string GetMedidas()
-        {
-            return "select * From medida;";
-        }
         public string GetVentaById(int p)
         {
-            return "select * from venta where id = '" + p.ToString() +"';";
+            return "select * from venta where id = '" + p.ToString() + "';";
         }
         public string GetVentaEntreFechas(DateTime desde, DateTime hasta)
         {
@@ -696,7 +676,7 @@ namespace AppLaMejor.datamanager
             " inner join ventadetalle vd on vd.id_venta = v.id " +
             " inner join producto p on p.id = vd.id_producto " +
             " WHERE " +
-            " v.fecha between '" + desde.ToString("yyyy-MM-dd") + "' and '" + hasta.ToString("yyyy-MM-dd") + "' ;";
+            " v.fecha between '" + desde.ToString(VariablesGlobales.dateFormat) + "' and '" + hasta.ToString(VariablesGlobales.dateFormat) + "' ;";
 
         }
         public string GetVentaByPlu(string plu)
@@ -749,13 +729,11 @@ namespace AppLaMejor.datamanager
         {
             return "SELECT MAX(id)+1 as nextid from venta;";
         }
-
         /* Operacion */
         public string GetNextOperacionId()
         {
             return "SELECT MAX(id)+1 as nextid from operacion;";
         }
-
         /* Productos */
         public string GetProductosData()
         {
@@ -771,7 +749,11 @@ namespace AppLaMejor.datamanager
             " producto p " +
             " where p.fecha_baja is null ";
         }
-
+        public string GetProducto(int idProducto)
+        {
+            return GetProductosData() +
+            " and id  = '" + idProducto + "';";
+        }
         public string GetProductosDataByTipo(int tp)
         {
             return " SELECT" +
@@ -786,9 +768,7 @@ namespace AppLaMejor.datamanager
             " producto p " +
             " where p.fecha_baja is null AND p.id_producto_tipo = " + tp.ToString();
         }
-
-
-        public string GetProductosSearchData()
+        public string GetProductosSearchDataConPlu()
         {
             return " SELECT" +
             " p.id," +
@@ -796,21 +776,18 @@ namespace AppLaMejor.datamanager
             " p.descripcion_breve AS DescripcionBreve "+
             " FROM " +
             " producto p " +
-            " where p.fecha_baja is null ";
+            " where p.fecha_baja is null and p.id_codigo_barra is not null ";
         }
-
         public string GetProductoByPLU(string plu)
         {
             return GetProductosData() +
-                " and substr(p.id_codigo_barra,2,4) = '" + plu +"';";
+                " and substr(p.id_codigo_barra,2,4)  = '" + plu + "';";
         }
-
         public string GetProductoByDescripBreve(string descripbreve)
         {
             return GetProductosData() +
                 " and p.descripcion_breve LIKE '%" + descripbreve + "%';";
         }
-
         public string GetDeleteProd(string idProd, DateTime fechaBaja)
         {
             return "update producto set fecha_baja ='" + fechaBaja.ToString() + "' where id = " + idProd + ";";
@@ -851,34 +828,41 @@ namespace AppLaMejor.datamanager
                     " producto p " +
                     " where p.fecha_baja is null and p.id = '" + id.ToString()+"';";
         }
-        
-        /* Precios */
-        public string GetTipoPrecioByIdProducto(int Id)
-        {
-            return "select id_tipo_precio from producto where id = " + Id + ";";
-        }
-        public string GetTipoPrecioById(int p)
-        {
-            return "select * from preciotipo where id = " + p;
-        }
-        public string GetTipoPrecio()
-        {
-            return "select * from preciotipo;";
-        }
-
         /* Garron */
         public string GetGarron(int idGarron)
         {
-            return "select * from garron where id = '" + idGarron.ToString() + "';";
+            return "select id, numero, id_tipo_garron, id_tipo_estado, fecha_entrada, peso, mes from garron where id = '" + idGarron.ToString() + "';";
         }
         public string GetTipoGarron()
         {
             return "select * from garrontipo;";
         }
-        public string GetGarronData()
+        public string GetGarronByNumberSearchData(Ubicacion u , TipoEstadoGarron teg , TipoGarron tg, String numero)
         {
-            return "select * from garron;";
-        }
+            string consulta = "select  concat(' ',g.numero,'/',g.mes, '- Peso: ',g.peso,' kg. - Ubicacion: ', u.descripcion, '- Estado: ', ge.descripcion, ' - Tipo: ' , gt.descripcion,' - ID: ',g.id) as text " +
+            "from garron g inner join productoubicacion pu on pu.id_Garron = g.id " +
+            "inner join ubicacion u on pu.id_ubicacion = u.id "+
+            "inner join garronestado ge on ge.id = g.id_tipo_estado "+
+            "inner join garrontipo gt on gt.id = g.id_tipo_garron "+
+            " where pu.fecha_egreso is null ";
+            if (u != null)
+            {
+                consulta += " and pu.id_ubicacion = '" + u.Id + "' ";
+            }
+            if (teg != null)
+            {
+                consulta += " and g.id_tipo_estado= '" + teg.Id + "' ";
+            }
+            if (tg != null)
+            {
+                consulta+=" and g.id_tipo_garron = '" +tg.Id+ "' ";
+            }
+            if (numero!=null)
+            {
+                consulta += " and g.numero like '%" + numero + "%' ";
+            }
+            return consulta;
+        }       
         public string GetTipoGarronByIdGarron(int Id)
         {
             return "select g.id_tipo_garron from garron g inner join garrontipo gt on gt.id = g.id_tipo_garron where g.id = '" + Id + "';";
@@ -889,13 +873,15 @@ namespace AppLaMejor.datamanager
         }    
         public string InsertGarron(Garron g)
         {
-            return " INSERT INTO garron(numero, id_tipo_garron, id_tipo_estado, fecha_entrada, peso, mes, usuario, fecha_baja) " +
+            return " INSERT INTO garron(numero, id_tipo_garron, id_tipo_estado, fecha_entrada, peso, mes, observacion, usuario, fecha_baja) " +
                 " VALUES ('" + g.Numero + "', '" +
                     g.TipoGarron.Id + "', '" +
                     g.TipoEstadoGarron.Id + "', '" +
-                    g.FechaEntrada.ToString("yyyy-MM-dd")+"', '"+
+                    g.FechaEntrada.ToString(VariablesGlobales.dateTimeFormat)+"', '"+
                     g.Peso + "', '" +
-                    g.Mes + "', '"+ VariablesGlobales.userIdLogueado.ToString() + "', " +
+                    g.Mes + "', '"+
+                    g.Observacion + "', '" +
+                    VariablesGlobales.userIdLogueado.ToString() + "', " +                    
                     "null );";
         }
         public string GetLastInsertedGarron()
@@ -917,20 +903,26 @@ namespace AppLaMejor.datamanager
             " inner join garronproductodef gpd on gpd.id_tipo_garron = g.id_tipo_garron " +
             " where g.id = '"+p+"';";
         }
-        public string GetGarronProductoDepostadoByGarron(string p)
-        {
-            /* Obtener productos ya depostados de garron*/
-            return "select gdp.id_producto from garron g " +
-            "inner join garronproductodef gpd on gpd.id_tipo_garron = g.id_tipo_garron " +
-            "left join garrondeposteparcial gdp on gdp.id_producto = gpd.id_producto and gdp.id_garron = g.id " +
-            "where g.id = '"+p+"' and " +
-            "gdp.id is not null ;";
-        }
         public string GetTipoEstadoGarron()
         {
             return "select * from garronestado; ";
         }
-
+        public string GetNextGarronId()
+        {
+            return "SELECT MAX(id)+1 as nextid from garron;";
+        }
+        public string InsertGarronDeposte(GarronDeposte gd)
+        {
+            return "insert into garrondeposte (id_garron, id_producto, peso, fecha, usuario, fecha_baja) VALUES ('" + gd.Garron.Id + "', '" + gd.Producto.Id + "', '" + gd.Peso + "', NOW() , '" + VariablesGlobales.userIdLogueado + "', NULL);";
+        }
+        public string UpdatePesoGarron(int idGarron , decimal pesoTotalDepostado)
+        {
+            return "update garron set id_tipo_estado = 2 , peso = peso - '"+pesoTotalDepostado+"' where id = '" +idGarron +"'";
+        }
+        public string GetGarronDeposteAnterior(int id)
+        {
+            return "select * from garrondeposte where id_garron  =  '" + id.ToString() + "';";
+        }
         /* Banco */
         public string GetBanco()
         {
@@ -948,7 +940,6 @@ namespace AppLaMejor.datamanager
         {
             return "select id_banco from proveedorcuenta where id = '" + idCuenta.ToString() + "';";
         }
-
         /* Precios */
         public string GetPrecioHistoricoData()
         {
@@ -981,15 +972,286 @@ namespace AppLaMejor.datamanager
         public string GetPreciosToExport()
         {
             return "SELECT CONCAT('CARNICERIA;',cast(SUBSTR(p.id_codigo_barra, 2, 4) AS UNSIGNED),';',p.descripcion_breve,';',cast(SUBSTR(p.id_codigo_barra, 2, 4) AS UNSIGNED),';',p.precio,';','0.00;P;0;;'	) " +
-                    "FROM producto p where p.id_producto_tipo = 1";
+                    "FROM producto p where 	p.id_codigo_barra is not null order by p.id_codigo_barra";
         }
         public string GetParametroByName(string name)
         {
             return "SELECT value FROM parametros where name = '" + name + "';";
         }
+        /* Operaciones */
+        public string GetOperacionesData()
+        {
+            return "select o.id, o.fecha, o.id_cliente, too.descripcion, v.monto_total, c.cod_cliente, c.razon_social, v.id as id_venta from operacion o " +
+            " inner join operaciontipo too on o.id_tipo_operacion = too.id " +
+            " inner join cliente c on c.id = o.id_cliente " +
+            " inner join venta v on v.id_operacion = o.id order by o.id desc ";
+        }
+        public string GetOperacionesProveedoresData()
+																 
+        {
+            return "select o.id, o.fecha, o.id_proveedor, too.descripcion, v.monto_total, c.razon_social , v.id as id_compra " +
+            "from operacionproveedor o  inner join operaciontipo too on o.id_tipo_operacion = too.id " +
+            "inner join proveedor c on c.id = o.id_proveedor " +
+            "inner join compra v on v.id_operacion = o.id " +
+            "order by o.id desc ";
+        }
+        /* Reportes */
+        /* ----------> Ultima Operacion Venta */
+        public string ReportVistaUltimaVenta(int id, int ido)
+        {
+            string consulta =
 
+             "    ALTER VIEW vistaultimaventa AS " +
+"SELECT " +
+"  `c`.`id`, " +
+"  `c`.`cod_cliente`, " +
+"  `c`.`razon_social`, " +
+" 	`c`.`domicilio`," +
+"  `c`.`cuit`, " +
+"  `cc`.`id` AS 'id_cliente_cuenta', " +
+"  `cc`.`descripcion`, " +
+"  `cc`.`id_banco`, " +
+"  `ccm`.`id_operacion`, " +
+" `mt`.`descripcion` AS 'tipo', " +
+"  `ccm`.`fecha`, " +
+"  IF((`ccm`.`id_movimiento_tipo` = 2), `ccm`.`monto`, (`ccm`.`monto` *-(1))) AS 'saldo' " +
+" FROM " +
+"      (((`clientecuenta` cc " +
+"    JOIN `cliente` c ON((`cc`.`id_cliente` = `c`.`id`))) " +
+"    JOIN `clientecuentamovimiento` ccm ON ((`ccm`.`id_cuenta` = `cc`.`id`))) " +
+"    JOIN `movimientotipo` mt ON ((`ccm`.`id_movimiento_tipo` = `mt`.`id`))) " +
+"WHERE  (`ccm`.`id_operacion` = " + ido.ToString() + "); " +
+  " ALTER VIEW vistasaldoporidcliente AS SELECT   `c`.`id`,   `c`.`cod_cliente`,   `c`.`razon_social`,   `c`.`cuit`,   `cc`.`id` AS 'id_cliente_cuenta',   `cc`.`descripcion`,   `cc`.`id_banco`," +
+  " `ccm`.`id_operacion`,   `mt`.`descripcion` AS 'tipo',   `ccm`.`fecha`,   IF((`ccm`.`id_movimiento_tipo` = 2), `ccm`.`monto`, (`ccm`.`monto` *-(1))) AS 'saldo' " +
+  " FROM(((`clientecuenta` cc    JOIN `cliente` c ON ((`cc`.`id_cliente` = `c`.`id`)))    JOIN `clientecuentamovimiento` ccm ON ((`ccm`.`id_cuenta` = `cc`.`id`)))    JOIN `movimientotipo` mt ON ((`ccm`.`id_movimiento_tipo` = `mt`.`id`))) " +
+  " WHERE(`c`.`id` = " + id.ToString() + "); ALTER VIEW vistasaldocliente AS SELECT   `id`, `razon_social`, SUM(`saldo`) AS 'saldo' FROM   `vistasaldoporidcliente` GROUP BY   `id`;";
+
+
+            return consulta;
+		 
+														
+		 
+																											   
+        }
+        public string ReportVistaUltimaVenta(int idv)
+        {
+            string consulta = " ALTER VIEW vistaventa AS SELECT  `v`.`id`,  `v`.`id_operacion`,  `p`.`id_codigo_barra` AS 'codigo',  `p`.`descripcion_breve` AS 'descripcion', " +
+            " `vd`.`peso`,  `vd`.`monto`,  `v`.`monto_total`FROM  (((`venta` v    JOIN `ventadetalle` vd ON((`v`.`id` = `vd`.`id_venta`)))    JOIN `producto` p ON ((`vd`.`id_producto` = `p`.`id`))) " +
+            "  JOIN `operacion` o ON ((`v`.`id_operacion` = `o`.`id`))) WHERE  (`v`.`id` = " + idv.ToString() + ");" +
+            " create view vistaVentaSumaTotal as " +
+            " select vsc.id, vvs.monto_total + vsc.saldo as total " +
+            " from vistaventaseleccionada vvs " +
+            " inner "+
+            " join vistasaldocliente vsc on vvs.id_cliente = vsc.id;";
+            return consulta;
+        }
+        public string ReportVistaUltimaVentaPorCliente(int idC)
+        {
+            string consulta =
+        "ALTER VIEW vistaultimaventaporcliente AS SELECT  `v`.`id`, " +
+        "`v`.`id_operacion`,  " +
+        "o.id_cliente, " +
+        "`p`.`id_codigo_barra` AS 'codigo',   " +
+        "`p`.`descripcion_breve` AS 'descripcion',  " +
+        "`vd`.`peso`,   " +
+        "`vd`.`monto`, " +
+        "`v`.`monto_total` " +
+
+        "FROM(((`venta` v " +
+        "JOIN `ventadetalle` vd ON((`v`.`id` = `vd`.`id_venta`)))     " +
+        "JOIN `producto` p ON((`vd`.`id_producto` = `p`.`id`)))  " +
+        "JOIN `operacion` o ON((`v`.`id_operacion` = `o`.`id`))) " +
+        "where v.id =( SELECT  `v`.`id` AS id_ultima_venta " +
+
+        "FROM  (((`venta` v " +
+        "JOIN `ventadetalle` vd ON((`v`.`id` = `vd`.`id_venta`)))     " +
+        "JOIN `producto` p ON((`vd`.`id_producto` = `p`.`id`)))  " +
+        "JOIN `operacion` o ON((`v`.`id_operacion` = `o`.`id`))) " +
+        "where o.id_cliente = " + idC.ToString() + " order by v.id desc limit 1); ";
+            return consulta;
+        }
+        public string ReportVistaVentaSeleccionada(int idV)
+        {
+            string consulta = "ALTER VIEW vistaventaseleccionada AS  SELECT  `v`.`id`, `v`.`id_operacion`, o.id_cliente, `p`.`id_codigo_barra` AS 'codigo',  `p`.`descripcion_breve` AS 'descripcion', " +
+        "`vd`.`peso`,  `vd`.`monto`,  `v`.`monto_total` FROM(((`venta` v JOIN `ventadetalle` vd ON((`v`.`id` = `vd`.`id_venta`)))    " +
+         "JOIN `producto` p ON((`vd`.`id_producto` = `p`.`id`)))  JOIN `operacion` o ON((`v`.`id_operacion` = `o`.`id`))) " +
+        "where v.id = " + idV.ToString();
+         return consulta;
+        }
+        /* ----------> Ultima Operacion Compra */
+        public string ReportVistaUltimaCompra(int id, int ido)
+        {
+            string consulta =
+
+               "ALTER VIEW vistaultimacompra AS SELECT " +
+		 " `c`.`id`, " +
+		 " `c`.`razon_social`, " +
+		 " 	`c`.`domicilio`," +
+		 " `c`.`cuit`, " +
+		 " `cc`.`id` AS 'id_proveedor_cuenta', " +
+		 " `cc`.`descripcion`, " +
+		 " `cc`.`id_banco`, " +
+		 " `ccm`.`id_operacion`, " +
+												 
+		 " `mt`.`descripcion` AS 'tipo', " +
+		 " `ccm`.`fecha`, " +
+		 " IF((`ccm`.`id_movimiento_tipo` = 2), `ccm`.`monto`, (`ccm`.`monto` *-(1))) AS 'saldo' " +
+		 " FROM " +
+		 "   (((`proveedorcuenta` cc " +
+		 "   JOIN `proveedor` c ON((`cc`.`id_proveedor` = `c`.`id`))) " +
+		 "   JOIN `proveedorcuentamovimiento` ccm ON ((`ccm`.`id_cuenta` = `cc`.`id`))) " +
+		 "   JOIN `movimientotipo` mt ON ((`ccm`.`id_movimiento_tipo` = `mt`.`id`))) " +
+		 " WHERE " +
+				 
+		 " (`ccm`.`id_operacion` = " + id.ToString() + "); " +
+          " ALTER VIEW vistasaldoporidProveedor AS SELECT   `c`.`id`,   `c`.`razon_social`,   `c`.`cuit`,   `cc`.`id` AS 'id_proveedor_cuenta',    `cc`.`descripcion`,   `cc`.`id_banco`,   `ccm`.`id_operacion`,  " +
+          " `mt`.`descripcion` AS 'tipo',    	 `ccm`.`fecha`,    	 IF((`ccm`.`id_movimiento_tipo` = 2),  	 `ccm`.`monto`, (`ccm`.`monto` *-(1))) AS 'saldo'  FROM(((`proveedorcuenta` cc    JOIN `proveedor` c ON((`cc`.`id_proveedor` = `c`.`id`)))   " +
+          " JOIN `proveedorcuentamovimiento` ccm ON ((`ccm`.`id_cuenta` = `cc`.`id`)))     	JOIN `movimientotipo` mt ON ((`ccm`.`id_movimiento_tipo` = `mt`.`id`)))   WHERE(`c`.`id` = " + id.ToString() + " ); " +
+          " ALTER VIEW vistasaldoproveedor AS SELECT `id`, `razon_social`, SUM(`saldo`) AS 'saldo'   FROM   `vistasaldoporidproveedor` GROUP BY   `id`; ";
+            return consulta;																																									
+        }
+        public string ReportVistaCompraSeleccionada(int idC)
+        {
+            string consulta = "ALTER VIEW vistacompraseleccionada AS SELECT  `v`.`id`, `v`.`id_operacion`, o.id_proveedor, `p`.`id_codigo_barra` AS 'codigo',  `p`.`descripcion_breve` AS 'descripcion',  " +
+        "`vd`.`peso`,  `vd`.`monto`,  `v`.`monto_total` FROM(((`compra` v JOIN `compradetalle` vd ON((`v`.`id` = `vd`.`id_compra`)))    " +
+        " JOIN `producto` p ON((`vd`.`id_producto` = `p`.`id`)))  JOIN `operacionproveedor` o ON((`v`.`id_operacion` = `o`.`id`))) " +
+        "where v.id = " + idC.ToString();
+            return consulta;
+        }
+        /* Compras */
+        public string GetNextCompraId()
+        {
+            return "SELECT MAX(id)+1 as nextid from compra;";
+        }
+        public string InsertNuevaCompra(Proveedor provSelec, decimal currentMontoCompra, decimal currentMontoPagado)
+        {
+            if (provSelec == null)
+            {
+                return " INSERT INTO compra (id_proveedor, monto_total, monto_pagado, fecha, usuario, fecha_baja) VALUES (NULL, '" + currentMontoCompra + "','" + currentMontoPagado + "', NOW(), '" + VariablesGlobales.userIdLogueado.ToString() + "', NULL); ";
+            }
+            else
+            {
+                return " INSERT INTO compra (id_proveedor, monto_total, monto_pagado, fecha, usuario, fecha_baja) VALUES ('" + provSelec.Id + "', '" + currentMontoCompra + "','" + currentMontoPagado + "', NOW(), '" + VariablesGlobales.userIdLogueado.ToString() + "', NULL); ";
+            }
+
+        }
+        public string InsertCompraDetalle(int idCompra, Garron g)
+        {
+            return "INSERT INTO compradetalle (id_compra, id_garron, id_producto, monto, peso, usuario, fecha_baja)  VALUES ('" + idCompra.ToString() + "', '" + g.Id + "', NULL , '" + g.MontoCompra + "', '"+g.Peso+ "', '" + VariablesGlobales.userIdLogueado.ToString() + "', NULL)";
+        }
+        public string InsertCompraDetalle(int idCompra, Producto p)
+        {
+            if (p.CantidadEntregada.Equals(p.Cantidad))
+                return "INSERT INTO compradetalle (id_compra, id_garron, id_producto, monto, peso, usuario, fecha_baja)  VALUES ('" + idCompra.ToString() + "',NULL ,  '" + p.Id + "', '" + p.Precio + "',  '" + p.Cantidad + "', '" + VariablesGlobales.userIdLogueado.ToString() + "', NULL)";
+
+            return "INSERT INTO compradetalle (id_compra, id_garron, id_producto, monto, peso, peso_faltaentregar, usuario, fecha_baja)  VALUES ('" + idCompra.ToString() + "',NULL ,  '" + p.Id + "', '" + p.Precio + "',  '" + p.Cantidad + "', '" + (p.Cantidad - p.CantidadEntregada) + "', '" + VariablesGlobales.userIdLogueado.ToString() + "', NULL)";
+        }
+        public string UpdateCantidadProducto(Producto p)
+        {
+            return " UPDATE producto set cantidad = cantidad + '" + p.Cantidad + "' where id = '" + p.Id + "'";
+        }
+        public string UbicarCompraDetalleMesaEntrada(Producto p)
+        {
+            return "INSERT INTO productoubicacion (id_producto, id_garron, id_ubicacion, peso, fecha_egreso, fecha_ingreso, id_usuario)" +
+            "VALUES('"+p.Id+"', NULL, '"+ VariablesGlobales.ubicacionInicialCompra + "', '"+p.CantidadEntregada+ "', NULL, NOW(), '"+VariablesGlobales.userIdLogueado+"');";
+        }
+        public string UbicarCompraDetalleMesaEntrada(Garron g)
+        {
+            return "INSERT INTO productoubicacion (id_producto, id_garron, id_ubicacion, peso, fecha_egreso, fecha_ingreso, id_usuario)" +
+            "VALUES( NULL , '" + g.Id + "', '" + VariablesGlobales.ubicacionInicialCompra + "', '" + g.Peso + "', NULL, NOW(), '" + VariablesGlobales.userIdLogueado + "');";
+        }
+        /* Ubicacion */
+        public string GetUbicacion()
+        {
+            return "select * from ubicacion;";
+        }
+        public string GetUbicacionById(int v)
+        {
+            return "select * from ubicacion where id = '"+v.ToString()+"';";
+        }
+        public string GetUbicacionByName(string name)
+        {
+            return "select * from ubicacion where descripcion = '"+name+"';";
+        }
+        public string GetProductosByUbicacion(int idUbicacion)
+        {
+            // TODO: SQL Devuelve registros repetidos, verificar.
+            return " SELECT" +
+            " p.id," +
+            " p.id_codigo_barra as CodigoBarra," +
+            " p.descripcion_breve AS DescripcionBreve," +
+            " cast(p.id_producto_tipo AS CHAR (50)) AS TipoProducto," +
+            " p.precio as Precio," +
+            " p.cantidad AS Cantidad, " +
+            " p.descripcion_larga AS DescripcionLarga " +
+            " FROM productoubicacion pu inner join producto p on p.id = pu.id_producto where pu.id_ubicacion = '" + idUbicacion.ToString() + "' and pu.fecha_egreso is null;";
+            
+        }
+        public string GetProductoUbicacion(Producto producto, int origenSeleccionado)
+        {
+            return "select * from productoubicacion pu where pu.id_producto = '" + producto.Id.ToString() + "' and pu.id_ubicacion = '" + origenSeleccionado.ToString() + "' and pu.fecha_egreso is null";
+        }
+        public string GetProductoUbicacion(Garron garron, int origenSeleccionado)
+        {
+            return "select * from productoubicacion pu where pu.id_garron = '" + garron.Id.ToString() + "' and pu.id_ubicacion = '" + origenSeleccionado.ToString() + "' and pu.fecha_egreso is null";
+        }
+        public string CheckExistProductoUbicacion(Producto producto, int idOrigen, int idDestino)
+        {
+            return "select * from productoubicacion pu where pu.id_producto = '"+producto.Id+"' and id_ubicacion not in ('"+idOrigen.ToString()+"') and id_ubicacion in ('"+idDestino.ToString()+"');";
+        }
+        public string GetGarronByUbicacion(int idUbicacion)
+        {
+            return "SELECT g.* FROM productoubicacion pu inner join garron g on g.id = pu.id_garron where pu.fecha_egreso is null and pu.id_ubicacion ='" + idUbicacion.ToString() + "';";
+        }
+        public string GetUbicacionByGarron(int id)
+        {
+            return "SELECT u.* FROM productoubicacion pu inner join ubicacion u  on u.id = pu.id_ubicacion WHERE id_garron = '"+id.ToString()+ "' and pu.fecha_egreso is null ";
+        }
+        public string GetUbicacionDestino(int idOrigen)
+        {
+            return "select * from ubicacion where id <> '"+idOrigen.ToString()+"';";
+        }
+        public string InsertarMovimientoMercaderia(MovimientoMercaderia m)
+        {
+            if (m.producto != null)
+            {
+                return 
+                "INSERT INTO movimientomercaderia(fecha, id_ubicacion_origen, id_ubicacion_destino, peso, id_producto, id_garron, usuario, fecha_baja) " +
+                " VALUES(now(), '"+m.origen.Id+"', '"+m.destino.Id+"', '"+m.peso+"', '"+m.producto.Id+"', NULL, '"+VariablesGlobales.userIdLogueado+"', NULL); ";
+            }else if (m.garron != null)
+            {
+                return 
+                "INSERT INTO movimientomercaderia(fecha, id_ubicacion_origen, id_ubicacion_destino, peso, id_producto, id_garron, usuario, fecha_baja) " +
+                " VALUES(now(), '" + m.origen.Id + "', '" + m.destino.Id + "', '" + m.peso + "', NULL , '"+m.garron.Id+"', '" + VariablesGlobales.userIdLogueado + "', NULL); ";
+            }
+            return "";
+
+        }
+        public string UpdateProductoUbicacionBaja(int idProductoUbicacion)
+        {
+            return "update productoubicacion set peso = 0 , fecha_egreso = now(), fecha_baja = NULL where id = '" + idProductoUbicacion.ToString() + "';";
+        }
+        public string UpdateProductoUbicacion(int idProductoUbicacion, decimal pesoRestante)
+        {
+            return " update productoubicacion set peso = '"+ pesoRestante + "', fecha_baja = NULL where id = '"+idProductoUbicacion.ToString()+"' ;";
+        }
+        public string InsertProductoUbicacion(MovimientoMercaderia m)
+        {
+            if (m.producto != null)
+            {
+                return "INSERT INTO productoubicacion(id_producto, id_garron, id_ubicacion, peso, fecha_egreso, fecha_ingreso, id_usuario, fecha_baja) " +
+                "VALUES('"+m.producto.Id+"', NULL, '"+m.destino.Id+"', '"+m.peso+"', NULL, now() ,'"+VariablesGlobales.userIdLogueado+"' , NULL);";
+            }else if (m.garron != null)
+            {
+                return "INSERT INTO productoubicacion(id_producto, id_garron, id_ubicacion, peso, fecha_egreso, fecha_ingreso, id_usuario, fecha_baja) " +
+                "VALUES( NULL , '"+m.garron.Id+"', '" + m.destino.Id + "', '" + m.peso + "', NULL, now() ,'" + VariablesGlobales.userIdLogueado + "' , NULL);";
+            }
+            return "";   
+        }
+        public string UpdatePesoProductoDestino(int id, decimal nuevoPeso)
+        {
+            return "update productoubicacion set peso = '"+nuevoPeso+"', fecha_baja = null where id = '"+id.ToString()+"';";
+        }
     }
-
-
 
 }

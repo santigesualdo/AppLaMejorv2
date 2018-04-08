@@ -10,6 +10,8 @@ using AppLaMejor.datamanager;
 using AppLaMejor.controlmanager;
 using AppLaMejor.stylemanager;
 using AppLaMejor.formularios.Compras;
+using AppLaMejor.formularios.Productos;
+using AppLaMejor.reportes;
 
 namespace AppLaMejor.formularios
 {
@@ -89,11 +91,19 @@ namespace AppLaMejor.formularios
                 case "Movimiento Cuentas": boton.Click += new System.EventHandler(IniciarMovimientoCuentas); break;
                 case "Movimiento Cuentas Proveedores": boton.Click += new System.EventHandler(IniciarMovimientoCuentasProveedores); break;
                 case "Ventas Caja": boton.Click += new System.EventHandler(IniciarVentasCaja); break;
-                case "Carga Garron": boton.Click += new System.EventHandler(IniciarCargaGarron); break;
                 case "Compras": boton.Click += new System.EventHandler(IniciarCompras); break;
                 case "Caja Mayorista": boton.Click += new System.EventHandler(IniciarCajaMay); break;
+                case "Ubicación de Productos": boton.Click += new System.EventHandler(IniciarUbicacion); break;
+                case "Deposte": boton.Click += new System.EventHandler(IniciarDeposte); break;
+				case "Reportes": boton.Click += new System.EventHandler(IniciarReportes); break;
             }
             return boton;
+        }
+
+        private void IniciarDeposte(object sender, EventArgs e)
+        {
+            FormDeposte formDeposte = new FormDeposte();
+            formDeposte.ShowDialog();
         }
 
         private void IniciarClientes(object sender, EventArgs e)
@@ -137,11 +147,6 @@ namespace AppLaMejor.formularios
             FormVentasCaja formVentasCaja = new FormVentasCaja();
             formVentasCaja.ShowDialog();
         }
-        private void IniciarCargaGarron(object sender, EventArgs e)
-        {
-            FormCargaGarron formCargaGarron = new FormCargaGarron();
-            formCargaGarron.ShowDialog();
-        }
         private void IniciarMovimientoCuentasProveedores(object sender, EventArgs e)
         {
             FormMovCuentasProveedores formMovCuentasProveedores = new FormMovCuentasProveedores();
@@ -151,6 +156,20 @@ namespace AppLaMejor.formularios
         {
             FormCargaCompras formCompras = new FormCargaCompras();
             formCompras.ShowDialog();
+        }
+
+        private void IniciarUbicacion(object sender, EventArgs e)
+        {
+            FormUbicacion formUbicacion = new FormUbicacion();
+            formUbicacion.ShowDialog();
+        }
+		private void IniciarReportes(object sender, EventArgs e)
+        {
+            FormReportes formReportes = new FormReportes();
+            formReportes.ShowDialog();
+
+         //   FormModalReportes fmr = new FormModalReportes();
+         //   fmr.ShowDialog();
         }
         private void bCancelar_Click(object sender, EventArgs e)
         {

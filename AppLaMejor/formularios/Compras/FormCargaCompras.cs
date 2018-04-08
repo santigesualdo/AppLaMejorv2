@@ -7,9 +7,15 @@ using System.Windows.Forms;
 using System;
 using System.Data;
 using System.Collections.Generic;
+using AppLaMejor.formularios.Util;
+using AppLaMejor.formularios.Productos;
 
 namespace AppLaMejor.formularios.Compras
 {
+    // TODO: VALIDACION Luego de compra confirmada con exito limpiar todos los valores. 
+    // TODO: MODELO Decidar como funciona el flujo de registración en la cuenta del proveedor seleccionado.
+    // TODO: BUG verificacion de list precios de compradetalle con currentMontoCompra no esta funcionando
+
     public partial class FormCargaCompras : Form
     {
         List<Garron> listGarron;
@@ -19,24 +25,36 @@ namespace AppLaMejor.formularios.Compras
         DataTable currentCompraDetalleProducto;
 
         Producto lastProdSelected = null;
+        Proveedor provSelec = null;
+
+        decimal currentMontoCompra;
+        decimal currentPagoParcial;
+
+        bool proveedorSeleccionado;
 
         public FormCargaCompras()
         {
             InitializeComponent();
 
             ApplicationLookAndFeel.ApplyThemeToAll(this);
+
+            Cargar();
+        }
+
+        private void Cargar()
+        {
             LoadAutoCompleteTextBox();
             LoadGrids();
             LoadLists();
 
-
-
+            proveedorSeleccionado = false;
         }
 
         private void LoadLists()
         {
             listProducto = new List<Producto>();
             listGarron = new List<Garron>();
+            currentMontoCompra = decimal.Zero;
         }
 
         private void LoadGrids()
@@ -45,7 +63,7 @@ namespace AppLaMejor.formularios.Compras
 
             gridGarron.ColumnHeadersVisible = false;
             gridGarron.AllowUserToAddRows = false;
-            gridGarron.Columns.Add(new DataGridViewImageColumn() { Image = Properties.Resources.x_icon_30x30, Width = 30 });
+            gridGarron.Columns.Add(new DataGridViewImageColumn() { Image = Properties.Resources.x_icon_30x30_white, Width = 30 });
             gridGarron.DataSource = currentCompraDetalleGarron;
             gridGarron.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             gridGarron.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -56,12 +74,13 @@ namespace AppLaMejor.formularios.Compras
             currentCompraDetalleProducto = GetTableProducto();
             gridProductos.ColumnHeadersVisible = false;
             gridProductos.AllowUserToAddRows = false;
-            gridProductos.Columns.Add(new DataGridViewImageColumn() { Image = Properties.Resources.x_icon_30x30, Width = 30 });
+            gridProductos.Columns.Add(new DataGridViewImageColumn() { Image = Properties.Resources.x_icon_30x30_white, Width = 30 });
             gridProductos.DataSource = currentCompraDetalleProducto;
             gridProductos.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             gridProductos.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             gridProductos.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             gridProductos.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            gridProductos.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
         }
 
@@ -82,9 +101,11 @@ namespace AppLaMejor.formularios.Compras
         {
             // Here we create a DataTable with four columns.
             DataTable table = new DataTable();
+            
             table.Columns.Add("Producto", typeof(string));
             table.Columns.Add("Monto", typeof(string));
             table.Columns.Add("Peso", typeof(string));
+            table.Columns.Add("Peso Entregado", typeof(string));
             table.Rows.Clear();
 
             return table;
@@ -112,7 +133,7 @@ namespace AppLaMejor.formularios.Compras
 
         private void LoadTextBoxPlu()
         {
-            string consulta = QueryManager.Instance().GetProductosSearchData();
+            string consulta = QueryManager.Instance().GetProductosSearchDataConPlu();
             AutoCompleteStringCollection collection = QueryManager.Instance().GetAutoCompleteCollection(ConnecionBD.Instance().Connection, consulta, 1);
             if (collection != null)
             {
@@ -124,8 +145,8 @@ namespace AppLaMejor.formularios.Compras
 
         private void LoadTextBoxDescripProd()
         {
-            string consulta = QueryManager.Instance().GetProductosSearchData();
-            AutoCompleteStringCollection  collection = QueryManager.Instance().GetAutoCompleteCollection(ConnecionBD.Instance().Connection, consulta, 2);
+            string consulta = QueryManager.Instance().GetProductosSearchDataConPlu();
+            AutoCompleteStringCollection collection = QueryManager.Instance().GetAutoCompleteCollection(ConnecionBD.Instance().Connection, consulta, 2);
             if (collection != null)
             {
                 textBoxDescrip.AutoCompleteMode = AutoCompleteMode.Suggest;
@@ -142,7 +163,7 @@ namespace AppLaMejor.formularios.Compras
                 lastProdSelected = FuncionesProductos.GetProductoByPlu(text);
                 labelProdSelec.Text = lastProdSelected.DescripcionLarga;
                 textBoxDescrip.Text = string.Empty;
-            } 
+            }
         }
 
         private void textBoxDescrip_KeyUp(object sender, KeyEventArgs e)
@@ -161,8 +182,9 @@ namespace AppLaMejor.formularios.Compras
             if (e.KeyCode.Equals(Keys.Return))
             {
                 string text = ((TextBox)sender).Text;
-                Proveedor provSelec= FuncionesProveedores.GetProveedorByName(text);
+                provSelec = FuncionesProveedores.GetProveedorByName(text);
                 labelProveedorSeleccionado.Text = provSelec.RazonSocial;
+                proveedorSeleccionado = true;
 
             }
         }
@@ -181,7 +203,7 @@ namespace AppLaMejor.formularios.Compras
 
         private void panelFinalizarCompra_Paint(object sender, PaintEventArgs e)
         {
-            panelPaint(sender, e, panelFinalizarCompra,2);
+            panelPaint(sender, e, panelFinalizarCompra, 2);
         }
 
         private void panelProducto_Paint(object sender, PaintEventArgs e)
@@ -223,6 +245,7 @@ namespace AppLaMejor.formularios.Compras
                 MyTextTimer.TStartFade("Se guardo Proveedor " + newProv.RazonSocial.ToUpper() + ".", statusStrip1, tsslMensaje, MyTextTimer.TIME_SHORT);
                 LoadTextBoxProveedor();
                 labelProveedorSeleccionado.Text = newProv.RazonSocial;
+                proveedorSeleccionado = true;
             }
             else
             {
@@ -235,39 +258,316 @@ namespace AppLaMejor.formularios.Compras
             Garron newGarron = FuncionesGarron.AgregarGarronSinBD("Agregar Garron");
             if (newGarron != null)
             {
-                // TODO: textbox para ingresar monto de Garron, ya que la entidad garron no posee monto
-                AgregarGarronToGrid(newGarron, "152.25");
+                AgregarGarronToGrid(newGarron);
             }
         }
 
-        private void AgregarGarronToGrid(Garron newGarron, string monto)
+        private void AgregarGarronToGrid(Garron newGarron)
         {
             // Agregamos a la lista y mostramos en grid
+            currentCompraDetalleGarron.Rows.Add(newGarron.Numero, "$ " + newGarron.MontoCompra.ToString(), newGarron.Peso.ToString() + " kg.", newGarron.TipoGarron.Descripcion);
+
+            currentMontoCompra += newGarron.MontoCompra;
             listGarron.Add(newGarron);
-            currentCompraDetalleGarron.Rows.Add(newGarron.Numero, "$ " + monto, newGarron.Peso.ToString() + " kg.", newGarron.TipoGarron.Descripcion);
+
+            ActualizarSaldoLabel(currentMontoCompra);
+
             if (!gridGarron.ColumnHeadersVisible)
                 gridGarron.ColumnHeadersVisible = true;
         }
         private void bAgregarProducto_Click(object sender, EventArgs e)
         {
-            if (lastProdSelected != null)
+            if (validarProductoToGrid())
             {
-                // TODO: textbox para ingresar monto de producto, ya que la entidad garron no posee monto
-                AgregarProductoToGrid(lastProdSelected, "152.25");
+                AgregarProductoToGrid(lastProdSelected);
+                LimpiarInputsDeProducto();
             }
         }
 
-        private void AgregarProductoToGrid(Producto producto, string v)
+        private void LimpiarInputsDeProducto()
         {
+            
+            textBoxDescrip.Text = "(buscar por descripcion)";
+            textBoxPeso.Text = "(ingrese peso del producto)";
+            textBoxPesoEntregado.Text = "";
+            textBoxMonto.Text = "(ingrese monto)";
+            textBoxPLU.Focus();
+        }
+
+        private void AgregarProductoToGrid(Producto producto)
+        {
+            decimal auxprecio = decimal.Parse(textBoxMonto.Text);
+            decimal auxcantidad = decimal.Parse(textBoxPeso.Text);
+            decimal auxcantidadEntregada = decimal.Parse(textBoxPesoEntregado.Text);
+
+            producto.CantidadEntregada = auxcantidadEntregada;
+            producto.Cantidad = auxcantidad;
+            producto.Precio = auxprecio;
+
             listProducto.Add(producto);
-            currentCompraDetalleProducto.Rows.Add(producto.DescripcionLarga, "$ " + textBoxMonto.Text, textBoxPeso.Text + " kg.");
+
+            currentCompraDetalleProducto.Rows.Add(producto.DescripcionLarga, "$ " + textBoxMonto.Text, textBoxPeso.Text + " kg.", textBoxPesoEntregado.Text + " kg.");
+
+            currentMontoCompra += producto.Precio;
+
+            ActualizarSaldoLabel(currentMontoCompra);
+
             if (!gridProductos.ColumnHeadersVisible)
                 gridProductos.ColumnHeadersVisible = true;
+        }
+
+        private bool validarProductoToGrid()
+        {
+            FormMessageBox dialog = new FormMessageBox();
+            if (lastProdSelected == null)
+            {
+                dialog.ShowErrorDialog("Se debe seleccionar un producto para continuar. ");
+                return false;
+            }
+            if ((textBoxPeso.Text.Equals("(ingrese peso)")) || (textBoxPeso.Text.Equals("")))
+            {
+                dialog.ShowErrorDialog("Se debe indicar un peso para cada producto comprado. ");
+                textBoxPeso.Focus();
+                return false;
+            }
+            if ((textBoxMonto.Text.Equals("(ingrese monto)"))|| (textBoxPeso.Text.Equals("")))
+            {
+                dialog.ShowErrorDialog("Se debe indicar un precio para cada producto comprado. ");
+                textBoxMonto.Focus();
+                return false;
+            }
+            if (textBoxPesoEntregado.Text.Equals(""))
+            {
+                dialog.ShowErrorDialog("Se debe indicar un peso entregado para cada producto comprado. ");             
+                textBoxPeso_Leave(null, null);
+                return false;
+            }
+
+            return true;        
         }
 
         private void bCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
         }
+
+        private void gridGarron_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Eliminar venta detalle de la grilla (aun no se guardo nada)
+            if (e.ColumnIndex.Equals(0))
+            {
+                EliminarFilaGarron(sender);
+            }
+        }
+
+        private void gridProductos_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Eliminar venta detalle de la grilla (aun no se guardo nada)
+            if (e.ColumnIndex.Equals(0))
+            {
+                EliminarFilaProducto(sender);
+            }
+        }
+
+        private void EliminarFilaGarron(object sender)
+        {
+            DataGridView grid = (DataGridView)sender;
+
+            int selectedrowindex = grid.SelectedCells[0].RowIndex;
+
+            currentMontoCompra -= listGarron[selectedrowindex].MontoCompra;
+
+            ActualizarSaldoLabel(currentMontoCompra);
+
+            grid.Rows.RemoveAt(selectedrowindex);
+            listGarron.RemoveAt(selectedrowindex);
+        }
+
+        private void EliminarFilaProducto(object sender)
+        {
+
+            DataGridView grid = (DataGridView)sender;
+
+            int selectedrowindex = grid.SelectedCells[0].RowIndex;
+
+            decimal currentEliminatedPrcio = listProducto[selectedrowindex].Precio;
+            currentMontoCompra = currentMontoCompra - currentEliminatedPrcio;
+
+            ActualizarSaldoLabel(currentMontoCompra);
+
+            grid.Rows.RemoveAt(selectedrowindex);
+            listProducto.RemoveAt(selectedrowindex);
+        }
+
+        void ActualizarSaldoLabel(decimal saldo)
+        {
+            lblSaldo.Text = " $ " + saldo.ToString();
+        }
+
+        private void bFinalizarCompra_Click(object sender, EventArgs e)
+        {
+            FormMessageBox dialog = new FormMessageBox();
+            if (ValidarCompra())
+            {
+                if (dialog.ShowConfirmationDialog("¿Desea confirmar la compra?"))
+                {
+                    if (ConfirmarCompra())
+                    {
+                        MyTextTimer.TStartFade("Compra confirmada. ", this.statusStrip1, this.tsslMensaje, MyTextTimer.TIME_LONG);
+                        Cargar();
+                    }
+                    else
+                    {
+                        MyTextTimer.TStartFade("No se confirmo la compra. Intente nuevamente.",this.statusStrip1, this.tsslMensaje, MyTextTimer.TIME_LONG);
+                    }
+                }
+            }
+            
+        }
+
+        private bool ConfirmarCompra()
+        {
+            // En result queda el ID de Compra si todo salio bien.
+            int result = FuncionesCompras.ConfirmarCompraTransaction(currentMontoCompra, currentPagoParcial, provSelec, listGarron, listProducto);
+            if (result.Equals(-1))
+            {
+                return false;
+            }
+
+            FormMessageBox box = new FormMessageBox();
+            if (box.ShowConfirmationDialog("Compra #"+result.ToString()+" registrada con exito.¿Desea ubicar los productos?"))
+            {
+                FormMoverProductos fmp = new FormMoverProductos(FormMoverProductos.MODO_UBICARMERCADERIACOMPRA, listProducto, listGarron);
+                fmp.ShowDialog();
+            }
+
+            return true;
+        }
+
+        private bool ValidarCompra()
+        {
+            FormMessageBox box = new FormMessageBox();
+            // 1. seleccionar alguna opcion en proveedores, si elije sin proveedor mostrar advertencia que no 
+            // se registrara en ninguna cuenta
+            if (!proveedorSeleccionado)
+            {
+                box.ShowErrorDialog("Debe seleccionar alguna opción para proveedores.");
+                return false;
+            }
+
+            // 2. que list garron o list producto tengan al menos 1 item en la grilla
+            if (listGarron.Count.Equals(0) && listProducto.Count.Equals(0))
+            {
+                box.ShowErrorDialog("Debe agregar algun Garron o Producto a la compra.");
+                return false;
+            }
+
+            if (currentMontoCompra.Equals(decimal.Zero))
+            {
+                box.ShowErrorDialog("El monto total no puede ser 0.");
+                return false;
+            }
+
+            // 2a. que saldo sea la suma de los items
+            decimal auxMonto = 0;
+            foreach ( Garron g in listGarron)
+            {
+                auxMonto += g.MontoCompra;
+            }
+            foreach (Producto p in listProducto)
+            {
+                auxMonto += p.Precio;
+            }
+
+            int res = decimal.Compare(auxMonto, currentMontoCompra);
+            if (!res.Equals(0))
+            {
+                box.ShowErrorDialog("Los precios no coinciden. Ocurrio un error.");
+                return false;
+            }
+
+            // Si no esta chequeado pago total 
+            if (!checkTotalPagado.Checked)
+            {
+                // Y el pago parcial esta vacio
+                if (textPagoParcial.Text.Equals(""))
+                {
+                    if (!box.ShowConfirmationDialog("Se selecciono pago parcial pero no se ingreso monto parcial. Si elige ACEPTAR la compra se registrara impaga."))
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        currentPagoParcial = decimal.Zero;
+                    }
+                }
+                // sino procedemos con el pago parcial
+                else
+                {
+                    // 3. Si esta chequeado que el pago es parcial, el monto parcial no puede ser mayor ni igual al saldo actual
+                    currentPagoParcial = decimal.Parse(textPagoParcial.Text);
+                    if (currentPagoParcial >= currentMontoCompra)
+                    {
+                        box.ShowErrorDialog("El pago parcial solo puede ser menor al saldo total.");
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
+
+        private void checkProveedores_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkProveedores.Checked)
+            {
+                textBoxProveedor.Text = string.Empty;
+                FormMessageBox box = new FormMessageBox();
+                box.ShowErrorDialog("Si selecciona esta opción, la compra no se registrara en ninguna cuenta.");
+                labelProveedorSeleccionado.Text = "COMPRA SIN PROVEEDOR";
+                proveedorSeleccionado = true;
+                checkTotalPagado.Checked = true;
+                checkTotalPagado_CheckedChanged(sender, e);
+                checkTotalPagado.AutoCheck = false;
+            }
+            else
+            {
+                checkTotalPagado.AutoCheck = true;
+                labelProveedorSeleccionado.Text = "(Proveedor sin seleccionar)";
+            }
+
+        }
+
+        private void textBoxDecimal_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            FuncionesGlobales.DecimalTextBox_KeyPress(sender, e);
+        }
+
+        private void checkTotalPagado_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkTotalPagado.Checked)
+            {
+                textPagoParcial.Visible = false;
+                labelPrecioPagado.Visible = false;
+            }
+            else
+            {
+                textPagoParcial.Visible = true;
+                labelPrecioPagado.Visible = true;
+            }
+        }
+
+        private void textBoxProveedor_TextChanged(object sender, EventArgs e)
+        {
+            if (textBoxProveedor.Text.Equals(string.Empty))
+            {
+                labelProveedorSeleccionado.Text = "(Proveedor sin seleccionar)";
+            }
+        }
+
+        private void textBoxPeso_Leave(object sender, EventArgs e)
+        {
+            textBoxPesoEntregado.Text = textBoxPeso.Text;
+        }    
     }
 }

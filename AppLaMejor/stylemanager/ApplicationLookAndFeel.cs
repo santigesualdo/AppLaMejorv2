@@ -11,91 +11,29 @@ public class ApplicationLookAndFeel
         c.Font = StyleManager.Instance().GetCurrentStyle().MainFont;
         c.BackColor = StyleManager.Instance().GetCurrentStyle().BackColor;
         c.ForeColor = StyleManager.Instance().GetCurrentStyle().TextColor;
+        HandleTag(c);
     }
     public static void ApplyTheme(TextBox c)
     {
         c.Font = StyleManager.Instance().GetCurrentStyle().MainFont;
         c.BackColor = StyleManager.Instance().GetCurrentStyle().BackColor;
         c.ForeColor = StyleManager.Instance().GetCurrentStyle().TextColor ;
+        HandleTag(c);
     }
+    public static void ApplyTheme(CheckBox c)
+    {
+        c.Font = StyleManager.Instance().GetCurrentStyle().MainFont;
+        c.BackColor = StyleManager.Instance().GetCurrentStyle().BackColor;
+        c.ForeColor = StyleManager.Instance().GetCurrentStyle().TextColor;
+        HandleTag(c);
+    }
+
     public static void ApplyTheme(Label c)
     {
-        Boolean bold = false;
-        Boolean big = false;
-        Boolean title = false;
-        Boolean small = false;
-        Boolean inverted = false;
-
-        Boolean saldoBien = false;
-        Boolean saldoMal = false;
-        
-        // Si se ingresa en TAG:  big small titlle rompe todo 
-        if (c.Tag != null)
-        {
-            if (c.Tag.ToString().Contains("bold")) bold = true;
-            if (c.Tag.ToString().Contains("title")) title = true;
-            if (c.Tag.ToString().Contains("big")) big = true;
-            if (c.Tag.ToString().Contains("small")) small = true;
-            if (c.Tag.ToString().Contains("inverted")) inverted = true;
-            if (c.Tag.ToString().Contains("saldobien")) saldoBien = true;
-            if (c.Tag.ToString().Contains("saldomal")) saldoMal = true;
-
-            Font fontSelected = null;
-            if (bold)
-            {
-                if (title)
-                {
-                    fontSelected = StyleManager.Instance().GetCurrentStyle().MainFontTitleBold;
-                }
-                else if (big)
-                {
-                    fontSelected = StyleManager.Instance().GetCurrentStyle().MainFontBigBold;
-                }
-                else if (small)
-                {
-                    fontSelected = StyleManager.Instance().GetCurrentStyle().MainFontSmallBold;
-                }
-            }
-            else
-            {
-                if (title)
-                {
-                    fontSelected = StyleManager.Instance().GetCurrentStyle().MainFontTitle;
-                }
-                else if (big)
-                {
-                    fontSelected = StyleManager.Instance().GetCurrentStyle().MainFontBig;
-                }
-                else if (small)
-                {
-                    fontSelected = StyleManager.Instance().GetCurrentStyle().MainFontSmall;
-                }
-            }
-            c.Font = fontSelected;
-
-            if (inverted)
-            {
-                c.BackColor = StyleManager.Instance().GetCurrentStyle().MainColor;
-            }else
-            {
-                c.BackColor = StyleManager.Instance().GetCurrentStyle().BackColor;
-            }            
-
-            if (saldoBien)
-            {
-                c.ForeColor = Color.Lime;
-            }else if (saldoMal)
-            {
-                c.ForeColor = Color.Red;
-            }
-
-            c.ForeColor = StyleManager.Instance().GetCurrentStyle().TextColor;
-        }else
-        {
-            c.Font = StyleManager.Instance().GetCurrentStyle().MainFontSmall;
-            c.BackColor = StyleManager.Instance().GetCurrentStyle().BackColor;
-            c.ForeColor = StyleManager.Instance().GetCurrentStyle().TextColor;
-        }
+        c.Font = StyleManager.Instance().GetCurrentStyle().MainFontSmall;
+        c.BackColor = StyleManager.Instance().GetCurrentStyle().BackColor;
+        c.ForeColor = StyleManager.Instance().GetCurrentStyle().TextColor;
+        HandleTag(c);
     }
     public static void ApplyTheme(ToolStripStatusLabel c)
     {
@@ -223,17 +161,22 @@ public class ApplicationLookAndFeel
         {
             c.BorderStyle = BorderStyle.FixedSingle;
         }
+        else if (c.Name.Equals("bottomPanel"))
+        {
+            c.BackColor = StyleManager.Instance().GetCurrentStyle().MainColor;
+        }
         else
-            if (c.Name.Equals("bottomPanel"))
+        {
+            c.Font = StyleManager.Instance().GetCurrentStyle().MainFont;
+            c.BackColor = StyleManager.Instance().GetCurrentStyle().BackColor;
+            c.ForeColor = StyleManager.Instance().GetCurrentStyle().TextColor;
+
+            if (c.Tag !=null && c.Tag.Equals("inverted"))
             {
-                c.BackColor = StyleManager.Instance().GetCurrentStyle().MainColor;
+                c.BackColor = StyleManager.Instance().GetCurrentStyle().TextColor;
+                c.ForeColor = StyleManager.Instance().GetCurrentStyle().BackColor;
             }
-            else
-            {
-                c.Font = StyleManager.Instance().GetCurrentStyle().MainFont;
-                c.BackColor = StyleManager.Instance().GetCurrentStyle().BackColor;
-                c.ForeColor = StyleManager.Instance().GetCurrentStyle().TextColor;
-            }
+        }
 
     }
     public static void ApplyTheme(TableLayoutPanel c)
@@ -254,6 +197,8 @@ public class ApplicationLookAndFeel
         c.FlatAppearance.BorderColor = StyleManager.Instance().GetCurrentStyle().MainColor;
         c.FlatAppearance.MouseDownBackColor = StyleManager.Instance().GetCurrentStyle().MouseDownBackColor;
         c.FlatAppearance.MouseOverBackColor = StyleManager.Instance().GetCurrentStyle().MouseOverBackColor;
+
+        HandleTag(c);
     }
     public static void ApplyTheme(ComboBox c)
     {
@@ -272,6 +217,82 @@ public class ApplicationLookAndFeel
     {
         c.BackColor = StyleManager.Instance().GetCurrentStyle().BackColor;
         c.ForeColor = StyleManager.Instance().GetCurrentStyle().TextColor;
+    }
+
+    private static void HandleTag(Control c)
+    {
+        Boolean bold = false;
+        Boolean big = false;
+        Boolean title = false;
+        Boolean small = false;
+        Boolean inverted = false;
+        Boolean saldoBien = false;
+        Boolean saldoMal = false;
+
+        // Si se ingresa en TAG:  big small titlle rompe todo 
+        if (c.Tag != null)
+        {
+            if (c.Tag.ToString().Contains("bold")) bold = true;
+            if (c.Tag.ToString().Contains("title")) title = true;
+            if (c.Tag.ToString().Contains("big")) big = true;
+            if (c.Tag.ToString().Contains("small")) small = true;
+            if (c.Tag.ToString().Contains("inverted")) inverted = true;
+            if (c.Tag.ToString().Contains("saldobien")) saldoBien = true;
+            if (c.Tag.ToString().Contains("saldomal")) saldoMal = true;
+
+            Font fontSelected = null;
+            if (bold)
+            {
+                if (title)
+                {
+                    fontSelected = StyleManager.Instance().GetCurrentStyle().MainFontTitleBold;
+                }
+                else if (big)
+                {
+                    fontSelected = StyleManager.Instance().GetCurrentStyle().MainFontBigBold;
+                }
+                else if (small)
+                {
+                    fontSelected = StyleManager.Instance().GetCurrentStyle().MainFontSmallBold;
+                }
+            }
+            else
+            {
+                if (title)
+                {
+                    fontSelected = StyleManager.Instance().GetCurrentStyle().MainFontTitle;
+                }
+                else if (big)
+                {
+                    fontSelected = StyleManager.Instance().GetCurrentStyle().MainFontBig;
+                }
+                else if (small)
+                {
+                    fontSelected = StyleManager.Instance().GetCurrentStyle().MainFontSmall;
+                }
+            }
+            c.Font = fontSelected;
+
+            if (inverted)
+            {
+                c.BackColor = StyleManager.Instance().GetCurrentStyle().MainColor;
+            }
+            else
+            {
+                c.BackColor = StyleManager.Instance().GetCurrentStyle().BackColor;
+            }
+
+            if (saldoBien)
+            {
+                c.ForeColor = Color.Lime;
+            }
+            else if (saldoMal)
+            {
+                c.ForeColor = Color.Red;
+            }
+
+            c.ForeColor = StyleManager.Instance().GetCurrentStyle().TextColor;
+        }
     }
 
     private static object GetCurrentStyle()
@@ -294,6 +315,12 @@ public class ApplicationLookAndFeel
                     break;
                 case "System.Windows.Forms.Label":
                     ApplyTheme((Label)c);
+                    control = (Control)c;
+                    if (control.Controls.Count > 0)
+                        ApplyThemeToChild((Control)c);
+                    break;
+                case "System.Windows.Forms.CheckBox":
+                    ApplyTheme((CheckBox)c);
                     control = (Control)c;
                     if (control.Controls.Count > 0)
                         ApplyThemeToChild((Control)c);
@@ -346,8 +373,6 @@ public class ApplicationLookAndFeel
             }
         }
     }
-
-
 
     public static void ApplyThemeToAll(Form f)
     {

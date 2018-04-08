@@ -65,7 +65,7 @@ namespace AppLaMejor.formularios
             catch (Exception E)
             {
                 FormMessageBox dialog = new FormMessageBox();
-                dialog.ShowErrorDialog("Ocurrio un error. Motivo: ");
+                dialog.ShowErrorDialog("Ocurrio un error. Motivo: "+E.Message);
             }
         }
 

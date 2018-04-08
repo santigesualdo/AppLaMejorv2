@@ -29,7 +29,10 @@ namespace AppLaMejor.entidades
         public string DescripcionLarga { get; set; }
 
         [DataNames("Cantidad")]
-        public double Cantidad { get; set; }
+        public decimal Cantidad { get; set; }
+
+        // Peso entregado (solo se usa para Compras)
+        public decimal CantidadEntregada { get; set; }
 
     }
 }

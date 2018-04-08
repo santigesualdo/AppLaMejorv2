@@ -35,6 +35,9 @@
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
             this.panel7 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.labelAgregar = new System.Windows.Forms.Label();
+            this.labelPorcentaje = new System.Windows.Forms.Label();
+            this.labelNuevoPrecio = new System.Windows.Forms.Label();
             this.textNuevoPrecio = new System.Windows.Forms.TextBox();
             this.radioNuevoPrecio = new System.Windows.Forms.RadioButton();
             this.textPorcen = new System.Windows.Forms.TextBox();
@@ -166,6 +169,9 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.labelAgregar);
+            this.groupBox1.Controls.Add(this.labelPorcentaje);
+            this.groupBox1.Controls.Add(this.labelNuevoPrecio);
             this.groupBox1.Controls.Add(this.textNuevoPrecio);
             this.groupBox1.Controls.Add(this.radioNuevoPrecio);
             this.groupBox1.Controls.Add(this.textPorcen);
@@ -180,6 +186,30 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Ingresar nuevo Precio";
             // 
+            // labelAgregar
+            // 
+            this.labelAgregar.AutoSize = true;
+            this.labelAgregar.Location = new System.Drawing.Point(138, 202);
+            this.labelAgregar.Name = "labelAgregar";
+            this.labelAgregar.Size = new System.Drawing.Size(0, 13);
+            this.labelAgregar.TabIndex = 14;
+            // 
+            // labelPorcentaje
+            // 
+            this.labelPorcentaje.AutoSize = true;
+            this.labelPorcentaje.Location = new System.Drawing.Point(138, 135);
+            this.labelPorcentaje.Name = "labelPorcentaje";
+            this.labelPorcentaje.Size = new System.Drawing.Size(0, 13);
+            this.labelPorcentaje.TabIndex = 13;
+            // 
+            // labelNuevoPrecio
+            // 
+            this.labelNuevoPrecio.AutoSize = true;
+            this.labelNuevoPrecio.Location = new System.Drawing.Point(138, 61);
+            this.labelNuevoPrecio.Name = "labelNuevoPrecio";
+            this.labelNuevoPrecio.Size = new System.Drawing.Size(0, 13);
+            this.labelNuevoPrecio.TabIndex = 12;
+            // 
             // textNuevoPrecio
             // 
             this.textNuevoPrecio.Location = new System.Drawing.Point(32, 58);
@@ -187,6 +217,9 @@
             this.textNuevoPrecio.ReadOnly = true;
             this.textNuevoPrecio.Size = new System.Drawing.Size(100, 20);
             this.textNuevoPrecio.TabIndex = 7;
+            this.textNuevoPrecio.Enter += new System.EventHandler(this.textNuevoPrecio_Enter);
+            this.textNuevoPrecio.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxDecimal_KeyPress);
+            this.textNuevoPrecio.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBoxPreCalculate_KeyUp);
             // 
             // radioNuevoPrecio
             // 
@@ -207,6 +240,9 @@
             this.textPorcen.ReadOnly = true;
             this.textPorcen.Size = new System.Drawing.Size(100, 20);
             this.textPorcen.TabIndex = 10;
+            this.textPorcen.Enter += new System.EventHandler(this.textPorcen_Enter);
+            this.textPorcen.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxDecimal_KeyPress);
+            this.textPorcen.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBoxPreCalculate_KeyUp);
             // 
             // radioPorcen
             // 
@@ -227,6 +263,9 @@
             this.textAumentarActual.ReadOnly = true;
             this.textAumentarActual.Size = new System.Drawing.Size(100, 20);
             this.textAumentarActual.TabIndex = 11;
+            this.textAumentarActual.Enter += new System.EventHandler(this.textAumentarActual_Enter);
+            this.textAumentarActual.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxDecimal_KeyPress);
+            this.textAumentarActual.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBoxPreCalculate_KeyUp);
             // 
             // radioAumentarActual
             // 
@@ -624,5 +663,8 @@
         private System.Windows.Forms.RadioButton radioPorcen;
         private System.Windows.Forms.TextBox textAumentarActual;
         private System.Windows.Forms.RadioButton radioAumentarActual;
+        private System.Windows.Forms.Label labelAgregar;
+        private System.Windows.Forms.Label labelPorcentaje;
+        private System.Windows.Forms.Label labelNuevoPrecio;
     }
 }

@@ -2,6 +2,7 @@
 using AppLaMejor.entidades;
 using AppLaMejor.formularios.Util;
 using AppLaMejor.stylemanager;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,60 +22,6 @@ namespace AppLaMejor.controlmanager
             DataTable result = manager.GetTableResults(ConnecionBD.Instance().Connection, query);
             DataNamesMapper<Garron> mg = new DataNamesMapper<Garron>();
             return mg.Map(result).ToList().First();
-        }
-        public static ComboBox GetComboTipoGarron(ComboBox cb, List<TipoGarron> list)
-        {
-            BindingList<TipoGarron> objects = new BindingList<TipoGarron>(list);
-            cb.DisplayMember = "Descripcion";
-            cb.DataSource = objects;
-            cb.SelectedIndex = -1;
-            return cb;
-        }
-        public static TipoGarron GetTipoGarronClicked(object sender, EventArgs e)
-        {
-            ComboBox combo = (ComboBox)sender;
-            TipoGarron tipoGarron = (TipoGarron)combo.SelectedValue;
-            return tipoGarron;
-        }
-        public static ComboBox GetComboGarron(ComboBox cb, List<Garron> list)
-        {
-            BindingList<Garron> objects = new BindingList<Garron>(list);
-            cb.DisplayMember = "Numero";
-            cb.DataSource = objects;
-            cb.SelectedIndex = -1;
-            return cb;
-        }
-        public static Garron GetGarronClicked(object sender, EventArgs e)
-        {
-            ComboBox combo = (ComboBox)sender;
-            Garron garron = (Garron)combo.SelectedValue;
-            return garron;
-        }
-        public static List<Garron> GetListGarronByEstadoAndTipo(string estado, string tipo)
-        {
-            string consulta = QueryManager.Instance().GetGarronByEstadoAndTipo(estado, tipo);
-            DataTable dataTablaGarron = QueryManager.Instance().GetTableResults(ConnecionBD.Instance().Connection, consulta);
-            DataNamesMapper<Garron> mg = new DataNamesMapper<Garron>();
-            return mg.Map(dataTablaGarron).ToList();
-        }
-        public static List<GarronParte> GetIdProductoDeposteByGarron(int idGarron)
-        {
-            string consulta = QueryManager.Instance().GetGarronProductoByGarron(idGarron.ToString());
-            DataTable dataTable = QueryManager.Instance().GetTableResults(ConnecionBD.Instance().Connection, consulta);
-            DataNamesMapper<GarronParte> mgp = new DataNamesMapper<GarronParte>();
-            List<GarronParte> list = mgp.Map(dataTable).ToList();
-            return list;
-        }
-        public static List<int> GetIdProductoDepostado(int idGarron)
-        {
-            string consulta = QueryManager.Instance().GetGarronProductoDepostadoByGarron(idGarron.ToString());
-            DataTable dataTableIds = QueryManager.Instance().GetTableResults(ConnecionBD.Instance().Connection, consulta);
-            List<int> list = new List<int>();
-            foreach (DataRow row in dataTableIds.Rows)
-            {
-                list.Add((int)row[0]);
-            }
-            return list;
         }
         public static bool InsertGarron(Garron g)
         {
@@ -98,32 +45,6 @@ namespace AppLaMejor.controlmanager
             }
             return false;
         }
-
-        public static Garron AgregarGarron(string v)
-        {
-            Garron g = new Garron();
-            g.FechaEntrada = DateTime.Now;
-            FormEntityInput dialog = new FormEntityInput(g, FormEntityInput.MODO_INSERTAR, v);
-            Boolean result = dialog.Execute(g);
-
-            if (result)
-            {
-                g = (Garron)dialog.SelectedObject;
-                // Desde este form solo se carga garron estado COMPLETO = 1
-                g.TipoEstadoGarron = TiposManager.Instance().GetTipoEstadoGarron(1);
-                /* Insert en BD */
-                if (FuncionesGarron.InsertGarron(g))
-                {
-                    return g;
-                }
-                else
-                {
-                    return null;
-                }
-
-            }
-            return null;
-        }
         public static Garron AgregarGarronSinBD(string v)
         {
             Garron g = new Garron();
@@ -137,10 +58,141 @@ namespace AppLaMejor.controlmanager
                 // Desde este form solo se carga garron estado COMPLETO = 1
                 g.TipoEstadoGarron = TiposManager.Instance().GetTipoEstadoGarron(1);
                 /* Insert en BD */
-                    return g;
+                return g;
             }
             return null;
         }
+        public static int GetNextGarronId()
+        {
+        
+            QueryManager manager = QueryManager.Instance();
+            string consulta = manager.GetNextGarronId();
+            DataTable result = manager.GetTableResults(ConnecionBD.Instance().Connection, consulta);
+            return Int32.Parse(result.Rows[0][0].ToString());
+        }
+        public static List<Garron> GetGarronByUbicacion(int idUbicacion)
+        {
+            string consulta = QueryManager.Instance().GetGarronByUbicacion(idUbicacion);
+            DataTable dataTablaGarron = QueryManager.Instance().GetTableResults(ConnecionBD.Instance().Connection, consulta);
+            DataNamesMapper<Garron> mg = new DataNamesMapper<Garron>();
+            return mg.Map(dataTablaGarron).ToList();
+        }
+        public static Ubicacion GetUbicacionByGarron(Garron garronDeposte)
+        {
+            string consulta = QueryManager.Instance().GetUbicacionByGarron(garronDeposte.Id);
+            DataTable dataTableUbicacion = QueryManager.Instance().GetTableResults(ConnecionBD.Instance().Connection, consulta);
+            DataNamesMapper<Ubicacion> mg = new DataNamesMapper<Ubicacion>();
+            return mg.Map(dataTableUbicacion).ToList().First();
+        }
+        public static bool ConfirmarDeposte(List<GarronDeposte> listDeposte, Garron garronDeposte, Ubicacion origenGarron)
+        {
+            MySqlConnection connection = ConnecionBD.Instance().Connection;
+            using (connection)
+            {
+                MySqlTransaction tran = null;
+                try
+                {
+                    if (connection.State.Equals(ConnectionState.Closed))
+                    {
+                        connection.Open();
+                    }
 
+                    tran = connection.BeginTransaction();
+
+                    QueryManager manager = QueryManager.Instance();
+
+                    // Transaccion - 
+                    // primera ejecucion 
+                    string consulta = "";
+                    MySqlCommand command = new MySqlCommand(consulta, connection, tran);
+
+                    decimal pesoTotal = 0;
+
+                    // Objetivos: 
+                    // 1 Registro de cada deposte individualmente y sumar el peso total de los productos generados.
+                    // 2 Insertar en producto ubicacion, considerando que si ya existe el producto en esa ubicacion, solo se actualiza la cantidad.
+                    // 3 Garron debe restar el peso total de lo depostado y cambiar a estado DEPOSTE PARCIAL.
+
+                    foreach (GarronDeposte gd in listDeposte)
+                    {
+                        if (gd.yaDepostado)
+                            continue;
+
+                        pesoTotal += gd.Peso;
+
+                        ProductoUbicacion pu = FuncionesProductos.GetProductoUbicacion(gd.Producto , gd.Destino.Id);
+                        // Si no existe el producto en destino, insertamos productoUbicacion.
+                        if (pu == null)
+                        {
+                            // Se inserta la nueva ubicacion en ProductoUbicacion
+                            // Creamos movimiento mercaderia solo por que InsertProductoUbicacion lo toma asi.
+                            MovimientoMercaderia m = new MovimientoMercaderia();
+                            m.destino = gd.Destino;
+                            m.peso = gd.Peso;
+                            m.producto = gd.Producto;
+
+                            consulta = manager.InsertProductoUbicacion(m);
+                            command.CommandText = consulta;
+                            if (!manager.ExecuteSQL(command))
+                            {
+                                tran.Rollback();
+                                return false;
+                            }
+                        }
+                        else
+                        // Caso contrario sumamos el peso.
+                        {
+                            decimal nuevoPeso = pu.peso + gd.Peso;
+                            consulta = manager.UpdatePesoProductoDestino(pu.Id, nuevoPeso);
+                            command.CommandText = consulta;
+                            if (!manager.ExecuteSQL(command))
+                            {
+                                tran.Rollback();
+                                return false;
+                            }
+                        }
+
+
+                        consulta = manager.InsertGarronDeposte(gd);
+                        command.CommandText = consulta;
+                        if (!manager.ExecuteSQL(command))
+                        {
+                            tran.Rollback();
+                            return false;
+                        }
+
+                    }
+
+                    consulta = manager.UpdatePesoGarron(garronDeposte.Id,  pesoTotal);
+                    command.CommandText = consulta;
+                    if (!manager.ExecuteSQL(command))
+                    {
+                        tran.Rollback();
+                        return false;
+                    }
+
+                    tran.Commit();
+                    return true;
+                }
+                catch (Exception e)
+                {
+                    FormMessageBox dialog = new FormMessageBox();
+                    dialog.ShowErrorDialog("Ocurrio un error al registrar depostes. Motivo: " + e.Message);
+                    if (tran != null)
+                    {
+                        tran.Rollback();
+                    }
+
+                    return false;
+                }
+            }
+        }
+        public static List<GarronDeposte> GetDeposteAnterior(int id)
+        {
+            string consulta = QueryManager.Instance().GetGarronDeposteAnterior(id);
+            DataTable dataTablaGarron = QueryManager.Instance().GetTableResults(ConnecionBD.Instance().Connection, consulta);
+            DataNamesMapper<GarronDeposte> mg = new DataNamesMapper<GarronDeposte>();
+            return mg.Map(dataTablaGarron).ToList();
+        }
     }
 }

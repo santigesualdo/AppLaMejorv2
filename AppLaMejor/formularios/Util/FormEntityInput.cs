@@ -60,6 +60,7 @@ namespace AppLaMejor.formularios.Util
         List<TipoGarron> listTipoGarron;
         List<TipoEstadoGarron> listTipoEstadoGarron;
         List<Banco> listBanco;
+        List<Ubicacion> listUbicacion;
 
         bool first;
 
@@ -341,7 +342,14 @@ namespace AppLaMejor.formularios.Util
                     combo.DataSource = currentTipoEstadoGarron.Descripcion;
                     break;
                 case MODO_INSERTAR:
-                    TipoEstadoGarron tgvacio = new TipoEstadoGarron();
+                    // Hardcodeamos que el estado del garron a insertar sea siempre COMPLETO.
+                    TextBox textField = new TextBox { Dock = DockStyle.Fill, AutoSize = true };
+                    textField.Text = TiposManager.Instance().GetTipoEstadoGarron(1).Descripcion;
+                    controlsTableLayoutPanel.Controls.Add(GetCampoTitulo(property.Name), 0, controlsTableLayoutPanel.RowCount += 1);
+                    controlsTableLayoutPanel.Controls.Add(textField, 1, controlsTableLayoutPanel.RowCount);
+                    textField.ReadOnly = true;
+                    return;
+                    /*TipoEstadoGarron tgvacio = new TipoEstadoGarron();
                     tgvacio.Id = 0;
                     tgvacio.Descripcion = "";
                     combo.Leave += comboRequiredLeave;
@@ -354,7 +362,7 @@ namespace AppLaMejor.formularios.Util
                     combo.DisplayMember = "Descripcion";
                     combo.DataSource = objects;
                     combo.SelectedIndex = -1;
-                    break;
+                    break;*/
                 case MODO_EDITAR:
                     currentTipoEstadoGarron = TiposManager.Instance().GetTipoEstadoGarronByIdGarron(Id);
                     listTipoEstadoGarron = TiposManager.Instance().GetTipoEstadoGarronList().OrderBy(x => x.Descripcion != currentTipoEstadoGarron.Descripcion).ToList();
@@ -460,7 +468,6 @@ namespace AppLaMejor.formularios.Util
             controlsTableLayoutPanel.Controls.Add(GetCampoTitulo(property.Name), 0, controlsTableLayoutPanel.RowCount += 1);
             controlsTableLayoutPanel.Controls.Add(combo, 1, controlsTableLayoutPanel.RowCount);
         }
-
         // Eventos para cada tipo
         private void tipoClienteComboClicked(object sender, EventArgs e)
         {
@@ -509,30 +516,9 @@ namespace AppLaMejor.formularios.Util
                 }
             }
         }
-        private void DecimalOnExit(object sender, EventArgs e)
+        private void TextBoxDecimal_KeyPress(object sender, KeyPressEventArgs e)
         {
-            decimal d;
-            string strdecimal = ((TextBox)sender).Text;
-            strdecimal.Replace(".", ",");
-
-            if (!decimal.TryParse(strdecimal, out d))
-            {
-                FormMessageBox dialog = new FormMessageBox();
-				dialog.ShowErrorDialog("Por favor ingresa un numero decimal valido.");
-            }
-            else
-            {
-                ((TextBox)sender).Text = d.ToString();
-            }
-        }
-        private void DecimalOnPoint(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == '.')
-            {
-                e.Handled = true;
-				FormMessageBox dialog = new FormMessageBox();
-				dialog.ShowErrorDialog("No se puede escribir punto, escriba coma");
-            }
+            FuncionesGlobales.DecimalTextBox_KeyPress(sender, e);
         }
         private void comboRequiredLeave(object sender, EventArgs e)
         {
@@ -571,8 +557,8 @@ namespace AppLaMejor.formularios.Util
         {
             TextBox textField = new TextBox { Dock = DockStyle.Fill, AutoSize = true };
             textField.DataBindings.Add("Text", _reflection, p);
-            /*textField.LostFocus += DecimalOnExit;
-            textField.KeyPress += DecimalOnPoint;*/
+            //textField.LostFocus += DecimalOnExit;
+            textField.KeyPress += TextBoxDecimal_KeyPress;
             if (currentModo.Equals(MODO_VER))
             {
                 textField.ReadOnly = true;

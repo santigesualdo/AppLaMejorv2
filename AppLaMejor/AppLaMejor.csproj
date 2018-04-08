@@ -20,7 +20,7 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>3.5</OldToolsVersion>
-    <PublishUrl>C:\Users\juanj\Desktop\JuanjoBranch\publish_2018_enero\</PublishUrl>
+    <PublishUrl>G:\Escritorio\app_publicada\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -30,7 +30,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>10</ApplicationRevision>
+    <ApplicationRevision>11</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -66,6 +66,13 @@
     <SignManifests>false</SignManifests>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="FlashControlV71, Version=1.0.3187.32366, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="Microsoft.ReportViewer.Common, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="MySql.Data, Version=5.2.3.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -73,9 +80,11 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -97,6 +106,8 @@
     <Compile Include="controlmanager\FuncionesPrecios.cs" />
     <Compile Include="controlmanager\FuncionesProductos.cs" />
     <Compile Include="controlmanager\FuncionesProveedores.cs" />
+    <Compile Include="controlmanager\FuncionesOperaciones.cs" />
+    <Compile Include="controlmanager\FuncionesReportes.cs" />
     <Compile Include="controlmanager\FuncionesVentas.cs" />
     <Compile Include="controlmanager\Validator.cs" />
     <Compile Include="controlmanager\VariablesGlobales.cs" />
@@ -106,10 +117,23 @@
     <Compile Include="datamanager\DataNamesMapper.cs" />
     <Compile Include="datamanager\PropertyMapHelper.cs" />
     <Compile Include="datamanager\QueryManager.cs" />
+    <Compile Include="formularios\Clientes\clienteCR.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="reports\DataSet1.cs">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="reports\DataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </Compile>
     <Compile Include="entidades\Banco.cs" />
     <Compile Include="entidades\Garron.cs" />
-    <Compile Include="entidades\GarronParte.cs" />
+    <Compile Include="entidades\GarronDeposte.cs" />
+    <Compile Include="entidades\MovimientoMercaderia.cs" />
     <Compile Include="entidades\Operacion.cs" />
+    <Compile Include="entidades\OperacionProveedor.cs" />
     <Compile Include="entidades\PrecioHistorico.cs" />
     <Compile Include="entidades\Producto.cs" />
     <Compile Include="entidades\Proveedor.cs" />
@@ -167,11 +191,29 @@
     <Compile Include="formularios\Compras\FormCargaCompras.Designer.cs">
       <DependentUpon>FormCargaCompras.cs</DependentUpon>
     </Compile>
-    <Compile Include="formularios\Garron\FormCargaGarron.cs">
+    <Compile Include="formularios\Compras\FormCompras.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="formularios\Garron\FormCargaGarron.Designer.cs">
-      <DependentUpon>FormCargaGarron.cs</DependentUpon>
+    <Compile Include="formularios\Compras\FormCompras.Designer.cs">
+      <DependentUpon>FormCompras.cs</DependentUpon>
+    </Compile>
+    <Compile Include="formularios\Compras\FormEntregaProductosPendientes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formularios\Compras\FormEntregaProductosPendientes.Designer.cs">
+      <DependentUpon>FormEntregaProductosPendientes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="formularios\Garron\FormDeposte.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formularios\Garron\FormDeposte.Designer.cs">
+      <DependentUpon>FormDeposte.cs</DependentUpon>
+    </Compile>
+    <Compile Include="formularios\Garron\FormDeposteGarron.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formularios\Garron\FormDeposteGarron.Designer.cs">
+      <DependentUpon>FormDeposteGarron.cs</DependentUpon>
     </Compile>
     <Compile Include="formularios\Garron\FormGarron.cs">
       <SubType>Form</SubType>
@@ -203,17 +245,35 @@
     <Compile Include="formularios\MovimientoCuentas\FormMovDetalle.Designer.cs">
       <DependentUpon>FormMovDetalle.cs</DependentUpon>
     </Compile>
+    <Compile Include="formularios\MovimientoCuentas\ReportMovCuentas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formularios\MovimientoCuentas\ReportMovCuentas.Designer.cs">
+      <DependentUpon>ReportMovCuentas.cs</DependentUpon>
+    </Compile>
     <Compile Include="formularios\Productos\FormHistoricoPrecios.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="formularios\Productos\FormHistoricoPrecios.designer.cs">
       <DependentUpon>FormHistoricoPrecios.cs</DependentUpon>
     </Compile>
+    <Compile Include="formularios\Productos\FormMoverProductos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formularios\Productos\FormMoverProductos.Designer.cs">
+      <DependentUpon>FormMoverProductos.cs</DependentUpon>
+    </Compile>
     <Compile Include="formularios\Productos\FormProductos.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="formularios\Productos\FormProductos.Designer.cs">
       <DependentUpon>FormProductos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="formularios\Productos\FormUbicacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formularios\Productos\FormUbicacion.Designer.cs">
+      <DependentUpon>FormUbicacion.cs</DependentUpon>
     </Compile>
     <Compile Include="formularios\Proveedores\FormProveedores.cs">
       <SubType>Form</SubType>
@@ -283,9 +343,11 @@
       <DependentUpon>FormCargaCompras.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="formularios\Garron\FormCargaGarron.resx">
-      <DependentUpon>FormCargaGarron.cs</DependentUpon>
-      <SubType>Designer</SubType>
+    <EmbeddedResource Include="formularios\Garron\FormDeposte.resx">
+      <DependentUpon>FormDeposte.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formularios\Garron\FormDeposteGarron.resx">
+      <DependentUpon>FormDeposteGarron.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="formularios\Garron\FormGarron.resx">
       <DependentUpon>FormGarron.cs</DependentUpon>
@@ -306,12 +368,21 @@
     <EmbeddedResource Include="formularios\MovimientoCuentas\FormMovDetalle.resx">
       <DependentUpon>FormMovDetalle.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="formularios\MovimientoCuentas\ReportMovCuentas.resx">
+      <DependentUpon>ReportMovCuentas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="formularios\Productos\FormHistoricoPrecios.resx">
       <DependentUpon>FormHistoricoPrecios.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formularios\Productos\FormMoverProductos.resx">
+      <DependentUpon>FormMoverProductos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="formularios\Productos\FormProductos.resx">
       <DependentUpon>FormProductos.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formularios\Productos\FormUbicacion.resx">
+      <DependentUpon>FormUbicacion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="formularios\Proveedores\FormProveedores.resx">
       <DependentUpon>FormProveedores.cs</DependentUpon>
@@ -349,6 +420,45 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="reports\crRemito.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crRemito.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="reports\crSaldoPorProveedor.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crSaldoPorProveedor.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="reports\crSaldoPorCliente.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crSaldoPorCliente.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="reports\crVentas.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crVentas.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="reports\FormModalReportes.resx">
+      <DependentUpon>FormModalReportes.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="reports\FormReportes.resx">
+      <DependentUpon>FormReportes.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="reports\DataSet1.xsc">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="reports\DataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="reports\DataSet1.xss">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="Properties\DataSources\AppLaMejor.entidades.Banco.datasource" />
+    <None Include="Properties\DataSources\AppLaMejor.entidades.Cliente.datasource" />
+    <None Include="Properties\DataSources\AppLaMejor.entidades.Cuenta.datasource" />
+    <None Include="Properties\DataSources\AppLaMejor.entidades.MovimientoCuenta.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -357,6 +467,42 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="reports\crRemito.cs">
+      <DependentUpon>crRemito.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="reports\crSaldoPorProveedor.cs">
+      <DependentUpon>crSaldoPorProveedor.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="reports\crSaldoPorCliente.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>crSaldoPorCliente.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="reports\crVentas.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>crVentas.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="reports\FormModalReportes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="reports\FormModalReportes.Designer.cs">
+      <DependentUpon>FormModalReportes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="reports\FormReportes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="reports\FormReportes.Designer.cs">
+      <DependentUpon>FormReportes.cs</DependentUpon>
     </Compile>
     <Compile Include="stylemanager\ApplicationLookAndFeel.cs" />
     <Compile Include="stylemanager\MyTextTimer.cs" />
@@ -402,7 +548,12 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

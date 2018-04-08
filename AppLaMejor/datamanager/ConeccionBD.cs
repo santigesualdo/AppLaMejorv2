@@ -7,8 +7,8 @@ namespace AppLaMejor.datamanager
      /* Clase singleton para conectar a la bd */
       public class ConnecionBD{
 
-        // TODO: leer string de coneccion desde un archivo
-        string connstring = "Server=localhost; database=u570713702_jjdev; password=dd74f695; UID=root; pooling=false;";
+        // TODO: MEJORA - leer string de coneccion desde un archivo
+        string connstring = "Server=localhost; database=bdlamejor_dev; password=dd74f695; UID=root; pooling=false;";
 
         private MySqlConnection connection = null;
         private static ConnecionBD _instance = null;

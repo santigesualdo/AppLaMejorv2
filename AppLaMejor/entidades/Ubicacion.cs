@@ -6,14 +6,15 @@ using AppLaMejor.datamanager;
 
 namespace AppLaMejor.entidades
 {
-    public class Ubicacion : BaseEntity
+    public class Ubicacion
     {
 
-        [DataNames("id_ubicacion_tipo")]
-        public TipoUbicacion TipoUbicacion { get; set; }
+        [DataNames("id")]
+        public int Id { get; set; }
 
         [DataNames("descripcion")]
         public string Descripcion { get; set; }
+
 
     }
 }

@@ -5,18 +5,17 @@ using AppLaMejor.formularios.Util;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace AppLaMejor.formularios.Productos
 {
     public partial class FormHistoricoPrecios : Form
     {
-        DataTable tableHistorico;
+        // TODO BUG el precio por porcentaje no funciona bien
+
         List<PrecioHistorico> listHistorico;
         int idProducto;
 
@@ -109,6 +108,10 @@ namespace AppLaMejor.formularios.Productos
             textAumentarActual.Text = string.Empty;
             textNuevoPrecio.Text = string.Empty;
 
+            labelNuevoPrecio.Text = string.Empty;
+            labelPorcentaje.Text = string.Empty;
+            labelAgregar.Text = string.Empty;          
+
             if (radioNuevoPrecio.Checked)
             {
                 textNuevoPrecio.ReadOnly = false;
@@ -135,6 +138,8 @@ namespace AppLaMejor.formularios.Productos
             }
         }
 
+
+
         private bool GuardarPrecioActual()
         {            
             decimal precioNuevo = GetPrecioNuevo();
@@ -147,7 +152,7 @@ namespace AppLaMejor.formularios.Productos
             }
 
             // Verificamos que el precio actual, tiene la misma fecha desde que el proximo a ingresar.
-            if (precioActual.Desde.ToString("MM/dd/yyyy").Equals(DateTime.Now.ToString("MM/dd/yyyy")))
+            if (precioActual != null && precioActual.Desde.ToString("MM/dd/yyyy").Equals(DateTime.Now.ToString("MM/dd/yyyy")))
             {
                 FormMessageBox dialog = new FormMessageBox();
                 if (!dialog.ShowConfirmationDialog("Ya cambio el precio de este producto el dia de hoy, ¿desea reemplazarlo por el precio nuevo?"))
@@ -307,33 +312,36 @@ namespace AppLaMejor.formularios.Productos
 
         private decimal GetPrecioNuevo()
         {
-            decimal result;
+            decimal result = decimal.Zero;
 
             if (radioNuevoPrecio.Checked)
             {
-                // TODO: validar ingreso de nuevo precio
-                if (decimal.TryParse(textNuevoPrecio.Text, out result ))
-                {
-                    return result;
-                }
+                return decimal.Parse(textNuevoPrecio.Text);
             }
             else if (radioPorcen.Checked)
             {
-                // TODO: validar ingreso de porcentaje, no puede ingresar cualquier fruta
-                string percentage = "1." +  textPorcen.Text.Replace(".","");
-                decimal p = decimal.Parse(percentage);
-                result = precioActual.Precio * p;
-                return result;
+                // de 1 a 100
+                result = decimal.Parse(textPorcen.Text);
+
+                if (result < decimal.Zero) return decimal.Zero;
+
+                if (textPorcen.Text.Equals("100"))
+                    result= precioActual.Precio * 2;
+                else
+                {
+                    string a = Convert.ToString(Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator);
+                    string percentage = "1" + a + textPorcen.Text.Replace(a,"");
+                    decimal p = decimal.Parse(percentage);
+                    result = precioActual.Precio * p;
+                }
             }
             else if (radioAumentarActual.Checked)
             {
-                // TODO: validar ingreso precio aumento
-                if (decimal.TryParse(textAumentarActual.Text, out result))
-                {
-                    return precioActual.Precio + result;
-                }
+                result = decimal.Parse(textAumentarActual.Text);
+                return precioActual.Precio + result;                
             }
-            return decimal.Zero;
+
+            return result; 
         }
    
         private void bAceptar_Click(object sender, EventArgs e)
@@ -367,6 +375,56 @@ namespace AppLaMejor.formularios.Productos
             {
                 Reset();
             }
+        }
+
+        private void textBoxDecimal_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            FuncionesGlobales.DecimalTextBox_KeyPress(sender, e);
+        }
+
+        private void textBoxPreCalculate_KeyUp(object sender, KeyEventArgs e)
+        {
+            TextBox box = (TextBox)sender;
+
+            if (box.Text.Equals(string.Empty)) return;
+
+            if (radioPorcen.Checked)
+            {
+                //labelPorcentaje
+                string a = Convert.ToString(Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator);
+                string percentage = "1" + a + textPorcen.Text.Replace(a, "");
+                decimal p = decimal.Parse(percentage);
+                labelPorcentaje.Text = "$"+ (precioActual.Precio* p).ToString();
+            }
+            else if (radioAumentarActual.Checked)
+            {
+                decimal agregar = decimal.Parse(textAumentarActual.Text);
+                labelAgregar.Text = "$" + (precioActual.Precio + agregar).ToString();
+            }
+        }
+
+        private void textNuevoPrecio_Enter(object sender, EventArgs e)
+        {
+            radioNuevoPrecio.Checked = true;
+            radioPorcen.Checked = false;
+            radioAumentarActual.Checked = false;
+            RadioButtonsChanged();
+        }
+
+        private void textPorcen_Enter(object sender, EventArgs e)
+        {
+            radioNuevoPrecio.Checked = false;
+            radioPorcen.Checked = true;
+            radioAumentarActual.Checked = false;
+            RadioButtonsChanged();
+        }
+
+        private void textAumentarActual_Enter(object sender, EventArgs e)
+        {
+            radioNuevoPrecio.Checked = false;
+            radioPorcen.Checked = false;
+            radioAumentarActual.Checked = true;
+            RadioButtonsChanged();
         }
     }
 }

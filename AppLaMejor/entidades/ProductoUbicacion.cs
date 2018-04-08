@@ -6,7 +6,7 @@ using AppLaMejor.datamanager;
 
 namespace AppLaMejor.entidades
 {
-    public class ProductoUbicacion 
+    public class ProductoUbicacion : BaseEntity
     {
 
         [DataNames("id_producto")]
@@ -14,6 +14,12 @@ namespace AppLaMejor.entidades
 
         [DataNames("id_ubicacion")]
         public Ubicacion Ubicacion { get; set; }
+
+        [DataNames("id_garron")]
+        public Garron garron{ get; set; }
+
+        [DataNames("peso")]
+        public decimal peso{ get; set; }
 
         [DataNames("fecha_egreso")]
         public Nullable<DateTime> Fecha_Egreso { get; set; }

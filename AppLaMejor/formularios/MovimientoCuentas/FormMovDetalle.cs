@@ -291,7 +291,7 @@ namespace AppLaMejor.formularios.Util
                             if (name.ToUpper().Equals("ID") ||
                                 name.ToUpper().Equals("USUARIO") ||
                                 name.ToUpper().Equals("FECHABAJA") ||
-                                name.ToUpper().Equals("VOB") ||
+                                name.ToUpper().Equals("ID_OPERACION") ||
                                 name.ToUpper().Equals("ID1") ||
                                 name.ToUpper().Equals("ID_CLIENTE") ||
                                 name.ToUpper().Equals("ID_MOVIMIENTO_TIPO") ||
@@ -342,7 +342,7 @@ namespace AppLaMejor.formularios.Util
                             if (name.ToUpper().Equals("ID") ||
                                 name.ToUpper().Equals("USUARIO") ||
                                 name.ToUpper().Equals("FECHABAJA") ||
-                                name.ToUpper().Equals("VOB") ||
+                                name.ToUpper().Equals("ID_OPERACION") ||
                                 name.ToUpper().Equals("ID1") ||
                                 name.ToUpper().Equals("ID_CLIENTE") ||
                                 name.ToUpper().Equals("ID_MOVIMIENTO_TIPO") ||
@@ -596,6 +596,16 @@ namespace AppLaMejor.formularios.Util
                 MovimientoCuenta movCuenta1 = new MovimientoCuenta();
                 TipoMovimiento tp = new TipoMovimiento();
                 Cuenta cuenta = new Cuenta();
+                Operacion newOperacion = new Operacion();
+                TipoOperacion to = new TipoOperacion();
+
+                to.Id = 2;
+
+                VariablesGlobales.idOperacion = FuncionesVentas.GetNextIdOperacion();
+
+                newOperacion.Id = VariablesGlobales.idOperacion;
+
+                newOperacion.tipoOperacion = to;
 
                 VariablesGlobales.FormMovCuentas_activo = true;
 
@@ -623,7 +633,7 @@ namespace AppLaMejor.formularios.Util
                     {
                         movCuenta1.TipoMovimiento = tp;
 
-                        movCuenta1.Vob = '1';
+                        movCuenta1.Operacion = newOperacion;
 
                         movCuenta1.Cuenta = cuenta;
                         Decimal montoto = Convert.ToDecimal(tbImporte.Text);
@@ -671,6 +681,9 @@ namespace AppLaMejor.formularios.Util
                 VariablesGlobales.FormMovCuentas_activo = true;
 
                 cuenta = FuncionesClientes.GetCuentaById(lastCuenta);
+                Operacion newOperacion = new Operacion();
+
+                newOperacion.Id = VariablesGlobales.idOperacion;
 
                 Proveedor prov = FuncionesProveedores.GetProveedorById(lastEntityId);
 
@@ -694,7 +707,7 @@ namespace AppLaMejor.formularios.Util
                     {
                         movCuenta1.TipoMovimiento = tp;
 
-                        movCuenta1.Vob = '1';
+                        movCuenta1.Operacion = newOperacion;
 
                         movCuenta1.Cuenta = cuenta;
                         Decimal montoto = Convert.ToDecimal(tbImporte.Text);
@@ -725,6 +738,8 @@ namespace AppLaMejor.formularios.Util
             }
 
         }
+
+       
 
         private void dgvCuentas_CellClick(object sender, DataGridViewCellEventArgs e)
         {

@@ -8,6 +8,7 @@ using System.Data;
 using MySql.Data.MySqlClient;
 using AppLaMejor.formularios.Util;
 using AppLaMejor.formularios.MovimientoCuentas;
+using AppLaMejor.formularios;
 
 namespace AppLaMejor.controlmanager
 {
@@ -53,13 +54,18 @@ namespace AppLaMejor.controlmanager
                     tran = connection.BeginTransaction();
                     QueryManager manager = QueryManager.Instance();
                     string consulta;
+                    Operacion newOperacion = new Operacion();
 
+                    VariablesGlobales.idOperacion = GetNextIdOperacion();
+                    newOperacion.Id = VariablesGlobales.idOperacion;
+                    
                     decimal montoTotal = listDetalleVentas.Sum(x => x.Monto);
                     int idVenta = GetNextIdVenta();
 
                     Venta newVenta = new Venta();
                     newVenta.MontoTotal = montoTotal;
                     newVenta.Id = idVenta;
+                    newVenta.Operacion = newOperacion;
                     consulta = manager.InsertVenta(newVenta);
 
                     // Transaccion
@@ -116,14 +122,22 @@ namespace AppLaMejor.controlmanager
 
                     decimal montoTotal = listDetalleVentas.Sum(x => x.Monto);
 
+                    Operacion newOperacion = new Operacion();
+
+                    newOperacion.Id = VariablesGlobales.idOperacion;
                     // venta
 
                     int idVenta = GetNextIdVenta();
-
+                    
                     Venta newVenta = new Venta();
                     newVenta.MontoTotal = montoTotal;
                     newVenta.Id = idVenta;
+                    newVenta.Operacion = newOperacion;
                     consultaVenta = manager.InsertVenta(newVenta);
+
+                    //genero la vista para el reporte de la ultima venta
+                    FuncionesReportes.informeVistaUltimaVenta(idVenta);
+
                     // movcuenta
 
                     movCuenta.Id = VariablesGlobales.idMovCuenta_VentaMay;
@@ -134,13 +148,13 @@ namespace AppLaMejor.controlmanager
 
                     tipoOperacion.Id = 1;
 
-                    int idOperacion = GetNextIdOperacion();
+                    VariablesGlobales.idOperacion = GetNextIdOperacion();
 
-                    Operacion newOperacion = new Operacion();
-                    newOperacion.Id = idOperacion;
+                    newOperacion = new Operacion();
+                    newOperacion.Id = VariablesGlobales.idOperacion;
                     newOperacion.cliente = cliente;
-                    newOperacion.venta = newVenta;
-                    newOperacion.movCuenta = movCuenta;
+                   // newOperacion.venta = newVenta;
+                   // newOperacion.movCuenta = movCuenta;
                     newOperacion.tipoOperacion = tipoOperacion;
                     consultaOperacion = manager.InsertOperacion(newOperacion);
 
@@ -170,31 +184,14 @@ namespace AppLaMejor.controlmanager
 
                     QueryManager.Instance().ExecuteSQL(ConnecionBD.Instance().Connection,consultaOperacion);
 
-                    /*  movCuenta1.TipoMovimiento = tp;
-
-                        movCuenta1.Vob = '1';
-
-                        movCuenta1.Cuenta = cuenta;
-                        Decimal montoto = Convert.ToDecimal(tbImporte.Text);
-                        movCuenta1.Monto = montoto;
-                        movCuenta1.Fecha = DateTime.Now.AddDays(0);
-                        movCuenta1.Cobrado = 'N';
-                        movCuenta1.idUsuario = VariablesGlobales.userIdLogueado;
-                        movCuenta.Vob + "," +
-
-                  movCuenta.Cuenta.Id + "," +
-                  movCuenta.TipoMovimiento.Id + "," +
-                  movCuenta.Monto + ", NOW(),'" +
-                  movCuenta.Cobrado + "'," +
-                  movCuenta.idUsuario
-                  */
 
                     MovimientoCuenta mcDebito = new MovimientoCuenta();
                     TipoMovimiento tp = new TipoMovimiento();
 
                     tp.Id = 1;
 
-                    mcDebito.Vob = '1';
+
+                    mcDebito.Operacion = newOperacion; //.Vob = '1';
                     mcDebito.TipoMovimiento = tp;
                     mcDebito.Cuenta = movCuenta.Cuenta;
                     mcDebito.Monto = montoTotal;

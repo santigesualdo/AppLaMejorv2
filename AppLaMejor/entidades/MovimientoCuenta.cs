@@ -8,8 +8,8 @@ namespace AppLaMejor.entidades
 {
     public class MovimientoCuenta : BaseEntity
     {        
-        [DataNames("vob")]
-        public char Vob { get; set; }
+        [DataNames("id_operacion")]
+        public Operacion Operacion { get; set; }
 
         //se deja id_cliente_cuenta para que no se rompa en el sql y para usar la misma clase en el proyecto
         [DataNames("ïd_cuenta")]
