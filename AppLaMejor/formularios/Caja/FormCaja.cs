@@ -18,6 +18,7 @@ namespace AppLaMejor.formularios
         List<VentaDetalle> listDetalleVentas;
         List<Venta> listVentas;
         DataTable currentVentasDetalle;
+        DataTable dtVentas;
         decimal currentMontoTotal;
 
         public FormCaja()
@@ -104,7 +105,7 @@ namespace AppLaMejor.formularios
 
             codigo = text;
             // Codigo de producto 6 posiciones desde posicion 1 
-            plu = codigo.Substring(2, 4);
+            plu = codigo.Substring(1, 6);
 
             // Obtenemos producto por plu
             Producto product = controlmanager.FuncionesVentas.GetProductoByCode(plu);

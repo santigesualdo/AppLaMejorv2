@@ -138,10 +138,10 @@
             // 
             this.groupNuevaVenta.Controls.Add(this.dataGridNuevaVentaDetalle);
             this.groupNuevaVenta.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupNuevaVenta.Location = new System.Drawing.Point(0, 98);
+            this.groupNuevaVenta.Location = new System.Drawing.Point(0, 100);
             this.groupNuevaVenta.Name = "groupNuevaVenta";
             this.groupNuevaVenta.Padding = new System.Windows.Forms.Padding(7);
-            this.groupNuevaVenta.Size = new System.Drawing.Size(1143, 200);
+            this.groupNuevaVenta.Size = new System.Drawing.Size(1143, 198);
             this.groupNuevaVenta.TabIndex = 12;
             this.groupNuevaVenta.TabStop = false;
             this.groupNuevaVenta.Text = "Nueva Venta";
@@ -150,7 +150,7 @@
             // 
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.DimGray;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Source Sans Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Green;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
@@ -159,7 +159,7 @@
             this.dataGridNuevaVentaDetalle.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Source Sans Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.Green;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ActiveCaptionText;
@@ -168,7 +168,7 @@
             this.dataGridNuevaVentaDetalle.ColumnHeadersHeight = 40;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Source Sans Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.MediumSeaGreen;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.DarkSlateGray;
@@ -183,7 +183,7 @@
             this.dataGridNuevaVentaDetalle.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Source Sans Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowFrame;
             dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.MediumSeaGreen;
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.DarkSlateGray;
@@ -193,7 +193,7 @@
             this.dataGridNuevaVentaDetalle.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.dataGridNuevaVentaDetalle.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.dataGridNuevaVentaDetalle.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.MediumSeaGreen;
-            this.dataGridNuevaVentaDetalle.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridNuevaVentaDetalle.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Source Sans Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridNuevaVentaDetalle.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.White;
             this.dataGridNuevaVentaDetalle.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.Green;
             this.dataGridNuevaVentaDetalle.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black;
@@ -202,7 +202,7 @@
             this.dataGridNuevaVentaDetalle.RowTemplate.ReadOnly = true;
             this.dataGridNuevaVentaDetalle.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridNuevaVentaDetalle.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridNuevaVentaDetalle.Size = new System.Drawing.Size(1129, 173);
+            this.dataGridNuevaVentaDetalle.Size = new System.Drawing.Size(1129, 171);
             this.dataGridNuevaVentaDetalle.TabIndex = 11;
             this.dataGridNuevaVentaDetalle.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridNuevaVentaDetalle_CellClick);
             // 
@@ -255,7 +255,7 @@
             this.agregarVenta.FlatAppearance.BorderSize = 2;
             this.agregarVenta.FlatAppearance.MouseDownBackColor = System.Drawing.Color.MediumSeaGreen;
             this.agregarVenta.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkSlateGray;
-            this.agregarVenta.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.agregarVenta.Font = new System.Drawing.Font("Source Sans Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.agregarVenta.Image = global::AppLaMejor.Properties.Resources.add_icon_30x30_green;
             this.agregarVenta.Location = new System.Drawing.Point(459, 3);
             this.agregarVenta.Name = "agregarVenta";
@@ -276,19 +276,19 @@
             this.panelBusqueda.Location = new System.Drawing.Point(0, 32);
             this.panelBusqueda.Name = "panelBusqueda";
             this.panelBusqueda.Padding = new System.Windows.Forms.Padding(5);
-            this.panelBusqueda.Size = new System.Drawing.Size(1143, 66);
+            this.panelBusqueda.Size = new System.Drawing.Size(1143, 68);
             this.panelBusqueda.TabIndex = 11;
             // 
             // textCodigo
             // 
             this.textCodigo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textCodigo.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.textCodigo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textCodigo.Font = new System.Drawing.Font("Source Sans Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textCodigo.Location = new System.Drawing.Point(5, 35);
             this.textCodigo.MaximumSize = new System.Drawing.Size(250, 30);
             this.textCodigo.MinimumSize = new System.Drawing.Size(200, 22);
             this.textCodigo.Name = "textCodigo";
-            this.textCodigo.Size = new System.Drawing.Size(250, 26);
+            this.textCodigo.Size = new System.Drawing.Size(250, 28);
             this.textCodigo.TabIndex = 5;
             this.textCodigo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textCodigo.TextChanged += new System.EventHandler(this.textCodigo_TextChanged);
@@ -297,7 +297,7 @@
             // label5
             // 
             this.label5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Font = new System.Drawing.Font("Source Sans Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(5, 5);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(1133, 30);
@@ -334,7 +334,7 @@
             // 
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle5.BackColor = System.Drawing.Color.DimGray;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Source Sans Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.Green;
             dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
@@ -343,7 +343,7 @@
             this.dataGridVentas.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle6.BackColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Source Sans Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle6.ForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.Green;
             dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.ActiveCaptionText;
@@ -352,7 +352,7 @@
             this.dataGridVentas.ColumnHeadersHeight = 40;
             dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle7.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Source Sans Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle7.ForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.MediumSeaGreen;
             dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.DarkSlateGray;
@@ -367,7 +367,7 @@
             this.dataGridVentas.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Source Sans Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowFrame;
             dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.MediumSeaGreen;
             dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.DarkSlateGray;
@@ -377,7 +377,7 @@
             this.dataGridVentas.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.dataGridVentas.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.dataGridVentas.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.MediumSeaGreen;
-            this.dataGridVentas.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridVentas.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Source Sans Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridVentas.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.White;
             this.dataGridVentas.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.Green;
             this.dataGridVentas.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black;
@@ -417,11 +417,11 @@
             // tsslMensaje
             // 
             this.tsslMensaje.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.tsslMensaje.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tsslMensaje.Font = new System.Drawing.Font("Lucida Sans", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tsslMensaje.ImageTransparentColor = System.Drawing.Color.Green;
             this.tsslMensaje.Margin = new System.Windows.Forms.Padding(20, 0, 0, 0);
             this.tsslMensaje.Name = "tsslMensaje";
-            this.tsslMensaje.Size = new System.Drawing.Size(83, 50);
+            this.tsslMensaje.Size = new System.Drawing.Size(85, 50);
             this.tsslMensaje.Text = "Mensajero";
             // 
             // bAceptar
@@ -433,7 +433,7 @@
             this.bAceptar.FlatAppearance.BorderSize = 2;
             this.bAceptar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.MediumSeaGreen;
             this.bAceptar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkSlateGray;
-            this.bAceptar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bAceptar.Font = new System.Drawing.Font("Source Sans Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bAceptar.Location = new System.Drawing.Point(773, 0);
             this.bAceptar.MinimumSize = new System.Drawing.Size(150, 30);
             this.bAceptar.Name = "bAceptar";
@@ -452,7 +452,7 @@
             this.bCancelar.FlatAppearance.BorderSize = 2;
             this.bCancelar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.MediumSeaGreen;
             this.bCancelar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkSlateGray;
-            this.bCancelar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bCancelar.Font = new System.Drawing.Font("Source Sans Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bCancelar.Location = new System.Drawing.Point(973, 0);
             this.bCancelar.MinimumSize = new System.Drawing.Size(150, 30);
             this.bCancelar.Name = "bCancelar";
@@ -477,7 +477,7 @@
             // 
             this.formTittleText.BackColor = System.Drawing.Color.Green;
             this.formTittleText.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.formTittleText.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.formTittleText.Font = new System.Drawing.Font("Source Sans Pro", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.formTittleText.Location = new System.Drawing.Point(0, 0);
             this.formTittleText.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
             this.formTittleText.Name = "formTittleText";
@@ -543,19 +543,19 @@
             // tbCodigo
             // 
             this.tbCodigo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tbCodigo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbCodigo.Font = new System.Drawing.Font("Source Sans Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbCodigo.Location = new System.Drawing.Point(9, 38);
             this.tbCodigo.MaximumSize = new System.Drawing.Size(180, 30);
             this.tbCodigo.MinimumSize = new System.Drawing.Size(200, 22);
             this.tbCodigo.Name = "tbCodigo";
-            this.tbCodigo.Size = new System.Drawing.Size(200, 26);
+            this.tbCodigo.Size = new System.Drawing.Size(200, 28);
             this.tbCodigo.TabIndex = 5;
             this.tbCodigo.Text = "Codigo";
             // 
             // label2
             // 
             this.label2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Source Sans Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(5, 5);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(24, 30);
@@ -577,19 +577,19 @@
             // tbCodigoDescripcion
             // 
             this.tbCodigoDescripcion.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tbCodigoDescripcion.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbCodigoDescripcion.Font = new System.Drawing.Font("Source Sans Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbCodigoDescripcion.Location = new System.Drawing.Point(9, 38);
             this.tbCodigoDescripcion.MaximumSize = new System.Drawing.Size(600, 30);
             this.tbCodigoDescripcion.MinimumSize = new System.Drawing.Size(500, 22);
             this.tbCodigoDescripcion.Name = "tbCodigoDescripcion";
-            this.tbCodigoDescripcion.Size = new System.Drawing.Size(500, 26);
+            this.tbCodigoDescripcion.Size = new System.Drawing.Size(500, 28);
             this.tbCodigoDescripcion.TabIndex = 5;
             this.tbCodigoDescripcion.Text = "Descripcion Codigo";
             // 
             // label1
             // 
             this.label1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Source Sans Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(5, 5);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(851, 30);
@@ -632,19 +632,19 @@
             // textBox1
             // 
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox1.Font = new System.Drawing.Font("Source Sans Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox1.Location = new System.Drawing.Point(9, 38);
             this.textBox1.MaximumSize = new System.Drawing.Size(180, 30);
             this.textBox1.MinimumSize = new System.Drawing.Size(200, 22);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(200, 26);
+            this.textBox1.Size = new System.Drawing.Size(200, 28);
             this.textBox1.TabIndex = 5;
             this.textBox1.Text = "Codigo";
             // 
             // label3
             // 
             this.label3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Font = new System.Drawing.Font("Source Sans Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(5, 5);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(24, 30);
@@ -666,19 +666,19 @@
             // textBox2
             // 
             this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox2.Font = new System.Drawing.Font("Source Sans Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox2.Location = new System.Drawing.Point(9, 38);
             this.textBox2.MaximumSize = new System.Drawing.Size(600, 30);
             this.textBox2.MinimumSize = new System.Drawing.Size(500, 22);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(500, 26);
+            this.textBox2.Size = new System.Drawing.Size(500, 28);
             this.textBox2.TabIndex = 5;
             this.textBox2.Text = "Descripcion Codigo";
             // 
             // label4
             // 
             this.label4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Font = new System.Drawing.Font("Source Sans Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(5, 5);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(899, 30);
@@ -692,7 +692,7 @@
             this.button1.FlatAppearance.BorderSize = 2;
             this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.MediumSeaGreen;
             this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkSlateGray;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Font = new System.Drawing.Font("Source Sans Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.Image = global::AppLaMejor.Properties.Resources.add_icon_30x30_green;
             this.button1.Location = new System.Drawing.Point(403, 3);
             this.button1.Name = "button1";

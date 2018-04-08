@@ -1,10 +1,11 @@
 ﻿using AppLaMejor.controlmanager;
 using AppLaMejor.formularios.reportes;
+using AppLaMejor.Reports;
 using System;
 using System.Windows.Forms;
 
 
-namespace AppLaMejor.reportes
+namespace AppLaMejor.Reports
 {
     public partial class FormReportes : Form
     {
@@ -19,7 +20,7 @@ namespace AppLaMejor.reportes
                 
         }
 
-        public DataSet1 DS = new DataSet1();
+        public Reports.DataSet1 DS = new Reports.DataSet1();
 
         private void crVisor_Load(object sender, EventArgs e)
         {

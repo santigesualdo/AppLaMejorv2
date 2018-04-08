@@ -117,6 +117,10 @@
     <Compile Include="datamanager\DataNamesMapper.cs" />
     <Compile Include="datamanager\PropertyMapHelper.cs" />
     <Compile Include="datamanager\QueryManager.cs" />
+    <Compile Include="formularios\Caja\FormCajaMayorista.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formularios\Caja\FormCajaMayorista.Designer.cs" />
     <Compile Include="formularios\Clientes\clienteCR.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -155,12 +159,6 @@
     <Compile Include="entidades\TipoCliente.cs" />
     <Compile Include="entidades\TipoMovimiento.cs" />
     <Compile Include="entidades\Usuario.cs" />
-    <Compile Include="formularios\Caja\FormCajaMayorista.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="formularios\Caja\FormCajaMayorista.Designer.cs">
-      <DependentUpon>FormCajaMayorista.cs</DependentUpon>
-    </Compile>
     <Compile Include="formularios\Caja\FormCaja.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -319,10 +317,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="formularios\Caja\FormCajaMayorista.resx">
-      <DependentUpon>FormCajaMayorista.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="formularios\Caja\FormCaja.resx">
       <DependentUpon>FormCaja.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -331,6 +325,7 @@
       <DependentUpon>FormAgregarManual.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="formularios\Caja\FormCajaMayorista.resx" />
     <EmbeddedResource Include="formularios\Caja\FormVentasCaja.resx">
       <DependentUpon>FormVentasCaja.cs</DependentUpon>
       <SubType>Designer</SubType>

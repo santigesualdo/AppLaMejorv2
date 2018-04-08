@@ -11,6 +11,7 @@ using MySql.Data.MySqlClient;
 using AppLaMejor.controlmanager;
 using AppLaMejor.stylemanager;
 using AppLaMejor.formularios.Util;
+using AppLaMejor.Reports;
 
 namespace AppLaMejor.formularios
 {

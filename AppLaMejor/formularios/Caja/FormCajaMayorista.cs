@@ -13,6 +13,7 @@ using AppLaMejor.datamanager;
 using AppLaMejor.formularios.MovimientoCuentas;
 using AppLaMejor.formularios.Util;
 using AppLaMejor.formularios.Caja;
+using AppLaMejor.Reports;
 
 namespace AppLaMejor.formularios
 {
@@ -218,6 +219,7 @@ namespace AppLaMejor.formularios
             {
 
                 MyTextTimer.TStartFade("Se inserto venta  correctamente.", statusStrip1, tsslMensaje, MyTextTimer.TIME_LONG);
+                
                 listDetalleVentas.Clear();
                 Cargar();
             }
@@ -268,7 +270,7 @@ namespace AppLaMejor.formularios
                 // Nueva sub-venta, ventadetalle
                 VentaDetalle vd = new VentaDetalle();
                 vd.Monto = formAgregarManual.precioFinal;
-                vd.Peso = FuncionesProductos.GetPesoProductoPrecio(vd.Monto, formAgregarManual.product);
+                vd.Peso = formAgregarManual.cantidad;  //FuncionesProductos.GetPesoProductoPrecio(vd.Monto, formAgregarManual.product);
                 vd.idUsuario = 1;
                 vd.Producto = formAgregarManual.product;
 
@@ -296,6 +298,24 @@ namespace AppLaMejor.formularios
                 textCodigo.Text = String.Empty;
             }
         }
+
+        private void btRemito_Click(object sender, EventArgs e)
+        {
+               FormReportes fmr = new FormReportes();
+               fmr.ShowDialog();
+        }
+
+        //private void InitializeComponent()
+        //{
+        //    this.SuspendLayout();
+        //    // 
+        //    // FormCajaMayorista
+        //    // 
+        //    this.ClientSize = new System.Drawing.Size(284, 261);
+        //    this.Name = "FormCajaMayorista";
+        //    this.ResumeLayout(false);
+
+        //}
 
         private void textCodigo_Enter(object sender, EventArgs e)
         {

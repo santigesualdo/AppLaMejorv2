@@ -1,4 +1,4 @@
-﻿namespace AppLaMejor.reportes
+﻿namespace AppLaMejor.Reports
 {
     partial class FormReportes
     {
@@ -34,11 +34,9 @@
             this.msReportes = new System.Windows.Forms.MenuStrip();
             this.ventasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ultimaOperaciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ultimaVentaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.remitoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.comprasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ultimaOperaciónToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.ultimaComrpaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.remitoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tlpReportes.SuspendLayout();
             this.msReportes.SuspendLayout();
             this.SuspendLayout();
@@ -100,7 +98,7 @@
             this.msReportes.Name = "msReportes";
             this.msReportes.Padding = new System.Windows.Forms.Padding(0);
             this.msReportes.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.msReportes.Size = new System.Drawing.Size(106, 71);
+            this.msReportes.Size = new System.Drawing.Size(106, 52);
             this.msReportes.TabIndex = 2;
             this.msReportes.Text = "msReportes";
             // 
@@ -108,7 +106,6 @@
             // 
             this.ventasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ultimaOperaciónToolStripMenuItem,
-            this.ultimaVentaToolStripMenuItem,
             this.remitoToolStripMenuItem});
             this.ventasToolStripMenuItem.Name = "ventasToolStripMenuItem";
             this.ventasToolStripMenuItem.Size = new System.Drawing.Size(105, 25);
@@ -117,22 +114,21 @@
             // ultimaOperaciónToolStripMenuItem
             // 
             this.ultimaOperaciónToolStripMenuItem.Name = "ultimaOperaciónToolStripMenuItem";
-            this.ultimaOperaciónToolStripMenuItem.Size = new System.Drawing.Size(169, 26);
+            this.ultimaOperaciónToolStripMenuItem.Size = new System.Drawing.Size(167, 26);
             this.ultimaOperaciónToolStripMenuItem.Text = "Operaciones";
             this.ultimaOperaciónToolStripMenuItem.Click += new System.EventHandler(this.ultimaOperaciónToolStripMenuItem_Click);
             // 
-            // ultimaVentaToolStripMenuItem
+            // remitoToolStripMenuItem
             // 
-            this.ultimaVentaToolStripMenuItem.Name = "ultimaVentaToolStripMenuItem";
-            this.ultimaVentaToolStripMenuItem.Size = new System.Drawing.Size(169, 26);
-            this.ultimaVentaToolStripMenuItem.Text = "Ultima Venta";
-            this.ultimaVentaToolStripMenuItem.Click += new System.EventHandler(this.ultimaVentaToolStripMenuItem_Click);
+            this.remitoToolStripMenuItem.Name = "remitoToolStripMenuItem";
+            this.remitoToolStripMenuItem.Size = new System.Drawing.Size(167, 26);
+            this.remitoToolStripMenuItem.Text = "Remito";
+            this.remitoToolStripMenuItem.Click += new System.EventHandler(this.remitoToolStripMenuItem_Click);
             // 
             // comprasToolStripMenuItem
             // 
             this.comprasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ultimaOperaciónToolStripMenuItem1,
-            this.ultimaComrpaToolStripMenuItem});
+            this.ultimaOperaciónToolStripMenuItem1});
             this.comprasToolStripMenuItem.Name = "comprasToolStripMenuItem";
             this.comprasToolStripMenuItem.Size = new System.Drawing.Size(105, 25);
             this.comprasToolStripMenuItem.Text = "Compras";
@@ -140,22 +136,9 @@
             // ultimaOperaciónToolStripMenuItem1
             // 
             this.ultimaOperaciónToolStripMenuItem1.Name = "ultimaOperaciónToolStripMenuItem1";
-            this.ultimaOperaciónToolStripMenuItem1.Size = new System.Drawing.Size(186, 26);
+            this.ultimaOperaciónToolStripMenuItem1.Size = new System.Drawing.Size(167, 26);
             this.ultimaOperaciónToolStripMenuItem1.Text = "Operaciones";
             this.ultimaOperaciónToolStripMenuItem1.Click += new System.EventHandler(this.ultimaOperaciónToolStripMenuItem1_Click);
-            // 
-            // ultimaComrpaToolStripMenuItem
-            // 
-            this.ultimaComrpaToolStripMenuItem.Name = "ultimaComrpaToolStripMenuItem";
-            this.ultimaComrpaToolStripMenuItem.Size = new System.Drawing.Size(186, 26);
-            this.ultimaComrpaToolStripMenuItem.Text = "Ultima Compra";
-            // 
-            // remitoToolStripMenuItem
-            // 
-            this.remitoToolStripMenuItem.Name = "remitoToolStripMenuItem";
-            this.remitoToolStripMenuItem.Size = new System.Drawing.Size(169, 26);
-            this.remitoToolStripMenuItem.Text = "Remito";
-            this.remitoToolStripMenuItem.Click += new System.EventHandler(this.remitoToolStripMenuItem_Click);
             // 
             // FormReportes
             // 
@@ -182,10 +165,8 @@
         private System.Windows.Forms.MenuStrip msReportes;
         private System.Windows.Forms.ToolStripMenuItem ventasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ultimaOperaciónToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem ultimaVentaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem comprasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ultimaOperaciónToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem ultimaComrpaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem remitoToolStripMenuItem;
     }
 }

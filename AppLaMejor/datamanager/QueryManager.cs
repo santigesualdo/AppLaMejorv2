@@ -1038,7 +1038,7 @@ namespace AppLaMejor.datamanager
             string consulta = " ALTER VIEW vistaventa AS SELECT  `v`.`id`,  `v`.`id_operacion`,  `p`.`id_codigo_barra` AS 'codigo',  `p`.`descripcion_breve` AS 'descripcion', " +
             " `vd`.`peso`,  `vd`.`monto`,  `v`.`monto_total`FROM  (((`venta` v    JOIN `ventadetalle` vd ON((`v`.`id` = `vd`.`id_venta`)))    JOIN `producto` p ON ((`vd`.`id_producto` = `p`.`id`))) " +
             "  JOIN `operacion` o ON ((`v`.`id_operacion` = `o`.`id`))) WHERE  (`v`.`id` = " + idv.ToString() + ");" +
-            " create view vistaVentaSumaTotal as " +
+            " alter view vistaVentaSumaTotal as " +
             " select vsc.id, vvs.monto_total + vsc.saldo as total " +
             " from vistaventaseleccionada vvs " +
             " inner "+

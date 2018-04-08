@@ -11,7 +11,7 @@ using AppLaMejor.controlmanager;
 using AppLaMejor.stylemanager;
 using AppLaMejor.formularios.Compras;
 using AppLaMejor.formularios.Productos;
-using AppLaMejor.reportes;
+using AppLaMejor.Reports;
 
 namespace AppLaMejor.formularios
 {
@@ -165,7 +165,7 @@ namespace AppLaMejor.formularios
         }
 		private void IniciarReportes(object sender, EventArgs e)
         {
-            FormReportes formReportes = new FormReportes();
+            Reports.FormReportes formReportes = new Reports.FormReportes();
             formReportes.ShowDialog();
 
          //   FormModalReportes fmr = new FormModalReportes();
