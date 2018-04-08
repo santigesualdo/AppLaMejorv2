@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AppLaMejor.reportes {
+namespace AppLaMejor.Reports {
     using System;
     using System.ComponentModel;
     using CrystalDecisions.Shared;
@@ -41,7 +41,7 @@ namespace AppLaMejor.reportes {
         
         public override string FullResourceName {
             get {
-                return "AppLaMejor.reportes.crSaldoPorProveedor.rpt";
+                return "AppLaMejor.Reports.crSaldoPorProveedor.rpt";
             }
             set {
                 // Do nothing

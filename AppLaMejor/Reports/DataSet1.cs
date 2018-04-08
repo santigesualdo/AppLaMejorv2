@@ -2,7 +2,7 @@
 {
 }
 
-namespace AppLaMejor.reportes
+namespace AppLaMejor.Reports
 {
 
 

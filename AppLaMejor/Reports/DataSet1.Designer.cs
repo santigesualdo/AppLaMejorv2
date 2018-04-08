@@ -10,7 +10,7 @@
 
 #pragma warning disable 1591
 
-namespace AppLaMejor.reportes {
+namespace AppLaMejor.Reports {
     
     
     /// <summary>
@@ -1671,7 +1671,7 @@ namespace AppLaMejor.reportes {
         }
     }
 }
-namespace AppLaMejor.reportes.DataSet1TableAdapters {
+namespace AppLaMejor.Reports.DataSet1TableAdapters {
     
     
     /// <summary>

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AppLaMejor.reportes {
+namespace AppLaMejor.Reports {
     using System;
     using System.ComponentModel;
     using CrystalDecisions.Shared;
@@ -16,14 +16,14 @@ namespace AppLaMejor.reportes {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class crVentas : ReportClass {
+    public class crSaldoPorCliente : ReportClass {
         
-        public crVentas() {
+        public crSaldoPorCliente() {
         }
         
         public override string ResourceName {
             get {
-                return "crVentas.rpt";
+                return "crSaldoPorCliente.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace AppLaMejor.reportes {
         
         public override string FullResourceName {
             get {
-                return "AppLaMejor.reportes.crVentas.rpt";
+                return "AppLaMejor.Reports.crSaldoPorCliente.rpt";
             }
             set {
                 // Do nothing
@@ -66,7 +66,7 @@ namespace AppLaMejor.reportes {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section GroupHeaderSection1 {
+        public CrystalDecisions.CrystalReports.Engine.Section Section3 {
             get {
                 return this.ReportDefinition.Sections[2];
             }
@@ -74,7 +74,7 @@ namespace AppLaMejor.reportes {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section3 {
+        public CrystalDecisions.CrystalReports.Engine.Section Section4 {
             get {
                 return this.ReportDefinition.Sections[3];
             }
@@ -82,33 +82,17 @@ namespace AppLaMejor.reportes {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section GroupFooterSection1 {
-            get {
-                return this.ReportDefinition.Sections[4];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section4 {
-            get {
-                return this.ReportDefinition.Sections[5];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
         public CrystalDecisions.CrystalReports.Engine.Section Section5 {
             get {
-                return this.ReportDefinition.Sections[6];
+                return this.ReportDefinition.Sections[4];
             }
         }
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedcrVentas : Component, ICachedReport {
+    public class CachedcrSaldoPorCliente : Component, ICachedReport {
         
-        public CachedcrVentas() {
+        public CachedcrSaldoPorCliente() {
         }
         
         [Browsable(false)]
@@ -145,7 +129,7 @@ namespace AppLaMejor.reportes {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            crVentas rpt = new crVentas();
+            crSaldoPorCliente rpt = new crSaldoPorCliente();
             rpt.Site = this.Site;
             return rpt;
         }

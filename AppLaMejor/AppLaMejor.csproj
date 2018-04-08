@@ -120,10 +120,10 @@
     <Compile Include="formularios\Clientes\clienteCR.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="reports\DataSet1.cs">
+    <Compile Include="Reports\DataSet1.cs">
       <DependentUpon>DataSet1.xsd</DependentUpon>
     </Compile>
-    <Compile Include="reports\DataSet1.Designer.cs">
+    <Compile Include="Reports\DataSet1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DataSet1.xsd</DependentUpon>
@@ -420,39 +420,39 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="reports\crRemito.rpt">
+    <EmbeddedResource Include="Reports\crRemito.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>crRemito.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="reports\crSaldoPorProveedor.rpt">
+    <EmbeddedResource Include="Reports\crSaldoPorProveedor.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>crSaldoPorProveedor.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="reports\crSaldoPorCliente.rpt">
+    <EmbeddedResource Include="Reports\crSaldoPorCliente.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>crSaldoPorCliente.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="reports\crVentas.rpt">
+    <EmbeddedResource Include="Reports\crVentas.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>crVentas.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="reports\FormModalReportes.resx">
+    <EmbeddedResource Include="Reports\FormModalReportes.resx">
       <DependentUpon>FormModalReportes.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="reports\FormReportes.resx">
+    <EmbeddedResource Include="Reports\FormReportes.resx">
       <DependentUpon>FormReportes.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
-    <None Include="reports\DataSet1.xsc">
+    <None Include="Reports\DataSet1.xsc">
       <DependentUpon>DataSet1.xsd</DependentUpon>
     </None>
-    <None Include="reports\DataSet1.xsd">
+    <None Include="Reports\DataSet1.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>DataSet1.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="reports\DataSet1.xss">
+    <None Include="Reports\DataSet1.xss">
       <DependentUpon>DataSet1.xsd</DependentUpon>
     </None>
     <None Include="Properties\DataSources\AppLaMejor.entidades.Banco.datasource" />
@@ -468,40 +468,40 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="reports\crRemito.cs">
+    <Compile Include="Reports\crRemito.cs">
       <DependentUpon>crRemito.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="reports\crSaldoPorProveedor.cs">
+    <Compile Include="Reports\crSaldoPorProveedor.cs">
       <DependentUpon>crSaldoPorProveedor.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="reports\crSaldoPorCliente.cs">
+    <Compile Include="Reports\crSaldoPorCliente.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>crSaldoPorCliente.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="reports\crVentas.cs">
+    <Compile Include="Reports\crVentas.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>crVentas.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="reports\FormModalReportes.cs">
+    <Compile Include="Reports\FormModalReportes.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="reports\FormModalReportes.Designer.cs">
+    <Compile Include="Reports\FormModalReportes.Designer.cs">
       <DependentUpon>FormModalReportes.cs</DependentUpon>
     </Compile>
-    <Compile Include="reports\FormReportes.cs">
+    <Compile Include="Reports\FormReportes.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="reports\FormReportes.Designer.cs">
+    <Compile Include="Reports\FormReportes.Designer.cs">
       <DependentUpon>FormReportes.cs</DependentUpon>
     </Compile>
     <Compile Include="stylemanager\ApplicationLookAndFeel.cs" />
@@ -554,6 +554,7 @@
   <ItemGroup>
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

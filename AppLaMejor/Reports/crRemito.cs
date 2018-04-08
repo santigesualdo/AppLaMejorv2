@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AppLaMejor.reportes {
+namespace AppLaMejor.Reports {
     using System;
     using System.ComponentModel;
     using CrystalDecisions.Shared;
@@ -16,14 +16,14 @@ namespace AppLaMejor.reportes {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class crSaldoPorCliente : ReportClass {
+    public class crRemito : ReportClass {
         
-        public crSaldoPorCliente() {
+        public crRemito() {
         }
         
         public override string ResourceName {
             get {
-                return "crSaldoPorCliente.rpt";
+                return "crRemito.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace AppLaMejor.reportes {
         
         public override string FullResourceName {
             get {
-                return "AppLaMejor.reportes.crSaldoPorCliente.rpt";
+                return "AppLaMejor.Reports.crRemito.rpt";
             }
             set {
                 // Do nothing
@@ -90,9 +90,9 @@ namespace AppLaMejor.reportes {
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedcrSaldoPorCliente : Component, ICachedReport {
+    public class CachedcrRemito : Component, ICachedReport {
         
-        public CachedcrSaldoPorCliente() {
+        public CachedcrRemito() {
         }
         
         [Browsable(false)]
@@ -129,7 +129,7 @@ namespace AppLaMejor.reportes {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            crSaldoPorCliente rpt = new crSaldoPorCliente();
+            crRemito rpt = new crRemito();
             rpt.Site = this.Site;
             return rpt;
         }
