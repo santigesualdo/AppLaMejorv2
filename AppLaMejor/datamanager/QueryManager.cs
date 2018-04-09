@@ -265,6 +265,10 @@ namespace AppLaMejor.datamanager
         {
             return "call borrarProveedor('" + idProveedor.ToString() + "','" + fechaBaja.ToString(VariablesGlobales.dateFormat) + "')";
         }
+        public string GetProveedoresCuentaBanco()
+        {
+            return "SELECT concat('',c.razon_social,' - CBU: ',cu.cbu, ' - Banco: ', b.descripcion, ' - idCuenta:  ', cu.id) FROM proveedor c INNER JOIN proveedorcuenta cu ON cu.id_proveedor = c.id INNER JOIN banco b ON b.id = cu.id_banco WHERE c.fecha_baja IS NULL ORDER BY c.id;";
+        }
         public string UpdateProveedor(Proveedor proveedor)
         {
             string query = "call actualizarProveedor(" +
@@ -614,6 +618,26 @@ namespace AppLaMejor.datamanager
                 movCuenta.Cobrado + "'," +
                 movCuenta.idUsuario + ");";
         }
+        public string InsertMovCuentaProveedor(MovimientoCuentaProveedor movCuentaProveedor)
+        {
+            /* persiste el movimiento de cuenta*/
+            return "INSERT INTO proveedorcuentamovimiento(" +
+                "id_operacion," +
+                "id_cuenta," +
+                "id_movimiento_tipo," +
+                "monto," +
+                "fecha," +
+                "cobrado," +
+                "usuario)" +
+                "VALUES (" +
+
+                movCuentaProveedor.Operacion.Id + "," +
+                movCuentaProveedor.Cuenta.Id + "," +
+                movCuentaProveedor.TipoMovimiento.Id + "," +
+                movCuentaProveedor.Monto + ", NOW(),'" +
+                movCuentaProveedor.Cobrado + "'," +
+                movCuentaProveedor.idUsuario + ");";
+        }
         public string GetNextMovCuentaId()
         {
             return "SELECT MAX(id)+1 as nextid from clientecuentamovimiento;";
@@ -661,6 +685,15 @@ namespace AppLaMejor.datamanager
             string consulta = "INSERT INTO operacion (id_tipo_operacion, id_cliente, fecha, usuario) VALUES (" +
                 o.tipoOperacion.Id + "," + o.cliente.Id + ", NOW()," +
 						   
+                VariablesGlobales.userIdLogueado.ToString() + ");";
+
+            return consulta;
+        }
+        public string InsertOperacion(OperacionProveedor o)
+        {
+            string consulta = "INSERT INTO operacionproveedor (id_tipo_operacion, id_proveedor, fecha, usuario) VALUES (" +
+                o.tipoOperacion.Id + "," + o.proveedor.Id + ", NOW()," +
+
                 VariablesGlobales.userIdLogueado.ToString() + ");";
 
             return consulta;
@@ -1121,17 +1154,17 @@ namespace AppLaMejor.datamanager
         /* Compras */
         public string GetNextCompraId()
         {
-            return "SELECT MAX(id)+1 as nextid from compra;";
+            return "SELECT case when MAX(id)+1 is not null then MAX(id)+1  else 1 end as nextid from compra";
         }
-        public string InsertNuevaCompra(Proveedor provSelec, decimal currentMontoCompra, decimal currentMontoPagado)
+        public string InsertNuevaCompra(Proveedor provSelec, OperacionProveedor newOperacion, decimal currentMontoCompra, decimal currentMontoPagado)
         {
             if (provSelec == null)
             {
-                return " INSERT INTO compra (id_proveedor, monto_total, monto_pagado, fecha, usuario, fecha_baja) VALUES (NULL, '" + currentMontoCompra + "','" + currentMontoPagado + "', NOW(), '" + VariablesGlobales.userIdLogueado.ToString() + "', NULL); ";
+                return " INSERT INTO compra (id_proveedor, id_operacion, monto_total, monto_pagado, fecha, usuario, fecha_baja) VALUES (NULL, NULL, '" + currentMontoCompra + "','" + currentMontoPagado + "', NOW(), '" + VariablesGlobales.userIdLogueado.ToString() + "', NULL); ";
             }
             else
             {
-                return " INSERT INTO compra (id_proveedor, monto_total, monto_pagado, fecha, usuario, fecha_baja) VALUES ('" + provSelec.Id + "', '" + currentMontoCompra + "','" + currentMontoPagado + "', NOW(), '" + VariablesGlobales.userIdLogueado.ToString() + "', NULL); ";
+                return " INSERT INTO compra (id_proveedor, id_operacion, monto_total, monto_pagado, fecha, usuario, fecha_baja) VALUES ('" + provSelec.Id + "', '"+ newOperacion.Id + "' , '" + currentMontoCompra + "','" + currentMontoPagado + "', NOW(), '" + VariablesGlobales.userIdLogueado.ToString() + "', NULL); ";
             }
 
         }

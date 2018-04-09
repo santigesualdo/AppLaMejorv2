@@ -117,6 +117,7 @@
     <Compile Include="datamanager\DataNamesMapper.cs" />
     <Compile Include="datamanager\PropertyMapHelper.cs" />
     <Compile Include="datamanager\QueryManager.cs" />
+    <Compile Include="entidades\MovimientoCuentaProveedor.cs" />
     <Compile Include="formularios\Caja\FormCajaMayorista.cs">
       <SubType>Form</SubType>
     </Compile>

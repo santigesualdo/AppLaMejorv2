@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2018-04-08 01:09:33
+Date: 2018-04-08 22:40:53
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -134,7 +134,7 @@ CREATE TABLE `clientecuentamovimiento` (
   `cobrado` char(1) NOT NULL DEFAULT 'N',
   `usuario` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of clientecuentamovimiento
@@ -181,7 +181,7 @@ CREATE TABLE `clientetipo` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of clientetipo
@@ -204,11 +204,13 @@ CREATE TABLE `compra` (
   `fecha_baja` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_prov` (`id_proveedor`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of compra
 -- ----------------------------
+INSERT INTO `compra` VALUES ('1', '1', '0', '2018-04-08 22:38:39', '2500.000', '1531.250', '1', null);
+INSERT INTO `compra` VALUES ('2', '1', '0', '2018-04-08 22:39:06', '2500.000', '1531.250', '1', null);
 
 -- ----------------------------
 -- Table structure for compradetalle
@@ -606,14 +608,13 @@ CREATE TABLE `operacionproveedor` (
   KEY `fk_pl` (`id_proveedor`),
   KEY `fk_top` (`Id_tipo_operacion`),
   CONSTRAINT `fk_top` FOREIGN KEY (`Id_tipo_operacion`) REFERENCES `operaciontipo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of operacionproveedor
 -- ----------------------------
-INSERT INTO `operacionproveedor` VALUES ('1', '1', '1', '2018-01-01 00:00:00', '1');
-INSERT INTO `operacionproveedor` VALUES ('2', '2', '1', '2018-01-01 00:00:00', '1');
-INSERT INTO `operacionproveedor` VALUES ('3', '3', '1', '2018-01-01 00:00:00', '1');
+INSERT INTO `operacionproveedor` VALUES ('4', '3', '1', '2018-04-08 22:37:58', '1');
+INSERT INTO `operacionproveedor` VALUES ('5', '3', '1', '2018-04-08 22:39:06', '1');
 
 -- ----------------------------
 -- Table structure for operaciontipo
@@ -1205,14 +1206,14 @@ CREATE TABLE `proveedorcuenta` (
 -- ----------------------------
 -- Records of proveedorcuenta
 -- ----------------------------
-INSERT INTO `proveedorcuenta` VALUES ('1', '1238238923892234', '12-1238238923892234', '1', '2017-11-12 19:53:42', '1', '1', null);
-INSERT INTO `proveedorcuenta` VALUES ('2', '1238238923892236', '12-1238238923893434', '2', '2017-11-12 19:53:39', '2', '1', null);
-INSERT INTO `proveedorcuenta` VALUES ('3', '2222', '22222', '1', '2017-11-12 19:53:29', '4', '0', null);
-INSERT INTO `proveedorcuenta` VALUES ('4', 'aaa', '12312', '6', '2017-11-12 19:53:32', '3', '0', null);
-INSERT INTO `proveedorcuenta` VALUES ('5', '52145312', '2312156432', '0', '2017-11-16 17:36:32', '1', '0', null);
-INSERT INTO `proveedorcuenta` VALUES ('6', '12313', '123123', '0', '2017-11-16 17:51:57', '1', '0', null);
-INSERT INTO `proveedorcuenta` VALUES ('7', '1234', '1234', '0', '2017-11-29 09:17:12', '1', '0', null);
-INSERT INTO `proveedorcuenta` VALUES ('8', '1234', '1234', '3', '2017-11-29 09:18:04', '1', '0', null);
+INSERT INTO `proveedorcuenta` VALUES ('1', '1238238923892234', 'EFECTIVO', '1', '2017-11-12 19:53:42', '1', '1', null);
+INSERT INTO `proveedorcuenta` VALUES ('2', '1238238923892236', 'EFECTIVO', '1', '2017-11-12 19:53:39', '2', '1', null);
+INSERT INTO `proveedorcuenta` VALUES ('3', '2222', 'EFECTIVO', '2', '2017-11-12 19:53:29', '4', '0', null);
+INSERT INTO `proveedorcuenta` VALUES ('4', 'aaa', 'EFECTIVO', '2', '2017-11-12 19:53:32', '3', '0', null);
+INSERT INTO `proveedorcuenta` VALUES ('5', '52145312', 'EFECTIVO', '3', '2017-11-16 17:36:32', '1', '0', null);
+INSERT INTO `proveedorcuenta` VALUES ('6', '12313', 'EFECTIVO', '3', '2017-11-16 17:51:57', '1', '0', null);
+INSERT INTO `proveedorcuenta` VALUES ('7', '1234', 'EFECTIVO', '4', '2017-11-29 09:17:12', '1', '0', null);
+INSERT INTO `proveedorcuenta` VALUES ('8', '1234', 'EFECTIVO', '4', '2017-11-29 09:18:04', '1', '0', null);
 
 -- ----------------------------
 -- Table structure for proveedorcuentamovimiento
@@ -1961,7 +1962,7 @@ SELECT
 cc.id,
 b.descripcion,
 cc.cbu,
-cc.nro_cuenta,
+cc.descripcion,
 cc.fecha_updated
 FROM clientecuenta cc 
 INNER JOIN banco b ON b.id = cc.id_banco
@@ -2181,7 +2182,7 @@ SELECT
 banco.descripcion, 
 cuenta.id as id_cuenta, 
 cuenta.cbu, 
-cuenta.nro_cuenta, 
+cuenta.descripcion, 
 cuenta.fecha_updated 
 FROM proveedor 
 inner join proveedorcuenta cuenta on proveedor.id = cuenta.id_proveedor
@@ -2333,7 +2334,7 @@ SELECT
 banco.descripcion, 
 c.id AS id_cuenta, 
 c.cbu, 
-c.nro_cuenta, 
+c.descripcion, 
 c.fecha_updated 
 FROM cliente
 INNER JOIN clientecuenta c ON cliente.id = c.id_cliente

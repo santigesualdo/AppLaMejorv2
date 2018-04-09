@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Linq;
-using System.Text;
 using AppLaMejor.datamanager;
 using AppLaMejor.entidades;
 
-namespace AppLaMejor.formularios.MovimientoCuentas
+namespace AppLaMejor.controlmanager
 {
     public class FuncionesMovCuentas
     {
@@ -102,6 +98,11 @@ namespace AppLaMejor.formularios.MovimientoCuentas
         public static bool insertarMovimientoProveedor(MovimientoCuenta movCuenta1)
         {
             string consulta = QueryManager.Instance().InsertMovCuentaProveedor(movCuenta1);
+            return QueryManager.Instance().ExecuteSQL(ConnecionBD.Instance().Connection, consulta);
+        }
+        public static bool insertarMovimientoProveedor(MovimientoCuentaProveedor movCuenta)
+        {
+            string consulta = QueryManager.Instance().InsertMovCuentaProveedor(movCuenta);
             return QueryManager.Instance().ExecuteSQL(ConnecionBD.Instance().Connection, consulta);
         }
     }

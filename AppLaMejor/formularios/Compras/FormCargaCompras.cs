@@ -15,6 +15,12 @@ namespace AppLaMejor.formularios.Compras
     // TODO: VALIDACION Luego de compra confirmada con exito limpiar todos los valores. 
     // TODO: MODELO Decidar como funciona el flujo de registración en la cuenta del proveedor seleccionado.
     // TODO: BUG verificacion de list precios de compradetalle con currentMontoCompra no esta funcionando
+    // TODO: MEJORA inclui
+        /*  SELECT p.id, p.razon_social, pc.cbu, b.descripcion  from proveedor p 
+            inner join proveedorcuenta pc on pc.id_proveedor = p.id
+            inner join banco b on b.id = pc.id_banco;
+         * */
+
 
     public partial class FormCargaCompras : Form
     {
@@ -26,6 +32,7 @@ namespace AppLaMejor.formularios.Compras
 
         Producto lastProdSelected = null;
         Proveedor provSelec = null;
+        int currentIdCuentaProveedor;
 
         decimal currentMontoCompra;
         decimal currentPagoParcial;
@@ -48,6 +55,7 @@ namespace AppLaMejor.formularios.Compras
             LoadLists();
 
             proveedorSeleccionado = false;
+            currentIdCuentaProveedor = 0;
         }
 
         private void LoadLists()
@@ -121,8 +129,8 @@ namespace AppLaMejor.formularios.Compras
 
         private void LoadTextBoxProveedor()
         {
-            string consulta = QueryManager.Instance().GetProveedoresData();
-            AutoCompleteStringCollection collection = QueryManager.Instance().GetAutoCompleteCollection(ConnecionBD.Instance().Connection, consulta, 1);
+            string consulta = QueryManager.Instance().GetProveedoresCuentaBanco();
+            AutoCompleteStringCollection collection = QueryManager.Instance().GetAutoCompleteCollection(ConnecionBD.Instance().Connection, consulta, 0);
             if (collection != null)
             {
                 textBoxProveedor.AutoCompleteMode = AutoCompleteMode.Suggest;
@@ -182,9 +190,12 @@ namespace AppLaMejor.formularios.Compras
             if (e.KeyCode.Equals(Keys.Return))
             {
                 string text = ((TextBox)sender).Text;
-                provSelec = FuncionesProveedores.GetProveedorByName(text);
+                currentIdCuentaProveedor = int.Parse(text.Substring(text.LastIndexOf("idCuenta:") + 9));
+                string nameProveedor = text.Substring(0, text.LastIndexOf(" - CBU"));
+                provSelec = FuncionesProveedores.GetProveedorByName(nameProveedor);
                 labelProveedorSeleccionado.Text = provSelec.RazonSocial;
                 proveedorSeleccionado = true;
+                ((TextBox)sender).SelectionLength = 0;
 
             }
         }
@@ -428,7 +439,7 @@ namespace AppLaMejor.formularios.Compras
         private bool ConfirmarCompra()
         {
             // En result queda el ID de Compra si todo salio bien.
-            int result = FuncionesCompras.ConfirmarCompraTransaction(currentMontoCompra, currentPagoParcial, provSelec, listGarron, listProducto);
+            int result = FuncionesCompras.ConfirmarCompraTransaction(currentMontoCompra, currentPagoParcial, provSelec, listGarron, listProducto, currentIdCuentaProveedor);
             if (result.Equals(-1))
             {
                 return false;
@@ -559,10 +570,7 @@ namespace AppLaMejor.formularios.Compras
 
         private void textBoxProveedor_TextChanged(object sender, EventArgs e)
         {
-            if (textBoxProveedor.Text.Equals(string.Empty))
-            {
-                labelProveedorSeleccionado.Text = "(Proveedor sin seleccionar)";
-            }
+
         }
 
         private void textBoxPeso_Leave(object sender, EventArgs e)
