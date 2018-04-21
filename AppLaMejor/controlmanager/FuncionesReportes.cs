@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Linq;
-using System.Text;
-using AppLaMejor.datamanager;
-using AppLaMejor.entidades;
+﻿using AppLaMejor.datamanager;
 
 namespace AppLaMejor.controlmanager
 {
     public class FuncionesReportes
     {
-    
+
         //REPORTES
 
         //VENTAS
@@ -41,7 +34,7 @@ namespace AppLaMejor.controlmanager
 
         public static bool informeListadoVentas(string d, string h)
         {
-            string consulta = QueryManager.Instance().ReportVistaListadoVentas(d,h);
+            string consulta = QueryManager.Instance().ReportVistaListadoVentas(d, h);
             return QueryManager.Instance().ExecuteSQL(ConnecionBD.Instance().Connection, consulta);
 
         }

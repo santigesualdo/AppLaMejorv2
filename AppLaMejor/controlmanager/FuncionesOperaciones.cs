@@ -6,9 +6,8 @@ using System.Linq;
 using System.Text;
 using AppLaMejor.datamanager;
 using AppLaMejor.entidades;
-using AppLaMejor.controlmanager;
 
-namespace AppLaMejor.formularios
+namespace AppLaMejor.controlmanager
 {
     public class FuncionesOperaciones
     {
@@ -17,8 +16,8 @@ namespace AppLaMejor.formularios
 
         //movimiento cuentas
 
-            public static Operacion operacionEnCurso(int idTipoOperacion)
-        { 
+        public static Operacion operacionEnCurso(int idTipoOperacion)
+        {
 
             Operacion newOperacion = new Operacion();
             TipoOperacion to = new TipoOperacion();
@@ -55,6 +54,27 @@ namespace AppLaMejor.formularios
         {
             DataNamesMapper<OperacionProveedor> mapper = new DataNamesMapper<OperacionProveedor>();
             return mapper.Map(table).ToList();
+        }
+        public static int GetNextIdOperacion()
+        {
+            QueryManager manager = QueryManager.Instance();
+            string consulta = manager.GetNextOperacionId();
+            DataTable result = manager.GetTableResults(ConnecionBD.Instance().Connection, consulta);
+
+            if (result.Rows[0][0].ToString().Length == 0)
+                return 1;
+            else return Int32.Parse(result.Rows[0][0].ToString());
+        }
+
+        public static int GetNextIdOperacionProveedor()
+        {
+            QueryManager manager = QueryManager.Instance();
+            string consulta = manager.GetNextOperacionProveedorId();
+            DataTable result = manager.GetTableResults(ConnecionBD.Instance().Connection, consulta);
+
+            if (result.Rows[0][0].ToString().Length == 0)
+                return 1;
+            else return Int32.Parse(result.Rows[0][0].ToString());
         }
 
     }

@@ -3,87 +3,100 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using System.Reflection;
 using AppLaMejor.entidades;
-using AppLaMejor.datamanager;
-using AppLaMejor.stylemanager;
 using AppLaMejor.controlmanager;
+using AppLaMejor.formularios.Util;
+
+// Se pueden incluir en VentaMayorista todos los productos que son de tipo VENTA MAYORISTA 
+// y se encuentran en salon de ventas. De lo contrario no se podran seleccionar.
 
 namespace AppLaMejor.formularios.Caja
 {
     public partial class FormAgregarManual : Form
     {
-        // TODO: Validar que todos los botones tengan la info que requieren cuando se les hace click.
-        public Producto product = new Producto();
+        public Producto selectedProducto;
         public decimal cantidad;
         public decimal precioFinal;
         public string codigomanual;
 
         DataTable tableProductos;
         List<Producto> listProds = new List<Producto>();
-        public FormAgregarManual()
+        public FormAgregarManual(List<VentaDetalle> listVentaDetalle)
         {
+            selectedProducto = null;
             Size actualSize = this.Size;
             this.Size = new Size(actualSize.Width, Screen.PrimaryScreen.Bounds.Height);
             InitializeComponent();
             ApplicationLookAndFeel.ApplyThemeToAll(this);
-            cargar();
-            tbCodigo.Focus();
-        }
-
-        private void ProcesarBarra(string text)
-        {
-            // Obtenemos producto por plu
-            product = controlmanager.FuncionesVentas.GetProductoByCode(text);
-
-            // Sino encuentra producto, sale
-            if (product == null)
-            {
-                MessageBox.Show("No se encontro PLU de Producto. Verificar codigo de barra.");
-                return;
-            }
-            cmbProductos.Text = product.DescripcionLarga;
-            tbCantidad.Focus();
+            cargar(listVentaDetalle);
         }
 
         private void tbCantidad_TextChanged(object sender, EventArgs e)
         {
-
-        }
-
-        private void tbCantidad_Leave(object sender, EventArgs e)
-        {
-            if (tbCantidad.Text.Length > 0)
+            if (selectedProducto != null)
             {
-                precioFinal = Convert.ToDecimal(tbCantidad.Text) * product.Precio;
-                tbPrecio.Text = precioFinal.ToString("00.00");
-                cantidad = Convert.ToDecimal(tbCantidad.Text);
-                tbPrecio.Focus();
-            }
-        }
-
-        private void tbPrecio_Leave(object sender, EventArgs e)
-        {
-            if (tbPrecio.Text.Length > 0)
-            {
-                tbPrecioFinal.Text = tbPrecio.Text;
-                precioFinal = Convert.ToDecimal(tbPrecioFinal.Text);
+                TextBox t = (TextBox)sender;
+                string cantidadStr = t.Text;
+                decimal.TryParse(cantidadStr, out cantidad);
+                tbPrecio.Text = (selectedProducto.Precio * cantidad).ToString();
             }
         }
 
         private void bAceptar_Click(object sender, EventArgs e)
         {
+            decimal precioFinalTextBox;
+            
+            if (!decimal.TryParse(tbPrecioFinal.Text, out precioFinalTextBox))
+            {
+                FormMessageBox dialog = new FormMessageBox();
+                dialog.ShowErrorDialog("El precio ingresado no es correcto.");
+                tbPrecioFinal.Focus();
+                return;
+            }
+
+            precioFinal = precioFinalTextBox;
+
             DialogResult = DialogResult.OK;
             this.Close();
         }
 
-        void cargar()
+        void cargar(List<VentaDetalle> listVentaDetalle)
         {
-            tableProductos = FuncionesProductos.fillProductos(3);
+            tableProductos = FuncionesProductos.fillProductosVentaMayoristaDeposito();
             listProds = FuncionesProductos.listProductos(tableProductos);
+
+            if (listVentaDetalle.Count > 0)
+            {
+                List<Producto> listProdRemover = new List<Producto>();
+                foreach (VentaDetalle vd in listVentaDetalle)
+                {
+                    foreach (Producto p in listProds)
+                    {
+                        if (p.Id.Equals(vd.Producto.Id))
+                        {
+                            p.Cantidad -= vd.Peso;
+                            if (p.Cantidad.Equals(0))
+                            {
+                                listProdRemover.Add(p);
+                            }
+                        }
+                    }
+                }
+
+                if (listProdRemover.Count > 0)
+                {
+                    for (int i = listProds.Count - 1; i >= 0; i--)
+                    {
+                        foreach (Producto rem in listProdRemover)
+                        {
+                            if (rem.Id.Equals(listProds[i].Id))
+                                listProds.RemoveAt(i);
+                        }
+                    }
+                }
+            }
+
             BindingList<Producto> objects = new BindingList<Producto>(listProds);
             cmbProductos.ValueMember = null;
             cmbProductos.DisplayMember = "DescripcionBreve";
@@ -101,56 +114,38 @@ namespace AppLaMejor.formularios.Caja
             ComboBox combo = (ComboBox)sender;
             if (combo.SelectedIndex != -1)
             {
-                Producto prod = (Producto)combo.SelectedValue;
-                product = prod;
-                tbPrecio.Text = prod.Precio.ToString();
+                selectedProducto = (Producto)combo.SelectedValue;
+                tbPrecio.Text = selectedProducto.Precio.ToString();
+                lCantidadMaxima.Text = "(Cantidad Maxima: " + selectedProducto.Cantidad.ToString() + ")";
                 tbCantidad.Focus();
             }
         }
 
-        private void cmbProductos_SelectedIndexChanged(object sender, EventArgs e)
+        private void tbCantidad_KeyPress_1(object sender, KeyPressEventArgs e)
         {
-           
+            if (e.KeyChar == (char)13)
+            {
+                tbPrecioFinal.Focus();
+            }
+            FuncionesGlobales.DecimalTextBox_KeyPress(sender, e);
         }
 
-        private void cmbProductos_KeyPress(object sender, KeyPressEventArgs e)
+        private void tbPrecioFinal_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
-        (e.KeyChar != '.'))
-            {
-                e.Handled = true;
-            }
-            //    // only allow one decimal point
-            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
-            {
-                e.Handled = true;
-            }
+            FuncionesGlobales.DecimalTextBox_KeyPress(sender, e);
         }
 
-        private void cmbProductos_Leave(object sender, EventArgs e)
+        private void tbCantidad_Leave(object sender, EventArgs e)
         {
-            
-        }
-
-        private void tbCantidad_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
-         (e.KeyChar != '.'))
+            TextBox text = (TextBox)sender;
+            decimal cantidad;
+            decimal.TryParse(text.Text, out cantidad);
+            if (cantidad > selectedProducto.Cantidad)
             {
-                e.Handled = true;
+                FormMessageBox dialog = new FormMessageBox();
+                dialog.ShowConfirmationDialog("La cantidad ingresada supera a la cantidad permitida.");
+                tbCantidad.Focus();
             }
-            //    // only allow one decimal point
-            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
-            {
-                e.Handled = true;
-            }
-
-            
-        }
-
-        private void tbPrecio_TextChanged(object sender, EventArgs e)
-        {
-            tbPrecioFinal.Text = tbPrecio.Text;
         }
     }
 }

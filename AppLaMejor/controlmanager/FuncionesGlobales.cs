@@ -120,5 +120,12 @@ namespace AppLaMejor.controlmanager
             DataRow dr = ((DataRowView)bm.Current).Row;
             return dr.Field<int>("id_proveedor");
         }
+
+        public static void TextBoxLeaveOnEnter_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter) {
+                SendKeys.Send("{TAB}");
+            } 
+        }
     }
 }

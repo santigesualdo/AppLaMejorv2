@@ -1,6 +1,5 @@
 ﻿using AppLaMejor.controlmanager;
 using AppLaMejor.formularios.Reports;
-using AppLaMejor.Reports;
 using System;
 using System.Windows.Forms;
 

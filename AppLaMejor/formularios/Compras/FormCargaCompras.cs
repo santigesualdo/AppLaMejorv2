@@ -11,18 +11,8 @@ using AppLaMejor.formularios.Util;
 using AppLaMejor.formularios.Productos;
 
 namespace AppLaMejor.formularios.Compras
-{
-    // TODO: VALIDACION Luego de compra confirmada con exito limpiar todos los valores. 
-    // TODO: MODELO Decidar como funciona el flujo de registración en la cuenta del proveedor seleccionado.
-    // TODO: BUG verificacion de list precios de compradetalle con currentMontoCompra no esta funcionando
-    // TODO: MEJORA inclui
-        /*  SELECT p.id, p.razon_social, pc.cbu, b.descripcion  from proveedor p 
-            inner join proveedorcuenta pc on pc.id_proveedor = p.id
-            inner join banco b on b.id = pc.id_banco;
-         * */
-
-
-    public partial class FormCargaCompras : Form
+{ 
+     public partial class FormCargaCompras : Form
     {
         List<Garron> listGarron;
         List<Producto> listProducto;
@@ -63,6 +53,7 @@ namespace AppLaMejor.formularios.Compras
             listProducto = new List<Producto>();
             listGarron = new List<Garron>();
             currentMontoCompra = decimal.Zero;
+            lblSaldo.Text = "$$";
         }
 
         private void LoadGrids()
@@ -122,9 +113,11 @@ namespace AppLaMejor.formularios.Compras
         private void LoadAutoCompleteTextBox()
         {
             LoadTextBoxProveedor();
+            textBoxProveedor.Text = "(Ingrese nombre de proveedor)";
             LoadTextBoxPlu();
+            textBoxPLU.Text = "(Ingrese PLU)";
             LoadTextBoxDescripProd();
-
+            textBoxDescrip.Text = "(Ingrese Descripcion)";
         }
 
         private void LoadTextBoxProveedor()
@@ -540,9 +533,11 @@ namespace AppLaMejor.formularios.Compras
                 checkTotalPagado.Checked = true;
                 checkTotalPagado_CheckedChanged(sender, e);
                 checkTotalPagado.AutoCheck = false;
+                textBoxPesoEntregado.ReadOnly = true;
             }
             else
             {
+                textBoxPesoEntregado.ReadOnly = false;
                 checkTotalPagado.AutoCheck = true;
                 labelProveedorSeleccionado.Text = "(Proveedor sin seleccionar)";
             }

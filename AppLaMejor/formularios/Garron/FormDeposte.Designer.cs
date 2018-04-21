@@ -67,7 +67,6 @@
             this.bottomPanel = new System.Windows.Forms.Panel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.tsslMensaje = new System.Windows.Forms.ToolStripStatusLabel();
-            this.bAceptar = new System.Windows.Forms.Button();
             this.bCancelar = new System.Windows.Forms.Button();
             this.topPanel = new System.Windows.Forms.Panel();
             this.formTittleText = new System.Windows.Forms.Label();
@@ -518,7 +517,6 @@
             // 
             this.bottomPanel.BackColor = System.Drawing.Color.Green;
             this.bottomPanel.Controls.Add(this.statusStrip1);
-            this.bottomPanel.Controls.Add(this.bAceptar);
             this.bottomPanel.Controls.Add(this.bCancelar);
             this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.bottomPanel.Location = new System.Drawing.Point(0, 679);
@@ -535,38 +533,19 @@
             this.tsslMensaje});
             this.statusStrip1.Location = new System.Drawing.Point(0, 0);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(950, 50);
+            this.statusStrip1.Size = new System.Drawing.Size(1150, 50);
             this.statusStrip1.TabIndex = 22;
             this.statusStrip1.Text = "ssMensajero";
             // 
             // tsslMensaje
             // 
             this.tsslMensaje.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.tsslMensaje.Font = new System.Drawing.Font("Lucida Sans", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tsslMensaje.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tsslMensaje.ImageTransparentColor = System.Drawing.Color.Green;
             this.tsslMensaje.Margin = new System.Windows.Forms.Padding(20, 0, 0, 0);
             this.tsslMensaje.Name = "tsslMensaje";
-            this.tsslMensaje.Size = new System.Drawing.Size(85, 50);
+            this.tsslMensaje.Size = new System.Drawing.Size(83, 50);
             this.tsslMensaje.Text = "Mensajero";
-            // 
-            // bAceptar
-            // 
-            this.bAceptar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.bAceptar.BackColor = System.Drawing.Color.Black;
-            this.bAceptar.Dock = System.Windows.Forms.DockStyle.Right;
-            this.bAceptar.FlatAppearance.BorderColor = System.Drawing.Color.Green;
-            this.bAceptar.FlatAppearance.BorderSize = 2;
-            this.bAceptar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.MediumSeaGreen;
-            this.bAceptar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkSlateGray;
-            this.bAceptar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bAceptar.Location = new System.Drawing.Point(950, 0);
-            this.bAceptar.MinimumSize = new System.Drawing.Size(150, 30);
-            this.bAceptar.Name = "bAceptar";
-            this.bAceptar.Size = new System.Drawing.Size(200, 50);
-            this.bAceptar.TabIndex = 21;
-            this.bAceptar.Text = "Aceptar";
-            this.bAceptar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.bAceptar.UseVisualStyleBackColor = false;
             // 
             // bCancelar
             // 
@@ -582,7 +561,7 @@
             this.bCancelar.Name = "bCancelar";
             this.bCancelar.Size = new System.Drawing.Size(200, 50);
             this.bCancelar.TabIndex = 20;
-            this.bCancelar.Text = "Cancelar";
+            this.bCancelar.Text = "Salir";
             this.bCancelar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.bCancelar.UseVisualStyleBackColor = false;
             // 
@@ -667,7 +646,6 @@
         private System.Windows.Forms.Panel bottomPanel;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel tsslMensaje;
-        private System.Windows.Forms.Button bAceptar;
         private System.Windows.Forms.Button bCancelar;
         private System.Windows.Forms.Panel searchPanel;
         private System.Windows.Forms.Panel searchMainPanel;

@@ -9,24 +9,11 @@ using MySql.Data.MySqlClient;
 using AppLaMejor.formularios.Util;
 using AppLaMejor.formularios.MovimientoCuentas;
 using AppLaMejor.formularios;
-using AppLaMejor.formularios.Reports;
-using AppLaMejor.Reports;
 
 namespace AppLaMejor.controlmanager
 {
     public class FuncionesVentas
     {   
-        public static string getDescripcion(string plu)
-        {       
-            string consulta = QueryManager.Instance().GetProductoFromIdCode(plu);
-            string resultado;
-
-            DataTable dtProducto = QueryManager.Instance().GetTableResults(ConnecionBD.Instance().Connection, consulta);
-            resultado = dtProducto.Rows[0][0].ToString();
-            //traigo la descripcion del producto
-            return dtProducto.Rows[0][0].ToString();            
-        }
-
         public static Producto GetProductoByCode(string plu)
         {
             QueryManager manager = QueryManager.Instance();
@@ -39,7 +26,6 @@ namespace AppLaMejor.controlmanager
             Producto product = mapper.Map(dt).ToList().First();
             return product;
         }
-
         public static bool InsertVenta(List<VentaDetalle> listDetalleVentas)
         {
             MySqlConnection connection = ConnecionBD.Instance().Connection;
@@ -58,7 +44,7 @@ namespace AppLaMejor.controlmanager
                     string consulta;
                     Operacion newOperacion = new Operacion();
 
-                    VariablesGlobales.idOperacion = GetNextIdOperacion();
+                    VariablesGlobales.idOperacion = FuncionesOperaciones.GetNextIdOperacion();
                     newOperacion.Id = VariablesGlobales.idOperacion;
                     
                     decimal montoTotal = listDetalleVentas.Sum(x => x.Monto);
@@ -86,6 +72,27 @@ namespace AppLaMejor.controlmanager
                         {
                             tran.Rollback();
                         }
+
+                        /*
+                        // Se resta la cantidad del producto vendido en tabla Producto
+                        consulta = manager.RestarCantidadProducto(v);
+                        command.CommandText = consulta;
+                        if (!manager.ExecuteSQL(command))
+                        {
+                            tran.Rollback();
+                        }
+
+                        // Se resta la cantidad del producto vendido en tabla ProductoUbicacion
+                        ProductoUbicacion pu 
+                        consulta = manager.RestarCantidadProducto(v);
+                        command.CommandText = consulta;
+                        if (!manager.ExecuteSQL(command))
+                        {
+                            tran.Rollback();
+                        }*/
+
+
+                        // TODO: Falta registrar salida de productos en tabla PRODUCTOUBICACION, que solo deberian estar en SALON DE VENTAS
                     }
 
                     tran.Commit();
@@ -104,8 +111,7 @@ namespace AppLaMejor.controlmanager
                 }
             }
         }
-
-        public static bool InsertVentaMayorista(List<VentaDetalle> listDetalleVentas, Cliente cliente, MovimientoCuenta movCuenta)
+        public static bool InsertVentaMayorista(List<VentaDetalle> listDetalleVentas, Cliente cliente, Cuenta cuenta)
         {
             MySqlConnection connection = ConnecionBD.Instance().Connection;
             using (connection)
@@ -120,113 +126,116 @@ namespace AppLaMejor.controlmanager
 
                     tran = connection.BeginTransaction();
                     QueryManager manager = QueryManager.Instance();
-                    string consultaVenta, consultaOperacion;
-
+                    string consulta = "" ;
+                    MySqlCommand command = new MySqlCommand(consulta, connection, tran);
+                    // Preparamos para registrar Venta
                     decimal montoTotal = listDetalleVentas.Sum(x => x.Monto);
-
-                    Operacion newOperacion = new Operacion();
-                    Cuenta cuenta = new Cuenta();
-                    if (VariablesGlobales.idOperacion == 0)
-                    {
-
-                        //1 pq es una venta que genera DEBE
-
-                        newOperacion = FuncionesOperaciones.operacionEnCurso(1);
-                        cuenta = FuncionesClientes.GetCuentaEfectivoByIdCliente(cliente);
-                        movCuenta.Cuenta = cuenta;
-
-                    }
-                    else
-                    {
-
-                        newOperacion.Id = VariablesGlobales.idOperacion;
-                    }
-                    // venta
-
                     int idVenta = GetNextIdVenta();
-                    
                     Venta newVenta = new Venta();
                     newVenta.MontoTotal = montoTotal;
                     newVenta.Id = idVenta;
-                    newVenta.Operacion = newOperacion;
-                    consultaVenta = manager.InsertVenta(newVenta);
 
-                    //genero la vista para el reporte de la ultima venta
-                    //revisar
-                    FuncionesReportes.informeVistaUltimaVenta(idVenta);
-
-                    // movcuenta
-
-                    movCuenta.Id = VariablesGlobales.idMovCuenta_VentaMay;
-
-                    //operacion
-
-                    TipoOperacion tipoOperacion = new TipoOperacion();
-
-                    tipoOperacion.Id = 1;
-
-                    VariablesGlobales.idOperacion = GetNextIdOperacion();
-
-                    newOperacion = new Operacion();
+                    // Preparamos la Operacion
+                    VariablesGlobales.idOperacion = FuncionesOperaciones.GetNextIdOperacion();
+                    Operacion newOperacion = new Operacion();
                     newOperacion.Id = VariablesGlobales.idOperacion;
                     newOperacion.cliente = cliente;
-                   // newOperacion.venta = newVenta;
-                   // newOperacion.movCuenta = movCuenta;
+                    TipoOperacion tipoOperacion = new TipoOperacion();
+                    tipoOperacion.Id = 1;
                     newOperacion.tipoOperacion = tipoOperacion;
-                    consultaOperacion = manager.InsertOperacion(newOperacion);
+                    // newOperacion.venta = newVenta;
+                    // newOperacion.movCuenta = movCuenta;
 
-                    
-
-                    // Transaccion
-                    MySqlCommand commandVenta = new MySqlCommand(consultaVenta, connection, tran);
-                    
-                    if (!manager.ExecuteSQL(commandVenta))
+                    // 1. Insertamos la operacion
+                    consulta = manager.InsertOperacion(newOperacion);
+                    command.CommandText = consulta;
+                    if (!manager.ExecuteSQL(command))
                     {
                         tran.Rollback();
                     }
-                    
 
+                    newVenta.Operacion = newOperacion;
+                    // 2. Se inserta la venta
+                    consulta = manager.InsertVenta(newVenta);
+                    command.CommandText = consulta;
+                    if (!manager.ExecuteSQL(command))
+                    {
+                        tran.Rollback();
+                    }
+
+                    // Generacion de vista para el reporte de la ultima venta
+                    FuncionesReportes.informeVistaUltimaVenta(idVenta);
+
+                    // 3. Se inserta el detalle de la venta.
                     foreach (VentaDetalle v in listDetalleVentas)
                     {
+                        // 3.1 Insertamos venta detalle
                         v.Venta = newVenta;
-                        consultaVenta = manager.InsertVentaDetalle(v);
-                        commandVenta.CommandText = consultaVenta;
-                        if (!manager.ExecuteSQL(commandVenta))
+                        consulta = manager.InsertVentaDetalle(v);
+                        command.CommandText = consulta;
+                        if (!manager.ExecuteSQL(command))
                         {
                             tran.Rollback();
                         }
+
+                        // 3.2 Operamos en producto ubicacion
+                        // HARDCODEADO : UBICACION DEPOSITO 4
+                        ProductoUbicacion pu = FuncionesProductos.GetProductoUbicacion(v.Producto, 4);
+                        // Sabemos que el peso de la VentaMayorista nunca puede ser mayor a la cantidad de esa ubicacion, por que esta validado
+                        decimal calculo = decimal.Subtract(pu.peso, v.Peso);
+                        if (calculo.Equals(0))
+                        {
+                            // agrego fecha_egreso y cantidad 0 al productoubicacion
+                            consulta = manager.UpdateProductoUbicacionBaja(pu.Id);
+                            command.CommandText = consulta;
+                            if (!manager.ExecuteSQL(command))
+                            {
+                                tran.Rollback();
+                                return false;
+                            }
+                        }
+                        else
+                        {
+                            // Caso contrario queda un resto de producto y se resta lo retirado
+                            consulta = manager.UpdateProductoUbicacion(pu.Id, calculo);
+                            command.CommandText = consulta;
+                            if (!manager.ExecuteSQL(command))
+                            {
+                                tran.Rollback();
+                                return false;
+                            }
+                        }
+
+                        // 3.3 Operamos en tabla Producto
+                        Producto p = FuncionesProductos.GetProducto(v.Producto.Id);
+                        decimal pesoRestanteTotal = decimal.Subtract(p.Cantidad, v.Peso);
+                        consulta = manager.UpdateCantidadProducto(p.Id, pesoRestanteTotal);
+                        command.CommandText = consulta;
+                        if (!manager.ExecuteSQL(command))
+                        {
+                            tran.Rollback();
+                            return false;
+                        }
                     }
-
-                    tran.Commit();
-
-                    QueryManager.Instance().ExecuteSQL(ConnecionBD.Instance().Connection,consultaOperacion);
-
 
                     MovimientoCuenta mcDebito = new MovimientoCuenta();
                     TipoMovimiento tp = new TipoMovimiento();
-
                     tp.Id = 1;
-
 
                     mcDebito.Operacion = newOperacion; //.Vob = '1';
                     mcDebito.TipoMovimiento = tp;
-                    mcDebito.Cuenta = movCuenta.Cuenta;
+                    mcDebito.Cuenta = cuenta;
                     mcDebito.Monto = montoTotal;
                     mcDebito.Cobrado = 'N';
-                    mcDebito.idUsuario = VariablesGlobales.userIdLogueado;
 
-                    FuncionesMovCuentas.insertarMovimiento(mcDebito);
+                    consulta = manager.InsertMovCuenta(mcDebito);
+                    command.CommandText = consulta;
+                    if (!manager.ExecuteSQL(command))
+                    {
+                        tran.Rollback();
+                    }
 
-                    //INICIO SECCION EN LA QUE SE ENVIAN LOS DATOS PARA GENERAR EL REMITO
-                        FuncionesReportes.informeVistaUltimaVenta(cliente.Id, newOperacion.Id);
-                        FuncionesReportes.informeVistaUltimaVentaPorCliente(cliente.Id);
-                        FuncionesReportes.informeVistaVentaSeleccionada(idVenta);
-                        crRemito scr = new crRemito();
-                        FormReportes fr = new FormReportes(scr);
-                        fr.ShowDialog();
-                    //FIN SECCION EN LA QUE SE ENVIAN LOS DATOS PARA GENERAR EL REMITO 
-
-
+                    tran.Commit();
                     return true;
                 }
                 catch (Exception e)
@@ -242,29 +251,13 @@ namespace AppLaMejor.controlmanager
                 }
             }
         }
-
-
         public static int GetNextIdVenta()
         {
             QueryManager manager = QueryManager.Instance();
             string consulta = manager.GetNextVentaId();
             DataTable result = manager.GetTableResults(ConnecionBD.Instance().Connection, consulta);
-            if (result.Rows[0][0].ToString().Length == 0)
-                return 1;
-            else return Int32.Parse(result.Rows[0][0].ToString());
+            return Int32.Parse(result.Rows[0][0].ToString());
         }
-
-        public static int GetNextIdOperacion()
-        {
-            QueryManager manager = QueryManager.Instance();
-            string consulta = manager.GetNextOperacionId();
-            DataTable result = manager.GetTableResults(ConnecionBD.Instance().Connection, consulta);
-
-            if (result.Rows[0][0].ToString().Length == 0)
-                return 1;
-            else return Int32.Parse(result.Rows[0][0].ToString());
-        }
-
         public static List<Venta> ObtenerVentasDelDiaList()
         {
             QueryManager manager = QueryManager.Instance();
@@ -274,14 +267,12 @@ namespace AppLaMejor.controlmanager
             List<Venta> listVentasDiarias = mv.Map(result).ToList();
             return listVentasDiarias;
         }
-
         public static DataTable GetVentas()
         {
             QueryManager manager = QueryManager.Instance();
             string consulta = manager.GetVentas();
             return manager.GetTableResults(ConnecionBD.Instance().Connection, consulta);
         }
-
         public static List<Venta> FillVentas(DataTable dataTableVentas)
         {
             DataNamesMapper<Venta> dv = new DataNamesMapper<Venta>();

@@ -24,12 +24,33 @@ namespace AppLaMejor.controlmanager
 
         public static DataTable fillProductos()
         {
-            return QueryManager.Instance().GetTableResults(ConnecionBD.Instance().Connection, QueryManager.Instance().GetProductosData());
+            return QueryManager.Instance().GetTableResults(ConnecionBD.Instance().Connection, QueryManager.Instance().GetProductoUbicacionData());
+        }
+
+        public static DataTable fillComprasProductosFaltantes()
+        {
+            return QueryManager.Instance().GetTableResults(ConnecionBD.Instance().Connection, QueryManager.Instance().GetComprasProductosFaltantes());
         }
 
         public static DataTable fillProductos(int tipoProducto)
         {
             return QueryManager.Instance().GetTableResults(ConnecionBD.Instance().Connection, QueryManager.Instance().GetProductosDataByTipo(tipoProducto));
+        }
+
+        public static DataTable fillProductosVentaMayoristaDeposito()
+        {
+            return QueryManager.Instance().GetTableResults(ConnecionBD.Instance().Connection, QueryManager.Instance().GetProductosMayoristaSalonDeposito());
+        }
+
+        internal static List<ProductoUbicacion> listProductoUbicacion(DataTable tableUbicacion)
+        {
+            DataNamesMapper<ProductoUbicacion> mapper = new DataNamesMapper<ProductoUbicacion>();
+            return mapper.Map(tableUbicacion).ToList();
+        }
+
+        public static DataTable fillProductoUbicacion()
+        {
+            return QueryManager.Instance().GetTableResults(ConnecionBD.Instance().Connection, QueryManager.Instance().GetProductoUbicacionTotal());
         }
 
         public static List<Producto> listProductos(DataTable table)

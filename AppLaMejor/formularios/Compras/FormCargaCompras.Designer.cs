@@ -255,10 +255,10 @@
             this.bAgregarProducto.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkSlateGray;
             this.bAgregarProducto.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bAgregarProducto.Image = global::AppLaMejor.Properties.Resources.add_icon_30x30_green;
-            this.bAgregarProducto.Location = new System.Drawing.Point(230, 192);
+            this.bAgregarProducto.Location = new System.Drawing.Point(230, 185);
             this.bAgregarProducto.MaximumSize = new System.Drawing.Size(320, 75);
             this.bAgregarProducto.Name = "bAgregarProducto";
-            this.bAgregarProducto.Size = new System.Drawing.Size(200, 36);
+            this.bAgregarProducto.Size = new System.Drawing.Size(200, 50);
             this.bAgregarProducto.TabIndex = 12;
             this.bAgregarProducto.Text = "Agregar Producto";
             this.bAgregarProducto.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -784,9 +784,9 @@
             // 
             this.tableProvSelecCargar.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.InsetDouble;
             this.tableProvSelecCargar.ColumnCount = 3;
-            this.tableProvSelecCargar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableProvSelecCargar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableProvSelecCargar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableProvSelecCargar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.tableProvSelecCargar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.tableProvSelecCargar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableProvSelecCargar.Controls.Add(this.bAgregar, 1, 0);
             this.tableProvSelecCargar.Controls.Add(this.panel1, 0, 0);
             this.tableProvSelecCargar.Controls.Add(this.checkProveedores, 2, 0);
@@ -808,10 +808,10 @@
             this.bAgregar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkSlateGray;
             this.bAgregar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.bAgregar.Image = global::AppLaMejor.Properties.Resources.add_icon_30x30_green;
-            this.bAgregar.Location = new System.Drawing.Point(222, 22);
+            this.bAgregar.Location = new System.Drawing.Point(283, 22);
             this.bAgregar.MaximumSize = new System.Drawing.Size(320, 75);
             this.bAgregar.Name = "bAgregar";
-            this.bAgregar.Size = new System.Drawing.Size(207, 50);
+            this.bAgregar.Size = new System.Drawing.Size(214, 50);
             this.bAgregar.TabIndex = 11;
             this.bAgregar.Text = "Agregar Nuevo Proveedor";
             this.bAgregar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -825,13 +825,13 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(6, 6);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(207, 82);
+            this.panel1.Size = new System.Drawing.Size(250, 82);
             this.panel1.TabIndex = 12;
             // 
             // textBoxProveedor
             // 
             this.textBoxProveedor.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.textBoxProveedor.Location = new System.Drawing.Point(6, 31);
+            this.textBoxProveedor.Location = new System.Drawing.Point(28, 31);
             this.textBoxProveedor.Name = "textBoxProveedor";
             this.textBoxProveedor.Size = new System.Drawing.Size(194, 20);
             this.textBoxProveedor.TabIndex = 2;
@@ -844,7 +844,7 @@
             // 
             this.checkProveedores.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.checkProveedores.AutoSize = true;
-            this.checkProveedores.Location = new System.Drawing.Point(496, 38);
+            this.checkProveedores.Location = new System.Drawing.Point(539, 38);
             this.checkProveedores.Name = "checkProveedores";
             this.checkProveedores.Size = new System.Drawing.Size(93, 17);
             this.checkProveedores.TabIndex = 13;

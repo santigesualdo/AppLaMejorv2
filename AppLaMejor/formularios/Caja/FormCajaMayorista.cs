@@ -3,19 +3,14 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using AppLaMejor.entidades;
 using AppLaMejor.controlmanager;
 using AppLaMejor.stylemanager;
-using AppLaMejor.datamanager;
-using AppLaMejor.formularios.MovimientoCuentas;
-using AppLaMejor.formularios.Util;
-using AppLaMejor.formularios.Caja;
 using AppLaMejor.Reports;
+using AppLaMejor.formularios.Util;
 
-namespace AppLaMejor.formularios
+namespace AppLaMejor.formularios.Caja
 {
     public partial class FormCajaMayorista : Form
     {
@@ -23,19 +18,45 @@ namespace AppLaMejor.formularios
         List<Venta> listVentas;
         List<Cliente> listClients;
         DataTable currentVentasDetalle, tableClientes;
-        //DataTable dtVentas;
 
-        Cliente miCliente = new Cliente();
-        MovimientoCuenta miMovCuenta = new MovimientoCuenta();
-        Cuenta miCuenta = new Cuenta();
+        Cuenta cuentaSelected;
+        Cliente clienteSelected;
 
         decimal currentMontoTotal;
+        private List<GarronDeposte> listDeposte;
 
         public FormCajaMayorista()
         {
             InitializeComponent();
             Cargar();
             ApplicationLookAndFeel.ApplyThemeToAll(this);
+        }
+
+        public FormCajaMayorista(List<GarronDeposte> listDeposte)
+        {
+            InitializeComponent();
+            Cargar();
+            ApplicationLookAndFeel.ApplyThemeToAll(this);
+
+            this.listDeposte = listDeposte;
+
+            foreach(GarronDeposte gd in listDeposte)
+            {
+                if (!gd.yaDepostado)
+                {
+                    VentaDetalle vd = new VentaDetalle();
+                    vd.Monto = gd.Precio;
+                    vd.Peso = gd.Peso;
+                    vd.Producto = gd.Producto;
+
+                    listDetalleVentas.Add(vd);
+
+                    currentVentasDetalle.Rows.Add(vd.Producto.DescripcionLarga, "$ " + vd.Monto, vd.Peso.ToString() + " kg.");
+                    currentMontoTotal += vd.Monto;
+
+                    labelSubTotal.Text = " TOTAL : $ " + currentMontoTotal.ToString();
+                }
+            }
         }
 
         private void Cargar()
@@ -53,6 +74,8 @@ namespace AppLaMejor.formularios
             dataGridNuevaVentaDetalle.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridNuevaVentaDetalle.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
+            tableDatos.CellBorderStyle = TableLayoutPanelCellBorderStyle.Outset;
+
             
 
             tbCodigo.Focus();
@@ -65,8 +88,7 @@ namespace AppLaMejor.formularios
 
             // cargar los clientes en el combobox
 
-            tableClientes = FuncionesClientes.fillClientes();
-            listClients = FuncionesClientes.listClientes(tableClientes);
+            listClients = FuncionesClientes.GetClientesMayoristasConCuenta();
 
             BindingList<Cliente> objects = new BindingList<Cliente>(listClients);
 
@@ -122,54 +144,6 @@ namespace AppLaMejor.formularios
             this.Close();
         }
 
-        private void ProcesarBarra(string text)
-        {
-            string codigo;
-            string entero;
-            string decimales;
-            string plu;
-
-            codigo = text;
-            // Codigo de producto 6 posiciones desde posicion 1 
-            plu = codigo.Substring(1, 6);
-
-            // Obtenemos producto por plu
-            Producto product = controlmanager.FuncionesVentas.GetProductoByCode(plu);
-
-            // Sino encuentra producto, sale
-            if (product == null)
-            {
-                MyTextTimer.TStartFade("No se encontro PLU de Producto. Verificar codigo de barra.", statusStrip1, tsslMensaje, MyTextTimer.TIME_SHORT);
-                return;
-            }
-
-            // Monto entero 3 posiciones desde posicion 7
-            entero = codigo.Substring(7, 3);
-            // Monto entero 3 posiciones desde posicion 10
-            decimales = codigo.Substring(10, 3);
-            // Monto concatenado en string y operatoria para obtener decimal de 3 posiciones
-            string monto = entero + decimales;
-            int imonto = Int32.Parse(monto);
-            decimal montoTicket = (decimal)imonto / 1000;
-
-            // Nueva sub-venta, ventadetalle
-            VentaDetalle vd = new VentaDetalle();
-            vd.Monto = montoTicket;
-            vd.Peso = FuncionesProductos.GetPesoProductoPrecio(montoTicket, product);
-            vd.idUsuario = 1;
-            vd.Producto = product;
-
-            // Agregamos a la lista y mostramos en grid
-            listDetalleVentas.Add(vd);
-
-            currentVentasDetalle.Rows.Add(vd.Producto.DescripcionLarga, "$ " + vd.Monto , vd.Peso.ToString() + " kg.");
-
-            currentMontoTotal += vd.Monto;
-
-            labelSubTotal.Text = " TOTAL : $ " + currentMontoTotal.ToString();
-
-        }
-
         private static DataTable GetTable()
         {
             // Here we create a DataTable with four columns.
@@ -208,14 +182,31 @@ namespace AppLaMejor.formularios
         private void agregarVenta_Click(object sender, EventArgs e)
         {
 
+            if (clienteSelected == null)
+            {
+                FormMessageBox dialog = new FormMessageBox();
+                dialog.ShowErrorDialog("Debe seleccionar un cliente mayorista para la operacion.");
+                return;
+            }
+            else
+            {
+                List<Cuenta> cuentasCliente = FuncionesClientes.GetCuentaEfectivoCliente(clienteSelected.Id);
+                foreach(Cuenta c in cuentasCliente)
+                {
+                    if (c.Descripcion.Equals("EFECTIVO"))
+                    {
+                        cuentaSelected = c;
+                        break;
+                    }
+                }
+            }
+
             if (listDetalleVentas.Count.Equals(0)) {
-                MyTextTimer.TStartFade("No se encontro PLU de Producto. Verificar codigo de barra.", statusStrip1, tsslMensaje, MyTextTimer.TIME_LONG);
+                MyTextTimer.TStartFade("No se inserto detalle de la venta.", statusStrip1, tsslMensaje, MyTextTimer.TIME_LONG);
                 return;
             }
 
-            miMovCuenta.Cuenta = VariablesGlobales.Cuenta_VentaMay;
-
-            if (FuncionesVentas.InsertVentaMayorista(listDetalleVentas, miCliente, miMovCuenta))
+            if (FuncionesVentas.InsertVentaMayorista(listDetalleVentas, clienteSelected, cuentaSelected))
             {
 
                 MyTextTimer.TStartFade("Se inserto venta  correctamente.", statusStrip1, tsslMensaje, MyTextTimer.TIME_LONG);
@@ -231,113 +222,38 @@ namespace AppLaMejor.formularios
 
         private void cmbCliente_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            ComboBox combo = (ComboBox)sender;
-            if (combo.SelectedIndex != -1)
-            {
-                miCliente = (Cliente)combo.SelectedValue;
-                //if (nuevaCuenta(client) != null)
-                //{
-                //    CargarDataGrid();
-                //}
-            }
-        }
-
-        private void cmbCliente_SelectedIndexChanged(object sender, EventArgs e)
-        {
             lblCliente.Text = "Cliente: " + cmbCliente.Text;
-           // miCliente.Id = (int)cmbCliente.SelectedValue;
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            /* Form Entity Input */
-            FormMovDetalle dialog = new FormMovDetalle(FormMovDetalle.MODO_AGREGAR, miCliente, currentMontoTotal.ToString());
-            dialog.SetTitulo("Cliente: " + miCliente.RazonSocial);
-            Boolean result = dialog.Execute(miCliente.Id);
+            ComboBox combo = (ComboBox)sender;
+            clienteSelected = (Cliente)combo.SelectedItem;
         }
 
         private void btManual_Click(object sender, EventArgs e)
         {
-            FormAgregarManual formAgregarManual = new FormAgregarManual();
+            FormAgregarManual formAgregarManual = new FormAgregarManual(listDetalleVentas);
+
             if (formAgregarManual.ShowDialog() == DialogResult.OK)
             {
-                //textCodigo.Text = formAgregarManual.codigomanual;
-
-                //string monto = entero + decimales;
-                //int imonto = Int32.Parse(monto);
-                //decimal montoTicket = (decimal)imonto / 1000;
-
                 // Nueva sub-venta, ventadetalle
                 VentaDetalle vd = new VentaDetalle();
                 vd.Monto = formAgregarManual.precioFinal;
-                vd.Peso = formAgregarManual.cantidad;  //FuncionesProductos.GetPesoProductoPrecio(vd.Monto, formAgregarManual.product);
-                vd.idUsuario = 1;
-                vd.Producto = formAgregarManual.product;
+                vd.Peso = formAgregarManual.cantidad;  
+                vd.Producto = formAgregarManual.selectedProducto;
 
                 // Agregamos a la lista y mostramos en grid
                 listDetalleVentas.Add(vd);
 
                 currentVentasDetalle.Rows.Add(vd.Producto.DescripcionLarga, "$ " + vd.Monto, vd.Peso.ToString() + " kg.");
-
                 currentMontoTotal += vd.Monto;
 
                 labelSubTotal.Text = " TOTAL : $ " + currentMontoTotal.ToString();
 
-            }
-                //formAgregarManual.ShowDialog();
-
-            
-        }
-
-        private void textCodigo_TextChanged(object sender, EventArgs e)
-        {
-            // Barra de 13 caracteres
-            if (textCodigo.Text.Length == 13)
-            {
-                ProcesarBarra(textCodigo.Text);
-                textCodigo.Text = String.Empty;
-            }
+            }            
         }
 
         private void btRemito_Click(object sender, EventArgs e)
         {
                FormReportes fmr = new FormReportes();
                fmr.ShowDialog();
-        }
-
-        //private void InitializeComponent()
-        //{
-        //    this.SuspendLayout();
-        //    // 
-        //    // FormCajaMayorista
-        //    // 
-        //    this.ClientSize = new System.Drawing.Size(284, 261);
-        //    this.Name = "FormCajaMayorista";
-        //    this.ResumeLayout(false);
-
-        //}
-
-        private void textCodigo_Enter(object sender, EventArgs e)
-        {
-            TextBox t = (TextBox)sender;
-            t.Text = string.Empty;
-        }
-
-
-
-//Proceso:
-//EntraProducto
-//- Entra código de producto, se busca el producto en la bd. Se encuentra.
-//- Obtenemos entidad producto.
-//- Añadimos la entidad a la grid (posibilidad de eliminar, no editar)
-//- EntraProducto o FinalizarVenta
-
-//FinalizarVenta
-//- Se inserta el registro venta sus ventadetalle.
-//- Se refresca la grilla de ventas anteriores.
-//- Se limpian todos los controles.
-
-
-        
+        }      
     }
 }

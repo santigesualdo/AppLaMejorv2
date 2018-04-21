@@ -9,6 +9,8 @@ using System.Data;
 using AppLaMejor.formularios.Util;
 using System.Drawing;
 using AppLaMejor.stylemanager;
+using AppLaMejor.formularios.Caja;
+using System.Linq;
 
 namespace AppLaMejor.formularios
 {
@@ -34,6 +36,7 @@ namespace AppLaMejor.formularios
         Ubicacion origenGarron;
 
         TextBox textBoxPesoMover;
+        TextBox textBoxPrecio;
 
         Panel currentPanel;
 
@@ -166,12 +169,13 @@ namespace AppLaMejor.formularios
             tablePanel.AutoSize = true;
             tablePanel.CellBorderStyle = TableLayoutPanelCellBorderStyle.Single;
             tablePanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            tablePanel.ColumnCount = 4;
+            tablePanel.ColumnCount = 5;
 
-            tablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            tablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            tablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            tablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            tablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22F));
+            tablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22F));
+            tablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22F));
+            tablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22F));
+            tablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12F));
 
             tablePanel.Controls.Add(FuncionesGlobales.StyleLabel("Producto Deposte"), 0, 0);
             comboProductoDeposte= new ComboBox();
@@ -184,14 +188,14 @@ namespace AppLaMejor.formularios
             comboProductoDeposte.DisplayMember = "DescripcionBreve";
             comboProductoDeposte.ValueMember = "id";
             comboProductoDeposte.SelectedIndex = -1;
-            comboProductoDeposte.SelectedValueChanged += ComboProductoDeposte_SelectedValueChanged ;
+            comboProductoDeposte.SelectionChangeCommitted += ComboProductoDeposte_SelectionChangeCommitted;
             tablePanel.Controls.Add(comboProductoDeposte, 0, 1);
 
             tablePanel.Controls.Add(FuncionesGlobales.StyleLabel("Peso Producto"), 1, 0);
             textBoxPesoMover = new TextBox();
             textBoxPesoMover.Anchor = AnchorStyles.None;
-            textBoxPesoMover.ReadOnly = true;
             textBoxPesoMover.KeyPress += FuncionesGlobales.DecimalTextBox_KeyPress;
+            textBoxPesoMover.KeyDown += FuncionesGlobales.TextBoxLeaveOnEnter_KeyDown;
             textBoxPesoMover.Dock = DockStyle.Fill;
             tablePanel.Controls.Add(textBoxPesoMover, 1, 1);
 
@@ -205,11 +209,18 @@ namespace AppLaMejor.formularios
             comboUbicacionDestino.ValueMember = "Id";
             comboUbicacionDestino.Anchor = AnchorStyles.None;
             comboUbicacionDestino.Dock = DockStyle.Fill;
+            comboUbicacionDestino.SelectedValueChanged += ComboUbicacionDeposte_SelectedValueChanged;
             comboUbicacionDestino.SelectedIndex = -1;
-            comboUbicacionDestino.Enabled = false;
             
             // text box con ubicacion destino disponible
             tablePanel.Controls.Add(comboUbicacionDestino, 2, 1);
+
+            tablePanel.Controls.Add(FuncionesGlobales.StyleLabel("Precio Venta"), 3, 0);
+            textBoxPrecio = new TextBox();
+            textBoxPrecio.Anchor = AnchorStyles.None;
+            textBoxPrecio.KeyPress += FuncionesGlobales.DecimalTextBox_KeyPress;
+            textBoxPrecio.Dock = DockStyle.Fill;
+            tablePanel.Controls.Add(textBoxPrecio, 3, 1);
 
             // PanelConfirmacion
             Panel p = new Panel();
@@ -229,8 +240,8 @@ namespace AppLaMejor.formularios
             bCancelar.Anchor = AnchorStyles.None;
             bCancelar.Click += BCancelar_Click;
 
-            tablePanel.Controls.Add(bOk, 3, 0);
-            tablePanel.Controls.Add(bCancelar, 3, 1);
+            tablePanel.Controls.Add(bOk, 4, 0);
+            tablePanel.Controls.Add(bCancelar, 4, 1);
 
             tablePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             tablePanel.Location = new System.Drawing.Point(5, 5);
@@ -244,6 +255,15 @@ namespace AppLaMejor.formularios
             panel.Controls.Add(tablePanel);
             panelLista.Controls.Add(panel);
 
+        }
+
+        private void ComboProductoDeposte_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            textBoxPesoMover.Focus();
+        }
+        private void ComboUbicacionDeposte_SelectedValueChanged(object sender, EventArgs e)
+        {
+            textBoxPrecio.Focus();
         }
 
         private void BCancelar_Click(object sender, EventArgs e)
@@ -268,6 +288,13 @@ namespace AppLaMejor.formularios
                 return;
             }
 
+            decimal precioOpcional;
+            if (!decimal.TryParse(textBoxPrecio.Text, out precioOpcional))
+            {
+                dialog.ShowErrorDialog("Debe indicar un precio para el producto depostado.");
+                return;
+            }
+
             if (pesoAcumulado + peso > garronDeposte.Peso)
             {
                 dialog.ShowErrorDialog("No se puede generar un producto con peso mayor al garron origen. Peso maximo: " + garronDeposte.Peso);
@@ -285,11 +312,15 @@ namespace AppLaMejor.formularios
                 dialog.ShowErrorDialog("Debe seleccionar un destino para el producto depostado.");
                 return;
             }
+
             pesoAcumulado += peso;
+
             GarronDeposte gd = new GarronDeposte();
+
             gd.Fecha = DateTime.Now;
             gd.Garron = garronDeposte;
             gd.Peso = peso;
+            gd.Precio = precioOpcional;
             gd.Producto = (Producto)comboProductoDeposte.SelectedItem;
             gd.Destino = (Ubicacion)comboUbicacionDestino.SelectedItem;
             listDeposte.Add(gd);
@@ -301,7 +332,9 @@ namespace AppLaMejor.formularios
             currentPanel.BackColor = StyleManager.Instance().GetCurrentStyle().MouseDownBackColor;
             currentPanel.Enabled = false;
 
-            bConfirmar.Text = "Confirmar Deposte (Cantidad: " + listDeposte.Count + ")";
+            int count = listDeposte.Where(o => o.yaDepostado.Equals(false)).ToList().Count;
+
+            bConfirmar.Text = "Confirmar Deposte (Cantidad: " +count + ")";
         }
 
         private void ConfirmarCombos(Panel currentPanel)
@@ -346,19 +379,6 @@ namespace AppLaMejor.formularios
             }
         }
 
-        private void ComboProductoDeposte_SelectedValueChanged(object sender, EventArgs e)
-        {
-            textBoxPesoMover.ReadOnly = false;
-            textBoxPesoMover.Focus();
-            textBoxPesoMover.Leave += TextBoxPesoMover_Leave;
-        }
-
-        private void TextBoxPesoMover_Leave(object sender, EventArgs e)
-        {
-            comboUbicacionDestino.Enabled = true;
-            comboUbicacionDestino.Focus();
-        }
-
         private void LoadLists()
         {
             origenGarron = FuncionesGarron.GetUbicacionByGarron(garronDeposte);
@@ -381,6 +401,13 @@ namespace AppLaMejor.formularios
                     if (FuncionesGarron.ConfirmarDeposte(listDeposte, garronDeposte, origenGarron))
                     {
                         dialog.ShowErrorDialog("Depostes de garron registrados exitosamente.");
+                        if (dialog.ShowConfirmationDialog("¿Desea incluir el deposte en una nueva venta mayorista?"))
+                        {
+                            FormCajaMayorista cajaMayorista = new FormCajaMayorista(listDeposte);
+                            cajaMayorista.ShowDialog();
+                        }
+
+                        this.Close();
                     }
                 }
             }            

@@ -1,5 +1,6 @@
 ﻿using AppLaMejor.controlmanager;
 using AppLaMejor.formularios.Clientes;
+using AppLaMejor.Reports;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,7 +21,7 @@ namespace AppLaMejor.formularios.MovimientoCuentas
 
         private void ReportMovCuentas_Load(object sender, EventArgs e)
         {
-            AppLaMejor.Reports.DataSet1 DS = new AppLaMejor.Reports.DataSet1();
+            DataSet1 DS = new DataSet1();
             
             clienteCR scr = new clienteCR();
             scr.SetDataSource(DS);

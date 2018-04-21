@@ -42,7 +42,6 @@
             this.bottomPanel = new System.Windows.Forms.Panel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.tsslMensaje = new System.Windows.Forms.ToolStripStatusLabel();
-            this.bAceptar = new System.Windows.Forms.Button();
             this.bCancelar = new System.Windows.Forms.Button();
             this.searchPanel = new System.Windows.Forms.Panel();
             this.searchMainPanel = new System.Windows.Forms.Panel();
@@ -52,10 +51,10 @@
             this.comboTipoFilter = new System.Windows.Forms.ComboBox();
             this.filter1Text = new System.Windows.Forms.Label();
             this.filtro2Panel = new System.Windows.Forms.Panel();
-            this.filter2TextBox = new System.Windows.Forms.TextBox();
+            this.filterGarronText = new System.Windows.Forms.TextBox();
             this.filter2Text = new System.Windows.Forms.Label();
             this.filtro3Panel = new System.Windows.Forms.Panel();
-            this.filterTextBox = new System.Windows.Forms.TextBox();
+            this.filterProductoPLU = new System.Windows.Forms.TextBox();
             this.filter3Text = new System.Windows.Forms.Label();
             this.titlePanel = new System.Windows.Forms.Panel();
             this.tittleText = new System.Windows.Forms.Label();
@@ -229,7 +228,6 @@
             // 
             this.bottomPanel.BackColor = System.Drawing.Color.Green;
             this.bottomPanel.Controls.Add(this.statusStrip1);
-            this.bottomPanel.Controls.Add(this.bAceptar);
             this.bottomPanel.Controls.Add(this.bCancelar);
             this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.bottomPanel.Location = new System.Drawing.Point(0, 648);
@@ -246,7 +244,7 @@
             this.tsslMensaje});
             this.statusStrip1.Location = new System.Drawing.Point(0, 0);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(727, 50);
+            this.statusStrip1.Size = new System.Drawing.Size(927, 50);
             this.statusStrip1.TabIndex = 22;
             this.statusStrip1.Text = "ssMensajero";
             // 
@@ -259,25 +257,6 @@
             this.tsslMensaje.Name = "tsslMensaje";
             this.tsslMensaje.Size = new System.Drawing.Size(83, 50);
             this.tsslMensaje.Text = "Mensajero";
-            // 
-            // bAceptar
-            // 
-            this.bAceptar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.bAceptar.BackColor = System.Drawing.Color.Black;
-            this.bAceptar.Dock = System.Windows.Forms.DockStyle.Right;
-            this.bAceptar.FlatAppearance.BorderColor = System.Drawing.Color.Green;
-            this.bAceptar.FlatAppearance.BorderSize = 2;
-            this.bAceptar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.MediumSeaGreen;
-            this.bAceptar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkSlateGray;
-            this.bAceptar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bAceptar.Location = new System.Drawing.Point(727, 0);
-            this.bAceptar.MinimumSize = new System.Drawing.Size(150, 30);
-            this.bAceptar.Name = "bAceptar";
-            this.bAceptar.Size = new System.Drawing.Size(200, 50);
-            this.bAceptar.TabIndex = 21;
-            this.bAceptar.Text = "Aceptar";
-            this.bAceptar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.bAceptar.UseVisualStyleBackColor = false;
             // 
             // bCancelar
             // 
@@ -293,9 +272,10 @@
             this.bCancelar.Name = "bCancelar";
             this.bCancelar.Size = new System.Drawing.Size(200, 50);
             this.bCancelar.TabIndex = 20;
-            this.bCancelar.Text = "Cancelar";
+            this.bCancelar.Text = "Salir";
             this.bCancelar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.bCancelar.UseVisualStyleBackColor = false;
+            this.bCancelar.Click += new System.EventHandler(this.bCancelar_Click);
             // 
             // searchPanel
             // 
@@ -374,6 +354,7 @@
             this.comboTipoFilter.Name = "comboTipoFilter";
             this.comboTipoFilter.Size = new System.Drawing.Size(140, 21);
             this.comboTipoFilter.TabIndex = 2;
+            this.comboTipoFilter.SelectedIndexChanged += new System.EventHandler(this.comboTipoFilter_SelectedIndexChanged);
             // 
             // filter1Text
             // 
@@ -389,7 +370,7 @@
             // 
             // filtro2Panel
             // 
-            this.filtro2Panel.Controls.Add(this.filter2TextBox);
+            this.filtro2Panel.Controls.Add(this.filterGarronText);
             this.filtro2Panel.Controls.Add(this.filter2Text);
             this.filtro2Panel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.filtro2Panel.Location = new System.Drawing.Point(368, 4);
@@ -398,18 +379,19 @@
             this.filtro2Panel.Size = new System.Drawing.Size(357, 54);
             this.filtro2Panel.TabIndex = 2;
             // 
-            // filter2TextBox
+            // filterGarronText
             // 
-            this.filter2TextBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.filter2TextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.filter2TextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.filter2TextBox.Location = new System.Drawing.Point(114, 26);
-            this.filter2TextBox.MaximumSize = new System.Drawing.Size(140, 30);
-            this.filter2TextBox.MinimumSize = new System.Drawing.Size(140, 22);
-            this.filter2TextBox.Name = "filter2TextBox";
-            this.filter2TextBox.Size = new System.Drawing.Size(140, 26);
-            this.filter2TextBox.TabIndex = 6;
-            this.filter2TextBox.Text = "-";
+            this.filterGarronText.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.filterGarronText.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.filterGarronText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.filterGarronText.Location = new System.Drawing.Point(114, 26);
+            this.filterGarronText.MaximumSize = new System.Drawing.Size(140, 30);
+            this.filterGarronText.MinimumSize = new System.Drawing.Size(140, 22);
+            this.filterGarronText.Name = "filterGarronText";
+            this.filterGarronText.Size = new System.Drawing.Size(140, 26);
+            this.filterGarronText.TabIndex = 6;
+            this.filterGarronText.Text = "-";
+            this.filterGarronText.TextChanged += new System.EventHandler(this.filterGarronText_TextChanged);
             // 
             // filter2Text
             // 
@@ -419,12 +401,12 @@
             this.filter2Text.Name = "filter2Text";
             this.filter2Text.Size = new System.Drawing.Size(347, 18);
             this.filter2Text.TabIndex = 1;
-            this.filter2Text.Text = "Por Nombre de Producto";
+            this.filter2Text.Text = "Por Garron - Numero";
             this.filter2Text.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // filtro3Panel
             // 
-            this.filtro3Panel.Controls.Add(this.filterTextBox);
+            this.filtro3Panel.Controls.Add(this.filterProductoPLU);
             this.filtro3Panel.Controls.Add(this.filter3Text);
             this.filtro3Panel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.filtro3Panel.Location = new System.Drawing.Point(4, 4);
@@ -433,18 +415,19 @@
             this.filtro3Panel.Size = new System.Drawing.Size(357, 54);
             this.filtro3Panel.TabIndex = 1;
             // 
-            // filterTextBox
+            // filterProductoPLU
             // 
-            this.filterTextBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.filterTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.filterTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.filterTextBox.Location = new System.Drawing.Point(109, 26);
-            this.filterTextBox.MaximumSize = new System.Drawing.Size(140, 30);
-            this.filterTextBox.MinimumSize = new System.Drawing.Size(140, 22);
-            this.filterTextBox.Name = "filterTextBox";
-            this.filterTextBox.Size = new System.Drawing.Size(140, 26);
-            this.filterTextBox.TabIndex = 5;
-            this.filterTextBox.Text = "-";
+            this.filterProductoPLU.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.filterProductoPLU.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.filterProductoPLU.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.filterProductoPLU.Location = new System.Drawing.Point(109, 26);
+            this.filterProductoPLU.MaximumSize = new System.Drawing.Size(140, 30);
+            this.filterProductoPLU.MinimumSize = new System.Drawing.Size(140, 22);
+            this.filterProductoPLU.Name = "filterProductoPLU";
+            this.filterProductoPLU.Size = new System.Drawing.Size(140, 26);
+            this.filterProductoPLU.TabIndex = 5;
+            this.filterProductoPLU.Text = "-";
+            this.filterProductoPLU.TextChanged += new System.EventHandler(this.filterProductoPLU_TextChanged);
             // 
             // filter3Text
             // 
@@ -454,7 +437,7 @@
             this.filter3Text.Name = "filter3Text";
             this.filter3Text.Size = new System.Drawing.Size(347, 18);
             this.filter3Text.TabIndex = 4;
-            this.filter3Text.Text = "Por PLU";
+            this.filter3Text.Text = "Por Producto - PLU";
             this.filter3Text.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // titlePanel
@@ -508,8 +491,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1127, 698);
             this.Controls.Add(this.mainPanel);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormUbicacion";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormUbicacion";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.mainPanel.ResumeLayout(false);
             this.contentPanel.ResumeLayout(false);
             this.groupDataGrid.ResumeLayout(false);
@@ -548,7 +534,6 @@
         private System.Windows.Forms.Panel bottomPanel;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel tsslMensaje;
-        private System.Windows.Forms.Button bAceptar;
         private System.Windows.Forms.Button bCancelar;
         private System.Windows.Forms.Panel searchPanel;
         private System.Windows.Forms.Panel searchMainPanel;
@@ -558,10 +543,10 @@
         private System.Windows.Forms.ComboBox comboTipoFilter;
         private System.Windows.Forms.Label filter1Text;
         private System.Windows.Forms.Panel filtro2Panel;
-        private System.Windows.Forms.TextBox filter2TextBox;
+        private System.Windows.Forms.TextBox filterGarronText;
         private System.Windows.Forms.Label filter2Text;
         private System.Windows.Forms.Panel filtro3Panel;
-        private System.Windows.Forms.TextBox filterTextBox;
+        private System.Windows.Forms.TextBox filterProductoPLU;
         private System.Windows.Forms.Label filter3Text;
         private System.Windows.Forms.Panel titlePanel;
         private System.Windows.Forms.Label tittleText;

@@ -6,6 +6,9 @@ using AppLaMejor.formularios.Util;
 
 public class ApplicationLookAndFeel
 {
+    // TODO UI: Todos los formularios deben tener solo un boton "Salir".
+    // TODO UI: Todos los formularios deben tener el "formBorderStyle" por defecto.
+
     public static void ApplyTheme(RadioButton c)
     {
         c.Font = StyleManager.Instance().GetCurrentStyle().MainFont;
@@ -19,6 +22,12 @@ public class ApplicationLookAndFeel
         c.BackColor = StyleManager.Instance().GetCurrentStyle().BackColor;
         c.ForeColor = StyleManager.Instance().GetCurrentStyle().TextColor ;
         HandleTag(c);
+    }
+    public static void ApplyTheme(ComboBox c)
+    {
+        c.Font = StyleManager.Instance().GetCurrentStyle().MainFont;
+        c.BackColor = StyleManager.Instance().GetCurrentStyle().BackColor;
+        c.ForeColor = StyleManager.Instance().GetCurrentStyle().TextColor;
     }
     public static void ApplyTheme(CheckBox c)
     {
@@ -200,12 +209,7 @@ public class ApplicationLookAndFeel
 
         HandleTag(c);
     }
-    public static void ApplyTheme(ComboBox c)
-    {
-        c.Font = StyleManager.Instance().GetCurrentStyle().MainFont;
-        c.BackColor = StyleManager.Instance().GetCurrentStyle().BackColor;
-        c.ForeColor = StyleManager.Instance().GetCurrentStyle().TextColor;
-    }
+
     public static void ApplyTheme(DateTimePicker c)
     {
         c.Font = StyleManager.Instance().GetCurrentStyle().MainFont;
@@ -344,7 +348,7 @@ public class ApplicationLookAndFeel
                         ApplyThemeToChild((Control)c);
                     break;
                 case "System.Windows.Forms.TableLayoutPanel":
-                    control = (Control)c;
+                    control = (TableLayoutPanel)c;
                     if (control.Controls.Count > 0)
                         ApplyThemeToChild((Control)c);
                     break;
@@ -355,12 +359,14 @@ public class ApplicationLookAndFeel
                         ApplyThemeToChild((Control)c);
                     break;
                 case "System.Windows.Forms.ComboBox":
-                    control = (Control)c;
+                    control = (ComboBox)c;
+                    ApplyTheme((ComboBox)control);
                     if (control.Controls.Count > 0)
                         ApplyThemeToChild((Control)c);
                     break;
                 case "System.Windows.Forms.DateTimePicker":
-                    control = (Control)c;
+                    control = (DateTimePicker)c;
+                    ApplyTheme((DateTimePicker)control);
                     if (control.Controls.Count > 0)
                         ApplyThemeToChild((Control)c);
                     break;

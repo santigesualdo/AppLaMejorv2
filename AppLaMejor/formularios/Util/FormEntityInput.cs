@@ -185,6 +185,9 @@ namespace AppLaMejor.formularios.Util
         {
             // decimal
             var textField = TextBoxCampoDecimal(property.Name);
+
+            if (property.Name.Equals("Precio")) textField.ReadOnly = true;
+
             controlsTableLayoutPanel.Controls.Add(GetCampoTitulo(property.Name), 0, controlsTableLayoutPanel.RowCount += 1);
             controlsTableLayoutPanel.Controls.Add(textField, 1, controlsTableLayoutPanel.RowCount );
             

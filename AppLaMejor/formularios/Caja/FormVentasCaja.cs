@@ -82,12 +82,6 @@ namespace AppLaMejor.formularios
 
             filter.Append(" fecha >= #" + now + "# and fecha <= #" + now2 + "# ");
             (dataGridVentas.DataSource as DataTable).DefaultView.RowFilter = filter.ToString();         
-         
-         //   (Date >= #" +
-         //Convert.ToDateTime(txtFromDate.Text).ToString("MM/dd/yyyy") +
-         //"# And Date <= #" +
-         //Convert.ToDateTime(txtToDate.Text).ToString("MM/dd/yyyy") +
-         //"# ) ";
             
         }
 
@@ -133,20 +127,6 @@ namespace AppLaMejor.formularios
             filter.Append(" fecha  >=  #" + fDesde + "# AND fecha<=#" + fHasta + "#");
             
             (dataGridVentas.DataSource as DataTable).DefaultView.RowFilter = filter.ToString();
-        }
-
-        private void VentasEntreCantidades(DataGridView datagrid, decimal pesoDesde, decimal pesoHasta)
-        {
-            //// Aplicar filtro a data grid por texto en PLU
-            //(dataGridVentas.DataSource as DataTable).DefaultView.RowFilter = string.Empty;
-            //StringBuilder filter = new StringBuilder();
-            //filter.Append(" monto_total between '" + pesoDesde + "' AND '" + pesoHasta + "'");
-            //(dataGridVentas.DataSource as DataTable).DefaultView.RowFilter = filter.ToString();
-        }
-
-        private void bVentaDia_Click(object sender, EventArgs e)
-        {
-            VentasDelDia(dataGridVentas);
         }
 
         private void textDescripcion_TextChanged(object sender, EventArgs e)

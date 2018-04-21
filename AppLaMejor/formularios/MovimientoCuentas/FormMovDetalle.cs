@@ -596,8 +596,16 @@ namespace AppLaMejor.formularios.Util
                 MovimientoCuenta movCuenta1 = new MovimientoCuenta();
                 TipoMovimiento tp = new TipoMovimiento();
                 Cuenta cuenta = new Cuenta();
+                Operacion newOperacion = new Operacion();
+                TipoOperacion to = new TipoOperacion();
 
-                Operacion newOperacion = FuncionesOperaciones.operacionEnCurso(2);
+                to.Id = 2;
+
+                VariablesGlobales.idOperacion = FuncionesOperaciones.GetNextIdOperacion();
+
+                newOperacion.Id = VariablesGlobales.idOperacion;
+
+                newOperacion.tipoOperacion = to;
 
                 VariablesGlobales.FormMovCuentas_activo = true;
 

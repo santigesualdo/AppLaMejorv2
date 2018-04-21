@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using AppLaMejor.datamanager;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;
 
 namespace AppLaMejor.entidades
 {
@@ -18,7 +19,7 @@ namespace AppLaMejor.entidades
         public string CodigoBarra{ get; set; }
 
         [Required(ErrorMessage = "Precio es informacion obligatoria. ")]
-        [DataNames("Precio")]
+        [DataNames("Precio")]   
         public decimal Precio { get; set; }
 
         [Required(ErrorMessage = "DescripcionBreve es informacion obligatoria. ")]

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2018-04-08 22:40:53
+Date: 2018-04-19 20:55:03
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -134,7 +134,7 @@ CREATE TABLE `clientecuentamovimiento` (
   `cobrado` char(1) NOT NULL DEFAULT 'N',
   `usuario` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of clientecuentamovimiento
@@ -172,6 +172,10 @@ INSERT INTO `clientecuentamovimiento` VALUES ('31', '13', '59', '1', '7872', '20
 INSERT INTO `clientecuentamovimiento` VALUES ('32', '14', '65', '2', '88', '2018-03-02 13:05:34', 'N', '1');
 INSERT INTO `clientecuentamovimiento` VALUES ('33', '14', '65', '1', '88', '2018-03-02 13:05:37', 'N', '1');
 INSERT INTO `clientecuentamovimiento` VALUES ('34', '15', '0', '1', '4303', '2018-04-07 18:53:57', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('35', '16', '0', '1', '169.5', '2018-04-13 20:11:47', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('36', '23', '55', '1', '50', '2018-04-17 20:33:40', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('37', '24', '55', '2', '50', '2018-04-17 20:34:13', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('38', '24', '55', '1', '6000', '2018-04-17 20:49:19', 'N', '1');
 
 -- ----------------------------
 -- Table structure for clientetipo
@@ -204,13 +208,19 @@ CREATE TABLE `compra` (
   `fecha_baja` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_prov` (`id_proveedor`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of compra
 -- ----------------------------
 INSERT INTO `compra` VALUES ('1', '1', '0', '2018-04-08 22:38:39', '2500.000', '1531.250', '1', null);
 INSERT INTO `compra` VALUES ('2', '1', '0', '2018-04-08 22:39:06', '2500.000', '1531.250', '1', null);
+INSERT INTO `compra` VALUES ('3', '1', '16', '2018-04-09 18:08:37', '12069.230', '10000.000', '1', null);
+INSERT INTO `compra` VALUES ('4', '2', '16', '2018-04-09 18:29:07', '12179.970', '12179.970', '1', null);
+INSERT INTO `compra` VALUES ('5', '2', '8', '2018-04-09 18:39:42', '256.360', '100.000', '1', null);
+INSERT INTO `compra` VALUES ('6', '1', '9', '2018-04-09 19:09:29', '7950.760', '7950.760', '1', null);
+INSERT INTO `compra` VALUES ('7', '1', '10', '2018-04-19 17:59:27', '3751.250', '3751.250', '1', null);
+INSERT INTO `compra` VALUES ('8', '2', '11', '2018-04-19 18:04:12', '2897.740', '2897.740', '1', null);
 
 -- ----------------------------
 -- Table structure for compradetalle
@@ -229,11 +239,23 @@ CREATE TABLE `compradetalle` (
   PRIMARY KEY (`id`),
   KEY `id_entrega` (`id_compra`),
   KEY `id_producto` (`id_producto`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of compradetalle
 -- ----------------------------
+INSERT INTO `compradetalle` VALUES ('1', '4', '69', null, '2521.360', '361.250', '0.000', '1', null);
+INSERT INTO `compradetalle` VALUES ('2', '4', '70', null, '5213.250', '233.000', '0.000', '1', null);
+INSERT INTO `compradetalle` VALUES ('3', '4', null, '46', '4200.000', '253.250', '0.000', '1', null);
+INSERT INTO `compradetalle` VALUES ('4', '4', null, '47', '245.360', '200.000', '0.000', '1', null);
+INSERT INTO `compradetalle` VALUES ('5', '5', '71', null, '256.360', '14.000', '0.000', '1', null);
+INSERT INTO `compradetalle` VALUES ('6', '6', '72', null, '2563.250', '112.000', '0.000', '1', null);
+INSERT INTO `compradetalle` VALUES ('7', '6', null, '44', '524.260', '25.360', '0.000', '1', null);
+INSERT INTO `compradetalle` VALUES ('8', '6', null, '51', '4863.250', '38.000', '0.000', '1', null);
+INSERT INTO `compradetalle` VALUES ('9', '7', null, '35', '3400.000', '80.000', '30.000', '1', null);
+INSERT INTO `compradetalle` VALUES ('10', '7', null, '46', '351.250', '60.000', '40.000', '1', null);
+INSERT INTO `compradetalle` VALUES ('11', '8', null, '44', '350.360', '28.000', '13.000', '1', null);
+INSERT INTO `compradetalle` VALUES ('12', '8', null, '46', '2547.380', '350.000', '0.000', '1', null);
 
 -- ----------------------------
 -- Table structure for compraestado
@@ -265,7 +287,7 @@ CREATE TABLE `garron` (
   `fecha_baja` datetime DEFAULT NULL,
   `observacion` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of garron
@@ -295,18 +317,18 @@ INSERT INTO `garron` VALUES ('23', '223', '1', '1', '2018-03-12 11:38:31', '84.0
 INSERT INTO `garron` VALUES ('24', '222', '1', '1', '2018-03-12 16:50:13', '534.000', '11', '1', null, null);
 INSERT INTO `garron` VALUES ('25', '558', '2', '1', '2018-03-17 11:08:13', '624.000', '3', '1', null, null);
 INSERT INTO `garron` VALUES ('26', '421', '3', '2', '2018-03-29 22:25:35', '2.580', '4', '1', null, null);
-INSERT INTO `garron` VALUES ('27', '333', '6', '1', '2018-03-17 11:18:04', '222.850', '3', '1', null, null);
+INSERT INTO `garron` VALUES ('27', '333', '6', '2', '2018-03-17 11:18:04', '13.470', '3', '1', null, null);
 INSERT INTO `garron` VALUES ('28', '332', '5', '1', '2018-03-17 11:18:26', '66.580', '2', '1', null, null);
 INSERT INTO `garron` VALUES ('29', '342', '1', '1', '2018-03-19 17:32:45', '234.000', '1', '1', null, null);
 INSERT INTO `garron` VALUES ('30', '213', '3', '1', '2018-03-19 17:33:04', '543.000', '11', '1', null, null);
-INSERT INTO `garron` VALUES ('31', '12', '6', '1', '2018-03-19 17:33:29', '34645.000', '12', '1', null, null);
+INSERT INTO `garron` VALUES ('31', '12', '6', '2', '2018-03-19 17:33:29', '34595.000', '12', '1', null, null);
 INSERT INTO `garron` VALUES ('32', '22', '2', '1', '2018-03-19 19:06:00', '147.250', '5', '1', null, null);
 INSERT INTO `garron` VALUES ('33', '22', '2', '1', '2018-03-19 19:08:07', '123.650', '22', '1', null, null);
 INSERT INTO `garron` VALUES ('34', '22', '1', '1', '2018-03-19 19:11:28', '44.254', '11', '1', null, null);
 INSERT INTO `garron` VALUES ('35', '22', '2', '1', '2018-03-19 19:13:58', '22.000', '22', '1', null, null);
 INSERT INTO `garron` VALUES ('36', '123', '1', '2', '2018-03-29 22:25:35', '2.000', '12', '1', null, null);
-INSERT INTO `garron` VALUES ('37', '22', '1', '2', '2018-03-29 22:25:35', '9.550', '12', '1', null, null);
-INSERT INTO `garron` VALUES ('38', '22', '1', '1', '2018-03-19 19:55:00', '12.000', '1', '1', null, null);
+INSERT INTO `garron` VALUES ('37', '22', '1', '2', '2018-03-29 22:25:35', '0.550', '12', '1', null, null);
+INSERT INTO `garron` VALUES ('38', '22', '1', '2', '2018-03-19 19:55:00', '0.000', '1', '1', null, null);
 INSERT INTO `garron` VALUES ('39', '22', '1', '1', '2018-03-19 20:05:15', '321.000', '23', '1', null, null);
 INSERT INTO `garron` VALUES ('40', '11', '3', '1', '2018-03-19 20:24:00', '12.000', '11', '1', null, null);
 INSERT INTO `garron` VALUES ('41', '22', '1', '1', '2018-03-19 20:42:57', '112.250', '11', '1', null, null);
@@ -330,13 +352,17 @@ INSERT INTO `garron` VALUES ('58', '12', '2', '1', '2018-03-19 23:02:59', '11.00
 INSERT INTO `garron` VALUES ('59', '22', '1', '1', '2018-03-21 17:45:42', '12.000', '1', '1', null, null);
 INSERT INTO `garron` VALUES ('60', '2', '1', '1', '2018-03-21 17:59:46', '11.000', '12', '1', null, null);
 INSERT INTO `garron` VALUES ('61', '12', '1', '1', '2018-03-21 18:01:06', '12.000', '1', '1', null, null);
-INSERT INTO `garron` VALUES ('62', '1', '1', '1', '2018-03-21 18:03:07', '125.000', '1', '1', null, null);
+INSERT INTO `garron` VALUES ('62', '1', '1', '2', '2018-03-21 18:03:07', '77.000', '1', '1', null, null);
 INSERT INTO `garron` VALUES ('63', '235', '1', '1', '2018-03-21 19:51:41', '123.000', '3', '1', null, '');
 INSERT INTO `garron` VALUES ('64', '236', '3', '1', '2018-03-21 19:51:53', '123.000', '3', '1', null, 'incompleto');
-INSERT INTO `garron` VALUES ('65', '237', '5', '2', '2018-03-29 22:25:35', '231.250', '3', '1', null, '');
+INSERT INTO `garron` VALUES ('65', '237', '5', '2', '2018-03-29 22:25:35', '191.640', '3', '1', null, '');
 INSERT INTO `garron` VALUES ('66', '235', '4', '1', '2018-03-22 17:05:01', '245.000', '11', '1', null, 'garron recortado');
 INSERT INTO `garron` VALUES ('67', '235', '4', '1', '2018-04-05 16:53:40', '256.250', '11', '1', null, '');
 INSERT INTO `garron` VALUES ('68', '236', '3', '1', '2018-04-05 16:54:12', '122.000', '1', '1', null, '');
+INSERT INTO `garron` VALUES ('69', '222', '2', '1', '2018-04-09 18:16:05', '361.250', '11', '1', null, '');
+INSERT INTO `garron` VALUES ('70', '333', '1', '1', '2018-04-09 18:16:22', '233.000', '10', '1', null, '');
+INSERT INTO `garron` VALUES ('71', '111', '2', '1', '2018-04-09 18:38:50', '14.000', '11', '1', null, '');
+INSERT INTO `garron` VALUES ('72', '2', '3', '1', '2018-04-09 19:08:39', '112.000', '11', '1', null, '');
 
 -- ----------------------------
 -- Table structure for garrondeposte
@@ -351,21 +377,21 @@ CREATE TABLE `garrondeposte` (
   `usuario` int(11) DEFAULT NULL,
   `fecha_baja` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of garrondeposte
 -- ----------------------------
-INSERT INTO `garrondeposte` VALUES ('1', '2', '6', '10.256', '0000-00-00 00:00:00', null, null);
-INSERT INTO `garrondeposte` VALUES ('2', '2', '7', '18.620', '0000-00-00 00:00:00', null, null);
-INSERT INTO `garrondeposte` VALUES ('3', '2', '8', '20.680', '0000-00-00 00:00:00', null, null);
-INSERT INTO `garrondeposte` VALUES ('5', '43', '24', '235.000', '0000-00-00 00:00:00', '1', null);
-INSERT INTO `garrondeposte` VALUES ('7', '26', '14', '18.000', '0000-00-00 00:00:00', '1', null);
-INSERT INTO `garrondeposte` VALUES ('9', '36', '10', '7.000', '0000-00-00 00:00:00', '1', null);
-INSERT INTO `garrondeposte` VALUES ('11', '44', '7', '0.500', '0000-00-00 00:00:00', '1', null);
-INSERT INTO `garrondeposte` VALUES ('12', '44', '13', '0.250', '0000-00-00 00:00:00', '1', null);
-INSERT INTO `garrondeposte` VALUES ('14', '44', '7', '0.500', '0000-00-00 00:00:00', '1', null);
-INSERT INTO `garrondeposte` VALUES ('15', '44', '13', '0.250', '0000-00-00 00:00:00', '1', null);
+INSERT INTO `garrondeposte` VALUES ('1', '2', '6', '10.256', '2018-03-29 20:33:39', null, null);
+INSERT INTO `garrondeposte` VALUES ('2', '2', '7', '18.620', '2018-03-29 20:33:39', null, null);
+INSERT INTO `garrondeposte` VALUES ('3', '2', '8', '20.680', '2018-03-29 20:33:39', null, null);
+INSERT INTO `garrondeposte` VALUES ('5', '43', '24', '235.000', '2018-03-29 20:33:39', '1', null);
+INSERT INTO `garrondeposte` VALUES ('7', '26', '14', '18.000', '2018-03-29 20:33:39', '1', null);
+INSERT INTO `garrondeposte` VALUES ('9', '36', '10', '7.000', '2018-03-29 20:33:39', '1', null);
+INSERT INTO `garrondeposte` VALUES ('11', '44', '7', '0.500', '2018-03-29 20:33:39', '1', null);
+INSERT INTO `garrondeposte` VALUES ('12', '44', '13', '0.250', '2018-03-29 20:33:39', '1', null);
+INSERT INTO `garrondeposte` VALUES ('14', '44', '7', '0.500', '2018-03-29 20:33:39', '1', null);
+INSERT INTO `garrondeposte` VALUES ('15', '44', '13', '0.250', '2018-03-29 20:33:39', '1', null);
 INSERT INTO `garrondeposte` VALUES ('16', '37', '6', '0.200', '2018-03-29 20:33:39', '1', null);
 INSERT INTO `garrondeposte` VALUES ('17', '37', '10', '1.250', '2018-03-29 20:33:39', '1', null);
 INSERT INTO `garrondeposte` VALUES ('18', '65', '15', '125.000', '2018-03-29 20:45:35', '1', null);
@@ -373,6 +399,20 @@ INSERT INTO `garrondeposte` VALUES ('19', '48', '27', '10.000', '2018-03-29 20:4
 INSERT INTO `garrondeposte` VALUES ('20', '55', '4', '2.000', '2018-03-29 20:53:09', '1', null);
 INSERT INTO `garrondeposte` VALUES ('21', '55', '2', '7.000', '2018-03-29 20:53:09', '1', null);
 INSERT INTO `garrondeposte` VALUES ('22', '55', '4', '1.500', '2018-03-29 22:23:37', '1', null);
+INSERT INTO `garrondeposte` VALUES ('23', '27', '3', '25.280', '2018-04-11 17:57:29', '1', null);
+INSERT INTO `garrondeposte` VALUES ('24', '27', '10', '28.250', '2018-04-11 17:57:29', '1', null);
+INSERT INTO `garrondeposte` VALUES ('25', '27', '23', '125.250', '2018-04-11 18:29:33', '1', null);
+INSERT INTO `garrondeposte` VALUES ('26', '37', '2', '5.000', '2018-04-13 20:02:03', '1', null);
+INSERT INTO `garrondeposte` VALUES ('27', '37', '4', '4.000', '2018-04-13 20:02:03', '1', null);
+INSERT INTO `garrondeposte` VALUES ('28', '65', '1', '25.360', '2018-04-13 20:08:07', '1', null);
+INSERT INTO `garrondeposte` VALUES ('29', '65', '8', '14.250', '2018-04-13 20:08:08', '1', null);
+INSERT INTO `garrondeposte` VALUES ('30', '27', '4', '20.360', '2018-04-13 20:09:31', '1', null);
+INSERT INTO `garrondeposte` VALUES ('31', '27', '9', '10.240', '2018-04-13 20:09:31', '1', null);
+INSERT INTO `garrondeposte` VALUES ('32', '38', '5', '5.360', '2018-04-13 20:11:31', '1', null);
+INSERT INTO `garrondeposte` VALUES ('33', '38', '10', '6.360', '2018-04-13 20:11:31', '1', null);
+INSERT INTO `garrondeposte` VALUES ('34', '62', '23', '48.000', '2018-04-17 20:35:56', '1', null);
+INSERT INTO `garrondeposte` VALUES ('35', '31', '23', '50.000', '2018-04-17 20:46:59', '1', null);
+INSERT INTO `garrondeposte` VALUES ('36', '38', '26', '0.280', '2018-04-17 20:54:25', '1', null);
 
 -- ----------------------------
 -- Table structure for garronestado
@@ -419,7 +459,7 @@ CREATE TABLE `modulo` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of modulo
@@ -429,7 +469,7 @@ INSERT INTO `modulo` VALUES ('2', 'Proveedores');
 INSERT INTO `modulo` VALUES ('3', 'Stock');
 INSERT INTO `modulo` VALUES ('4', 'Caja');
 INSERT INTO `modulo` VALUES ('5', 'Ventas');
-INSERT INTO `modulo` VALUES ('6', 'Compras');
+INSERT INTO `modulo` VALUES ('6', 'Carga Nueva Compra');
 INSERT INTO `modulo` VALUES ('7', 'Movimiento Cuentas');
 INSERT INTO `modulo` VALUES ('8', 'Gestion Usuarios');
 INSERT INTO `modulo` VALUES ('9', 'Productos');
@@ -437,10 +477,11 @@ INSERT INTO `modulo` VALUES ('10', 'Ventas Caja');
 INSERT INTO `modulo` VALUES ('11', 'Movimiento Cuentas Proveedores');
 INSERT INTO `modulo` VALUES ('12', 'Carga Garron');
 INSERT INTO `modulo` VALUES ('13', 'Caja Mayorista');
-INSERT INTO `modulo` VALUES ('14', 'Ubicación de Productos');
+INSERT INTO `modulo` VALUES ('14', 'Ubicacion de Productos');
 INSERT INTO `modulo` VALUES ('15', 'Deposte');
 INSERT INTO `modulo` VALUES ('16', 'Ubicacion');
 INSERT INTO `modulo` VALUES ('17', 'Reportes');
+INSERT INTO `modulo` VALUES ('18', 'Compras con Productos a Entregar');
 
 -- ----------------------------
 -- Table structure for movimientomercaderia
@@ -457,7 +498,7 @@ CREATE TABLE `movimientomercaderia` (
   `usuario` int(5) DEFAULT NULL,
   `fecha_baja` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=89 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=92 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of movimientomercaderia
@@ -542,6 +583,9 @@ INSERT INTO `movimientomercaderia` VALUES ('85', '2018-04-05 16:57:09', '4', '1'
 INSERT INTO `movimientomercaderia` VALUES ('86', '2018-04-05 16:57:12', '4', '3', '256.250', null, '67', '1', null);
 INSERT INTO `movimientomercaderia` VALUES ('87', '2018-04-05 16:57:15', '4', '2', '122.000', null, '68', '1', null);
 INSERT INTO `movimientomercaderia` VALUES ('88', '2018-04-05 17:01:04', '2', '1', '1.200', '9', null, '1', null);
+INSERT INTO `movimientomercaderia` VALUES ('89', '2018-04-09 18:39:56', '4', '2', '14.000', null, '71', '1', null);
+INSERT INTO `movimientomercaderia` VALUES ('90', '2018-04-10 17:45:27', '1', '2', '2.000', '2', null, '1', null);
+INSERT INTO `movimientomercaderia` VALUES ('91', '2018-04-10 17:46:09', '2', '3', '1.250', '4', null, '1', null);
 
 -- ----------------------------
 -- Table structure for movimientotipo
@@ -573,7 +617,7 @@ CREATE TABLE `operacion` (
   KEY `fk_cl` (`id_cliente`),
   KEY `fk_to` (`Id_tipo_operacion`),
   CONSTRAINT `fk_to` FOREIGN KEY (`Id_tipo_operacion`) REFERENCES `operaciontipo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of operacion
@@ -593,6 +637,15 @@ INSERT INTO `operacion` VALUES ('12', '1', '32', '2018-03-02 12:44:07', '1');
 INSERT INTO `operacion` VALUES ('13', '1', '35', '2018-03-02 12:45:42', '1');
 INSERT INTO `operacion` VALUES ('14', '1', '41', '2018-03-02 13:05:37', '1');
 INSERT INTO `operacion` VALUES ('15', '1', '0', '2018-04-07 18:53:57', '1');
+INSERT INTO `operacion` VALUES ('16', '1', '0', '2018-04-13 20:11:46', '1');
+INSERT INTO `operacion` VALUES ('17', '1', '0', '2018-04-17 19:03:49', '1');
+INSERT INTO `operacion` VALUES ('18', '1', '0', '2018-04-17 19:10:57', '1');
+INSERT INTO `operacion` VALUES ('19', '1', '0', '2018-04-17 19:22:16', '1');
+INSERT INTO `operacion` VALUES ('20', '1', '0', '2018-04-17 19:28:41', '1');
+INSERT INTO `operacion` VALUES ('21', '1', '0', '2018-04-17 19:29:46', '1');
+INSERT INTO `operacion` VALUES ('22', '1', '31', '2018-04-17 20:31:27', '1');
+INSERT INTO `operacion` VALUES ('23', '1', '31', '2018-04-17 20:33:37', '1');
+INSERT INTO `operacion` VALUES ('24', '1', '31', '2018-04-17 20:49:19', '1');
 
 -- ----------------------------
 -- Table structure for operacionproveedor
@@ -608,13 +661,19 @@ CREATE TABLE `operacionproveedor` (
   KEY `fk_pl` (`id_proveedor`),
   KEY `fk_top` (`Id_tipo_operacion`),
   CONSTRAINT `fk_top` FOREIGN KEY (`Id_tipo_operacion`) REFERENCES `operaciontipo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of operacionproveedor
 -- ----------------------------
 INSERT INTO `operacionproveedor` VALUES ('4', '3', '1', '2018-04-08 22:37:58', '1');
 INSERT INTO `operacionproveedor` VALUES ('5', '3', '1', '2018-04-08 22:39:06', '1');
+INSERT INTO `operacionproveedor` VALUES ('6', '3', '1', '2018-04-09 18:08:23', '1');
+INSERT INTO `operacionproveedor` VALUES ('7', '3', '2', '2018-04-09 18:29:07', '1');
+INSERT INTO `operacionproveedor` VALUES ('8', '3', '2', '2018-04-09 18:39:42', '1');
+INSERT INTO `operacionproveedor` VALUES ('9', '3', '1', '2018-04-09 19:09:29', '1');
+INSERT INTO `operacionproveedor` VALUES ('10', '3', '1', '2018-04-19 17:59:27', '1');
+INSERT INTO `operacionproveedor` VALUES ('11', '3', '2', '2018-04-19 18:04:11', '1');
 
 -- ----------------------------
 -- Table structure for operaciontipo
@@ -663,7 +722,7 @@ CREATE TABLE `preciohistorico` (
   `id_usuario` int(11) DEFAULT NULL,
   `fecha_baja` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=184 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=185 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of preciohistorico
@@ -846,7 +905,8 @@ INSERT INTO `preciohistorico` VALUES ('179', '105', '2018-04-03', null, '265.440
 INSERT INTO `preciohistorico` VALUES ('180', '106', '2018-04-03', null, '209.050', '1', null);
 INSERT INTO `preciohistorico` VALUES ('181', '107', '2018-04-03', null, '148.920', '1', null);
 INSERT INTO `preciohistorico` VALUES ('182', '3', '2018-04-04', null, '179.740', '1', null);
-INSERT INTO `preciohistorico` VALUES ('183', '1', '2018-04-04', null, '280.280', '1', null);
+INSERT INTO `preciohistorico` VALUES ('183', '1', '2018-04-04', '2018-04-10', '280.280', '1', '2018-04-11 17:26:15');
+INSERT INTO `preciohistorico` VALUES ('184', '1', '2018-04-11', null, '281.210', '1', null);
 
 -- ----------------------------
 -- Table structure for producto
@@ -869,113 +929,113 @@ CREATE TABLE `producto` (
 -- ----------------------------
 -- Records of producto
 -- ----------------------------
-INSERT INTO `producto` VALUES ('1', '2', '11750', '280.280', '153.84', 'TRIPA', 'TRIPA', '1', null);
-INSERT INTO `producto` VALUES ('2', '2', '11760', '328.250', '45.52', 'CHINCHULÍN', 'CHINCHULÍN', '1', null);
-INSERT INTO `producto` VALUES ('3', '2', '11770', '179.740', '136.71', 'RIÑON', 'RIÑON', '1', null);
-INSERT INTO `producto` VALUES ('4', '2', '11780', '75.590', '51.67', 'CORAZÓN', 'CORAZÓN', '1', null);
-INSERT INTO `producto` VALUES ('5', '2', '11790', '91.610', '63.52', 'ENTRAÑA', 'ENTRAÑA', '1', null);
-INSERT INTO `producto` VALUES ('6', '2', '11800', '112.700', '30.25', 'RABO', 'RABO', '1', null);
-INSERT INTO `producto` VALUES ('7', '2', '11810', '111.020', '67.27', 'MONDONGO', 'MONDONGO', '1', null);
-INSERT INTO `producto` VALUES ('8', '2', '11820', '26.480', '105.01', 'HÍGADO', 'HÍGADO', '1', null);
-INSERT INTO `producto` VALUES ('9', '2', '11830', '147.850', '145.47', 'MOLLEJAS', 'MOLLEJAS', '1', null);
-INSERT INTO `producto` VALUES ('10', '2', '11850', '124.760', '41.16', 'LENGUA', 'LENGUA', '1', null);
-INSERT INTO `producto` VALUES ('11', '2', '11860', '147.950', '60.91', 'QUIJADA', 'QUIJADA', '1', null);
-INSERT INTO `producto` VALUES ('12', '2', '11870', '111.750', '66.32', 'DUOS', 'DUOS', '1', null);
-INSERT INTO `producto` VALUES ('13', '2', '11880', '76.250', '56.87', 'CARRE ', 'CARRE ', '1', null);
-INSERT INTO `producto` VALUES ('14', '2', '11890', '64.160', '30.64', 'PECHITO', 'PECHITO', '1', null);
-INSERT INTO `producto` VALUES ('15', '2', '11900', '57.160', '138.59', 'JAMON ENTERO', 'JAMON ENTERO', '1', null);
-INSERT INTO `producto` VALUES ('16', '2', '11910', '143.550', '80.19', 'CHURRASQUITO', 'CHURRASQUITO', '1', null);
-INSERT INTO `producto` VALUES ('17', '2', '11920', '153.140', '153.24', 'PALETA ENTERA', 'PALETA ENTERA', '1', null);
-INSERT INTO `producto` VALUES ('18', '2', '11930', '82.180', '74.79', 'PAPADA', 'PAPADA', '1', null);
-INSERT INTO `producto` VALUES ('19', '2', '11940', '103.810', '103.02', 'TOCINO', 'TOCINO', '1', null);
-INSERT INTO `producto` VALUES ('20', '2', '11950', '116.780', '54.89', 'MATAMBRITOS', 'MATAMBRITOS', '1', null);
-INSERT INTO `producto` VALUES ('21', '2', '11960', '114.800', '53.97', 'BONDIOLA', 'BONDIOLA', '1', null);
-INSERT INTO `producto` VALUES ('22', '3', null, '97.230', '52.99', '1/2 RESES', '1/2 RESES', '1', null);
-INSERT INTO `producto` VALUES ('23', '3', null, '47.830', '139.70', '1/4 RUEDA', '1/4 RUEDA', '1', null);
-INSERT INTO `producto` VALUES ('24', '3', null, '59.850', '111.79', '1/4 PISTOLA', '1/4 PISTOLA', '1', null);
-INSERT INTO `producto` VALUES ('25', '3', null, '73.830', '141.13', ' 1/4 DELANTERO ', ' 1/4 DELANTERO ', '1', null);
-INSERT INTO `producto` VALUES ('26', '3', null, '103.910', '82.96', 'BARRAS', 'BARRAS', '1', null);
-INSERT INTO `producto` VALUES ('27', '3', null, '130.530', '147.28', 'MOCHITOS', 'MOCHITOS', '1', null);
-INSERT INTO `producto` VALUES ('28', '3', null, '134.400', '121.54', 'MANTAS', 'MANTAS', '1', null);
-INSERT INTO `producto` VALUES ('29', '3', null, '106.050', '71.28', 'RECORTE', 'RECORTE', '1', null);
-INSERT INTO `producto` VALUES ('30', '3', null, '56.560', '120.85', 'PARRILLERO', 'PARRILLERO', '1', null);
-INSERT INTO `producto` VALUES ('31', '3', null, '98.580', '47.91', 'JUEGOS DE ACHURAS', 'JUEGOS DE ACHURAS', '1', null);
-INSERT INTO `producto` VALUES ('32', '3', null, '85.370', '33.54', 'RECORTE DE 1', 'RECORTE DE 1', '1', null);
-INSERT INTO `producto` VALUES ('33', '3', null, '49.460', '32.77', 'RECORTE DE 2°', 'RECORTE DE 2°', '1', null);
-INSERT INTO `producto` VALUES ('34', '1', '10990', '48.950', '98.46', 'CHORIZO ESPECIAL', 'CHORIZO ESPECIAL', '1', null);
-INSERT INTO `producto` VALUES ('35', '1', '11000', '53.330', '121.42', 'CHORIZO PARRILLERO', 'CHORIZO PARRILLERO', '1', null);
-INSERT INTO `producto` VALUES ('36', '1', '11010', '125.560', '31.82', 'CHORIZO DE CERDO', 'CHORIZO DE CERDO', '1', null);
-INSERT INTO `producto` VALUES ('37', '1', '11020', '31.580', '152.98', 'CHORIZO COLORADO', 'CHORIZO COLORADO', '1', null);
-INSERT INTO `producto` VALUES ('38', '1', '11030', '41.820', '105.86', 'SALCHICHA PARRILL.', 'SALCHICHA PARRILL.', '1', null);
-INSERT INTO `producto` VALUES ('39', '1', '11040', '144.400', '74.99', 'MORCILLA', 'MORCILLA', '1', null);
-INSERT INTO `producto` VALUES ('40', '1', '11050', '72.380', '32.30', 'MORCILLA', 'MORCILLA', '1', null);
-INSERT INTO `producto` VALUES ('41', '1', '11060', '54.580', '67.80', 'SALCHICHAS SNACK', 'SALCHICHAS SNACK', '1', null);
-INSERT INTO `producto` VALUES ('42', '1', '11070', '38.680', '32.12', 'PATE', 'PATE', '1', null);
-INSERT INTO `producto` VALUES ('43', '1', '11080', '107.300', '128.84', 'QUESO DE CERDO', 'QUESO DE CERDO', '1', null);
-INSERT INTO `producto` VALUES ('44', '1', '11100', '30.120', '66.97', 'PICADA COMUN', 'PICADA COMUN', '1', null);
-INSERT INTO `producto` VALUES ('45', '1', '11110', '116.230', '71.09', 'PICADA INTERMEDIA', 'PICADA INTERMEDIA', '1', null);
-INSERT INTO `producto` VALUES ('46', '1', '11120', '250.280', '121.71', 'PICADA ESPECIAL', 'PICADA ESPECIAL', '1', null);
-INSERT INTO `producto` VALUES ('47', '1', '11130', '37.920', '62.85', 'PUCHERO COMUN', 'PUCHERO COMUN', '1', null);
-INSERT INTO `producto` VALUES ('48', '1', '11140', '40.125', '75.03', 'PUCHERO ESPECIAL', 'PUCHERO ESPECIAL', '1', null);
-INSERT INTO `producto` VALUES ('49', '1', '11150', '41.230', '165.88', 'CANINO', 'CANINO', '1', null);
-INSERT INTO `producto` VALUES ('50', '1', '11160', '92.220', '120.08', 'MATAMBRE', 'MATAMBRE', '1', null);
-INSERT INTO `producto` VALUES ('51', '1', '11170', '111.710', '111.06', 'VACIO', 'VACIO', '1', null);
-INSERT INTO `producto` VALUES ('52', '1', '11180', '106.860', '150.04', 'ALA DE PECHO', 'ALA DE PECHO', '1', null);
-INSERT INTO `producto` VALUES ('53', '1', '11190', '133.860', '45.14', 'COSTILLA', 'COSTILLA', '1', null);
-INSERT INTO `producto` VALUES ('54', '1', '11200', '30.180', '81.05', 'MARUCHA', 'MARUCHA', '1', null);
-INSERT INTO `producto` VALUES ('55', '1', '11210', '112.810', '61.14', 'TAPA DE NALGA', 'TAPA DE NALGA', '1', null);
-INSERT INTO `producto` VALUES ('56', '1', '11220', '47.510', '86.23', 'CORTE MALVINA', 'CORTE MALVINA', '1', null);
-INSERT INTO `producto` VALUES ('57', '1', '11230', '39.460', '109.62', 'FALDA', 'FALDA', '1', null);
-INSERT INTO `producto` VALUES ('58', '1', '11240', '136.620', '122.41', 'COSTELETAS', 'COSTELETAS', '1', null);
-INSERT INTO `producto` VALUES ('59', '1', '11250', '105.710', '58.51', 'AGUJA', 'AGUJA', '1', null);
-INSERT INTO `producto` VALUES ('60', '1', '11260', '57.700', '60.64', 'BRAZUELO', 'BRAZUELO', '1', null);
-INSERT INTO `producto` VALUES ('61', '1', '11270', '36.160', '140.54', 'BIFE ANCHO/ANGOSTO', 'BIFE ANCHO/ANGOSTO', '1', null);
-INSERT INTO `producto` VALUES ('62', '1', '11280', '114.390', '106.96', 'ENTRECOT', 'ENTRECOT', '1', null);
-INSERT INTO `producto` VALUES ('63', '1', '11290', '87.570', '83.18', 'ROAST BEEF', 'ROAST BEEF', '1', null);
-INSERT INTO `producto` VALUES ('64', '1', '11300', '114.240', '125.60', 'NALGAS', 'NALGAS', '1', null);
-INSERT INTO `producto` VALUES ('65', '1', '11310', '43.250', '119.60', 'LOMO', 'LOMO', '1', null);
-INSERT INTO `producto` VALUES ('66', '1', '11320', '36.660', '136.16', 'PECETO', 'PECETO', '1', null);
-INSERT INTO `producto` VALUES ('67', '1', '11330', '61.650', '43.97', 'CUADRIL', 'CUADRIL', '1', null);
-INSERT INTO `producto` VALUES ('68', '1', '11340', '123.510', '80.34', 'PALOMITA', 'PALOMITA', '1', null);
-INSERT INTO `producto` VALUES ('69', '1', '11350', '130.630', '74.57', 'JAMON CUADRADO', 'JAMON CUADRADO', '1', null);
-INSERT INTO `producto` VALUES ('70', '1', '11360', '46.800', '60.01', 'CABEZA DE LOMO', 'CABEZA DE LOMO', '1', null);
-INSERT INTO `producto` VALUES ('71', '1', '11370', '108.510', '127.80', 'PULPA BRAZUELO', 'PULPA BRAZUELO', '1', null);
-INSERT INTO `producto` VALUES ('72', '1', '11380', '149.570', '143.06', 'PULPA PALETA', 'PULPA PALETA', '1', null);
-INSERT INTO `producto` VALUES ('73', '1', '11390', '25.880', '88.76', 'TORTUGUITA', 'TORTUGUITA', '1', null);
-INSERT INTO `producto` VALUES ('74', '1', '11400', '142.610', '74.57', 'MILANESAS DE CARNE', 'MILANESAS DE CARNE', '1', null);
-INSERT INTO `producto` VALUES ('75', '1', '11410', '55.910', '69.85', 'MILANESAS DE POLLO', 'MILANESAS DE POLLO', '1', null);
-INSERT INTO `producto` VALUES ('76', '1', '11420', '63.670', '56.89', 'HAMBURGUESAS', 'HAMBURGUESAS', '1', null);
-INSERT INTO `producto` VALUES ('77', '1', '11430', '38.150', '62.15', 'ALBONDIGAS', 'ALBONDIGAS', '1', null);
-INSERT INTO `producto` VALUES ('78', '1', '11440', '125.670', '141.31', 'COSTELETAS', 'COSTELETAS', '1', null);
-INSERT INTO `producto` VALUES ('79', '1', '11450', '138.760', '58.50', 'BONDIOLA', 'BONDIOLA', '1', null);
-INSERT INTO `producto` VALUES ('80', '1', '11460', '83.870', '56.01', 'MATAMBRITO', 'MATAMBRITO', '1', null);
-INSERT INTO `producto` VALUES ('81', '1', '11470', '69.460', '84.68', 'COSTILLA/PECHITO', 'COSTILLA/PECHITO', '1', null);
-INSERT INTO `producto` VALUES ('82', '1', '11480', '28.950', '31.49', 'PULPAS', 'PULPAS', '1', null);
-INSERT INTO `producto` VALUES ('83', '1', '11490', '37.080', '103.86', 'MARUCHA', 'MARUCHA', '1', null);
-INSERT INTO `producto` VALUES ('84', '1', '11500', '141.580', '93.29', 'CARACU', 'CARACU', '1', null);
-INSERT INTO `producto` VALUES ('85', '1', '11510', '69.250', '70.19', 'PAT./HUE./CUE.', 'PATITA/HUESITO/CUERITO', '1', null);
-INSERT INTO `producto` VALUES ('86', '1', '11520', '79.810', '84.03', 'MILANESAS', 'MILANESAS', '1', null);
-INSERT INTO `producto` VALUES ('87', '1', '11530', '77.840', '49.35', 'HAMBURGUESAS', 'HAMBURGUESAS', '1', null);
-INSERT INTO `producto` VALUES ('88', '1', '11540', '78.480', '103.88', 'PATAMUSLO', 'PATAMUSLO', '1', null);
-INSERT INTO `producto` VALUES ('89', '1', '11550', '122.900', '93.31', 'TROZADO', 'TROZADO', '1', null);
-INSERT INTO `producto` VALUES ('90', '1', '11560', '89.560', '151.96', 'PECHUGA', 'PECHUGA', '1', null);
-INSERT INTO `producto` VALUES ('91', '1', '11570', '41.960', '57.83', 'FILET', 'FILET', '1', null);
-INSERT INTO `producto` VALUES ('92', '1', '11580', '135.130', '122.31', 'BROCHET', 'BROCHET', '1', null);
-INSERT INTO `producto` VALUES ('93', '1', '11590', '130.990', '45.09', 'BONDIOLA', 'BONDIOLA', '1', null);
-INSERT INTO `producto` VALUES ('94', '1', '11600', '108.720', '34.35', 'PALETA', 'PALETA', '1', null);
-INSERT INTO `producto` VALUES ('95', '1', '11610', '61.440', '49.20', 'JAMON COCIDO', 'JAMON COCIDO', '1', null);
-INSERT INTO `producto` VALUES ('96', '1', '11620', '110.730', '46.97', 'JAMON CRUDO', 'JAMON CRUDO', '1', null);
-INSERT INTO `producto` VALUES ('97', '1', '11630', '102.460', '41.46', 'SALAME MILAN', 'SALAME MILAN', '1', null);
-INSERT INTO `producto` VALUES ('98', '1', '11640', '34.330', '129.92', 'SALAMIN', 'SALAMIN', '1', null);
-INSERT INTO `producto` VALUES ('99', '1', '11650', '117.640', '59.77', 'QUESO BARRA', 'QUESO BARRA', '1', null);
-INSERT INTO `producto` VALUES ('100', '1', '11660', '61.960', '134.76', 'CREMOSO', 'CREMOSO', '1', null);
-INSERT INTO `producto` VALUES ('101', '1', '11670', '129.930', '111.41', 'CASCARA COLORADA', 'CASCARA COLORADA', '1', null);
-INSERT INTO `producto` VALUES ('102', '1', '11680', '53.510', '144.59', 'QUESO CRE', 'QUESO CRE', '1', null);
-INSERT INTO `producto` VALUES ('103', '1', '11690', '51.580', '88.59', 'QUESO TREEMBLAY', 'QUESO TREEMBLAY', '1', null);
-INSERT INTO `producto` VALUES ('104', '1', '11700', '54.320', '132.61', 'QUESO PROVOLETA', 'QUESO PROVOLETA', '1', null);
-INSERT INTO `producto` VALUES ('105', '1', '11710', '126.280', '116.29', 'QUESO SARDO', 'QUESO SARDO', '1', null);
-INSERT INTO `producto` VALUES ('106', '1', '11720', '78.640', '33.00', 'MORTADELA', 'MORTADELA', '1', null);
-INSERT INTO `producto` VALUES ('107', '1', '11730', '122.700', '144.23', 'MORTADELA', 'MORTADELA', '1', null);
+INSERT INTO `producto` VALUES ('1', '2', '11750', '281.210', '50.00', 'TRIPA', 'TRIPA', '1', null);
+INSERT INTO `producto` VALUES ('2', '2', '11760', '328.250', '50.00', 'CHINCHULÍN', 'CHINCHULÍN', '1', null);
+INSERT INTO `producto` VALUES ('3', '2', '11770', '179.740', '50.00', 'RIÑON', 'RIÑON', '1', null);
+INSERT INTO `producto` VALUES ('4', '2', '11780', '75.590', '50.00', 'CORAZÓN', 'CORAZÓN', '1', null);
+INSERT INTO `producto` VALUES ('5', '2', '11790', '91.610', '50.00', 'ENTRAÑA', 'ENTRAÑA', '1', null);
+INSERT INTO `producto` VALUES ('6', '2', '11800', '112.700', '50.00', 'RABO', 'RABO', '1', null);
+INSERT INTO `producto` VALUES ('7', '2', '11810', '111.020', '50.00', 'MONDONGO', 'MONDONGO', '1', null);
+INSERT INTO `producto` VALUES ('8', '2', '11820', '26.480', '50.00', 'HÍGADO', 'HÍGADO', '1', null);
+INSERT INTO `producto` VALUES ('9', '2', '11830', '147.850', '50.00', 'MOLLEJAS', 'MOLLEJAS', '1', null);
+INSERT INTO `producto` VALUES ('10', '2', '11850', '124.760', '50.00', 'LENGUA', 'LENGUA', '1', null);
+INSERT INTO `producto` VALUES ('11', '2', '11860', '147.950', '50.00', 'QUIJADA', 'QUIJADA', '1', null);
+INSERT INTO `producto` VALUES ('12', '2', '11870', '111.750', '50.00', 'DUOS', 'DUOS', '1', null);
+INSERT INTO `producto` VALUES ('13', '2', '11880', '76.250', '50.00', 'CARRE ', 'CARRE ', '1', null);
+INSERT INTO `producto` VALUES ('14', '2', '11890', '64.160', '50.00', 'PECHITO', 'PECHITO', '1', null);
+INSERT INTO `producto` VALUES ('15', '2', '11900', '57.160', '50.00', 'JAMON ENTERO', 'JAMON ENTERO', '1', null);
+INSERT INTO `producto` VALUES ('16', '2', '11910', '143.550', '50.00', 'CHURRASQUITO', 'CHURRASQUITO', '1', null);
+INSERT INTO `producto` VALUES ('17', '2', '11920', '153.140', '50.00', 'PALETA ENTERA', 'PALETA ENTERA', '1', null);
+INSERT INTO `producto` VALUES ('18', '2', '11930', '82.180', '50.00', 'PAPADA', 'PAPADA', '1', null);
+INSERT INTO `producto` VALUES ('19', '2', '11940', '103.810', '50.00', 'TOCINO', 'TOCINO', '1', null);
+INSERT INTO `producto` VALUES ('20', '2', '11950', '116.780', '50.00', 'MATAMBRITOS', 'MATAMBRITOS', '1', null);
+INSERT INTO `producto` VALUES ('21', '2', '11960', '114.800', '50.00', 'BONDIOLA', 'BONDIOLA', '1', null);
+INSERT INTO `producto` VALUES ('22', '3', null, '97.230', '50.00', '1/2 RESES', '1/2 RESES', '1', null);
+INSERT INTO `producto` VALUES ('23', '3', null, '47.830', '100.00', '1/4 RUEDA', '1/4 RUEDA', '1', null);
+INSERT INTO `producto` VALUES ('24', '3', null, '59.850', '50.00', '1/4 PISTOLA', '1/4 PISTOLA', '1', null);
+INSERT INTO `producto` VALUES ('25', '3', null, '73.830', '50.00', ' 1/4 DELANTERO ', ' 1/4 DELANTERO ', '1', null);
+INSERT INTO `producto` VALUES ('26', '3', null, '103.910', '0.28', 'BARRAS', 'BARRAS', '1', null);
+INSERT INTO `producto` VALUES ('27', '3', null, '130.530', '50.00', 'MOCHITOS', 'MOCHITOS', '1', null);
+INSERT INTO `producto` VALUES ('28', '3', null, '134.400', '50.00', 'MANTAS', 'MANTAS', '1', null);
+INSERT INTO `producto` VALUES ('29', '3', null, '106.050', '50.00', 'RECORTE', 'RECORTE', '1', null);
+INSERT INTO `producto` VALUES ('30', '3', null, '56.560', '50.00', 'PARRILLERO', 'PARRILLERO', '1', null);
+INSERT INTO `producto` VALUES ('31', '3', null, '98.580', '50.00', 'JUEGOS DE ACHURAS', 'JUEGOS DE ACHURAS', '1', null);
+INSERT INTO `producto` VALUES ('32', '3', null, '85.370', '50.00', 'RECORTE DE 1', 'RECORTE DE 1', '1', null);
+INSERT INTO `producto` VALUES ('33', '3', null, '49.460', '50.00', 'RECORTE DE 2°', 'RECORTE DE 2°', '1', null);
+INSERT INTO `producto` VALUES ('34', '1', '10990', '48.950', '50.00', 'CHORIZO ESPECIAL', 'CHORIZO ESPECIAL', '1', null);
+INSERT INTO `producto` VALUES ('35', '1', '11000', '53.330', '130.00', 'CHORIZO PARRILLERO', 'CHORIZO PARRILLERO', '1', null);
+INSERT INTO `producto` VALUES ('36', '1', '11010', '125.560', '50.00', 'CHORIZO DE CERDO', 'CHORIZO DE CERDO', '1', null);
+INSERT INTO `producto` VALUES ('37', '1', '11020', '31.580', '50.00', 'CHORIZO COLORADO', 'CHORIZO COLORADO', '1', null);
+INSERT INTO `producto` VALUES ('38', '1', '11030', '41.820', '50.00', 'SALCHICHA PARRILL.', 'SALCHICHA PARRILL.', '1', null);
+INSERT INTO `producto` VALUES ('39', '1', '11040', '144.400', '50.00', 'MORCILLA', 'MORCILLA', '1', null);
+INSERT INTO `producto` VALUES ('40', '1', '11050', '72.380', '50.00', 'MORCILLA', 'MORCILLA', '1', null);
+INSERT INTO `producto` VALUES ('41', '1', '11060', '54.580', '50.00', 'SALCHICHAS SNACK', 'SALCHICHAS SNACK', '1', null);
+INSERT INTO `producto` VALUES ('42', '1', '11070', '38.680', '50.00', 'PATE', 'PATE', '1', null);
+INSERT INTO `producto` VALUES ('43', '1', '11080', '107.300', '50.00', 'QUESO DE CERDO', 'QUESO DE CERDO', '1', null);
+INSERT INTO `producto` VALUES ('44', '1', '11100', '30.120', '78.00', 'PICADA COMUN', 'PICADA COMUN', '1', null);
+INSERT INTO `producto` VALUES ('45', '1', '11110', '116.230', '50.00', 'PICADA INTERMEDIA', 'PICADA INTERMEDIA', '1', null);
+INSERT INTO `producto` VALUES ('46', '1', '11120', '250.280', '460.00', 'PICADA ESPECIAL', 'PICADA ESPECIAL', '1', null);
+INSERT INTO `producto` VALUES ('47', '1', '11130', '37.920', '50.00', 'PUCHERO COMUN', 'PUCHERO COMUN', '1', null);
+INSERT INTO `producto` VALUES ('48', '1', '11140', '40.125', '50.00', 'PUCHERO ESPECIAL', 'PUCHERO ESPECIAL', '1', null);
+INSERT INTO `producto` VALUES ('49', '1', '11150', '41.230', '50.00', 'CANINO', 'CANINO', '1', null);
+INSERT INTO `producto` VALUES ('50', '1', '11160', '92.220', '50.00', 'MATAMBRE', 'MATAMBRE', '1', null);
+INSERT INTO `producto` VALUES ('51', '1', '11170', '111.710', '50.00', 'VACIO', 'VACIO', '1', null);
+INSERT INTO `producto` VALUES ('52', '1', '11180', '106.860', '50.00', 'ALA DE PECHO', 'ALA DE PECHO', '1', null);
+INSERT INTO `producto` VALUES ('53', '1', '11190', '133.860', '50.00', 'COSTILLA', 'COSTILLA', '1', null);
+INSERT INTO `producto` VALUES ('54', '1', '11200', '30.180', '50.00', 'MARUCHA', 'MARUCHA', '1', null);
+INSERT INTO `producto` VALUES ('55', '1', '11210', '112.810', '50.00', 'TAPA DE NALGA', 'TAPA DE NALGA', '1', null);
+INSERT INTO `producto` VALUES ('56', '1', '11220', '47.510', '50.00', 'CORTE MALVINA', 'CORTE MALVINA', '1', null);
+INSERT INTO `producto` VALUES ('57', '1', '11230', '39.460', '50.00', 'FALDA', 'FALDA', '1', null);
+INSERT INTO `producto` VALUES ('58', '1', '11240', '136.620', '50.00', 'COSTELETAS', 'COSTELETAS', '1', null);
+INSERT INTO `producto` VALUES ('59', '1', '11250', '105.710', '50.00', 'AGUJA', 'AGUJA', '1', null);
+INSERT INTO `producto` VALUES ('60', '1', '11260', '57.700', '50.00', 'BRAZUELO', 'BRAZUELO', '1', null);
+INSERT INTO `producto` VALUES ('61', '1', '11270', '36.160', '50.00', 'BIFE ANCHO/ANGOSTO', 'BIFE ANCHO/ANGOSTO', '1', null);
+INSERT INTO `producto` VALUES ('62', '1', '11280', '114.390', '50.00', 'ENTRECOT', 'ENTRECOT', '1', null);
+INSERT INTO `producto` VALUES ('63', '1', '11290', '87.570', '50.00', 'ROAST BEEF', 'ROAST BEEF', '1', null);
+INSERT INTO `producto` VALUES ('64', '1', '11300', '114.240', '50.00', 'NALGAS', 'NALGAS', '1', null);
+INSERT INTO `producto` VALUES ('65', '1', '11310', '43.250', '50.00', 'LOMO', 'LOMO', '1', null);
+INSERT INTO `producto` VALUES ('66', '1', '11320', '36.660', '50.00', 'PECETO', 'PECETO', '1', null);
+INSERT INTO `producto` VALUES ('67', '1', '11330', '61.650', '50.00', 'CUADRIL', 'CUADRIL', '1', null);
+INSERT INTO `producto` VALUES ('68', '1', '11340', '123.510', '50.00', 'PALOMITA', 'PALOMITA', '1', null);
+INSERT INTO `producto` VALUES ('69', '1', '11350', '130.630', '50.00', 'JAMON CUADRADO', 'JAMON CUADRADO', '1', null);
+INSERT INTO `producto` VALUES ('70', '1', '11360', '46.800', '50.00', 'CABEZA DE LOMO', 'CABEZA DE LOMO', '1', null);
+INSERT INTO `producto` VALUES ('71', '1', '11370', '108.510', '50.00', 'PULPA BRAZUELO', 'PULPA BRAZUELO', '1', null);
+INSERT INTO `producto` VALUES ('72', '1', '11380', '149.570', '50.00', 'PULPA PALETA', 'PULPA PALETA', '1', null);
+INSERT INTO `producto` VALUES ('73', '1', '11390', '25.880', '50.00', 'TORTUGUITA', 'TORTUGUITA', '1', null);
+INSERT INTO `producto` VALUES ('74', '1', '11400', '142.610', '50.00', 'MILANESAS DE CARNE', 'MILANESAS DE CARNE', '1', null);
+INSERT INTO `producto` VALUES ('75', '1', '11410', '55.910', '50.00', 'MILANESAS DE POLLO', 'MILANESAS DE POLLO', '1', null);
+INSERT INTO `producto` VALUES ('76', '1', '11420', '63.670', '50.00', 'HAMBURGUESAS', 'HAMBURGUESAS', '1', null);
+INSERT INTO `producto` VALUES ('77', '1', '11430', '38.150', '50.00', 'ALBONDIGAS', 'ALBONDIGAS', '1', null);
+INSERT INTO `producto` VALUES ('78', '1', '11440', '125.670', '50.00', 'COSTELETAS', 'COSTELETAS', '1', null);
+INSERT INTO `producto` VALUES ('79', '1', '11450', '138.760', '50.00', 'BONDIOLA', 'BONDIOLA', '1', null);
+INSERT INTO `producto` VALUES ('80', '1', '11460', '83.870', '50.00', 'MATAMBRITO', 'MATAMBRITO', '1', null);
+INSERT INTO `producto` VALUES ('81', '1', '11470', '69.460', '50.00', 'COSTILLA/PECHITO', 'COSTILLA/PECHITO', '1', null);
+INSERT INTO `producto` VALUES ('82', '1', '11480', '28.950', '50.00', 'PULPAS', 'PULPAS', '1', null);
+INSERT INTO `producto` VALUES ('83', '1', '11490', '37.080', '50.00', 'MARUCHA', 'MARUCHA', '1', null);
+INSERT INTO `producto` VALUES ('84', '1', '11500', '141.580', '50.00', 'CARACU', 'CARACU', '1', null);
+INSERT INTO `producto` VALUES ('85', '1', '11510', '69.250', '50.00', 'PAT./HUE./CUE.', 'PATITA/HUESITO/CUERITO', '1', null);
+INSERT INTO `producto` VALUES ('86', '1', '11520', '79.810', '50.00', 'MILANESAS', 'MILANESAS', '1', null);
+INSERT INTO `producto` VALUES ('87', '1', '11530', '77.840', '50.00', 'HAMBURGUESAS', 'HAMBURGUESAS', '1', null);
+INSERT INTO `producto` VALUES ('88', '1', '11540', '78.480', '50.00', 'PATAMUSLO', 'PATAMUSLO', '1', null);
+INSERT INTO `producto` VALUES ('89', '1', '11550', '122.900', '50.00', 'TROZADO', 'TROZADO', '1', null);
+INSERT INTO `producto` VALUES ('90', '1', '11560', '89.560', '50.00', 'PECHUGA', 'PECHUGA', '1', null);
+INSERT INTO `producto` VALUES ('91', '1', '11570', '41.960', '50.00', 'FILET', 'FILET', '1', null);
+INSERT INTO `producto` VALUES ('92', '1', '11580', '135.130', '50.00', 'BROCHET', 'BROCHET', '1', null);
+INSERT INTO `producto` VALUES ('93', '1', '11590', '130.990', '50.00', 'BONDIOLA', 'BONDIOLA', '1', null);
+INSERT INTO `producto` VALUES ('94', '1', '11600', '108.720', '50.00', 'PALETA', 'PALETA', '1', null);
+INSERT INTO `producto` VALUES ('95', '1', '11610', '61.440', '50.00', 'JAMON COCIDO', 'JAMON COCIDO', '1', null);
+INSERT INTO `producto` VALUES ('96', '1', '11620', '110.730', '50.00', 'JAMON CRUDO', 'JAMON CRUDO', '1', null);
+INSERT INTO `producto` VALUES ('97', '1', '11630', '102.460', '50.00', 'SALAME MILAN', 'SALAME MILAN', '1', null);
+INSERT INTO `producto` VALUES ('98', '1', '11640', '34.330', '50.00', 'SALAMIN', 'SALAMIN', '1', null);
+INSERT INTO `producto` VALUES ('99', '1', '11650', '117.640', '50.00', 'QUESO BARRA', 'QUESO BARRA', '1', null);
+INSERT INTO `producto` VALUES ('100', '1', '11660', '61.960', '50.00', 'CREMOSO', 'CREMOSO', '1', null);
+INSERT INTO `producto` VALUES ('101', '1', '11670', '129.930', '50.00', 'CASCARA COLORADA', 'CASCARA COLORADA', '1', null);
+INSERT INTO `producto` VALUES ('102', '1', '11680', '53.510', '50.00', 'QUESO CRE', 'QUESO CRE', '1', null);
+INSERT INTO `producto` VALUES ('103', '1', '11690', '51.580', '50.00', 'QUESO TREEMBLAY', 'QUESO TREEMBLAY', '1', null);
+INSERT INTO `producto` VALUES ('104', '1', '11700', '54.320', '50.00', 'QUESO PROVOLETA', 'QUESO PROVOLETA', '1', null);
+INSERT INTO `producto` VALUES ('105', '1', '11710', '126.280', '50.00', 'QUESO SARDO', 'QUESO SARDO', '1', null);
+INSERT INTO `producto` VALUES ('106', '1', '11720', '78.640', '50.00', 'MORTADELA', 'MORTADELA', '1', null);
+INSERT INTO `producto` VALUES ('107', '1', '11730', '122.700', '50.00', 'MORTADELA', 'MORTADELA', '1', null);
 
 -- ----------------------------
 -- Table structure for productotipo
@@ -1012,16 +1072,15 @@ CREATE TABLE `productoubicacion` (
   UNIQUE KEY `UQ_InventarioUbicacion_id_ubicacion` (`id`),
   KEY `id_producto` (`id_producto`),
   KEY `fk_ubi` (`id_ubicacion`)
-) ENGINE=InnoDB AUTO_INCREMENT=163 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=187 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of productoubicacion
 -- ----------------------------
-INSERT INTO `productoubicacion` VALUES ('4', '7', null, '4', '6.500', null, '2018-03-12 16:52:01', '1', null);
 INSERT INTO `productoubicacion` VALUES ('6', '34', null, '3', '31.420', null, '2018-03-15 19:28:36', '1', null);
 INSERT INTO `productoubicacion` VALUES ('7', '7', null, '2', '6.930', null, '2018-03-15 19:28:36', '1', null);
 INSERT INTO `productoubicacion` VALUES ('14', '9', null, '1', '21.020', null, '2018-03-16 20:01:09', '1', null);
-INSERT INTO `productoubicacion` VALUES ('16', '9', null, '3', '38.320', null, '2018-03-16 20:43:04', '1', null);
+INSERT INTO `productoubicacion` VALUES ('16', '9', null, '3', '48.560', null, '2018-03-16 20:43:04', '1', null);
 INSERT INTO `productoubicacion` VALUES ('17', null, '23', '2', '84.000', null, '2018-03-16 20:43:04', '1', null);
 INSERT INTO `productoubicacion` VALUES ('18', '9', null, '2', '0.900', null, '2018-03-16 21:08:21', '1', null);
 INSERT INTO `productoubicacion` VALUES ('19', '7', null, '1', '1.570', null, '2018-03-16 21:16:03', '1', null);
@@ -1035,41 +1094,22 @@ INSERT INTO `productoubicacion` VALUES ('27', null, '28', '2', '66.580', null, '
 INSERT INTO `productoubicacion` VALUES ('28', null, '29', '4', '234.000', null, '2018-03-19 17:34:09', '1', null);
 INSERT INTO `productoubicacion` VALUES ('29', null, '30', '4', '543.000', null, '2018-03-19 17:34:09', '1', null);
 INSERT INTO `productoubicacion` VALUES ('31', null, '31', '2', '3464.500', null, '2018-03-19 17:36:28', '1', null);
-INSERT INTO `productoubicacion` VALUES ('32', '5', null, '4', '20.000', null, '2018-03-19 19:07:13', '1', null);
-INSERT INTO `productoubicacion` VALUES ('33', '12', null, '4', '-6.000', null, '2018-03-19 19:07:13', '1', null);
 INSERT INTO `productoubicacion` VALUES ('34', null, '32', '4', '147.250', null, '2018-03-19 19:07:13', '1', null);
-INSERT INTO `productoubicacion` VALUES ('35', '20', null, '4', '58.000', null, '2018-03-19 19:09:20', '1', null);
-INSERT INTO `productoubicacion` VALUES ('36', '25', null, '4', '100.000', null, '2018-03-19 19:09:20', '1', null);
 INSERT INTO `productoubicacion` VALUES ('37', null, '33', '4', '123.650', null, '2018-03-19 19:09:20', '1', null);
-INSERT INTO `productoubicacion` VALUES ('38', '8', null, '4', '-78.500', null, '2018-03-19 19:12:35', '1', null);
-INSERT INTO `productoubicacion` VALUES ('39', '26', null, '4', '84.000', null, '2018-03-19 19:12:35', '1', null);
+INSERT INTO `productoubicacion` VALUES ('39', '26', null, '4', '0.000', '2018-04-17 20:49:19', '2018-03-19 19:12:35', '1', null);
 INSERT INTO `productoubicacion` VALUES ('40', null, '34', '4', '44.254', null, '2018-03-19 19:12:35', '1', null);
-INSERT INTO `productoubicacion` VALUES ('41', '26', null, '4', '21.000', null, '2018-03-19 19:14:37', '1', null);
-INSERT INTO `productoubicacion` VALUES ('42', '33', null, '4', '11.000', null, '2018-03-19 19:14:37', '1', null);
+INSERT INTO `productoubicacion` VALUES ('42', '33', null, '4', '50.000', null, '2018-03-19 19:14:37', '1', null);
 INSERT INTO `productoubicacion` VALUES ('43', null, '35', '4', '22.000', null, '2018-03-19 19:14:37', '1', null);
-INSERT INTO `productoubicacion` VALUES ('44', '8', null, '4', '85.000', null, '2018-03-19 19:16:37', '1', null);
-INSERT INTO `productoubicacion` VALUES ('45', '25', null, '4', '32.000', null, '2018-03-19 19:16:37', '1', null);
+INSERT INTO `productoubicacion` VALUES ('45', '25', null, '4', '50.000', null, '2018-03-19 19:16:37', '1', null);
 INSERT INTO `productoubicacion` VALUES ('47', null, '36', '2', '11.000', null, '2018-03-19 19:18:22', '1', null);
-INSERT INTO `productoubicacion` VALUES ('48', '6', null, '4', '-27.000', null, '2018-03-19 19:31:18', '1', null);
 INSERT INTO `productoubicacion` VALUES ('49', '45', null, '4', '50.000', null, '2018-03-19 19:31:18', '1', null);
 INSERT INTO `productoubicacion` VALUES ('51', null, '37', '2', '11.000', null, '2018-03-19 19:34:04', '1', null);
-INSERT INTO `productoubicacion` VALUES ('52', '9', null, '4', '36.000', null, '2018-03-19 19:55:49', '1', null);
-INSERT INTO `productoubicacion` VALUES ('53', '14', null, '4', '-59.000', null, '2018-03-19 19:55:49', '1', null);
 INSERT INTO `productoubicacion` VALUES ('55', null, '38', '2', '12.000', null, '2018-03-19 19:59:28', '1', null);
-INSERT INTO `productoubicacion` VALUES ('56', '5', null, '4', '22.000', null, '2018-03-19 20:05:44', '1', null);
 INSERT INTO `productoubicacion` VALUES ('57', null, '39', '4', '321.000', null, '2018-03-19 20:05:44', '1', null);
-INSERT INTO `productoubicacion` VALUES ('58', '10', null, '4', '-132.000', null, '2018-03-19 20:24:54', '1', null);
 INSERT INTO `productoubicacion` VALUES ('59', '15', null, '4', '22.000', null, '2018-03-19 20:24:54', '1', null);
 INSERT INTO `productoubicacion` VALUES ('60', null, '40', '4', '12.000', null, '2018-03-19 20:24:54', '1', null);
-INSERT INTO `productoubicacion` VALUES ('61', '10', null, '4', '25.000', null, '2018-03-19 20:45:17', '1', null);
-INSERT INTO `productoubicacion` VALUES ('62', '6', null, '4', '14.000', null, '2018-03-19 20:45:17', '1', null);
 INSERT INTO `productoubicacion` VALUES ('63', null, '41', '4', '112.250', null, '2018-03-19 20:45:17', '1', null);
-INSERT INTO `productoubicacion` VALUES ('64', '7', null, '4', '25.000', null, '2018-03-19 20:48:19', '1', null);
-INSERT INTO `productoubicacion` VALUES ('65', '10', null, '4', '64.000', null, '2018-03-19 20:48:19', '1', null);
 INSERT INTO `productoubicacion` VALUES ('66', null, '42', '4', '11.000', null, '2018-03-19 20:48:19', '1', null);
-INSERT INTO `productoubicacion` VALUES ('67', '7', null, '4', '22.000', null, '2018-03-19 20:53:03', '1', null);
-INSERT INTO `productoubicacion` VALUES ('68', '8', null, '4', '25.000', null, '2018-03-19 20:55:59', '1', null);
-INSERT INTO `productoubicacion` VALUES ('69', '12', null, '4', '85.000', null, '2018-03-19 20:55:59', '1', null);
 INSERT INTO `productoubicacion` VALUES ('70', null, '43', '4', '251.000', null, '2018-03-19 20:55:59', '1', null);
 INSERT INTO `productoubicacion` VALUES ('71', '5', null, '4', '43.000', null, '2018-03-19 21:00:28', '1', null);
 INSERT INTO `productoubicacion` VALUES ('72', '19', null, '4', '31.000', null, '2018-03-19 21:00:28', '1', null);
@@ -1080,49 +1120,35 @@ INSERT INTO `productoubicacion` VALUES ('76', null, '45', '4', '254.000', null, 
 INSERT INTO `productoubicacion` VALUES ('77', '55', null, '4', '25.000', null, '2018-03-19 21:52:34', '1', null);
 INSERT INTO `productoubicacion` VALUES ('78', '65', null, '4', '85.000', null, '2018-03-19 21:52:34', '1', null);
 INSERT INTO `productoubicacion` VALUES ('79', null, '46', '4', '12.000', null, '2018-03-19 21:52:34', '1', null);
-INSERT INTO `productoubicacion` VALUES ('80', '8', null, '4', '22.000', null, '2018-03-19 22:28:40', '1', null);
+INSERT INTO `productoubicacion` VALUES ('80', '8', null, '4', '36.250', null, '2018-03-19 22:28:40', '1', null);
 INSERT INTO `productoubicacion` VALUES ('81', '17', null, '4', '52.000', null, '2018-03-19 22:28:40', '1', null);
 INSERT INTO `productoubicacion` VALUES ('82', null, '47', '4', '55.000', null, '2018-03-19 22:28:40', '1', null);
 INSERT INTO `productoubicacion` VALUES ('83', '10', null, '4', '25.000', null, '2018-03-19 22:34:39', '1', null);
-INSERT INTO `productoubicacion` VALUES ('84', '15', null, '4', '24.000', null, '2018-03-19 22:34:39', '1', null);
 INSERT INTO `productoubicacion` VALUES ('85', null, '48', '4', '11.250', null, '2018-03-19 22:34:39', '1', null);
 INSERT INTO `productoubicacion` VALUES ('86', '12', null, '4', '22.000', null, '2018-03-19 22:36:37', '1', null);
 INSERT INTO `productoubicacion` VALUES ('87', '13', null, '4', '23.500', null, '2018-03-19 22:36:37', '1', null);
 INSERT INTO `productoubicacion` VALUES ('88', null, '49', '4', '12.000', null, '2018-03-19 22:36:37', '1', null);
-INSERT INTO `productoubicacion` VALUES ('89', '6', null, '4', '52.000', null, '2018-03-19 22:38:11', '1', null);
-INSERT INTO `productoubicacion` VALUES ('90', '8', null, '4', '74.000', null, '2018-03-19 22:38:11', '1', null);
 INSERT INTO `productoubicacion` VALUES ('92', '6', null, '1', '52.000', null, '2018-03-19 22:39:15', '1', null);
 INSERT INTO `productoubicacion` VALUES ('93', '8', null, '3', '88.000', null, '2018-03-19 22:39:30', '1', null);
-INSERT INTO `productoubicacion` VALUES ('94', '9', null, '4', '22.000', null, '2018-03-19 22:40:52', '1', null);
-INSERT INTO `productoubicacion` VALUES ('96', '8', null, '4', '25.000', null, '2018-03-19 22:43:46', '1', null);
-INSERT INTO `productoubicacion` VALUES ('97', '12', null, '4', '50.000', null, '2018-03-19 22:43:46', '1', null);
 INSERT INTO `productoubicacion` VALUES ('98', null, '52', '4', '125.000', null, '2018-03-19 22:43:46', '1', null);
-INSERT INTO `productoubicacion` VALUES ('99', '8', null, '4', '14.000', null, '2018-03-19 22:46:45', '1', null);
-INSERT INTO `productoubicacion` VALUES ('100', '10', null, '4', '154.000', null, '2018-03-19 22:46:45', '1', null);
 INSERT INTO `productoubicacion` VALUES ('101', null, '53', '4', '1524.250', null, '2018-03-19 22:46:45', '1', null);
-INSERT INTO `productoubicacion` VALUES ('102', '10', null, '1', '154.000', null, '2018-03-19 22:47:38', '1', null);
+INSERT INTO `productoubicacion` VALUES ('102', '10', null, '1', '160.360', null, '2018-03-19 22:47:38', '1', null);
 INSERT INTO `productoubicacion` VALUES ('104', null, '54', '3', '22.000', null, '2018-03-19 22:49:46', '1', null);
 INSERT INTO `productoubicacion` VALUES ('105', '7', null, '4', '52.000', null, '2018-03-19 22:51:03', '1', null);
 INSERT INTO `productoubicacion` VALUES ('106', '16', null, '4', '48.000', null, '2018-03-19 22:51:03', '1', null);
 INSERT INTO `productoubicacion` VALUES ('107', null, '55', '4', '11.250', null, '2018-03-19 22:51:03', '1', null);
-INSERT INTO `productoubicacion` VALUES ('108', '16', null, '4', '100.000', null, '2018-03-19 22:54:31', '1', null);
 INSERT INTO `productoubicacion` VALUES ('109', null, '56', '4', '1.000', null, '2018-03-19 22:54:31', '1', null);
-INSERT INTO `productoubicacion` VALUES ('110', '19', null, '4', '22.000', null, '2018-03-19 23:00:05', '1', null);
 INSERT INTO `productoubicacion` VALUES ('111', null, '57', '4', '52.000', null, '2018-03-19 23:00:05', '1', null);
-INSERT INTO `productoubicacion` VALUES ('112', '16', null, '4', '52.000', null, '2018-03-19 23:03:41', '1', null);
 INSERT INTO `productoubicacion` VALUES ('113', '14', null, '4', '145.000', null, '2018-03-19 23:03:41', '1', null);
 INSERT INTO `productoubicacion` VALUES ('114', null, '58', '4', '11.000', null, '2018-03-19 23:03:41', '1', null);
 INSERT INTO `productoubicacion` VALUES ('115', '16', null, '1', '52.000', null, '2018-03-19 23:04:07', '1', null);
 INSERT INTO `productoubicacion` VALUES ('116', '14', null, '3', '145.000', null, '2018-03-19 23:04:09', '1', null);
-INSERT INTO `productoubicacion` VALUES ('117', '9', null, '4', '25.000', null, '2018-03-21 17:46:09', '1', null);
 INSERT INTO `productoubicacion` VALUES ('118', null, '59', '4', '12.000', null, '2018-03-21 17:46:09', '1', null);
-INSERT INTO `productoubicacion` VALUES ('119', '25', null, '4', '25.000', null, '2018-03-21 18:00:09', '1', null);
 INSERT INTO `productoubicacion` VALUES ('120', null, '60', '4', '11.000', null, '2018-03-21 18:00:09', '1', null);
-INSERT INTO `productoubicacion` VALUES ('121', '28', null, '4', '25.000', null, '2018-03-21 18:01:29', '1', null);
+INSERT INTO `productoubicacion` VALUES ('121', '28', null, '4', '50.000', null, '2018-03-21 18:01:29', '1', null);
 INSERT INTO `productoubicacion` VALUES ('122', null, '61', '4', '12.000', null, '2018-03-21 18:01:29', '1', null);
 INSERT INTO `productoubicacion` VALUES ('125', null, '62', '2', '125.000', null, '2018-03-21 18:04:27', '1', null);
 INSERT INTO `productoubicacion` VALUES ('126', '21', null, '4', '0.000', '2018-03-21 19:58:57', '2018-03-21 19:56:59', '1', null);
-INSERT INTO `productoubicacion` VALUES ('127', '23', null, '4', '0.000', '2018-03-21 19:58:57', '2018-03-21 19:57:01', '1', null);
 INSERT INTO `productoubicacion` VALUES ('128', null, '63', '4', '0.000', '2018-03-21 19:58:57', '2018-03-21 19:57:08', '1', null);
 INSERT INTO `productoubicacion` VALUES ('129', null, '64', '4', '0.000', '2018-03-21 19:58:57', '2018-03-21 19:57:10', '1', null);
 INSERT INTO `productoubicacion` VALUES ('130', null, '65', '4', '0.000', '2018-03-21 19:58:57', '2018-03-21 19:57:12', '1', null);
@@ -1131,21 +1157,20 @@ INSERT INTO `productoubicacion` VALUES ('132', '23', null, '1', '25.000', null, 
 INSERT INTO `productoubicacion` VALUES ('133', null, '63', '3', '123.000', null, '2018-03-21 19:58:57', '1', null);
 INSERT INTO `productoubicacion` VALUES ('134', null, '64', '3', '123.000', null, '2018-03-21 19:58:57', '1', null);
 INSERT INTO `productoubicacion` VALUES ('135', null, '65', '2', '356.250', null, '2018-03-21 19:58:57', '1', null);
-INSERT INTO `productoubicacion` VALUES ('136', '12', null, '4', '20.000', null, '2018-03-22 17:06:45', '1', null);
 INSERT INTO `productoubicacion` VALUES ('137', null, '66', '4', '0.000', '2018-03-22 17:07:45', '2018-03-22 17:06:45', '1', null);
 INSERT INTO `productoubicacion` VALUES ('138', '12', null, '3', '20.000', null, '2018-03-22 17:07:45', '1', null);
 INSERT INTO `productoubicacion` VALUES ('139', null, '66', '2', '245.000', null, '2018-03-22 17:07:45', '1', null);
 INSERT INTO `productoubicacion` VALUES ('140', '30', null, '2', '14.250', null, '2018-03-29 16:53:32', '1', null);
 INSERT INTO `productoubicacion` VALUES ('141', '24', null, '3', '235.000', null, '2018-03-29 16:53:43', '1', null);
-INSERT INTO `productoubicacion` VALUES ('142', '3', null, '2', '12.000', null, '2018-03-29 16:56:07', '1', null);
-INSERT INTO `productoubicacion` VALUES ('143', '2', null, '1', '2.000', null, '2018-03-29 16:58:40', '1', null);
-INSERT INTO `productoubicacion` VALUES ('144', '10', null, '2', '8.250', null, '2018-03-29 16:59:30', '1', null);
-INSERT INTO `productoubicacion` VALUES ('145', '5', null, '3', '48.000', null, '2018-03-29 20:20:51', '1', null);
+INSERT INTO `productoubicacion` VALUES ('142', '3', null, '2', '37.280', null, '2018-03-29 16:56:07', '1', null);
+INSERT INTO `productoubicacion` VALUES ('143', '2', null, '1', '0.000', '2018-04-10 17:45:27', '2018-03-29 16:58:40', '1', null);
+INSERT INTO `productoubicacion` VALUES ('144', '10', null, '2', '36.500', null, '2018-03-29 16:59:30', '1', null);
+INSERT INTO `productoubicacion` VALUES ('145', '5', null, '3', '53.360', null, '2018-03-29 20:20:51', '1', null);
 INSERT INTO `productoubicacion` VALUES ('146', '7', null, '3', '1.000', null, '2018-03-29 20:21:11', '1', null);
 INSERT INTO `productoubicacion` VALUES ('147', '6', null, '3', '0.200', null, '2018-03-29 20:33:39', '1', null);
 INSERT INTO `productoubicacion` VALUES ('148', '15', null, '1', '125.000', null, '2018-03-29 20:45:21', '1', null);
 INSERT INTO `productoubicacion` VALUES ('149', '27', null, '3', '10.000', null, '2018-03-29 20:48:23', '1', null);
-INSERT INTO `productoubicacion` VALUES ('150', '4', null, '2', '2.000', null, '2018-03-29 20:53:09', '1', null);
+INSERT INTO `productoubicacion` VALUES ('150', '4', null, '2', '21.110', null, '2018-03-29 20:53:09', '1', null);
 INSERT INTO `productoubicacion` VALUES ('151', '2', null, '4', '7.000', null, '2018-03-29 20:53:09', '1', null);
 INSERT INTO `productoubicacion` VALUES ('152', '4', null, '1', '1.500', null, '2018-03-29 22:23:37', '1', null);
 INSERT INTO `productoubicacion` VALUES ('153', '44', null, '4', '0.000', '2018-04-05 16:56:54', '2018-04-05 16:55:16', '1', null);
@@ -1158,6 +1183,29 @@ INSERT INTO `productoubicacion` VALUES ('159', '49', null, '3', '29.630', null, 
 INSERT INTO `productoubicacion` VALUES ('160', '46', null, '1', '63.000', null, '2018-04-05 16:57:09', '1', null);
 INSERT INTO `productoubicacion` VALUES ('161', null, '67', '3', '256.250', null, '2018-04-05 16:57:12', '1', null);
 INSERT INTO `productoubicacion` VALUES ('162', null, '68', '2', '122.000', null, '2018-04-05 16:57:15', '1', null);
+INSERT INTO `productoubicacion` VALUES ('163', '46', null, '4', '253.250', null, '2018-04-09 18:30:03', '1', null);
+INSERT INTO `productoubicacion` VALUES ('164', '47', null, '4', '200.000', null, '2018-04-09 18:30:05', '1', null);
+INSERT INTO `productoubicacion` VALUES ('165', null, '69', '4', '361.250', null, '2018-04-09 18:30:10', '1', null);
+INSERT INTO `productoubicacion` VALUES ('166', null, '70', '4', '233.000', null, '2018-04-09 18:30:13', '1', null);
+INSERT INTO `productoubicacion` VALUES ('167', null, '71', '4', '0.000', '2018-04-09 18:39:56', '2018-04-09 18:39:45', '1', null);
+INSERT INTO `productoubicacion` VALUES ('168', null, '71', '2', '14.000', null, '2018-04-09 18:39:56', '1', null);
+INSERT INTO `productoubicacion` VALUES ('169', '44', null, '4', '25.360', null, '2018-04-09 19:09:29', '1', null);
+INSERT INTO `productoubicacion` VALUES ('170', '51', null, '4', '38.000', null, '2018-04-09 19:09:29', '1', null);
+INSERT INTO `productoubicacion` VALUES ('171', null, '72', '4', '112.000', null, '2018-04-09 19:09:29', '1', null);
+INSERT INTO `productoubicacion` VALUES ('172', '2', null, '2', '7.000', null, '2018-04-10 17:45:27', '1', null);
+INSERT INTO `productoubicacion` VALUES ('173', '4', null, '3', '5.250', null, '2018-04-10 17:46:09', '1', null);
+INSERT INTO `productoubicacion` VALUES ('174', '23', null, '2', '125.250', null, '2018-04-11 18:29:33', '1', null);
+INSERT INTO `productoubicacion` VALUES ('175', '1', null, '3', '25.360', null, '2018-04-13 20:08:07', '1', null);
+INSERT INTO `productoubicacion` VALUES ('176', '22', null, '4', '50.000', null, '2018-03-19 19:16:37', '1', null);
+INSERT INTO `productoubicacion` VALUES ('177', '23', null, '4', '100.000', null, '2018-03-19 19:16:37', '1', null);
+INSERT INTO `productoubicacion` VALUES ('178', '24', null, '4', '50.000', null, '2018-03-19 19:16:37', '1', null);
+INSERT INTO `productoubicacion` VALUES ('179', '27', null, '4', '50.000', null, '2018-03-19 19:16:37', '1', null);
+INSERT INTO `productoubicacion` VALUES ('180', '29', null, '4', '50.000', null, '2018-03-19 19:16:37', '1', null);
+INSERT INTO `productoubicacion` VALUES ('182', '26', null, '4', '0.280', null, '2018-04-17 20:54:25', '1', null);
+INSERT INTO `productoubicacion` VALUES ('183', '35', null, '4', '50.000', null, '2018-04-19 17:59:27', '1', null);
+INSERT INTO `productoubicacion` VALUES ('184', '46', null, '4', '20.000', null, '2018-04-19 17:59:27', '1', null);
+INSERT INTO `productoubicacion` VALUES ('185', '44', null, '4', '15.000', null, '2018-04-19 18:04:12', '1', null);
+INSERT INTO `productoubicacion` VALUES ('186', '46', null, '4', '350.000', null, '2018-04-19 18:04:12', '1', null);
 
 -- ----------------------------
 -- Table structure for proveedor
@@ -1231,7 +1279,7 @@ CREATE TABLE `proveedorcuentamovimiento` (
   PRIMARY KEY (`id`),
   KEY `fk_movtipo` (`id_movimiento_tipo`),
   CONSTRAINT `proveedorcuentamovimiento_ibfk_2` FOREIGN KEY (`id_movimiento_tipo`) REFERENCES `movimientotipo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of proveedorcuentamovimiento
@@ -1242,6 +1290,16 @@ INSERT INTO `proveedorcuentamovimiento` VALUES ('3', '1', '3', '1', '500', '2017
 INSERT INTO `proveedorcuentamovimiento` VALUES ('4', '1', '3', '2', '1000', '2017-11-15 12:00:06', 'N', '1');
 INSERT INTO `proveedorcuentamovimiento` VALUES ('5', '0', '1', '1', '11', '2018-03-09 12:48:20', 'N', '1');
 INSERT INTO `proveedorcuentamovimiento` VALUES ('6', '0', '1', '1', '22', '2018-03-09 12:52:13', 'N', '1');
+INSERT INTO `proveedorcuentamovimiento` VALUES ('7', '16', '4', '1', '12179.97', '2018-04-09 18:29:19', 'N', '1');
+INSERT INTO `proveedorcuentamovimiento` VALUES ('8', '16', '4', '2', '12179.97', '2018-04-09 18:29:34', 'S', '1');
+INSERT INTO `proveedorcuentamovimiento` VALUES ('9', '8', '4', '1', '256.36', '2018-04-09 18:39:45', 'N', '1');
+INSERT INTO `proveedorcuentamovimiento` VALUES ('10', '8', '4', '2', '100', '2018-04-09 18:39:45', 'S', '1');
+INSERT INTO `proveedorcuentamovimiento` VALUES ('11', '9', '1', '1', '7950.76', '2018-04-09 19:09:29', 'N', '1');
+INSERT INTO `proveedorcuentamovimiento` VALUES ('12', '9', '1', '2', '7950.76', '2018-04-09 19:09:29', 'S', '1');
+INSERT INTO `proveedorcuentamovimiento` VALUES ('13', '10', '1', '1', '3751.25', '2018-04-19 17:59:27', 'N', '1');
+INSERT INTO `proveedorcuentamovimiento` VALUES ('14', '10', '1', '2', '3751.25', '2018-04-19 17:59:27', 'S', '1');
+INSERT INTO `proveedorcuentamovimiento` VALUES ('15', '11', '4', '1', '2897.74', '2018-04-19 18:04:12', 'N', '1');
+INSERT INTO `proveedorcuentamovimiento` VALUES ('16', '11', '4', '2', '2897.74', '2018-04-19 18:04:12', 'S', '1');
 
 -- ----------------------------
 -- Table structure for ubicacion
@@ -1311,7 +1369,7 @@ CREATE TABLE `usuariomodulo` (
   KEY `fk_us` (`id_usuario`),
   CONSTRAINT `fk_mod` FOREIGN KEY (`id_modulo`) REFERENCES `modulo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_us` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of usuariomodulo
@@ -1337,6 +1395,7 @@ INSERT INTO `usuariomodulo` VALUES ('25', '1', '14');
 INSERT INTO `usuariomodulo` VALUES ('26', '1', '15');
 INSERT INTO `usuariomodulo` VALUES ('27', '1', '16');
 INSERT INTO `usuariomodulo` VALUES ('28', '1', '17');
+INSERT INTO `usuariomodulo` VALUES ('29', '1', '18');
 
 -- ----------------------------
 -- Table structure for venta
@@ -1350,7 +1409,7 @@ CREATE TABLE `venta` (
   `fecha_baja` datetime DEFAULT NULL,
   `id_operacion` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of venta
@@ -1371,6 +1430,15 @@ INSERT INTO `venta` VALUES ('14', '35310.000', '2018-03-02 12:44:07', '1', null,
 INSERT INTO `venta` VALUES ('15', '7872.000', '2018-03-02 12:45:42', '1', null, '13');
 INSERT INTO `venta` VALUES ('16', '88.000', '2018-03-02 13:05:37', '1', null, '14');
 INSERT INTO `venta` VALUES ('17', '4303.000', '2018-04-07 18:53:57', '1', null, '0');
+INSERT INTO `venta` VALUES ('18', '169.500', '2018-04-13 20:11:46', '1', null, '0');
+INSERT INTO `venta` VALUES ('19', '9570.000', '2018-04-17 19:03:56', '1', null, '17');
+INSERT INTO `venta` VALUES ('20', '9920.000', '2018-04-17 19:10:59', '1', null, '18');
+INSERT INTO `venta` VALUES ('21', '3700.000', '2018-04-17 19:22:17', '1', null, '19');
+INSERT INTO `venta` VALUES ('22', '5200.000', '2018-04-17 19:28:41', '1', null, '20');
+INSERT INTO `venta` VALUES ('23', '6800.000', '2018-04-17 19:29:46', '1', null, '21');
+INSERT INTO `venta` VALUES ('24', '4200.000', '2018-04-17 20:31:27', '1', null, '22');
+INSERT INTO `venta` VALUES ('25', '50.000', '2018-04-17 20:33:37', '1', null, '23');
+INSERT INTO `venta` VALUES ('26', '6000.000', '2018-04-17 20:49:19', '1', null, '24');
 
 -- ----------------------------
 -- Table structure for ventadetalle
@@ -1387,7 +1455,7 @@ CREATE TABLE `ventadetalle` (
   PRIMARY KEY (`id`),
   KEY `fk_liquidacion` (`id_venta`),
   KEY `fk_produ` (`id_producto`)
-) ENGINE=InnoDB AUTO_INCREMENT=207 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=220 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of ventadetalle
@@ -1595,6 +1663,19 @@ INSERT INTO `ventadetalle` VALUES ('203', '31', '35', '105.130', '0.725', '1', n
 INSERT INTO `ventadetalle` VALUES ('204', '31', '35', '105.130', '0.725', '1', null);
 INSERT INTO `ventadetalle` VALUES ('205', '31', '35', '105.130', '0.725', '1', null);
 INSERT INTO `ventadetalle` VALUES ('206', '31', '35', '105.130', '0.725', '1', null);
+INSERT INTO `ventadetalle` VALUES ('207', '18', '5', '85.250', '5.360', '1', null);
+INSERT INTO `ventadetalle` VALUES ('208', '18', '10', '84.250', '6.360', '1', null);
+INSERT INTO `ventadetalle` VALUES ('209', '19', '26', '2600.000', '25.000', '1', null);
+INSERT INTO `ventadetalle` VALUES ('210', '20', '26', '2500.000', '24.000', '1', null);
+INSERT INTO `ventadetalle` VALUES ('211', '20', '33', '700.000', '14.000', '1', null);
+INSERT INTO `ventadetalle` VALUES ('212', '20', '28', '6720.000', '50.000', '1', null);
+INSERT INTO `ventadetalle` VALUES ('213', '21', '25', '3700.000', '50.000', '1', null);
+INSERT INTO `ventadetalle` VALUES ('214', '22', '26', '5200.000', '50.000', '1', null);
+INSERT INTO `ventadetalle` VALUES ('215', '23', '28', '6800.000', '50.000', '1', null);
+INSERT INTO `ventadetalle` VALUES ('216', '24', '23', '2200.000', '45.000', '1', null);
+INSERT INTO `ventadetalle` VALUES ('217', '24', '24', '2000.000', '48.000', '1', null);
+INSERT INTO `ventadetalle` VALUES ('218', '25', '23', '50.000', '5.000', '1', null);
+INSERT INTO `ventadetalle` VALUES ('219', '26', '26', '6000.000', '50.000', '1', null);
 
 -- ----------------------------
 -- View structure for vistacompra
@@ -1620,22 +1701,13 @@ WHERE
 -- View structure for vistacompraseleccionada
 -- ----------------------------
 DROP VIEW IF EXISTS `vistacompraseleccionada`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost`  VIEW `vistacompraseleccionada` AS SELECT
-  `v`.`id`,
-  `v`.`id_operacion`,
-  `o`.`id_proveedor`,
-  `p`.`id_codigo_barra` AS 'codigo',
-  `p`.`descripcion_breve` AS 'descripcion',
-  `vd`.`peso`,
-  `vd`.`monto`,
-  `v`.`monto_total`
-FROM
-  (((`compra` v
-    JOIN `compradetalle` vd ON ((`v`.`id` = `vd`.`id_compra`)))
-    JOIN `producto` p ON ((`vd`.`id_producto` = `p`.`id`)))
-    JOIN `operacionproveedor` o ON ((`v`.`id_operacion` = `o`.`id`)))
-WHERE
-  (`v`.`id` = 11) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `vistacompraseleccionada` AS SELECT  `v`.`id`, `v`.`id_operacion`, o.id_proveedor, `p`.`id_codigo_barra` AS 'codigo',  `p`.`descripcion_breve` AS 'descripcion',  `vd`.`peso`,  `vd`.`monto`,  `v`.`monto_total` FROM(((`compra` v JOIN `compradetalle` vd ON((`v`.`id` = `vd`.`id_compra`)))     JOIN `producto` p ON((`vd`.`id_producto` = `p`.`id`)))  JOIN `operacionproveedor` o ON((`v`.`id_operacion` = `o`.`id`))) where v.id = 6 ;
+
+-- ----------------------------
+-- View structure for vistasaldoporidcliente
+-- ----------------------------
+DROP VIEW IF EXISTS `vistasaldoporidcliente`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `vistasaldoporidcliente` AS SELECT   `c`.`id`,   `c`.`cod_cliente`,   `c`.`razon_social`,   `c`.`cuit`,   `cc`.`id` AS 'id_cliente_cuenta',   `cc`.`descripcion`,   `cc`.`id_banco`, `ccm`.`id_operacion`,   `mt`.`descripcion` AS 'tipo',   `ccm`.`fecha`,   IF((`ccm`.`id_movimiento_tipo` = 2), `ccm`.`monto`, (`ccm`.`monto` *-(1))) AS 'saldo'  FROM(((`clientecuenta` cc    JOIN `cliente` c ON ((`cc`.`id_cliente` = `c`.`id`)))    JOIN `clientecuentamovimiento` ccm ON ((`ccm`.`id_cuenta` = `cc`.`id`)))    JOIN `movimientotipo` mt ON ((`ccm`.`id_movimiento_tipo` = `mt`.`id`)))  WHERE(`c`.`id` = 31); ;
 
 -- ----------------------------
 -- View structure for vistasaldocliente
@@ -1644,33 +1716,10 @@ DROP VIEW IF EXISTS `vistasaldocliente`;
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `vistasaldocliente` AS SELECT   `id`, `razon_social`, SUM(`saldo`) AS 'saldo' FROM   `vistasaldoporidcliente` GROUP BY   `id` ;
 
 -- ----------------------------
--- View structure for vistasaldoporidcliente
--- ----------------------------
-DROP VIEW IF EXISTS `vistasaldoporidcliente`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `vistasaldoporidcliente` AS SELECT   `c`.`id`,   `c`.`cod_cliente`,   `c`.`razon_social`,   `c`.`cuit`,   `cc`.`id` AS 'id_cliente_cuenta',   `cc`.`descripcion`,   `cc`.`id_banco`, `ccm`.`id_operacion`,   `mt`.`descripcion` AS 'tipo',   `ccm`.`fecha`,   IF((`ccm`.`id_movimiento_tipo` = 2), `ccm`.`monto`, (`ccm`.`monto` *-(1))) AS 'saldo'  FROM(((`clientecuenta` cc    JOIN `cliente` c ON ((`cc`.`id_cliente` = `c`.`id`)))    JOIN `clientecuentamovimiento` ccm ON ((`ccm`.`id_cuenta` = `cc`.`id`)))    JOIN `movimientotipo` mt ON ((`ccm`.`id_movimiento_tipo` = `mt`.`id`)))  WHERE(`c`.`id` = 41); ;
-
--- ----------------------------
 -- View structure for vistasaldoporidproveedor
 -- ----------------------------
 DROP VIEW IF EXISTS `vistasaldoporidproveedor`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost`  VIEW `vistasaldoporidproveedor` AS SELECT
-  `c`.`id`,
-  `c`.`razon_social`,
-  `c`.`cuit`,
-  `cc`.`id` AS 'id_proveedor_cuenta',
-  `cc`.`descripcion`,
-  `cc`.`id_banco`,
-  `ccm`.`id_operacion`,
-  `mt`.`descripcion` AS 'tipo',
-  `ccm`.`fecha`,
-  IF((`ccm`.`id_movimiento_tipo` = 2), `ccm`.`monto`, (`ccm`.`monto` * -(1))) AS 'saldo'
-FROM
-  (((`proveedorcuenta` cc
-    JOIN `proveedor` c ON ((`cc`.`id_proveedor` = `c`.`id`)))
-    JOIN `proveedorcuentamovimiento` ccm ON ((`ccm`.`id_cuenta` = `cc`.`id`)))
-    JOIN `movimientotipo` mt ON ((`ccm`.`id_movimiento_tipo` = `mt`.`id`)))
-WHERE
-  (`c`.`id` = 1) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `vistasaldoporidproveedor` AS SELECT   `c`.`id`,   `c`.`razon_social`,   `c`.`cuit`,   `cc`.`id` AS 'id_proveedor_cuenta',    `cc`.`descripcion`,   `cc`.`id_banco`,   `ccm`.`id_operacion`,   `mt`.`descripcion` AS 'tipo',    	 `ccm`.`fecha`,    	 IF((`ccm`.`id_movimiento_tipo` = 2),  	 `ccm`.`monto`, (`ccm`.`monto` *-(1))) AS 'saldo'  FROM(((`proveedorcuenta` cc    JOIN `proveedor` c ON((`cc`.`id_proveedor` = `c`.`id`)))    JOIN `proveedorcuentamovimiento` ccm ON ((`ccm`.`id_cuenta` = `cc`.`id`)))     	JOIN `movimientotipo` mt ON ((`ccm`.`id_movimiento_tipo` = `mt`.`id`)))   WHERE(`c`.`id` = 1 ); ;
 
 -- ----------------------------
 -- View structure for vistasaldoproveedor
@@ -1706,30 +1755,30 @@ FROM
     JOIN `movimientotipo` mt ON ((`ccm`.`id_movimiento_tipo` = `mt`.`id`)))
 WHERE
   (`ccm`.`id_operacion` = 1) ;
-
+  
 -- ----------------------------
 -- View structure for vistaultimaventa
 -- ----------------------------
 DROP VIEW IF EXISTS `vistaultimaventa`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `vistaultimaventa` AS SELECT   `c`.`id`,   `c`.`cod_cliente`,   `c`.`razon_social`,  	`c`.`domicilio`,  `c`.`cuit`,   `cc`.`id` AS 'id_cliente_cuenta',   `cc`.`descripcion`,   `cc`.`id_banco`,   `ccm`.`id_operacion`,  `mt`.`descripcion` AS 'tipo',   `ccm`.`fecha`,   IF((`ccm`.`id_movimiento_tipo` = 2), `ccm`.`monto`, (`ccm`.`monto` *-(1))) AS 'saldo'  FROM       (((`clientecuenta` cc     JOIN `cliente` c ON((`cc`.`id_cliente` = `c`.`id`)))     JOIN `clientecuentamovimiento` ccm ON ((`ccm`.`id_cuenta` = `cc`.`id`)))     JOIN `movimientotipo` mt ON ((`ccm`.`id_movimiento_tipo` = `mt`.`id`))) WHERE  (`ccm`.`id_operacion` = 14); ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `vistaultimaventa` AS SELECT   `c`.`id`,   `c`.`cod_cliente`,   `c`.`razon_social`,  	`c`.`domicilio`,  `c`.`cuit`,   `cc`.`id` AS 'id_cliente_cuenta',   `cc`.`descripcion`,   `cc`.`id_banco`,   `ccm`.`id_operacion`,  `mt`.`descripcion` AS 'tipo',   `ccm`.`fecha`,   IF((`ccm`.`id_movimiento_tipo` = 2), `ccm`.`monto`, (`ccm`.`monto` *-(1))) AS 'saldo'  FROM       (((`clientecuenta` cc     JOIN `cliente` c ON((`cc`.`id_cliente` = `c`.`id`)))     JOIN `clientecuentamovimiento` ccm ON ((`ccm`.`id_cuenta` = `cc`.`id`)))     JOIN `movimientotipo` mt ON ((`ccm`.`id_movimiento_tipo` = `mt`.`id`))) WHERE  (`ccm`.`id_operacion` = 23); ;
 
 -- ----------------------------
 -- View structure for vistaultimaventaporcliente
 -- ----------------------------
 DROP VIEW IF EXISTS `vistaultimaventaporcliente`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `vistaultimaventaporcliente` AS SELECT  `v`.`id`, `v`.`id_operacion`,  o.id_cliente, `p`.`id_codigo_barra` AS 'codigo',   `p`.`descripcion_breve` AS 'descripcion',  `vd`.`peso`,   `vd`.`monto`, `v`.`monto_total` FROM(((`venta` v JOIN `ventadetalle` vd ON((`v`.`id` = `vd`.`id_venta`)))     JOIN `producto` p ON((`vd`.`id_producto` = `p`.`id`)))  JOIN `operacion` o ON((`v`.`id_operacion` = `o`.`id`))) where v.id =( SELECT  `v`.`id` AS id_ultima_venta FROM  (((`venta` v JOIN `ventadetalle` vd ON((`v`.`id` = `vd`.`id_venta`)))     JOIN `producto` p ON((`vd`.`id_producto` = `p`.`id`)))  JOIN `operacion` o ON((`v`.`id_operacion` = `o`.`id`))) where o.id_cliente = 41 order by v.id desc limit 1) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `vistaultimaventaporcliente` AS SELECT  `v`.`id`, `v`.`id_operacion`,  o.id_cliente, `p`.`id_codigo_barra` AS 'codigo',   `p`.`descripcion_breve` AS 'descripcion',  `vd`.`peso`,   `vd`.`monto`, `v`.`monto_total` FROM(((`venta` v JOIN `ventadetalle` vd ON((`v`.`id` = `vd`.`id_venta`)))     JOIN `producto` p ON((`vd`.`id_producto` = `p`.`id`)))  JOIN `operacion` o ON((`v`.`id_operacion` = `o`.`id`))) where v.id =( SELECT  `v`.`id` AS id_ultima_venta FROM  (((`venta` v JOIN `ventadetalle` vd ON((`v`.`id` = `vd`.`id_venta`)))     JOIN `producto` p ON((`vd`.`id_producto` = `p`.`id`)))  JOIN `operacion` o ON((`v`.`id_operacion` = `o`.`id`))) where o.id_cliente = 31 order by v.id desc limit 1) ;
 
 -- ----------------------------
 -- View structure for vistaventa
 -- ----------------------------
 DROP VIEW IF EXISTS `vistaventa`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost`  VIEW `vistaventa` AS SELECT  `v`.`id`,  `v`.`id_operacion`,  `p`.`id_codigo_barra` AS 'codigo',  `p`.`descripcion_breve` AS 'descripcion',  `vd`.`peso`,  `vd`.`monto`,  `v`.`monto_total`FROM  (((`venta` v    JOIN `ventadetalle` vd ON((`v`.`id` = `vd`.`id_venta`)))    JOIN `producto` p ON ((`vd`.`id_producto` = `p`.`id`)))   JOIN `operacion` o ON ((`v`.`id_operacion` = `o`.`id`))) WHERE  (`v`.`id` = 17) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost`  VIEW `vistaventa` AS SELECT  `v`.`id`,  `v`.`id_operacion`,  `p`.`id_codigo_barra` AS 'codigo',  `p`.`descripcion_breve` AS 'descripcion',  `vd`.`peso`,  `vd`.`monto`,  `v`.`monto_total`FROM  (((`venta` v    JOIN `ventadetalle` vd ON((`v`.`id` = `vd`.`id_venta`)))    JOIN `producto` p ON ((`vd`.`id_producto` = `p`.`id`)))   JOIN `operacion` o ON ((`v`.`id_operacion` = `o`.`id`))) WHERE  (`v`.`id` = 26); ;
 
 -- ----------------------------
 -- View structure for vistaventaseleccionada
 -- ----------------------------
 DROP VIEW IF EXISTS `vistaventaseleccionada`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `vistaventaseleccionada` AS SELECT  `v`.`id`, `v`.`id_operacion`, o.id_cliente, `p`.`id_codigo_barra` AS 'codigo',  `p`.`descripcion_breve` AS 'descripcion', `vd`.`peso`,  `vd`.`monto`,  `v`.`monto_total` FROM(((`venta` v JOIN `ventadetalle` vd ON((`v`.`id` = `vd`.`id_venta`)))    JOIN `producto` p ON((`vd`.`id_producto` = `p`.`id`)))  JOIN `operacion` o ON((`v`.`id_operacion` = `o`.`id`))) where v.id = 16 ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost`  VIEW `vistaventaseleccionada` AS SELECT  `v`.`id`, `v`.`id_operacion`, o.id_cliente, `p`.`id_codigo_barra` AS 'codigo',  `p`.`descripcion_breve` AS 'descripcion', `vd`.`peso`,  `vd`.`monto`,  `v`.`monto_total` FROM(((`venta` v JOIN `ventadetalle` vd ON((`v`.`id` = `vd`.`id_venta`)))    JOIN `producto` p ON((`vd`.`id_producto` = `p`.`id`)))  JOIN `operacion` o ON((`v`.`id_operacion` = `o`.`id`))) where v.id = 25 ;
 
 -- ----------------------------
 -- View structure for vistaventasumatotal

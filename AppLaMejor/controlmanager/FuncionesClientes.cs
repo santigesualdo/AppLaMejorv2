@@ -168,6 +168,13 @@ namespace AppLaMejor.controlmanager
 
         }
 
+        public static List<Cliente> GetClientesMayoristasConCuenta()
+        {
+            string consulta = QueryManager.Instance().GetClientesMayoristasConCuenta();
+            DataTable clientesMayoristasTable = QueryManager.Instance().GetTableResults(ConnecionBD.Instance().Connection, consulta);
+            DataNamesMapper<Cliente> mapper = new DataNamesMapper<Cliente>();
+            return mapper.Map(clientesMayoristasTable).ToList();
+        }
         public static Cuenta GetCuentaById(int lastCuenta)
         {
             //lleno cliente
@@ -218,5 +225,16 @@ namespace AppLaMejor.controlmanager
             }
         }
 
+        public static List<Cuenta> GetCuentaEfectivoCliente(int id)
+        {
+            string consulta = QueryManager.Instance().GetCuentaByIdCliente(id);
+            DataTable cuentaClienteTable = QueryManager.Instance().GetTableResults(ConnecionBD.Instance().Connection, consulta);
+
+            if (cuentaClienteTable.Rows.Count.Equals(0))
+                return null;
+
+            DataNamesMapper<Cuenta> mapper = new DataNamesMapper<Cuenta>();
+            return mapper.Map(cuentaClienteTable).ToList();
+        }
     }
 }

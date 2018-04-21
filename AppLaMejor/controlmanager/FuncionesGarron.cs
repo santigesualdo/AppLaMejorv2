@@ -152,8 +152,17 @@ namespace AppLaMejor.controlmanager
                             }
                         }
 
-
                         consulta = manager.InsertGarronDeposte(gd);
+                        command.CommandText = consulta;
+                        if (!manager.ExecuteSQL(command))
+                        {
+                            tran.Rollback();
+                            return false;
+                        }
+
+                        Producto p = FuncionesProductos.GetProducto(gd.Producto.Id);
+                        decimal cantidadTotal = p.Cantidad + gd.Peso;
+                        consulta = manager.UpdateCantidadProducto(gd.Producto.Id, cantidadTotal);
                         command.CommandText = consulta;
                         if (!manager.ExecuteSQL(command))
                         {
@@ -170,6 +179,8 @@ namespace AppLaMejor.controlmanager
                         tran.Rollback();
                         return false;
                     }
+
+
 
                     tran.Commit();
                     return true;

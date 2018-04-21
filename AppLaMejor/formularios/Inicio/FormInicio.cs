@@ -11,6 +11,7 @@ using AppLaMejor.controlmanager;
 using AppLaMejor.stylemanager;
 using AppLaMejor.formularios.Compras;
 using AppLaMejor.formularios.Productos;
+using AppLaMejor.formularios.Caja;
 using AppLaMejor.Reports;
 
 namespace AppLaMejor.formularios
@@ -91,13 +92,26 @@ namespace AppLaMejor.formularios
                 case "Movimiento Cuentas": boton.Click += new System.EventHandler(IniciarMovimientoCuentas); break;
                 case "Movimiento Cuentas Proveedores": boton.Click += new System.EventHandler(IniciarMovimientoCuentasProveedores); break;
                 case "Ventas Caja": boton.Click += new System.EventHandler(IniciarVentasCaja); break;
-                case "Compras": boton.Click += new System.EventHandler(IniciarCompras); break;
+                case "Carga Nueva Compra": boton.Click += new System.EventHandler(IniciarCompras); break;
                 case "Caja Mayorista": boton.Click += new System.EventHandler(IniciarCajaMay); break;
-                case "Ubicación de Productos": boton.Click += new System.EventHandler(IniciarUbicacion); break;
+                case "Ubicacion de Productos": boton.Click += new System.EventHandler(IniciarUbicacionProductos); break;
+                case "Ubicacion": boton.Click += new System.EventHandler(IniciarUbicacion); break;
                 case "Deposte": boton.Click += new System.EventHandler(IniciarDeposte); break;
 				case "Reportes": boton.Click += new System.EventHandler(IniciarReportes); break;
+                case "Compras con Productos a Entregar": boton.Click+= new System.EventHandler(IniciarComprasConProduFaltante); break;
             }
             return boton;
+        }
+
+        private void IniciarComprasConProduFaltante(object sender, EventArgs e)
+        {
+            FormEntregaProductosPendientes form = new FormEntregaProductosPendientes();
+            form.ShowDialog();
+        }
+
+        private void IniciarUbicacion(object sender, EventArgs e)
+        {
+            // TODO: ABM DE Ubicaciones.
         }
 
         private void IniciarDeposte(object sender, EventArgs e)
@@ -158,14 +172,14 @@ namespace AppLaMejor.formularios
             formCompras.ShowDialog();
         }
 
-        private void IniciarUbicacion(object sender, EventArgs e)
+        private void IniciarUbicacionProductos(object sender, EventArgs e)
         {
             FormUbicacion formUbicacion = new FormUbicacion();
             formUbicacion.ShowDialog();
         }
 		private void IniciarReportes(object sender, EventArgs e)
         {
-            Reports.FormReportes formReportes = new Reports.FormReportes();
+            FormReportes formReportes = new FormReportes();
             formReportes.ShowDialog();
 
          //   FormModalReportes fmr = new FormModalReportes();

@@ -15,6 +15,8 @@ namespace AppLaMejor.formularios
         List<TipoGarron> listTipoGarron;
         List<TipoEstadoGarron> listTipoEstadoGarron;
 
+        const int TIPO_ESTADO_GARRON_COMPLETO = 1;
+
         Garron garronSelected;
 
         Ubicacion currentUbicacion = null;
@@ -124,7 +126,7 @@ namespace AppLaMejor.formularios
         private void bDepostar_Click(object sender, EventArgs e)
         {
             FormDeposteGarron fdg = null;
-            if (garronSelected.TipoEstadoGarron.Id.ToString().Equals("1"))
+            if (garronSelected.TipoEstadoGarron.Id.ToString().Equals(TIPO_ESTADO_GARRON_COMPLETO))
             {
                 fdg = new FormDeposteGarron(FormDeposteGarron.MODO_GARRONCOMPLETO, garronSelected, currentGarronData);
             }
@@ -134,6 +136,8 @@ namespace AppLaMejor.formularios
             }
             
             fdg.ShowDialog();
+            CargarCombos();
+            bCancelSeleccion_Click(null, null);
         }
 
         private void bCancelSeleccion_Click(object sender, EventArgs e)

@@ -21,5 +21,7 @@ namespace AppLaMejor.entidades
         public Ubicacion Destino { get; set; }
 
         public bool yaDepostado { get; set; }
+
+        public decimal Precio { get; set; }
     }
 }

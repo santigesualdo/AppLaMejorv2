@@ -340,6 +340,8 @@ namespace AppLaMejor.formularios
 
                 if (dialog.ShowConfirmationDialog("¿Esta seguro de guardar los precios en Balanza Digital?"))
                 {
+                    ExportarArchivoCsv();
+
                     // Exigimos que Qendra este abierto. Sino, lo abrimos.
                     if (!FuncionesGlobales.IsProccessOpen("Qendra"))
                     {
@@ -350,33 +352,28 @@ namespace AppLaMejor.formularios
                         Process.Start(path);
                         return;
                     }
-                    else
-                    {
-                        dialog.ShowConfirmationDialog("Qendra abierto. Exportando.. ");
-                    }
                 }
-                else
-                    return;
-
-
-                // Quendra esta activo, creamos el CSV.
-                StringBuilder sb = new StringBuilder();
-                DataTable dt = FuncionesPrecios.GetPreciosToExport();
-                foreach (DataRow row in dt.Rows)
-                {
-                    string[] fields = row.ItemArray.Select(field => field.ToString()).ToArray();
-                    sb.AppendLine(string.Join(",", fields));
-                }
-
-                string savePath = FuncionesGlobales.GetParametro(VariablesGlobales.FILEPRECIOSSAVE_PARAMNAME);
-                File.WriteAllText(savePath + "applamejorprecios.csv", sb.ToString());
-                MyTextTimer.TStartFade("Precios exportados correctamente. Aguarde el mensaje de confirmación.", this.statusStrip1, this.tsslMensaje, MyTextTimer.TIME_LONG);
-
             }
             catch (Exception E)
             {
                 dialog.ShowErrorDialog("Ocurrio un problema. Motivo: " + E.Message);
             }
+        }
+
+        private void ExportarArchivoCsv()
+        {
+            // Quendra esta activo, creamos el CSV.
+            StringBuilder sb = new StringBuilder();
+            DataTable dt = FuncionesPrecios.GetPreciosToExport();
+            foreach (DataRow row in dt.Rows)
+            {
+                string[] fields = row.ItemArray.Select(field => field.ToString()).ToArray();
+                sb.AppendLine(string.Join(",", fields));
+            }
+
+            string savePath = FuncionesGlobales.GetParametro(VariablesGlobales.FILEPRECIOSSAVE_PARAMNAME);
+            File.WriteAllText(savePath + "applamejorprecios.csv", sb.ToString());
+            MyTextTimer.TStartFade("Precios exportados correctamente. Aguarde el mensaje de confirmación.", this.statusStrip1, this.tsslMensaje, MyTextTimer.TIME_LONG);
         }
 
         private void bUbicacion_Click(object sender, EventArgs e)
