@@ -1,5 +1,5 @@
 ﻿using AppLaMejor.controlmanager;
-using AppLaMejor.formularios.reportes;
+using AppLaMejor.formularios.Reports;
 using AppLaMejor.Reports;
 using System;
 using System.Windows.Forms;
@@ -9,18 +9,19 @@ namespace AppLaMejor.Reports
 {
     public partial class FormReportes : Form
     {
+        public Reports.DataSet1 DS = new Reports.DataSet1();
         public FormReportes()
         {
             InitializeComponent();
         }
-
-        public FormReportes(string inicio)
+        
+        public FormReportes(crRemito cr)
         {
-          
-                
+            InitializeComponent();
+            cr.SetDataSource(DS);
+            crVisor.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None;
+            crVisor.ReportSource = cr;
         }
-
-        public Reports.DataSet1 DS = new Reports.DataSet1();
 
         private void crVisor_Load(object sender, EventArgs e)
         {
@@ -85,6 +86,66 @@ namespace AppLaMejor.Reports
                     scr.SetDataSource(DS);
                     this.crVisor.ReportSource = scr;
                 }
+        }
+
+        private void resumenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormModalReportes fmr = new FormModalReportes("Resumen");
+            if (fmr.ShowDialog() == DialogResult.OK)
+            {
+                
+                crListadoVentas scr = new crListadoVentas();
+                scr.SetDataSource(DS);
+                this.crVisor.ReportSource = scr;
+            }
+        }
+
+        private void agruparPorFechaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormModalReportes fmr = new FormModalReportes("MovClientes");
+            if (fmr.ShowDialog() == DialogResult.OK)
+            {
+
+                crListadoMovClientes scr = new crListadoMovClientes();
+                scr.SetDataSource(DS);
+                this.crVisor.ReportSource = scr;
+            }
+        }
+
+        private void agruparPorFechaToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            FormModalReportes fmr = new FormModalReportes("MovProveedores");
+            if (fmr.ShowDialog() == DialogResult.OK)
+            {
+
+                crListadoMovProveedores scr = new crListadoMovProveedores();
+                scr.SetDataSource(DS);
+                this.crVisor.ReportSource = scr;
+            }
+        }
+
+        private void agruparPorClienteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormModalReportes fmr = new FormModalReportes("MovClientes");
+            if (fmr.ShowDialog() == DialogResult.OK)
+            {
+
+                crListadoMovClientes2 scr = new crListadoMovClientes2();
+                scr.SetDataSource(DS);
+                this.crVisor.ReportSource = scr;
+            }
+        }
+
+        private void agruparPorProveedorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormModalReportes fmr = new FormModalReportes("MovProveedores");
+            if (fmr.ShowDialog() == DialogResult.OK)
+            {
+
+                crListadoMovProveedores2 scr = new crListadoMovProveedores2();
+                scr.SetDataSource(DS);
+                this.crVisor.ReportSource = scr;
+            }
         }
     }
 }

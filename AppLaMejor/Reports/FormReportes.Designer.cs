@@ -35,8 +35,16 @@
             this.ventasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ultimaOperaciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.remitoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.resumenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.comprasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ultimaOperaciónToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.movimientosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.clientesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.agruparPorFechaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.agruparPorClienteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.proveedoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.agruparPorFechaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.agruparPorProveedorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tlpReportes.SuspendLayout();
             this.msReportes.SuspendLayout();
             this.SuspendLayout();
@@ -92,13 +100,14 @@
             this.msReportes.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.msReportes.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ventasToolStripMenuItem,
-            this.comprasToolStripMenuItem});
+            this.comprasToolStripMenuItem,
+            this.movimientosToolStripMenuItem});
             this.msReportes.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
             this.msReportes.Location = new System.Drawing.Point(0, 56);
             this.msReportes.Name = "msReportes";
             this.msReportes.Padding = new System.Windows.Forms.Padding(0);
             this.msReportes.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.msReportes.Size = new System.Drawing.Size(106, 52);
+            this.msReportes.Size = new System.Drawing.Size(106, 96);
             this.msReportes.TabIndex = 2;
             this.msReportes.Text = "msReportes";
             // 
@@ -106,7 +115,8 @@
             // 
             this.ventasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ultimaOperaciónToolStripMenuItem,
-            this.remitoToolStripMenuItem});
+            this.remitoToolStripMenuItem,
+            this.resumenToolStripMenuItem});
             this.ventasToolStripMenuItem.Name = "ventasToolStripMenuItem";
             this.ventasToolStripMenuItem.Size = new System.Drawing.Size(105, 25);
             this.ventasToolStripMenuItem.Text = "Ventas";
@@ -125,6 +135,13 @@
             this.remitoToolStripMenuItem.Text = "Remito";
             this.remitoToolStripMenuItem.Click += new System.EventHandler(this.remitoToolStripMenuItem_Click);
             // 
+            // resumenToolStripMenuItem
+            // 
+            this.resumenToolStripMenuItem.Name = "resumenToolStripMenuItem";
+            this.resumenToolStripMenuItem.Size = new System.Drawing.Size(167, 26);
+            this.resumenToolStripMenuItem.Text = "Resumen";
+            this.resumenToolStripMenuItem.Click += new System.EventHandler(this.resumenToolStripMenuItem_Click);
+            // 
             // comprasToolStripMenuItem
             // 
             this.comprasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -139,6 +156,61 @@
             this.ultimaOperaciónToolStripMenuItem1.Size = new System.Drawing.Size(167, 26);
             this.ultimaOperaciónToolStripMenuItem1.Text = "Operaciones";
             this.ultimaOperaciónToolStripMenuItem1.Click += new System.EventHandler(this.ultimaOperaciónToolStripMenuItem1_Click);
+            // 
+            // movimientosToolStripMenuItem
+            // 
+            this.movimientosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.clientesToolStripMenuItem,
+            this.proveedoresToolStripMenuItem});
+            this.movimientosToolStripMenuItem.Name = "movimientosToolStripMenuItem";
+            this.movimientosToolStripMenuItem.Size = new System.Drawing.Size(105, 25);
+            this.movimientosToolStripMenuItem.Text = "Movimientos";
+            // 
+            // clientesToolStripMenuItem
+            // 
+            this.clientesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.agruparPorFechaToolStripMenuItem,
+            this.agruparPorClienteToolStripMenuItem});
+            this.clientesToolStripMenuItem.Name = "clientesToolStripMenuItem";
+            this.clientesToolStripMenuItem.Size = new System.Drawing.Size(167, 26);
+            this.clientesToolStripMenuItem.Text = "Clientes";
+            // 
+            // agruparPorFechaToolStripMenuItem
+            // 
+            this.agruparPorFechaToolStripMenuItem.Name = "agruparPorFechaToolStripMenuItem";
+            this.agruparPorFechaToolStripMenuItem.Size = new System.Drawing.Size(217, 26);
+            this.agruparPorFechaToolStripMenuItem.Text = "Agrupar por Fecha";
+            this.agruparPorFechaToolStripMenuItem.Click += new System.EventHandler(this.agruparPorFechaToolStripMenuItem_Click);
+            // 
+            // agruparPorClienteToolStripMenuItem
+            // 
+            this.agruparPorClienteToolStripMenuItem.Name = "agruparPorClienteToolStripMenuItem";
+            this.agruparPorClienteToolStripMenuItem.Size = new System.Drawing.Size(217, 26);
+            this.agruparPorClienteToolStripMenuItem.Text = "Agrupar por Cliente";
+            this.agruparPorClienteToolStripMenuItem.Click += new System.EventHandler(this.agruparPorClienteToolStripMenuItem_Click);
+            // 
+            // proveedoresToolStripMenuItem
+            // 
+            this.proveedoresToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.agruparPorFechaToolStripMenuItem1,
+            this.agruparPorProveedorToolStripMenuItem});
+            this.proveedoresToolStripMenuItem.Name = "proveedoresToolStripMenuItem";
+            this.proveedoresToolStripMenuItem.Size = new System.Drawing.Size(167, 26);
+            this.proveedoresToolStripMenuItem.Text = "Proveedores";
+            // 
+            // agruparPorFechaToolStripMenuItem1
+            // 
+            this.agruparPorFechaToolStripMenuItem1.Name = "agruparPorFechaToolStripMenuItem1";
+            this.agruparPorFechaToolStripMenuItem1.Size = new System.Drawing.Size(241, 26);
+            this.agruparPorFechaToolStripMenuItem1.Text = "Agrupar por Fecha";
+            this.agruparPorFechaToolStripMenuItem1.Click += new System.EventHandler(this.agruparPorFechaToolStripMenuItem1_Click);
+            // 
+            // agruparPorProveedorToolStripMenuItem
+            // 
+            this.agruparPorProveedorToolStripMenuItem.Name = "agruparPorProveedorToolStripMenuItem";
+            this.agruparPorProveedorToolStripMenuItem.Size = new System.Drawing.Size(241, 26);
+            this.agruparPorProveedorToolStripMenuItem.Text = "Agrupar por Proveedor";
+            this.agruparPorProveedorToolStripMenuItem.Click += new System.EventHandler(this.agruparPorProveedorToolStripMenuItem_Click);
             // 
             // FormReportes
             // 
@@ -168,5 +240,13 @@
         private System.Windows.Forms.ToolStripMenuItem comprasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ultimaOperaciónToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem remitoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem resumenToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem movimientosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem clientesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem proveedoresToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem agruparPorFechaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem agruparPorClienteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem agruparPorFechaToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem agruparPorProveedorToolStripMenuItem;
     }
 }

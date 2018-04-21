@@ -39,7 +39,27 @@ namespace AppLaMejor.controlmanager
             return QueryManager.Instance().ExecuteSQL(ConnecionBD.Instance().Connection, consulta);
         }
 
+        public static bool informeListadoVentas(string d, string h)
+        {
+            string consulta = QueryManager.Instance().ReportVistaListadoVentas(d,h);
+            return QueryManager.Instance().ExecuteSQL(ConnecionBD.Instance().Connection, consulta);
 
+        }
+
+        public static bool informeListadoMovCuentas(string d, string h)
+        {
+            string consulta = QueryManager.Instance().ReportVistaListadoMovCuentas(d, h);
+            return QueryManager.Instance().ExecuteSQL(ConnecionBD.Instance().Connection, consulta);
+
+        }
+
+
+        public static bool informeListadoMovCuentasProveedores(string d, string h)
+        {
+            string consulta = QueryManager.Instance().ReportVistaListadoMovCuentasProveedores(d, h);
+            return QueryManager.Instance().ExecuteSQL(ConnecionBD.Instance().Connection, consulta);
+
+        }
         //COMPRAS
         public static bool informeVistaUltimaCompra(int id, int ido)
         {

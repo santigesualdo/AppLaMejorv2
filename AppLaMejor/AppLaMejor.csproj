@@ -121,8 +121,46 @@
     <Compile Include="formularios\Caja\FormCajaMayorista.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="formularios\Caja\FormCajaMayorista.Designer.cs" />
+    <Compile Include="formularios\Caja\FormCajaMayorista.Designer.cs">
+      <DependentUpon>FormCajaMayorista.cs</DependentUpon>
+    </Compile>
     <Compile Include="formularios\Clientes\clienteCR.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\crListadoMovClientes.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>crListadoMovClientes.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\crListadoMovProveedores.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>crListadoMovProveedores.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\crListadoMovProveedores2.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>crListadoMovProveedores2.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\crListadoVentas1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>crListadoVentas.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\crRemito.cs">
+      <DependentUpon>crRemito.rpt</DependentUpon>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Reports\crListadoMovClientes2.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>crListadoMovClientes2.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\DataSet1.cs">
@@ -326,7 +364,9 @@
       <DependentUpon>FormAgregarManual.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="formularios\Caja\FormCajaMayorista.resx" />
+    <EmbeddedResource Include="formularios\Caja\FormCajaMayorista.resx">
+      <DependentUpon>FormCajaMayorista.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="formularios\Caja\FormVentasCaja.resx">
       <DependentUpon>FormVentasCaja.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -416,6 +456,22 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Reports\crListadoMovClientes.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crListadoMovClientes.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\crListadoMovProveedores.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crListadoMovProveedores.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\crListadoMovProveedores2.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crListadoMovProveedores2.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\crListadoVentas.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crListadoVentas1.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\crRemito.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>crRemito.cs</LastGenOutput>
@@ -431,6 +487,10 @@
     <EmbeddedResource Include="Reports\crVentas.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>crVentas.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\crListadoMovClientes2.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crListadoMovClientes2.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\FormModalReportes.resx">
       <DependentUpon>FormModalReportes.cs</DependentUpon>
@@ -463,12 +523,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="Reports\crRemito.cs">
-      <DependentUpon>crRemito.rpt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
-      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Reports\crSaldoPorProveedor.cs">
       <DependentUpon>crSaldoPorProveedor.rpt</DependentUpon>

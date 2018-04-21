@@ -20,7 +20,7 @@ namespace AppLaMejor.formularios.MovimientoCuentas
 
         private void ReportMovCuentas_Load(object sender, EventArgs e)
         {
-            Reports.DataSet1 DS = new Reports.DataSet1();
+            AppLaMejor.Reports.DataSet1 DS = new AppLaMejor.Reports.DataSet1();
             
             clienteCR scr = new clienteCR();
             scr.SetDataSource(DS);

@@ -12,7 +12,7 @@ using AppLaMejor.datamanager;
 using AppLaMejor.stylemanager;
 using AppLaMejor.controlmanager;
 
-namespace AppLaMejor.formularios.reportes
+namespace AppLaMejor.formularios.Reports
 {
     public partial class FormModalReportes : Form
     {
@@ -42,6 +42,8 @@ namespace AppLaMejor.formularios.reportes
             ApplicationLookAndFeel.ApplyThemeToAll(this);
             cargar();
         }
+
+
 
         private void ProcesarBarra(string text)
         {
@@ -104,20 +106,36 @@ namespace AppLaMejor.formularios.reportes
 
         void cargar()
         {
-            if (tipo.Equals("Cliente"))
-            { 
-                tableOperaciones = FuncionesOperaciones.fillOperaciones();
-                listOps = FuncionesOperaciones.listOperaciones(tableOperaciones);
+            if (tipo.Equals("Resumen") || tipo.Equals("MovClientes") || tipo.Equals("MovProveedores"))
+            {
+                controlsPanel.Visible = false;
+                controlsModalResumen.Visible = true;
+                controlsModalResumen.Dock = DockStyle.Fill;
             }
             else
+
             {
-                tableOperaciones = FuncionesOperaciones.fillOperacionesProveedores();
-                listOpsPro = FuncionesOperaciones.listOperacionesProveedores(tableOperaciones);
-            }
+                if (tipo.Equals("Cliente"))
+                {
+                    tableOperaciones = FuncionesOperaciones.fillOperaciones();
+                    listOps = FuncionesOperaciones.listOperaciones(tableOperaciones);
+                }
+                else
+                {
+                    tableOperaciones = FuncionesOperaciones.fillOperacionesProveedores();
+                    listOpsPro = FuncionesOperaciones.listOperacionesProveedores(tableOperaciones);
+                }
+            
+            controlsModalResumen.Visible = false;
+            controlsPanel.Visible = true;
+            controlsPanel.Dock = DockStyle.Fill;
+
+            
             dgvOperaciones.DataSource = tableOperaciones;
             dgvOperaciones.Columns[0].Visible = false;
             dgvOperaciones.Columns[2].Visible = false;
             dgvOperaciones.AutoResizeColumns();
+            }
 
         }
 
@@ -204,15 +222,36 @@ namespace AppLaMejor.formularios.reportes
 
         private void dgvOperaciones_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            seleccionar();
-            DialogResult = DialogResult.OK;
-            this.Close();
+            if (dgvOperaciones.Rows.Count > 1)
+            {
+                seleccionar();
+                DialogResult = DialogResult.OK;
+                this.Close();
+            }
+            else MessageBox.Show("No hay remitos");
         }
 
         private void tbNombre_Click(object sender, EventArgs e)
         {
             TextBox textBox = (TextBox)sender;
             textBox.Text = string.Empty;
+        }
+
+
+        //BOTONES DEL MODAL RESUMEN
+        private void btFiltroFecha_Click(object sender, EventArgs e)
+        {
+            string d = dtpDesde.Value.ToString("yyyy-MM-dd");
+            string h = dtpHasta.Value.ToString("yyyy-MM-dd");
+
+            if (tipo.Equals("Resumen"))
+                FuncionesReportes.informeListadoVentas(d,h);
+            else if (tipo.Equals("MovClientes"))
+                FuncionesReportes.informeListadoMovCuentas(d, h);
+                else if (tipo.Equals("MovProveedores"))
+                    FuncionesReportes.informeListadoMovCuentasProveedores(d, h);
+            DialogResult = DialogResult.OK;
+                this.Close();
         }
     }
 }

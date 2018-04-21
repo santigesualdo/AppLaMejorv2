@@ -6,11 +6,33 @@ using System.Linq;
 using System.Text;
 using AppLaMejor.datamanager;
 using AppLaMejor.entidades;
+using AppLaMejor.controlmanager;
 
 namespace AppLaMejor.formularios
 {
     public class FuncionesOperaciones
     {
+        //venta
+
+
+        //movimiento cuentas
+
+            public static Operacion operacionEnCurso(int idTipoOperacion)
+        { 
+
+            Operacion newOperacion = new Operacion();
+            TipoOperacion to = new TipoOperacion();
+
+            to.Id = idTipoOperacion;
+            VariablesGlobales.idOperacion = FuncionesVentas.GetNextIdOperacion();
+
+            newOperacion.Id = VariablesGlobales.idOperacion;
+
+            newOperacion.tipoOperacion = to;
+
+            return newOperacion;
+
+        }
 
         //reportes
         public static DataTable fillOperaciones()

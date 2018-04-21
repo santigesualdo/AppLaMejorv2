@@ -9,6 +9,8 @@ using MySql.Data.MySqlClient;
 using AppLaMejor.formularios.Util;
 using AppLaMejor.formularios.MovimientoCuentas;
 using AppLaMejor.formularios;
+using AppLaMejor.formularios.Reports;
+using AppLaMejor.Reports;
 
 namespace AppLaMejor.controlmanager
 {
@@ -123,8 +125,22 @@ namespace AppLaMejor.controlmanager
                     decimal montoTotal = listDetalleVentas.Sum(x => x.Monto);
 
                     Operacion newOperacion = new Operacion();
+                    Cuenta cuenta = new Cuenta();
+                    if (VariablesGlobales.idOperacion == 0)
+                    {
 
-                    newOperacion.Id = VariablesGlobales.idOperacion;
+                        //1 pq es una venta que genera DEBE
+
+                        newOperacion = FuncionesOperaciones.operacionEnCurso(1);
+                        cuenta = FuncionesClientes.GetCuentaEfectivoByIdCliente(cliente);
+                        movCuenta.Cuenta = cuenta;
+
+                    }
+                    else
+                    {
+
+                        newOperacion.Id = VariablesGlobales.idOperacion;
+                    }
                     // venta
 
                     int idVenta = GetNextIdVenta();
@@ -136,6 +152,7 @@ namespace AppLaMejor.controlmanager
                     consultaVenta = manager.InsertVenta(newVenta);
 
                     //genero la vista para el reporte de la ultima venta
+                    //revisar
                     FuncionesReportes.informeVistaUltimaVenta(idVenta);
 
                     // movcuenta
@@ -200,6 +217,16 @@ namespace AppLaMejor.controlmanager
 
                     FuncionesMovCuentas.insertarMovimiento(mcDebito);
 
+                    //INICIO SECCION EN LA QUE SE ENVIAN LOS DATOS PARA GENERAR EL REMITO
+                        FuncionesReportes.informeVistaUltimaVenta(cliente.Id, newOperacion.Id);
+                        FuncionesReportes.informeVistaUltimaVentaPorCliente(cliente.Id);
+                        FuncionesReportes.informeVistaVentaSeleccionada(idVenta);
+                        crRemito scr = new crRemito();
+                        FormReportes fr = new FormReportes(scr);
+                        fr.ShowDialog();
+                    //FIN SECCION EN LA QUE SE ENVIAN LOS DATOS PARA GENERAR EL REMITO 
+
+
                     return true;
                 }
                 catch (Exception e)
@@ -222,7 +249,9 @@ namespace AppLaMejor.controlmanager
             QueryManager manager = QueryManager.Instance();
             string consulta = manager.GetNextVentaId();
             DataTable result = manager.GetTableResults(ConnecionBD.Instance().Connection, consulta);
-            return Int32.Parse(result.Rows[0][0].ToString());
+            if (result.Rows[0][0].ToString().Length == 0)
+                return 1;
+            else return Int32.Parse(result.Rows[0][0].ToString());
         }
 
         public static int GetNextIdOperacion()

@@ -1,5 +1,5 @@
 ﻿using AppLaMejor.stylemanager;
-namespace AppLaMejor.formularios.reportes
+namespace AppLaMejor.formularios.Reports
 {
     partial class FormModalReportes
     {
@@ -29,11 +29,19 @@ namespace AppLaMejor.formularios.reportes
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.mainPanel = new System.Windows.Forms.Panel();
             this.contentPanel = new System.Windows.Forms.Panel();
+            this.controlsModalResumen = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.tableFiltroFecha = new System.Windows.Forms.TableLayoutPanel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.dtpDesde = new System.Windows.Forms.DateTimePicker();
+            this.dtpHasta = new System.Windows.Forms.DateTimePicker();
+            this.btFiltroFecha = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.controlsPanel = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.dgvOperaciones = new System.Windows.Forms.DataGridView();
@@ -56,6 +64,9 @@ namespace AppLaMejor.formularios.reportes
             this.formTittleText = new System.Windows.Forms.Label();
             this.mainPanel.SuspendLayout();
             this.contentPanel.SuspendLayout();
+            this.controlsModalResumen.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.tableFiltroFecha.SuspendLayout();
             this.controlsPanel.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOperaciones)).BeginInit();
@@ -82,6 +93,7 @@ namespace AppLaMejor.formularios.reportes
             // contentPanel
             // 
             this.contentPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.contentPanel.Controls.Add(this.controlsModalResumen);
             this.contentPanel.Controls.Add(this.controlsPanel);
             this.contentPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.contentPanel.Location = new System.Drawing.Point(0, 51);
@@ -90,15 +102,105 @@ namespace AppLaMejor.formularios.reportes
             this.contentPanel.Size = new System.Drawing.Size(984, 650);
             this.contentPanel.TabIndex = 3;
             // 
+            // controlsModalResumen
+            // 
+            this.controlsModalResumen.BackColor = System.Drawing.Color.Maroon;
+            this.controlsModalResumen.Controls.Add(this.panel3);
+            this.controlsModalResumen.Location = new System.Drawing.Point(64, 6);
+            this.controlsModalResumen.Name = "controlsModalResumen";
+            this.controlsModalResumen.Size = new System.Drawing.Size(880, 575);
+            this.controlsModalResumen.TabIndex = 8;
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.tableFiltroFecha);
+            this.panel3.Location = new System.Drawing.Point(123, 76);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(654, 100);
+            this.panel3.TabIndex = 8;
+            // 
+            // tableFiltroFecha
+            // 
+            this.tableFiltroFecha.ColumnCount = 3;
+            this.tableFiltroFecha.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.tableFiltroFecha.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.tableFiltroFecha.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableFiltroFecha.Controls.Add(this.label3, 1, 0);
+            this.tableFiltroFecha.Controls.Add(this.dtpDesde, 0, 1);
+            this.tableFiltroFecha.Controls.Add(this.dtpHasta, 1, 1);
+            this.tableFiltroFecha.Controls.Add(this.btFiltroFecha, 2, 1);
+            this.tableFiltroFecha.Controls.Add(this.label1, 0, 0);
+            this.tableFiltroFecha.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableFiltroFecha.Location = new System.Drawing.Point(0, 0);
+            this.tableFiltroFecha.Name = "tableFiltroFecha";
+            this.tableFiltroFecha.RowCount = 2;
+            this.tableFiltroFecha.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableFiltroFecha.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80F));
+            this.tableFiltroFecha.Size = new System.Drawing.Size(654, 100);
+            this.tableFiltroFecha.TabIndex = 7;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label3.Location = new System.Drawing.Point(264, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(255, 20);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Fecha Hasta:";
+            // 
+            // dtpDesde
+            // 
+            this.dtpDesde.CustomFormat = "dd/MM/yyyy";
+            this.dtpDesde.Dock = System.Windows.Forms.DockStyle.Top;
+            this.dtpDesde.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpDesde.Location = new System.Drawing.Point(10, 30);
+            this.dtpDesde.Margin = new System.Windows.Forms.Padding(10);
+            this.dtpDesde.Name = "dtpDesde";
+            this.dtpDesde.Size = new System.Drawing.Size(241, 20);
+            this.dtpDesde.TabIndex = 0;
+            this.dtpDesde.Value = new System.DateTime(2018, 4, 1, 0, 0, 0, 0);
+            // 
+            // dtpHasta
+            // 
+            this.dtpHasta.CustomFormat = "dd/MM/yyyy";
+            this.dtpHasta.Dock = System.Windows.Forms.DockStyle.Top;
+            this.dtpHasta.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpHasta.Location = new System.Drawing.Point(271, 30);
+            this.dtpHasta.Margin = new System.Windows.Forms.Padding(10);
+            this.dtpHasta.Name = "dtpHasta";
+            this.dtpHasta.Size = new System.Drawing.Size(241, 20);
+            this.dtpHasta.TabIndex = 1;
+            // 
+            // btFiltroFecha
+            // 
+            this.btFiltroFecha.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btFiltroFecha.Location = new System.Drawing.Point(525, 23);
+            this.btFiltroFecha.Name = "btFiltroFecha";
+            this.btFiltroFecha.Size = new System.Drawing.Size(126, 41);
+            this.btFiltroFecha.TabIndex = 2;
+            this.btFiltroFecha.Text = "Aplicar";
+            this.btFiltroFecha.UseVisualStyleBackColor = true;
+            this.btFiltroFecha.Click += new System.EventHandler(this.btFiltroFecha_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label1.Location = new System.Drawing.Point(3, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(255, 20);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Fecha Desde:";
+            // 
             // controlsPanel
             // 
             this.controlsPanel.Controls.Add(this.tableLayoutPanel1);
             this.controlsPanel.Controls.Add(this.tableLayoutPanel2);
-            this.controlsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.controlsPanel.Location = new System.Drawing.Point(15, 15);
+            this.controlsPanel.Location = new System.Drawing.Point(15, 36);
             this.controlsPanel.Name = "controlsPanel";
             this.controlsPanel.Padding = new System.Windows.Forms.Padding(5);
-            this.controlsPanel.Size = new System.Drawing.Size(954, 620);
+            this.controlsPanel.Size = new System.Drawing.Size(861, 599);
             this.controlsPanel.TabIndex = 7;
             // 
             // tableLayoutPanel1
@@ -112,42 +214,42 @@ namespace AppLaMejor.formularios.reportes
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(944, 537);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(851, 516);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
             // dgvOperaciones
             // 
             this.dgvOperaciones.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvOperaciones.BackgroundColor = System.Drawing.SystemColors.ActiveCaptionText;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvOperaciones.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvOperaciones.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvOperaciones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvOperaciones.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvOperaciones.DefaultCellStyle = dataGridViewCellStyle5;
             this.dgvOperaciones.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvOperaciones.Location = new System.Drawing.Point(3, 3);
             this.dgvOperaciones.Name = "dgvOperaciones";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvOperaciones.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.dgvOperaciones.Size = new System.Drawing.Size(938, 511);
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvOperaciones.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            this.dgvOperaciones.Size = new System.Drawing.Size(845, 490);
             this.dgvOperaciones.TabIndex = 15;
             this.dgvOperaciones.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOperaciones_CellDoubleClick);
             // 
@@ -164,7 +266,7 @@ namespace AppLaMejor.formularios.reportes
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 73F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(944, 73);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(851, 73);
             this.tableLayoutPanel2.TabIndex = 1;
             // 
             // panel1
@@ -174,16 +276,16 @@ namespace AppLaMejor.formularios.reportes
             this.panel1.Controls.Add(this.lblPrecio);
             this.panel1.Controls.Add(this.tbPrecio);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(317, 3);
+            this.panel1.Location = new System.Drawing.Point(286, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(624, 67);
+            this.panel1.Size = new System.Drawing.Size(562, 67);
             this.panel1.TabIndex = 11;
             // 
             // label2
             // 
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(171, 6);
+            this.label2.Location = new System.Drawing.Point(140, 6);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(59, 13);
             this.label2.TabIndex = 12;
@@ -192,7 +294,7 @@ namespace AppLaMejor.formularios.reportes
             // tbPrecioFinal
             // 
             this.tbPrecioFinal.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.tbPrecioFinal.Location = new System.Drawing.Point(339, 22);
+            this.tbPrecioFinal.Location = new System.Drawing.Point(308, 22);
             this.tbPrecioFinal.Name = "tbPrecioFinal";
             this.tbPrecioFinal.ReadOnly = true;
             this.tbPrecioFinal.Size = new System.Drawing.Size(100, 20);
@@ -202,7 +304,7 @@ namespace AppLaMejor.formularios.reportes
             // 
             this.lblPrecio.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblPrecio.AutoSize = true;
-            this.lblPrecio.Location = new System.Drawing.Point(336, 6);
+            this.lblPrecio.Location = new System.Drawing.Point(305, 6);
             this.lblPrecio.Name = "lblPrecio";
             this.lblPrecio.Size = new System.Drawing.Size(40, 13);
             this.lblPrecio.TabIndex = 9;
@@ -211,7 +313,7 @@ namespace AppLaMejor.formularios.reportes
             // tbPrecio
             // 
             this.tbPrecio.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.tbPrecio.Location = new System.Drawing.Point(174, 22);
+            this.tbPrecio.Location = new System.Drawing.Point(143, 22);
             this.tbPrecio.Name = "tbPrecio";
             this.tbPrecio.Size = new System.Drawing.Size(100, 20);
             this.tbPrecio.TabIndex = 10;
@@ -225,13 +327,13 @@ namespace AppLaMejor.formularios.reportes
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(3, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(308, 67);
+            this.panel2.Size = new System.Drawing.Size(277, 67);
             this.panel2.TabIndex = 12;
             // 
             // tbNombre
             // 
             this.tbNombre.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.tbNombre.Location = new System.Drawing.Point(41, 22);
+            this.tbNombre.Location = new System.Drawing.Point(25, 22);
             this.tbNombre.Name = "tbNombre";
             this.tbNombre.Size = new System.Drawing.Size(216, 20);
             this.tbNombre.TabIndex = 7;
@@ -243,7 +345,7 @@ namespace AppLaMejor.formularios.reportes
             // 
             this.label5.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(38, 6);
+            this.label5.Location = new System.Drawing.Point(22, 6);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(42, 13);
             this.label5.TabIndex = 6;
@@ -376,6 +478,10 @@ namespace AppLaMejor.formularios.reportes
             this.Text = "FormAgregar";
             this.mainPanel.ResumeLayout(false);
             this.contentPanel.ResumeLayout(false);
+            this.controlsModalResumen.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.tableFiltroFecha.ResumeLayout(false);
+            this.tableFiltroFecha.PerformLayout();
             this.controlsPanel.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvOperaciones)).EndInit();
@@ -417,6 +523,14 @@ namespace AppLaMejor.formularios.reportes
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridView dgvOperaciones;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Panel controlsModalResumen;
+        private System.Windows.Forms.TableLayoutPanel tableFiltroFecha;
+        private System.Windows.Forms.DateTimePicker dtpHasta;
+        private System.Windows.Forms.DateTimePicker dtpDesde;
+        private System.Windows.Forms.Button btFiltroFecha;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label1;
     }
 
 
