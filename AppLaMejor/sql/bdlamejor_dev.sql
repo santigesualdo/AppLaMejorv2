@@ -1681,110 +1681,91 @@ INSERT INTO `ventadetalle` VALUES ('219', '26', '26', '6000.000', '50.000', '1',
 -- View structure for vistacompra
 -- ----------------------------
 DROP VIEW IF EXISTS `vistacompra`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost`  VIEW `vistacompra` AS SELECT
-  `v`.`id`,
-  `v`.`id_operacion`,
-  `p`.`id_codigo_barra` AS 'codigo',
-  `p`.`descripcion_breve` AS 'descripcion',
-  `vd`.`peso`,
-  `vd`.`monto`,
-  `v`.`monto_total`
-FROM
-  (((`compra` v
-    JOIN `compradetalle` vd ON ((`v`.`id` = `vd`.`id_compra`)))
-    JOIN `producto` p ON ((`vd`.`id_producto` = `p`.`id`)))
-    JOIN `operacionproveedor` o ON ((`v`.`id_operacion` = `o`.`id`)))
-WHERE
-  (`v`.`id` = 10) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vistacompra` AS select `v`.`id` AS `id`,`v`.`id_operacion` AS `id_operacion`,`p`.`id_codigo_barra` AS `codigo`,`p`.`descripcion_breve` AS `descripcion`,`vd`.`peso` AS `peso`,`vd`.`monto` AS `monto`,`v`.`monto_total` AS `monto_total` from (((`compra` `v` join `compradetalle` `vd` on((`v`.`id` = `vd`.`id_compra`))) join `producto` `p` on((`vd`.`id_producto` = `p`.`id`))) join `operacionproveedor` `o` on((`v`.`id_operacion` = `o`.`id`))) where (`v`.`id` = 10) ;	   
 
 -- ----------------------------
 -- View structure for vistacompraseleccionada
 -- ----------------------------
 DROP VIEW IF EXISTS `vistacompraseleccionada`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `vistacompraseleccionada` AS SELECT  `v`.`id`, `v`.`id_operacion`, o.id_proveedor, `p`.`id_codigo_barra` AS 'codigo',  `p`.`descripcion_breve` AS 'descripcion',  `vd`.`peso`,  `vd`.`monto`,  `v`.`monto_total` FROM(((`compra` v JOIN `compradetalle` vd ON((`v`.`id` = `vd`.`id_compra`)))     JOIN `producto` p ON((`vd`.`id_producto` = `p`.`id`)))  JOIN `operacionproveedor` o ON((`v`.`id_operacion` = `o`.`id`))) where v.id = 6 ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vistacompraseleccionada` AS select `v`.`id` AS `id`,`v`.`id_operacion` AS `id_operacion`,`o`.`id_proveedor` AS `id_proveedor`,`p`.`id_codigo_barra` AS `codigo`,`p`.`descripcion_breve` AS `descripcion`,`vd`.`peso` AS `peso`,`vd`.`monto` AS `monto`,`v`.`monto_total` AS `monto_total` from (((`compra` `v` join `compradetalle` `vd` on((`v`.`id` = `vd`.`id_compra`))) join `producto` `p` on((`vd`.`id_producto` = `p`.`id`))) join `operacionproveedor` `o` on((`v`.`id_operacion` = `o`.`id`))) where (`v`.`id` = 11) ;
 
 -- ----------------------------
--- View structure for vistasaldoporidcliente
+-- View structure for vistalistadomovimientosclientes
 -- ----------------------------
-DROP VIEW IF EXISTS `vistasaldoporidcliente`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `vistasaldoporidcliente` AS SELECT   `c`.`id`,   `c`.`cod_cliente`,   `c`.`razon_social`,   `c`.`cuit`,   `cc`.`id` AS 'id_cliente_cuenta',   `cc`.`descripcion`,   `cc`.`id_banco`, `ccm`.`id_operacion`,   `mt`.`descripcion` AS 'tipo',   `ccm`.`fecha`,   IF((`ccm`.`id_movimiento_tipo` = 2), `ccm`.`monto`, (`ccm`.`monto` *-(1))) AS 'saldo'  FROM(((`clientecuenta` cc    JOIN `cliente` c ON ((`cc`.`id_cliente` = `c`.`id`)))    JOIN `clientecuentamovimiento` ccm ON ((`ccm`.`id_cuenta` = `cc`.`id`)))    JOIN `movimientotipo` mt ON ((`ccm`.`id_movimiento_tipo` = `mt`.`id`)))  WHERE(`c`.`id` = 31); ;
+DROP VIEW IF EXISTS `vistalistadomovimientosclientes`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vistalistadomovimientosclientes` AS select `cm`.`id` AS `id`,dayofmonth(`cm`.`fecha`) AS `dia`,elt(date_format(`cm`.`fecha`,'%m'),'Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre') AS `mes`,year(`cm`.`fecha`) AS `año`,date_format(`cm`.`fecha`,'%d-%m-%Y') AS `fecha`,date_format(`cm`.`fecha`,'%H:%i') AS `hora`,`c`.`razon_social` AS `razon_social`,`c`.`cuit` AS `cuit`,`gc`.`descripcion` AS `descripcion`,`cm`.`id_cuenta` AS `cuenta`,`cm`.`id_movimiento_tipo` AS `id_tipo`,`mt`.`descripcion` AS `tipo`,`gc`.`id_banco` AS `id_banco`,`cm`.`id_operacion` AS `operacion`,if((`cm`.`id_movimiento_tipo` = 2),`cm`.`monto`,(`cm`.`monto` * -(1))) AS `monto` from (((`clientecuentamovimiento` `cm` join `clientecuenta` `gc` on((`cm`.`id_cuenta` = `gc`.`id`))) join `movimientotipo` `mt` on((`cm`.`id_movimiento_tipo` = `mt`.`id`))) join `cliente` `c` on((`gc`.`id_cliente` = `c`.`id`))) where ((`gc`.`id_cliente` is not null) and (`cm`.`fecha` between '2018-04-01' and ('2018-04-21' + interval 1 day))) order by `cm`.`id` desc ;
+
+-- ----------------------------
+-- View structure for vistalistadomovimientosproveedores
+-- ----------------------------
+DROP VIEW IF EXISTS `vistalistadomovimientosproveedores`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vistalistadomovimientosproveedores` AS select `cm`.`id` AS `id`,dayofmonth(`cm`.`fecha`) AS `dia`,elt(date_format(`cm`.`fecha`,'%m'),'Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre') AS `mes`,year(`cm`.`fecha`) AS `año`,date_format(`cm`.`fecha`,'%d-%m-%Y') AS `fecha`,date_format(`cm`.`fecha`,'%H:%i') AS `hora`,`c`.`razon_social` AS `razon_social`,`c`.`cuit` AS `cuit`,`gc`.`descripcion` AS `descripcion`,`cm`.`id_cuenta` AS `cuenta`,`cm`.`id_movimiento_tipo` AS `id_tipo`,`mt`.`descripcion` AS `tipo`,`gc`.`id_banco` AS `id_banco`,`cm`.`id_operacion` AS `operacion`,if((`cm`.`id_movimiento_tipo` = 2),`cm`.`monto`,(`cm`.`monto` * -(1))) AS `monto` from (((`proveedorcuentamovimiento` `cm` join `proveedorcuenta` `gc` on((`cm`.`id_cuenta` = `gc`.`id`))) join `movimientotipo` `mt` on((`cm`.`id_movimiento_tipo` = `mt`.`id`))) join `proveedor` `c` on((`gc`.`id_proveedor` = `c`.`id`))) where ((`gc`.`id_proveedor` is not null) and (`cm`.`fecha` between '2000-04-01' and ('2018-04-20' + interval 1 day))) order by `cm`.`id` desc ;
+
+-- ----------------------------
+-- View structure for vistalistadoventas
+-- ----------------------------
+DROP VIEW IF EXISTS `vistalistadoventas`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vistalistadoventas` AS select `v`.`id` AS `id`,dayofmonth(`v`.`fecha`) AS `dia`,elt(date_format(`v`.`fecha`,'%m'),'Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre') AS `mes`,year(`v`.`fecha`) AS `año`,date_format(`v`.`fecha`,'%d/%m/%Y') AS `fecha`,date_format(`v`.`fecha`,'%H:%i') AS `hora`,`v`.`monto_total` AS `monto`,`v`.`id_operacion` AS `operacion`,`c`.`razon_social` AS `cliente`,`c`.`cuit` AS `cuit` from ((`venta` `v` join `operacion` `o` on((`o`.`id` = `v`.`id_operacion`))) join `cliente` `c` on((`o`.`id_cliente` = `c`.`id`))) where (`v`.`fecha` between '2000-04-01' and ('2018-04-19' + interval 1 day)) ;
 
 -- ----------------------------
 -- View structure for vistasaldocliente
 -- ----------------------------
 DROP VIEW IF EXISTS `vistasaldocliente`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `vistasaldocliente` AS SELECT   `id`, `razon_social`, SUM(`saldo`) AS 'saldo' FROM   `vistasaldoporidcliente` GROUP BY   `id` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vistasaldocliente` AS select `vistasaldoporidcliente`.`id` AS `id`,`vistasaldoporidcliente`.`razon_social` AS `razon_social`,(sum(`vistasaldoporidcliente`.`saldo`) * -(1)) AS `saldo` from `vistasaldoporidcliente` group by `vistasaldoporidcliente`.`id` ;
+
+-- ----------------------------
+-- View structure for vistasaldoporidcliente
+-- ----------------------------
+DROP VIEW IF EXISTS `vistasaldoporidcliente`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vistasaldoporidcliente` AS select `c`.`id` AS `id`,`c`.`cod_cliente` AS `cod_cliente`,`c`.`razon_social` AS `razon_social`,`c`.`cuit` AS `cuit`,`cc`.`id` AS `id_cliente_cuenta`,`cc`.`descripcion` AS `descripcion`,`cc`.`id_banco` AS `id_banco`,`ccm`.`id_operacion` AS `id_operacion`,`mt`.`descripcion` AS `tipo`,`ccm`.`fecha` AS `fecha`,if((`ccm`.`id_movimiento_tipo` = 2),`ccm`.`monto`,(`ccm`.`monto` * -(1))) AS `saldo` from (((`clientecuenta` `cc` join `cliente` `c` on((`cc`.`id_cliente` = `c`.`id`))) join `clientecuentamovimiento` `ccm` on((`ccm`.`id_cuenta` = `cc`.`id`))) join `movimientotipo` `mt` on((`ccm`.`id_movimiento_tipo` = `mt`.`id`))) where (`c`.`id` = 37) ;
 
 -- ----------------------------
 -- View structure for vistasaldoporidproveedor
 -- ----------------------------
 DROP VIEW IF EXISTS `vistasaldoporidproveedor`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `vistasaldoporidproveedor` AS SELECT   `c`.`id`,   `c`.`razon_social`,   `c`.`cuit`,   `cc`.`id` AS 'id_proveedor_cuenta',    `cc`.`descripcion`,   `cc`.`id_banco`,   `ccm`.`id_operacion`,   `mt`.`descripcion` AS 'tipo',    	 `ccm`.`fecha`,    	 IF((`ccm`.`id_movimiento_tipo` = 2),  	 `ccm`.`monto`, (`ccm`.`monto` *-(1))) AS 'saldo'  FROM(((`proveedorcuenta` cc    JOIN `proveedor` c ON((`cc`.`id_proveedor` = `c`.`id`)))    JOIN `proveedorcuentamovimiento` ccm ON ((`ccm`.`id_cuenta` = `cc`.`id`)))     	JOIN `movimientotipo` mt ON ((`ccm`.`id_movimiento_tipo` = `mt`.`id`)))   WHERE(`c`.`id` = 1 ); ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vistasaldoporidproveedor` AS select `c`.`id` AS `id`,`c`.`razon_social` AS `razon_social`,`c`.`cuit` AS `cuit`,`cc`.`id` AS `id_proveedor_cuenta`,`cc`.`descripcion` AS `descripcion`,`cc`.`id_banco` AS `id_banco`,`ccm`.`id_operacion` AS `id_operacion`,`mt`.`descripcion` AS `tipo`,`ccm`.`fecha` AS `fecha`,if((`ccm`.`id_movimiento_tipo` = 2),`ccm`.`monto`,(`ccm`.`monto` * -(1))) AS `saldo` from (((`proveedorcuenta` `cc` join `proveedor` `c` on((`cc`.`id_proveedor` = `c`.`id`))) join `proveedorcuentamovimiento` `ccm` on((`ccm`.`id_cuenta` = `cc`.`id`))) join `movimientotipo` `mt` on((`ccm`.`id_movimiento_tipo` = `mt`.`id`))) where (`c`.`id` = 1) ;
 
 -- ----------------------------
 -- View structure for vistasaldoproveedor
 -- ----------------------------
 DROP VIEW IF EXISTS `vistasaldoproveedor`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost`  VIEW `vistasaldoproveedor` AS SELECT
-  `id`, `razon_social`, SUM(`saldo`) AS 'saldo'
-FROM
-  `vistasaldoporidproveedor`
-GROUP BY
-  `id` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vistasaldoproveedor` AS select `vistasaldoporidproveedor`.`id` AS `id`,`vistasaldoporidproveedor`.`razon_social` AS `razon_social`,sum(`vistasaldoporidproveedor`.`saldo`) AS `saldo` from `vistasaldoporidproveedor` group by `vistasaldoporidproveedor`.`id` ;
 
 -- ----------------------------
 -- View structure for vistaultimacompra
 -- ----------------------------
 DROP VIEW IF EXISTS `vistaultimacompra`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost`  VIEW `vistaultimacompra` AS SELECT
-  `c`.`id`,
-  `c`.`razon_social`,
-  `c`.`domicilio`,
-  `c`.`cuit`,
-  `cc`.`id` AS 'id_proveedor_cuenta',
-  `cc`.`descripcion`,
-  `cc`.`id_banco`,
-  `ccm`.`id_operacion`,
-  `mt`.`descripcion` AS 'tipo',
-  `ccm`.`fecha`,
-  IF((`ccm`.`id_movimiento_tipo` = 2), `ccm`.`monto`, (`ccm`.`monto` * -(1))) AS 'saldo'
-FROM
-  (((`proveedorcuenta` cc
-    JOIN `proveedor` c ON ((`cc`.`id_proveedor` = `c`.`id`)))
-    JOIN `proveedorcuentamovimiento` ccm ON ((`ccm`.`id_cuenta` = `cc`.`id`)))
-    JOIN `movimientotipo` mt ON ((`ccm`.`id_movimiento_tipo` = `mt`.`id`)))
-WHERE
-  (`ccm`.`id_operacion` = 1) ;
-  
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vistaultimacompra` AS select `c`.`id` AS `id`,`c`.`razon_social` AS `razon_social`,`c`.`domicilio` AS `domicilio`,`c`.`cuit` AS `cuit`,`cc`.`id` AS `id_proveedor_cuenta`,`cc`.`descripcion` AS `descripcion`,`cc`.`id_banco` AS `id_banco`,`ccm`.`id_operacion` AS `id_operacion`,`mt`.`descripcion` AS `tipo`,`ccm`.`fecha` AS `fecha`,if((`ccm`.`id_movimiento_tipo` = 2),`ccm`.`monto`,(`ccm`.`monto` * -(1))) AS `saldo` from (((`proveedorcuenta` `cc` join `proveedor` `c` on((`cc`.`id_proveedor` = `c`.`id`))) join `proveedorcuentamovimiento` `ccm` on((`ccm`.`id_cuenta` = `cc`.`id`))) join `movimientotipo` `mt` on((`ccm`.`id_movimiento_tipo` = `mt`.`id`))) where (`ccm`.`id_operacion` = 1) ;
+
 -- ----------------------------
 -- View structure for vistaultimaventa
 -- ----------------------------
 DROP VIEW IF EXISTS `vistaultimaventa`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `vistaultimaventa` AS SELECT   `c`.`id`,   `c`.`cod_cliente`,   `c`.`razon_social`,  	`c`.`domicilio`,  `c`.`cuit`,   `cc`.`id` AS 'id_cliente_cuenta',   `cc`.`descripcion`,   `cc`.`id_banco`,   `ccm`.`id_operacion`,  `mt`.`descripcion` AS 'tipo',   `ccm`.`fecha`,   IF((`ccm`.`id_movimiento_tipo` = 2), `ccm`.`monto`, (`ccm`.`monto` *-(1))) AS 'saldo'  FROM       (((`clientecuenta` cc     JOIN `cliente` c ON((`cc`.`id_cliente` = `c`.`id`)))     JOIN `clientecuentamovimiento` ccm ON ((`ccm`.`id_cuenta` = `cc`.`id`)))     JOIN `movimientotipo` mt ON ((`ccm`.`id_movimiento_tipo` = `mt`.`id`))) WHERE  (`ccm`.`id_operacion` = 23); ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vistaultimaventa` AS select `c`.`id` AS `id`,`c`.`cod_cliente` AS `cod_cliente`,`c`.`razon_social` AS `razon_social`,`c`.`domicilio` AS `domicilio`,`c`.`cuit` AS `cuit`,`cc`.`id` AS `id_cliente_cuenta`,`cc`.`descripcion` AS `descripcion`,`cc`.`id_banco` AS `id_banco`,`ccm`.`id_operacion` AS `id_operacion`,`mt`.`descripcion` AS `tipo`,`ccm`.`fecha` AS `fecha`,if((`ccm`.`id_movimiento_tipo` = 2),`ccm`.`monto`,(`ccm`.`monto` * -(1))) AS `saldo` from (((`clientecuenta` `cc` join `cliente` `c` on((`cc`.`id_cliente` = `c`.`id`))) join `clientecuentamovimiento` `ccm` on((`ccm`.`id_cuenta` = `cc`.`id`))) join `movimientotipo` `mt` on((`ccm`.`id_movimiento_tipo` = `mt`.`id`))) where (`ccm`.`id_operacion` = 30) ;
 
 -- ----------------------------
 -- View structure for vistaultimaventaporcliente
 -- ----------------------------
 DROP VIEW IF EXISTS `vistaultimaventaporcliente`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `vistaultimaventaporcliente` AS SELECT  `v`.`id`, `v`.`id_operacion`,  o.id_cliente, `p`.`id_codigo_barra` AS 'codigo',   `p`.`descripcion_breve` AS 'descripcion',  `vd`.`peso`,   `vd`.`monto`, `v`.`monto_total` FROM(((`venta` v JOIN `ventadetalle` vd ON((`v`.`id` = `vd`.`id_venta`)))     JOIN `producto` p ON((`vd`.`id_producto` = `p`.`id`)))  JOIN `operacion` o ON((`v`.`id_operacion` = `o`.`id`))) where v.id =( SELECT  `v`.`id` AS id_ultima_venta FROM  (((`venta` v JOIN `ventadetalle` vd ON((`v`.`id` = `vd`.`id_venta`)))     JOIN `producto` p ON((`vd`.`id_producto` = `p`.`id`)))  JOIN `operacion` o ON((`v`.`id_operacion` = `o`.`id`))) where o.id_cliente = 31 order by v.id desc limit 1) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vistaultimaventaporcliente` AS select `v`.`id` AS `id`,`v`.`id_operacion` AS `id_operacion`,`o`.`id_cliente` AS `id_cliente`,`p`.`id_codigo_barra` AS `codigo`,`p`.`descripcion_breve` AS `descripcion`,`vd`.`peso` AS `peso`,`vd`.`monto` AS `monto`,`v`.`monto_total` AS `monto_total` from (((`venta` `v` join `ventadetalle` `vd` on((`v`.`id` = `vd`.`id_venta`))) join `producto` `p` on((`vd`.`id_producto` = `p`.`id`))) join `operacion` `o` on((`v`.`id_operacion` = `o`.`id`))) where (`v`.`id` = (select `v`.`id` AS `id_ultima_venta` from (((`venta` `v` join `ventadetalle` `vd` on((`v`.`id` = `vd`.`id_venta`))) join `producto` `p` on((`vd`.`id_producto` = `p`.`id`))) join `operacion` `o` on((`v`.`id_operacion` = `o`.`id`))) where (`o`.`id_cliente` = 37) order by `v`.`id` desc limit 1)) ;
 
 -- ----------------------------
 -- View structure for vistaventa
 -- ----------------------------
 DROP VIEW IF EXISTS `vistaventa`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost`  VIEW `vistaventa` AS SELECT  `v`.`id`,  `v`.`id_operacion`,  `p`.`id_codigo_barra` AS 'codigo',  `p`.`descripcion_breve` AS 'descripcion',  `vd`.`peso`,  `vd`.`monto`,  `v`.`monto_total`FROM  (((`venta` v    JOIN `ventadetalle` vd ON((`v`.`id` = `vd`.`id_venta`)))    JOIN `producto` p ON ((`vd`.`id_producto` = `p`.`id`)))   JOIN `operacion` o ON ((`v`.`id_operacion` = `o`.`id`))) WHERE  (`v`.`id` = 26); ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vistaventa` AS select `v`.`id` AS `id`,`o`.`id_cliente` AS `id_cliente`,`v`.`id_operacion` AS `id_operacion`,`p`.`id_codigo_barra` AS `codigo`,`p`.`descripcion_breve` AS `descripcion`,`vd`.`peso` AS `peso`,`vd`.`monto` AS `monto`,`v`.`monto_total` AS `monto_total` from (((`venta` `v` join `ventadetalle` `vd` on((`v`.`id` = `vd`.`id_venta`))) join `producto` `p` on((`vd`.`id_producto` = `p`.`id`))) join `operacion` `o` on((`v`.`id_operacion` = `o`.`id`))) where (`v`.`id` = 32) ;
 
 -- ----------------------------
 -- View structure for vistaventaseleccionada
 -- ----------------------------
 DROP VIEW IF EXISTS `vistaventaseleccionada`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost`  VIEW `vistaventaseleccionada` AS SELECT  `v`.`id`, `v`.`id_operacion`, o.id_cliente, `p`.`id_codigo_barra` AS 'codigo',  `p`.`descripcion_breve` AS 'descripcion', `vd`.`peso`,  `vd`.`monto`,  `v`.`monto_total` FROM(((`venta` v JOIN `ventadetalle` vd ON((`v`.`id` = `vd`.`id_venta`)))    JOIN `producto` p ON((`vd`.`id_producto` = `p`.`id`)))  JOIN `operacion` o ON((`v`.`id_operacion` = `o`.`id`))) where v.id = 25 ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vistaventaseleccionada` AS select `v`.`id` AS `id`,`v`.`id_operacion` AS `id_operacion`,`o`.`id_cliente` AS `id_cliente`,`p`.`id_codigo_barra` AS `codigo`,`p`.`descripcion_breve` AS `descripcion`,`vd`.`peso` AS `peso`,`vd`.`monto` AS `monto`,`v`.`monto_total` AS `monto_total` from (((`venta` `v` join `ventadetalle` `vd` on((`v`.`id` = `vd`.`id_venta`))) join `producto` `p` on((`vd`.`id_producto` = `p`.`id`))) join `operacion` `o` on((`v`.`id_operacion` = `o`.`id`))) where (`v`.`id` = 32) ;
 
 -- ----------------------------
 -- View structure for vistaventasumatotal
 -- ----------------------------
 DROP VIEW IF EXISTS `vistaventasumatotal`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost`  VIEW `vistaventasumatotal` AS select vsc.id, vvs.monto_total + vsc.saldo as total  from vistaventaseleccionada vvs  inner  join vistasaldocliente vsc on vvs.id_cliente = vsc.id ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vistaventasumatotal` AS select `vsc`.`id` AS `id`,(`vvs`.`monto_total` - `vsc`.`saldo`) AS `total` from (`vistaventaseleccionada` `vvs` join `vistasaldocliente` `vsc` on((`vvs`.`id_cliente` = `vsc`.`id`))) ;
 
 -- ----------------------------
 -- Procedure structure for ActualizarCliente

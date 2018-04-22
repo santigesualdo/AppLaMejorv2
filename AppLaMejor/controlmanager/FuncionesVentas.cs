@@ -9,6 +9,7 @@ using MySql.Data.MySqlClient;
 using AppLaMejor.formularios.Util;
 using AppLaMejor.formularios.MovimientoCuentas;
 using AppLaMejor.formularios;
+using AppLaMejor.Reports;
 
 namespace AppLaMejor.controlmanager
 {
@@ -235,6 +236,30 @@ namespace AppLaMejor.controlmanager
                         tran.Rollback();
                     }
 
+                    // Modifica vista de reporte ultima venta.
+                    consulta = manager.ReportVistaUltimaVenta(cliente.Id, newOperacion.Id);
+                    command.CommandText = consulta;
+                    if (!manager.ExecuteSQL(command))
+                    {
+                        tran.Rollback();
+                    }
+
+                    // Modifica vista de reporte ultima venta por cliente.
+                    consulta = manager.ReportVistaUltimaVentaPorCliente(cliente.Id);
+                    command.CommandText = consulta;
+                    if (!manager.ExecuteSQL(command))
+                    {
+                        tran.Rollback();
+                    }
+
+                    // Modifica vista de reporte vista seleccionada
+                    consulta = manager.ReportVistaVentaSeleccionada(idVenta);
+                    command.CommandText = consulta;
+                    if (!manager.ExecuteSQL(command))
+                    {
+                        tran.Rollback();
+                    }
+
                     tran.Commit();
                     return true;
                 }
@@ -256,7 +281,19 @@ namespace AppLaMejor.controlmanager
             QueryManager manager = QueryManager.Instance();
             string consulta = manager.GetNextVentaId();
             DataTable result = manager.GetTableResults(ConnecionBD.Instance().Connection, consulta);
-            return Int32.Parse(result.Rows[0][0].ToString());
+            if (result.Rows[0][0].ToString().Length == 0)
+                return 1;
+            else return Int32.Parse(result.Rows[0][0].ToString());
+        }
+        public static int GetNextIdOperacion()
+        {
+            QueryManager manager = QueryManager.Instance();
+            string consulta = manager.GetNextOperacionId();
+            DataTable result = manager.GetTableResults(ConnecionBD.Instance().Connection, consulta);
+
+            if (result.Rows[0][0].ToString().Length == 0)
+                return 1;
+            else return Int32.Parse(result.Rows[0][0].ToString());
         }
         public static List<Venta> ObtenerVentasDelDiaList()
         {

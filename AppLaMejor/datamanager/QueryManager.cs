@@ -1071,44 +1071,37 @@ namespace AppLaMejor.datamanager
         /* ----------> Ultima Operacion Venta */
         public string ReportVistaUltimaVenta(int id, int ido)
         {
-            string consulta =
-
-             "    ALTER VIEW vistaultimaventa AS " +
-"SELECT " +
-"  `c`.`id`, " +
-"  `c`.`cod_cliente`, " +
-"  `c`.`razon_social`, " +
-" 	`c`.`domicilio`," +
-"  `c`.`cuit`, " +
-"  `cc`.`id` AS 'id_cliente_cuenta', " +
-"  `cc`.`descripcion`, " +
-"  `cc`.`id_banco`, " +
-"  `ccm`.`id_operacion`, " +
-" `mt`.`descripcion` AS 'tipo', " +
-"  `ccm`.`fecha`, " +
-"  IF((`ccm`.`id_movimiento_tipo` = 2), `ccm`.`monto`, (`ccm`.`monto` *-(1))) AS 'saldo' " +
-" FROM " +
-"      (((`clientecuenta` cc " +
-"    JOIN `cliente` c ON((`cc`.`id_cliente` = `c`.`id`))) " +
-"    JOIN `clientecuentamovimiento` ccm ON ((`ccm`.`id_cuenta` = `cc`.`id`))) " +
-"    JOIN `movimientotipo` mt ON ((`ccm`.`id_movimiento_tipo` = `mt`.`id`))) " +
-"WHERE  (`ccm`.`id_operacion` = " + ido.ToString() + "); " +
-  " ALTER VIEW vistasaldoporidcliente AS SELECT   `c`.`id`,   `c`.`cod_cliente`,   `c`.`razon_social`,   `c`.`cuit`,   `cc`.`id` AS 'id_cliente_cuenta',   `cc`.`descripcion`,   `cc`.`id_banco`," +
-  " `ccm`.`id_operacion`,   `mt`.`descripcion` AS 'tipo',   `ccm`.`fecha`,   IF((`ccm`.`id_movimiento_tipo` = 2), `ccm`.`monto`, (`ccm`.`monto` *-(1))) AS 'saldo' " +
-  " FROM(((`clientecuenta` cc    JOIN `cliente` c ON ((`cc`.`id_cliente` = `c`.`id`)))    JOIN `clientecuentamovimiento` ccm ON ((`ccm`.`id_cuenta` = `cc`.`id`)))    JOIN `movimientotipo` mt ON ((`ccm`.`id_movimiento_tipo` = `mt`.`id`))) " +
-  " WHERE(`c`.`id` = " + id.ToString() + ") ; " +
-  " ALTER VIEW vistasaldocliente AS SELECT   `id`, `razon_social`, SUM(`saldo`) * - (1) AS 'saldo' FROM   `vistasaldoporidcliente` GROUP BY   `id`;";
-  //" ALTER VIEW vistapagadoporidcliente AS select `vistasaldoporidcliente`.`id` AS `id`,`vistasaldoporidcliente`.`cod_cliente` AS `cod_cliente`,`vistasaldoporidcliente`.`razon_social` AS `razon_social`,`vistasaldoporidcliente`.`cuit` AS `cuit`,`vistasaldoporidcliente`.`id_cliente_cuenta` AS `id_cliente_cuenta`,`vistasaldoporidcliente`.`descripcion` AS `descripcion`,`vistasaldoporidcliente`.`id_banco` AS `id_banco`,`vistasaldoporidcliente`.`id_operacion` AS `id_operacion`,`vistasaldoporidcliente`.`tipo` AS `tipo`,`vistasaldoporidcliente`.`fecha` AS `fecha`,`vistasaldoporidcliente`.`saldo` AS `saldo` from `vistasaldoporidcliente` where(`vistasaldoporidcliente`.`tipo` = 'PAGO' and `id_operacion` =" + ido.ToString() + ");" +
-  //" select `vsc`.`id` AS `id`,(`vvs`.`monto_total` - `vsc`.`saldo`) AS `total` " +
-  //" from(`vistaventaseleccionada` `vvs` " +
-  //" join `vistasaldocliente` `vsc` on((`vvs`.`id_cliente` = `vsc`.`id`))) ";
-
-
-            return consulta;
-
-
+            return
+            "    ALTER VIEW vistaultimaventa AS " +
+            "SELECT " +
+            "  `c`.`id`, " +
+            "  `c`.`cod_cliente`, " +
+            "  `c`.`razon_social`, " +
+            " 	`c`.`domicilio`," +
+            "  `c`.`cuit`, " +
+            "  `cc`.`id` AS 'id_cliente_cuenta', " +
+            "  `cc`.`descripcion`, " +
+            "  `cc`.`id_banco`, " +
+            "  `ccm`.`id_operacion`, " +
+            " `mt`.`descripcion` AS 'tipo', " +
+            "  `ccm`.`fecha`, " +
+            "  IF((`ccm`.`id_movimiento_tipo` = 2), `ccm`.`monto`, (`ccm`.`monto` *-(1))) AS 'saldo' " +
+            " FROM " +
+            "      (((`clientecuenta` cc " +
+            "    JOIN `cliente` c ON((`cc`.`id_cliente` = `c`.`id`))) " +
+            "    JOIN `clientecuentamovimiento` ccm ON ((`ccm`.`id_cuenta` = `cc`.`id`))) " +
+            "    JOIN `movimientotipo` mt ON ((`ccm`.`id_movimiento_tipo` = `mt`.`id`))) " +
+            "WHERE  (`ccm`.`id_operacion` = " + ido.ToString() + "); " +
+            " ALTER VIEW vistasaldoporidcliente AS SELECT   `c`.`id`,   `c`.`cod_cliente`,   `c`.`razon_social`,   `c`.`cuit`,   `cc`.`id` AS 'id_cliente_cuenta',   `cc`.`descripcion`,   `cc`.`id_banco`," +
+            " `ccm`.`id_operacion`,   `mt`.`descripcion` AS 'tipo',   `ccm`.`fecha`,   IF((`ccm`.`id_movimiento_tipo` = 2), `ccm`.`monto`, (`ccm`.`monto` *-(1))) AS 'saldo' " +
+            " FROM(((`clientecuenta` cc    JOIN `cliente` c ON ((`cc`.`id_cliente` = `c`.`id`)))    JOIN `clientecuentamovimiento` ccm ON ((`ccm`.`id_cuenta` = `cc`.`id`)))    JOIN `movimientotipo` mt ON ((`ccm`.`id_movimiento_tipo` = `mt`.`id`))) " +
+            " WHERE(`c`.`id` = " + id.ToString() + ") ; " +
+            " ALTER VIEW vistasaldocliente AS SELECT   `id`, `razon_social`, SUM(`saldo`) * - (1) AS 'saldo' FROM   `vistasaldoporidcliente` GROUP BY   `id`;";
+            //" ALTER VIEW vistapagadoporidcliente AS select `vistasaldoporidcliente`.`id` AS `id`,`vistasaldoporidcliente`.`cod_cliente` AS `cod_cliente`,`vistasaldoporidcliente`.`razon_social` AS `razon_social`,`vistasaldoporidcliente`.`cuit` AS `cuit`,`vistasaldoporidcliente`.`id_cliente_cuenta` AS `id_cliente_cuenta`,`vistasaldoporidcliente`.`descripcion` AS `descripcion`,`vistasaldoporidcliente`.`id_banco` AS `id_banco`,`vistasaldoporidcliente`.`id_operacion` AS `id_operacion`,`vistasaldoporidcliente`.`tipo` AS `tipo`,`vistasaldoporidcliente`.`fecha` AS `fecha`,`vistasaldoporidcliente`.`saldo` AS `saldo` from `vistasaldoporidcliente` where(`vistasaldoporidcliente`.`tipo` = 'PAGO' and `id_operacion` =" + ido.ToString() + ");" +
+            //" select `vsc`.`id` AS `id`,(`vvs`.`monto_total` - `vsc`.`saldo`) AS `total` " +
+            //" from(`vistaventaseleccionada` `vvs` " +
+            //" join `vistasaldocliente` `vsc` on((`vvs`.`id_cliente` = `vsc`.`id`))) ";
             //order by `ccm`.`fecha` desc limit 1,8932173897
-
         }
         public string ReportVistaUltimaVenta(int idv)
         {

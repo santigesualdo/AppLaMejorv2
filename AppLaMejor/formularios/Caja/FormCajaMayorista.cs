@@ -208,6 +208,9 @@ namespace AppLaMejor.formularios.Caja
 
             if (FuncionesVentas.InsertVentaMayorista(listDetalleVentas, clienteSelected, cuentaSelected))
             {
+                crRemito scr = new crRemito();
+                FormReportes fr = new FormReportes(scr);
+                fr.ShowDialog();
 
                 MyTextTimer.TStartFade("Se inserto venta  correctamente.", statusStrip1, tsslMensaje, MyTextTimer.TIME_LONG);
                 
