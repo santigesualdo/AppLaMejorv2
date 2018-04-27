@@ -116,7 +116,7 @@ namespace AppLaMejor.formularios
 
         private void IniciarDeposte(object sender, EventArgs e)
         {
-            FormDeposte formDeposte = new FormDeposte();
+            FormDeposte formDeposte = new FormDeposte(FormDeposte.MODO_SELECCIONAR_GARRON_PARA_DEPOSTE);
             formDeposte.ShowDialog();
         }
 

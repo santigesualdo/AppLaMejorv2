@@ -15,9 +15,13 @@ namespace AppLaMejor.formularios
         List<TipoGarron> listTipoGarron;
         List<TipoEstadoGarron> listTipoEstadoGarron;
 
+        public static int MODO_SELECCIONAR_GARRON_PARA_DEPOSTE = 1;
+        public static int MODO_SELECCIONAR_GARRON = 2;
+        int currentModo;
+
         const int TIPO_ESTADO_GARRON_COMPLETO = 1;
 
-        Garron garronSelected;
+        public Garron garronSelected;
 
         Ubicacion currentUbicacion = null;
         TipoEstadoGarron currentTipoEstadoGarron = null;
@@ -25,12 +29,24 @@ namespace AppLaMejor.formularios
         private string currentNumero = null;
         private string currentGarronData;
 
-        public FormDeposte()
+        public FormDeposte(int modo)
         {
             InitializeComponent();
             CargarCombos();
 
             ApplicationLookAndFeel.ApplyThemeToAll(this);
+
+            currentModo = modo;
+
+            if (modo.Equals(MODO_SELECCIONAR_GARRON))
+            {
+                bDepostar.Text = "(Seleccionar Garron)";
+            }
+            else if (modo.Equals(MODO_SELECCIONAR_GARRON_PARA_DEPOSTE))
+            {
+                bDepostar.Text = "(Depostar)";
+            }
+
         }
 
         private void CargarCombos()
@@ -125,19 +141,27 @@ namespace AppLaMejor.formularios
 
         private void bDepostar_Click(object sender, EventArgs e)
         {
-            FormDeposteGarron fdg = null;
-            if (garronSelected.TipoEstadoGarron.Id.ToString().Equals(TIPO_ESTADO_GARRON_COMPLETO))
+            if (currentModo.Equals(MODO_SELECCIONAR_GARRON_PARA_DEPOSTE))
             {
-                fdg = new FormDeposteGarron(FormDeposteGarron.MODO_GARRONCOMPLETO, garronSelected, currentGarronData);
-            }
-            else
+                FormDeposteGarron fdg = null;
+                if (garronSelected.TipoEstadoGarron.Id.ToString().Equals(TIPO_ESTADO_GARRON_COMPLETO))
+                {
+                    fdg = new FormDeposteGarron(FormDeposteGarron.MODO_GARRONCOMPLETO, garronSelected, currentGarronData);
+                }
+                else
+                {
+                    fdg = new FormDeposteGarron(FormDeposteGarron.MODO_GARRONDEPOSTADO, garronSelected, currentGarronData);
+                }
+
+                fdg.ShowDialog();
+                CargarCombos();
+                bCancelSeleccion_Click(null, null);
+            }else if (currentModo.Equals(MODO_SELECCIONAR_GARRON))
             {
-                fdg = new FormDeposteGarron(FormDeposteGarron.MODO_GARRONDEPOSTADO, garronSelected, currentGarronData);
+                this.DialogResult = DialogResult.OK;
+                this.Close();
             }
-            
-            fdg.ShowDialog();
-            CargarCombos();
-            bCancelSeleccion_Click(null, null);
+
         }
 
         private void bCancelSeleccion_Click(object sender, EventArgs e)

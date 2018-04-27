@@ -243,6 +243,118 @@ namespace AppLaMejor.controlmanager
                 }
             }
         }
+
+        public static bool ConfirmarEntregaProductosRestantesTransaction(int idCompra)
+        {
+            MySqlConnection connection = ConnecionBD.Instance().Connection;
+            using (connection)
+            {
+                MySqlTransaction tran = null;
+                try
+                {
+                    if (connection.State.Equals(ConnectionState.Closed))
+                    {
+                        connection.Open();
+                    }
+
+                    tran = connection.BeginTransaction();
+
+                    QueryManager manager = QueryManager.Instance();
+
+                    Ubicacion destino = FuncionesCompras.obtenerUbicacionEntradaProductos();
+
+                    // Transaccion - 
+                    string consulta = "";
+                    MySqlCommand command = new MySqlCommand(consulta, connection, tran);
+
+                    // 1. Obtener la lista de productos faltantes.
+                    List<Producto> listProductos = obtenerProductosFaltantesEntrega(idCompra);
+                    if (listProductos==null || listProductos.Count.Equals(0))
+                    {
+                        tran.Rollback();
+                        return false;
+                    }
+                    
+                    foreach (Producto p in listProductos)
+                    {
+                        p.CantidadEntregada = p.Cantidad;
+
+                        // 2. Insertar en producto ubicacion (origen) los productos entregados.
+                        ProductoUbicacion puD = FuncionesProductos.GetProductoUbicacion(p, destino.Id);
+                        // Si no existe el producto en destino, insertamos productoUbicacion.
+                        if (puD == null)
+                        {
+                            // Se inserta la nueva ubicacion en ProductoUbicacion
+                            consulta = manager.InsertProductoUbicacion(p.Id, destino.Id, p.CantidadEntregada);
+                            command.CommandText = consulta;
+                            if (!manager.ExecuteSQL(command))
+                            {
+                                tran.Rollback();
+                                return false;
+                            }
+                        }
+                        else
+                        // Si ese productoUbicacion, ya tiene ese producto sumamos el peso.
+                        {
+                            decimal nuevoPeso = puD.peso + p.CantidadEntregada;
+                            consulta = manager.UpdatePesoProductoDestino(puD.Id, nuevoPeso);
+                            command.CommandText = consulta;
+                            if (!manager.ExecuteSQL(command))
+                            {
+                                tran.Rollback();
+                                return false;
+                            }
+                        }
+
+                        // 3. Sumar a la cantidad total de productos en Productos.
+                        Producto pr = FuncionesProductos.GetProducto(p.Id);
+                        decimal nuevoPesoProducto = decimal.Add(pr.Cantidad, p.CantidadEntregada);
+                        consulta = manager.UpdateCantidadProducto(p.Id, nuevoPesoProducto);
+                        command.CommandText = consulta;
+                        if (!manager.ExecuteSQL(command))
+                        {
+                            tran.Rollback();
+                            return false;
+                        }
+                    }
+
+                    // 4. Marcar en compra detalle los productos entregados en 0.
+                    consulta = manager.UpdateCompraDetalleEntregada(idCompra);
+                    command.CommandText = consulta;
+                    if (!manager.ExecuteSQL(command))
+                    {
+                        tran.Rollback();
+                        return false;
+                    }
+
+                    tran.Commit();
+                    return true;
+                }
+                catch (Exception e)
+                {
+                    FormMessageBox dialog = new FormMessageBox();
+                    dialog.ShowErrorDialog("Error: " + e.Message);
+                    return false;
+                }
+            }
+        }
+
+        private static Ubicacion obtenerUbicacionEntradaProductos()
+        {
+            string consulta = QueryManager.Instance().GetUbicacionEntrada();
+            DataTable tableUbicacion = QueryManager.Instance().GetTableResults(ConnecionBD.Instance().Connection, consulta);
+            DataNamesMapper<Ubicacion> dnmU = new DataNamesMapper<Ubicacion>();
+            return dnmU.Map(tableUbicacion).ToList().First();
+        }
+
+        public static List<Producto> obtenerProductosFaltantesEntrega(int idCompra)
+        {
+            string consulta = QueryManager.Instance().GetProductoFaltanteData(idCompra);
+            DataTable dt = QueryManager.Instance().GetTableResults(ConnecionBD.Instance().Connection, consulta);
+            DataNamesMapper<Producto> mapperProd = new DataNamesMapper<Producto>();
+            return mapperProd.Map(dt).ToList();
+        }
+
         public static int GetNextCompraId()
         {
             QueryManager manager = QueryManager.Instance();
@@ -250,7 +362,6 @@ namespace AppLaMejor.controlmanager
             DataTable result = manager.GetTableResults(ConnecionBD.Instance().Connection, consulta);
             return Int32.Parse(result.Rows[0][0].ToString());
         }
-
 
     }
 }

@@ -282,6 +282,10 @@ namespace AppLaMejor.datamanager
         {
             return "SELECT concat('',c.razon_social,' - CBU: ',cu.cbu, ' - Banco: ', b.descripcion, ' - idCuenta:  ', cu.id) FROM proveedor c INNER JOIN proveedorcuenta cu ON cu.id_proveedor = c.id INNER JOIN banco b ON b.id = cu.id_banco WHERE c.fecha_baja IS NULL ORDER BY c.id;";
         }
+        public string UpdateCompraDetalleEntregada(int idCompra)
+        {
+            return "update compradetalle set peso_faltaentregar = 0 where id_compra = " + idCompra + "";
+        }
         public string UpdateProveedor(Proveedor proveedor)
         {
             string query = "call actualizarProveedor(" +
@@ -374,6 +378,9 @@ namespace AppLaMejor.datamanager
              "   c.fecha_baja is null  " +
              "   order by c.id  ";
         }
+
+
+
         public string GetCuentaByIdCliente(int id)
         {
             return "CALL obtenerCuentasPorIdCliente(" + id.ToString() + ");";
@@ -679,12 +686,23 @@ namespace AppLaMejor.datamanager
         }
         public string InsertVentaDetalle(VentaDetalle vd)
         {
-            return "INSERT INTO ventadetalle (id_venta, id_producto, monto, peso, usuario) VALUES ('" +
-                vd.Venta.Id + "', '" +
-                vd.Producto.Id + "', '" +
-                vd.Monto + "', '" +
-                vd.Peso + "', '" +
-                VariablesGlobales.userIdLogueado.ToString() + "');";
+			if (vd.Producto!=null){
+				return "INSERT INTO ventadetalle (id_venta, id_producto, monto, peso, usuario) VALUES ('" +
+					vd.Venta.Id + "', '" +
+					vd.Producto.Id + "', '" +
+					vd.Monto + "', '" +
+					vd.Peso + "', '" +
+					VariablesGlobales.userIdLogueado.ToString() + "');";				
+			}else if (vd.Garron!=null){
+				return "INSERT INTO ventadetalle (id_venta, id_garron, monto, peso, usuario) VALUES ('" +
+					vd.Venta.Id + "', '" +
+					vd.Garron.Id + "', '" +
+					vd.Monto + "', '" +
+					vd.Peso + "', '" +
+					VariablesGlobales.userIdLogueado.ToString() + "');";				
+			}
+            return "";
+
         }
         public string InsertVenta(Venta v)
         {
@@ -900,6 +918,22 @@ namespace AppLaMejor.datamanager
                 " and pu.id_ubicacion = 4 " +
                 " and pu.fecha_egreso is null ";
         }
+       
+        public string GetProductoFaltanteData(int idCompra)
+        {
+            return " SELECT" +
+            " p.id," +
+            " p.id_codigo_barra as CodigoBarra," +
+            " p.descripcion_breve AS DescripcionBreve," +
+            " cast(p.id_producto_tipo AS CHAR (50)) AS TipoProducto," +
+            " p.precio as Precio," +
+            " cd.peso_faltaentregar AS Cantidad, " +
+            " p.descripcion_larga AS DescripcionLarga " +
+            " FROM " +
+            " producto p " +
+            " inner join compradetalle cd on cd.id_producto = p.id " +
+            " where cd.id_compra = "+idCompra+" and cd.peso_faltaentregar > 0 ";
+        }
         /* Garron */
         public string GetGarron(int idGarron)
         {
@@ -916,7 +950,7 @@ namespace AppLaMejor.datamanager
             "inner join ubicacion u on pu.id_ubicacion = u.id "+
             "inner join garronestado ge on ge.id = g.id_tipo_estado "+
             "inner join garrontipo gt on gt.id = g.id_tipo_garron "+
-            " where pu.fecha_egreso is null ";
+            " where pu.fecha_egreso is null and g.fecha_baja is null ";
             if (u != null)
             {
                 consulta += " and pu.id_ubicacion = '" + u.Id + "' ";
@@ -995,6 +1029,11 @@ namespace AppLaMejor.datamanager
         {
             return "select * from garrondeposte where id_garron  =  '" + id.ToString() + "';";
         }
+        public string UpdateFechaBajaGarron(int id)
+        {
+            return "update garron set fecha_baja = '" + DateTime.Now.ToString(VariablesGlobales.dateTimeFormat) +"' where id = " + id + ";";
+        }
+
         /* Banco */
         public string GetBanco()
         {
@@ -1341,9 +1380,9 @@ namespace AppLaMejor.datamanager
         {
             return " UPDATE producto set cantidad = cantidad + '" + p.Cantidad + "' where id = '" + p.Id + "'";
         }
-        public string UpdateCantidadProducto(int idProducto, decimal pesoRestante)
+        public string UpdateCantidadProducto(int idProducto, decimal nuevoPeso)
         {
-            return " UPDATE producto set cantidad = '" + pesoRestante + "' where id = '" + idProducto + "'";
+            return " UPDATE producto set cantidad = '" + nuevoPeso + "' where id = '" + idProducto + "'";
         }
         public string UbicarCompraDetalleMesaEntrada(Producto p)
         {
@@ -1374,6 +1413,10 @@ namespace AppLaMejor.datamanager
         public string GetUbicacionByName(string name)
         {
             return "select * from ubicacion where descripcion = '"+name+"';";
+        }
+        public string GetUbicacionEntrada()
+        {
+            return "select * from ubicacion where entrada = 1";
         }
         public string GetProductosByUbicacion(int idUbicacion)
         {
@@ -1449,6 +1492,13 @@ namespace AppLaMejor.datamanager
             }
             return "";   
         }
+
+        public string InsertProductoUbicacion(int idProducto, int idUbicacion, decimal peso)
+        {
+            return "INSERT INTO productoubicacion(id_producto, id_garron, id_ubicacion, peso, fecha_egreso, fecha_ingreso, id_usuario, fecha_baja) " +
+            "VALUES('" +idProducto+ "', NULL, '" + idUbicacion + "', '" + peso + "', NULL, now() ,'" + VariablesGlobales.userIdLogueado + "' , NULL);";
+        }
+
         public string UpdatePesoProductoDestino(int id, decimal nuevoPeso)
         {
             return "update productoubicacion set peso = '"+nuevoPeso+"', fecha_baja = null where id = '"+id.ToString()+"';";

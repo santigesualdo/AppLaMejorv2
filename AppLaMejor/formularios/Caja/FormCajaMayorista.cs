@@ -67,7 +67,7 @@ namespace AppLaMejor.formularios.Caja
             // Configuracion visual del grid
             dataGridNuevaVentaDetalle.ColumnHeadersVisible= false;
             dataGridNuevaVentaDetalle.AllowUserToAddRows = false;
-            dataGridNuevaVentaDetalle.Columns.Add(new DataGridViewImageColumn(){Image = Properties.Resources.x_icon_30x30,Width = 30});
+            dataGridNuevaVentaDetalle.Columns.Add(new DataGridViewImageColumn(){Image = Properties.Resources.x_icon_30x30_white,Width = 30});
             dataGridNuevaVentaDetalle.DataSource = currentVentasDetalle;
             dataGridNuevaVentaDetalle.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             dataGridNuevaVentaDetalle.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -232,7 +232,7 @@ namespace AppLaMejor.formularios.Caja
 
         private void btManual_Click(object sender, EventArgs e)
         {
-            FormAgregarManual formAgregarManual = new FormAgregarManual(listDetalleVentas);
+            FormAgregarProductoManual formAgregarManual = new FormAgregarProductoManual(listDetalleVentas);
 
             if (formAgregarManual.ShowDialog() == DialogResult.OK)
             {
@@ -251,6 +251,29 @@ namespace AppLaMejor.formularios.Caja
                 labelSubTotal.Text = " TOTAL : $ " + currentMontoTotal.ToString();
 
             }            
+        }
+
+        private void btManualGarron_Click(object sender, EventArgs e)
+        {
+            FormAgregarGarronManual formGarronManual = new FormAgregarGarronManual();
+
+            if (formGarronManual.ShowDialog() == DialogResult.OK)
+            {
+                // Nueva sub-venta, ventadetalle
+                VentaDetalle vd = new VentaDetalle();
+                vd.Monto = formGarronManual.precioFinal;
+                vd.Peso = formGarronManual.selectedGarron.Peso;
+                vd.Garron = formGarronManual.selectedGarron;
+
+                // Agregamos a la lista y mostramos en grid
+                listDetalleVentas.Add(vd);
+
+                currentVentasDetalle.Rows.Add("Garron # " + vd.Garron.Id + " - Numero: " + vd.Garron.Numero + " - Estado: " + vd.Garron.TipoEstadoGarron.Descripcion, "$ " + vd.Monto, vd.Peso.ToString() + " kg.");
+                currentMontoTotal += vd.Monto;
+
+                labelSubTotal.Text = " TOTAL : $ " + currentMontoTotal.ToString();
+
+            }
         }
 
         private void btRemito_Click(object sender, EventArgs e)

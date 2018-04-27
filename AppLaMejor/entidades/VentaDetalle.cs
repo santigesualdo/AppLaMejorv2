@@ -11,6 +11,9 @@ namespace AppLaMejor.entidades
         [DataNames("id_producto")]
         public Producto Producto { get; set; }
 
+        [DataNames("id_garron")]
+        public Garron Garron { get; set; }
+
         [DataNames("id_venta")]
         public Venta Venta{ get; set; }
 
