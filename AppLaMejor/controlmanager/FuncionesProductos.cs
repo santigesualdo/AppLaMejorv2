@@ -104,6 +104,13 @@ namespace AppLaMejor.controlmanager
             return mapperProd.Map(table).ToList().First().peso;
         }
 
+        public static bool CheckProductExistUbicacionSalida(int idProducto)
+        {
+            QueryManager manager = QueryManager.Instance();
+            DataTable table = manager.GetTableResults(ConnecionBD.Instance().Connection, manager.CheckProductExistUbicacionSalida(idProducto));
+            return table.Rows.Count > 0;
+        }
+
         public static List<Ubicacion> GetUbicacionDestino(int idOrigen, List<MovimientoMercaderia> listMovimientoMercaderia)
         {
             List<Ubicacion> listUbicacion = TiposManager.Instance().GetUbicacionListDestino(idOrigen);

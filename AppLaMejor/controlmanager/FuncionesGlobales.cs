@@ -8,6 +8,7 @@ using System.Diagnostics;
 using AppLaMejor.datamanager;
 using System.Globalization;
 using AppLaMejor.stylemanager;
+using AppLaMejor.entidades;
 
 namespace AppLaMejor.controlmanager
 {
@@ -121,11 +122,31 @@ namespace AppLaMejor.controlmanager
             return dr.Field<int>("id_proveedor");
         }
 
+
+
         public static void TextBoxLeaveOnEnter_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter) {
                 SendKeys.Send("{TAB}");
             } 
+        }
+
+        public static Ubicacion ObtenerUbicacionEntrada()
+        {
+            QueryManager manager = QueryManager.Instance();
+            string consulta = manager.GetUbicacionEntrada();
+            DataTable table = manager.GetTableResults(ConnecionBD.Instance().Connection, consulta);
+            DataNamesMapper<Ubicacion> dtnm = new DataNamesMapper<Ubicacion>();
+            return dtnm.Map(table).ToList().First();
+        }
+
+        public static Ubicacion ObtenerUbicacionSalida()
+        {
+            QueryManager manager = QueryManager.Instance();
+            string consulta = manager.GetUbicacionSalida();
+            DataTable table = manager.GetTableResults(ConnecionBD.Instance().Connection, consulta);
+            DataNamesMapper<Ubicacion> dtnm = new DataNamesMapper<Ubicacion>();
+            return dtnm.Map(table).ToList().First();
         }
     }
 }

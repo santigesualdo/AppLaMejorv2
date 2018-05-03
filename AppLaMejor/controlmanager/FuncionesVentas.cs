@@ -183,12 +183,13 @@ namespace AppLaMejor.controlmanager
                         if (v.Garron != null)
                         {
                             // Obtenemos ubicacion del garron
-                            Ubicacion ug = FuncionesGarron.GetUbicacionByGarron(v.Garron);
+                            // Ubicacion ug = FuncionesGarron.GetUbicacionByGarron(v.Garron);
+                            ProductoUbicacion pug = FuncionesGarron.GetProductoUbicacionByGarron(v.Garron.Id);
 
-                            if (ug != null)
+                            if (pug != null)
                             {
                                 // Seteamos el egreso del producto ubicacion
-                                consulta = manager.UpdateProductoUbicacionBaja(ug.Id);
+                                consulta = manager.UpdateProductoUbicacionBaja(pug.Id);
                                 command.CommandText = consulta;
                                 if (!manager.ExecuteSQL(command))
                                 {
@@ -214,11 +215,10 @@ namespace AppLaMejor.controlmanager
 
                         if (v.Producto != null)
                         {
-                            // TODO: Hacer destino origen global y estatico
                             // 3.2 Operamos en producto ubicacion
-                            // HARDCODEADO : UBICACION DEPOSITO 4
-                            ProductoUbicacion pu = FuncionesProductos.GetProductoUbicacion(v.Producto, 4);
-                            // Sabemos que el peso de la VentaMayorista nunca puede ser mayor a la cantidad de esa ubicacion, por que esta validado
+							// Obtenemos la ubicacion de entrada por defecto.
+                            ProductoUbicacion pu = FuncionesProductos.GetProductoUbicacion(v.Producto, FuncionesGlobales.ObtenerUbicacionEntrada().Id);
+                            // Sabemos que el peso de VentaDetalle nunca puede ser mayor a la cantidad de esa ubicacion, por que esta validado.
                             decimal calculo = decimal.Subtract(pu.peso, v.Peso);
                             if (calculo.Equals(0))
                             {

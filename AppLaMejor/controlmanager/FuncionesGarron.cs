@@ -198,6 +198,16 @@ namespace AppLaMejor.controlmanager
                 }
             }
         }
+
+        public static ProductoUbicacion GetProductoUbicacionByGarron(int idGarron)
+        {
+            QueryManager manager = QueryManager.Instance();
+            string consulta = manager.GetProductoUbicacionByGarron(idGarron);
+            DataTable table = manager.GetTableResults(ConnecionBD.Instance().Connection, consulta);
+            DataNamesMapper<ProductoUbicacion> dtmpu = new DataNamesMapper<ProductoUbicacion>();
+            return dtmpu.Map(table).ToList().First();
+        }
+
         public static List<GarronDeposte> GetDeposteAnterior(int id)
         {
             string consulta = QueryManager.Instance().GetGarronDeposteAnterior(id);

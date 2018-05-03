@@ -211,7 +211,7 @@ namespace AppLaMejor.controlmanager
                     //6. Se ubican todos los productos ingresados en MESA DE ENTRADA.
                     foreach (Producto p in listProducto)
                     {
-                        consulta = manager.UbicarCompraDetalleMesaEntrada(p);
+                        consulta = manager.UbicarCompraDetalleUbicacionEntrada(p);
                         command.CommandText = consulta;
                         if (!manager.ExecuteSQL(command))
                         {
@@ -222,7 +222,7 @@ namespace AppLaMejor.controlmanager
                     //7. Se ubican todos los garrones en Mesa de Entrada
                     foreach (Garron g in listGarron)
                     {
-                        consulta = manager.UbicarCompraDetalleMesaEntrada(g);
+                        consulta = manager.UbicarCompraDetalleUbicacionEntrada(g);
                         command.CommandText = consulta;
                         if (!manager.ExecuteSQL(command))
                         {
