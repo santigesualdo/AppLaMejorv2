@@ -1146,14 +1146,18 @@ namespace AppLaMejor.datamanager
         }
         public string ReportVistaUltimaVenta(int idv)
         {
-            string consulta = " ALTER VIEW vistaventa AS SELECT  `v`.`id`,  `o`.`id_cliente` AS `id_cliente`,`v`.`id_operacion`,  `p`.`id_codigo_barra` AS 'codigo',  `p`.`descripcion_breve` AS 'descripcion', " +
-            " `vd`.`peso`,  `vd`.`monto`,  `v`.`monto_total`FROM  (((`venta` v    JOIN `ventadetalle` vd ON((`v`.`id` = `vd`.`id_venta`)))    JOIN `producto` p ON ((`vd`.`id_producto` = `p`.`id`))) " +
-            "  JOIN `operacion` o ON ((`v`.`id_operacion` = `o`.`id`))) WHERE  (`v`.`id` = " + idv.ToString() + ");";
-            
-																	 
-												 
-					  
-																	  
+            //string consulta = " ALTER VIEW vistaventa AS SELECT  `v`.`id`,  `o`.`id_cliente` AS `id_cliente`,`v`.`id_operacion`,  `p`.`id_codigo_barra` AS 'codigo',  `p`.`descripcion_breve` AS 'descripcion', " +
+            //" `vd`.`peso`,  `vd`.`monto`,  `v`.`monto_total`FROM  (((`venta` v    JOIN `ventadetalle` vd ON((`v`.`id` = `vd`.`id_venta`)))    JOIN `producto` p ON ((`vd`.`id_producto` = `p`.`id`))) " +
+            //"  JOIN `operacion` o ON ((`v`.`id_operacion` = `o`.`id`))) WHERE  (`v`.`id` = " + idv.ToString() + ");";
+
+            string consulta = "ALTER VIEW vistaventa AS SELECT `v`.`id` AS `id`,	`o`.`id_cliente` AS `id_cliente`,	`v`.`id_operacion` AS `id_operacion`,	`p`.`id_codigo_barra` AS `codigo`,	CASE WHEN p.id IS NULL THEN " +
+            " concat('Garron #', g.numero, ' ID:', g.id) ELSE  `p`.`descripcion_breve` END AS `descripcion`, " +
+            " `vd`.`peso` AS `peso`,  `vd`.`monto` AS `monto`, `v`.`monto_total` AS `monto_total` " +
+            " FROM    `venta` `v`JOIN `ventadetalle` `vd` ON `v`.`id` = `vd`.`id_venta` " +
+            " LEFT JOIN producto p ON((vd.id_producto = p.id       AND p.id IS NOT NULL)) " +
+            " LEFT JOIN garron g ON((vd.id_garron = g.id     AND g.id IS NOT NULL)) " +
+            " JOIN `operacion` `o` ON `v`.`id_operacion` = `o`.`id`WHERE  `v`.`id` = " + idv.ToString() + ");";
+
             return consulta;
         }
         public string ReportVistaUltimaVentaPorCliente(int idC)
@@ -1183,11 +1187,21 @@ namespace AppLaMejor.datamanager
         }
         public string ReportVistaVentaSeleccionada(int idV)
         {
-            string consulta = "ALTER VIEW vistaventaseleccionada AS  SELECT  `v`.`id`, `v`.`id_operacion`, o.id_cliente, `p`.`id_codigo_barra` AS 'codigo',  `p`.`descripcion_breve` AS 'descripcion', " +
-        "`vd`.`peso`,  `vd`.`monto`,  `v`.`monto_total` FROM(((`venta` v JOIN `ventadetalle` vd ON((`v`.`id` = `vd`.`id_venta`)))    " +
-         "JOIN `producto` p ON((`vd`.`id_producto` = `p`.`id`)))  JOIN `operacion` o ON((`v`.`id_operacion` = `o`.`id`))) " +
-        "where v.id = " + idV.ToString();
-         return consulta;
+        //    string consulta = "ALTER VIEW vistaventaseleccionada AS  SELECT  `v`.`id`, `v`.`id_operacion`, o.id_cliente, `p`.`id_codigo_barra` AS 'codigo',  `p`.`descripcion_breve` AS 'descripcion', " +
+        //"`vd`.`peso`,  `vd`.`monto`,  `v`.`monto_total` FROM(((`venta` v JOIN `ventadetalle` vd ON((`v`.`id` = `vd`.`id_venta`)))    " +
+        // "JOIN `producto` p ON((`vd`.`id_producto` = `p`.`id`)))  JOIN `operacion` o ON((`v`.`id_operacion` = `o`.`id`))) " +
+        //"where v.id = " + idV.ToString();
+
+            string consulta = "ALTER VIEW vistaventaseleccionada AS  SELECT 	`v`.`id` AS `id`, 	`v`.`id_operacion` AS `id_operacion`, 	`o`.`id_cliente` AS `id_cliente`, " +
+    " (CASE        WHEN isnull(`p`.`id`) THEN          concat('Garron #',             `g`.`numero`, ' ID:',             `g`.`id`			) ELSE			`p`.`descripcion_breve`		END) AS `descripcion`, " +
+    " `vd`.`peso` AS `peso`,	`vd`.`monto` AS `monto`,	`v`.`monto_total` AS `monto_total` " +
+    "			FROM    `venta` `v`					JOIN `ventadetalle` `vd` ON `v`.`id` = `vd`.`id_venta` " +
+    "			LEFT JOIN `producto` `p` ON `vd`.`id_producto` = `p`.`id`				AND `p`.`id` IS NOT NULL " +
+    "           LEFT JOIN `garron` `g` ON `vd`.`id_garron` = `g`.`id`					AND `g`.`id` IS NOT NULL " +
+    "                    JOIN `operacion` `o` ON `v`.`id_operacion` = `o`.`id` " +
+    "		WHERE   `v`.`id` = " + idV.ToString();
+
+            return consulta;
         }
         public string ReportVistaListadoVentas(string d, string h)
         {
@@ -1344,10 +1358,19 @@ namespace AppLaMejor.datamanager
         }
         public string ReportVistaCompraSeleccionada(int idC)
         {
-            string consulta = "ALTER VIEW vistacompraseleccionada AS SELECT  `v`.`id`, `v`.`id_operacion`, o.id_proveedor, `p`.`id_codigo_barra` AS 'codigo',  `p`.`descripcion_breve` AS 'descripcion',  " +
-        "`vd`.`peso`,  `vd`.`monto`,  `v`.`monto_total` FROM(((`compra` v JOIN `compradetalle` vd ON((`v`.`id` = `vd`.`id_compra`)))    " +
-        " JOIN `producto` p ON((`vd`.`id_producto` = `p`.`id`)))  JOIN `operacionproveedor` o ON((`v`.`id_operacion` = `o`.`id`))) " +
-        "where v.id = " + idC.ToString();
+        //    string consulta = "ALTER VIEW vistacompraseleccionada AS SELECT  `v`.`id`, `v`.`id_operacion`, o.id_proveedor, `p`.`id_codigo_barra` AS 'codigo',  `p`.`descripcion_breve` AS 'descripcion',  " +
+        //"`vd`.`peso`,  `vd`.`monto`,  `v`.`monto_total` FROM(((`compra` v JOIN `compradetalle` vd ON((`v`.`id` = `vd`.`id_compra`)))    " +
+        //" JOIN `producto` p ON((`vd`.`id_producto` = `p`.`id`)))  JOIN `operacionproveedor` o ON((`v`.`id_operacion` = `o`.`id`))) " +
+        //"where v.id = " + idC.ToString();
+
+            string consulta = "ALTER VIEW vistacompraseleccionada AS  SELECT  `v`.`id` AS `id`, 	`v`.`id_operacion` AS `id_operacion`, 	`o`.`id_proveedor` AS `id_proveedor`,	`p`.`id_codigo_barra` AS `codigo`, " +
+         " (CASE        WHEN isnull(`p`.`id`) THEN concat('Garron #',             `g`.`numero`, ' ID:',             `g`.`id`			) " +
+            "	ELSE            `p`.`descripcion_breve`		END ) AS `descripcion`,	`vd`.`peso` AS `peso`,	`vd`.`monto` AS `monto`,	`v`.`monto_total` AS `monto_total` " +
+        " FROM                `compra` `v`				 " +
+        " JOIN `compradetalle` `vd` ON                    `v`.`id` = `vd`.`id_compra`				 " +
+        " LEFT JOIN `producto` `p` ON                             `vd`.`id_producto` = `p`.`id` AND `p`.`id` IS NOT NULL " +
+        " LEFT JOIN `garron` `g` ON                   `vd`.`id_garron` = `g`.`id`					AND `g`.`id` IS NOT NULL " +
+        " JOIN `operacionproveedor` `o` ON                `v`.`id_operacion` = `o`.`id` WHERE `v`.`id` " + idC.ToString();
             return consulta;
         }
         /* Compras */
