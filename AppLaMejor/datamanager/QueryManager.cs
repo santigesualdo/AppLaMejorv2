@@ -58,6 +58,15 @@ namespace AppLaMejor.datamanager
             }
         }
 
+        public string GetModulosFaltantesPorUsuario(int idUsuarioSelected)
+        {
+            return "select* from modulo m " +
+            "where m.id not in (select mo.id from usuario u " +
+            "left join usuariomodulo um on um.id_usuario = u.id " +
+            "left join modulo mo on mo.id = um.id_modulo " +
+            "where um.id_usuario = "+idUsuarioSelected+")";
+        }
+
         public AutoCompleteStringCollection GetAutoCompleteCollection(MySqlConnection conn, string query, int sourceIndex)
         {
             try
@@ -206,6 +215,7 @@ namespace AppLaMejor.datamanager
                 "'" + cliente.FechaDesde.ToString(VariablesGlobales.dateFormat) + "','" + VariablesGlobales.userIdLogueado.ToString() + "');";
             return query;
         }
+
         public string GetClientes()
         {
             return "call obtenerClientes();";
@@ -1150,13 +1160,13 @@ namespace AppLaMejor.datamanager
             //" `vd`.`peso`,  `vd`.`monto`,  `v`.`monto_total`FROM  (((`venta` v    JOIN `ventadetalle` vd ON((`v`.`id` = `vd`.`id_venta`)))    JOIN `producto` p ON ((`vd`.`id_producto` = `p`.`id`))) " +
             //"  JOIN `operacion` o ON ((`v`.`id_operacion` = `o`.`id`))) WHERE  (`v`.`id` = " + idv.ToString() + ");";
 
-            string consulta = "ALTER VIEW vistaventa AS SELECT `v`.`id` AS `id`,	`o`.`id_cliente` AS `id_cliente`,	`v`.`id_operacion` AS `id_operacion`,	`p`.`id_codigo_barra` AS `codigo`,	CASE WHEN p.id IS NULL THEN " +
-            " concat('Garron #', g.numero, ' ID:', g.id) ELSE  `p`.`descripcion_breve` END AS `descripcion`, " +
-            " `vd`.`peso` AS `peso`,  `vd`.`monto` AS `monto`, `v`.`monto_total` AS `monto_total` " +
-            " FROM    `venta` `v`JOIN `ventadetalle` `vd` ON `v`.`id` = `vd`.`id_venta` " +
+            string consulta = "ALTER VIEW vistaventa AS SELECT v.id AS id,o.id_cliente AS id_cliente,v.id_operacion AS id_operacion,p.id_codigo_barra AS codigo,CASE WHEN p.id IS NULL THEN " +
+            " concat('Garron #', g.numero, ' ID:', g.id) ELSE  p.descripcion_breve END AS descripcion, " +
+            " vd.peso AS peso,  vd.monto AS monto, v.monto_total AS monto_total " +
+            " FROM venta v JOIN ventadetalle vd ON v.id = vd.id_venta " +
             " LEFT JOIN producto p ON((vd.id_producto = p.id       AND p.id IS NOT NULL)) " +
             " LEFT JOIN garron g ON((vd.id_garron = g.id     AND g.id IS NOT NULL)) " +
-            " JOIN `operacion` `o` ON `v`.`id_operacion` = `o`.`id`WHERE  `v`.`id` = " + idv.ToString() + ");";
+            " JOIN operacion o ON v.id_operacion = o.id WHERE  v.id = " + idv.ToString() + ";";
 
             return consulta;
         }
@@ -1329,48 +1339,47 @@ namespace AppLaMejor.datamanager
         {
             string consulta =
 
-               "ALTER VIEW vistaultimacompra AS SELECT " +
-		 " `c`.`id`, " +
-		 " `c`.`razon_social`, " +
-		 " 	`c`.`domicilio`," +
-		 " `c`.`cuit`, " +
-		 " `cc`.`id` AS 'id_proveedor_cuenta', " +
-		 " `cc`.`descripcion`, " +
-		 " `cc`.`id_banco`, " +
-		 " `ccm`.`id_operacion`, " +
-												 
-		 " `mt`.`descripcion` AS 'tipo', " +
-		 " `ccm`.`fecha`, " +
-		 " IF((`ccm`.`id_movimiento_tipo` = 2), `ccm`.`monto`, (`ccm`.`monto` *-(1))) AS 'saldo' " +
+         "ALTER VIEW vistaultimacompra AS SELECT " +
+		 " c.id, " +
+		 " c.razon_social, " +
+		 " c.domicilio," +
+		 " c.cuit, " +
+		 " cc.id AS 'id_proveedor_cuenta', " +
+		 " cc.descripcion, " +
+		 " cc.id_banco, " +
+		 " ccm.id_operacion, " +												 
+		 " mt.descripcion AS 'tipo', " +
+		 " ccm.fecha, " +
+		 " IF((ccm.id_movimiento_tipo = 2), ccm.monto, (ccm.monto *-(1))) AS 'saldo' " +
 		 " FROM " +
-		 "   (((`proveedorcuenta` cc " +
-		 "   JOIN `proveedor` c ON((`cc`.`id_proveedor` = `c`.`id`))) " +
-		 "   JOIN `proveedorcuentamovimiento` ccm ON ((`ccm`.`id_cuenta` = `cc`.`id`))) " +
-		 "   JOIN `movimientotipo` mt ON ((`ccm`.`id_movimiento_tipo` = `mt`.`id`))) " +
-		 " WHERE " +
-				 
-		 " (`ccm`.`id_operacion` = " + id.ToString() + "); " +
-          " ALTER VIEW vistasaldoporidProveedor AS SELECT   `c`.`id`,   `c`.`razon_social`,   `c`.`cuit`,   `cc`.`id` AS 'id_proveedor_cuenta',    `cc`.`descripcion`,   `cc`.`id_banco`,   `ccm`.`id_operacion`,  " +
-          " `mt`.`descripcion` AS 'tipo',    	 `ccm`.`fecha`,    	 IF((`ccm`.`id_movimiento_tipo` = 2),  	 `ccm`.`monto`, (`ccm`.`monto` *-(1))) AS 'saldo'  FROM(((`proveedorcuenta` cc    JOIN `proveedor` c ON((`cc`.`id_proveedor` = `c`.`id`)))   " +
-          " JOIN `proveedorcuentamovimiento` ccm ON ((`ccm`.`id_cuenta` = `cc`.`id`)))     	JOIN `movimientotipo` mt ON ((`ccm`.`id_movimiento_tipo` = `mt`.`id`)))   WHERE(`c`.`id` = " + id.ToString() + " ); " +
-          " ALTER VIEW vistasaldoproveedor AS SELECT `id`, `razon_social`, SUM(`saldo`) AS 'saldo'   FROM   `vistasaldoporidproveedor` GROUP BY   `id`; ";
-            return consulta;																																									
+		 "   (((proveedorcuenta cc " +
+		 "   JOIN proveedor c ON((cc.id_proveedor = c.id))) " +
+		 "   JOIN proveedorcuentamovimiento ccm ON ((ccm.id_cuenta = cc.id))) " +
+		 "   JOIN movimientotipo mt ON ((ccm.id_movimiento_tipo = mt.id))) " +
+		 " WHERE " +	 
+		 " (ccm.id_operacion = " + id.ToString() + "); " +
+         " ALTER VIEW vistasaldoporidProveedor AS SELECT   c.id,   c.razon_social,   c.cuit,   cc.id AS 'id_proveedor_cuenta',    cc.descripcion,   cc.id_banco,   ccm.id_operacion,  " +
+         " mt.descripcion AS 'tipo', ccm.fecha, IF((ccm.id_movimiento_tipo = 2), ccm.monto, (ccm.monto *-(1))) AS 'saldo'  FROM(((proveedorcuenta cc    JOIN proveedor c ON((cc.id_proveedor = c.id)))   " +
+         " JOIN proveedorcuentamovimiento ccm ON ((ccm.id_cuenta = cc.id))) JOIN movimientotipo mt ON ((ccm.id_movimiento_tipo = mt.id)))   WHERE(c.id = " + id.ToString() + " ); " +
+         " ALTER VIEW vistasaldoproveedor AS SELECT id, razon_social, SUM(saldo) AS 'saldo'   FROM   vistasaldoporidproveedor GROUP BY   id; ";
+          return consulta;																																									
         }
         public string ReportVistaCompraSeleccionada(int idC)
         {
-        //    string consulta = "ALTER VIEW vistacompraseleccionada AS SELECT  `v`.`id`, `v`.`id_operacion`, o.id_proveedor, `p`.`id_codigo_barra` AS 'codigo',  `p`.`descripcion_breve` AS 'descripcion',  " +
-        //"`vd`.`peso`,  `vd`.`monto`,  `v`.`monto_total` FROM(((`compra` v JOIN `compradetalle` vd ON((`v`.`id` = `vd`.`id_compra`)))    " +
-        //" JOIN `producto` p ON((`vd`.`id_producto` = `p`.`id`)))  JOIN `operacionproveedor` o ON((`v`.`id_operacion` = `o`.`id`))) " +
-        //"where v.id = " + idC.ToString();
+            //    string consulta = "ALTER VIEW vistacompraseleccionada AS SELECT  `v`.`id`, `v`.`id_operacion`, o.id_proveedor, `p`.`id_codigo_barra` AS 'codigo',  `p`.`descripcion_breve` AS 'descripcion',  " +
+            //"`vd`.`peso`,  `vd`.`monto`,  `v`.`monto_total` FROM(((`compra` v JOIN `compradetalle` vd ON((`v`.`id` = `vd`.`id_compra`)))    " +
+            //" JOIN `producto` p ON((`vd`.`id_producto` = `p`.`id`)))  JOIN `operacionproveedor` o ON((`v`.`id_operacion` = `o`.`id`))) " +
+            //"where v.id = " + idC.ToString();
 
-            string consulta = "ALTER VIEW vistacompraseleccionada AS  SELECT  `v`.`id` AS `id`, 	`v`.`id_operacion` AS `id_operacion`, 	`o`.`id_proveedor` AS `id_proveedor`,	`p`.`id_codigo_barra` AS `codigo`, " +
-         " (CASE        WHEN isnull(`p`.`id`) THEN concat('Garron #',             `g`.`numero`, ' ID:',             `g`.`id`			) " +
-            "	ELSE            `p`.`descripcion_breve`		END ) AS `descripcion`,	`vd`.`peso` AS `peso`,	`vd`.`monto` AS `monto`,	`v`.`monto_total` AS `monto_total` " +
-        " FROM                `compra` `v`				 " +
-        " JOIN `compradetalle` `vd` ON                    `v`.`id` = `vd`.`id_compra`				 " +
-        " LEFT JOIN `producto` `p` ON                             `vd`.`id_producto` = `p`.`id` AND `p`.`id` IS NOT NULL " +
-        " LEFT JOIN `garron` `g` ON                   `vd`.`id_garron` = `g`.`id`					AND `g`.`id` IS NOT NULL " +
-        " JOIN `operacionproveedor` `o` ON                `v`.`id_operacion` = `o`.`id` WHERE `v`.`id` " + idC.ToString();
+            string consulta =
+            "ALTER VIEW vistacompraseleccionada AS SELECT v.id AS id, v.id_operacion AS id_operacion, o.id_proveedor AS id_proveedor, p.id_codigo_barra AS codigo, " +
+            " (CASE WHEN isnull(p.id) THEN concat('Garron #', g.numero, ' ID:', g.id ) " +
+            " ELSE p.descripcion_breve END ) AS descripcion, vd.peso AS peso, vd.monto AS monto, v.monto_total AS monto_total " +
+            " FROM compra v " +
+            " JOIN compradetalle vd ON v.id = vd.id_compra " +
+            " LEFT JOIN producto p ON vd.id_producto = p.id AND p.id IS NOT NULL " +
+            " LEFT JOIN garron g ON vd.id_garron = g.id AND g.id IS NOT NULL " +
+            " JOIN operacionproveedor o ON v.id_operacion = o.id WHERE v.id =" + idC.ToString() + ";";
             return consulta;
         }
         /* Compras */
@@ -1531,6 +1540,20 @@ namespace AppLaMejor.datamanager
         public string UpdatePesoProductoDestino(int id, decimal nuevoPeso)
         {
             return "update productoubicacion set peso = '"+nuevoPeso+"', fecha_baja = null where id = '"+id.ToString()+"';";
+        }
+
+        /* Usuarios y Modulos */
+        public string GetModulosPorUsuario(int idUsuarioSelected)
+        {
+            return "select m.*from usuario u inner join usuariomodulo um on um.id_usuario = u.id inner join modulo m on m.id = um.id_modulo where u.id = "+idUsuarioSelected+"; ";
+        }
+        public string GetUsuario(int v)
+        {
+            return "select * from usuario where id=" + v;
+        }
+        public string GetModulo(int v)
+        {
+            return "select * from modulo where id=" + v;
         }
     }
 

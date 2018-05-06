@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2018-05-02 21:08:35
+Date: 2018-05-06 12:28:51
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -134,7 +134,7 @@ CREATE TABLE `clientecuentamovimiento` (
   `cobrado` char(1) NOT NULL DEFAULT 'N',
   `usuario` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of clientecuentamovimiento
@@ -179,6 +179,9 @@ INSERT INTO `clientecuentamovimiento` VALUES ('38', '24', '55', '1', '6000', '20
 INSERT INTO `clientecuentamovimiento` VALUES ('39', '25', '53', '1', '4850', '2018-04-21 22:56:39', 'N', '1');
 INSERT INTO `clientecuentamovimiento` VALUES ('40', '28', '57', '1', '578.73', '2018-04-27 20:30:49', 'N', '1');
 INSERT INTO `clientecuentamovimiento` VALUES ('41', '30', '55', '1', '2581.25', '2018-05-02 18:59:03', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('42', '31', '60', '1', '5248', '2018-05-05 15:21:37', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('43', '34', '53', '1', '258.36', '2018-05-05 16:23:21', 'N', '1');
+INSERT INTO `clientecuentamovimiento` VALUES ('44', '37', '54', '1', '326.25', '2018-05-05 16:26:27', 'N', '1');
 
 -- ----------------------------
 -- Table structure for clientetipo
@@ -321,7 +324,7 @@ INSERT INTO `garron` VALUES ('24', '222', '1', '1', '2018-03-12 16:50:13', '534.
 INSERT INTO `garron` VALUES ('25', '558', '2', '1', '2018-03-17 11:08:13', '624.000', '3', '1', null, null);
 INSERT INTO `garron` VALUES ('26', '421', '3', '2', '2018-03-29 22:25:35', '2.580', '4', '1', null, null);
 INSERT INTO `garron` VALUES ('27', '333', '6', '2', '2018-03-17 11:18:04', '13.470', '3', '1', null, null);
-INSERT INTO `garron` VALUES ('28', '332', '5', '1', '2018-03-17 11:18:26', '66.580', '2', '1', null, null);
+INSERT INTO `garron` VALUES ('28', '332', '5', '1', '2018-03-17 11:18:26', '66.580', '2', '1', '2018-05-05 16:26:27', null);
 INSERT INTO `garron` VALUES ('29', '342', '1', '1', '2018-03-19 17:32:45', '234.000', '1', '1', null, null);
 INSERT INTO `garron` VALUES ('30', '213', '3', '1', '2018-03-19 17:33:04', '543.000', '11', '1', '2018-04-27 20:30:28', null);
 INSERT INTO `garron` VALUES ('31', '12', '6', '2', '2018-03-19 17:33:29', '34595.000', '12', '1', null, null);
@@ -359,12 +362,12 @@ INSERT INTO `garron` VALUES ('62', '1', '1', '2', '2018-03-21 18:03:07', '77.000
 INSERT INTO `garron` VALUES ('63', '235', '1', '1', '2018-03-21 19:51:41', '123.000', '3', '1', null, '');
 INSERT INTO `garron` VALUES ('64', '236', '3', '1', '2018-03-21 19:51:53', '123.000', '3', '1', null, 'incompleto');
 INSERT INTO `garron` VALUES ('65', '237', '5', '2', '2018-03-29 22:25:35', '191.640', '3', '1', null, '');
-INSERT INTO `garron` VALUES ('66', '235', '4', '1', '2018-03-22 17:05:01', '245.000', '11', '1', null, 'garron recortado');
+INSERT INTO `garron` VALUES ('66', '235', '4', '1', '2018-03-22 17:05:01', '245.000', '11', '1', '2018-05-05 16:23:21', 'garron recortado');
 INSERT INTO `garron` VALUES ('67', '235', '4', '1', '2018-04-05 16:53:40', '256.250', '11', '1', null, '');
 INSERT INTO `garron` VALUES ('68', '236', '3', '1', '2018-04-05 16:54:12', '122.000', '1', '1', null, '');
 INSERT INTO `garron` VALUES ('69', '222', '2', '1', '2018-04-09 18:16:05', '361.250', '11', '1', null, '');
 INSERT INTO `garron` VALUES ('70', '333', '1', '1', '2018-04-09 18:16:22', '233.000', '10', '1', null, '');
-INSERT INTO `garron` VALUES ('71', '111', '2', '1', '2018-04-09 18:38:50', '14.000', '11', '1', null, '');
+INSERT INTO `garron` VALUES ('71', '111', '2', '1', '2018-04-09 18:38:50', '14.000', '11', '1', '2018-05-05 15:21:37', '');
 INSERT INTO `garron` VALUES ('72', '2', '3', '1', '2018-04-09 19:08:39', '112.000', '11', '1', null, '');
 
 -- ----------------------------
@@ -621,7 +624,7 @@ CREATE TABLE `operacion` (
   KEY `fk_cl` (`id_cliente`),
   KEY `fk_to` (`Id_tipo_operacion`),
   CONSTRAINT `fk_to` FOREIGN KEY (`Id_tipo_operacion`) REFERENCES `operaciontipo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of operacion
@@ -656,6 +659,13 @@ INSERT INTO `operacion` VALUES ('27', '1', '36', '2018-04-27 20:28:50', '1');
 INSERT INTO `operacion` VALUES ('28', '1', '33', '2018-04-27 20:30:24', '1');
 INSERT INTO `operacion` VALUES ('29', '1', '35', '2018-05-02 18:44:20', '1');
 INSERT INTO `operacion` VALUES ('30', '1', '31', '2018-05-02 18:57:44', '1');
+INSERT INTO `operacion` VALUES ('31', '1', '36', '2018-05-05 15:21:24', '1');
+INSERT INTO `operacion` VALUES ('32', '1', '30', '2018-05-05 16:19:17', '1');
+INSERT INTO `operacion` VALUES ('33', '1', '29', '2018-05-05 16:20:48', '1');
+INSERT INTO `operacion` VALUES ('34', '1', '29', '2018-05-05 16:22:57', '1');
+INSERT INTO `operacion` VALUES ('35', '1', '33', '2018-05-05 16:23:38', '1');
+INSERT INTO `operacion` VALUES ('36', '1', '31', '2018-05-05 16:24:40', '1');
+INSERT INTO `operacion` VALUES ('37', '1', '30', '2018-05-05 16:26:22', '1');
 
 -- ----------------------------
 -- Table structure for operacionproveedor
@@ -1100,7 +1110,7 @@ INSERT INTO `productoubicacion` VALUES ('22', '34', null, '1', '1.600', null, '2
 INSERT INTO `productoubicacion` VALUES ('23', null, '25', '4', '624.000', null, '2018-03-17 11:08:41', '1', null);
 INSERT INTO `productoubicacion` VALUES ('24', null, '26', '4', '32.580', null, '2018-03-17 11:11:52', '1', null);
 INSERT INTO `productoubicacion` VALUES ('25', null, '27', '4', '222.850', null, '2018-03-17 11:18:49', '1', null);
-INSERT INTO `productoubicacion` VALUES ('27', null, '28', '2', '66.580', null, '2018-03-17 12:37:26', '1', null);
+INSERT INTO `productoubicacion` VALUES ('27', null, '28', '2', '0.000', '2018-05-05 16:26:27', '2018-03-17 12:37:26', '1', null);
 INSERT INTO `productoubicacion` VALUES ('28', null, '29', '4', '234.000', null, '2018-03-19 17:34:09', '1', null);
 INSERT INTO `productoubicacion` VALUES ('29', null, '30', '4', '543.000', null, '2018-03-19 17:34:09', '1', null);
 INSERT INTO `productoubicacion` VALUES ('31', null, '31', '2', '3464.500', null, '2018-03-19 17:36:28', '1', null);
@@ -1169,7 +1179,7 @@ INSERT INTO `productoubicacion` VALUES ('134', null, '64', '3', '123.000', null,
 INSERT INTO `productoubicacion` VALUES ('135', null, '65', '2', '356.250', null, '2018-03-21 19:58:57', '1', null);
 INSERT INTO `productoubicacion` VALUES ('137', null, '66', '4', '0.000', '2018-03-22 17:07:45', '2018-03-22 17:06:45', '1', null);
 INSERT INTO `productoubicacion` VALUES ('138', '12', null, '3', '20.000', null, '2018-03-22 17:07:45', '1', null);
-INSERT INTO `productoubicacion` VALUES ('139', null, '66', '2', '245.000', null, '2018-03-22 17:07:45', '1', null);
+INSERT INTO `productoubicacion` VALUES ('139', null, '66', '2', '0.000', '2018-05-05 16:23:21', '2018-03-22 17:07:45', '1', null);
 INSERT INTO `productoubicacion` VALUES ('140', '30', null, '2', '14.250', null, '2018-03-29 16:53:32', '1', null);
 INSERT INTO `productoubicacion` VALUES ('141', '24', null, '3', '235.000', null, '2018-03-29 16:53:43', '1', null);
 INSERT INTO `productoubicacion` VALUES ('142', '3', null, '2', '37.280', null, '2018-03-29 16:56:07', '1', null);
@@ -1198,7 +1208,7 @@ INSERT INTO `productoubicacion` VALUES ('164', '47', null, '4', '200.000', null,
 INSERT INTO `productoubicacion` VALUES ('165', null, '69', '4', '361.250', null, '2018-04-09 18:30:10', '1', null);
 INSERT INTO `productoubicacion` VALUES ('166', null, '70', '4', '233.000', null, '2018-04-09 18:30:13', '1', null);
 INSERT INTO `productoubicacion` VALUES ('167', null, '71', '4', '0.000', '2018-04-09 18:39:56', '2018-04-09 18:39:45', '1', null);
-INSERT INTO `productoubicacion` VALUES ('168', null, '71', '2', '14.000', null, '2018-04-09 18:39:56', '1', null);
+INSERT INTO `productoubicacion` VALUES ('168', null, '71', '2', '0.000', '2018-05-05 15:21:37', '2018-04-09 18:39:56', '1', null);
 INSERT INTO `productoubicacion` VALUES ('169', '44', null, '4', '37.360', null, '2018-04-09 19:09:29', '1', null);
 INSERT INTO `productoubicacion` VALUES ('170', '51', null, '4', '63.000', null, '2018-04-09 19:09:29', '1', null);
 INSERT INTO `productoubicacion` VALUES ('171', null, '72', '4', '112.000', null, '2018-04-09 19:09:29', '1', null);
@@ -1424,7 +1434,7 @@ CREATE TABLE `venta` (
   `fecha_baja` datetime DEFAULT NULL,
   `id_operacion` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of venta
@@ -1460,6 +1470,13 @@ INSERT INTO `venta` VALUES ('29', '1018.250', '2018-04-27 20:28:50', '1', null, 
 INSERT INTO `venta` VALUES ('30', '578.730', '2018-04-27 20:30:24', '1', null, '28');
 INSERT INTO `venta` VALUES ('31', '3524.250', '2018-05-02 18:44:20', '1', null, '29');
 INSERT INTO `venta` VALUES ('32', '2581.250', '2018-05-02 18:57:44', '1', null, '30');
+INSERT INTO `venta` VALUES ('33', '5248.000', '2018-05-05 15:21:24', '1', null, '31');
+INSERT INTO `venta` VALUES ('34', '2514.250', '2018-05-05 16:19:19', '1', null, '32');
+INSERT INTO `venta` VALUES ('35', '555.000', '2018-05-05 16:20:49', '1', null, '33');
+INSERT INTO `venta` VALUES ('36', '258.360', '2018-05-05 16:22:57', '1', null, '34');
+INSERT INTO `venta` VALUES ('37', '12332.000', '2018-05-05 16:23:38', '1', null, '35');
+INSERT INTO `venta` VALUES ('38', '3625.250', '2018-05-05 16:24:40', '1', null, '36');
+INSERT INTO `venta` VALUES ('39', '326.250', '2018-05-05 16:26:22', '1', null, '37');
 
 -- ----------------------------
 -- Table structure for ventadetalle
@@ -1477,7 +1494,7 @@ CREATE TABLE `ventadetalle` (
   PRIMARY KEY (`id`),
   KEY `fk_liquidacion` (`id_venta`),
   KEY `fk_produ` (`id_producto`)
-) ENGINE=InnoDB AUTO_INCREMENT=228 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=231 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of ventadetalle
@@ -1679,6 +1696,9 @@ INSERT INTO `ventadetalle` VALUES ('224', '30', null, '30', '258.250', '543.000'
 INSERT INTO `ventadetalle` VALUES ('225', '30', '29', null, '320.480', '48.000', '1', null);
 INSERT INTO `ventadetalle` VALUES ('226', '31', null, '37', '3524.250', '0.550', '1', null);
 INSERT INTO `ventadetalle` VALUES ('227', '32', null, '36', '2581.250', '2.000', '1', null);
+INSERT INTO `ventadetalle` VALUES ('228', '33', null, '71', '5248.000', '14.000', '1', null);
+INSERT INTO `ventadetalle` VALUES ('229', '36', null, '66', '258.360', '245.000', '1', null);
+INSERT INTO `ventadetalle` VALUES ('230', '39', null, '28', '326.250', '66.580', '1', null);
 
 -- ----------------------------
 -- View structure for vistacompra
@@ -1690,25 +1710,25 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW
 -- View structure for vistacompraseleccionada
 -- ----------------------------
 DROP VIEW IF EXISTS `vistacompraseleccionada`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `vistacompraseleccionada` AS SELECT  `v`.`id`, `v`.`id_operacion`, o.id_proveedor, `p`.`id_codigo_barra` AS 'codigo',  `p`.`descripcion_breve` AS 'descripcion',  `vd`.`peso`,  `vd`.`monto`,  `v`.`monto_total` FROM(((`compra` v JOIN `compradetalle` vd ON((`v`.`id` = `vd`.`id_compra`)))     JOIN `producto` p ON((`vd`.`id_producto` = `p`.`id`)))  JOIN `operacionproveedor` o ON((`v`.`id_operacion` = `o`.`id`))) where v.id = 7 ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `vistacompraseleccionada` AS SELECT v.id AS id, v.id_operacion AS id_operacion, o.id_proveedor AS id_proveedor, p.id_codigo_barra AS codigo,  (CASE WHEN isnull(p.id) THEN concat('Garron #', g.numero, ' ID:', g.id )  ELSE p.descripcion_breve END ) AS descripcion, vd.peso AS peso, vd.monto AS monto, v.monto_total AS monto_total  FROM compra v  JOIN compradetalle vd ON v.id = vd.id_compra  LEFT JOIN producto p ON vd.id_producto = p.id AND p.id IS NOT NULL  LEFT JOIN garron g ON vd.id_garron = g.id AND g.id IS NOT NULL  JOIN operacionproveedor o ON v.id_operacion = o.id WHERE v.id =8 ;
 
 -- ----------------------------
 -- View structure for vistalistadomovimientosclientes
 -- ----------------------------
 DROP VIEW IF EXISTS `vistalistadomovimientosclientes`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `vistalistadomovimientosclientes` AS SELECT cm.id,dayofmonth(cm.`fecha`) AS `dia`,ELT(DATE_FORMAT(cm.fecha, '%m'),'Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre') AS mes, YEAR (cm.fecha) AS a?o, DATE_FORMAT(cm.fecha, '%d-%m-%Y') AS fecha, DATE_FORMAT(cm.fecha, '%H:%i') AS hora, c.razon_social, c.cuit, gc.descripcion, cm.id_cuenta AS cuenta, cm.id_movimiento_tipo AS id_tipo, mt.descripcion AS tipo, gc.id_banco, cm.id_operacion AS operacion, IF((`cm`.`id_movimiento_tipo` = 2), `cm`.`monto`,(`cm`.`monto` *-(1))) AS `monto` FROM clientecuentamovimiento cm INNER JOIN clientecuenta gc ON cm.id_cuenta = gc.id INNER JOIN movimientotipo mt ON cm.id_movimiento_tipo = mt.id INNER JOIN cliente c ON gc.id_cliente = c.id WHERE gc.id_cliente IS NOT NULL AND  cm.`fecha` BETWEEN '2018-04-01' AND DATE_ADD('2018-04-21',INTERVAL 1 DAY) ORDER BY cm.id DESC ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `vistalistadomovimientosclientes` AS SELECT cm.id,dayofmonth(cm.`fecha`) AS `dia`,ELT(DATE_FORMAT(cm.fecha, '%m'),'Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre') AS mes, YEAR (cm.fecha) AS a?o, DATE_FORMAT(cm.fecha, '%d-%m-%Y') AS fecha, DATE_FORMAT(cm.fecha, '%H:%i') AS hora, c.razon_social, c.cuit, gc.descripcion, cm.id_cuenta AS cuenta, cm.id_movimiento_tipo AS id_tipo, mt.descripcion AS tipo, gc.id_banco, cm.id_operacion AS operacion, IF((`cm`.`id_movimiento_tipo` = 2), `cm`.`monto`,(`cm`.`monto` *-(1))) AS `monto` FROM clientecuentamovimiento cm INNER JOIN clientecuenta gc ON cm.id_cuenta = gc.id INNER JOIN movimientotipo mt ON cm.id_movimiento_tipo = mt.id INNER JOIN cliente c ON gc.id_cliente = c.id WHERE gc.id_cliente IS NOT NULL AND  cm.`fecha` BETWEEN '2018-04-01' AND DATE_ADD('2018-05-05',INTERVAL 1 DAY) ORDER BY cm.id DESC ;
 
 -- ----------------------------
 -- View structure for vistalistadomovimientosproveedores
 -- ----------------------------
 DROP VIEW IF EXISTS `vistalistadomovimientosproveedores`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `vistalistadomovimientosproveedores` AS select `cm`.`id` AS `id`,dayofmonth(`cm`.`fecha`) AS `dia`,elt(date_format(`cm`.`fecha`,'%m'),'Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre') AS `mes`,year(`cm`.`fecha`) AS `año`,date_format(`cm`.`fecha`,'%d-%m-%Y') AS `fecha`,date_format(`cm`.`fecha`,'%H:%i') AS `hora`,`c`.`razon_social` AS `razon_social`,`c`.`cuit` AS `cuit`,`gc`.`descripcion` AS `descripcion`,`cm`.`id_cuenta` AS `cuenta`,`cm`.`id_movimiento_tipo` AS `id_tipo`,`mt`.`descripcion` AS `tipo`,`gc`.`id_banco` AS `id_banco`,`cm`.`id_operacion` AS `operacion`,if((`cm`.`id_movimiento_tipo` = 2),`cm`.`monto`,(`cm`.`monto` * -(1))) AS `monto` from (((`proveedorcuentamovimiento` `cm` join `proveedorcuenta` `gc` on((`cm`.`id_cuenta` = `gc`.`id`))) join `movimientotipo` `mt` on((`cm`.`id_movimiento_tipo` = `mt`.`id`))) join `proveedor` `c` on((`gc`.`id_proveedor` = `c`.`id`))) where ((`gc`.`id_proveedor` is not null) and (`cm`.`fecha` between '2000-04-01' and ('2018-04-20' + interval 1 day))) order by `cm`.`id` desc ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `vistalistadomovimientosproveedores` AS SELECT `cm`.`id` AS `id`, dayofmonth(`cm`.`fecha`) AS `dia`, elt(date_format(`cm`.`fecha`, '%m'), 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre' ) AS `mes`, YEAR(`cm`.`fecha`) AS `a?o`, date_format(`cm`.`fecha`, '%d-%m-%Y') AS `fecha`, date_format(`cm`.`fecha`, '%H:%i') AS `hora`, `c`.`razon_social` AS `razon_social`, `c`.`cuit` AS `cuit`, `gc`.`descripcion` AS `descripcion`, `cm`.`id_cuenta` AS `cuenta`, `cm`.`id_movimiento_tipo` AS `id_tipo`, `mt`.`descripcion` AS `tipo`, `gc`.`id_banco` AS `id_banco`, `cm`.`id_operacion` AS `operacion`, IF ((`cm`.`id_movimiento_tipo` = 2),`cm`.`monto`,(`cm`.`monto` * -(1))) AS `monto` FROM  (((`proveedorcuentamovimiento` `cm`   JOIN `proveedorcuenta` `gc` ON ((`cm`.`id_cuenta` = `gc`.`id`)))  JOIN `movimientotipo` `mt` ON((`cm`.`id_movimiento_tipo` = `mt`.`id`)))  JOIN `proveedor` `c` ON((`gc`.`id_proveedor` = `c`.`id`)))  WHERE  `gc`.`id_proveedor` IS NOT NULL AND `cm`.`fecha` BETWEEN '2018-04-01' AND DATE_ADD('2018-05-05',INTERVAL 1 DAY) ORDER BY cm.id DESC ;
 
 -- ----------------------------
 -- View structure for vistalistadoventas
 -- ----------------------------
 DROP VIEW IF EXISTS `vistalistadoventas`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `vistalistadoventas` AS SELECT  `v`.`id` AS `id`, dayofmonth(`v`.`fecha`) AS `dia`, ELT(DATE_FORMAT(`v`.`fecha`, '%m'),'Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre', 'Diciembre') AS `mes`,  YEAR(`v`.`fecha`) AS `a?o`, date_format(`v`.`fecha`, '%d/%m/%Y') AS `fecha`, date_format(`v`.`fecha`, '%H:%i') AS `hora`, `v`.`monto_total` AS `monto`, `v`.`id_operacion` AS `operacion`, `c`.`razon_social` AS `cliente`,           `c`.`cuit` AS `cuit` FROM    ((	`venta` `v`   JOIN `operacion` `o` ON((	`o`.`id` = `v`.`id_operacion`)))  JOIN `cliente` `c` ON((`o`.`id_cliente` = `c`.`id`)))  WHERE    (		`v`.`fecha` BETWEEN '2018-04-01' AND DATE_ADD('2018-04-21',INTERVAL 1 DAY)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `vistalistadoventas` AS SELECT  `v`.`id` AS `id`, dayofmonth(`v`.`fecha`) AS `dia`, ELT(DATE_FORMAT(`v`.`fecha`, '%m'),'Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre', 'Diciembre') AS `mes`,  YEAR(`v`.`fecha`) AS `a?o`, date_format(`v`.`fecha`, '%d/%m/%Y') AS `fecha`, date_format(`v`.`fecha`, '%H:%i') AS `hora`, `v`.`monto_total` AS `monto`, `v`.`id_operacion` AS `operacion`, `c`.`razon_social` AS `cliente`,           `c`.`cuit` AS `cuit` FROM    ((	`venta` `v`   JOIN `operacion` `o` ON((	`o`.`id` = `v`.`id_operacion`)))  JOIN `cliente` `c` ON((`o`.`id_cliente` = `c`.`id`)))  WHERE    (		`v`.`fecha` BETWEEN '2018-04-01' AND DATE_ADD('2018-05-05',INTERVAL 1 DAY)) ;
 
 -- ----------------------------
 -- View structure for vistasaldocliente
@@ -1720,49 +1740,49 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW
 -- View structure for vistasaldoporidcliente
 -- ----------------------------
 DROP VIEW IF EXISTS `vistasaldoporidcliente`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `vistasaldoporidcliente` AS SELECT   `c`.`id`,   `c`.`cod_cliente`,   `c`.`razon_social`,   `c`.`cuit`,   `cc`.`id` AS 'id_cliente_cuenta',   `cc`.`descripcion`,   `cc`.`id_banco`, `ccm`.`id_operacion`,   `mt`.`descripcion` AS 'tipo',   `ccm`.`fecha`,   IF((`ccm`.`id_movimiento_tipo` = 2), `ccm`.`monto`, (`ccm`.`monto` *-(1))) AS 'saldo'  FROM(((`clientecuenta` cc    JOIN `cliente` c ON ((`cc`.`id_cliente` = `c`.`id`)))    JOIN `clientecuentamovimiento` ccm ON ((`ccm`.`id_cuenta` = `cc`.`id`)))    JOIN `movimientotipo` mt ON ((`ccm`.`id_movimiento_tipo` = `mt`.`id`)))  WHERE(`c`.`id` = 31) ; ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `vistasaldoporidcliente` AS SELECT   `c`.`id`,   `c`.`cod_cliente`,   `c`.`razon_social`,   `c`.`cuit`,   `cc`.`id` AS 'id_cliente_cuenta',   `cc`.`descripcion`,   `cc`.`id_banco`, `ccm`.`id_operacion`,   `mt`.`descripcion` AS 'tipo',   `ccm`.`fecha`,   IF((`ccm`.`id_movimiento_tipo` = 2), `ccm`.`monto`, (`ccm`.`monto` *-(1))) AS 'saldo'  FROM(((`clientecuenta` cc    JOIN `cliente` c ON ((`cc`.`id_cliente` = `c`.`id`)))    JOIN `clientecuentamovimiento` ccm ON ((`ccm`.`id_cuenta` = `cc`.`id`)))    JOIN `movimientotipo` mt ON ((`ccm`.`id_movimiento_tipo` = `mt`.`id`)))  WHERE(`c`.`id` = 30) ; ;
 
 -- ----------------------------
 -- View structure for vistasaldoporidproveedor
 -- ----------------------------
 DROP VIEW IF EXISTS `vistasaldoporidproveedor`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `vistasaldoporidproveedor` AS SELECT   `c`.`id`,   `c`.`razon_social`,   `c`.`cuit`,   `cc`.`id` AS 'id_proveedor_cuenta',    `cc`.`descripcion`,   `cc`.`id_banco`,   `ccm`.`id_operacion`,   `mt`.`descripcion` AS 'tipo',    	 `ccm`.`fecha`,    	 IF((`ccm`.`id_movimiento_tipo` = 2),  	 `ccm`.`monto`, (`ccm`.`monto` *-(1))) AS 'saldo'  FROM(((`proveedorcuenta` cc    JOIN `proveedor` c ON((`cc`.`id_proveedor` = `c`.`id`)))    JOIN `proveedorcuentamovimiento` ccm ON ((`ccm`.`id_cuenta` = `cc`.`id`)))     	JOIN `movimientotipo` mt ON ((`ccm`.`id_movimiento_tipo` = `mt`.`id`)))   WHERE(`c`.`id` = 1 ); ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `vistasaldoporidproveedor` AS SELECT   c.id,   c.razon_social,   c.cuit,   cc.id AS 'id_proveedor_cuenta',    cc.descripcion,   cc.id_banco,   ccm.id_operacion,   mt.descripcion AS 'tipo', ccm.fecha, IF((ccm.id_movimiento_tipo = 2), ccm.monto, (ccm.monto *-(1))) AS 'saldo'  FROM(((proveedorcuenta cc    JOIN proveedor c ON((cc.id_proveedor = c.id)))    JOIN proveedorcuentamovimiento ccm ON ((ccm.id_cuenta = cc.id))) JOIN movimientotipo mt ON ((ccm.id_movimiento_tipo = mt.id)))   WHERE(c.id = 2 ); ;
 
 -- ----------------------------
 -- View structure for vistasaldoproveedor
 -- ----------------------------
 DROP VIEW IF EXISTS `vistasaldoproveedor`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `vistasaldoproveedor` AS SELECT `id`, `razon_social`, SUM(`saldo`) AS 'saldo'   FROM   `vistasaldoporidproveedor` GROUP BY   `id` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `vistasaldoproveedor` AS SELECT id, razon_social, SUM(saldo) AS 'saldo'   FROM   vistasaldoporidproveedor GROUP BY   id ;
 
 -- ----------------------------
 -- View structure for vistaultimacompra
 -- ----------------------------
 DROP VIEW IF EXISTS `vistaultimacompra`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `vistaultimacompra` AS SELECT  `c`.`id`,  `c`.`razon_social`,  	`c`.`domicilio`, `c`.`cuit`,  `cc`.`id` AS 'id_proveedor_cuenta',  `cc`.`descripcion`,  `cc`.`id_banco`,  `ccm`.`id_operacion`,  `mt`.`descripcion` AS 'tipo',  `ccm`.`fecha`,  IF((`ccm`.`id_movimiento_tipo` = 2), `ccm`.`monto`, (`ccm`.`monto` *-(1))) AS 'saldo'  FROM    (((`proveedorcuenta` cc    JOIN `proveedor` c ON((`cc`.`id_proveedor` = `c`.`id`)))    JOIN `proveedorcuentamovimiento` ccm ON ((`ccm`.`id_cuenta` = `cc`.`id`)))    JOIN `movimientotipo` mt ON ((`ccm`.`id_movimiento_tipo` = `mt`.`id`)))  WHERE  (`ccm`.`id_operacion` = 1); ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `vistaultimacompra` AS SELECT  c.id,  c.razon_social,  c.domicilio, c.cuit,  cc.id AS 'id_proveedor_cuenta',  cc.descripcion,  cc.id_banco,  ccm.id_operacion,  mt.descripcion AS 'tipo',  ccm.fecha,  IF((ccm.id_movimiento_tipo = 2), ccm.monto, (ccm.monto *-(1))) AS 'saldo'  FROM    (((proveedorcuenta cc    JOIN proveedor c ON((cc.id_proveedor = c.id)))    JOIN proveedorcuentamovimiento ccm ON ((ccm.id_cuenta = cc.id)))    JOIN movimientotipo mt ON ((ccm.id_movimiento_tipo = mt.id)))  WHERE  (ccm.id_operacion = 2); ;
 
 -- ----------------------------
 -- View structure for vistaultimaventa
 -- ----------------------------
 DROP VIEW IF EXISTS `vistaultimaventa`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `vistaultimaventa` AS SELECT   `c`.`id`,   `c`.`cod_cliente`,   `c`.`razon_social`,  	`c`.`domicilio`,  `c`.`cuit`,   `cc`.`id` AS 'id_cliente_cuenta',   `cc`.`descripcion`,   `cc`.`id_banco`,   `ccm`.`id_operacion`,  `mt`.`descripcion` AS 'tipo',   `ccm`.`fecha`,   IF((`ccm`.`id_movimiento_tipo` = 2), `ccm`.`monto`, (`ccm`.`monto` *-(1))) AS 'saldo'  FROM       (((`clientecuenta` cc     JOIN `cliente` c ON((`cc`.`id_cliente` = `c`.`id`)))     JOIN `clientecuentamovimiento` ccm ON ((`ccm`.`id_cuenta` = `cc`.`id`)))     JOIN `movimientotipo` mt ON ((`ccm`.`id_movimiento_tipo` = `mt`.`id`))) WHERE  (`ccm`.`id_operacion` = 30); ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `vistaultimaventa` AS SELECT   `c`.`id`,   `c`.`cod_cliente`,   `c`.`razon_social`,  	`c`.`domicilio`,  `c`.`cuit`,   `cc`.`id` AS 'id_cliente_cuenta',   `cc`.`descripcion`,   `cc`.`id_banco`,   `ccm`.`id_operacion`,  `mt`.`descripcion` AS 'tipo',   `ccm`.`fecha`,   IF((`ccm`.`id_movimiento_tipo` = 2), `ccm`.`monto`, (`ccm`.`monto` *-(1))) AS 'saldo'  FROM       (((`clientecuenta` cc     JOIN `cliente` c ON((`cc`.`id_cliente` = `c`.`id`)))     JOIN `clientecuentamovimiento` ccm ON ((`ccm`.`id_cuenta` = `cc`.`id`)))     JOIN `movimientotipo` mt ON ((`ccm`.`id_movimiento_tipo` = `mt`.`id`))) WHERE  (`ccm`.`id_operacion` = 37); ;
 
 -- ----------------------------
 -- View structure for vistaultimaventaporcliente
 -- ----------------------------
 DROP VIEW IF EXISTS `vistaultimaventaporcliente`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `vistaultimaventaporcliente` AS SELECT  `v`.`id`, `v`.`id_operacion`,  o.id_cliente, `p`.`id_codigo_barra` AS 'codigo',   `p`.`descripcion_breve` AS 'descripcion',  `vd`.`peso`,   `vd`.`monto`, `v`.`monto_total` FROM(((`venta` v JOIN `ventadetalle` vd ON((`v`.`id` = `vd`.`id_venta`)))     JOIN `producto` p ON((`vd`.`id_producto` = `p`.`id`)))  JOIN `operacion` o ON((`v`.`id_operacion` = `o`.`id`))) where v.id =( SELECT  `v`.`id` AS id_ultima_venta FROM  (((`venta` v JOIN `ventadetalle` vd ON((`v`.`id` = `vd`.`id_venta`)))     JOIN `producto` p ON((`vd`.`id_producto` = `p`.`id`)))  JOIN `operacion` o ON((`v`.`id_operacion` = `o`.`id`))) where o.id_cliente = 31 order by v.id desc limit 1) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `vistaultimaventaporcliente` AS SELECT  `v`.`id`, `v`.`id_operacion`,  o.id_cliente, `p`.`id_codigo_barra` AS 'codigo',   `p`.`descripcion_breve` AS 'descripcion',  `vd`.`peso`,   `vd`.`monto`, `v`.`monto_total` FROM(((`venta` v JOIN `ventadetalle` vd ON((`v`.`id` = `vd`.`id_venta`)))     JOIN `producto` p ON((`vd`.`id_producto` = `p`.`id`)))  JOIN `operacion` o ON((`v`.`id_operacion` = `o`.`id`))) where v.id =( SELECT  `v`.`id` AS id_ultima_venta FROM  (((`venta` v JOIN `ventadetalle` vd ON((`v`.`id` = `vd`.`id_venta`)))     JOIN `producto` p ON((`vd`.`id_producto` = `p`.`id`)))  JOIN `operacion` o ON((`v`.`id_operacion` = `o`.`id`))) where o.id_cliente = 30 order by v.id desc limit 1) ;
 
 -- ----------------------------
 -- View structure for vistaventa
 -- ----------------------------
 DROP VIEW IF EXISTS `vistaventa`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `vistaventa` AS SELECT  `v`.`id`,  `o`.`id_cliente` AS `id_cliente`,`v`.`id_operacion`,  `p`.`id_codigo_barra` AS 'codigo',  `p`.`descripcion_breve` AS 'descripcion',  `vd`.`peso`,  `vd`.`monto`,  `v`.`monto_total`FROM  (((`venta` v    JOIN `ventadetalle` vd ON((`v`.`id` = `vd`.`id_venta`)))    JOIN `producto` p ON ((`vd`.`id_producto` = `p`.`id`)))   JOIN `operacion` o ON ((`v`.`id_operacion` = `o`.`id`))) WHERE  (`v`.`id` = 32) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `vistaventa` AS SELECT v.id AS id,o.id_cliente AS id_cliente,v.id_operacion AS id_operacion,p.id_codigo_barra AS codigo,CASE WHEN p.id IS NULL THEN  concat('Garron #', g.numero, ' ID:', g.id) ELSE  p.descripcion_breve END AS descripcion,  vd.peso AS peso,  vd.monto AS monto, v.monto_total AS monto_total  FROM venta v JOIN ventadetalle vd ON v.id = vd.id_venta  LEFT JOIN producto p ON((vd.id_producto = p.id       AND p.id IS NOT NULL))  LEFT JOIN garron g ON((vd.id_garron = g.id     AND g.id IS NOT NULL))  JOIN operacion o ON v.id_operacion = o.id WHERE  v.id = 39 ;
 
 -- ----------------------------
 -- View structure for vistaventaseleccionada
 -- ----------------------------
 DROP VIEW IF EXISTS `vistaventaseleccionada`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `vistaventaseleccionada` AS SELECT  `v`.`id`, `v`.`id_operacion`, o.id_cliente, `p`.`id_codigo_barra` AS 'codigo',  `p`.`descripcion_breve` AS 'descripcion', `vd`.`peso`,  `vd`.`monto`,  `v`.`monto_total` FROM(((`venta` v JOIN `ventadetalle` vd ON((`v`.`id` = `vd`.`id_venta`)))    JOIN `producto` p ON((`vd`.`id_producto` = `p`.`id`)))  JOIN `operacion` o ON((`v`.`id_operacion` = `o`.`id`))) where v.id = 32 ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `vistaventaseleccionada` AS SELECT 	`v`.`id` AS `id`, 	`v`.`id_operacion` AS `id_operacion`, 	`o`.`id_cliente` AS `id_cliente`,  (CASE        WHEN isnull(`p`.`id`) THEN          concat('Garron #',             `g`.`numero`, ' ID:',             `g`.`id`			) ELSE			`p`.`descripcion_breve`		END) AS `descripcion`,  `vd`.`peso` AS `peso`,	`vd`.`monto` AS `monto`,	`v`.`monto_total` AS `monto_total` 			FROM    `venta` `v`					JOIN `ventadetalle` `vd` ON `v`.`id` = `vd`.`id_venta` 			LEFT JOIN `producto` `p` ON `vd`.`id_producto` = `p`.`id`				AND `p`.`id` IS NOT NULL            LEFT JOIN `garron` `g` ON `vd`.`id_garron` = `g`.`id`					AND `g`.`id` IS NOT NULL                     JOIN `operacion` `o` ON `v`.`id_operacion` = `o`.`id` 		WHERE   `v`.`id` = 39 ;
 
 -- ----------------------------
 -- View structure for vistaventasumatotal
