@@ -13,6 +13,10 @@ File Encoding         : 65001
 Date: 2018-05-06 12:28:51
 */
 
+
+CREATE DATABASE bdlamejor_dev;
+USE bdlamejor_dev;
+
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
@@ -1716,20 +1720,22 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW
 -- View structure for vistalistadomovimientosclientes
 -- ----------------------------
 DROP VIEW IF EXISTS `vistalistadomovimientosclientes`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `vistalistadomovimientosclientes` AS SELECT cm.id,dayofmonth(cm.`fecha`) AS `dia`,ELT(DATE_FORMAT(cm.fecha, '%m'),'Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre') AS mes, YEAR (cm.fecha) AS a?o, DATE_FORMAT(cm.fecha, '%d-%m-%Y') AS fecha, DATE_FORMAT(cm.fecha, '%H:%i') AS hora, c.razon_social, c.cuit, gc.descripcion, cm.id_cuenta AS cuenta, cm.id_movimiento_tipo AS id_tipo, mt.descripcion AS tipo, gc.id_banco, cm.id_operacion AS operacion, IF((`cm`.`id_movimiento_tipo` = 2), `cm`.`monto`,(`cm`.`monto` *-(1))) AS `monto` FROM clientecuentamovimiento cm INNER JOIN clientecuenta gc ON cm.id_cuenta = gc.id INNER JOIN movimientotipo mt ON cm.id_movimiento_tipo = mt.id INNER JOIN cliente c ON gc.id_cliente = c.id WHERE gc.id_cliente IS NOT NULL AND  cm.`fecha` BETWEEN '2018-04-01' AND DATE_ADD('2018-05-05',INTERVAL 1 DAY) ORDER BY cm.id DESC ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `vistalistadomovimientosclientes` AS SELECT cm.id,dayofmonth(cm.`fecha`) AS `dia`,ELT(DATE_FORMAT(cm.fecha, '%m'),'Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre') AS mes, YEAR (cm.fecha) AS "Año" , DATE_FORMAT(cm.fecha, '%d-%m-%Y') AS fecha, DATE_FORMAT(cm.fecha, '%H:%i') AS hora, c.razon_social, c.cuit, gc.descripcion, cm.id_cuenta AS cuenta, cm.id_movimiento_tipo AS id_tipo, mt.descripcion AS tipo, gc.id_banco, cm.id_operacion AS operacion, IF((`cm`.`id_movimiento_tipo` = 2), `cm`.`monto`,(`cm`.`monto` *-(1))) AS `monto` FROM clientecuentamovimiento cm INNER JOIN clientecuenta gc ON cm.id_cuenta = gc.id INNER JOIN movimientotipo mt ON cm.id_movimiento_tipo = mt.id INNER JOIN cliente c ON gc.id_cliente = c.id WHERE gc.id_cliente IS NOT NULL AND  cm.`fecha` BETWEEN '2018-04-01' AND DATE_ADD('2018-05-05',INTERVAL 1 DAY) ORDER BY cm.id DESC ;
 
 -- ----------------------------
 -- View structure for vistalistadomovimientosproveedores
 -- ----------------------------
 DROP VIEW IF EXISTS `vistalistadomovimientosproveedores`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `vistalistadomovimientosproveedores` AS SELECT `cm`.`id` AS `id`, dayofmonth(`cm`.`fecha`) AS `dia`, elt(date_format(`cm`.`fecha`, '%m'), 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre' ) AS `mes`, YEAR(`cm`.`fecha`) AS `a?o`, date_format(`cm`.`fecha`, '%d-%m-%Y') AS `fecha`, date_format(`cm`.`fecha`, '%H:%i') AS `hora`, `c`.`razon_social` AS `razon_social`, `c`.`cuit` AS `cuit`, `gc`.`descripcion` AS `descripcion`, `cm`.`id_cuenta` AS `cuenta`, `cm`.`id_movimiento_tipo` AS `id_tipo`, `mt`.`descripcion` AS `tipo`, `gc`.`id_banco` AS `id_banco`, `cm`.`id_operacion` AS `operacion`, IF ((`cm`.`id_movimiento_tipo` = 2),`cm`.`monto`,(`cm`.`monto` * -(1))) AS `monto` FROM  (((`proveedorcuentamovimiento` `cm`   JOIN `proveedorcuenta` `gc` ON ((`cm`.`id_cuenta` = `gc`.`id`)))  JOIN `movimientotipo` `mt` ON((`cm`.`id_movimiento_tipo` = `mt`.`id`)))  JOIN `proveedor` `c` ON((`gc`.`id_proveedor` = `c`.`id`)))  WHERE  `gc`.`id_proveedor` IS NOT NULL AND `cm`.`fecha` BETWEEN '2018-04-01' AND DATE_ADD('2018-05-05',INTERVAL 1 DAY) ORDER BY cm.id DESC ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `vistalistadomovimientosproveedores` AS SELECT `cm`.`id` AS `id`, dayofmonth(`cm`.`fecha`) AS `dia`, elt(date_format(`cm`.`fecha`, '%m'), 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre' ) AS `mes`, YEAR(`cm`.`fecha`) AS "Año", date_format(`cm`.`fecha`, '%d-%m-%Y') AS `fecha`, date_format(`cm`.`fecha`, '%H:%i') AS `hora`, `c`.`razon_social` AS `razon_social`, `c`.`cuit` AS `cuit`, `gc`.`descripcion` AS `descripcion`, `cm`.`id_cuenta` AS `cuenta`, `cm`.`id_movimiento_tipo` AS `id_tipo`, `mt`.`descripcion` AS `tipo`, `gc`.`id_banco` AS `id_banco`, `cm`.`id_operacion` AS `operacion`, IF ((`cm`.`id_movimiento_tipo` = 2),`cm`.`monto`,(`cm`.`monto` * -(1))) AS `monto` FROM  (((`proveedorcuentamovimiento` `cm`   JOIN `proveedorcuenta` `gc` ON ((`cm`.`id_cuenta` = `gc`.`id`)))  JOIN `movimientotipo` `mt` ON((`cm`.`id_movimiento_tipo` = `mt`.`id`)))  JOIN `proveedor` `c` ON((`gc`.`id_proveedor` = `c`.`id`)))  WHERE  `gc`.`id_proveedor` IS NOT NULL AND `cm`.`fecha` BETWEEN '2018-04-01' AND DATE_ADD('2018-05-05',INTERVAL 1 DAY) ORDER BY cm.id DESC ;
 
 -- ----------------------------
 -- View structure for vistalistadoventas
 -- ----------------------------
 DROP VIEW IF EXISTS `vistalistadoventas`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `vistalistadoventas` AS SELECT  `v`.`id` AS `id`, dayofmonth(`v`.`fecha`) AS `dia`, ELT(DATE_FORMAT(`v`.`fecha`, '%m'),'Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre', 'Diciembre') AS `mes`,  YEAR(`v`.`fecha`) AS `a?o`, date_format(`v`.`fecha`, '%d/%m/%Y') AS `fecha`, date_format(`v`.`fecha`, '%H:%i') AS `hora`, `v`.`monto_total` AS `monto`, `v`.`id_operacion` AS `operacion`, `c`.`razon_social` AS `cliente`,           `c`.`cuit` AS `cuit` FROM    ((	`venta` `v`   JOIN `operacion` `o` ON((	`o`.`id` = `v`.`id_operacion`)))  JOIN `cliente` `c` ON((`o`.`id_cliente` = `c`.`id`)))  WHERE    (		`v`.`fecha` BETWEEN '2018-04-01' AND DATE_ADD('2018-05-05',INTERVAL 1 DAY)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `vistalistadoventas` AS SELECT  `v`.`id` AS `id`, dayofmonth(`v`.`fecha`) AS `dia`, ELT(DATE_FORMAT(`v`.`fecha`, '%m'),'Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre', 'Diciembre') AS `mes`,  YEAR(`v`.`fecha`) AS "Año", date_format(`v`.`fecha`, '%d/%m/%Y') AS `fecha`, date_format(`v`.`fecha`, '%H:%i') AS `hora`, `v`.`monto_total` AS `monto`, `v`.`id_operacion` AS `operacion`, `c`.`razon_social` AS `cliente`,           `c`.`cuit` AS `cuit` FROM    ((	`venta` `v`   JOIN `operacion` `o` ON((	`o`.`id` = `v`.`id_operacion`)))  JOIN `cliente` `c` ON((`o`.`id_cliente` = `c`.`id`)))  WHERE    (		`v`.`fecha` BETWEEN '2018-04-01' AND DATE_ADD('2018-05-05',INTERVAL 1 DAY)) ;
 
+DROP VIEW IF EXISTS `vistasaldoporidcliente`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `vistasaldoporidcliente` AS SELECT   `c`.`id`,   `c`.`cod_cliente`,   `c`.`razon_social`,   `c`.`cuit`,   `cc`.`id` AS 'id_cliente_cuenta',   `cc`.`descripcion`,   `cc`.`id_banco`, `ccm`.`id_operacion`,   `mt`.`descripcion` AS 'tipo',   `ccm`.`fecha`,   IF((`ccm`.`id_movimiento_tipo` = 2), `ccm`.`monto`, (`ccm`.`monto` *-(1))) AS 'saldo'  FROM(((`clientecuenta` cc    JOIN `cliente` c ON ((`cc`.`id_cliente` = `c`.`id`)))    JOIN `clientecuentamovimiento` ccm ON ((`ccm`.`id_cuenta` = `cc`.`id`)))    JOIN `movimientotipo` mt ON ((`ccm`.`id_movimiento_tipo` = `mt`.`id`)))  WHERE(`c`.`id` = 30) ; 
 -- ----------------------------
 -- View structure for vistasaldocliente
 -- ----------------------------
@@ -1739,8 +1745,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW
 -- ----------------------------
 -- View structure for vistasaldoporidcliente
 -- ----------------------------
-DROP VIEW IF EXISTS `vistasaldoporidcliente`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `vistasaldoporidcliente` AS SELECT   `c`.`id`,   `c`.`cod_cliente`,   `c`.`razon_social`,   `c`.`cuit`,   `cc`.`id` AS 'id_cliente_cuenta',   `cc`.`descripcion`,   `cc`.`id_banco`, `ccm`.`id_operacion`,   `mt`.`descripcion` AS 'tipo',   `ccm`.`fecha`,   IF((`ccm`.`id_movimiento_tipo` = 2), `ccm`.`monto`, (`ccm`.`monto` *-(1))) AS 'saldo'  FROM(((`clientecuenta` cc    JOIN `cliente` c ON ((`cc`.`id_cliente` = `c`.`id`)))    JOIN `clientecuentamovimiento` ccm ON ((`ccm`.`id_cuenta` = `cc`.`id`)))    JOIN `movimientotipo` mt ON ((`ccm`.`id_movimiento_tipo` = `mt`.`id`)))  WHERE(`c`.`id` = 30) ; ;
+
 
 -- ----------------------------
 -- View structure for vistasaldoporidproveedor

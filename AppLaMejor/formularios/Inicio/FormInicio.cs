@@ -13,6 +13,8 @@ using AppLaMejor.formularios.Compras;
 using AppLaMejor.formularios.Productos;
 using AppLaMejor.formularios.Caja;
 using AppLaMejor.Reports;
+using AppLaMejor.formularios.Util;
+using System.Threading;
 
 namespace AppLaMejor.formularios
 {
@@ -51,6 +53,11 @@ namespace AppLaMejor.formularios
                 string moduleName = dtTablaModulos.Rows[i].ItemArray[1].ToString();
                 AddRowToTablePanel(tablePanel, moduleName);
             }
+
+            tablePanel.HorizontalScroll.Maximum = 0;
+            tablePanel.AutoScroll = false;
+            tablePanel.VerticalScroll.Visible = false;
+            tablePanel.AutoScroll = true;
         }
 
         private void FormInicio_Load(object sender, EventArgs e)
