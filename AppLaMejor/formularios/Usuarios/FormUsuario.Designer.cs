@@ -30,6 +30,7 @@
         {
             this.contentPanel = new System.Windows.Forms.Panel();
             this.loginPanel = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.buttonPanel = new System.Windows.Forms.Panel();
             this.bLoginAceptar = new System.Windows.Forms.Button();
             this.bLoginCancelar = new System.Windows.Forms.Button();
@@ -67,6 +68,7 @@
             this.loginPanel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.loginPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.loginPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.loginPanel.Controls.Add(this.button1);
             this.loginPanel.Controls.Add(this.buttonPanel);
             this.loginPanel.Controls.Add(this.textUser);
             this.loginPanel.Controls.Add(this.lUser);
@@ -76,6 +78,17 @@
             this.loginPanel.Name = "loginPanel";
             this.loginPanel.Size = new System.Drawing.Size(471, 244);
             this.loginPanel.TabIndex = 22;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(391, 3);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 27;
+            this.button1.Text = "Ver Permisos";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Visible = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // buttonPanel
             // 
@@ -129,7 +142,7 @@
             // 
             this.textUser.Location = new System.Drawing.Point(162, 55);
             this.textUser.Name = "textUser";
-            this.textUser.Size = new System.Drawing.Size(163, 21);
+            this.textUser.Size = new System.Drawing.Size(163, 20);
             this.textUser.TabIndex = 0;
             this.textUser.Enter += new System.EventHandler(this.textUser_Enter);
             this.textUser.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textUser_KeyUp);
@@ -151,7 +164,7 @@
             // 
             this.textPass.Location = new System.Drawing.Point(162, 102);
             this.textPass.Name = "textPass";
-            this.textPass.Size = new System.Drawing.Size(163, 21);
+            this.textPass.Size = new System.Drawing.Size(163, 20);
             this.textPass.TabIndex = 1;
             this.textPass.Enter += new System.EventHandler(this.textPass_Enter);
             this.textPass.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textPass_KeyUp);
@@ -206,11 +219,11 @@
             // tsslMensaje
             // 
             this.tsslMensaje.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.tsslMensaje.Font = new System.Drawing.Font("Lucida Sans", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tsslMensaje.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tsslMensaje.ImageTransparentColor = System.Drawing.Color.Green;
             this.tsslMensaje.Margin = new System.Windows.Forms.Padding(20, 0, 0, 0);
             this.tsslMensaje.Name = "tsslMensaje";
-            this.tsslMensaje.Size = new System.Drawing.Size(85, 50);
+            this.tsslMensaje.Size = new System.Drawing.Size(83, 50);
             this.tsslMensaje.Text = "Mensajero";
             // 
             // topPanel
@@ -227,7 +240,7 @@
             // 
             this.formTittleText.BackColor = System.Drawing.Color.Green;
             this.formTittleText.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.formTittleText.Font = new System.Drawing.Font("Source Sans Pro", 22F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.formTittleText.Font = new System.Drawing.Font("Microsoft Sans Serif", 22F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.formTittleText.Location = new System.Drawing.Point(0, 0);
             this.formTittleText.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
             this.formTittleText.Name = "formTittleText";
@@ -239,11 +252,11 @@
             // 
             // FormUsuario
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1190, 576);
             this.Controls.Add(this.mainPanel);
-            this.Font = new System.Drawing.Font("Source Sans Pro", 8.25F);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
             this.Name = "FormUsuario";
@@ -283,5 +296,6 @@
         private System.Windows.Forms.Panel bottomPanel;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel tsslMensaje;
+        private System.Windows.Forms.Button button1;
     }
 }

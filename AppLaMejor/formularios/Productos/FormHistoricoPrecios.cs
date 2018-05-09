@@ -14,7 +14,6 @@ namespace AppLaMejor.formularios.Productos
 {
     public partial class FormHistoricoPrecios : Form
     {
-        // TODO BUG el precio por porcentaje no funciona bien
 
         List<PrecioHistorico> listHistorico;
         int idProducto;
@@ -48,7 +47,7 @@ namespace AppLaMejor.formularios.Productos
             if (listHistorico.Count > 0)
             {
                 precioActual = listHistorico.ElementAt(0);
-                formTittleText.Text = "Precios de : " + precioActual.Producto.DescripcionLarga.ToUpper();
+                formTittleText.Text = "Precios de : " + precioActual.Producto.DescripcionBreve.ToUpper();
 
                 lActualFechaDesde.Text = "Desde de : " + precioActual.Desde.ToString("MM/dd/yyyy");
                 lActualPrecio.Text = "PRECIO: $ " + precioActual.Precio.ToString();
@@ -89,7 +88,6 @@ namespace AppLaMejor.formularios.Productos
             textNuevoPrecio.Focus();
 
             radioNuevoPrecio.CheckedChanged += new EventHandler(radioButtons_CheckedChanged);
-            radioPorcen.CheckedChanged += new EventHandler(radioButtons_CheckedChanged);
             radioAumentarActual.CheckedChanged += new EventHandler(radioButtons_CheckedChanged);
 
             // Reseteamos los radio buttons.
@@ -104,12 +102,10 @@ namespace AppLaMejor.formularios.Productos
 
         private void RadioButtonsChanged()
         {
-            textPorcen.Text = string.Empty;
             textAumentarActual.Text = string.Empty;
             textNuevoPrecio.Text = string.Empty;
 
             labelNuevoPrecio.Text = string.Empty;
-            labelPorcentaje.Text = string.Empty;
             labelAgregar.Text = string.Empty;          
 
             if (radioNuevoPrecio.Checked)
@@ -118,35 +114,42 @@ namespace AppLaMejor.formularios.Productos
                 textNuevoPrecio.Focus();
 
                 textAumentarActual.ReadOnly = true;
-                textPorcen.ReadOnly = true;
-            }
-            else if (radioPorcen.Checked)
-            {
-                textPorcen.ReadOnly = false;
-                textPorcen.Focus();
-
-                textAumentarActual.ReadOnly = true;
-                textNuevoPrecio.ReadOnly = true;
             }
             else if (radioAumentarActual.Checked)
             {
                 textAumentarActual.ReadOnly = false;
                 textAumentarActual.Focus();
 
-                textPorcen.ReadOnly = true;
                 textNuevoPrecio.ReadOnly = true;
             }
         }
-
-
-
+        
         private bool GuardarPrecioActual()
-        {            
+        {
+
+            FormMessageBox dialog = new FormMessageBox();
+
+            if (radioNuevoPrecio.Checked)
+            {
+                if (textNuevoPrecio.Text.Equals("") || textNuevoPrecio.Text.Equals("0"))
+                {
+                    dialog.ShowErrorDialog("El precio ingresado es incorrecto. Ingresar nuevamente. ");
+                    return false;
+                }
+            }
+            else if (radioAumentarActual.Checked)
+            {
+                if (textAumentarActual.Text.Equals("") || textAumentarActual.Text.Equals("0"))
+                {
+                    dialog.ShowErrorDialog("El precio ingresado es incorrecto. Ingresar nuevamente. ");
+                    return false;
+                }
+            }
+
             decimal precioNuevo = GetPrecioNuevo();
 
             if (precioNuevo.Equals(decimal.Zero))
             {
-                FormMessageBox dialog = new FormMessageBox();
                 dialog.ShowErrorDialog("El precio ingresado es incorrecto. Ingresar nuevamente. ");
                 return false;
             }
@@ -154,7 +157,6 @@ namespace AppLaMejor.formularios.Productos
             // Verificamos que el precio actual, tiene la misma fecha desde que el proximo a ingresar.
             if (precioActual != null && precioActual.Desde.ToString("MM/dd/yyyy").Equals(DateTime.Now.ToString("MM/dd/yyyy")))
             {
-                FormMessageBox dialog = new FormMessageBox();
                 if (!dialog.ShowConfirmationDialog("Ya cambio el precio de este producto el dia de hoy, ¿desea reemplazarlo por el precio nuevo?"))
                 {
                     Reset();
@@ -318,23 +320,6 @@ namespace AppLaMejor.formularios.Productos
             {
                 return decimal.Parse(textNuevoPrecio.Text);
             }
-            else if (radioPorcen.Checked)
-            {
-                // de 1 a 100
-                result = decimal.Parse(textPorcen.Text);
-
-                if (result < decimal.Zero) return decimal.Zero;
-
-                if (textPorcen.Text.Equals("100"))
-                    result= precioActual.Precio * 2;
-                else
-                {
-                    string a = Convert.ToString(Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator);
-                    string percentage = "1" + a + textPorcen.Text.Replace(a,"");
-                    decimal p = decimal.Parse(percentage);
-                    result = precioActual.Precio * p;
-                }
-            }
             else if (radioAumentarActual.Checked)
             {
                 result = decimal.Parse(textAumentarActual.Text);
@@ -384,20 +369,16 @@ namespace AppLaMejor.formularios.Productos
 
         private void textBoxPreCalculate_KeyUp(object sender, KeyEventArgs e)
         {
-            TextBox box = (TextBox)sender;
-
-            if (box.Text.Equals(string.Empty)) return;
-
-            if (radioPorcen.Checked)
+            if (radioAumentarActual.Checked)
             {
-                //labelPorcentaje
-                string a = Convert.ToString(Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator);
-                string percentage = "1" + a + textPorcen.Text.Replace(a, "");
-                decimal p = decimal.Parse(percentage);
-                labelPorcentaje.Text = "$"+ (precioActual.Precio* p).ToString();
-            }
-            else if (radioAumentarActual.Checked)
-            {
+                if (textAumentarActual.Text.Equals("") || textAumentarActual.Text.Equals("0")){
+                    labelAgregar.Visible = false;
+                    return;
+                }else
+                {
+                    labelAgregar.Visible = true;
+                }
+                
                 decimal agregar = decimal.Parse(textAumentarActual.Text);
                 labelAgregar.Text = "$" + (precioActual.Precio + agregar).ToString();
             }
@@ -406,7 +387,6 @@ namespace AppLaMejor.formularios.Productos
         private void textNuevoPrecio_Enter(object sender, EventArgs e)
         {
             radioNuevoPrecio.Checked = true;
-            radioPorcen.Checked = false;
             radioAumentarActual.Checked = false;
             RadioButtonsChanged();
         }
@@ -414,7 +394,6 @@ namespace AppLaMejor.formularios.Productos
         private void textPorcen_Enter(object sender, EventArgs e)
         {
             radioNuevoPrecio.Checked = false;
-            radioPorcen.Checked = true;
             radioAumentarActual.Checked = false;
             RadioButtonsChanged();
         }
@@ -422,7 +401,6 @@ namespace AppLaMejor.formularios.Productos
         private void textAumentarActual_Enter(object sender, EventArgs e)
         {
             radioNuevoPrecio.Checked = false;
-            radioPorcen.Checked = false;
             radioAumentarActual.Checked = true;
             RadioButtonsChanged();
         }

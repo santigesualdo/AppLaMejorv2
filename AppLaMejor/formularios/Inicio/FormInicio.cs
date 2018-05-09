@@ -13,6 +13,8 @@ using AppLaMejor.formularios.Compras;
 using AppLaMejor.formularios.Productos;
 using AppLaMejor.formularios.Caja;
 using AppLaMejor.Reports;
+using AppLaMejor.formularios.Util;
+using System.Threading;
 
 namespace AppLaMejor.formularios
 {
@@ -51,6 +53,11 @@ namespace AppLaMejor.formularios
                 string moduleName = dtTablaModulos.Rows[i].ItemArray[1].ToString();
                 AddRowToTablePanel(tablePanel, moduleName);
             }
+
+            tablePanel.HorizontalScroll.Maximum = 0;
+            tablePanel.AutoScroll = false;
+            tablePanel.VerticalScroll.Visible = false;
+            tablePanel.AutoScroll = true;
         }
 
         private void FormInicio_Load(object sender, EventArgs e)
@@ -87,9 +94,8 @@ namespace AppLaMejor.formularios
                 case "Clientes": boton.Click += new System.EventHandler(IniciarClientes); break;
                 case "Proveedores": boton.Click += new System.EventHandler(IniciarProveedores); break;
                 case "Productos": boton.Click += new System.EventHandler(IniciarProductos); break;
-                case "Stock": boton.Click += new System.EventHandler(IniciarStock); break;
                 case "Caja": boton.Click += new System.EventHandler(IniciarCaja); break;
-                case "Movimiento Cuentas": boton.Click += new System.EventHandler(IniciarMovimientoCuentas); break;
+                case "Movimiento Cuentas Clientes": boton.Click += new System.EventHandler(IniciarMovimientoCuentas); break;
                 case "Movimiento Cuentas Proveedores": boton.Click += new System.EventHandler(IniciarMovimientoCuentasProveedores); break;
                 case "Ventas Caja": boton.Click += new System.EventHandler(IniciarVentasCaja); break;
                 case "Carga Nueva Compra": boton.Click += new System.EventHandler(IniciarCompras); break;
@@ -116,7 +122,7 @@ namespace AppLaMejor.formularios
 
         private void IniciarDeposte(object sender, EventArgs e)
         {
-            FormDeposte formDeposte = new FormDeposte();
+            FormDeposte formDeposte = new FormDeposte(FormDeposte.MODO_SELECCIONAR_GARRON_PARA_DEPOSTE);
             formDeposte.ShowDialog();
         }
 
@@ -139,11 +145,6 @@ namespace AppLaMejor.formularios
         {
             FormMovCuentas formMovCuentas = new FormMovCuentas();
             formMovCuentas.ShowDialog();
-        }
-        private void IniciarStock(object sender, EventArgs e)
-        {
-            FormStock formStock = new FormStock();
-            formStock.ShowDialog();
         }
         private void IniciarCaja(object sender, EventArgs e)
         {

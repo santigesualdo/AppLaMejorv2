@@ -17,7 +17,6 @@ namespace AppLaMejor.formularios.Productos
     public partial class FormMoverProductos : Form
     {
         // REGLAS DE FORMULARIO
-        // TODO: MODELO Realizar circuito completo para validar. Compras + Mover.
         // TODO: FUNCIONALIDAD Hacer scrolleable el panel de movimientos
 
         public static int MODO_MOVERMERCADERIA = 0;
@@ -33,8 +32,6 @@ namespace AppLaMejor.formularios.Productos
 
         List<Ubicacion> listUbicacionOrigen;
         List<Ubicacion> listUbicacionDestino;
-
-        
 
         ComboBox comboUbicacionOrigen;
         ComboBox comboUbicacionDestino;
@@ -216,9 +213,8 @@ namespace AppLaMejor.formularios.Productos
             {
                 currentMovimiento = new MovimientoMercaderia();
                 currentMovimiento.confirmado = false;
-
-                // HARDCODEADO MESA DE ENTRADA
-                currentMovimiento.origen = TiposManager.Instance().GetUbicacionById(4);
+                // Seteamos la ubicacion de entrada por defecto (ID : 4 - DEPOSITO)
+                currentMovimiento.origen = FuncionesGlobales.ObtenerUbicacionEntrada();
                 currentMovimiento.producto = pr;
                 currentMovimiento.peso = pr.CantidadEntregada;
 

@@ -117,6 +117,14 @@ namespace AppLaMejor.formularios
                 return;
             }
 
+            // TODO: Chequear que ese producto exista en salon de ventas
+            if (!FuncionesProductos.CheckProductExistUbicacionSalida(product.Id))
+            {
+                MyTextTimer.TStartFade("El producto: "+product.DescripcionBreve+" no existe en la ubicacion de salida "+FuncionesGlobales.ObtenerUbicacionSalida()+"\nAsegurese de mover mercaderia a esta ubicacion.", statusStrip1, tsslMensaje, MyTextTimer.TIME_LONG);
+                return;
+            }
+
+
             // Monto entero 3 posiciones desde posicion 7
             entero = codigo.Substring(7, 3);
             // Monto entero 3 posiciones desde posicion 10
@@ -136,7 +144,7 @@ namespace AppLaMejor.formularios
             // Agregamos a la lista y mostramos en grid
             listDetalleVentas.Add(vd);
 
-            currentVentasDetalle.Rows.Add(vd.Producto.DescripcionLarga, "$ " + vd.Monto , vd.Peso.ToString() + " kg.");
+            currentVentasDetalle.Rows.Add(vd.Producto.DescripcionBreve, "$ " + vd.Monto , vd.Peso.ToString() + " kg.");
 
             currentMontoTotal += vd.Monto;
 

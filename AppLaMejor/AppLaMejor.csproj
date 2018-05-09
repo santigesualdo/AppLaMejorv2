@@ -108,6 +108,7 @@
     <Compile Include="controlmanager\FuncionesProveedores.cs" />
     <Compile Include="controlmanager\FuncionesOperaciones.cs" />
     <Compile Include="controlmanager\FuncionesReportes.cs" />
+    <Compile Include="controlmanager\FuncionesUsuarios.cs" />
     <Compile Include="controlmanager\FuncionesVentas.cs" />
     <Compile Include="controlmanager\Validator.cs" />
     <Compile Include="controlmanager\VariablesGlobales.cs" />
@@ -117,7 +118,14 @@
     <Compile Include="datamanager\DataNamesMapper.cs" />
     <Compile Include="datamanager\PropertyMapHelper.cs" />
     <Compile Include="datamanager\QueryManager.cs" />
+    <Compile Include="entidades\Modulo.cs" />
     <Compile Include="entidades\MovimientoCuentaProveedor.cs" />
+    <Compile Include="formularios\Caja\FormAgregarGarronManual.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formularios\Caja\FormAgregarGarronManual.Designer.cs">
+      <DependentUpon>FormAgregarGarronManual.cs</DependentUpon>
+    </Compile>
     <Compile Include="formularios\Caja\FormCajaMayorista.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -126,6 +134,18 @@
     </Compile>
     <Compile Include="formularios\Clientes\clienteCR.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="formularios\Usuarios\FormGestionPermisos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formularios\Usuarios\FormGestionPermisos.Designer.cs">
+      <DependentUpon>FormGestionPermisos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="formularios\Usuarios\FormGestionUsuarios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formularios\Usuarios\FormGestionUsuarios.Designer.cs">
+      <DependentUpon>FormGestionUsuarios.cs</DependentUpon>
     </Compile>
     <Compile Include="Reports\crListadoMovClientes.cs">
       <AutoGen>True</AutoGen>
@@ -203,11 +223,11 @@
     <Compile Include="formularios\Caja\FormCaja.Designer.cs">
       <DependentUpon>FormCaja.cs</DependentUpon>
     </Compile>
-    <Compile Include="formularios\Caja\FormAgregarManual.cs">
+    <Compile Include="formularios\Caja\FormAgregarProductoManual.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="formularios\Caja\FormAgregarManual.Designer.cs">
-      <DependentUpon>FormAgregarManual.cs</DependentUpon>
+    <Compile Include="formularios\Caja\FormAgregarProductoManual.Designer.cs">
+      <DependentUpon>FormAgregarProductoManual.cs</DependentUpon>
     </Compile>
     <Compile Include="formularios\Caja\FormVentasCaja.cs">
       <SubType>Form</SubType>
@@ -317,12 +337,6 @@
     <Compile Include="formularios\Proveedores\FormProveedores.Designer.cs">
       <DependentUpon>FormProveedores.cs</DependentUpon>
     </Compile>
-    <Compile Include="formularios\Stock\FormStock.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="formularios\Stock\FormStock.Designer.cs">
-      <DependentUpon>FormStock.cs</DependentUpon>
-    </Compile>
     <Compile Include="formularios\Usuarios\FormUsuario.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -355,12 +369,16 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="formularios\Caja\FormAgregarGarronManual.resx">
+      <DependentUpon>FormAgregarGarronManual.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="formularios\Caja\FormCaja.resx">
       <DependentUpon>FormCaja.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="formularios\Caja\FormAgregarManual.resx">
-      <DependentUpon>FormAgregarManual.cs</DependentUpon>
+    <EmbeddedResource Include="formularios\Caja\FormAgregarProductoManual.resx">
+      <DependentUpon>FormAgregarProductoManual.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="formularios\Caja\FormCajaMayorista.resx">
@@ -425,9 +443,11 @@
     <EmbeddedResource Include="formularios\Proveedores\FormProveedores.resx">
       <DependentUpon>FormProveedores.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="formularios\Stock\FormStock.resx">
-      <DependentUpon>FormStock.cs</DependentUpon>
-      <SubType>Designer</SubType>
+    <EmbeddedResource Include="formularios\Usuarios\FormGestionPermisos.resx">
+      <DependentUpon>FormGestionPermisos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formularios\Usuarios\FormGestionUsuarios.resx">
+      <DependentUpon>FormGestionUsuarios.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="formularios\Usuarios\FormUsuario.resx">
       <DependentUpon>FormUsuario.cs</DependentUpon>

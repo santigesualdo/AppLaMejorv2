@@ -1,7 +1,7 @@
 ﻿using AppLaMejor.stylemanager;
 namespace AppLaMejor.formularios.Caja
 {
-    partial class FormAgregarManual
+    partial class FormAgregarProductoManual
     {
         /// <summary>
         /// Required designer variable.
@@ -413,7 +413,7 @@ namespace AppLaMejor.formularios.Caja
             this.formTittleText.Text = "Agregar Producto Manualmente";
             this.formTittleText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // FormAgregarManual
+            // FormAgregarProductoManual
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -422,7 +422,7 @@ namespace AppLaMejor.formularios.Caja
             this.Controls.Add(this.mainPanel);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.White;
-            this.Name = "FormAgregarManual";
+            this.Name = "FormAgregarProductoManual";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormAgregar";
             this.mainPanel.ResumeLayout(false);

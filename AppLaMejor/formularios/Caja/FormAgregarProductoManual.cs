@@ -13,7 +13,7 @@ using AppLaMejor.formularios.Util;
 
 namespace AppLaMejor.formularios.Caja
 {
-    public partial class FormAgregarManual : Form
+    public partial class FormAgregarProductoManual : Form
     {
         public Producto selectedProducto;
         public decimal cantidad;
@@ -22,7 +22,7 @@ namespace AppLaMejor.formularios.Caja
 
         DataTable tableProductos;
         List<Producto> listProds = new List<Producto>();
-        public FormAgregarManual(List<VentaDetalle> listVentaDetalle)
+        public FormAgregarProductoManual(List<VentaDetalle> listVentaDetalle)
         {
             selectedProducto = null;
             Size actualSize = this.Size;
@@ -71,6 +71,7 @@ namespace AppLaMejor.formularios.Caja
                 List<Producto> listProdRemover = new List<Producto>();
                 foreach (VentaDetalle vd in listVentaDetalle)
                 {
+                    if (vd.Producto == null) continue;
                     foreach (Producto p in listProds)
                     {
                         if (p.Id.Equals(vd.Producto.Id))

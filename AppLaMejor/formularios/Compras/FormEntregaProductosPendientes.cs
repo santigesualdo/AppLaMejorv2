@@ -1,11 +1,7 @@
 ﻿using AppLaMejor.controlmanager;
+using AppLaMejor.formularios.Util;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace AppLaMejor.formularios.Compras
@@ -31,6 +27,8 @@ namespace AppLaMejor.formularios.Compras
             dataGridComprasProdPendientes.AllowUserToAddRows = false;
             dataGridComprasProdPendientes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
 
+            ApplicationLookAndFeel.ApplyTheme(dataGridComprasProdPendientes);
+
             // Hacemos que todas las columnas cambien su tamaño a lo ancho para que se vea toda la info
             for (int i = 0; i < dataGridComprasProdPendientes.Columns.Count; i++)
             {
@@ -41,15 +39,41 @@ namespace AppLaMejor.formularios.Compras
                     continue;
                 }
                 
-                dataGridComprasProdPendientes.Columns[i].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            }
+                dataGridComprasProdPendientes.Columns[i].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
-            ApplicationLookAndFeel.ApplyTheme(dataGridComprasProdPendientes);
+                if (i.Equals(dataGridComprasProdPendientes.Columns.Count - 1))
+                {
+                  //  dataGridComprasProdPendientes.Columns[i].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+                    dataGridComprasProdPendientes.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                }
+            }
         }
 
         private void bCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
         }
+
+        private void bAgregar_Click(object sender, EventArgs e)
+        {
+            FormMessageBox dialog = new FormMessageBox();
+            if (dataGridComprasProdPendientes.RowCount > 0)
+            {
+                int idCompra = FuncionesGlobales.obtenerIndexDeListFromGrid(dataGridComprasProdPendientes);
+                if (dialog.ShowConfirmationDialog("¿Desea marcar los productos no entregados en la compra #" + idCompra + " como entregados?"))
+                {
+                    if (FuncionesCompras.ConfirmarEntregaProductosRestantesTransaction(idCompra))
+                    {
+                        // TODO: 
+                        dialog.ShowErrorDialog("Los productos que faltaban entregar de la compra #" + idCompra + " fueron registrados \ncon exito y ubicados en Deposito");
+                        CargarDataGrid();
+                    }
+                }
+            }else
+            {
+                dialog.ShowErrorDialog("No existe ninguna compra con productos pendientes de entrega.");
+            }
+        }
+
     }
 }

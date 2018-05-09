@@ -148,6 +148,20 @@ namespace AppLaMejor.datamanager
                     List<Cuenta> listCuentas = cuentaMapper.Map(cuentaDataTable).ToList();
                     prop.SetValue(entity, listCuentas, null);
                 }
+                else if (prop.PropertyType == typeof(Modulo))
+                {
+                    DataTable permisoDataTable = QueryManager.Instance().GetTableResults(ConnecionBD.Instance().Connection, QueryManager.Instance().GetModulo(int.Parse(value.ToString())));
+                    DataNamesMapper<Modulo> permisoMapper = new DataNamesMapper<Modulo>();
+                    Modulo m = permisoMapper.Map(permisoDataTable).ToList().First();
+                    prop.SetValue(entity, m, null);
+                }
+                else if (prop.PropertyType == typeof(Usuario))
+                {
+                    DataTable usuarioDataTable = QueryManager.Instance().GetTableResults(ConnecionBD.Instance().Connection, QueryManager.Instance().GetUsuario(int.Parse(value.ToString())));
+                    DataNamesMapper<Usuario> usuarioMapper = new DataNamesMapper<Usuario>();
+                    Usuario u = usuarioMapper.Map(usuarioDataTable).ToList().First();
+                    prop.SetValue(entity, u ,null);
+                }
             }
             catch(InvalidOperationException e)
             {

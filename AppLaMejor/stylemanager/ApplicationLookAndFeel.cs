@@ -154,7 +154,7 @@ public class ApplicationLookAndFeel
         c.RowTemplate.Resizable = DataGridViewTriState.False;
         c.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
-        if (c.Name.Equals("dataGridVentas"))
+        if (c.Name.Equals("dataGridVentas") || c.Name.Equals("dataGridComprasProdPendientes"))
         {
             c.RowTemplate.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;

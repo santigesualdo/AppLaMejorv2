@@ -40,11 +40,9 @@ namespace AppLaMejor.formularios
             this.dataGridProductos = new System.Windows.Forms.DataGridView();
             this.navigationPanel = new System.Windows.Forms.Panel();
             this.navTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.bUbicacion = new System.Windows.Forms.Button();
             this.bHistoricoPrecios = new System.Windows.Forms.Button();
             this.bVer = new System.Windows.Forms.Button();
             this.bEliminar = new System.Windows.Forms.Button();
-            this.bEditar = new System.Windows.Forms.Button();
             this.bAgregar = new System.Windows.Forms.Button();
             this.bottomPanel = new System.Windows.Forms.Panel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -198,18 +196,15 @@ namespace AppLaMejor.formularios
             this.navTableLayoutPanel.AllowDrop = true;
             this.navTableLayoutPanel.AutoSize = true;
             this.navTableLayoutPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.navTableLayoutPanel.ColumnCount = 6;
-            this.navTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.navTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.navTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.navTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.navTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.navTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.navTableLayoutPanel.Controls.Add(this.bUbicacion, 5, 0);
-            this.navTableLayoutPanel.Controls.Add(this.bHistoricoPrecios, 4, 0);
-            this.navTableLayoutPanel.Controls.Add(this.bVer, 3, 0);
-            this.navTableLayoutPanel.Controls.Add(this.bEliminar, 2, 0);
-            this.navTableLayoutPanel.Controls.Add(this.bEditar, 1, 0);
+            this.navTableLayoutPanel.ColumnCount = 4;
+            this.navTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.navTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.navTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.navTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35F));
+            this.navTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.navTableLayoutPanel.Controls.Add(this.bHistoricoPrecios, 3, 0);
+            this.navTableLayoutPanel.Controls.Add(this.bVer, 2, 0);
+            this.navTableLayoutPanel.Controls.Add(this.bEliminar, 1, 0);
             this.navTableLayoutPanel.Controls.Add(this.bAgregar, 0, 0);
             this.navTableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.navTableLayoutPanel.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize;
@@ -220,25 +215,6 @@ namespace AppLaMejor.formularios
             this.navTableLayoutPanel.Size = new System.Drawing.Size(977, 60);
             this.navTableLayoutPanel.TabIndex = 7;
             // 
-            // bUbicacion
-            // 
-            this.bUbicacion.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.bUbicacion.FlatAppearance.BorderColor = System.Drawing.Color.Green;
-            this.bUbicacion.FlatAppearance.BorderSize = 2;
-            this.bUbicacion.FlatAppearance.MouseDownBackColor = System.Drawing.Color.MediumSeaGreen;
-            this.bUbicacion.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkSlateGray;
-            this.bUbicacion.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bUbicacion.Image = global::AppLaMejor.Properties.Resources.lupa_icon_30x30_green;
-            this.bUbicacion.Location = new System.Drawing.Point(813, 3);
-            this.bUbicacion.Name = "bUbicacion";
-            this.bUbicacion.Size = new System.Drawing.Size(161, 54);
-            this.bUbicacion.TabIndex = 15;
-            this.bUbicacion.Text = "Ubicacion";
-            this.bUbicacion.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.bUbicacion.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.bUbicacion.UseVisualStyleBackColor = false;
-            this.bUbicacion.Click += new System.EventHandler(this.bUbicacion_Click);
-            // 
             // bHistoricoPrecios
             // 
             this.bHistoricoPrecios.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -248,9 +224,9 @@ namespace AppLaMejor.formularios
             this.bHistoricoPrecios.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkSlateGray;
             this.bHistoricoPrecios.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bHistoricoPrecios.Image = global::AppLaMejor.Properties.Resources.lupa_icon_30x30_green;
-            this.bHistoricoPrecios.Location = new System.Drawing.Point(651, 3);
+            this.bHistoricoPrecios.Location = new System.Drawing.Point(637, 3);
             this.bHistoricoPrecios.Name = "bHistoricoPrecios";
-            this.bHistoricoPrecios.Size = new System.Drawing.Size(156, 54);
+            this.bHistoricoPrecios.Size = new System.Drawing.Size(337, 54);
             this.bHistoricoPrecios.TabIndex = 14;
             this.bHistoricoPrecios.Text = "Historico Precios";
             this.bHistoricoPrecios.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -267,9 +243,9 @@ namespace AppLaMejor.formularios
             this.bVer.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkSlateGray;
             this.bVer.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bVer.Image = global::AppLaMejor.Properties.Resources.lupa_icon_30x30_green;
-            this.bVer.Location = new System.Drawing.Point(489, 3);
+            this.bVer.Location = new System.Drawing.Point(442, 3);
             this.bVer.Name = "bVer";
-            this.bVer.Size = new System.Drawing.Size(156, 54);
+            this.bVer.Size = new System.Drawing.Size(189, 54);
             this.bVer.TabIndex = 13;
             this.bVer.Text = "Ver";
             this.bVer.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -286,34 +262,15 @@ namespace AppLaMejor.formularios
             this.bEliminar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkSlateGray;
             this.bEliminar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bEliminar.Image = global::AppLaMejor.Properties.Resources.x_icon_30x30_green;
-            this.bEliminar.Location = new System.Drawing.Point(327, 3);
+            this.bEliminar.Location = new System.Drawing.Point(247, 3);
             this.bEliminar.Name = "bEliminar";
-            this.bEliminar.Size = new System.Drawing.Size(156, 54);
+            this.bEliminar.Size = new System.Drawing.Size(189, 54);
             this.bEliminar.TabIndex = 12;
             this.bEliminar.Text = "Eliminar";
             this.bEliminar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.bEliminar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.bEliminar.UseVisualStyleBackColor = false;
             this.bEliminar.Click += new System.EventHandler(this.bEliminar_Click);
-            // 
-            // bEditar
-            // 
-            this.bEditar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.bEditar.FlatAppearance.BorderColor = System.Drawing.Color.Green;
-            this.bEditar.FlatAppearance.BorderSize = 2;
-            this.bEditar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.MediumSeaGreen;
-            this.bEditar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkSlateGray;
-            this.bEditar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bEditar.Image = global::AppLaMejor.Properties.Resources.lapiz_icon_30x30_green;
-            this.bEditar.Location = new System.Drawing.Point(165, 3);
-            this.bEditar.Name = "bEditar";
-            this.bEditar.Size = new System.Drawing.Size(156, 54);
-            this.bEditar.TabIndex = 11;
-            this.bEditar.Text = "Editar";
-            this.bEditar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.bEditar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.bEditar.UseVisualStyleBackColor = false;
-            this.bEditar.Click += new System.EventHandler(this.bEditar_Click);
             // 
             // bAgregar
             // 
@@ -326,7 +283,7 @@ namespace AppLaMejor.formularios
             this.bAgregar.Image = global::AppLaMejor.Properties.Resources.add_icon_30x30_green;
             this.bAgregar.Location = new System.Drawing.Point(3, 3);
             this.bAgregar.Name = "bAgregar";
-            this.bAgregar.Size = new System.Drawing.Size(156, 54);
+            this.bAgregar.Size = new System.Drawing.Size(238, 54);
             this.bAgregar.TabIndex = 10;
             this.bAgregar.Text = "Agregar Producto";
             this.bAgregar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -362,11 +319,11 @@ namespace AppLaMejor.formularios
             // tsslMensaje
             // 
             this.tsslMensaje.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.tsslMensaje.Font = new System.Drawing.Font("Lucida Sans", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tsslMensaje.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tsslMensaje.ImageTransparentColor = System.Drawing.Color.Green;
             this.tsslMensaje.Margin = new System.Windows.Forms.Padding(20, 0, 0, 0);
             this.tsslMensaje.Name = "tsslMensaje";
-            this.tsslMensaje.Size = new System.Drawing.Size(85, 50);
+            this.tsslMensaje.Size = new System.Drawing.Size(83, 50);
             this.tsslMensaje.Text = "Mensajero";
             // 
             // bAceptar
@@ -699,7 +656,6 @@ namespace AppLaMejor.formularios
         private System.Windows.Forms.TableLayoutPanel navTableLayoutPanel;
         private System.Windows.Forms.Button bVer;
         private System.Windows.Forms.Button bEliminar;
-        private System.Windows.Forms.Button bEditar;
         private System.Windows.Forms.Button bAgregar;
         private System.Windows.Forms.TableLayoutPanel filterTableLayoutPanel;
         private System.Windows.Forms.Panel filtro1Panel;
@@ -716,6 +672,5 @@ namespace AppLaMejor.formularios
         private System.Windows.Forms.TextBox filter2TextBox;
         private System.Windows.Forms.Button bHistoricoPrecios;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button bUbicacion;
     }
 }

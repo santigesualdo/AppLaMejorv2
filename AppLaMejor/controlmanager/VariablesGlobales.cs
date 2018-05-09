@@ -21,8 +21,5 @@ namespace AppLaMejor.controlmanager
         public static string dateTimeFormat = "yyyy-MM-dd HH:mm:ss";
         public static string dateFormat = "yyyy-MM-dd";
 
-        // Ubicacion
-        public static string ubicacionInicialCompra = "4"; // Mesa de Entrada
-
     }
 }

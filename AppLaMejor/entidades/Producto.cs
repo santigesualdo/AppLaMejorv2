@@ -26,9 +26,6 @@ namespace AppLaMejor.entidades
         [DataNames("DescripcionBreve")]
         public string DescripcionBreve { get; set; }
 
-        [DataNames("DescripcionLarga")]
-        public string DescripcionLarga { get; set; }
-
         [DataNames("Cantidad")]
         public decimal Cantidad { get; set; }
 

@@ -138,7 +138,6 @@
             // 
             // dataGridComprasProdPendientes
             // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.DimGray;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
@@ -147,7 +146,6 @@
             this.dataGridComprasProdPendientes.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridComprasProdPendientes.BackgroundColor = System.Drawing.Color.Black;
             this.dataGridComprasProdPendientes.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.Black;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
@@ -170,7 +168,6 @@
             this.dataGridComprasProdPendientes.Location = new System.Drawing.Point(40, 35);
             this.dataGridComprasProdPendientes.Name = "dataGridComprasProdPendientes";
             this.dataGridComprasProdPendientes.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowFrame;
@@ -180,7 +177,6 @@
             this.dataGridComprasProdPendientes.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridComprasProdPendientes.RowHeadersVisible = false;
             this.dataGridComprasProdPendientes.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            this.dataGridComprasProdPendientes.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.dataGridComprasProdPendientes.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.MediumSeaGreen;
             this.dataGridComprasProdPendientes.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridComprasProdPendientes.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.White;
@@ -242,6 +238,7 @@
             this.bAgregar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.bAgregar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.bAgregar.UseVisualStyleBackColor = false;
+            this.bAgregar.Click += new System.EventHandler(this.bAgregar_Click);
             // 
             // bottomPanel
             // 

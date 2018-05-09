@@ -15,9 +15,16 @@ namespace AppLaMejor.formularios
         List<TipoGarron> listTipoGarron;
         List<TipoEstadoGarron> listTipoEstadoGarron;
 
+        List<VentaDetalle> listExcluirGarron;
+        string currentNotInGarronIds;
+
+        public static int MODO_SELECCIONAR_GARRON_PARA_DEPOSTE = 1;
+        public static int MODO_SELECCIONAR_GARRON = 2;
+        int currentModo;
+
         const int TIPO_ESTADO_GARRON_COMPLETO = 1;
 
-        Garron garronSelected;
+        public Garron garronSelected;
 
         Ubicacion currentUbicacion = null;
         TipoEstadoGarron currentTipoEstadoGarron = null;
@@ -25,12 +32,34 @@ namespace AppLaMejor.formularios
         private string currentNumero = null;
         private string currentGarronData;
 
-        public FormDeposte()
+        public FormDeposte(int modo, List<VentaDetalle> list)
+        {
+            listExcluirGarron = list;
+            LoadDeposte(modo);
+        }
+
+        public FormDeposte(int modo )
+        {
+            LoadDeposte(modo);
+        }
+
+        private void LoadDeposte(int modo)
         {
             InitializeComponent();
             CargarCombos();
 
             ApplicationLookAndFeel.ApplyThemeToAll(this);
+
+            currentModo = modo;
+
+            if (modo.Equals(MODO_SELECCIONAR_GARRON))
+            {
+                bDepostar.Text = "(Seleccionar Garron)";
+            }
+            else if (modo.Equals(MODO_SELECCIONAR_GARRON_PARA_DEPOSTE))
+            {
+                bDepostar.Text = "(Depostar)";
+            }
         }
 
         private void CargarCombos()
@@ -65,7 +94,27 @@ namespace AppLaMejor.formularios
 
             comboNumeroGarron.SelectedIndex = -1;
 
-            LoadTextBoxGarronByNumero(null,null,null, null);
+            currentNotInGarronIds = "";
+            if (listExcluirGarron!= null && listExcluirGarron.Count > 0)
+            {
+                foreach (VentaDetalle vd in listExcluirGarron)
+                {
+                    if (vd.Garron != null)
+                    {
+                        currentNotInGarronIds += "'" + vd.Garron.Id + "',";
+                    }
+                }
+                if (!currentNotInGarronIds.Equals(""))
+                {
+                    currentNotInGarronIds = currentNotInGarronIds.Remove(currentNotInGarronIds.Length - 1);
+                }
+            }
+
+            if (currentNotInGarronIds.Equals("")){
+                currentNotInGarronIds = null;
+            }
+
+            LoadTextBoxGarronByNumero(null, null, null, null, currentNotInGarronIds);
         }
 
         private void ComboEstadoGarron_SelectedIndexChanged(object sender, EventArgs e)
@@ -92,9 +141,9 @@ namespace AppLaMejor.formularios
             }
         }
 
-        private void LoadTextBoxGarronByNumero(Ubicacion u, TipoEstadoGarron teg, TipoGarron tg, string numero)
+        private void LoadTextBoxGarronByNumero(Ubicacion u, TipoEstadoGarron teg, TipoGarron tg, string numero, string listIdGarronExcluir)
         {
-            string consulta = QueryManager.Instance().GetGarronByNumberSearchData(u,teg,tg, numero);
+            string consulta = QueryManager.Instance().GetGarronByNumberSearchData(u,teg,tg, numero, listIdGarronExcluir);
             DataTable table = QueryManager.Instance().GetTableResults(ConnecionBD.Instance().Connection, consulta);
             if (table.Rows.Count.Equals(0))
             {
@@ -125,19 +174,27 @@ namespace AppLaMejor.formularios
 
         private void bDepostar_Click(object sender, EventArgs e)
         {
-            FormDeposteGarron fdg = null;
-            if (garronSelected.TipoEstadoGarron.Id.ToString().Equals(TIPO_ESTADO_GARRON_COMPLETO))
+            if (currentModo.Equals(MODO_SELECCIONAR_GARRON_PARA_DEPOSTE))
             {
-                fdg = new FormDeposteGarron(FormDeposteGarron.MODO_GARRONCOMPLETO, garronSelected, currentGarronData);
-            }
-            else
+                FormDeposteGarron fdg = null;
+                if (garronSelected.TipoEstadoGarron.Id.ToString().Equals(TIPO_ESTADO_GARRON_COMPLETO))
+                {
+                    fdg = new FormDeposteGarron(FormDeposteGarron.MODO_GARRONCOMPLETO, garronSelected, currentGarronData);
+                }
+                else
+                {
+                    fdg = new FormDeposteGarron(FormDeposteGarron.MODO_GARRONDEPOSTADO, garronSelected, currentGarronData);
+                }
+
+                fdg.ShowDialog();
+                CargarCombos();
+                bCancelSeleccion_Click(null, null);
+            }else if (currentModo.Equals(MODO_SELECCIONAR_GARRON))
             {
-                fdg = new FormDeposteGarron(FormDeposteGarron.MODO_GARRONDEPOSTADO, garronSelected, currentGarronData);
+                this.DialogResult = DialogResult.OK;
+                this.Close();
             }
-            
-            fdg.ShowDialog();
-            CargarCombos();
-            bCancelSeleccion_Click(null, null);
+
         }
 
         private void bCancelSeleccion_Click(object sender, EventArgs e)
@@ -147,14 +204,14 @@ namespace AppLaMejor.formularios
             bDepostar.Enabled = false;
             lGarronData.Text = "(sin seleccionar)";
             LimpiarFiltros();
-            LoadTextBoxGarronByNumero(null, null, null, null);
+            LoadTextBoxGarronByNumero(null, null, null, null, null);
         }
 
         private void bAplicarFiltros_Click(object sender, EventArgs e)
         {
             // Si se aplico algun filtro, cambiamos la consulta
-            if (currentUbicacion != null || currentTipoEstadoGarron!= null || currentTipoGarron != null || currentNumero!=null )
-                LoadTextBoxGarronByNumero(currentUbicacion, currentTipoEstadoGarron, currentTipoGarron, currentNumero);
+            if (currentUbicacion != null || currentTipoEstadoGarron!= null || currentTipoGarron != null || currentNumero!=null || currentNotInGarronIds!=null)
+                LoadTextBoxGarronByNumero(currentUbicacion, currentTipoEstadoGarron, currentTipoGarron, currentNumero, currentNotInGarronIds);
         }
 
         private void textNumero_Leave(object sender, EventArgs e)

@@ -12,6 +12,7 @@ using AppLaMejor.controlmanager;
 using AppLaMejor.stylemanager;
 using AppLaMejor.formularios.Util;
 using AppLaMejor.Reports;
+using AppLaMejor.formularios.Usuarios;
 
 namespace AppLaMejor.formularios
 {
@@ -122,6 +123,13 @@ namespace AppLaMejor.formularios
         private void FormUsuario_Load(object sender, EventArgs e)
         {
             bLoginAceptar.Focus();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            FormGestionPermisos formGestionPermisos = new FormGestionPermisos(1);
+            formGestionPermisos.ShowDialog();
+
         }
     }
 }

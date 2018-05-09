@@ -108,36 +108,6 @@ namespace AppLaMejor.formularios
 			}
         }
 
-        private void ModoEdicion(object sender, EventArgs e)
-        {
-            /* Obtenemos los datos de la fila seleccionada y tomamos los datos de la lista de productos */
-            int i = FuncionesGlobales.obtenerIndexDeListFromGrid(dataGridProductos);
-            Producto ProdSelected = listProds.First(s => s.Id == i);
-            int idProducto = ProdSelected.Id;
-
-            /* Form Entity Input */
-            FormEntityInput dialog = new FormEntityInput(null, FormEntityInput.MODO_EDITAR, formTittleText.Text);
-            Boolean result = dialog.Execute(ProdSelected, idProducto);
-
-            if (result)
-            {
-                Producto Prod = (Producto)dialog.SelectedObject;
-                /* Update en BD */
-
-                if (FuncionesProductos.UpdateProducto(Prod))
-                {
-                    // se actualizo bien
-                    CargarDataGrid();
-                    MyTextTimer.TStartFade("Producto actualizado correctamente", statusStrip1, tsslMensaje, MyTextTimer.TIME_LONG);
-                }
-                else
-                {
-                    MyTextTimer.TStartFade("Producto no se pudo actualizar actualizado correctamente.", statusStrip1, tsslMensaje, MyTextTimer.TIME_LONG);
-                }
-                
-            }
-        }
-
         private void ModoVer(object sender, EventArgs e)
         {
             /* Obtenemos los datos de la fila seleccionada y la convertimos a entidad Producto */
@@ -200,11 +170,6 @@ namespace AppLaMejor.formularios
         private void bVer_Click(object sender, EventArgs e)
         {
             ModoVer(sender, e);
-        }
-
-        private void bEditar_Click(object sender, EventArgs e)
-        {
-            ModoEdicion(sender, e);
         }
 
         private void comboTipoFilterOnChange(object sender, EventArgs e)
@@ -376,9 +341,5 @@ namespace AppLaMejor.formularios
             MyTextTimer.TStartFade("Precios exportados correctamente. Aguarde el mensaje de confirmación.", this.statusStrip1, this.tsslMensaje, MyTextTimer.TIME_LONG);
         }
 
-        private void bUbicacion_Click(object sender, EventArgs e)
-        {
-            // TODO: FUNCIONALIDAD Muestra form ubicacion, muestra ubicacion del producto seleccionado
-        }
     }
 }

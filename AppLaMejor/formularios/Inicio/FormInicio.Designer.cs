@@ -68,17 +68,16 @@
             // 
             // contentPanel
             // 
-            this.contentPanel.AutoScroll = true;
             this.contentPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.contentPanel.Location = new System.Drawing.Point(0, 50);
             this.contentPanel.Name = "contentPanel";
-            this.contentPanel.Size = new System.Drawing.Size(934, 441);
+            this.contentPanel.Size = new System.Drawing.Size(934, 391);
             this.contentPanel.TabIndex = 3;
             // 
             // mainPanel
             // 
-            this.mainPanel.Controls.Add(this.bottomPanel);
             this.mainPanel.Controls.Add(this.contentPanel);
+            this.mainPanel.Controls.Add(this.bottomPanel);
             this.mainPanel.Controls.Add(this.topPanel);
             this.mainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mainPanel.Location = new System.Drawing.Point(0, 0);

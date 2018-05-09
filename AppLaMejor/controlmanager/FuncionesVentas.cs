@@ -177,46 +177,83 @@ namespace AppLaMejor.controlmanager
                         if (!manager.ExecuteSQL(command))
                         {
                             tran.Rollback();
-                        }
-
-                        // 3.2 Operamos en producto ubicacion
-                        // HARDCODEADO : UBICACION DEPOSITO 4
-                        ProductoUbicacion pu = FuncionesProductos.GetProductoUbicacion(v.Producto, 4);
-                        // Sabemos que el peso de la VentaMayorista nunca puede ser mayor a la cantidad de esa ubicacion, por que esta validado
-                        decimal calculo = decimal.Subtract(pu.peso, v.Peso);
-                        if (calculo.Equals(0))
-                        {
-                            // agrego fecha_egreso y cantidad 0 al productoubicacion
-                            consulta = manager.UpdateProductoUbicacionBaja(pu.Id);
-                            command.CommandText = consulta;
-                            if (!manager.ExecuteSQL(command))
-                            {
-                                tran.Rollback();
-                                return false;
-                            }
-                        }
-                        else
-                        {
-                            // Caso contrario queda un resto de producto y se resta lo retirado
-                            consulta = manager.UpdateProductoUbicacion(pu.Id, calculo);
-                            command.CommandText = consulta;
-                            if (!manager.ExecuteSQL(command))
-                            {
-                                tran.Rollback();
-                                return false;
-                            }
-                        }
-
-                        // 3.3 Operamos en tabla Producto
-                        Producto p = FuncionesProductos.GetProducto(v.Producto.Id);
-                        decimal pesoRestanteTotal = decimal.Subtract(p.Cantidad, v.Peso);
-                        consulta = manager.UpdateCantidadProducto(p.Id, pesoRestanteTotal);
-                        command.CommandText = consulta;
-                        if (!manager.ExecuteSQL(command))
-                        {
-                            tran.Rollback();
                             return false;
                         }
+
+                        if (v.Garron != null)
+                        {
+                            // Obtenemos ubicacion del garron
+                            // Ubicacion ug = FuncionesGarron.GetUbicacionByGarron(v.Garron);
+                            ProductoUbicacion pug = FuncionesGarron.GetProductoUbicacionByGarron(v.Garron.Id);
+
+                            if (pug != null)
+                            {
+                                // Seteamos el egreso del producto ubicacion
+                                consulta = manager.UpdateProductoUbicacionBaja(pug.Id);
+                                command.CommandText = consulta;
+                                if (!manager.ExecuteSQL(command))
+                                {
+                                    tran.Rollback();
+                                    return false;
+                                }
+
+                                // Seteamos la fecha baja en garron
+                                consulta = manager.UpdateFechaBajaGarron(v.Garron.Id);
+                                command.CommandText = consulta;
+                                if (!manager.ExecuteSQL(command))
+                                {
+                                    tran.Rollback();
+                                    return false;
+                                }
+                            }
+                            else
+                            {
+                                tran.Rollback();
+                                return false;
+                            }
+                        }
+
+                        if (v.Producto != null)
+                        {
+                            // 3.2 Operamos en producto ubicacion
+							// Obtenemos la ubicacion de entrada por defecto.
+                            ProductoUbicacion pu = FuncionesProductos.GetProductoUbicacion(v.Producto, FuncionesGlobales.ObtenerUbicacionEntrada().Id);
+                            // Sabemos que el peso de VentaDetalle nunca puede ser mayor a la cantidad de esa ubicacion, por que esta validado.
+                            decimal calculo = decimal.Subtract(pu.peso, v.Peso);
+                            if (calculo.Equals(0))
+                            {
+                                // agrego fecha_egreso y cantidad 0 al productoubicacion
+                                consulta = manager.UpdateProductoUbicacionBaja(pu.Id);
+                                command.CommandText = consulta;
+                                if (!manager.ExecuteSQL(command))
+                                {
+                                    tran.Rollback();
+                                    return false;
+                                }
+                            }
+                            else
+                            {
+                                // Caso contrario queda un resto de producto y se resta lo retirado
+                                consulta = manager.UpdateProductoUbicacion(pu.Id, calculo);
+                                command.CommandText = consulta;
+                                if (!manager.ExecuteSQL(command))
+                                {
+                                    tran.Rollback();
+                                    return false;
+                                }
+                            }
+
+                            // 3.3 Operamos en tabla Producto
+                            Producto p = FuncionesProductos.GetProducto(v.Producto.Id);
+                            decimal pesoRestanteTotal = decimal.Subtract(p.Cantidad, v.Peso);
+                            consulta = manager.UpdateCantidadProducto(p.Id, pesoRestanteTotal);
+                            command.CommandText = consulta;
+                            if (!manager.ExecuteSQL(command))
+                            {
+                                tran.Rollback();
+                                return false;
+                            }
+                        }                        
                     }
 
                     MovimientoCuenta mcDebito = new MovimientoCuenta();
