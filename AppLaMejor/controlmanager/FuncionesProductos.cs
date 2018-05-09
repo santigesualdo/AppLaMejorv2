@@ -309,6 +309,18 @@ namespace AppLaMejor.controlmanager
             }
         }
 
+        public static bool CheckPluExists(string PLU)
+        {
+            string consulta = QueryManager.Instance().CheckCodigoBarraExist(PLU);
+            DataTable table = QueryManager.Instance().GetTableResults(ConnecionBD.Instance().Connection, consulta);
+            DataNamesMapper<Producto> mapperProd = new DataNamesMapper<Producto>();
+            if (table.Rows.Count > 0)
+                return true;
+            else
+                return false;
+            
+        }
+
         public static List<Producto> GetProductosDeposte()
         {
             string consulta = QueryManager.Instance().GetProductosDeposte();

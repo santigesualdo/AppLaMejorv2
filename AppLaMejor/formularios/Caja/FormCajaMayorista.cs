@@ -51,7 +51,7 @@ namespace AppLaMejor.formularios.Caja
 
                     listDetalleVentas.Add(vd);
 
-                    currentVentasDetalle.Rows.Add(vd.Producto.DescripcionLarga, "$ " + vd.Monto, vd.Peso.ToString() + " kg.");
+                    currentVentasDetalle.Rows.Add(vd.Producto.DescripcionBreve, "$ " + vd.Monto, vd.Peso.ToString() + " kg.");
                     currentMontoTotal += vd.Monto;
 
                     labelSubTotal.Text = " TOTAL : $ " + currentMontoTotal.ToString();
@@ -245,7 +245,7 @@ namespace AppLaMejor.formularios.Caja
                 // Agregamos a la lista y mostramos en grid
                 listDetalleVentas.Add(vd);
 
-                currentVentasDetalle.Rows.Add(vd.Producto.DescripcionLarga, "$ " + vd.Monto, vd.Peso.ToString() + " kg.");
+                currentVentasDetalle.Rows.Add(vd.Producto.DescripcionBreve, "$ " + vd.Monto, vd.Peso.ToString() + " kg.");
                 currentMontoTotal += vd.Monto;
 
                 labelSubTotal.Text = " TOTAL : $ " + currentMontoTotal.ToString();
@@ -255,7 +255,7 @@ namespace AppLaMejor.formularios.Caja
 
         private void btManualGarron_Click(object sender, EventArgs e)
         {
-            FormAgregarGarronManual formGarronManual = new FormAgregarGarronManual();
+            FormAgregarGarronManual formGarronManual = new FormAgregarGarronManual(listDetalleVentas);
 
             if (formGarronManual.ShowDialog() == DialogResult.OK)
             {

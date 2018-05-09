@@ -226,7 +226,7 @@ namespace AppLaMejor.datamanager
         }
         public string GetClientesData()
         {
-            return " SELECT c.id, c.razon_social AS RazonSocial, c.domicilio AS Domicilio, c.localidad AS Localidad, cast(c.id_tipo_cliente as CHAR(50)) AS TipoCliente, " +
+            return " SELECT c.id, c.cod_cliente as CodCliente, c.razon_social AS RazonSocial, c.domicilio AS Domicilio, c.localidad AS Localidad, cast(c.id_tipo_cliente as CHAR(50)) AS TipoCliente, " +
                 " c.fecha_desde as FechaDesde, c.civa AS IVA, c.cuit AS CUIT, c.nombre_responsable AS NombreResponsable, c.nombre_local AS NombreLocal, c.telefono AS Telefono, "+
                 " c.fecha_baja AS FechaBaja FROM cliente c order by c.id";
         }
@@ -339,6 +339,7 @@ namespace AppLaMejor.datamanager
                 AND razon_social LIKE CONCAT('%',name_,'%')
              */
         }
+
         /* Cuentas */
         public string GetClientesWithCuentaById(int id){
             return "SELECT c.id , " +
@@ -407,7 +408,7 @@ namespace AppLaMejor.datamanager
             //    " INNER JOIN banco ON cuenta.id_banco = banco.id INNER JOIN clientetipo ct ON ct.id = cliente.id_tipo_cliente where cliente.id = " + idCliente + " order by cuenta.id;";
 
 
-            string hini = "SELECT banco.descripcion as Banco,  c.id AS id_cuenta,  c.cbu,  c.descripcion,  c.fecha_updated " +
+            string hini = "SELECT banco.descripcion as Banco,  c.id AS id_cuenta,  c.cbu,  c.descripcion as Descripcion,  c.fecha_updated as FechaUltimaActualizacion " +
                 " FROM cliente INNER JOIN clientecuenta c ON cliente.id = c.id_cliente " + 
                 " INNER JOIN banco ON c.id_banco = banco.id INNER JOIN clientetipo ct ON ct.id = cliente.id_tipo_cliente WHERE cliente.id = "+ idCliente +" ORDER BY c.id ";
 
@@ -473,7 +474,7 @@ namespace AppLaMejor.datamanager
                     "mt.descripcion, " +
                     "gc.id_banco, " +
                     "round(cm.monto, 2) AS monto, " +
-                    "DATE_FORMAT(cm.fecha,'%Y-%m-%d') AS fecha_," +
+                    "DATE_FORMAT(cm.fecha,'%Y-%m-%d') AS Fecha," +
                     "cm.cobrado, " +
                     "cm.usuario " +
                     "FROM clientecuentamovimiento cm INNER JOIN clientecuenta gc ON cm.id_cuenta = gc.id " +
@@ -491,13 +492,13 @@ namespace AppLaMejor.datamanager
                     "cc.id_cliente," +
                     "banco.descripcion as Banco, " +
                     "cm.id_movimiento_tipo," +
-                    "mt.descripcion, " +
+                    "mt.descripcion as Descripcion, " +
                     "banco.descripcion as Banco, " +
-                    "round(cm.monto, 2) AS monto, " +
-                    "DATE_FORMAT(cm.fecha,'%Y-%m-%d') AS fecha_" +
+                    "concat('$ ' , round(cm.monto, 2)) AS Monto, " +
+                    "DATE_FORMAT(cm.fecha,'%Y-%m-%d') AS Fecha" +
                     " FROM clientecuentamovimiento cm INNER JOIN clientecuenta cc ON cm.id_cuenta = cc.id " +
                     "INNER JOIN movimientotipo mt ON cm.id_movimiento_tipo = mt.id " +
-                    "INNER JOIN banco ON banco.id = cc.id_banco WHERE cc.id_cliente =" + id.ToString() + " ORDER BY cm.id DESC LIMIT " +
+                    "INNER JOIN banco ON banco.id = cc.id_banco WHERE cc.id_cliente =" + id.ToString() + " ORDER BY banco.descripcion DESC LIMIT " +
                     pInicio.ToString() + ", " + registros.ToString() + ";";
         }        
         public string GetMovCuentasBetweenDates(int id, int pInicio, int registros, string fdesde, string fhasta)
@@ -511,10 +512,10 @@ namespace AppLaMejor.datamanager
                     "gc.id_cliente," +
                     "cm.id_cuenta, " +
                     "cm.id_movimiento_tipo," +
-                    "mt.descripcion, " +
+                    "mt.descripcion as Descripcion, " +
                     "banco.descripcion as Banco, " +
-                    "round(cm.monto, 2) AS monto, " +
-                    "DATE_FORMAT(cm.fecha,'%Y-%m-%d') AS fecha_" +
+                    "round(cm.monto, 2) AS Monto, " +
+                    "DATE_FORMAT(cm.fecha,'%Y-%m-%d') AS FechaUltimaActualizacion" +
 
                     " FROM clientecuentamovimiento cm INNER JOIN clientecuenta gc ON cm.id_cuenta = gc.id " +
                     "INNER JOIN movimientotipo mt ON cm.id_movimiento_tipo = mt.id " +
@@ -570,7 +571,7 @@ namespace AppLaMejor.datamanager
         public string GetMovCuentasProveedores()
         {
             /* trae todos los movimiento de cuentas de todos los proveedores*/
-            return "SELECT cm.id, cm.id_operacion, gc.id, gc.id_proveedor, cm.id_cuenta, cm.id_movimiento_tipo, mt.descripcion, gc.id_banco, round(cm.monto, 2) AS monto, DATE_FORMAT(cm.fecha, '%Y-%m-%d') AS fecha_,  cm.cobrado, cm.usuario FROM proveedorcuentamovimiento cm INNER JOIN proveedorcuenta gc ON cm.id_cuenta = gc.id INNER JOIN movimientotipo mt ON cm.id_movimiento_tipo = mt.id WHERE gc.id_proveedor IS NOT NULL ORDER BY cm.id DESC;";
+            return "SELECT cm.id, cm.id_operacion, gc.id, gc.id_proveedor, cm.id_cuenta, cm.id_movimiento_tipo, mt.descripcion as Descripcion, gc.id_banco, round(cm.monto, 2) AS Monto, DATE_FORMAT(cm.fecha, '%Y-%m-%d') AS FechaUltimaActualizacion,  cm.cobrado, cm.usuario FROM proveedorcuentamovimiento cm INNER JOIN proveedorcuenta gc ON cm.id_cuenta = gc.id INNER JOIN movimientotipo mt ON cm.id_movimiento_tipo = mt.id WHERE gc.id_proveedor IS NOT NULL ORDER BY cm.id DESC;";
         }		
 		public string GetMovCuentasProveedor(int id, int pInicio, int registros)
         {
@@ -583,10 +584,10 @@ namespace AppLaMejor.datamanager
                     "gc.id_proveedor," +
                     "banco.descripcion as Banco, " +
                     "cm.id_movimiento_tipo," +
-                    "mt.descripcion, " +
+                    "mt.descripcion as Descripcion, " +
                     "banco.descripcion as Banco, " +
-                    "round(cm.monto, 2) AS monto, " +
-                    "DATE_FORMAT(cm.fecha,'%Y-%m-%d') AS fecha_" +
+                    "round(cm.monto, 2) AS Monto, " +
+                    "DATE_FORMAT(cm.fecha,'%Y-%m-%d') AS FechaUltimaActualizacion" +
                     " FROM proveedorcuentamovimiento cm INNER JOIN proveedorcuenta gc ON cm.id_cuenta = gc.id " +
                     "INNER JOIN movimientotipo mt ON cm.id_movimiento_tipo = mt.id " +
                     "INNER JOIN banco ON banco.id = gc.id_banco WHERE gc.id_proveedor = " + id.ToString() + " ORDER BY cm.id DESC LIMIT " +
@@ -603,10 +604,10 @@ namespace AppLaMejor.datamanager
                     "gc.id_proveedor," +
                     "cm.id_cuenta, " +
                     "cm.id_movimiento_tipo," +
-                    "mt.descripcion, " +
+                    "mt.descripcion as Descripcion, " +
                     "banco.descripcion as Banco, " +
-                    "round(cm.monto, 2) AS monto, " +
-                    "DATE_FORMAT(cm.fecha,'%Y-%m-%d') AS fecha_ " +
+                    "round(cm.monto, 2) AS Monto, " +
+                    "DATE_FORMAT(cm.fecha,'%Y-%m-%d') AS FechaUltimaActualizacion " +
                     "FROM proveedorcuentamovimiento cm INNER JOIN proveedorcuenta gc ON cm.id_cuenta = gc.id " +
                     "INNER JOIN movimientotipo mt ON cm.id_movimiento_tipo = mt.id " +															  
                     "INNER JOIN banco ON banco.id = gc.id_banco WHERE gc.id_proveedor =" + id.ToString() + " AND DATE_FORMAT(cm.fecha, '%Y-%m-%d') BETWEEN '" + fdesde +
@@ -758,7 +759,7 @@ namespace AppLaMejor.datamanager
             " inner join ventadetalle vd on vd.id_venta = v.id " +
             " inner join producto p on p.id = vd.id_producto " +
             " WHERE " +
-            " p.descripcion_larga like '%" + descrip + "'% ';";
+            " p.descripcion_breve like '%" + descrip + "'% ';";
         }
         public string GetVentaEntreMontos(decimal montoDesde, decimal montoHasta)
         {
@@ -810,8 +811,7 @@ namespace AppLaMejor.datamanager
             " p.descripcion_breve AS DescripcionBreve," +
             " cast(p.id_producto_tipo AS CHAR (50)) AS TipoProducto," +
             " p.precio as Precio," +
-            " p.cantidad AS Cantidad, " +
-            " p.descripcion_larga AS DescripcionLarga " +
+            " p.cantidad AS Cantidad " +
             " FROM " +
             " producto p " +
             " where p.fecha_baja is null ";
@@ -840,8 +840,7 @@ namespace AppLaMejor.datamanager
             " p.descripcion_breve AS DescripcionBreve," +
             " cast(p.id_producto_tipo AS CHAR (50)) AS TipoProducto," +
             " p.precio as Precio," +
-            " p.cantidad AS Cantidad, " +
-            " p.descripcion_larga AS DescripcionLarga " +
+            " p.cantidad AS Cantidad " +
             " FROM " +
             " producto p " +
             " where p.fecha_baja is null AND p.id_producto_tipo = " + tp.ToString();
@@ -872,13 +871,12 @@ namespace AppLaMejor.datamanager
         }
         public string InsertNuevoProducto(Producto producto)
         {
-            return " INSERT INTO producto ( id_producto_tipo,  id_codigo_barra, precio, cantidad, descripcion_breve, descripcion_larga, usuario, fecha_baja) " +
+            return " INSERT INTO producto ( id_producto_tipo,  id_codigo_barra, precio, cantidad, descripcion_breve,  usuario, fecha_baja) " +
                 " VALUES ('" +producto.TipoProducto.Id + "', '" +
                     producto.CodigoBarra + "', '" +
                     producto.Precio + "', '" +
                     producto.Cantidad + "', '" +
                     producto.DescripcionBreve + "', '" +
-                    producto.DescripcionLarga + "', '" +
                     VariablesGlobales.userIdLogueado.ToString() + "', " +
                     "null );";
         }
@@ -886,7 +884,6 @@ namespace AppLaMejor.datamanager
         {
             return "UPDATE producto SET " +
                     " descripcion_breve ='" + producto.DescripcionBreve+ "',  " +
-                    " descripcion_larga ='" + producto.DescripcionLarga+ "',  " +
                     " id_producto_tipo ='" + producto.TipoProducto.Id+ "',  " +
                     " precio ='" + producto.Precio + "',  " +
                     " cantidad ='" + producto.Cantidad +"' " +
@@ -900,8 +897,7 @@ namespace AppLaMejor.datamanager
                     " p.descripcion_breve AS DescripcionBreve," +
                     " cast(p.id_producto_tipo AS CHAR (50)) AS TipoProducto," +
                     " p.precio as Precio," +
-                    " p.cantidad AS Cantidad, " +
-                    " p.descripcion_larga AS DescripcionLarga " +
+                    " p.cantidad AS Cantidad " +
                     " FROM " +
                     " producto p " +
                     " where p.fecha_baja is null and p.id = '" + id.ToString()+"';";
@@ -914,8 +910,7 @@ namespace AppLaMejor.datamanager
                 " p.descripcion_breve AS DescripcionBreve," +
                 " cast(p.id_producto_tipo AS CHAR (50)) AS TipoProducto," +
                 " p.precio as Precio," +
-                " pu.peso AS Cantidad, " +
-                " p.descripcion_larga AS DescripcionLarga " +
+                " pu.peso AS Cantidad " +
                 " FROM " +
                 " producto p " +
                 " inner join productoubicacion pu on pu.id_producto = p.id " +
@@ -931,8 +926,7 @@ namespace AppLaMejor.datamanager
             " p.descripcion_breve AS DescripcionBreve," +
             " cast(p.id_producto_tipo AS CHAR (50)) AS TipoProducto," +
             " p.precio as Precio," +
-            " cd.peso_faltaentregar AS Cantidad, " +
-            " p.descripcion_larga AS DescripcionLarga " +
+            " cd.peso_faltaentregar AS Cantidad " +
             " FROM " +
             " producto p " +
             " inner join compradetalle cd on cd.id_producto = p.id " +
@@ -943,6 +937,10 @@ namespace AppLaMejor.datamanager
             return "select * from productoubicacion pu inner join producto p on p.id = pu.id_producto where pu.fecha_egreso is NULL "+
             " and pu.id_producto = '"+idProducto+"' and pu.id_ubicacion = '"+ FuncionesGlobales.ObtenerUbicacionSalida().Id+"';";
         }
+        public string CheckCodigoBarraExist(string PLU)
+        {
+           return "select 1 from producto where id_codigo_barra like '%" + PLU + "%';";
+        }
         /* Garron */
         public string GetGarron(int idGarron)
         {
@@ -952,7 +950,7 @@ namespace AppLaMejor.datamanager
         {
             return "select * from garrontipo;";
         }
-        public string GetGarronByNumberSearchData(Ubicacion u , TipoEstadoGarron teg , TipoGarron tg, String numero)
+        public string GetGarronByNumberSearchData(Ubicacion u , TipoEstadoGarron teg , TipoGarron tg, string numero, string listIdGarronExcluir)
         {
             string consulta = "select  concat(' ',g.numero,'/',g.mes, '- Peso: ',g.peso,' kg. - Ubicacion: ', u.descripcion, '- Estado: ', ge.descripcion, ' - Tipo: ' , gt.descripcion,' - ID: ',g.id) as text " +
             "from garron g inner join productoubicacion pu on pu.id_Garron = g.id " +
@@ -975,6 +973,10 @@ namespace AppLaMejor.datamanager
             if (numero!=null)
             {
                 consulta += " and g.numero like '%" + numero + "%' ";
+            }
+            if (listIdGarronExcluir != null)
+            {
+                consulta+= " and g.id not in ("+ listIdGarronExcluir +") ";
             }
             return consulta;
         }       
@@ -1464,8 +1466,7 @@ namespace AppLaMejor.datamanager
             " p.descripcion_breve AS DescripcionBreve," +
             " cast(p.id_producto_tipo AS CHAR (50)) AS TipoProducto," +
             " p.precio as Precio," +
-            " p.cantidad AS Cantidad, " +
-            " p.descripcion_larga AS DescripcionLarga " +
+            " p.cantidad AS Cantidad " +
             " FROM productoubicacion pu inner join producto p on p.id = pu.id_producto where pu.id_ubicacion = '" + idUbicacion.ToString() + "' and pu.fecha_egreso is null;";
             
         }

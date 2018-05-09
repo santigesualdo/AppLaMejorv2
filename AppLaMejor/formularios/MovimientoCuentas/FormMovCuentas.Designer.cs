@@ -276,11 +276,11 @@ namespace AppLaMejor.formularios
             // tsslMensaje
             // 
             this.tsslMensaje.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.tsslMensaje.Font = new System.Drawing.Font("Lucida Sans", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tsslMensaje.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tsslMensaje.ImageTransparentColor = System.Drawing.Color.Green;
             this.tsslMensaje.Margin = new System.Windows.Forms.Padding(20, 0, 0, 0);
             this.tsslMensaje.Name = "tsslMensaje";
-            this.tsslMensaje.Size = new System.Drawing.Size(85, 50);
+            this.tsslMensaje.Size = new System.Drawing.Size(83, 50);
             this.tsslMensaje.Text = "Mensajero";
             // 
             // bAceptar
@@ -530,7 +530,7 @@ namespace AppLaMejor.formularios
             this.formTittleText.Size = new System.Drawing.Size(1017, 50);
             this.formTittleText.TabIndex = 0;
             this.formTittleText.Tag = "title bold inverted";
-            this.formTittleText.Text = "Movimiento de cuentas";
+            this.formTittleText.Text = "Movimiento de Cuentas de Clientes";
             this.formTittleText.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // FormMovCuentas

@@ -162,7 +162,7 @@ namespace AppLaMejor.formularios.Compras
             {
                 string text = ((TextBox)sender).Text;
                 lastProdSelected = FuncionesProductos.GetProductoByPlu(text);
-                labelProdSelec.Text = lastProdSelected.DescripcionLarga;
+                labelProdSelec.Text = lastProdSelected.DescripcionBreve;
                 textBoxDescrip.Text = string.Empty;
             }
         }
@@ -173,7 +173,7 @@ namespace AppLaMejor.formularios.Compras
             {
                 string text = ((TextBox)sender).Text;
                 lastProdSelected = FuncionesProductos.GetProductoByDescrip(text);
-                labelProdSelec.Text = lastProdSelected.DescripcionLarga;
+                labelProdSelec.Text = lastProdSelected.DescripcionBreve;
                 textBoxPLU.Text = string.Empty;
             }
         }
@@ -310,7 +310,7 @@ namespace AppLaMejor.formularios.Compras
 
             listProducto.Add(producto);
 
-            currentCompraDetalleProducto.Rows.Add(producto.DescripcionLarga, "$ " + textBoxMonto.Text, textBoxPeso.Text + " kg.", textBoxPesoEntregado.Text + " kg.");
+            currentCompraDetalleProducto.Rows.Add(producto.DescripcionBreve, "$ " + textBoxMonto.Text, textBoxPeso.Text + " kg.", textBoxPesoEntregado.Text + " kg.");
 
             currentMontoCompra += producto.Precio;
 

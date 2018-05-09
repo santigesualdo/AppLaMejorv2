@@ -36,12 +36,9 @@
             this.panel7 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.labelAgregar = new System.Windows.Forms.Label();
-            this.labelPorcentaje = new System.Windows.Forms.Label();
             this.labelNuevoPrecio = new System.Windows.Forms.Label();
             this.textNuevoPrecio = new System.Windows.Forms.TextBox();
             this.radioNuevoPrecio = new System.Windows.Forms.RadioButton();
-            this.textPorcen = new System.Windows.Forms.TextBox();
-            this.radioPorcen = new System.Windows.Forms.RadioButton();
             this.textAumentarActual = new System.Windows.Forms.TextBox();
             this.radioAumentarActual = new System.Windows.Forms.RadioButton();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -170,12 +167,9 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.labelAgregar);
-            this.groupBox1.Controls.Add(this.labelPorcentaje);
             this.groupBox1.Controls.Add(this.labelNuevoPrecio);
             this.groupBox1.Controls.Add(this.textNuevoPrecio);
             this.groupBox1.Controls.Add(this.radioNuevoPrecio);
-            this.groupBox1.Controls.Add(this.textPorcen);
-            this.groupBox1.Controls.Add(this.radioPorcen);
             this.groupBox1.Controls.Add(this.textAumentarActual);
             this.groupBox1.Controls.Add(this.radioAumentarActual);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -189,30 +183,24 @@
             // labelAgregar
             // 
             this.labelAgregar.AutoSize = true;
-            this.labelAgregar.Location = new System.Drawing.Point(138, 202);
+            this.labelAgregar.Location = new System.Drawing.Point(137, 156);
             this.labelAgregar.Name = "labelAgregar";
-            this.labelAgregar.Size = new System.Drawing.Size(0, 13);
+            this.labelAgregar.Size = new System.Drawing.Size(58, 13);
             this.labelAgregar.TabIndex = 14;
-            // 
-            // labelPorcentaje
-            // 
-            this.labelPorcentaje.AutoSize = true;
-            this.labelPorcentaje.Location = new System.Drawing.Point(138, 135);
-            this.labelPorcentaje.Name = "labelPorcentaje";
-            this.labelPorcentaje.Size = new System.Drawing.Size(0, 13);
-            this.labelPorcentaje.TabIndex = 13;
+            this.labelAgregar.Text = "asdasdasd";
             // 
             // labelNuevoPrecio
             // 
             this.labelNuevoPrecio.AutoSize = true;
-            this.labelNuevoPrecio.Location = new System.Drawing.Point(138, 61);
+            this.labelNuevoPrecio.Location = new System.Drawing.Point(138, 81);
             this.labelNuevoPrecio.Name = "labelNuevoPrecio";
-            this.labelNuevoPrecio.Size = new System.Drawing.Size(0, 13);
+            this.labelNuevoPrecio.Size = new System.Drawing.Size(75, 13);
             this.labelNuevoPrecio.TabIndex = 12;
+            this.labelNuevoPrecio.Text = "asdasdasdasd";
             // 
             // textNuevoPrecio
             // 
-            this.textNuevoPrecio.Location = new System.Drawing.Point(32, 58);
+            this.textNuevoPrecio.Location = new System.Drawing.Point(32, 78);
             this.textNuevoPrecio.Name = "textNuevoPrecio";
             this.textNuevoPrecio.ReadOnly = true;
             this.textNuevoPrecio.Size = new System.Drawing.Size(100, 20);
@@ -225,7 +213,7 @@
             // 
             this.radioNuevoPrecio.AutoSize = true;
             this.radioNuevoPrecio.BackColor = System.Drawing.Color.Transparent;
-            this.radioNuevoPrecio.Location = new System.Drawing.Point(15, 31);
+            this.radioNuevoPrecio.Location = new System.Drawing.Point(15, 51);
             this.radioNuevoPrecio.Name = "radioNuevoPrecio";
             this.radioNuevoPrecio.Size = new System.Drawing.Size(127, 17);
             this.radioNuevoPrecio.TabIndex = 6;
@@ -233,32 +221,9 @@
             this.radioNuevoPrecio.Text = "ingresar nuevo precio";
             this.radioNuevoPrecio.UseVisualStyleBackColor = false;
             // 
-            // textPorcen
-            // 
-            this.textPorcen.Location = new System.Drawing.Point(34, 132);
-            this.textPorcen.Name = "textPorcen";
-            this.textPorcen.ReadOnly = true;
-            this.textPorcen.Size = new System.Drawing.Size(100, 20);
-            this.textPorcen.TabIndex = 10;
-            this.textPorcen.Enter += new System.EventHandler(this.textPorcen_Enter);
-            this.textPorcen.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxDecimal_KeyPress);
-            this.textPorcen.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBoxPreCalculate_KeyUp);
-            // 
-            // radioPorcen
-            // 
-            this.radioPorcen.AutoSize = true;
-            this.radioPorcen.BackColor = System.Drawing.Color.Transparent;
-            this.radioPorcen.Location = new System.Drawing.Point(15, 109);
-            this.radioPorcen.Name = "radioPorcen";
-            this.radioPorcen.Size = new System.Drawing.Size(119, 17);
-            this.radioPorcen.TabIndex = 8;
-            this.radioPorcen.TabStop = true;
-            this.radioPorcen.Text = "porcentaje aumento";
-            this.radioPorcen.UseVisualStyleBackColor = false;
-            // 
             // textAumentarActual
             // 
-            this.textAumentarActual.Location = new System.Drawing.Point(34, 199);
+            this.textAumentarActual.Location = new System.Drawing.Point(33, 153);
             this.textAumentarActual.Name = "textAumentarActual";
             this.textAumentarActual.ReadOnly = true;
             this.textAumentarActual.Size = new System.Drawing.Size(100, 20);
@@ -271,7 +236,7 @@
             // 
             this.radioAumentarActual.AutoSize = true;
             this.radioAumentarActual.BackColor = System.Drawing.Color.Transparent;
-            this.radioAumentarActual.Location = new System.Drawing.Point(16, 174);
+            this.radioAumentarActual.Location = new System.Drawing.Point(15, 128);
             this.radioAumentarActual.Name = "radioAumentarActual";
             this.radioAumentarActual.Size = new System.Drawing.Size(101, 17);
             this.radioAumentarActual.TabIndex = 9;
@@ -556,11 +521,11 @@
             // tsslMensaje
             // 
             this.tsslMensaje.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.tsslMensaje.Font = new System.Drawing.Font("Lucida Sans", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tsslMensaje.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tsslMensaje.ImageTransparentColor = System.Drawing.Color.Green;
             this.tsslMensaje.Margin = new System.Windows.Forms.Padding(20, 0, 0, 0);
             this.tsslMensaje.Name = "tsslMensaje";
-            this.tsslMensaje.Size = new System.Drawing.Size(85, 50);
+            this.tsslMensaje.Size = new System.Drawing.Size(83, 50);
             this.tsslMensaje.Text = "Mensajero";
             // 
             // topPanel
@@ -577,7 +542,7 @@
             // 
             this.formTittleText.BackColor = System.Drawing.Color.Green;
             this.formTittleText.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.formTittleText.Font = new System.Drawing.Font("Source Sans Pro", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.formTittleText.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.formTittleText.Location = new System.Drawing.Point(0, 0);
             this.formTittleText.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
             this.formTittleText.Name = "formTittleText";
@@ -659,12 +624,9 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox textNuevoPrecio;
         private System.Windows.Forms.RadioButton radioNuevoPrecio;
-        private System.Windows.Forms.TextBox textPorcen;
-        private System.Windows.Forms.RadioButton radioPorcen;
         private System.Windows.Forms.TextBox textAumentarActual;
         private System.Windows.Forms.RadioButton radioAumentarActual;
         private System.Windows.Forms.Label labelAgregar;
-        private System.Windows.Forms.Label labelPorcentaje;
         private System.Windows.Forms.Label labelNuevoPrecio;
     }
 }

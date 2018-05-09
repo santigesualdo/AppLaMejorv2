@@ -272,10 +272,10 @@ namespace AppLaMejor.formularios.Util
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Lucida Sans", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(9, 5);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(242, 23);
+            this.label2.Size = new System.Drawing.Size(234, 25);
             this.label2.TabIndex = 36;
             this.label2.Tag = "bold big";
             this.label2.Text = "Completar Operación";
@@ -283,10 +283,10 @@ namespace AppLaMejor.formularios.Util
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Lucida Sans", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(10, 61);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(135, 18);
+            this.label1.Size = new System.Drawing.Size(123, 20);
             this.label1.TabIndex = 30;
             this.label1.Tag = "big";
             this.label1.Text = "Tipo Movimiento";
@@ -294,7 +294,7 @@ namespace AppLaMejor.formularios.Util
             // tbImporte
             // 
             this.tbImporte.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tbImporte.Font = new System.Drawing.Font("Lucida Sans", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbImporte.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbImporte.Location = new System.Drawing.Point(51, 166);
             this.tbImporte.Name = "tbImporte";
             this.tbImporte.Size = new System.Drawing.Size(178, 26);
@@ -304,10 +304,10 @@ namespace AppLaMejor.formularios.Util
             // lblImporte
             // 
             this.lblImporte.AutoSize = true;
-            this.lblImporte.Font = new System.Drawing.Font("Lucida Sans", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblImporte.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblImporte.Location = new System.Drawing.Point(10, 134);
             this.lblImporte.Name = "lblImporte";
-            this.lblImporte.Size = new System.Drawing.Size(65, 18);
+            this.lblImporte.Size = new System.Drawing.Size(64, 20);
             this.lblImporte.TabIndex = 10;
             this.lblImporte.Text = "Importe";
             // 
@@ -400,10 +400,10 @@ namespace AppLaMejor.formularios.Util
             // 
             this.txtDisplayPageNo.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.txtDisplayPageNo.AutoSize = true;
-            this.txtDisplayPageNo.Font = new System.Drawing.Font("Lucida Sans", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDisplayPageNo.Location = new System.Drawing.Point(103, 12);
+            this.txtDisplayPageNo.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDisplayPageNo.Location = new System.Drawing.Point(102, 11);
             this.txtDisplayPageNo.Name = "txtDisplayPageNo";
-            this.txtDisplayPageNo.Size = new System.Drawing.Size(17, 23);
+            this.txtDisplayPageNo.Size = new System.Drawing.Size(20, 25);
             this.txtDisplayPageNo.TabIndex = 29;
             this.txtDisplayPageNo.Text = "-";
             this.txtDisplayPageNo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -411,7 +411,7 @@ namespace AppLaMejor.formularios.Util
             // lblCantidad
             // 
             this.lblCantidad.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblCantidad.Font = new System.Drawing.Font("Lucida Sans", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCantidad.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCantidad.Location = new System.Drawing.Point(10, 2);
             this.lblCantidad.Name = "lblCantidad";
             this.lblCantidad.Size = new System.Drawing.Size(203, 18);
@@ -536,20 +536,20 @@ namespace AppLaMejor.formularios.Util
             // 
             this.lblDebe.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblDebe.AutoSize = true;
-            this.lblDebe.Font = new System.Drawing.Font("Lucida Sans", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDebe.Location = new System.Drawing.Point(334, 7);
+            this.lblDebe.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDebe.Location = new System.Drawing.Point(334, 6);
             this.lblDebe.Name = "lblDebe";
-            this.lblDebe.Size = new System.Drawing.Size(0, 18);
+            this.lblDebe.Size = new System.Drawing.Size(0, 20);
             this.lblDebe.TabIndex = 30;
             // 
             // lblTituloDebe
             // 
             this.lblTituloDebe.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblTituloDebe.AutoSize = true;
-            this.lblTituloDebe.Font = new System.Drawing.Font("Lucida Sans", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTituloDebe.Location = new System.Drawing.Point(79, 7);
+            this.lblTituloDebe.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTituloDebe.Location = new System.Drawing.Point(79, 6);
             this.lblTituloDebe.Name = "lblTituloDebe";
-            this.lblTituloDebe.Size = new System.Drawing.Size(53, 18);
+            this.lblTituloDebe.Size = new System.Drawing.Size(52, 20);
             this.lblTituloDebe.TabIndex = 29;
             this.lblTituloDebe.Text = "Debe:";
             // 
@@ -566,20 +566,20 @@ namespace AppLaMejor.formularios.Util
             // 
             this.lblPago.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblPago.AutoSize = true;
-            this.lblPago.Font = new System.Drawing.Font("Lucida Sans", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPago.Location = new System.Drawing.Point(334, 40);
+            this.lblPago.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPago.Location = new System.Drawing.Point(334, 39);
             this.lblPago.Name = "lblPago";
-            this.lblPago.Size = new System.Drawing.Size(0, 18);
+            this.lblPago.Size = new System.Drawing.Size(0, 20);
             this.lblPago.TabIndex = 33;
             // 
             // lblTituloPago
             // 
             this.lblTituloPago.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblTituloPago.AutoSize = true;
-            this.lblTituloPago.Font = new System.Drawing.Font("Lucida Sans", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTituloPago.Location = new System.Drawing.Point(80, 40);
+            this.lblTituloPago.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTituloPago.Location = new System.Drawing.Point(80, 39);
             this.lblTituloPago.Name = "lblTituloPago";
-            this.lblTituloPago.Size = new System.Drawing.Size(51, 18);
+            this.lblTituloPago.Size = new System.Drawing.Size(50, 20);
             this.lblTituloPago.TabIndex = 32;
             this.lblTituloPago.Text = "Pagó:";
             // 
@@ -596,10 +596,10 @@ namespace AppLaMejor.formularios.Util
             // 
             this.lblSaldo.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblSaldo.AutoSize = true;
-            this.lblSaldo.Font = new System.Drawing.Font("Lucida Sans", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSaldo.Location = new System.Drawing.Point(297, 78);
+            this.lblSaldo.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSaldo.Location = new System.Drawing.Point(295, 77);
             this.lblSaldo.Name = "lblSaldo";
-            this.lblSaldo.Size = new System.Drawing.Size(74, 23);
+            this.lblSaldo.Size = new System.Drawing.Size(78, 25);
             this.lblSaldo.TabIndex = 36;
             this.lblSaldo.Tag = "bold big";
             this.lblSaldo.Text = "$ 0.00";
@@ -608,10 +608,10 @@ namespace AppLaMejor.formularios.Util
             // 
             this.lblTituloSaldo.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblTituloSaldo.AutoSize = true;
-            this.lblTituloSaldo.Font = new System.Drawing.Font("Lucida Sans", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTituloSaldo.Location = new System.Drawing.Point(68, 78);
+            this.lblTituloSaldo.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTituloSaldo.Location = new System.Drawing.Point(66, 77);
             this.lblTituloSaldo.Name = "lblTituloSaldo";
-            this.lblTituloSaldo.Size = new System.Drawing.Size(75, 23);
+            this.lblTituloSaldo.Size = new System.Drawing.Size(79, 25);
             this.lblTituloSaldo.TabIndex = 35;
             this.lblTituloSaldo.Text = "Saldo:";
             // 
@@ -666,7 +666,7 @@ namespace AppLaMejor.formularios.Util
             // 
             // dtpHasta
             // 
-            this.dtpHasta.CustomFormat = "yyyy/MM/dd";
+            this.dtpHasta.CustomFormat = "dd/MM/yyyy";
             this.dtpHasta.Dock = System.Windows.Forms.DockStyle.Left;
             this.dtpHasta.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpHasta.Location = new System.Drawing.Point(307, 10);
@@ -677,7 +677,7 @@ namespace AppLaMejor.formularios.Util
             // 
             // dtpDesde
             // 
-            this.dtpDesde.CustomFormat = "yyyy/MM/dd";
+            this.dtpDesde.CustomFormat = "dd/MM/yyyy";
             this.dtpDesde.Dock = System.Windows.Forms.DockStyle.Right;
             this.dtpDesde.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpDesde.Location = new System.Drawing.Point(104, 10);
@@ -790,11 +790,11 @@ namespace AppLaMejor.formularios.Util
             // mensajeroFormEntityInput
             // 
             this.mensajeroFormEntityInput.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.mensajeroFormEntityInput.Font = new System.Drawing.Font("Lucida Sans", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.mensajeroFormEntityInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mensajeroFormEntityInput.ImageTransparentColor = System.Drawing.Color.Green;
             this.mensajeroFormEntityInput.Margin = new System.Windows.Forms.Padding(20, 0, 0, 0);
             this.mensajeroFormEntityInput.Name = "mensajeroFormEntityInput";
-            this.mensajeroFormEntityInput.Size = new System.Drawing.Size(85, 45);
+            this.mensajeroFormEntityInput.Size = new System.Drawing.Size(83, 45);
             this.mensajeroFormEntityInput.Text = "Mensajero";
             // 
             // topPanel

@@ -471,16 +471,16 @@ namespace AppLaMejor.formularios.Util
             if (tipo.Equals("Cliente"))
             {
                 // Trae clientes con cuenta 
-                consulta = QueryManager.Instance().GetClientesWithCuenta();
-                table = QueryManager.Instance().GetTableResults(ConnecionBD.Instance().Connection, consulta);
+                //consulta = QueryManager.Instance().GetClientesWithCuenta();
+                //table = QueryManager.Instance().GetTableResults(ConnecionBD.Instance().Connection, consulta);
 
                 //lleno movCuentas
                 tableMovCuentas = FuncionesMovCuentas.fillMovCuentas();
             }
             else if (tipo.Equals("Proveedor"))
             {
-                consulta = QueryManager.Instance().GetProveedoresWithCuenta();
-                table = QueryManager.Instance().GetTableResults(ConnecionBD.Instance().Connection, consulta);
+                //consulta = QueryManager.Instance().GetProveedoresWithCuenta();
+                //table = QueryManager.Instance().GetTableResults(ConnecionBD.Instance().Connection, consulta);
 
                 //lleno movCuentas
                 tableMovCuentas = FuncionesMovCuentas.fillMovCuentasProveedores();

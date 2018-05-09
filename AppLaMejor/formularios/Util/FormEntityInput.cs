@@ -87,6 +87,7 @@ namespace AppLaMejor.formularios.Util
                     {
                         if (property.Name.Equals("FechaBaja") ||
                             property.Name.Equals("idUsuario") ||
+                            property.Name.Equals("CantidadEntregada") || // HARDCODEOFEO
                             property.Name.Equals("Id"))
                             continue;
 
@@ -177,8 +178,38 @@ namespace AppLaMejor.formularios.Util
         private void TypeString(PropertyInfo property)
         {
             TextBox textField = TextBoxCampoString(property.Name);
+
+            if (property.Name.Equals("CodigoBarra"))
+            {
+                switch (currentModo)
+                {
+                    case MODO_INSERTAR:
+                        textField.MaxLength = 5;
+                        textField.Leave += TextFieldCodigoBarra_Leave;
+                        break;
+                }
+
+            }
             controlsTableLayoutPanel.Controls.Add(GetCampoTitulo(property.Name), 0, controlsTableLayoutPanel.RowCount+=1);
             controlsTableLayoutPanel.Controls.Add(textField, 1, controlsTableLayoutPanel.RowCount);
+        }
+
+        private void TextFieldCodigoBarra_Leave(object sender, EventArgs e)
+        {
+            
+            TextBox text = (TextBox)sender;
+            if (text.Text.Length<5)
+            {
+                MyTextTimer.TStartFade("El valor minimo de CodigoBarra es 5 numeros.", this.statusStripFormEntityInput, this.mensajeroFormEntityInput, MyTextTimer.TIME_LONG);
+                text.Focus();
+            }else
+            {
+                if (FuncionesProductos.CheckPluExists(text.Text))
+                {
+                    MyTextTimer.TStartFade("El CodigoBarra ingresado ya existe.", this.statusStripFormEntityInput, this.mensajeroFormEntityInput, MyTextTimer.TIME_LONG);
+                    text.Focus();
+                }
+            }
         }
 
         private void TypeDecimal(PropertyInfo property)
@@ -222,24 +253,28 @@ namespace AppLaMejor.formularios.Util
         private void TypeNullableDateTime(PropertyInfo property)
         {
             controlsTableLayoutPanel.Controls.Add(GetCampoTitulo(property.Name), 0, controlsTableLayoutPanel.RowCount += 1);
-
-            Binding binding = new Binding("Text", _reflection, property.Name);
-            var textBox = new TextBox { Dock = DockStyle.Fill, AutoSize = true };
-            textBox.DataBindings.Add(binding);
-
-            if (textBox.Text.Equals(""))
+            switch (currentModo)
             {
-                TextBox dtp = new TextBox { Dock = DockStyle.Fill, AutoSize = true };
-                dtp.ReadOnly = true;
-                controlsTableLayoutPanel.Controls.Add(dtp, 1, controlsTableLayoutPanel.RowCount);
+                case FormEntityInput.MODO_INSERTAR:
+
+                    DateTimePicker dtp = new DateTimePicker { Dock = DockStyle.Fill, AutoSize = true };
+                    Binding dateBinding = new Binding("Value", _reflection, property.Name);
+                    dtp.DataBindings.Add(dateBinding);
+                    controlsTableLayoutPanel.Controls.Add(dtp, 1, controlsTableLayoutPanel.RowCount);
+                    break;
+                case FormEntityInput.MODO_VER:
+                    Binding binding = new Binding("Text", _reflection, property.Name);
+                    var textBox = new TextBox { Dock = DockStyle.Fill, AutoSize = true };
+                    textBox.DataBindings.Add(binding);
+                    if (textBox.Text.Equals(""))
+                    {
+                        TextBox tdtp = new TextBox { Dock = DockStyle.Fill, AutoSize = true };
+                        tdtp.ReadOnly = true;
+                        controlsTableLayoutPanel.Controls.Add(tdtp, 1, controlsTableLayoutPanel.RowCount);
+                    }
+                    break;
             }
-            else
-            {
-                DateTimePicker dtp = new DateTimePicker { Dock = DockStyle.Fill, AutoSize = true };
-                Binding dateBinding = new Binding("Value", _reflection, property.Name);
-                dtp.DataBindings.Add(dateBinding);
-                controlsTableLayoutPanel.Controls.Add(dtp, 1, controlsTableLayoutPanel.RowCount);
-            }
+
         }
 
         private void TypeTipoCliente(PropertyInfo property)

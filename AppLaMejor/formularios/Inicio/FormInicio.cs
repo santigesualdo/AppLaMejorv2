@@ -96,7 +96,7 @@ namespace AppLaMejor.formularios
                 case "Productos": boton.Click += new System.EventHandler(IniciarProductos); break;
                 case "Stock": boton.Click += new System.EventHandler(IniciarStock); break;
                 case "Caja": boton.Click += new System.EventHandler(IniciarCaja); break;
-                case "Movimiento Cuentas": boton.Click += new System.EventHandler(IniciarMovimientoCuentas); break;
+                case "Movimiento Cuentas Clientes": boton.Click += new System.EventHandler(IniciarMovimientoCuentas); break;
                 case "Movimiento Cuentas Proveedores": boton.Click += new System.EventHandler(IniciarMovimientoCuentasProveedores); break;
                 case "Ventas Caja": boton.Click += new System.EventHandler(IniciarVentasCaja); break;
                 case "Carga Nueva Compra": boton.Click += new System.EventHandler(IniciarCompras); break;

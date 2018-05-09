@@ -13,16 +13,19 @@ namespace AppLaMejor.entidades
         [DataNames("descripcion")]
         public string Descripcion { get; set; }
 
-        private Nullable<DateTime> fechaUltimaActualizacion;
-
         [Required(ErrorMessage = "Banco es informacion obligatoria. ")]
         [DataNames("banco")]
         public Banco Banco { get; set; }
-        
+
+
+        private Nullable<DateTime> fechaUltimaActualizacion;
         [DataNames("fecha_updated")] 
         public Nullable<DateTime> FechaUltimaActualizacion
         {
-            get { return fechaUltimaActualizacion.HasValue ? (DateTime?)fechaUltimaActualizacion : null; }
+            get
+            {
+                return fechaUltimaActualizacion.HasValue ? (DateTime?)fechaUltimaActualizacion : null;
+            }
             set { fechaUltimaActualizacion = value; }
         }
     }

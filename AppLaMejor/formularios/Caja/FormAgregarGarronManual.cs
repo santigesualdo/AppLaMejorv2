@@ -17,9 +17,12 @@ namespace AppLaMejor.formularios.Caja
     {
         public Garron selectedGarron;
         public decimal precioFinal;
+        List<VentaDetalle> listVentaDetalle;
 
-        public FormAgregarGarronManual()
+
+        public FormAgregarGarronManual(List<VentaDetalle> list)
         {
+            listVentaDetalle = list;
             Size actualSize = this.Size;
             this.Size = new Size(actualSize.Width, Screen.PrimaryScreen.Bounds.Height);
             InitializeComponent();
@@ -56,7 +59,7 @@ namespace AppLaMejor.formularios.Caja
 
         private void btManual_Click(object sender, EventArgs e)
         {
-            FormDeposte frmDeposte = new FormDeposte(FormDeposte.MODO_SELECCIONAR_GARRON);
+            FormDeposte frmDeposte = new FormDeposte(FormDeposte.MODO_SELECCIONAR_GARRON, listVentaDetalle);
             frmDeposte.ShowDialog();
 
             if (frmDeposte.DialogResult.Equals(DialogResult.OK))

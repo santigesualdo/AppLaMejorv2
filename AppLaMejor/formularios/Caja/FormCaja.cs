@@ -144,7 +144,7 @@ namespace AppLaMejor.formularios
             // Agregamos a la lista y mostramos en grid
             listDetalleVentas.Add(vd);
 
-            currentVentasDetalle.Rows.Add(vd.Producto.DescripcionLarga, "$ " + vd.Monto , vd.Peso.ToString() + " kg.");
+            currentVentasDetalle.Rows.Add(vd.Producto.DescripcionBreve, "$ " + vd.Monto , vd.Peso.ToString() + " kg.");
 
             currentMontoTotal += vd.Monto;
 

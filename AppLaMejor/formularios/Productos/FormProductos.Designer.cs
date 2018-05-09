@@ -30,17 +30,16 @@ namespace AppLaMejor.formularios
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.mainPanel = new System.Windows.Forms.Panel();
             this.contentPanel = new System.Windows.Forms.Panel();
             this.groupDataGrid = new System.Windows.Forms.GroupBox();
             this.dataGridProductos = new System.Windows.Forms.DataGridView();
             this.navigationPanel = new System.Windows.Forms.Panel();
             this.navTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.bUbicacion = new System.Windows.Forms.Button();
             this.bHistoricoPrecios = new System.Windows.Forms.Button();
             this.bVer = new System.Windows.Forms.Button();
             this.bEliminar = new System.Windows.Forms.Button();
@@ -127,45 +126,45 @@ namespace AppLaMejor.formularios
             // 
             // dataGridProductos
             // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.DimGray;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Green;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
-            this.dataGridProductos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.DimGray;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.Green;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.Black;
+            this.dataGridProductos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle9;
             this.dataGridProductos.BackgroundColor = System.Drawing.Color.Black;
             this.dataGridProductos.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.Green;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridProductos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.Green;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridProductos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
             this.dataGridProductos.ColumnHeadersHeight = 40;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.MediumSeaGreen;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.DarkSlateGray;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridProductos.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.Color.MediumSeaGreen;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.DarkSlateGray;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridProductos.DefaultCellStyle = dataGridViewCellStyle11;
             this.dataGridProductos.EnableHeadersVisualStyles = false;
             this.dataGridProductos.GridColor = System.Drawing.Color.Green;
             this.dataGridProductos.Location = new System.Drawing.Point(20, 43);
             this.dataGridProductos.Name = "dataGridProductos";
             this.dataGridProductos.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.MediumSeaGreen;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.DarkSlateGray;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridProductos.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.MediumSeaGreen;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.DarkSlateGray;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridProductos.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
             this.dataGridProductos.RowHeadersVisible = false;
             this.dataGridProductos.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.dataGridProductos.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
@@ -198,14 +197,13 @@ namespace AppLaMejor.formularios
             this.navTableLayoutPanel.AllowDrop = true;
             this.navTableLayoutPanel.AutoSize = true;
             this.navTableLayoutPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.navTableLayoutPanel.ColumnCount = 6;
-            this.navTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.navTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.navTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.navTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.navTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.navTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.navTableLayoutPanel.Controls.Add(this.bUbicacion, 5, 0);
+            this.navTableLayoutPanel.ColumnCount = 5;
+            this.navTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.navTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.navTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.navTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            this.navTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.navTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.navTableLayoutPanel.Controls.Add(this.bHistoricoPrecios, 4, 0);
             this.navTableLayoutPanel.Controls.Add(this.bVer, 3, 0);
             this.navTableLayoutPanel.Controls.Add(this.bEliminar, 2, 0);
@@ -220,25 +218,6 @@ namespace AppLaMejor.formularios
             this.navTableLayoutPanel.Size = new System.Drawing.Size(977, 60);
             this.navTableLayoutPanel.TabIndex = 7;
             // 
-            // bUbicacion
-            // 
-            this.bUbicacion.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.bUbicacion.FlatAppearance.BorderColor = System.Drawing.Color.Green;
-            this.bUbicacion.FlatAppearance.BorderSize = 2;
-            this.bUbicacion.FlatAppearance.MouseDownBackColor = System.Drawing.Color.MediumSeaGreen;
-            this.bUbicacion.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkSlateGray;
-            this.bUbicacion.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bUbicacion.Image = global::AppLaMejor.Properties.Resources.lupa_icon_30x30_green;
-            this.bUbicacion.Location = new System.Drawing.Point(813, 3);
-            this.bUbicacion.Name = "bUbicacion";
-            this.bUbicacion.Size = new System.Drawing.Size(161, 54);
-            this.bUbicacion.TabIndex = 15;
-            this.bUbicacion.Text = "Ubicacion";
-            this.bUbicacion.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.bUbicacion.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.bUbicacion.UseVisualStyleBackColor = false;
-            this.bUbicacion.Click += new System.EventHandler(this.bUbicacion_Click);
-            // 
             // bHistoricoPrecios
             // 
             this.bHistoricoPrecios.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -248,9 +227,9 @@ namespace AppLaMejor.formularios
             this.bHistoricoPrecios.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkSlateGray;
             this.bHistoricoPrecios.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bHistoricoPrecios.Image = global::AppLaMejor.Properties.Resources.lupa_icon_30x30_green;
-            this.bHistoricoPrecios.Location = new System.Drawing.Point(651, 3);
+            this.bHistoricoPrecios.Location = new System.Drawing.Point(783, 3);
             this.bHistoricoPrecios.Name = "bHistoricoPrecios";
-            this.bHistoricoPrecios.Size = new System.Drawing.Size(156, 54);
+            this.bHistoricoPrecios.Size = new System.Drawing.Size(191, 54);
             this.bHistoricoPrecios.TabIndex = 14;
             this.bHistoricoPrecios.Text = "Historico Precios";
             this.bHistoricoPrecios.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -267,9 +246,9 @@ namespace AppLaMejor.formularios
             this.bVer.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkSlateGray;
             this.bVer.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bVer.Image = global::AppLaMejor.Properties.Resources.lupa_icon_30x30_green;
-            this.bVer.Location = new System.Drawing.Point(489, 3);
+            this.bVer.Location = new System.Drawing.Point(637, 3);
             this.bVer.Name = "bVer";
-            this.bVer.Size = new System.Drawing.Size(156, 54);
+            this.bVer.Size = new System.Drawing.Size(140, 54);
             this.bVer.TabIndex = 13;
             this.bVer.Text = "Ver";
             this.bVer.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -286,9 +265,9 @@ namespace AppLaMejor.formularios
             this.bEliminar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkSlateGray;
             this.bEliminar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bEliminar.Image = global::AppLaMejor.Properties.Resources.x_icon_30x30_green;
-            this.bEliminar.Location = new System.Drawing.Point(327, 3);
+            this.bEliminar.Location = new System.Drawing.Point(442, 3);
             this.bEliminar.Name = "bEliminar";
-            this.bEliminar.Size = new System.Drawing.Size(156, 54);
+            this.bEliminar.Size = new System.Drawing.Size(189, 54);
             this.bEliminar.TabIndex = 12;
             this.bEliminar.Text = "Eliminar";
             this.bEliminar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -305,15 +284,14 @@ namespace AppLaMejor.formularios
             this.bEditar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkSlateGray;
             this.bEditar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bEditar.Image = global::AppLaMejor.Properties.Resources.lapiz_icon_30x30_green;
-            this.bEditar.Location = new System.Drawing.Point(165, 3);
+            this.bEditar.Location = new System.Drawing.Point(247, 3);
             this.bEditar.Name = "bEditar";
-            this.bEditar.Size = new System.Drawing.Size(156, 54);
+            this.bEditar.Size = new System.Drawing.Size(189, 54);
             this.bEditar.TabIndex = 11;
             this.bEditar.Text = "Editar";
             this.bEditar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.bEditar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.bEditar.UseVisualStyleBackColor = false;
-            this.bEditar.Click += new System.EventHandler(this.bEditar_Click);
             // 
             // bAgregar
             // 
@@ -326,7 +304,7 @@ namespace AppLaMejor.formularios
             this.bAgregar.Image = global::AppLaMejor.Properties.Resources.add_icon_30x30_green;
             this.bAgregar.Location = new System.Drawing.Point(3, 3);
             this.bAgregar.Name = "bAgregar";
-            this.bAgregar.Size = new System.Drawing.Size(156, 54);
+            this.bAgregar.Size = new System.Drawing.Size(238, 54);
             this.bAgregar.TabIndex = 10;
             this.bAgregar.Text = "Agregar Producto";
             this.bAgregar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -362,11 +340,11 @@ namespace AppLaMejor.formularios
             // tsslMensaje
             // 
             this.tsslMensaje.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.tsslMensaje.Font = new System.Drawing.Font("Lucida Sans", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tsslMensaje.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tsslMensaje.ImageTransparentColor = System.Drawing.Color.Green;
             this.tsslMensaje.Margin = new System.Windows.Forms.Padding(20, 0, 0, 0);
             this.tsslMensaje.Name = "tsslMensaje";
-            this.tsslMensaje.Size = new System.Drawing.Size(85, 50);
+            this.tsslMensaje.Size = new System.Drawing.Size(83, 50);
             this.tsslMensaje.Text = "Mensajero";
             // 
             // bAceptar
@@ -716,6 +694,5 @@ namespace AppLaMejor.formularios
         private System.Windows.Forms.TextBox filter2TextBox;
         private System.Windows.Forms.Button bHistoricoPrecios;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button bUbicacion;
     }
 }
