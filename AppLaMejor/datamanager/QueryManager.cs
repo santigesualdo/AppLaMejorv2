@@ -104,13 +104,18 @@ namespace AppLaMejor.datamanager
             }
         }
 
+        public string GetTipoProductoKiosco()
+        {
+            return "select * from productotipo where descripcion like '%kiosco%'";
+        }
+
         /* Recibe conexion y consulta y ejecuta update. Retorna true o false, exito o error */
         public bool ExecuteSQL(MySqlConnection conn, string query)
         {
             MySqlCommand sqlCommand = new MySqlCommand(query, conn);
             try
             {                
-                if (conn.State == ConnectionState.Closed)
+                if (conn.State.Equals(ConnectionState.Closed))
                     conn.Open();
                 sqlCommand.ExecuteNonQuery();
                 conn.Close();
@@ -855,6 +860,16 @@ namespace AppLaMejor.datamanager
             " producto p " +
             " where p.fecha_baja is null and p.id_codigo_barra is not null ";
         }
+        public string GetProductosSearchDataKiosco()
+        {
+            return " SELECT" +
+            " p.id," +
+            " p.descripcion_breve " +
+            " FROM " +
+            " producto p " +
+            " where p.fecha_baja is null and p.id_producto_tipo = 4 ";
+        }
+
         public string GetProductoByPLU(string plu)
         {
             return GetProductoUbicacionData() +
@@ -1393,7 +1408,7 @@ namespace AppLaMejor.datamanager
         {
             if (provSelec == null)
             {
-                return " INSERT INTO compra (id_proveedor, id_operacion, monto_total, monto_pagado, fecha, usuario, fecha_baja) VALUES (NULL, NULL, '" + currentMontoCompra + "','" + currentMontoPagado + "', NOW(), '" + VariablesGlobales.userIdLogueado.ToString() + "', NULL); ";
+                return " INSERT INTO compra (id_proveedor, id_operacion, monto_total, monto_pagado, fecha, usuario, fecha_baja) VALUES (NULL, '" + newOperacion.Id + "', '" + currentMontoCompra + "','" + currentMontoPagado + "', NOW(), '" + VariablesGlobales.userIdLogueado.ToString() + "', NULL); ";
             }
             else
             {

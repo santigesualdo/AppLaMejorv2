@@ -38,7 +38,6 @@
             this.tableProducto = new System.Windows.Forms.TableLayoutPanel();
             this.gridProductos = new System.Windows.Forms.DataGridView();
             this.bAgregarProducto = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.panelSelecProducto = new System.Windows.Forms.Panel();
             this.tableSelecProducto = new System.Windows.Forms.TableLayoutPanel();
             this.tableBuscarProducto = new System.Windows.Forms.TableLayoutPanel();
@@ -91,6 +90,8 @@
             this.bCancelar = new System.Windows.Forms.Button();
             this.topPanel = new System.Windows.Forms.Panel();
             this.formTittleText = new System.Windows.Forms.Label();
+            this.panelTitulo = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.mainPanel.SuspendLayout();
             this.contentPanel.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -119,6 +120,7 @@
             this.bottomPanel.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.topPanel.SuspendLayout();
+            this.panelTitulo.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainPanel
@@ -222,16 +224,16 @@
             this.tableProducto.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableProducto.Controls.Add(this.gridProductos, 0, 3);
             this.tableProducto.Controls.Add(this.bAgregarProducto, 0, 2);
-            this.tableProducto.Controls.Add(this.label1, 0, 0);
             this.tableProducto.Controls.Add(this.panelSelecProducto, 0, 1);
+            this.tableProducto.Controls.Add(this.panelTitulo, 0, 0);
             this.tableProducto.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableProducto.Location = new System.Drawing.Point(2, 2);
             this.tableProducto.Name = "tableProducto";
             this.tableProducto.RowCount = 4;
-            this.tableProducto.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableProducto.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 35F));
+            this.tableProducto.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8F));
+            this.tableProducto.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 42F));
             this.tableProducto.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.tableProducto.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.tableProducto.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 35F));
             this.tableProducto.Size = new System.Drawing.Size(661, 400);
             this.tableProducto.TabIndex = 1;
             // 
@@ -239,9 +241,9 @@
             // 
             this.gridProductos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridProductos.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridProductos.Location = new System.Drawing.Point(3, 243);
+            this.gridProductos.Location = new System.Drawing.Point(3, 263);
             this.gridProductos.Name = "gridProductos";
-            this.gridProductos.Size = new System.Drawing.Size(655, 154);
+            this.gridProductos.Size = new System.Drawing.Size(655, 134);
             this.gridProductos.TabIndex = 14;
             this.gridProductos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridProductos_CellClick);
             // 
@@ -255,7 +257,7 @@
             this.bAgregarProducto.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkSlateGray;
             this.bAgregarProducto.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bAgregarProducto.Image = global::AppLaMejor.Properties.Resources.add_icon_30x30_green;
-            this.bAgregarProducto.Location = new System.Drawing.Point(230, 185);
+            this.bAgregarProducto.Location = new System.Drawing.Point(230, 205);
             this.bAgregarProducto.MaximumSize = new System.Drawing.Size(320, 75);
             this.bAgregarProducto.Name = "bAgregarProducto";
             this.bAgregarProducto.Size = new System.Drawing.Size(200, 50);
@@ -266,25 +268,14 @@
             this.bAgregarProducto.UseVisualStyleBackColor = false;
             this.bAgregarProducto.Click += new System.EventHandler(this.bAgregarProducto_Click);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(5, 5);
-            this.label1.Margin = new System.Windows.Forms.Padding(5);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(90, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Tag = "big bold inverted";
-            this.label1.Text = "Agregar Producto";
-            // 
             // panelSelecProducto
             // 
             this.panelSelecProducto.Controls.Add(this.tableSelecProducto);
             this.panelSelecProducto.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelSelecProducto.Location = new System.Drawing.Point(3, 43);
+            this.panelSelecProducto.Location = new System.Drawing.Point(3, 35);
             this.panelSelecProducto.Name = "panelSelecProducto";
             this.panelSelecProducto.Padding = new System.Windows.Forms.Padding(2);
-            this.panelSelecProducto.Size = new System.Drawing.Size(655, 134);
+            this.panelSelecProducto.Size = new System.Drawing.Size(655, 162);
             this.panelSelecProducto.TabIndex = 3;
             this.panelSelecProducto.Paint += new System.Windows.Forms.PaintEventHandler(this.panelSelecProducto_Paint);
             // 
@@ -302,22 +293,22 @@
             this.tableSelecProducto.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
             this.tableSelecProducto.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableSelecProducto.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 35F));
-            this.tableSelecProducto.Size = new System.Drawing.Size(651, 130);
+            this.tableSelecProducto.Size = new System.Drawing.Size(651, 158);
             this.tableSelecProducto.TabIndex = 0;
             // 
             // tableBuscarProducto
             // 
-            this.tableBuscarProducto.ColumnCount = 2;
-            this.tableBuscarProducto.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableBuscarProducto.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableBuscarProducto.Controls.Add(this.panel3, 1, 0);
+            this.tableBuscarProducto.ColumnCount = 1;
+            this.tableBuscarProducto.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableBuscarProducto.Controls.Add(this.panel3, 0, 1);
             this.tableBuscarProducto.Controls.Add(this.panel2, 0, 0);
             this.tableBuscarProducto.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableBuscarProducto.Location = new System.Drawing.Point(3, 3);
             this.tableBuscarProducto.Name = "tableBuscarProducto";
-            this.tableBuscarProducto.RowCount = 1;
+            this.tableBuscarProducto.RowCount = 2;
             this.tableBuscarProducto.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableBuscarProducto.Size = new System.Drawing.Size(645, 46);
+            this.tableBuscarProducto.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableBuscarProducto.Size = new System.Drawing.Size(645, 57);
             this.tableBuscarProducto.TabIndex = 0;
             // 
             // panel3
@@ -325,15 +316,15 @@
             this.panel3.Controls.Add(this.textBoxDescrip);
             this.panel3.Controls.Add(this.label2);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(325, 3);
+            this.panel3.Location = new System.Drawing.Point(3, 31);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(317, 40);
+            this.panel3.Size = new System.Drawing.Size(639, 23);
             this.panel3.TabIndex = 1;
             // 
             // textBoxDescrip
             // 
             this.textBoxDescrip.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.textBoxDescrip.Location = new System.Drawing.Point(119, 10);
+            this.textBoxDescrip.Location = new System.Drawing.Point(264, 2);
             this.textBoxDescrip.Name = "textBoxDescrip";
             this.textBoxDescrip.Size = new System.Drawing.Size(194, 20);
             this.textBoxDescrip.TabIndex = 1;
@@ -345,7 +336,7 @@
             // 
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 13);
+            this.label2.Location = new System.Drawing.Point(3, 4);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(117, 13);
             this.label2.TabIndex = 0;
@@ -359,13 +350,13 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(3, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(316, 40);
+            this.panel2.Size = new System.Drawing.Size(639, 22);
             this.panel2.TabIndex = 0;
             // 
             // textBoxPLU
             // 
             this.textBoxPLU.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.textBoxPLU.Location = new System.Drawing.Point(103, 10);
+            this.textBoxPLU.Location = new System.Drawing.Point(264, 1);
             this.textBoxPLU.Name = "textBoxPLU";
             this.textBoxPLU.Size = new System.Drawing.Size(194, 20);
             this.textBoxPLU.TabIndex = 1;
@@ -377,7 +368,7 @@
             // 
             this.lBuscarPorPLU.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lBuscarPorPLU.AutoSize = true;
-            this.lBuscarPorPLU.Location = new System.Drawing.Point(3, 13);
+            this.lBuscarPorPLU.Location = new System.Drawing.Point(3, 4);
             this.lBuscarPorPLU.Name = "lBuscarPorPLU";
             this.lBuscarPorPLU.Size = new System.Drawing.Size(82, 13);
             this.lBuscarPorPLU.TabIndex = 0;
@@ -388,9 +379,9 @@
             // 
             this.panelSeleccionado.Controls.Add(this.labelProdSelec);
             this.panelSeleccionado.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelSeleccionado.Location = new System.Drawing.Point(3, 55);
+            this.panelSeleccionado.Location = new System.Drawing.Point(3, 66);
             this.panelSeleccionado.Name = "panelSeleccionado";
-            this.panelSeleccionado.Size = new System.Drawing.Size(645, 26);
+            this.panelSeleccionado.Size = new System.Drawing.Size(645, 33);
             this.panelSeleccionado.TabIndex = 1;
             // 
             // labelProdSelec
@@ -399,7 +390,7 @@
             this.labelProdSelec.Location = new System.Drawing.Point(0, 0);
             this.labelProdSelec.MaximumSize = new System.Drawing.Size(0, 35);
             this.labelProdSelec.Name = "labelProdSelec";
-            this.labelProdSelec.Size = new System.Drawing.Size(645, 26);
+            this.labelProdSelec.Size = new System.Drawing.Size(645, 33);
             this.labelProdSelec.TabIndex = 1;
             this.labelProdSelec.Tag = "big inverted";
             this.labelProdSelec.Text = "(Producto sin seleccionar)";
@@ -421,14 +412,14 @@
             this.tablePesoMonto.Controls.Add(this.textBoxPeso, 1, 0);
             this.tablePesoMonto.Controls.Add(this.textBoxPesoEntregado, 3, 0);
             this.tablePesoMonto.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tablePesoMonto.Location = new System.Drawing.Point(3, 87);
+            this.tablePesoMonto.Location = new System.Drawing.Point(3, 105);
             this.tablePesoMonto.Name = "tablePesoMonto";
             this.tablePesoMonto.RowCount = 1;
             this.tablePesoMonto.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tablePesoMonto.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tablePesoMonto.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tablePesoMonto.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tablePesoMonto.Size = new System.Drawing.Size(645, 40);
+            this.tablePesoMonto.Size = new System.Drawing.Size(645, 50);
             this.tablePesoMonto.TabIndex = 2;
             // 
             // Peso
@@ -436,7 +427,7 @@
             this.Peso.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.Peso.AutoSize = true;
             this.Peso.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
-            this.Peso.Location = new System.Drawing.Point(38, 13);
+            this.Peso.Location = new System.Drawing.Point(38, 18);
             this.Peso.Name = "Peso";
             this.Peso.Size = new System.Drawing.Size(31, 13);
             this.Peso.TabIndex = 1;
@@ -448,7 +439,7 @@
             this.label5.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
-            this.label5.Location = new System.Drawing.Point(463, 13);
+            this.label5.Location = new System.Drawing.Point(463, 18);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(37, 13);
             this.label5.TabIndex = 3;
@@ -460,7 +451,7 @@
             this.label4.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
-            this.label4.Location = new System.Drawing.Point(226, 13);
+            this.label4.Location = new System.Drawing.Point(226, 18);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(83, 13);
             this.label4.TabIndex = 5;
@@ -471,7 +462,7 @@
             // 
             this.textBoxMonto.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.textBoxMonto.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
-            this.textBoxMonto.Location = new System.Drawing.Point(539, 11);
+            this.textBoxMonto.Location = new System.Drawing.Point(539, 16);
             this.textBoxMonto.Name = "textBoxMonto";
             this.textBoxMonto.Size = new System.Drawing.Size(102, 18);
             this.textBoxMonto.TabIndex = 4;
@@ -484,7 +475,7 @@
             // 
             this.textBoxPeso.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.textBoxPeso.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
-            this.textBoxPeso.Location = new System.Drawing.Point(110, 11);
+            this.textBoxPeso.Location = new System.Drawing.Point(110, 16);
             this.textBoxPeso.Name = "textBoxPeso";
             this.textBoxPeso.Size = new System.Drawing.Size(101, 18);
             this.textBoxPeso.TabIndex = 2;
@@ -498,7 +489,7 @@
             // 
             this.textBoxPesoEntregado.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.textBoxPesoEntregado.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
-            this.textBoxPesoEntregado.Location = new System.Drawing.Point(324, 11);
+            this.textBoxPesoEntregado.Location = new System.Drawing.Point(324, 16);
             this.textBoxPesoEntregado.Name = "textBoxPesoEntregado";
             this.textBoxPesoEntregado.Size = new System.Drawing.Size(101, 18);
             this.textBoxPesoEntregado.TabIndex = 6;
@@ -952,6 +943,28 @@
             this.formTittleText.Text = "Compras";
             this.formTittleText.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // panelTitulo
+            // 
+            this.panelTitulo.Controls.Add(this.label1);
+            this.panelTitulo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelTitulo.Location = new System.Drawing.Point(5, 5);
+            this.panelTitulo.Margin = new System.Windows.Forms.Padding(5);
+            this.panelTitulo.Name = "panelTitulo";
+            this.panelTitulo.Size = new System.Drawing.Size(651, 22);
+            this.panelTitulo.TabIndex = 15;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.label1.Location = new System.Drawing.Point(0, 0);
+            this.label1.Margin = new System.Windows.Forms.Padding(5);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(90, 13);
+            this.label1.TabIndex = 5;
+            this.label1.Tag = "big bold inverted";
+            this.label1.Text = "Agregar Producto";
+            // 
             // FormCargaCompras
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1004,6 +1017,8 @@
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.topPanel.ResumeLayout(false);
+            this.panelTitulo.ResumeLayout(false);
+            this.panelTitulo.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1046,7 +1061,6 @@
         private System.Windows.Forms.TableLayoutPanel tableProducto;
         private System.Windows.Forms.DataGridView gridProductos;
         private System.Windows.Forms.Button bAgregarProducto;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panelSelecProducto;
         private System.Windows.Forms.TableLayoutPanel tableSelecProducto;
         private System.Windows.Forms.TableLayoutPanel tableBuscarProducto;
@@ -1073,5 +1087,7 @@
         private System.Windows.Forms.TextBox textPagoParcial;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textBoxPesoEntregado;
+        private System.Windows.Forms.Panel panelTitulo;
+        private System.Windows.Forms.Label label1;
     }
 }

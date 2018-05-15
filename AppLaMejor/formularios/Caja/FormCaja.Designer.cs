@@ -46,6 +46,20 @@
             this.navTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.agregarVenta = new System.Windows.Forms.Button();
             this.panelBusqueda = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.bAgregarProduKiosco = new System.Windows.Forms.Button();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.textBoxProductoK = new System.Windows.Forms.TextBox();
+            this.labelKiosco = new System.Windows.Forms.Label();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.textBoxCantidadK = new System.Windows.Forms.TextBox();
+            this.labelCantidad = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.textCodigo = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.lTittle = new System.Windows.Forms.Label();
             this.groupVentasAnterioresDataGrid = new System.Windows.Forms.GroupBox();
             this.dataGridVentas = new System.Windows.Forms.DataGridView();
@@ -72,19 +86,6 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.label5 = new System.Windows.Forms.Label();
-            this.textCodigo = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.Cantidad = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.labelKiosco = new System.Windows.Forms.Label();
-            this.labelCantidad = new System.Windows.Forms.Label();
             this.mainPanel.SuspendLayout();
             this.contentPanel.SuspendLayout();
             this.nuevaVentaPanel.SuspendLayout();
@@ -93,6 +94,12 @@
             this.panelSubTotal.SuspendLayout();
             this.navTableLayoutPanel.SuspendLayout();
             this.panelBusqueda.SuspendLayout();
+            this.tableLayoutPanel4.SuspendLayout();
+            this.panel4.SuspendLayout();
+            this.tableLayoutPanel5.SuspendLayout();
+            this.panel5.SuspendLayout();
+            this.panel6.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.groupVentasAnterioresDataGrid.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridVentas)).BeginInit();
             this.bottomPanel.SuspendLayout();
@@ -104,12 +111,6 @@
             this.tableLayoutPanel3.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.tableLayoutPanel4.SuspendLayout();
-            this.panel3.SuspendLayout();
-            this.panel4.SuspendLayout();
-            this.tableLayoutPanel5.SuspendLayout();
-            this.panel5.SuspendLayout();
-            this.panel6.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainPanel
@@ -294,6 +295,179 @@
             this.panelBusqueda.Padding = new System.Windows.Forms.Padding(5);
             this.panelBusqueda.Size = new System.Drawing.Size(1143, 142);
             this.panelBusqueda.TabIndex = 11;
+            // 
+            // tableLayoutPanel4
+            // 
+            this.tableLayoutPanel4.ColumnCount = 3;
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel4.Controls.Add(this.panel4, 1, 0);
+            this.tableLayoutPanel4.Controls.Add(this.panel3, 0, 0);
+            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(5, 5);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            this.tableLayoutPanel4.RowCount = 1;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(1133, 132);
+            this.tableLayoutPanel4.TabIndex = 6;
+            // 
+            // panel4
+            // 
+            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel4.Controls.Add(this.tableLayoutPanel5);
+            this.panel4.Controls.Add(this.label6);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel4.Location = new System.Drawing.Point(342, 3);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(673, 126);
+            this.panel4.TabIndex = 1;
+            // 
+            // tableLayoutPanel5
+            // 
+            this.tableLayoutPanel5.ColumnCount = 2;
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel5.Controls.Add(this.bAgregarProduKiosco, 1, 1);
+            this.tableLayoutPanel5.Controls.Add(this.panel5, 0, 0);
+            this.tableLayoutPanel5.Controls.Add(this.panel6, 0, 1);
+            this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(0, 30);
+            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
+            this.tableLayoutPanel5.RowCount = 2;
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(671, 94);
+            this.tableLayoutPanel5.TabIndex = 8;
+            // 
+            // bAgregarProduKiosco
+            // 
+            this.bAgregarProduKiosco.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.bAgregarProduKiosco.FlatAppearance.BorderColor = System.Drawing.Color.Green;
+            this.bAgregarProduKiosco.FlatAppearance.BorderSize = 2;
+            this.bAgregarProduKiosco.FlatAppearance.MouseDownBackColor = System.Drawing.Color.MediumSeaGreen;
+            this.bAgregarProduKiosco.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkSlateGray;
+            this.bAgregarProduKiosco.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bAgregarProduKiosco.Image = global::AppLaMejor.Properties.Resources.add_icon_30x30_green;
+            this.bAgregarProduKiosco.Location = new System.Drawing.Point(527, 50);
+            this.bAgregarProduKiosco.MaximumSize = new System.Drawing.Size(120, 41);
+            this.bAgregarProduKiosco.Name = "bAgregarProduKiosco";
+            this.bAgregarProduKiosco.Size = new System.Drawing.Size(120, 41);
+            this.bAgregarProduKiosco.TabIndex = 15;
+            this.bAgregarProduKiosco.Text = "Agregar";
+            this.bAgregarProduKiosco.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.bAgregarProduKiosco.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.bAgregarProduKiosco.UseVisualStyleBackColor = false;
+            this.bAgregarProduKiosco.Click += new System.EventHandler(this.bAgregarProduKiosco_Click);
+            // 
+            // panel5
+            // 
+            this.panel5.Controls.Add(this.textBoxProductoK);
+            this.panel5.Controls.Add(this.labelKiosco);
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel5.Location = new System.Drawing.Point(5, 5);
+            this.panel5.Margin = new System.Windows.Forms.Padding(5);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(493, 37);
+            this.panel5.TabIndex = 0;
+            // 
+            // textBoxProductoK
+            // 
+            this.textBoxProductoK.Dock = System.Windows.Forms.DockStyle.Left;
+            this.textBoxProductoK.Location = new System.Drawing.Point(50, 0);
+            this.textBoxProductoK.Name = "textBoxProductoK";
+            this.textBoxProductoK.Size = new System.Drawing.Size(381, 20);
+            this.textBoxProductoK.TabIndex = 7;
+            this.textBoxProductoK.Text = "(buscar por descripcion)";
+            this.textBoxProductoK.Click += new System.EventHandler(this.textBoxProductoK_Click);
+            this.textBoxProductoK.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBoxProductoK_KeyUp);
+            // 
+            // labelKiosco
+            // 
+            this.labelKiosco.AutoSize = true;
+            this.labelKiosco.Dock = System.Windows.Forms.DockStyle.Left;
+            this.labelKiosco.Location = new System.Drawing.Point(0, 0);
+            this.labelKiosco.Margin = new System.Windows.Forms.Padding(3);
+            this.labelKiosco.Name = "labelKiosco";
+            this.labelKiosco.Size = new System.Drawing.Size(50, 13);
+            this.labelKiosco.TabIndex = 5;
+            this.labelKiosco.Text = "Producto";
+            // 
+            // panel6
+            // 
+            this.panel6.Controls.Add(this.textBoxCantidadK);
+            this.panel6.Controls.Add(this.labelCantidad);
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel6.Location = new System.Drawing.Point(5, 52);
+            this.panel6.Margin = new System.Windows.Forms.Padding(5);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(493, 37);
+            this.panel6.TabIndex = 1;
+            // 
+            // textBoxCantidadK
+            // 
+            this.textBoxCantidadK.Dock = System.Windows.Forms.DockStyle.Left;
+            this.textBoxCantidadK.Location = new System.Drawing.Point(49, 0);
+            this.textBoxCantidadK.Name = "textBoxCantidadK";
+            this.textBoxCantidadK.Size = new System.Drawing.Size(381, 20);
+            this.textBoxCantidadK.TabIndex = 7;
+            this.textBoxCantidadK.Text = "(ingresar cantidad)";
+            this.textBoxCantidadK.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxCantidadK_KeyPress);
+            // 
+            // labelCantidad
+            // 
+            this.labelCantidad.AutoSize = true;
+            this.labelCantidad.Dock = System.Windows.Forms.DockStyle.Left;
+            this.labelCantidad.Location = new System.Drawing.Point(0, 0);
+            this.labelCantidad.Margin = new System.Windows.Forms.Padding(3);
+            this.labelCantidad.Name = "labelCantidad";
+            this.labelCantidad.Size = new System.Drawing.Size(49, 13);
+            this.labelCantidad.TabIndex = 6;
+            this.labelCantidad.Text = "Cantidad";
+            // 
+            // label6
+            // 
+            this.label6.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(0, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(671, 30);
+            this.label6.TabIndex = 7;
+            this.label6.Text = "Agregar Producto Kiosco";
+            // 
+            // panel3
+            // 
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.textCodigo);
+            this.panel3.Controls.Add(this.label5);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel3.Location = new System.Drawing.Point(3, 3);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(333, 126);
+            this.panel3.TabIndex = 0;
+            // 
+            // textCodigo
+            // 
+            this.textCodigo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textCodigo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textCodigo.Location = new System.Drawing.Point(41, 34);
+            this.textCodigo.MaximumSize = new System.Drawing.Size(250, 30);
+            this.textCodigo.MinimumSize = new System.Drawing.Size(200, 22);
+            this.textCodigo.Name = "textCodigo";
+            this.textCodigo.Size = new System.Drawing.Size(250, 26);
+            this.textCodigo.TabIndex = 9;
+            this.textCodigo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textCodigo.TextChanged += new System.EventHandler(this.textCodigo_TextChanged);
+            // 
+            // label5
+            // 
+            this.label5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(0, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(331, 30);
+            this.label5.TabIndex = 6;
+            this.label5.Text = "Codigo nueva venta";
             // 
             // lTittle
             // 
@@ -694,148 +868,6 @@
             this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.button1.UseVisualStyleBackColor = false;
             // 
-            // tableLayoutPanel4
-            // 
-            this.tableLayoutPanel4.ColumnCount = 3;
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel4.Controls.Add(this.panel4, 1, 0);
-            this.tableLayoutPanel4.Controls.Add(this.panel3, 0, 0);
-            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(5, 5);
-            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-            this.tableLayoutPanel4.RowCount = 1;
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(1133, 132);
-            this.tableLayoutPanel4.TabIndex = 6;
-            // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.textCodigo);
-            this.panel3.Controls.Add(this.label5);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(3, 3);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(333, 126);
-            this.panel3.TabIndex = 0;
-            // 
-            // panel4
-            // 
-            this.panel4.Controls.Add(this.tableLayoutPanel5);
-            this.panel4.Controls.Add(this.label6);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel4.Location = new System.Drawing.Point(342, 3);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(560, 126);
-            this.panel4.TabIndex = 1;
-            // 
-            // label5
-            // 
-            this.label5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(0, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(333, 30);
-            this.label5.TabIndex = 6;
-            this.label5.Text = "Codigo nueva venta";
-            // 
-            // textCodigo
-            // 
-            this.textCodigo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textCodigo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textCodigo.Location = new System.Drawing.Point(41, 34);
-            this.textCodigo.MaximumSize = new System.Drawing.Size(250, 30);
-            this.textCodigo.MinimumSize = new System.Drawing.Size(200, 22);
-            this.textCodigo.Name = "textCodigo";
-            this.textCodigo.Size = new System.Drawing.Size(250, 26);
-            this.textCodigo.TabIndex = 9;
-            this.textCodigo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // label6
-            // 
-            this.label6.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(0, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(560, 30);
-            this.label6.TabIndex = 7;
-            this.label6.Text = "Agregar Producto Kiosco";
-            // 
-            // tableLayoutPanel5
-            // 
-            this.tableLayoutPanel5.ColumnCount = 2;
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 65F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35F));
-            this.tableLayoutPanel5.Controls.Add(this.panel5, 0, 0);
-            this.tableLayoutPanel5.Controls.Add(this.panel6, 0, 1);
-            this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel5.Location = new System.Drawing.Point(0, 30);
-            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
-            this.tableLayoutPanel5.RowCount = 2;
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(560, 96);
-            this.tableLayoutPanel5.TabIndex = 8;
-            // 
-            // panel5
-            // 
-            this.panel5.Controls.Add(this.labelKiosco);
-            this.panel5.Controls.Add(this.Cantidad);
-            this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel5.Location = new System.Drawing.Point(3, 3);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(358, 42);
-            this.panel5.TabIndex = 0;
-            // 
-            // panel6
-            // 
-            this.panel6.Controls.Add(this.labelCantidad);
-            this.panel6.Controls.Add(this.textBox3);
-            this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel6.Location = new System.Drawing.Point(3, 51);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(358, 42);
-            this.panel6.TabIndex = 1;
-            // 
-            // Cantidad
-            // 
-            this.Cantidad.Dock = System.Windows.Forms.DockStyle.Right;
-            this.Cantidad.Location = new System.Drawing.Point(99, 0);
-            this.Cantidad.Name = "Cantidad";
-            this.Cantidad.Size = new System.Drawing.Size(259, 20);
-            this.Cantidad.TabIndex = 4;
-            this.Cantidad.Text = "(buscar por descripcion)";
-            // 
-            // textBox3
-            // 
-            this.textBox3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.textBox3.Location = new System.Drawing.Point(99, 0);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(259, 20);
-            this.textBox3.TabIndex = 4;
-            this.textBox3.Text = "(buscar por plu)";
-            // 
-            // labelKiosco
-            // 
-            this.labelKiosco.AutoSize = true;
-            this.labelKiosco.Dock = System.Windows.Forms.DockStyle.Left;
-            this.labelKiosco.Location = new System.Drawing.Point(0, 0);
-            this.labelKiosco.Name = "labelKiosco";
-            this.labelKiosco.Size = new System.Drawing.Size(50, 13);
-            this.labelKiosco.TabIndex = 5;
-            this.labelKiosco.Text = "Producto";
-            // 
-            // labelCantidad
-            // 
-            this.labelCantidad.AutoSize = true;
-            this.labelCantidad.Dock = System.Windows.Forms.DockStyle.Left;
-            this.labelCantidad.Location = new System.Drawing.Point(0, 0);
-            this.labelCantidad.Name = "labelCantidad";
-            this.labelCantidad.Size = new System.Drawing.Size(49, 13);
-            this.labelCantidad.TabIndex = 6;
-            this.labelCantidad.Text = "Cantidad";
-            // 
             // FormCaja
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -857,6 +889,15 @@
             this.panelSubTotal.ResumeLayout(false);
             this.navTableLayoutPanel.ResumeLayout(false);
             this.panelBusqueda.ResumeLayout(false);
+            this.tableLayoutPanel4.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
+            this.tableLayoutPanel5.ResumeLayout(false);
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
+            this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.groupVentasAnterioresDataGrid.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridVentas)).EndInit();
             this.bottomPanel.ResumeLayout(false);
@@ -875,15 +916,6 @@
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            this.tableLayoutPanel4.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
-            this.panel4.ResumeLayout(false);
-            this.tableLayoutPanel5.ResumeLayout(false);
-            this.panel5.ResumeLayout(false);
-            this.panel5.PerformLayout();
-            this.panel6.ResumeLayout(false);
-            this.panel6.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -935,9 +967,10 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Label labelKiosco;
-        private System.Windows.Forms.TextBox Cantidad;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Label labelCantidad;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.Button bAgregarProduKiosco;
+        private System.Windows.Forms.TextBox textBoxProductoK;
+        private System.Windows.Forms.TextBox textBoxCantidadK;
     }
 }

@@ -95,6 +95,14 @@ namespace AppLaMejor.datamanager
             return null;
         }
 
+        public TipoProducto GetTipoProductoKiosco()
+        {
+            string consulta = QueryManager.Instance().GetTipoProductoKiosco();
+            DataTable dt = QueryManager.Instance().GetTableResults(ConnecionBD.Instance().Connection, consulta);
+            DataNamesMapper<TipoProducto> dnmptp = new DataNamesMapper<TipoProducto>();
+            return dnmptp.Map(dt).ToList().First();
+        }
+
         /* Nomenclador TipoMovimiento*/
         List<TipoMovimiento> listTipoMovimiento;
         public TipoMovimiento GetTipoMovimiento(int p)

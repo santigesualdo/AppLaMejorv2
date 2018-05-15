@@ -10,6 +10,7 @@ using AppLaMejor.entidades;
 using AppLaMejor.controlmanager;
 using AppLaMejor.stylemanager;
 using AppLaMejor.datamanager;
+using AppLaMejor.formularios.Util;
 
 namespace AppLaMejor.formularios
 {
@@ -18,8 +19,10 @@ namespace AppLaMejor.formularios
         List<VentaDetalle> listDetalleVentas;
         List<Venta> listVentas;
         DataTable currentVentasDetalle;
-        DataTable dtVentas;
+        //DataTable dtVentas;
         decimal currentMontoTotal;
+
+        Producto productoKioscoSelected;
 
         public FormCaja()
         {
@@ -32,6 +35,8 @@ namespace AppLaMejor.formularios
         {
             // Armamos la tabla de nueva venta para mostrar en el grid
             currentVentasDetalle = GetTable();
+
+            productoKioscoSelected = null;
 
             // Configuracion visual del grid
             dataGridNuevaVentaDetalle.ColumnHeadersVisible= false;
@@ -72,7 +77,23 @@ namespace AppLaMejor.formularios
             labelSubTotal.Font = new Font("Source Sans Pro", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             labelSubTotal.Text = " TOTAL : $ " + currentMontoTotal.ToString();
 
+            // Cargar AutoCompleteTextBox
+            LoadTextBoxs();
+
             UpdateFont();
+        }
+
+        private void LoadTextBoxs()
+        {
+            string consulta = QueryManager.Instance().GetProductosSearchDataKiosco();
+            AutoCompleteStringCollection collectionProducto = QueryManager.Instance().GetAutoCompleteCollection(ConnecionBD.Instance().Connection, consulta, 1 );
+            if (collectionProducto != null)
+            {
+                textBoxProductoK.AutoCompleteMode = AutoCompleteMode.Suggest;
+                textBoxProductoK.AutoCompleteSource = AutoCompleteSource.CustomSource;
+                textBoxProductoK.AutoCompleteCustomSource = collectionProducto;
+            }
+
         }
 
         void UpdateFont()
@@ -104,8 +125,8 @@ namespace AppLaMejor.formularios
             string plu;
 
             codigo = text;
-            // Codigo de producto 6 posiciones desde posicion 1 
-            plu = codigo.Substring(1, 6);
+            // Codigo de producto 4 posiciones desde posicion 2 
+            plu = codigo.Substring(2, 4);
 
             // Obtenemos producto por plu
             Producto product = controlmanager.FuncionesVentas.GetProductoByCode(plu);
@@ -120,10 +141,11 @@ namespace AppLaMejor.formularios
             // TODO: Chequear que ese producto exista en salon de ventas
             if (!FuncionesProductos.CheckProductExistUbicacionSalida(product.Id))
             {
-                MyTextTimer.TStartFade("El producto: "+product.DescripcionBreve+" no existe en la ubicacion de salida "+FuncionesGlobales.ObtenerUbicacionSalida()+"\nAsegurese de mover mercaderia a esta ubicacion.", statusStrip1, tsslMensaje, MyTextTimer.TIME_LONG);
+                MyTextTimer.TStartFade("El producto: "+product.DescripcionBreve+" no existe en la ubicacion de salida "+FuncionesGlobales.ObtenerUbicacionSalida().Descripcion+"\nAsegurese de mover mercaderia a esta ubicacion.", statusStrip1, tsslMensaje, MyTextTimer.TIME_LONG);
                 return;
             }
 
+            ProductoUbicacion pu = FuncionesProductos.GetProductoUbicacion(product, FuncionesGlobales.ObtenerUbicacionSalida().Id);
 
             // Monto entero 3 posiciones desde posicion 7
             entero = codigo.Substring(7, 3);
@@ -138,6 +160,16 @@ namespace AppLaMejor.formularios
             VentaDetalle vd = new VentaDetalle();
             vd.Monto = montoTicket;
             vd.Peso = FuncionesProductos.GetPesoProductoPrecio(montoTicket, product);
+
+            // Validacion extra del ticket sobre la cantidad del producto en SALON DE VENTAS. (aunque si todo funciona bien nunca deberia vender mas de lo que tiene)
+            decimal calculo = decimal.Subtract(pu.peso, vd.Peso);
+            if (calculo<0)
+            {
+                FormMessageBox dialog = new FormMessageBox();
+                dialog.ShowErrorDialog("Ticket erroneo. Existen " + pu.peso.ToString() + "kg. de " + product.DescripcionBreve + "en " + FuncionesGlobales.ObtenerUbicacionSalida().Descripcion + ". \nSe intentan vender " + vd.Peso + "kg.");
+                return;
+            }
+
             vd.idUsuario = 1;
             vd.Producto = product;
 
@@ -224,21 +256,88 @@ namespace AppLaMejor.formularios
             t.Text = string.Empty;
         }
 
+        private void textBoxProductoK_Click(object sender, EventArgs e)
+        {
+            textBoxProductoK.Text = string.Empty;
+        }
+
+        private void bAgregarProduKiosco_Click(object sender, EventArgs e)
+        {
+            FormMessageBox dialog = new FormMessageBox();
+            if (productoKioscoSelected == null)
+            {
+                dialog.ShowErrorDialog("Debe seleccionar un Producto Kiosco para agregar.");
+                textBoxProductoK.Focus();
+                return;
+            }
+
+            if (textBoxCantidadK.ToString().Equals("")|| textBoxCantidadK.ToString().Equals(string.Empty))
+            {
+                textBoxCantidadK.Focus();
+                dialog.ShowErrorDialog("Debe seleccionar una cantidad de unidades para el producto.");
+                return;
+            }
+
+            // Nueva sub-venta, ventadetalle
+            VentaDetalle vd = new VentaDetalle();
+            decimal unidades;
+            decimal.TryParse(textBoxCantidadK.Text, out unidades);
+            vd.Peso = unidades;
+            vd.Monto = productoKioscoSelected.Precio * vd.Peso;
+            vd.idUsuario = 1;
+            vd.Producto = productoKioscoSelected;
+
+            // Agregamos a la lista y mostramos en grid
+            listDetalleVentas.Add(vd);
+
+            currentVentasDetalle.Rows.Add(vd.Producto.DescripcionBreve, "$ " + vd.Monto, " x "+ vd.Peso.ToString());
+
+            currentMontoTotal += vd.Monto;
+
+            productoKioscoSelected = null;
+
+            labelSubTotal.Text = " TOTAL : $ " + currentMontoTotal.ToString();
+            tbCodigo.Focus();
+
+        }
+
+        private void textBoxProductoK_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode.Equals(Keys.Return))
+            {
+                string text = ((TextBox)sender).Text;
+                productoKioscoSelected = FuncionesProductos.GetProductoByDescrip(text);
+                textBoxCantidadK.Focus();
+                
+            }
+        }
+
+        private void textBoxCantidadK_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!e.KeyChar.Equals(Keys.Return))
+            {
+                FuncionesGlobales.KeyPressIntegerTextField(sender, e);
+            }else
+            {
+                bAgregarProduKiosco.Focus();
+            }
+        }
 
 
-//Proceso:
-//EntraProducto
-//- Entra código de producto, se busca el producto en la bd. Se encuentra.
-//- Obtenemos entidad producto.
-//- Añadimos la entidad a la grid (posibilidad de eliminar, no editar)
-//- EntraProducto o FinalizarVenta
 
-//FinalizarVenta
-//- Se inserta el registro venta sus ventadetalle.
-//- Se refresca la grilla de ventas anteriores.
-//- Se limpian todos los controles.
+        //Proceso:
+        //EntraProducto
+        //- Entra código de producto, se busca el producto en la bd. Se encuentra.
+        //- Obtenemos entidad producto.
+        //- Añadimos la entidad a la grid (posibilidad de eliminar, no editar)
+        //- EntraProducto o FinalizarVenta
+
+        //FinalizarVenta
+        //- Se inserta el registro venta sus ventadetalle.
+        //- Se refresca la grilla de ventas anteriores.
+        //- Se limpian todos los controles.
 
 
-        
+
     }
 }

@@ -40,30 +40,33 @@ namespace AppLaMejor.controlmanager
                         connection.Open();
                     }
                     
+                    // Setup
                     tran = connection.BeginTransaction();
                     QueryManager manager = QueryManager.Instance();
-                    string consulta;
-                    Operacion newOperacion = new Operacion();
+                    string consulta="";
+                    MySqlCommand command = new MySqlCommand(consulta, connection, tran);
 
+                    // Operacion
+                    Operacion newOperacion = new Operacion();
                     VariablesGlobales.idOperacion = FuncionesOperaciones.GetNextIdOperacion();
                     newOperacion.Id = VariablesGlobales.idOperacion;
                     
+                    // Venta
                     decimal montoTotal = listDetalleVentas.Sum(x => x.Monto);
                     int idVenta = GetNextIdVenta();
-
                     Venta newVenta = new Venta();
                     newVenta.MontoTotal = montoTotal;
                     newVenta.Id = idVenta;
                     newVenta.Operacion = newOperacion;
-                    consulta = manager.InsertVenta(newVenta);
 
-                    // Transaccion
-                    MySqlCommand command = new MySqlCommand(consulta, connection, tran);
+                    consulta = manager.InsertVenta(newVenta);
+                    command.CommandText = consulta;
                     if (!manager.ExecuteSQL(command))
                     {
                         tran.Rollback();
                     }
-
+                    
+                    // Detalle de Ventas
                     foreach (VentaDetalle v in listDetalleVentas)
                     {
                         v.Venta = newVenta;
@@ -74,26 +77,49 @@ namespace AppLaMejor.controlmanager
                             tran.Rollback();
                         }
 
-                        /*
-                        // Se resta la cantidad del producto vendido en tabla Producto
-                        consulta = manager.RestarCantidadProducto(v);
-                        command.CommandText = consulta;
-                        if (!manager.ExecuteSQL(command))
+                        TipoProducto tp = TiposManager.Instance().GetTipoProductoKiosco();
+                        // Si el producto no es del tipo Kiosco, operamos.
+                        // Manejo de cantidades
+                        if (!v.Producto.TipoProducto.Id.Equals(tp.Id))
                         {
-                            tran.Rollback();
+                            ProductoUbicacion pu = FuncionesProductos.GetProductoUbicacion(v.Producto, FuncionesGlobales.ObtenerUbicacionSalida().Id);
+                            // Sabemos que el peso de VentaDetalle nunca puede ser mayor a la cantidad de esa ubicacion, por que esta validado.
+                            decimal calculo = decimal.Subtract(pu.peso, v.Peso);
+                            if (calculo.Equals(0))
+                            {
+                                // agrego fecha_egreso y cantidad 0 al productoubicacion
+                                consulta = manager.UpdateProductoUbicacionBaja(pu.Id);
+                                command.CommandText = consulta;
+                                if (!manager.ExecuteSQL(command))
+                                {
+                                    tran.Rollback();
+                                    return false;
+                                }
+                            }
+                            else
+                            {
+                                // Caso contrario queda un resto de producto y se resta lo retirado
+                                consulta = manager.UpdateProductoUbicacion(pu.Id, calculo);
+                                command.CommandText = consulta;
+                                if (!manager.ExecuteSQL(command))
+                                {
+                                    tran.Rollback();
+                                    return false;
+                                }
+                            }
+
+
+                            // Se resta la cantidad del producto vendido en tabla Producto
+                            Producto p = FuncionesProductos.GetProducto(v.Producto.Id);
+                            decimal pesoRestanteTotal = decimal.Subtract(p.Cantidad, v.Peso);
+                            consulta = manager.UpdateCantidadProducto(p.Id, pesoRestanteTotal);
+                            command.CommandText = consulta;
+                            if (!manager.ExecuteSQL(command))
+                            {
+                                tran.Rollback();
+                                return false;
+                            }
                         }
-
-                        // Se resta la cantidad del producto vendido en tabla ProductoUbicacion
-                        ProductoUbicacion pu 
-                        consulta = manager.RestarCantidadProducto(v);
-                        command.CommandText = consulta;
-                        if (!manager.ExecuteSQL(command))
-                        {
-                            tran.Rollback();
-                        }*/
-
-
-                        // TODO: Falta registrar salida de productos en tabla PRODUCTOUBICACION, que solo deberian estar en SALON DE VENTAS
                     }
 
                     tran.Commit();
@@ -103,11 +129,6 @@ namespace AppLaMejor.controlmanager
                 {
                     FormMessageBox dialog = new FormMessageBox();
                     dialog.ShowErrorDialog("Error: " + e.Message);
-                    if (tran == null)
-                    {
-                        return false;
-                    }
-                    tran.Rollback();
                     return false;
                 }
             }

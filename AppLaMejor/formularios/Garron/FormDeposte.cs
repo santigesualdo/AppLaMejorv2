@@ -229,7 +229,7 @@ namespace AppLaMejor.formularios
 
         private void textNumero_KeyPress(object sender, KeyPressEventArgs e)
         {
-            FuncionesGlobales.KeyDownIntegerTextField(sender, e);
+            FuncionesGlobales.KeyPressIntegerTextField(sender, e);
         }
 
         private void comboNumeroGarron_SelectionChangeCommitted(object sender, EventArgs e)

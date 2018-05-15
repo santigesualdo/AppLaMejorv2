@@ -35,40 +35,38 @@ namespace AppLaMejor.controlmanager
                 MySqlTransaction tran = null;
                 try
                 {
-                    if (connection.State.Equals(ConnectionState.Closed))
-                    {
-                        connection.Open();
-                    }
-
-                    tran = connection.BeginTransaction();
-
-                    QueryManager manager = QueryManager.Instance();
-
-                    // Transaccion - 
-                    int idCompra = GetNextCompraId();
-                    string consulta = "";
-                    MySqlCommand command = new MySqlCommand(consulta, connection, tran);
-
+                    int idCompra;
                     // 1. Registrar operacion.
                     OperacionProveedor newOperacion = new OperacionProveedor();
-                    newOperacion.Id = FuncionesOperaciones.GetNextIdOperacionProveedor();
-                    VariablesGlobales.idOperacion = newOperacion.Id;
-
                     // Si el provedor != null creamos operacion con IdCuenta e IdProveedor
                     // Si el proveedor == null registramos la operacion pero el idProveedor en 0 y no referencia a ninguna cuenta.
-                    if (provSelec!=null)
+                    if (provSelec != null)
                     {
                         newOperacion.proveedor = provSelec;
-                    }else
+                    }
+                    else
                     {
                         newOperacion.proveedor = new Proveedor();
                         newOperacion.proveedor.Id = 0;
                     }
                     
-                    // Tipo Operacion = 3 (Compra Proveedor)
                     TipoOperacion to = new TipoOperacion();
-                    to.Id = 3;
+                    to.Id = 3; //(Compra Proveedor)
                     newOperacion.tipoOperacion = to;
+
+                    //
+
+                    if (connection.State.Equals(ConnectionState.Closed))
+                    {
+                        connection.Open();
+                    }
+
+                    QueryManager manager = QueryManager.Instance();
+
+                    tran = connection.BeginTransaction();
+
+                    string consulta = "";
+                    MySqlCommand command = new MySqlCommand(consulta, connection, tran);
 
                     consulta = manager.InsertOperacion(newOperacion);
                     command.CommandText = consulta;
@@ -77,7 +75,8 @@ namespace AppLaMejor.controlmanager
                         tran.Rollback();
                         return -1;
                     }
-
+                    newOperacion.Id = (int)command.LastInsertedId;
+                    VariablesGlobales.idOperacion = newOperacion.Id;
                     // 2. Registramos compra con idOperacion.
                     // Si el currentMontoPagado = 0 signfica que pago todo, insertamos todo el monto de la compra como pagado.
                     // Sino, pago una parte, registramos lo que pago y el total.
@@ -98,8 +97,8 @@ namespace AppLaMejor.controlmanager
                         tran.Rollback();
                         return -1;
                     }
-
-
+                    idCompra = (int)command.LastInsertedId;
+                    
                     // 3. Movimiento Cuenta Proveedor
                     // Insertamos el el total del monto de la compra en el debe de la cuenta.
                     MovimientoCuentaProveedor mcDebito = new MovimientoCuentaProveedor();
@@ -165,8 +164,7 @@ namespace AppLaMejor.controlmanager
                     foreach (Garron g in listGarron)
                     {
                         // Insertamos el garron en garron.
-                        int idGarron = FuncionesGarron.GetNextGarronId();
-                        g.Id = idGarron;
+                        
                         // Se inserta el garron comprado en tabla garron. 
                         consulta = manager.InsertGarron(g);
                         command.CommandText = consulta;
@@ -175,7 +173,8 @@ namespace AppLaMejor.controlmanager
                             tran.Rollback();
                             return -1;
                         }
-
+                        g.Id = (int)command.LastInsertedId;
+                        // Garron en compra detalle
                         consulta = manager.InsertCompraDetalle(idCompra, g);
                         command.CommandText = consulta;
                         if (!manager.ExecuteSQL(command))
@@ -183,8 +182,16 @@ namespace AppLaMejor.controlmanager
                             tran.Rollback();
                             return -1;
                         }
+                        //7. Se ubican todos los garrones en Mesa de Entrada
+                        consulta = manager.UbicarCompraDetalleUbicacionEntrada(g);
+                        command.CommandText = consulta;
+                        if (!manager.ExecuteSQL(command))
+                        {
+                            tran.Rollback();
+                            return -1;
+                        }
                     }
-
+                    
                     foreach (Producto p in listProducto)
                     {
                         consulta = manager.InsertCompraDetalle(idCompra, p);
@@ -194,11 +201,8 @@ namespace AppLaMejor.controlmanager
                             tran.Rollback();
                             return -1;
                         }
-                    }
 
-                    //5. Los productos se suman en campo "Cantidad". 
-                    foreach (Producto p in listProducto)
-                    {
+                        //5. Los productos se suman en campo "Cantidad". 
                         consulta = manager.SumarCantidadProducto(p);
                         command.CommandText = consulta;
                         if (!manager.ExecuteSQL(command))
@@ -206,23 +210,8 @@ namespace AppLaMejor.controlmanager
                             tran.Rollback();
                             return -1;
                         }
-                    }
-
-                    //6. Se ubican todos los productos ingresados en MESA DE ENTRADA.
-                    foreach (Producto p in listProducto)
-                    {
+                        //6. Se ubican todos los productos ingresados en MESA DE ENTRADA.
                         consulta = manager.UbicarCompraDetalleUbicacionEntrada(p);
-                        command.CommandText = consulta;
-                        if (!manager.ExecuteSQL(command))
-                        {
-                            tran.Rollback();
-                            return -1;
-                        }
-                    }
-                    //7. Se ubican todos los garrones en Mesa de Entrada
-                    foreach (Garron g in listGarron)
-                    {
-                        consulta = manager.UbicarCompraDetalleUbicacionEntrada(g);
                         command.CommandText = consulta;
                         if (!manager.ExecuteSQL(command))
                         {
@@ -232,7 +221,6 @@ namespace AppLaMejor.controlmanager
                     }
 
                     tran.Commit();
-                    // Transaccion 
                     return idCompra;
                 }
                 catch (Exception e)

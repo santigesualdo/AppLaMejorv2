@@ -64,7 +64,7 @@ namespace AppLaMejor.controlmanager
             if (!isNumber(e.KeyChar, textbox.Text))
                 e.Handled = true;
         }
-        public static void KeyDownIntegerTextField(object sender, KeyPressEventArgs e)
+        public static void KeyPressIntegerTextField(object sender, KeyPressEventArgs e)
         {
             string text = ((TextBox)sender).ToString();
             for (int i = 0; i < text.Length; i++)
