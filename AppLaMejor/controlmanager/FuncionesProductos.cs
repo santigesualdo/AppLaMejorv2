@@ -185,7 +185,7 @@ namespace AppLaMejor.controlmanager
 
         public static bool ConfirmarMovimientosTransaction(List<MovimientoMercaderia> listMercaderiaMov)
         {
-            MySqlConnection connection = ConnecionBD.Instance().Connection;
+            MySqlConnection connection = new MySqlConnection(ConnecionBD.Instance().connstring);
             using (connection)
             {
                 MySqlTransaction tran = null;
@@ -217,11 +217,7 @@ namespace AppLaMejor.controlmanager
                             // Se actualiza la fecha_egreso y se marca peso 0
                             consulta = manager.UpdateProductoUbicacionBaja(pu.Id);
                             command.CommandText = consulta;
-                            if (!manager.ExecuteSQL(command))
-                            {
-                                tran.Rollback();
-                                return false;
-                            }
+                            command.ExecuteNonQuery();
                         }
 
                         // Solo para los productos, chequeamos que la mercaderia que movemos sea el total de ese productoubicacion
@@ -235,11 +231,7 @@ namespace AppLaMejor.controlmanager
                                 // agrego fecha_egreso y cantidad 0 al productoubicacion
                                 consulta = manager.UpdateProductoUbicacionBaja(pu.Id);
                                 command.CommandText = consulta;
-                                if (!manager.ExecuteSQL(command))
-                                {
-                                    tran.Rollback();
-                                    return false;
-                                }
+                                command.ExecuteNonQuery();
                             }
                             else
                             {
@@ -247,11 +239,7 @@ namespace AppLaMejor.controlmanager
                                 decimal pesoRestante = pu.peso - m.peso;
                                 consulta = manager.UpdateProductoUbicacion(pu.Id, pesoRestante);
                                 command.CommandText = consulta;
-                                if (!manager.ExecuteSQL(command))
-                                {
-                                    tran.Rollback();
-                                    return false;
-                                }
+                                command.ExecuteNonQuery();
                             }
 
                             // Chequeamos si ya existe un productoubicacion con ese idProducto e idUbicacion(destino)
@@ -261,11 +249,7 @@ namespace AppLaMejor.controlmanager
                         // Se inserta el movimiento en MovimientoMercaderia
                         consulta = manager.InsertarMovimientoMercaderia(m);
                         command.CommandText = consulta;
-                        if (!manager.ExecuteSQL(command))
-                        {
-                            tran.Rollback();
-                            return false;
-                        }
+                        command.ExecuteNonQuery();
 
                         // Si no existe el producto en destino, insertamos productoUbicacion.
                         if (puD == null)
@@ -273,22 +257,15 @@ namespace AppLaMejor.controlmanager
                             // Se inserta la nueva ubicacion en ProductoUbicacion
                             consulta = manager.InsertProductoUbicacion(m);
                             command.CommandText = consulta;
-                            if (!manager.ExecuteSQL(command))
-                            {
-                                tran.Rollback();
-                                return false;
-                            }
-                        }else
+                            command.ExecuteNonQuery();
+                        }
+                        else
                         // Caso contrario sumamos el peso.
                         {
                             decimal nuevoPeso = puD.peso + m.peso;
                             consulta = manager.UpdatePesoProductoDestino(puD.Id, nuevoPeso);
                             command.CommandText = consulta;
-                            if (!manager.ExecuteSQL(command))
-                            {
-                                tran.Rollback();
-                                return false;
-                            }
+                            command.ExecuteNonQuery();
                         }
 
                     }

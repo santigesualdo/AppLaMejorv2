@@ -9,6 +9,8 @@ using AppLaMejor.datamanager;
 using System.Globalization;
 using AppLaMejor.stylemanager;
 using AppLaMejor.entidades;
+using MySql.Data.MySqlClient;
+using AppLaMejor.formularios.Util;
 
 namespace AppLaMejor.controlmanager
 {
@@ -89,8 +91,36 @@ namespace AppLaMejor.controlmanager
             label.TabIndex = 1;
             label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             return label;
-        }		
-		public static int obtenerIndexClienteDeListFromGrid(DataGridView grid)													  
+        }
+
+        public static int GetLastInsertId(MySqlCommand command)
+        {
+            IDataReader reader = null;
+            int id=-1;
+            try
+            {
+                command.CommandText = "SELECT LAST_INSERT_ID()";
+                reader = command.ExecuteReader();
+                if (reader != null && reader.Read())
+                    id=reader.GetInt32(0);
+            }
+            catch(Exception E)
+            {
+                FormMessageBox dialog = new FormMessageBox();
+                dialog.ShowErrorDialog("Ocurrio un error: " + E.Message);
+            }
+            finally
+            {
+                if (reader != null)
+                {
+                    reader.Close();
+                }
+            }
+            return id;
+
+        }
+
+        public static int obtenerIndexClienteDeListFromGrid(DataGridView grid)													  
         {
             // para que funcione la query tiene que tener un campo "id"
             BindingManagerBase bm = grid.BindingContext[grid.DataSource, grid.DataMember];

@@ -86,7 +86,7 @@ namespace AppLaMejor.controlmanager
         }
         public static bool ConfirmarDeposte(List<GarronDeposte> listDeposte, Garron garronDeposte, Ubicacion origenGarron)
         {
-            MySqlConnection connection = ConnecionBD.Instance().Connection;
+            MySqlConnection connection = new MySqlConnection(ConnecionBD.Instance().connstring);
             using (connection)
             {
                 MySqlTransaction tran = null;
@@ -133,11 +133,7 @@ namespace AppLaMejor.controlmanager
 
                             consulta = manager.InsertProductoUbicacion(m);
                             command.CommandText = consulta;
-                            if (!manager.ExecuteSQL(command))
-                            {
-                                tran.Rollback();
-                                return false;
-                            }
+                            command.ExecuteNonQuery();
                         }
                         else
                         // Caso contrario sumamos el peso.
@@ -145,40 +141,24 @@ namespace AppLaMejor.controlmanager
                             decimal nuevoPeso = pu.peso + gd.Peso;
                             consulta = manager.UpdatePesoProductoDestino(pu.Id, nuevoPeso);
                             command.CommandText = consulta;
-                            if (!manager.ExecuteSQL(command))
-                            {
-                                tran.Rollback();
-                                return false;
-                            }
+                            command.ExecuteNonQuery();
                         }
 
                         consulta = manager.InsertGarronDeposte(gd);
                         command.CommandText = consulta;
-                        if (!manager.ExecuteSQL(command))
-                        {
-                            tran.Rollback();
-                            return false;
-                        }
+                        command.ExecuteNonQuery();
 
                         Producto p = FuncionesProductos.GetProducto(gd.Producto.Id);
                         decimal cantidadTotal = p.Cantidad + gd.Peso;
                         consulta = manager.UpdateCantidadProducto(gd.Producto.Id, cantidadTotal);
                         command.CommandText = consulta;
-                        if (!manager.ExecuteSQL(command))
-                        {
-                            tran.Rollback();
-                            return false;
-                        }
+                        command.ExecuteNonQuery();
 
                     }
 
                     consulta = manager.UpdatePesoGarron(garronDeposte.Id,  pesoTotal);
                     command.CommandText = consulta;
-                    if (!manager.ExecuteSQL(command))
-                    {
-                        tran.Rollback();
-                        return false;
-                    }
+                    command.ExecuteNonQuery();
 
 
 
@@ -188,12 +168,23 @@ namespace AppLaMejor.controlmanager
                 catch (Exception e)
                 {
                     FormMessageBox dialog = new FormMessageBox();
-                    dialog.ShowErrorDialog("Ocurrio un error al registrar depostes. Motivo: " + e.Message);
-                    if (tran != null)
+                    try
                     {
-                        tran.Rollback();
+                        if (tran != null)
+                        {
+                            tran.Rollback();
+                            dialog.ShowErrorDialog(e.Message);
+                        }
+                            
                     }
-
+                    catch (InvalidOperationException ioe)
+                    {
+                        dialog.ShowErrorDialog(ioe.Message);
+                    }
+                    catch (MySqlException es)
+                    {
+                        dialog.ShowErrorDialog(es.Message);
+                    }
                     return false;
                 }
             }

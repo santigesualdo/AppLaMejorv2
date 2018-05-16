@@ -13,13 +13,14 @@ namespace AppLaMejor.controlmanager
     public class FuncionesCompras
     {
         // Parametros:
-            // montoCompra
-            // proveedorSeleccioado (puede ser null)
-            // listaGarron
-            // listProducto
+        // montoCompra
+        // proveedorSeleccioado (puede ser null)
+        // listaGarron
+        // listProducto
         // Resultado:
-            // ERROR : -1 
-            // EXITO : id de la Compra para mostrar
+        // ERROR : -1 
+        // EXITO : id de la Compra para mostrar
+
         public static int ConfirmarCompraTransaction(decimal currentMontoCompra, decimal currentMontoPagado, Proveedor provSelec, List<Garron> listGarron, List<Producto> listProducto, int idCuentaProveedor)
         {
             //0. begin transaction
@@ -29,13 +30,26 @@ namespace AppLaMejor.controlmanager
             //4. Los productos se suman en campo "Cantidad". 
             //4. end transaction
 
-            MySqlConnection connection = ConnecionBD.Instance().Connection;
+            MySqlConnection connection = new MySqlConnection(ConnecionBD.Instance().connstring);
             using (connection)
             {
                 MySqlTransaction tran = null;
+                MySqlCommand command = null;
                 try
                 {
-                    int idCompra;
+                    if (connection.State.Equals(ConnectionState.Closed))
+                    {
+                        // el BeginTransaction necesita la conexion abierta.
+                        connection.Open();
+                    }
+
+                    int idCompra = -1;
+
+                    tran = connection.BeginTransaction();
+                    QueryManager manager = QueryManager.Instance();
+                    string consulta = "";
+                    command = new MySqlCommand(consulta, connection, tran);
+
                     // 1. Registrar operacion.
                     OperacionProveedor newOperacion = new OperacionProveedor();
                     // Si el provedor != null creamos operacion con IdCuenta e IdProveedor
@@ -54,28 +68,12 @@ namespace AppLaMejor.controlmanager
                     to.Id = 3; //(Compra Proveedor)
                     newOperacion.tipoOperacion = to;
 
-                    //
-
-                    if (connection.State.Equals(ConnectionState.Closed))
-                    {
-                        connection.Open();
-                    }
-
-                    QueryManager manager = QueryManager.Instance();
-
-                    tran = connection.BeginTransaction();
-
-                    string consulta = "";
-                    MySqlCommand command = new MySqlCommand(consulta, connection, tran);
-
-                    consulta = manager.InsertOperacion(newOperacion);
+                    consulta = manager.InsertOperacionProveedor(newOperacion);
                     command.CommandText = consulta;
-                    if (!manager.ExecuteSQL(command))
-                    {
-                        tran.Rollback();
-                        return -1;
-                    }
-                    newOperacion.Id = (int)command.LastInsertedId;
+                    command.ExecuteNonQuery();
+
+                    int idOperacion = FuncionesGlobales.GetLastInsertId(command);
+                    newOperacion.Id = idOperacion;
                     VariablesGlobales.idOperacion = newOperacion.Id;
                     // 2. Registramos compra con idOperacion.
                     // Si el currentMontoPagado = 0 signfica que pago todo, insertamos todo el monto de la compra como pagado.
@@ -90,15 +88,10 @@ namespace AppLaMejor.controlmanager
                         // Si monto pagado es diferente de cero, se inserta el monto pagado.
                         consulta = manager.InsertNuevaCompra(provSelec, newOperacion, currentMontoCompra, currentMontoCompra);
                     }
-                    
+
                     command.CommandText = consulta;
-                    if (!manager.ExecuteSQL(command))
-                    {
-                        tran.Rollback();
-                        return -1;
-                    }
-                    idCompra = (int)command.LastInsertedId;
-                    
+                    command.ExecuteNonQuery();
+                    idCompra = FuncionesGlobales.GetLastInsertId(command);
                     // 3. Movimiento Cuenta Proveedor
                     // Insertamos el el total del monto de la compra en el debe de la cuenta.
                     MovimientoCuentaProveedor mcDebito = new MovimientoCuentaProveedor();
@@ -111,13 +104,9 @@ namespace AppLaMejor.controlmanager
                     mcDebito.Monto = currentMontoCompra;
                     mcDebito.Cobrado = 'N';
 
-                    consulta = QueryManager.Instance().InsertMovCuentaProveedor(mcDebito);
+                    consulta = manager.InsertMovCuentaProveedor(mcDebito);
                     command.CommandText = consulta;
-                    if (!manager.ExecuteSQL(command))
-                    {
-                        tran.Rollback();
-                        return -1;
-                    }
+                    command.ExecuteNonQuery();
 
                     // Si pago una parte, insertamos en el haber la parte que pago.
                     // Sino insertamos el total en el haber de la cuenta.
@@ -133,13 +122,9 @@ namespace AppLaMejor.controlmanager
                         mcPago.Cuenta.Id = idCuentaProveedor;
                         mcPago.Monto = currentMontoPagado;
                         mcPago.Cobrado = 'S';
-                        consulta = QueryManager.Instance().InsertMovCuentaProveedor(mcPago);
+                        consulta = manager.InsertMovCuentaProveedor(mcPago);
                         command.CommandText = consulta;
-                        if (!manager.ExecuteSQL(command))
-                        {
-                            tran.Rollback();
-                            return -1;
-                        }
+                        command.ExecuteNonQuery();
                     }
                     else{
                         MovimientoCuentaProveedor mcPago2 = new MovimientoCuentaProveedor();
@@ -151,73 +136,44 @@ namespace AppLaMejor.controlmanager
                         mcPago2.Cuenta.Id = idCuentaProveedor;
                         mcPago2.Monto = currentMontoCompra;
                         mcPago2.Cobrado = 'S';
-                        consulta = QueryManager.Instance().InsertMovCuentaProveedor(mcPago2);
+                        consulta = manager.InsertMovCuentaProveedor(mcPago2);
                         command.CommandText = consulta;
-                        if (!manager.ExecuteSQL(command))
-                        {
-                            tran.Rollback();
-                            return -1;
-                        }
+                        command.ExecuteNonQuery();
                     }
 
                     //4. Se inserta el registro en compraDetalle. (obtener siguiente id de compra)
                     foreach (Garron g in listGarron)
                     {
-                        // Insertamos el garron en garron.
-                        
                         // Se inserta el garron comprado en tabla garron. 
                         consulta = manager.InsertGarron(g);
                         command.CommandText = consulta;
-                        if (!manager.ExecuteSQL(command))
-                        {
-                            tran.Rollback();
-                            return -1;
-                        }
-                        g.Id = (int)command.LastInsertedId;
+                        command.ExecuteNonQuery();
+
+                        g.Id = FuncionesGlobales.GetLastInsertId(command);
                         // Garron en compra detalle
                         consulta = manager.InsertCompraDetalle(idCompra, g);
                         command.CommandText = consulta;
-                        if (!manager.ExecuteSQL(command))
-                        {
-                            tran.Rollback();
-                            return -1;
-                        }
-                        //7. Se ubican todos los garrones en Mesa de Entrada
+                        command.ExecuteNonQuery();
+                        // Se ubican todos los garrones en Mesa de Entrada
                         consulta = manager.UbicarCompraDetalleUbicacionEntrada(g);
                         command.CommandText = consulta;
-                        if (!manager.ExecuteSQL(command))
-                        {
-                            tran.Rollback();
-                            return -1;
-                        }
+                        command.ExecuteNonQuery();
                     }
                     
                     foreach (Producto p in listProducto)
                     {
+                        // Registro compra detalle.
                         consulta = manager.InsertCompraDetalle(idCompra, p);
                         command.CommandText = consulta;
-                        if (!manager.ExecuteSQL(command))
-                        {
-                            tran.Rollback();
-                            return -1;
-                        }
-
-                        //5. Los productos se suman en campo "Cantidad". 
+                        command.ExecuteNonQuery();
+                        // Los productos se suman en campo "Cantidad". 
                         consulta = manager.SumarCantidadProducto(p);
                         command.CommandText = consulta;
-                        if (!manager.ExecuteSQL(command))
-                        {
-                            tran.Rollback();
-                            return -1;
-                        }
-                        //6. Se ubican todos los productos ingresados en MESA DE ENTRADA.
+                        command.ExecuteNonQuery();
+                        // Se ubican todos los productos ingresados en MESA DE ENTRADA.
                         consulta = manager.UbicarCompraDetalleUbicacionEntrada(p);
                         command.CommandText = consulta;
-                        if (!manager.ExecuteSQL(command))
-                        {
-                            tran.Rollback();
-                            return -1;
-                        }
+                        command.ExecuteNonQuery();
                     }
 
                     tran.Commit();
@@ -226,7 +182,19 @@ namespace AppLaMejor.controlmanager
                 catch (Exception e)
                 {
                     FormMessageBox dialog = new FormMessageBox();
-                    dialog.ShowErrorDialog("Error: " + e.Message);
+                    try
+                    {   
+                        if (tran!=null)
+                            tran.Rollback();
+                    }
+                    catch (InvalidOperationException ioe)
+                    {
+                        dialog.ShowErrorDialog(ioe.Message);
+                    }
+                    catch (MySqlException es)
+                    {
+                        dialog.ShowErrorDialog(es.Message);
+                    }
                     return -1;
                 }
             }
@@ -275,11 +243,7 @@ namespace AppLaMejor.controlmanager
                             // Se inserta la nueva ubicacion en ProductoUbicacion
                             consulta = manager.InsertProductoUbicacion(p.Id, destino.Id, p.CantidadEntregada);
                             command.CommandText = consulta;
-                            if (!manager.ExecuteSQL(command))
-                            {
-                                tran.Rollback();
-                                return false;
-                            }
+                            command.ExecuteNonQuery();
                         }
                         else
                         // Si ese productoUbicacion, ya tiene ese producto sumamos el peso.
@@ -287,11 +251,7 @@ namespace AppLaMejor.controlmanager
                             decimal nuevoPeso = puD.peso + p.CantidadEntregada;
                             consulta = manager.UpdatePesoProductoDestino(puD.Id, nuevoPeso);
                             command.CommandText = consulta;
-                            if (!manager.ExecuteSQL(command))
-                            {
-                                tran.Rollback();
-                                return false;
-                            }
+                            command.ExecuteNonQuery();
                         }
 
                         // 3. Sumar a la cantidad total de productos en Productos.
@@ -299,21 +259,13 @@ namespace AppLaMejor.controlmanager
                         decimal nuevoPesoProducto = decimal.Add(pr.Cantidad, p.CantidadEntregada);
                         consulta = manager.UpdateCantidadProducto(p.Id, nuevoPesoProducto);
                         command.CommandText = consulta;
-                        if (!manager.ExecuteSQL(command))
-                        {
-                            tran.Rollback();
-                            return false;
-                        }
+                        command.ExecuteNonQuery();
                     }
 
                     // 4. Marcar en compra detalle los productos entregados en 0.
                     consulta = manager.UpdateCompraDetalleEntregada(idCompra);
                     command.CommandText = consulta;
-                    if (!manager.ExecuteSQL(command))
-                    {
-                        tran.Rollback();
-                        return false;
-                    }
+                    command.ExecuteNonQuery();
 
                     tran.Commit();
                     return true;
@@ -321,7 +273,19 @@ namespace AppLaMejor.controlmanager
                 catch (Exception e)
                 {
                     FormMessageBox dialog = new FormMessageBox();
-                    dialog.ShowErrorDialog("Error: " + e.Message);
+                    try
+                    {
+                        if (tran != null)
+                            tran.Rollback();
+                    }
+                    catch (InvalidOperationException ioe)
+                    {
+                        dialog.ShowErrorDialog(ioe.Message);
+                    }
+                    catch (MySqlException es)
+                    {
+                        dialog.ShowErrorDialog(es.Message);
+                    }
                     return false;
                 }
             }

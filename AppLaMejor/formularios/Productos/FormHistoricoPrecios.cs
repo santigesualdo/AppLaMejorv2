@@ -191,46 +191,29 @@ namespace AppLaMejor.formularios.Productos
                     }
 
                     tran = connection.BeginTransaction();
-
-                    QueryManager manager = QueryManager.Instance();
-
-                    // Transaccion - 
-                    // primera ejecucion 
-                    //1. Se cierra el historico anterior con la fecha actual
-
+                    QueryManager manager = QueryManager.Instance();                  
                     string consulta = "";
                     MySqlCommand command = new MySqlCommand(consulta, connection, tran);
 
                     if (!primerHistorico)
                     {
+                        //1. Se cierra el historico anterior con la fecha actual
                         consulta = manager.ClosePrecioHistorico(precioActual.Id);
                         command.CommandText = consulta;
-                        if (!manager.ExecuteSQL(command))
-                        {
-                            tran.Rollback();
-                            return false;
-                        }
+                        command.ExecuteNonQuery();
                     }
 
                     // segunda ejecucion             
                     //2. Se inserta nuevo historico del producto seleccionado, con fecha hasta null   
                     consulta = manager.CreateHistoricoNuevo(precioNuevo, idProducto);
                     command.CommandText = consulta;
-                    if (!manager.ExecuteSQL(command))
-                    {
-                        tran.Rollback();
-                        return false;
-                    }
+                    command.ExecuteNonQuery();
 
                     // tercera ejecucion
                     //3. Se modifica el precio de producto en tabla productos
                     consulta = manager.UpdateProductoPrecio(precioNuevo, idProducto);
                     command.CommandText = consulta;
-                    if (!manager.ExecuteSQL(command))
-                    {
-                        tran.Rollback();
-                        return false;
-                    }
+                    command.ExecuteNonQuery();
 
                     tran.Commit();
                     // Transaccion 
@@ -254,7 +237,7 @@ namespace AppLaMejor.formularios.Productos
         {
             // 0. modificar precio actual.
             // 1. modificar precio en productos.
-            MySqlConnection connection = ConnecionBD.Instance().Connection;
+            MySqlConnection connection = new MySqlConnection(ConnecionBD.Instance().connstring);
             using (connection)
             {
                 MySqlTransaction tran = null;
@@ -278,21 +261,13 @@ namespace AppLaMejor.formularios.Productos
 
                     consulta = manager.UpdatePrecioHistorico(precioNuevo, idProducto);
                     command.CommandText = consulta;
-                    if (!manager.ExecuteSQL(command))
-                    {
-                        tran.Rollback();
-                        return false;
-                    }
+                    command.ExecuteNonQuery();
 
                     // tercera ejecucion
                     //2. Se modifica el precio de producto en tabla productos
                     consulta = manager.UpdateProductoPrecio(precioNuevo, idProducto);
                     command.CommandText = consulta;
-                    if (!manager.ExecuteSQL(command))
-                    {
-                        tran.Rollback();
-                        return false;
-                    }
+                    command.ExecuteNonQuery();
 
                     tran.Commit();
                     // Transaccion 
@@ -301,12 +276,19 @@ namespace AppLaMejor.formularios.Productos
                 catch (Exception e)
                 {
                     FormMessageBox dialog = new FormMessageBox();
-                    dialog.ShowErrorDialog("Error: " + e.Message);
-                    if (tran == null)
+                    try
                     {
-                        return false;
+                        if (tran != null)
+                            tran.Rollback();
                     }
-                    tran.Rollback();
+                    catch (InvalidOperationException ioe)
+                    {
+                        dialog.ShowErrorDialog(ioe.Message);
+                    }
+                    catch (MySqlException es)
+                    {
+                        dialog.ShowErrorDialog(es.Message);
+                    }
                     return false;
                 }
             }

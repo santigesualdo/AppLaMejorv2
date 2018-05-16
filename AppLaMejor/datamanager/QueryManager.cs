@@ -136,22 +136,6 @@ namespace AppLaMejor.datamanager
             }
         }
 
-        // Se usa para transacciones, en caso de escribir varias tablas, si falla alguna, no se escribe nada.
-        public bool ExecuteSQL(MySqlCommand sqlCommand)
-        {
-            try { 
-             if (sqlCommand.Connection.State == ConnectionState.Closed)
-                    sqlCommand.Connection.Open();
-                sqlCommand.ExecuteNonQuery();
-                return true;
-            }
-            catch (Exception ex)
-            {
-                FormMessageBox dialog = new FormMessageBox();
-                dialog.ShowErrorDialog("Ocurrio un fallor en la BD: " + ex.Message);
-                return false;
-            }
-        }
         /* Operaciones Generales END*/
 
         /* Tipos */
@@ -728,7 +712,7 @@ namespace AppLaMejor.datamanager
                 o.tipoOperacion.Id + "," + o.cliente.Id + ", NOW()," +	   
                 VariablesGlobales.userIdLogueado.ToString() + ");";
         }
-        public string InsertOperacion(OperacionProveedor o)
+        public string InsertOperacionProveedor(OperacionProveedor o)
         {
             return "INSERT INTO operacionproveedor (id_tipo_operacion, id_proveedor, fecha, usuario) VALUES (" +
                 o.tipoOperacion.Id + "," + o.proveedor.Id + ", NOW()," +

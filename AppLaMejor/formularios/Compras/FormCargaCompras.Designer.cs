@@ -56,6 +56,8 @@
             this.textBoxMonto = new System.Windows.Forms.TextBox();
             this.textBoxPeso = new System.Windows.Forms.TextBox();
             this.textBoxPesoEntregado = new System.Windows.Forms.TextBox();
+            this.panelTitulo = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.panelGarron = new System.Windows.Forms.Panel();
             this.tableGarron = new System.Windows.Forms.TableLayoutPanel();
             this.bAgregarGarron = new System.Windows.Forms.Button();
@@ -90,8 +92,6 @@
             this.bCancelar = new System.Windows.Forms.Button();
             this.topPanel = new System.Windows.Forms.Panel();
             this.formTittleText = new System.Windows.Forms.Label();
-            this.panelTitulo = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
             this.mainPanel.SuspendLayout();
             this.contentPanel.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -106,6 +106,7 @@
             this.panel2.SuspendLayout();
             this.panelSeleccionado.SuspendLayout();
             this.tablePesoMonto.SuspendLayout();
+            this.panelTitulo.SuspendLayout();
             this.panelGarron.SuspendLayout();
             this.tableGarron.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridGarron)).BeginInit();
@@ -120,7 +121,6 @@
             this.bottomPanel.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.topPanel.SuspendLayout();
-            this.panelTitulo.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainPanel
@@ -416,9 +416,9 @@
             this.tablePesoMonto.Name = "tablePesoMonto";
             this.tablePesoMonto.RowCount = 1;
             this.tablePesoMonto.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tablePesoMonto.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tablePesoMonto.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tablePesoMonto.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tablePesoMonto.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tablePesoMonto.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tablePesoMonto.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tablePesoMonto.Size = new System.Drawing.Size(645, 50);
             this.tablePesoMonto.TabIndex = 2;
             // 
@@ -496,6 +496,28 @@
             this.textBoxPesoEntregado.Tag = "small";
             this.textBoxPesoEntregado.Text = "(ingrese peso)";
             this.textBoxPesoEntregado.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxDecimal_KeyPress);
+            // 
+            // panelTitulo
+            // 
+            this.panelTitulo.Controls.Add(this.label1);
+            this.panelTitulo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelTitulo.Location = new System.Drawing.Point(5, 5);
+            this.panelTitulo.Margin = new System.Windows.Forms.Padding(5);
+            this.panelTitulo.Name = "panelTitulo";
+            this.panelTitulo.Size = new System.Drawing.Size(651, 22);
+            this.panelTitulo.TabIndex = 15;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.label1.Location = new System.Drawing.Point(0, 0);
+            this.label1.Margin = new System.Windows.Forms.Padding(5);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(90, 13);
+            this.label1.TabIndex = 5;
+            this.label1.Tag = "big bold inverted";
+            this.label1.Text = "Agregar Producto";
             // 
             // panelGarron
             // 
@@ -943,28 +965,6 @@
             this.formTittleText.Text = "Compras";
             this.formTittleText.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // panelTitulo
-            // 
-            this.panelTitulo.Controls.Add(this.label1);
-            this.panelTitulo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelTitulo.Location = new System.Drawing.Point(5, 5);
-            this.panelTitulo.Margin = new System.Windows.Forms.Padding(5);
-            this.panelTitulo.Name = "panelTitulo";
-            this.panelTitulo.Size = new System.Drawing.Size(651, 22);
-            this.panelTitulo.TabIndex = 15;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Margin = new System.Windows.Forms.Padding(5);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(90, 13);
-            this.label1.TabIndex = 5;
-            this.label1.Tag = "big bold inverted";
-            this.label1.Text = "Agregar Producto";
-            // 
             // FormCargaCompras
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -996,6 +996,8 @@
             this.panelSeleccionado.ResumeLayout(false);
             this.tablePesoMonto.ResumeLayout(false);
             this.tablePesoMonto.PerformLayout();
+            this.panelTitulo.ResumeLayout(false);
+            this.panelTitulo.PerformLayout();
             this.panelGarron.ResumeLayout(false);
             this.tableGarron.ResumeLayout(false);
             this.tableGarron.PerformLayout();
@@ -1017,8 +1019,6 @@
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.topPanel.ResumeLayout(false);
-            this.panelTitulo.ResumeLayout(false);
-            this.panelTitulo.PerformLayout();
             this.ResumeLayout(false);
 
         }

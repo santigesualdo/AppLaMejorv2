@@ -29,7 +29,7 @@ namespace AppLaMejor.controlmanager
         }
         public static bool InsertVenta(List<VentaDetalle> listDetalleVentas)
         {
-            MySqlConnection connection = ConnecionBD.Instance().Connection;
+            MySqlConnection connection = new MySqlConnection(ConnecionBD.Instance().connstring);
             using (connection)
             {
                 MySqlTransaction tran = null;
@@ -61,21 +61,15 @@ namespace AppLaMejor.controlmanager
 
                     consulta = manager.InsertVenta(newVenta);
                     command.CommandText = consulta;
-                    if (!manager.ExecuteSQL(command))
-                    {
-                        tran.Rollback();
-                    }
-                    
+                    command.ExecuteNonQuery();
+
                     // Detalle de Ventas
                     foreach (VentaDetalle v in listDetalleVentas)
                     {
                         v.Venta = newVenta;
                         consulta = manager.InsertVentaDetalle(v);
                         command.CommandText = consulta;
-                        if (!manager.ExecuteSQL(command))
-                        {
-                            tran.Rollback();
-                        }
+                        command.ExecuteNonQuery();
 
                         TipoProducto tp = TiposManager.Instance().GetTipoProductoKiosco();
                         // Si el producto no es del tipo Kiosco, operamos.
@@ -90,22 +84,14 @@ namespace AppLaMejor.controlmanager
                                 // agrego fecha_egreso y cantidad 0 al productoubicacion
                                 consulta = manager.UpdateProductoUbicacionBaja(pu.Id);
                                 command.CommandText = consulta;
-                                if (!manager.ExecuteSQL(command))
-                                {
-                                    tran.Rollback();
-                                    return false;
-                                }
+                                command.ExecuteNonQuery();
                             }
                             else
                             {
                                 // Caso contrario queda un resto de producto y se resta lo retirado
                                 consulta = manager.UpdateProductoUbicacion(pu.Id, calculo);
                                 command.CommandText = consulta;
-                                if (!manager.ExecuteSQL(command))
-                                {
-                                    tran.Rollback();
-                                    return false;
-                                }
+                                command.ExecuteNonQuery();
                             }
 
 
@@ -114,11 +100,7 @@ namespace AppLaMejor.controlmanager
                             decimal pesoRestanteTotal = decimal.Subtract(p.Cantidad, v.Peso);
                             consulta = manager.UpdateCantidadProducto(p.Id, pesoRestanteTotal);
                             command.CommandText = consulta;
-                            if (!manager.ExecuteSQL(command))
-                            {
-                                tran.Rollback();
-                                return false;
-                            }
+                            command.ExecuteNonQuery();
                         }
                     }
 
@@ -128,14 +110,26 @@ namespace AppLaMejor.controlmanager
                 catch (Exception e)
                 {
                     FormMessageBox dialog = new FormMessageBox();
-                    dialog.ShowErrorDialog("Error: " + e.Message);
+                    try
+                    {
+                        if (tran != null)
+                            tran.Rollback();
+                    }
+                    catch (InvalidOperationException ioe)
+                    {
+                        dialog.ShowErrorDialog(ioe.Message);
+                    }
+                    catch (MySqlException es)
+                    {
+                        dialog.ShowErrorDialog(es.Message);
+                    }
                     return false;
                 }
             }
         }
         public static bool InsertVentaMayorista(List<VentaDetalle> listDetalleVentas, Cliente cliente, Cuenta cuenta)
         {
-            MySqlConnection connection = ConnecionBD.Instance().Connection;
+            MySqlConnection connection = new MySqlConnection(ConnecionBD.Instance().connstring);
             using (connection)
             {
                 MySqlTransaction tran = null;
@@ -171,19 +165,13 @@ namespace AppLaMejor.controlmanager
                     // 1. Insertamos la operacion
                     consulta = manager.InsertOperacion(newOperacion);
                     command.CommandText = consulta;
-                    if (!manager.ExecuteSQL(command))
-                    {
-                        tran.Rollback();
-                    }
+                    command.ExecuteNonQuery();
 
                     newVenta.Operacion = newOperacion;
                     // 2. Se inserta la venta
                     consulta = manager.InsertVenta(newVenta);
                     command.CommandText = consulta;
-                    if (!manager.ExecuteSQL(command))
-                    {
-                        tran.Rollback();
-                    }
+                    command.ExecuteNonQuery();
 
                     // Generacion de vista para el reporte de la ultima venta
                     FuncionesReportes.informeVistaUltimaVenta(idVenta);
@@ -195,11 +183,7 @@ namespace AppLaMejor.controlmanager
                         v.Venta = newVenta;
                         consulta = manager.InsertVentaDetalle(v);
                         command.CommandText = consulta;
-                        if (!manager.ExecuteSQL(command))
-                        {
-                            tran.Rollback();
-                            return false;
-                        }
+                        command.ExecuteNonQuery();
 
                         if (v.Garron != null)
                         {
@@ -212,20 +196,12 @@ namespace AppLaMejor.controlmanager
                                 // Seteamos el egreso del producto ubicacion
                                 consulta = manager.UpdateProductoUbicacionBaja(pug.Id);
                                 command.CommandText = consulta;
-                                if (!manager.ExecuteSQL(command))
-                                {
-                                    tran.Rollback();
-                                    return false;
-                                }
+                                command.ExecuteNonQuery();
 
                                 // Seteamos la fecha baja en garron
                                 consulta = manager.UpdateFechaBajaGarron(v.Garron.Id);
                                 command.CommandText = consulta;
-                                if (!manager.ExecuteSQL(command))
-                                {
-                                    tran.Rollback();
-                                    return false;
-                                }
+                                command.ExecuteNonQuery();
                             }
                             else
                             {
@@ -246,22 +222,14 @@ namespace AppLaMejor.controlmanager
                                 // agrego fecha_egreso y cantidad 0 al productoubicacion
                                 consulta = manager.UpdateProductoUbicacionBaja(pu.Id);
                                 command.CommandText = consulta;
-                                if (!manager.ExecuteSQL(command))
-                                {
-                                    tran.Rollback();
-                                    return false;
-                                }
+                                command.ExecuteNonQuery();
                             }
                             else
                             {
                                 // Caso contrario queda un resto de producto y se resta lo retirado
                                 consulta = manager.UpdateProductoUbicacion(pu.Id, calculo);
                                 command.CommandText = consulta;
-                                if (!manager.ExecuteSQL(command))
-                                {
-                                    tran.Rollback();
-                                    return false;
-                                }
+                                command.ExecuteNonQuery();
                             }
 
                             // 3.3 Operamos en tabla Producto
@@ -269,11 +237,7 @@ namespace AppLaMejor.controlmanager
                             decimal pesoRestanteTotal = decimal.Subtract(p.Cantidad, v.Peso);
                             consulta = manager.UpdateCantidadProducto(p.Id, pesoRestanteTotal);
                             command.CommandText = consulta;
-                            if (!manager.ExecuteSQL(command))
-                            {
-                                tran.Rollback();
-                                return false;
-                            }
+                            command.ExecuteNonQuery();
                         }                        
                     }
 
@@ -289,34 +253,22 @@ namespace AppLaMejor.controlmanager
 
                     consulta = manager.InsertMovCuenta(mcDebito);
                     command.CommandText = consulta;
-                    if (!manager.ExecuteSQL(command))
-                    {
-                        tran.Rollback();
-                    }
+                    command.ExecuteNonQuery();
 
                     // Modifica vista de reporte ultima venta.
                     consulta = manager.ReportVistaUltimaVenta(cliente.Id, newOperacion.Id);
                     command.CommandText = consulta;
-                    if (!manager.ExecuteSQL(command))
-                    {
-                        tran.Rollback();
-                    }
+                    command.ExecuteNonQuery();
 
                     // Modifica vista de reporte ultima venta por cliente.
                     consulta = manager.ReportVistaUltimaVentaPorCliente(cliente.Id);
                     command.CommandText = consulta;
-                    if (!manager.ExecuteSQL(command))
-                    {
-                        tran.Rollback();
-                    }
+                    command.ExecuteNonQuery();
 
                     // Modifica vista de reporte vista seleccionada
                     consulta = manager.ReportVistaVentaSeleccionada(idVenta);
                     command.CommandText = consulta;
-                    if (!manager.ExecuteSQL(command))
-                    {
-                        tran.Rollback();
-                    }
+                    command.ExecuteNonQuery();
 
                     tran.Commit();
                     return true;
@@ -324,12 +276,19 @@ namespace AppLaMejor.controlmanager
                 catch (Exception e)
                 {
                     FormMessageBox dialog = new FormMessageBox();
-                    dialog.ShowErrorDialog("Error: " + e.Message);
-                    if (tran == null)
+                    try
                     {
-                        return false;
+                        if (tran != null)
+                            tran.Rollback();
                     }
-                    tran.Rollback();
+                    catch (InvalidOperationException ioe)
+                    {
+                        dialog.ShowErrorDialog(ioe.Message);
+                    }
+                    catch (MySqlException es)
+                    {
+                        dialog.ShowErrorDialog(es.Message);
+                    }
                     return false;
                 }
             }
