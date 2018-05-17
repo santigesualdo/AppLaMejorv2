@@ -64,7 +64,6 @@ namespace AppLaMejor.formularios.Compras
                 {
                     if (FuncionesCompras.ConfirmarEntregaProductosRestantesTransaction(idCompra))
                     {
-                        // TODO: 
                         dialog.ShowErrorDialog("Los productos que faltaban entregar de la compra #" + idCompra + " fueron registrados \ncon exito y ubicados en Deposito");
                         CargarDataGrid();
                     }

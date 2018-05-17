@@ -41,7 +41,7 @@ namespace AppLaMejor.formularios
             // Configuracion visual del grid
             dataGridNuevaVentaDetalle.ColumnHeadersVisible= false;
             dataGridNuevaVentaDetalle.AllowUserToAddRows = false;
-            dataGridNuevaVentaDetalle.Columns.Add(new DataGridViewImageColumn(){Image = Properties.Resources.x_icon_30x30,Width = 30});
+            dataGridNuevaVentaDetalle.Columns.Add(new DataGridViewImageColumn(){Image = Properties.Resources.x_icon_30x30_white,Width = 30});
             dataGridNuevaVentaDetalle.DataSource = currentVentasDetalle;
             dataGridNuevaVentaDetalle.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             dataGridNuevaVentaDetalle.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -138,7 +138,6 @@ namespace AppLaMejor.formularios
                 return;
             }
 
-            // TODO: Chequear que ese producto exista en salon de ventas
             if (!FuncionesProductos.CheckProductExistUbicacionSalida(product.Id))
             {
                 MyTextTimer.TStartFade("El producto: "+product.DescripcionBreve+" no existe en la ubicacion de salida "+FuncionesGlobales.ObtenerUbicacionSalida().Descripcion+"\nAsegurese de mover mercaderia a esta ubicacion.", statusStrip1, tsslMensaje, MyTextTimer.TIME_LONG);
@@ -307,8 +306,26 @@ namespace AppLaMejor.formularios
             {
                 string text = ((TextBox)sender).Text;
                 productoKioscoSelected = FuncionesProductos.GetProductoByDescrip(text);
-                textBoxCantidadK.Focus();
+
+
                 
+
+                textBoxCantidadK.Focus();
+
+                decimal pesoMax = FuncionesProductos.GetPesoMaxByProdByUbi(productoKioscoSelected, FuncionesGlobales.ObtenerUbicacionSalida().Id);
+
+                if (pesoMax.Equals(decimal.Zero))
+                {
+                    FormMessageBox dialog = new FormMessageBox();
+                    dialog.ShowErrorDialog("Ocurrio un error, el peso no puede ser 0.");
+                    return;
+                }
+
+                // Si ya utilizamos este producto en un movimiento anterior para la misma ubicacion, el peso max disponible cambia
+                pesoMax = CheckProductoUbicacionUtilizado(pesoMax, productoKioscoSelected, FuncionesGlobales.ObtenerUbicacionSalida().Id);
+
+                textBoxCantidadK.Text = "(CantidadMax: " + pesoMax.ToString() + ")";
+
             }
         }
 
@@ -323,6 +340,23 @@ namespace AppLaMejor.formularios
             }
         }
 
+        
+
+        private decimal CheckProductoUbicacionUtilizado(decimal pesoMax, Producto producto, int origenSeleccionado)
+        {
+            if (listDetalleVentas.Count.Equals(0))
+                return pesoMax;
+
+            decimal pesoMaxNuevo = pesoMax;
+            foreach (VentaDetalle m in listDetalleVentas)
+            {
+                if (m.Producto.Id.Equals(producto.Id))
+                {
+                    pesoMaxNuevo -= m.Peso;
+                }
+            }
+            return pesoMaxNuevo;
+        }
 
 
         //Proceso:

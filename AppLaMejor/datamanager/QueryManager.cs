@@ -808,10 +808,11 @@ namespace AppLaMejor.datamanager
         public string GetProductoUbicacionTotal()
         {
             return "select case when g.id is null then concat('Producto: ', p.descripcion_breve, ' ',COALESCE(substr(p.id_codigo_barra,2,4), 'SIN PLU')) else concat('Garron: ', g.numero, ' ', g.peso, ' kg. ', gt.descripcion) end as mercaderia, " +
-            "u.descripcion as ubicacion, pu.peso as peso from productoubicacion pu " +
+            "u.descripcion as ubicacion, pu.peso as peso,  pt.descripcion AS TipoProducto from productoubicacion pu " +
             "left join garron g on pu.id_garron is not null and g.id = pu.id_garron " +
             "left join producto p on pu.id_producto is not null and p.id = pu.id_producto " +
             "left join garrontipo gt on gt.id = g.id_tipo_garron " +
+            "left join productotipo pt on pt.id = p.id_producto_tipo " +
             "inner join ubicacion u on u.id = pu.id_ubicacion " +
             "and fecha_egreso is null " +
             "order by pu.id_ubicacion, pu.id_producto, pu.id_garron ";
@@ -846,12 +847,17 @@ namespace AppLaMejor.datamanager
         }
         public string GetProductosSearchDataKiosco()
         {
+            return "select p.id,p.descripcion_breve from productoubicacion pu inner join producto p on p.id = pu.id_producto where pu.fecha_egreso is NULL " +
+            " and pu.id_ubicacion = '" + FuncionesGlobales.ObtenerUbicacionSalida().Id + "' and p.fecha_baja is null and p.id_producto_tipo = 4 ;";
+        }
+        public string GetProductosSearchDataAll()
+        {
             return " SELECT" +
             " p.id," +
             " p.descripcion_breve " +
             " FROM " +
             " producto p " +
-            " where p.fecha_baja is null and p.id_producto_tipo = 4 ";
+            " where p.fecha_baja is null  ";
         }
 
         public string GetProductoByPLU(string plu)

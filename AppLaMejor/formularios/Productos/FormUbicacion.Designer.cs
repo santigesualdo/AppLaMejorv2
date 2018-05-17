@@ -60,6 +60,9 @@
             this.tittleText = new System.Windows.Forms.Label();
             this.topPanel = new System.Windows.Forms.Panel();
             this.formTittleText = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.comboTipoProducto = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.mainPanel.SuspendLayout();
             this.contentPanel.SuspendLayout();
             this.groupDataGrid.SuspendLayout();
@@ -77,6 +80,7 @@
             this.filtro3Panel.SuspendLayout();
             this.titlePanel.SuspendLayout();
             this.topPanel.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainPanel
@@ -317,10 +321,12 @@
             this.filterTableLayoutPanel.AutoSize = true;
             this.filterTableLayoutPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.filterTableLayoutPanel.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
-            this.filterTableLayoutPanel.ColumnCount = 3;
-            this.filterTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.filterTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.filterTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.filterTableLayoutPanel.ColumnCount = 4;
+            this.filterTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.filterTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.filterTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.filterTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.filterTableLayoutPanel.Controls.Add(this.panel1, 3, 0);
             this.filterTableLayoutPanel.Controls.Add(this.filtro1Panel, 0, 0);
             this.filterTableLayoutPanel.Controls.Add(this.filtro2Panel, 0, 0);
             this.filterTableLayoutPanel.Controls.Add(this.filtro3Panel, 0, 0);
@@ -338,17 +344,17 @@
             this.filtro1Panel.Controls.Add(this.comboTipoFilter);
             this.filtro1Panel.Controls.Add(this.filter1Text);
             this.filtro1Panel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.filtro1Panel.Location = new System.Drawing.Point(732, 4);
+            this.filtro1Panel.Location = new System.Drawing.Point(550, 4);
             this.filtro1Panel.Name = "filtro1Panel";
             this.filtro1Panel.Padding = new System.Windows.Forms.Padding(5);
-            this.filtro1Panel.Size = new System.Drawing.Size(359, 54);
+            this.filtro1Panel.Size = new System.Drawing.Size(266, 54);
             this.filtro1Panel.TabIndex = 3;
             // 
             // comboTipoFilter
             // 
             this.comboTipoFilter.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.comboTipoFilter.FormattingEnabled = true;
-            this.comboTipoFilter.Location = new System.Drawing.Point(114, 25);
+            this.comboTipoFilter.Location = new System.Drawing.Point(68, 25);
             this.comboTipoFilter.MaximumSize = new System.Drawing.Size(120, 0);
             this.comboTipoFilter.MinimumSize = new System.Drawing.Size(140, 0);
             this.comboTipoFilter.Name = "comboTipoFilter";
@@ -360,7 +366,7 @@
             // 
             this.filter1Text.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.filter1Text.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.filter1Text.Location = new System.Drawing.Point(20, 5);
+            this.filter1Text.Location = new System.Drawing.Point(-26, 5);
             this.filter1Text.Margin = new System.Windows.Forms.Padding(0);
             this.filter1Text.Name = "filter1Text";
             this.filter1Text.Size = new System.Drawing.Size(320, 18);
@@ -373,10 +379,10 @@
             this.filtro2Panel.Controls.Add(this.filterGarronText);
             this.filtro2Panel.Controls.Add(this.filter2Text);
             this.filtro2Panel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.filtro2Panel.Location = new System.Drawing.Point(368, 4);
+            this.filtro2Panel.Location = new System.Drawing.Point(4, 4);
             this.filtro2Panel.Name = "filtro2Panel";
             this.filtro2Panel.Padding = new System.Windows.Forms.Padding(5);
-            this.filtro2Panel.Size = new System.Drawing.Size(357, 54);
+            this.filtro2Panel.Size = new System.Drawing.Size(266, 54);
             this.filtro2Panel.TabIndex = 2;
             // 
             // filterGarronText
@@ -384,7 +390,7 @@
             this.filterGarronText.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.filterGarronText.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.filterGarronText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.filterGarronText.Location = new System.Drawing.Point(114, 26);
+            this.filterGarronText.Location = new System.Drawing.Point(69, 26);
             this.filterGarronText.MaximumSize = new System.Drawing.Size(140, 30);
             this.filterGarronText.MinimumSize = new System.Drawing.Size(140, 22);
             this.filterGarronText.Name = "filterGarronText";
@@ -399,7 +405,7 @@
             this.filter2Text.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.filter2Text.Location = new System.Drawing.Point(5, 5);
             this.filter2Text.Name = "filter2Text";
-            this.filter2Text.Size = new System.Drawing.Size(347, 18);
+            this.filter2Text.Size = new System.Drawing.Size(256, 18);
             this.filter2Text.TabIndex = 1;
             this.filter2Text.Text = "Por Garron - Numero";
             this.filter2Text.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -409,10 +415,10 @@
             this.filtro3Panel.Controls.Add(this.filterProductoPLU);
             this.filtro3Panel.Controls.Add(this.filter3Text);
             this.filtro3Panel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.filtro3Panel.Location = new System.Drawing.Point(4, 4);
+            this.filtro3Panel.Location = new System.Drawing.Point(277, 4);
             this.filtro3Panel.Name = "filtro3Panel";
             this.filtro3Panel.Padding = new System.Windows.Forms.Padding(5);
-            this.filtro3Panel.Size = new System.Drawing.Size(357, 54);
+            this.filtro3Panel.Size = new System.Drawing.Size(266, 54);
             this.filtro3Panel.TabIndex = 1;
             // 
             // filterProductoPLU
@@ -420,7 +426,7 @@
             this.filterProductoPLU.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.filterProductoPLU.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.filterProductoPLU.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.filterProductoPLU.Location = new System.Drawing.Point(109, 26);
+            this.filterProductoPLU.Location = new System.Drawing.Point(64, 26);
             this.filterProductoPLU.MaximumSize = new System.Drawing.Size(140, 30);
             this.filterProductoPLU.MinimumSize = new System.Drawing.Size(140, 22);
             this.filterProductoPLU.Name = "filterProductoPLU";
@@ -435,7 +441,7 @@
             this.filter3Text.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.filter3Text.Location = new System.Drawing.Point(5, 5);
             this.filter3Text.Name = "filter3Text";
-            this.filter3Text.Size = new System.Drawing.Size(347, 18);
+            this.filter3Text.Size = new System.Drawing.Size(256, 18);
             this.filter3Text.TabIndex = 4;
             this.filter3Text.Text = "Por Producto - PLU";
             this.filter3Text.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -485,6 +491,41 @@
             this.formTittleText.Text = "Ubicacion de Productos";
             this.formTittleText.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.comboTipoProducto);
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(823, 4);
+            this.panel1.Name = "panel1";
+            this.panel1.Padding = new System.Windows.Forms.Padding(5);
+            this.panel1.Size = new System.Drawing.Size(268, 54);
+            this.panel1.TabIndex = 4;
+            // 
+            // comboTipoProducto
+            // 
+            this.comboTipoProducto.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.comboTipoProducto.FormattingEnabled = true;
+            this.comboTipoProducto.Location = new System.Drawing.Point(69, 25);
+            this.comboTipoProducto.MaximumSize = new System.Drawing.Size(120, 0);
+            this.comboTipoProducto.MinimumSize = new System.Drawing.Size(140, 0);
+            this.comboTipoProducto.Name = "comboTipoProducto";
+            this.comboTipoProducto.Size = new System.Drawing.Size(140, 21);
+            this.comboTipoProducto.TabIndex = 2;
+            this.comboTipoProducto.SelectedIndexChanged += new System.EventHandler(this.comboTipoProducto_SelectedIndexChanged);
+            // 
+            // label1
+            // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(-25, 5);
+            this.label1.Margin = new System.Windows.Forms.Padding(0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(320, 18);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Por Tipo Producto";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
             // FormUbicacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -519,6 +560,7 @@
             this.filtro3Panel.PerformLayout();
             this.titlePanel.ResumeLayout(false);
             this.topPanel.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -553,5 +595,8 @@
         private System.Windows.Forms.Panel topPanel;
         private System.Windows.Forms.Label formTittleText;
         private System.Windows.Forms.Button bMoverProducto;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.ComboBox comboTipoProducto;
+        private System.Windows.Forms.Label label1;
     }
 }

@@ -14,6 +14,7 @@ namespace AppLaMejor.formularios.Compras
 { 
      public partial class FormCargaCompras : Form
     {
+        // TODO : CargaCompras - No debe poder ingresar dos veces el mismo producto.
         List<Garron> listGarron;
         List<Producto> listProducto;
 
@@ -28,6 +29,10 @@ namespace AppLaMejor.formularios.Compras
         decimal currentPagoParcial;
 
         bool proveedorSeleccionado;
+
+        int currentModoPeso;
+        int MODO_KG = 1;
+        int MODO_UNIDAD = 2;
 
         public FormCargaCompras()
         {
@@ -44,6 +49,7 @@ namespace AppLaMejor.formularios.Compras
             LoadGrids();
             LoadLists();
 
+            currentModoPeso = MODO_KG;
             proveedorSeleccionado = false;
             currentIdCuentaProveedor = 0;
         }
@@ -103,8 +109,8 @@ namespace AppLaMejor.formularios.Compras
             
             table.Columns.Add("Producto", typeof(string));
             table.Columns.Add("Monto", typeof(string));
-            table.Columns.Add("Peso", typeof(string));
-            table.Columns.Add("Peso Entregado", typeof(string));
+            table.Columns.Add("Cant.", typeof(string));
+            table.Columns.Add("Cant. Entregada", typeof(string));
             table.Rows.Clear();
 
             return table;
@@ -146,8 +152,8 @@ namespace AppLaMejor.formularios.Compras
 
         private void LoadTextBoxDescripProd()
         {
-            string consulta = QueryManager.Instance().GetProductosSearchDataConPlu();
-            AutoCompleteStringCollection collection = QueryManager.Instance().GetAutoCompleteCollection(ConnecionBD.Instance().Connection, consulta, 2);
+            string consulta = QueryManager.Instance().GetProductosSearchDataAll();
+            AutoCompleteStringCollection collection = QueryManager.Instance().GetAutoCompleteCollection(ConnecionBD.Instance().Connection, consulta, 1);
             if (collection != null)
             {
                 textBoxDescrip.AutoCompleteMode = AutoCompleteMode.Suggest;
@@ -163,6 +169,7 @@ namespace AppLaMejor.formularios.Compras
                 string text = ((TextBox)sender).Text;
                 lastProdSelected = FuncionesProductos.GetProductoByPlu(text);
                 labelProdSelec.Text = lastProdSelected.DescripcionBreve;
+                CheckTipoProducto(lastProdSelected);
                 textBoxDescrip.Text = string.Empty;
             }
         }
@@ -174,7 +181,35 @@ namespace AppLaMejor.formularios.Compras
                 string text = ((TextBox)sender).Text;
                 lastProdSelected = FuncionesProductos.GetProductoByDescrip(text);
                 labelProdSelec.Text = lastProdSelected.DescripcionBreve;
+                CheckTipoProducto(lastProdSelected);
                 textBoxPLU.Text = string.Empty;
+            }
+        }
+
+        private void CheckTipoProducto(Producto lastProdSelected)
+        {
+            // Producto tipo kiosco por unidades
+            if (lastProdSelected.TipoProducto.Id.Equals(4))
+            {
+                currentModoPeso = MODO_UNIDAD;
+                Peso.Text = "Unidades";
+                label4.Visible = false;
+                textBoxPesoEntregado.Visible = false;
+                textBoxPeso.KeyPress -= textBoxDecimal_KeyPress;
+                textBoxPeso.KeyPress += textBoxInteger_KeyPress;
+                textBoxPeso.Text = "1";
+                textBoxPeso.Focus();
+            }
+            else
+            // Productos por KG.
+            {
+                currentModoPeso = MODO_KG;
+                Peso.Text = "Peso";
+                label4.Visible = true;
+                textBoxPesoEntregado.Visible = true;
+                textBoxPeso.KeyPress -= textBoxInteger_KeyPress;
+                textBoxPeso.KeyPress += textBoxDecimal_KeyPress;
+                textBoxPeso.Focus();
             }
         }
 
@@ -295,7 +330,8 @@ namespace AppLaMejor.formularios.Compras
             textBoxPeso.Text = "(ingrese peso del producto)";
             textBoxPesoEntregado.Text = "";
             textBoxMonto.Text = "(ingrese monto)";
-            textBoxPLU.Focus();
+            textBoxPLU.Text = "(buscar por plu)";
+            label1.Focus();
         }
 
         private void AgregarProductoToGrid(Producto producto)
@@ -310,7 +346,11 @@ namespace AppLaMejor.formularios.Compras
 
             listProducto.Add(producto);
 
-            currentCompraDetalleProducto.Rows.Add(producto.DescripcionBreve, "$ " + textBoxMonto.Text, textBoxPeso.Text + " kg.", textBoxPesoEntregado.Text + " kg.");
+            if (currentModoPeso.Equals(MODO_KG))
+                currentCompraDetalleProducto.Rows.Add(producto.DescripcionBreve, "$ " + textBoxMonto.Text, textBoxPeso.Text + " kg.", textBoxPesoEntregado.Text + " kg.");
+            
+            if (currentModoPeso.Equals(MODO_UNIDAD))
+                currentCompraDetalleProducto.Rows.Add(producto.DescripcionBreve, "$ " + textBoxMonto.Text, " x"+ textBoxPeso.Text, " x" + textBoxPesoEntregado.Text);
 
             currentMontoCompra += producto.Precio;
 
@@ -340,11 +380,14 @@ namespace AppLaMejor.formularios.Compras
                 textBoxMonto.Focus();
                 return false;
             }
-            if (textBoxPesoEntregado.Text.Equals(""))
+            if (textBoxPesoEntregado.Text.Equals("") && currentModoPeso.Equals(MODO_KG))
             {
                 dialog.ShowErrorDialog("Se debe indicar un peso entregado para cada producto comprado. ");             
                 textBoxPeso_Leave(null, null);
                 return false;
+            }else if (textBoxPesoEntregado.Text.Equals("") && currentModoPeso.Equals(MODO_UNIDAD))
+            {
+                textBoxPesoEntregado.Text = textBoxPeso.Text;
             }
 
             return true;        
@@ -549,6 +592,11 @@ namespace AppLaMejor.formularios.Compras
             FuncionesGlobales.DecimalTextBox_KeyPress(sender, e);
         }
 
+        private void textBoxInteger_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            FuncionesGlobales.KeyPressIntegerTextField(sender, e);
+        }
+
         private void checkTotalPagado_CheckedChanged(object sender, EventArgs e)
         {
             if (checkTotalPagado.Checked)
@@ -571,6 +619,28 @@ namespace AppLaMejor.formularios.Compras
         private void textBoxPeso_Leave(object sender, EventArgs e)
         {
             textBoxPesoEntregado.Text = textBoxPeso.Text;
-        }    
+        }
+
+        private void textBoxPeso_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)13)
+            {
+                textBoxMonto.Focus();
+                return;
+            }
+
+            FuncionesGlobales.DecimalTextBox_KeyPress(sender, e);
+        }
+
+        private void textBoxMonto_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)13)
+            {
+                bAgregarProducto_Click(null, null);
+                return;
+            }
+
+            FuncionesGlobales.DecimalTextBox_KeyPress(sender, e);
+        }
     }
 }

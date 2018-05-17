@@ -77,6 +77,7 @@ namespace AppLaMejor.controlmanager
                     text = text.Remove(i, 1);
                 }
             }
+            
         }
         public static Label StyleLabel(string name)
         {
@@ -92,7 +93,6 @@ namespace AppLaMejor.controlmanager
             label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             return label;
         }
-
         public static int GetLastInsertId(MySqlCommand command)
         {
             IDataReader reader = null;
@@ -119,7 +119,6 @@ namespace AppLaMejor.controlmanager
             return id;
 
         }
-
         public static int obtenerIndexClienteDeListFromGrid(DataGridView grid)													  
         {
             // para que funcione la query tiene que tener un campo "id"
@@ -135,7 +134,6 @@ namespace AppLaMejor.controlmanager
             int r = dr.Field<int>("id_venta");
             return r;
         }
-
         public static int obtenerIndexCompraDeListFromGrid(DataGridView grid)
         {
             // para que funcione la query tiene que tener un campo "id"
@@ -150,17 +148,13 @@ namespace AppLaMejor.controlmanager
             BindingManagerBase bm = grid.BindingContext[grid.DataSource, grid.DataMember];
             DataRow dr = ((DataRowView)bm.Current).Row;
             return dr.Field<int>("id_proveedor");
-        }
-
-
-
+        }        
         public static void TextBoxLeaveOnEnter_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter) {
                 SendKeys.Send("{TAB}");
             } 
         }
-
         public static Ubicacion ObtenerUbicacionEntrada()
         {
             QueryManager manager = QueryManager.Instance();
@@ -169,7 +163,6 @@ namespace AppLaMejor.controlmanager
             DataNamesMapper<Ubicacion> dtnm = new DataNamesMapper<Ubicacion>();
             return dtnm.Map(table).ToList().First();
         }
-
         public static Ubicacion ObtenerUbicacionSalida()
         {
             QueryManager manager = QueryManager.Instance();

@@ -101,7 +101,6 @@ namespace AppLaMejor.formularios
                 case "Carga Nueva Compra": boton.Click += new System.EventHandler(IniciarCompras); break;
                 case "Caja Mayorista": boton.Click += new System.EventHandler(IniciarCajaMay); break;
                 case "Ubicacion de Productos": boton.Click += new System.EventHandler(IniciarUbicacionProductos); break;
-                case "Ubicacion": boton.Click += new System.EventHandler(IniciarUbicacion); break;
                 case "Deposte": boton.Click += new System.EventHandler(IniciarDeposte); break;
 				case "Reportes": boton.Click += new System.EventHandler(IniciarReportes); break;
                 case "Compras con Productos a Entregar": boton.Click+= new System.EventHandler(IniciarComprasConProduFaltante); break;
@@ -113,11 +112,6 @@ namespace AppLaMejor.formularios
         {
             FormEntregaProductosPendientes form = new FormEntregaProductosPendientes();
             form.ShowDialog();
-        }
-
-        private void IniciarUbicacion(object sender, EventArgs e)
-        {
-            // TODO: ABM DE Ubicaciones.
         }
 
         private void IniciarDeposte(object sender, EventArgs e)

@@ -12,8 +12,6 @@ namespace AppLaMejor.formularios.Util
 {
     public partial class FormMovDetalle : Form
     {
-        // TODO: Validar que exista una cuenta para iniciar.
-        // TODO: Validar al "Confirmar Operacion" que exista una cuenta tambien.
 
         DataTable table, tableCuentas, tableMovCuentas, tableMovCuentasPaginator;
         DataView dv;

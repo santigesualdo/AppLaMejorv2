@@ -22,6 +22,7 @@ namespace AppLaMejor.formularios.Productos
             InitializeComponent();
             CargarGrid();
             LoadComboUbicacion();
+            LoadComboTipoProducto();
             ApplicationLookAndFeel.ApplyThemeToAll(this);
             
         }
@@ -40,6 +41,22 @@ namespace AppLaMejor.formularios.Productos
             comboTipoFilter.DisplayMember = "Descripcion";
             comboTipoFilter.DataSource = objects;
             comboTipoFilter.SelectedIndex = -1;
+        }
+
+        private void LoadComboTipoProducto()
+        {
+            // Ejemplo usar nomenclador para filtro
+            TipoProducto tpvacio = new TipoProducto();
+            tpvacio.Id = 0;
+            tpvacio.Descripcion = "";
+            List<TipoProducto> listTipoProductos = TiposManager.Instance().GetTipoProductoList();
+            listTipoProductos.Add(tpvacio);
+            listTipoProductos = listTipoProductos.OrderBy(x => x.Id).ToList();
+            BindingList<TipoProducto> objects = new BindingList<TipoProducto>(listTipoProductos);
+            comboTipoProducto.ValueMember = null;
+            comboTipoProducto.DisplayMember = "Descripcion";
+            comboTipoProducto.DataSource = objects;
+            comboTipoProducto.SelectedIndex = -1;
         }
 
         private void CargarGrid()
@@ -149,6 +166,27 @@ namespace AppLaMejor.formularios.Productos
         private void bCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void comboTipoProducto_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ComboBox combo = (ComboBox)sender;
+            TipoProducto tipoProducto = (TipoProducto)combo.SelectedValue;
+
+            //Aplicar filtro a data grid por texto fecha en Razon Social
+            if (tipoProducto != null && !string.IsNullOrEmpty(tipoProducto.Descripcion))
+            {
+                StringBuilder filter = new StringBuilder();
+                if (!(string.IsNullOrEmpty(tipoProducto.Descripcion)))
+                {
+                    filter.Append("TipoProducto = '" + tipoProducto.Descripcion + "'");
+                    (dataGridPU.DataSource as DataTable).DefaultView.RowFilter = filter.ToString();
+                }
+            }
+            else
+            {
+                (dataGridPU.DataSource as DataTable).DefaultView.RowFilter = string.Empty;
+            }
         }
     }
 

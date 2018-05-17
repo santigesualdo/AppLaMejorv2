@@ -16,7 +16,6 @@ namespace AppLaMejor.formularios
 {
     public partial class FormDeposteGarron : Form
     {
-        // TODO: FUNCIONALIDAD LIMPIAR LOS PANELES LUEGO DE DEPOSTE CON EXITO
         public static int MODO_GARRONCOMPLETO = 0;
         public static int MODO_GARRONDEPOSTADO = 1;
         int currentModo;

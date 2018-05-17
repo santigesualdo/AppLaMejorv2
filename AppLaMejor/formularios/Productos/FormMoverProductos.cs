@@ -16,8 +16,6 @@ namespace AppLaMejor.formularios.Productos
 {
     public partial class FormMoverProductos : Form
     {
-        // REGLAS DE FORMULARIO
-        // TODO: FUNCIONALIDAD Hacer scrolleable el panel de movimientos
 
         public static int MODO_MOVERMERCADERIA = 0;
         public static int MODO_UBICARMERCADERIACOMPRA = 1;
@@ -113,8 +111,7 @@ namespace AppLaMejor.formularios.Productos
                 currentMovimiento = new MovimientoMercaderia();
                 currentMovimiento.confirmado = false;
 
-                // TODO: MODELO Definir con el cliente ubicacion inicio y ubicacion salida.
-                currentMovimiento.origen = TiposManager.Instance().GetUbicacionById(4);
+                currentMovimiento.origen = FuncionesGlobales.ObtenerUbicacionEntrada();
                 currentMovimiento.garron = g;
                 currentMovimiento.peso = g.Peso;
 
@@ -909,5 +906,6 @@ namespace AppLaMejor.formularios.Productos
             LimpiarMovimientos();
             Cargar();
         }
+
     }
 }
