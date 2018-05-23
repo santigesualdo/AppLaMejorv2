@@ -310,12 +310,14 @@ namespace AppLaMejor.formularios
                     // Exigimos que Qendra este abierto. Sino, lo abrimos.
                     if (!FuncionesGlobales.IsProccessOpen("Qendra"))
                     {
-                        dialog.ShowConfirmationDialog("Es necesario abrir la App QENDRA para actualizar precios. \nAbriendo QENDRA, intente nuevamente cuando la aplicacion este abierta.");
-                        String path = FuncionesGlobales.GetParametro(VariablesGlobales.QENDRAPATH_PARAMNAME);
+                        if (dialog.ShowConfirmationDialog("Es necesario abrir la App QENDRA para actualizar precios. \nAbriendo QENDRA, intente nuevamente cuando la aplicacion este abierta."))
+                        {
+                            String path = FuncionesGlobales.GetParametro(VariablesGlobales.QENDRAPATH_PARAMNAME);
 
-                        // Abrimos la aplicacion y cortamos la exportación hasta que Qendra este activo.
-                        Process.Start(path);
-                        return;
+                            // Abrimos la aplicacion y cortamos la exportación hasta que Qendra este activo.
+                            Process.Start(path);
+                            return;
+                        }
                     }
                 }
             }

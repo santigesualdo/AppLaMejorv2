@@ -1097,9 +1097,10 @@ namespace AppLaMejor.datamanager
         }
         public string GetPreciosToExport()
         {
-            return "SELECT CONCAT('CARNICERIA;',cast(SUBSTR(p.id_codigo_barra, 2, 4) AS UNSIGNED),';',p.descripcion_breve,';',cast(SUBSTR(p.id_codigo_barra, 2, 4) AS UNSIGNED),';',p.precio,';','0.00;P;0;;'	) " +
+            return "SELECT CONCAT('CARNICERIA;',p.id_codigo_barra,';',p.descripcion_breve,';',p.id_codigo_barra,';',p.precio,';','0.00;P;0;;'	) " +
                     "FROM producto p where 	p.id_codigo_barra is not null order by p.id_codigo_barra";
         }
+        // TODO : Agregar nuevo producto, falta validar mejor PLU.
         public string GetParametroByName(string name)
         {
             return "SELECT value FROM parametros where name = '" + name + "';";
