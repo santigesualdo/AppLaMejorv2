@@ -97,15 +97,22 @@ namespace AppLaMejor.formularios
                 case "Caja": boton.Click += new System.EventHandler(IniciarCaja); break;
                 case "Movimiento Cuentas Clientes": boton.Click += new System.EventHandler(IniciarMovimientoCuentas); break;
                 case "Movimiento Cuentas Proveedores": boton.Click += new System.EventHandler(IniciarMovimientoCuentasProveedores); break;
-                case "Ventas Caja": boton.Click += new System.EventHandler(IniciarVentasCaja); break;
-                case "Carga Nueva Compra": boton.Click += new System.EventHandler(IniciarCompras); break;
+                case "Ventas": boton.Click += new System.EventHandler(IniciarVentasCaja); break;
+                case "Carga Nueva Compra": boton.Click += new System.EventHandler(IniciarCargaCompras); break;
                 case "Caja Mayorista": boton.Click += new System.EventHandler(IniciarCajaMay); break;
                 case "Ubicacion de Productos": boton.Click += new System.EventHandler(IniciarUbicacionProductos); break;
                 case "Deposte": boton.Click += new System.EventHandler(IniciarDeposte); break;
 				case "Reportes": boton.Click += new System.EventHandler(IniciarReportes); break;
                 case "Compras con Productos a Entregar": boton.Click+= new System.EventHandler(IniciarComprasConProduFaltante); break;
+                case "Compras": boton.Click += new System.EventHandler(IniciarCompras); break;
             }
             return boton;
+        }
+
+        private void IniciarCompras(object sender, EventArgs e)
+        {
+            FormCompras formCompras = new FormCompras();
+            formCompras.ShowDialog();
         }
 
         private void IniciarComprasConProduFaltante(object sender, EventArgs e)
@@ -153,7 +160,7 @@ namespace AppLaMejor.formularios
         }
         private void IniciarVentasCaja(object sender, EventArgs e)
         {
-            FormVentasCaja formVentasCaja = new FormVentasCaja();
+            FormVentas formVentasCaja = new FormVentas();
             formVentasCaja.ShowDialog();
         }
         private void IniciarMovimientoCuentasProveedores(object sender, EventArgs e)
@@ -161,7 +168,7 @@ namespace AppLaMejor.formularios
             FormMovCuentasProveedores formMovCuentasProveedores = new FormMovCuentasProveedores();
             formMovCuentasProveedores.ShowDialog();
         }
-        private void IniciarCompras(object sender, EventArgs e)
+        private void IniciarCargaCompras(object sender, EventArgs e)
         {
             FormCargaCompras formCompras = new FormCargaCompras();
             formCompras.ShowDialog();

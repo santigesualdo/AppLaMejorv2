@@ -48,8 +48,7 @@ namespace AppLaMejor.controlmanager
 
                     // Operacion
                     Operacion newOperacion = new Operacion();
-                    VariablesGlobales.idOperacion = FuncionesOperaciones.GetNextIdOperacion();
-                    newOperacion.Id = VariablesGlobales.idOperacion;
+                    newOperacion.Id = 0;
                     
                     // Venta
                     decimal montoTotal = listDetalleVentas.Sum(x => x.Monto);
@@ -311,6 +310,15 @@ namespace AppLaMejor.controlmanager
             if (result.Rows[0][0].ToString().Length == 0)
                 return 1;
             else return Int32.Parse(result.Rows[0][0].ToString());
+        }
+        public static List<Venta> ObtenerVentasDelDiaMayoristaList()
+        {
+            QueryManager manager = QueryManager.Instance();
+            string consulta = manager.GetVentasDelDiaMayorista();
+            DataTable result = manager.GetTableResults(ConnecionBD.Instance().Connection, consulta);
+            DataNamesMapper<Venta> mv = new DataNamesMapper<Venta>();
+            List<Venta> listVentasDiarias = mv.Map(result).ToList();
+            return listVentasDiarias;
         }
         public static List<Venta> ObtenerVentasDelDiaList()
         {

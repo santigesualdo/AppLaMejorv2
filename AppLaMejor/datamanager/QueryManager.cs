@@ -17,6 +17,8 @@ namespace AppLaMejor.datamanager
     class QueryManager 
     {
         private static QueryManager _instance = null;
+        
+        // TODO: Chequear por que tienen 0 referencia algunas funciones.
 
         /* Clase singleton que retorna consultas sql en un string */
         public static QueryManager Instance()
@@ -25,7 +27,6 @@ namespace AppLaMejor.datamanager
                 _instance = new QueryManager();
             return _instance;
         }
-
         /* Operaciones Generales */
         /* Recibe coneccion y consulta, y retorna data table llena */
         public DataTable GetTableResults(MySqlConnection conn, string query)
@@ -57,7 +58,6 @@ namespace AppLaMejor.datamanager
                 }
             }
         }
-
         public string GetModulosFaltantesPorUsuario(int idUsuarioSelected)
         {
             return "select* from modulo m " +
@@ -66,7 +66,6 @@ namespace AppLaMejor.datamanager
             "left join modulo mo on mo.id = um.id_modulo " +
             "where um.id_usuario = "+idUsuarioSelected+")";
         }
-
         public AutoCompleteStringCollection GetAutoCompleteCollection(MySqlConnection conn, string query, int sourceIndex)
         {
             try
@@ -103,12 +102,10 @@ namespace AppLaMejor.datamanager
                 }
             }
         }
-
         public string GetTipoProductoKiosco()
         {
             return "select * from productotipo where descripcion like '%kiosco%'";
         }
-
         /* Recibe conexion y consulta y ejecuta update. Retorna true o false, exito o error */
         public bool ExecuteSQL(MySqlConnection conn, string query)
         {
@@ -135,9 +132,7 @@ namespace AppLaMejor.datamanager
                 }
             }
         }
-
         /* Operaciones Generales END*/
-
         /* Tipos */
         public string GetTipoMovimiento()
         {
@@ -204,7 +199,6 @@ namespace AppLaMejor.datamanager
                 "'" + cliente.FechaDesde.ToString(VariablesGlobales.dateFormat) + "','" + VariablesGlobales.userIdLogueado.ToString() + "');";
             return query;
         }
-
         public string GetClientes()
         {
             return "call obtenerClientes();";
@@ -219,7 +213,6 @@ namespace AppLaMejor.datamanager
                 " c.fecha_desde as FechaDesde, c.civa AS IVA, c.cuit AS CUIT, c.nombre_responsable AS NombreResponsable, c.nombre_local AS NombreLocal, c.telefono AS Telefono, "+
                 " c.fecha_baja AS FechaBaja FROM cliente c order by c.id";
         }
-        //trae el saldo actual y algunos datos de referencia para el form de MovCuentas
         public string GetClientesSaldoActual()
         {
            // return "CALL obtenerClientesSaldoActual()";
@@ -236,7 +229,6 @@ namespace AppLaMejor.datamanager
             "cu.id AS IdCuenta,c.fecha_desde AS FechaDesde,	c.civa AS IVA,c.cuit AS CUIT,c.nombre_responsable AS NombreResponsable,	c.nombre_local AS NombreLocal,c.telefono AS Telefono "+
             "FROM cliente c INNER JOIN clientetipo ct ON ct.id = c.id_tipo_cliente INNER JOIN clientecuenta cu ON cu.id_cliente = c.id where c.id_tipo_cliente = 1 and cu.descripcion = 'EFECTIVO'" ;
         }
-
         /* Proveedores */
         public string InsertNuevoProveedor(Proveedor Proveedor)
         {
@@ -328,7 +320,6 @@ namespace AppLaMejor.datamanager
                 AND razon_social LIKE CONCAT('%',name_,'%')
              */
         }
-
         /* Cuentas */
         public string GetClientesWithCuentaById(int id){
             return "SELECT c.id , " +
@@ -768,15 +759,21 @@ namespace AppLaMejor.datamanager
         }
         public string GetVentasDelDia()
         {
-            return "SELECT * FROM venta v where v.fecha between curdate() and ADDDATE(curdate(),1) order by v.fecha desc;";
+            return "SELECT * FROM venta v where v.fecha between curdate() and ADDDATE(curdate(),1) and v.id_operacion = 0 order by v.fecha desc;";
+        }
+        public string GetVentasDelDiaMayorista()
+        {
+            return "SELECT * FROM venta v where v.fecha between curdate() and ADDDATE(curdate(),1) and v.id_operacion <> 0 order by v.fecha desc;";
         }
         public string GetVentas()
         {
-            return " SELECT v.id , v.monto_total as MontoTotal, v.fecha as Fecha, v.usuario, v.fecha_baja, GROUP_CONCAT(CONCAT('(', p.id_codigo_barra,') ',  p.descripcion_breve, ' ', vd.peso, ' kg') SEPARATOR ' || ') as Descripcion FROM venta v " +
-            " inner join ventadetalle vd on vd.id_venta = v.id " +
-            " inner join producto p on p.id = vd.id_producto " +
-            " where v.fecha_baja is null " +
-            " GROUP BY v.id; ";
+            return " SELECT v.id , case when id_operacion = 0 then 'CAJA' ELSE 'MAYORISTA' end as TipoVenta, v.monto_total as MontoTotal, v.fecha as Fecha, v.usuario, v.fecha_baja, " +
+            "GROUP_CONCAT(CONCAT(case when p.id_codigo_barra is null then '' else concat(p.id_codigo_barra, ' ') end, p.descripcion_breve, ' ', vd.peso, ' kg') SEPARATOR ' || ') as Descripcion " +
+            "FROM venta v " +
+            "inner join ventadetalle vd on vd.id_venta = v.id " +
+            "inner join producto p on p.id = vd.id_producto " +
+            "where v.fecha_baja is null " +
+            "GROUP BY v.id; ";
         }
         public string GetNextVentaId()
         {
@@ -859,11 +856,10 @@ namespace AppLaMejor.datamanager
             " producto p " +
             " where p.fecha_baja is null  ";
         }
-
         public string GetProductoByPLU(string plu)
         {
             return GetProductoUbicacionData() +
-                " and substr(p.id_codigo_barra,2,4)  = '" + plu + "';";
+                " and p.id_codigo_barra = '" + plu + "';";
         }
         public string GetProductoByDescripBreve(string descripbreve)
         {
@@ -1250,8 +1246,6 @@ namespace AppLaMejor.datamanager
 	" WHERE    (		`v`.`fecha` BETWEEN '" + d + "' AND DATE_ADD('" + h + "',INTERVAL 1 DAY));";
             return consulta;
         }
-
-
         public string ReportVistaListadoMovCuentas(string d, string h)
         {
             string consulta = "ALTER VIEW vistalistadomovimientosclientes AS SELECT"+
@@ -1298,7 +1292,6 @@ namespace AppLaMejor.datamanager
 
             return consulta;
         }
-
         public string ReportVistaListadoMovCuentasProveedores(string d, string h)
         {
             string consulta = "ALTER VIEW vistalistadomovimientosproveedores AS " +
@@ -1390,6 +1383,24 @@ namespace AppLaMejor.datamanager
             return consulta;
         }
         /* Compras */
+        public string GetCompras()
+        {
+            return " select case when c.id_proveedor is null then '-' else pr.razon_social end as Proveedor, c.fecha as Fecha, c.monto_total as Total, c.monto_pagado as Pagado,  " +
+            " GROUP_CONCAT(CONCAT( " +
+            " 	case when p.id is null then concat('Garron #', g.numero) else p.descripcion_breve end, ' ',  " +
+            " 	case when p.id is not null and pt.id = 4 then replace(cast(cd.peso as char),'.000','') else cd.peso end ,  " +
+            " 	case when p.id is not null and pt.id = 4 then ' unidades ' else ' kg.' end) " +
+            " SEPARATOR ' || ') as Descripcion " +
+            " from compra c " +
+            " inner join compradetalle cd on cd.id_compra = c.id " +
+            " left join producto p on cd.id_producto is not null and p.id = cd.id_producto " +
+            " left join productotipo pt on p.id is not null and pt.id = p.id_producto_tipo " +
+            " left join garron g on cd.id_garron is not null and g.id = cd.id_garron " +
+            " left join proveedor pr on c.id_proveedor is not null and c.id_proveedor = pr.id " +
+            " WHERE " +
+            " 1=1 " +
+            " group by c.id ";
+        }
         public string GetNextCompraId()
         {
             return "SELECT case when MAX(id)+1 is not null then MAX(id)+1  else 1 end as nextid from compra";

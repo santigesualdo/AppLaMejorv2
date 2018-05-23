@@ -412,6 +412,7 @@
             this.textBoxCantidadK.Size = new System.Drawing.Size(381, 20);
             this.textBoxCantidadK.TabIndex = 7;
             this.textBoxCantidadK.Text = "(ingresar cantidad)";
+            this.textBoxCantidadK.Click += new System.EventHandler(this.textBoxCantidadK_Click);
             this.textBoxCantidadK.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxCantidadK_KeyPress);
             // 
             // labelCantidad

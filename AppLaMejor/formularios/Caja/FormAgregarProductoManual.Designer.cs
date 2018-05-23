@@ -422,9 +422,9 @@ namespace AppLaMejor.formularios.Caja
             this.Controls.Add(this.mainPanel);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.White;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "FormAgregarProductoManual";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "FormAgregar";
             this.mainPanel.ResumeLayout(false);
             this.contentPanel.ResumeLayout(false);
             this.controlsPanel.ResumeLayout(false);

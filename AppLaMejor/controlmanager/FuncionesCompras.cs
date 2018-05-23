@@ -307,6 +307,13 @@ namespace AppLaMejor.controlmanager
             return mapperProd.Map(dt).ToList();
         }
 
+        public static DataTable GetCompras()
+        {
+            QueryManager manager = QueryManager.Instance();
+            string consulta = manager.GetCompras();
+            return manager.GetTableResults(ConnecionBD.Instance().Connection, consulta);
+        }
+
         public static int GetNextCompraId()
         {
             QueryManager manager = QueryManager.Instance();

@@ -62,7 +62,7 @@ namespace AppLaMejor.formularios
                 dataGridVentas.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 // Hacemos que todas las columnas cambien su tamaño a lo ancho para que se vea toda la info
                 string name = dataGridVentas.Columns[i].Name;
-                if (name.ToUpper().Equals("ID") || name.ToUpper().Equals("IDUSUARIO") || name.ToUpper().Equals("FECHABAJA"))
+                if (name.ToUpper().Equals("ID") || name.ToUpper().Equals("IDUSUARIO") || name.ToUpper().Equals("FECHABAJA") || name.ToUpper().Equals("OPERACION"))
                 {
                     dataGridVentas.Columns[i].Visible = false;
                     continue;
@@ -356,6 +356,12 @@ namespace AppLaMejor.formularios
                 }
             }
             return pesoMaxNuevo;
+        }
+
+        private void textBoxCantidadK_Click(object sender, EventArgs e)
+        {
+            TextBox text = (TextBox)sender;
+            text.Text = string.Empty;
         }
 
 

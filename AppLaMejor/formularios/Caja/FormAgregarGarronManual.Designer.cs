@@ -34,8 +34,13 @@ namespace AppLaMejor.formularios.Caja
             this.controlsPanel = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.tbPrecioFinal = new System.Windows.Forms.TextBox();
+            this.lblPrecio = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.lGarronSelected = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.btManual = new System.Windows.Forms.Button();
             this.panel5 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.bottomPanel = new System.Windows.Forms.Panel();
@@ -46,15 +51,11 @@ namespace AppLaMejor.formularios.Caja
             this.mensajeroFormEntityInput = new System.Windows.Forms.ToolStripStatusLabel();
             this.topPanel = new System.Windows.Forms.Panel();
             this.formTittleText = new System.Windows.Forms.Label();
-            this.lGarronSelected = new System.Windows.Forms.Label();
-            this.btManual = new System.Windows.Forms.Button();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.tbPrecioFinal = new System.Windows.Forms.TextBox();
-            this.lblPrecio = new System.Windows.Forms.Label();
             this.mainPanel.SuspendLayout();
             this.contentPanel.SuspendLayout();
             this.controlsPanel.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
+            this.panel6.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -62,7 +63,6 @@ namespace AppLaMejor.formularios.Caja
             this.tableBottomPanel.SuspendLayout();
             this.statusStripFormEntityInput.SuspendLayout();
             this.topPanel.SuspendLayout();
-            this.panel6.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainPanel
@@ -125,6 +125,35 @@ namespace AppLaMejor.formularios.Caja
             this.tableLayoutPanel2.Size = new System.Drawing.Size(566, 220);
             this.tableLayoutPanel2.TabIndex = 1;
             // 
+            // panel6
+            // 
+            this.panel6.Controls.Add(this.tbPrecioFinal);
+            this.panel6.Controls.Add(this.lblPrecio);
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel6.Location = new System.Drawing.Point(5, 149);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(556, 66);
+            this.panel6.TabIndex = 15;
+            // 
+            // tbPrecioFinal
+            // 
+            this.tbPrecioFinal.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.tbPrecioFinal.Location = new System.Drawing.Point(230, 31);
+            this.tbPrecioFinal.Name = "tbPrecioFinal";
+            this.tbPrecioFinal.Size = new System.Drawing.Size(100, 20);
+            this.tbPrecioFinal.TabIndex = 13;
+            this.tbPrecioFinal.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPrecioFinal_KeyPress);
+            // 
+            // lblPrecio
+            // 
+            this.lblPrecio.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblPrecio.AutoSize = true;
+            this.lblPrecio.Location = new System.Drawing.Point(227, 15);
+            this.lblPrecio.Name = "lblPrecio";
+            this.lblPrecio.Size = new System.Drawing.Size(40, 13);
+            this.lblPrecio.TabIndex = 12;
+            this.lblPrecio.Text = "Precio:";
+            // 
             // panel2
             // 
             this.panel2.Controls.Add(this.lGarronSelected);
@@ -134,6 +163,17 @@ namespace AppLaMejor.formularios.Caja
             this.panel2.Size = new System.Drawing.Size(556, 64);
             this.panel2.TabIndex = 14;
             // 
+            // lGarronSelected
+            // 
+            this.lGarronSelected.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lGarronSelected.Location = new System.Drawing.Point(0, 0);
+            this.lGarronSelected.Name = "lGarronSelected";
+            this.lGarronSelected.Size = new System.Drawing.Size(556, 64);
+            this.lGarronSelected.TabIndex = 0;
+            this.lGarronSelected.Tag = "bold inverted";
+            this.lGarronSelected.Text = "garronSelected";
+            this.lGarronSelected.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // panel3
             // 
             this.panel3.Controls.Add(this.btManual);
@@ -142,6 +182,27 @@ namespace AppLaMejor.formularios.Caja
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(556, 64);
             this.panel3.TabIndex = 13;
+            // 
+            // btManual
+            // 
+            this.btManual.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btManual.FlatAppearance.BorderColor = System.Drawing.Color.Green;
+            this.btManual.FlatAppearance.BorderSize = 2;
+            this.btManual.FlatAppearance.MouseDownBackColor = System.Drawing.Color.MediumSeaGreen;
+            this.btManual.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkSlateGray;
+            this.btManual.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btManual.Image = global::AppLaMejor.Properties.Resources.add_icon_30x30_green;
+            this.btManual.Location = new System.Drawing.Point(172, 7);
+            this.btManual.MaximumSize = new System.Drawing.Size(0, 50);
+            this.btManual.MinimumSize = new System.Drawing.Size(213, 0);
+            this.btManual.Name = "btManual";
+            this.btManual.Size = new System.Drawing.Size(213, 50);
+            this.btManual.TabIndex = 17;
+            this.btManual.Text = "Seleccionar Garron";
+            this.btManual.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btManual.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btManual.UseVisualStyleBackColor = false;
+            this.btManual.Click += new System.EventHandler(this.btManual_Click);
             // 
             // panel5
             // 
@@ -276,77 +337,19 @@ namespace AppLaMejor.formularios.Caja
             this.formTittleText.Text = "Agregar Producto Manualmente";
             this.formTittleText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // lGarronSelected
-            // 
-            this.lGarronSelected.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lGarronSelected.Location = new System.Drawing.Point(0, 0);
-            this.lGarronSelected.Name = "lGarronSelected";
-            this.lGarronSelected.Size = new System.Drawing.Size(556, 64);
-            this.lGarronSelected.TabIndex = 0;
-            this.lGarronSelected.Tag = "bold inverted";
-            this.lGarronSelected.Text = "garronSelected";
-            this.lGarronSelected.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // btManual
-            // 
-            this.btManual.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btManual.FlatAppearance.BorderColor = System.Drawing.Color.Green;
-            this.btManual.FlatAppearance.BorderSize = 2;
-            this.btManual.FlatAppearance.MouseDownBackColor = System.Drawing.Color.MediumSeaGreen;
-            this.btManual.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkSlateGray;
-            this.btManual.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btManual.Image = global::AppLaMejor.Properties.Resources.add_icon_30x30_green;
-            this.btManual.Location = new System.Drawing.Point(172, 7);
-            this.btManual.MaximumSize = new System.Drawing.Size(0, 50);
-            this.btManual.MinimumSize = new System.Drawing.Size(213, 0);
-            this.btManual.Name = "btManual";
-            this.btManual.Size = new System.Drawing.Size(213, 50);
-            this.btManual.TabIndex = 17;
-            this.btManual.Text = "Seleccionar Garron";
-            this.btManual.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btManual.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btManual.UseVisualStyleBackColor = false;
-            this.btManual.Click += new System.EventHandler(this.btManual_Click);
-            // 
-            // panel6
-            // 
-            this.panel6.Controls.Add(this.tbPrecioFinal);
-            this.panel6.Controls.Add(this.lblPrecio);
-            this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel6.Location = new System.Drawing.Point(5, 149);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(556, 66);
-            this.panel6.TabIndex = 15;
-            // 
-            // tbPrecioFinal
-            // 
-            this.tbPrecioFinal.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.tbPrecioFinal.Location = new System.Drawing.Point(230, 31);
-            this.tbPrecioFinal.Name = "tbPrecioFinal";
-            this.tbPrecioFinal.Size = new System.Drawing.Size(100, 20);
-            this.tbPrecioFinal.TabIndex = 13;
-            this.tbPrecioFinal.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPrecioFinal_KeyPress);
-            // 
-            // lblPrecio
-            // 
-            this.lblPrecio.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblPrecio.AutoSize = true;
-            this.lblPrecio.Location = new System.Drawing.Point(227, 15);
-            this.lblPrecio.Name = "lblPrecio";
-            this.lblPrecio.Size = new System.Drawing.Size(40, 13);
-            this.lblPrecio.TabIndex = 12;
-            this.lblPrecio.Text = "Precio:";
-            // 
             // FormAgregarGarronManual
             // 
             this.ClientSize = new System.Drawing.Size(606, 489);
             this.Controls.Add(this.mainPanel);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "FormAgregarGarronManual";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.mainPanel.ResumeLayout(false);
             this.contentPanel.ResumeLayout(false);
             this.controlsPanel.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
+            this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
@@ -355,8 +358,6 @@ namespace AppLaMejor.formularios.Caja
             this.statusStripFormEntityInput.ResumeLayout(false);
             this.statusStripFormEntityInput.PerformLayout();
             this.topPanel.ResumeLayout(false);
-            this.panel6.ResumeLayout(false);
-            this.panel6.PerformLayout();
             this.ResumeLayout(false);
 
         }

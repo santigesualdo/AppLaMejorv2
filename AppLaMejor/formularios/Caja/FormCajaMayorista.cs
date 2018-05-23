@@ -82,7 +82,7 @@ namespace AppLaMejor.formularios.Caja
             listDetalleVentas = new List<VentaDetalle>();
 
             // Obtenemos ventas del dia
-            listVentas = FuncionesVentas.ObtenerVentasDelDiaList();
+            listVentas = FuncionesVentas.ObtenerVentasDelDiaMayoristaList();
             dataGridVentas.DataSource = listVentas;
             dataGridVentas.AllowUserToAddRows = false;
 

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2018-05-17 20:24:05
+Date: 2018-05-23 20:35:17
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -465,7 +465,7 @@ CREATE TABLE `modulo` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of modulo
@@ -478,7 +478,6 @@ INSERT INTO `modulo` VALUES ('6', 'Carga Nueva Compra');
 INSERT INTO `modulo` VALUES ('7', 'Movimiento Cuentas Clientes');
 INSERT INTO `modulo` VALUES ('8', 'Gestion Usuarios');
 INSERT INTO `modulo` VALUES ('9', 'Productos');
-INSERT INTO `modulo` VALUES ('10', 'Ventas Caja');
 INSERT INTO `modulo` VALUES ('11', 'Movimiento Cuentas Proveedores');
 INSERT INTO `modulo` VALUES ('12', 'Carga Garron');
 INSERT INTO `modulo` VALUES ('13', 'Caja Mayorista');
@@ -487,6 +486,7 @@ INSERT INTO `modulo` VALUES ('15', 'Deposte');
 INSERT INTO `modulo` VALUES ('16', 'Ubicacion');
 INSERT INTO `modulo` VALUES ('17', 'Reportes');
 INSERT INTO `modulo` VALUES ('18', 'Compras con Productos a Entregar');
+INSERT INTO `modulo` VALUES ('19', 'Compras');
 
 -- ----------------------------
 -- Table structure for movimientomercaderia
@@ -988,31 +988,31 @@ CREATE TABLE `producto` (
 -- ----------------------------
 -- Records of producto
 -- ----------------------------
-INSERT INTO `producto` VALUES ('1', '2', '11750', '290.000', '50.00', 'TRIPA', '1', null);
-INSERT INTO `producto` VALUES ('2', '2', '11760', '328.250', '50.00', 'CHINCHULÍN', '1', null);
-INSERT INTO `producto` VALUES ('3', '2', '11770', '179.740', '50.00', 'RIÑON', '1', null);
-INSERT INTO `producto` VALUES ('4', '2', '11780', '75.590', '62.00', 'CORAZÓN', '1', null);
-INSERT INTO `producto` VALUES ('5', '2', '11790', '250.000', '50.00', 'ENTRAÑA', '1', null);
-INSERT INTO `producto` VALUES ('6', '2', '11800', '112.700', '50.00', 'RABO', '1', null);
-INSERT INTO `producto` VALUES ('7', '2', '11810', '111.020', '50.00', 'MONDONGO', '1', null);
-INSERT INTO `producto` VALUES ('8', '2', '11820', '26.480', '50.00', 'HÍGADO', '1', null);
-INSERT INTO `producto` VALUES ('9', '2', '11830', '147.850', '50.00', 'MOLLEJAS', '1', null);
-INSERT INTO `producto` VALUES ('10', '2', '11850', '124.760', '50.00', 'LENGUA', '1', null);
-INSERT INTO `producto` VALUES ('11', '2', '11860', '147.950', '50.00', 'QUIJADA', '1', null);
-INSERT INTO `producto` VALUES ('12', '2', '11870', '111.750', '50.00', 'DUOS', '1', null);
-INSERT INTO `producto` VALUES ('13', '2', '11880', '76.250', '50.00', 'CARRE ', '1', null);
-INSERT INTO `producto` VALUES ('14', '2', '11890', '64.160', '50.00', 'PECHITO', '1', null);
-INSERT INTO `producto` VALUES ('15', '2', '11900', '57.160', '50.00', 'JAMON ENTERO', '1', null);
-INSERT INTO `producto` VALUES ('16', '2', '11910', '280.000', '50.00', 'CHURRASQUITO', '1', null);
-INSERT INTO `producto` VALUES ('17', '2', '11920', '153.140', '50.00', 'PALETA ENTERA', '1', null);
-INSERT INTO `producto` VALUES ('18', '2', '11930', '82.180', '50.00', 'PAPADA', '1', null);
-INSERT INTO `producto` VALUES ('19', '2', '11940', '103.810', '50.00', 'TOCINO', '1', null);
-INSERT INTO `producto` VALUES ('20', '2', '11950', '116.780', '50.00', 'MATAMBRITOS', '1', null);
-INSERT INTO `producto` VALUES ('21', '2', '11960', '114.800', '50.00', 'BONDIOLA', '1', null);
+INSERT INTO `producto` VALUES ('1', '2', '1750', '290.000', '50.00', 'TRIPA', '1', null);
+INSERT INTO `producto` VALUES ('2', '2', '1760', '328.250', '50.00', 'CHINCHULÍN', '1', null);
+INSERT INTO `producto` VALUES ('3', '2', '1770', '179.740', '50.00', 'RIÑON', '1', null);
+INSERT INTO `producto` VALUES ('4', '2', '1780', '75.590', '62.00', 'CORAZÓN', '1', null);
+INSERT INTO `producto` VALUES ('5', '2', '1790', '250.000', '50.00', 'ENTRAÑA', '1', null);
+INSERT INTO `producto` VALUES ('6', '2', '1800', '112.700', '50.00', 'RABO', '1', null);
+INSERT INTO `producto` VALUES ('7', '2', '1810', '111.020', '50.00', 'MONDONGO', '1', null);
+INSERT INTO `producto` VALUES ('8', '2', '1820', '26.480', '50.00', 'HÍGADO', '1', null);
+INSERT INTO `producto` VALUES ('9', '2', '1830', '147.850', '50.00', 'MOLLEJAS', '1', null);
+INSERT INTO `producto` VALUES ('10', '2', '1850', '124.760', '50.00', 'LENGUA', '1', null);
+INSERT INTO `producto` VALUES ('11', '2', '1860', '147.950', '50.00', 'QUIJADA', '1', null);
+INSERT INTO `producto` VALUES ('12', '2', '1870', '111.750', '50.00', 'DUOS', '1', null);
+INSERT INTO `producto` VALUES ('13', '2', '1880', '76.250', '50.00', 'CARRE ', '1', null);
+INSERT INTO `producto` VALUES ('14', '2', '1890', '64.160', '50.00', 'PECHITO', '1', null);
+INSERT INTO `producto` VALUES ('15', '2', '1900', '57.160', '50.00', 'JAMON ENTERO', '1', null);
+INSERT INTO `producto` VALUES ('16', '2', '1910', '280.000', '50.00', 'CHURRASQUITO', '1', null);
+INSERT INTO `producto` VALUES ('17', '2', '1920', '153.140', '50.00', 'PALETA ENTERA', '1', null);
+INSERT INTO `producto` VALUES ('18', '2', '1930', '82.180', '50.00', 'PAPADA', '1', null);
+INSERT INTO `producto` VALUES ('19', '2', '1940', '103.810', '50.00', 'TOCINO', '1', null);
+INSERT INTO `producto` VALUES ('20', '2', '1950', '116.780', '50.00', 'MATAMBRITOS', '1', null);
+INSERT INTO `producto` VALUES ('21', '2', '1960', '114.800', '50.00', 'BONDIOLA', '1', null);
 INSERT INTO `producto` VALUES ('22', '3', null, '97.230', '2.00', '1/2 RESES', '1', null);
 INSERT INTO `producto` VALUES ('23', '3', null, '47.830', '74.64', '1/4 RUEDA', '1', null);
 INSERT INTO `producto` VALUES ('24', '3', null, '59.850', '14.74', '1/4 PISTOLA', '1', null);
-INSERT INTO `producto` VALUES ('25', '3', null, '73.830', '0.00', ' 1/4 DELANTERO ', '1', null);
+INSERT INTO `producto` VALUES ('25', '3', null, '73.830', '0.00', '1/4 DELANTERO ', '1', null);
 INSERT INTO `producto` VALUES ('26', '3', null, '103.910', '0.28', 'BARRAS', '1', null);
 INSERT INTO `producto` VALUES ('27', '3', null, '130.530', '50.00', 'MOCHITOS', '1', null);
 INSERT INTO `producto` VALUES ('28', '3', null, '134.400', '50.00', 'MANTAS', '1', null);
@@ -1021,80 +1021,80 @@ INSERT INTO `producto` VALUES ('30', '3', null, '56.560', '50.00', 'PARRILLERO',
 INSERT INTO `producto` VALUES ('31', '3', null, '98.580', '50.00', 'JUEGOS DE ACHURAS', '1', null);
 INSERT INTO `producto` VALUES ('32', '3', null, '85.370', '50.00', 'RECORTE DE 1', '1', null);
 INSERT INTO `producto` VALUES ('33', '3', null, '49.460', '25.00', 'RECORTE DE 2°', '1', null);
-INSERT INTO `producto` VALUES ('34', '1', '10990', '48.950', '48.96', 'CHORIZO ESPECIAL', '1', null);
-INSERT INTO `producto` VALUES ('35', '1', '11000', '53.330', '130.00', 'CHORIZO PARRILLERO', '1', null);
-INSERT INTO `producto` VALUES ('36', '1', '11010', '125.560', '92.00', 'CHORIZO DE CERDO', '1', null);
-INSERT INTO `producto` VALUES ('37', '1', '11020', '31.580', '75.00', 'CHORIZO COLORADO', '1', null);
-INSERT INTO `producto` VALUES ('38', '1', '11030', '41.820', '71.00', 'SALCHICHA PARRILL.', '1', null);
-INSERT INTO `producto` VALUES ('39', '1', '11040', '144.400', '50.00', 'MORCILLA', '1', null);
-INSERT INTO `producto` VALUES ('40', '1', '11050', '72.380', '86.25', 'MORCILLA', '1', null);
-INSERT INTO `producto` VALUES ('41', '1', '11060', '54.580', '50.00', 'SALCHICHAS SNACK', '1', null);
-INSERT INTO `producto` VALUES ('42', '1', '11070', '38.680', '50.00', 'PATE', '1', null);
-INSERT INTO `producto` VALUES ('43', '1', '11080', '107.300', '50.00', 'QUESO DE CERDO', '1', null);
-INSERT INTO `producto` VALUES ('44', '1', '11100', '30.120', '103.00', 'PICADA COMUN', '1', null);
-INSERT INTO `producto` VALUES ('45', '1', '11110', '116.230', '73.00', 'PICADA INTERMEDIA', '1', null);
-INSERT INTO `producto` VALUES ('46', '1', '11120', '250.280', '460.00', 'PICADA ESPECIAL', '1', null);
-INSERT INTO `producto` VALUES ('47', '1', '11130', '37.920', '50.00', 'PUCHERO COMUN', '1', null);
-INSERT INTO `producto` VALUES ('48', '1', '11140', '40.125', '62.00', 'PUCHERO ESPECIAL', '1', null);
-INSERT INTO `producto` VALUES ('49', '1', '11150', '41.230', '50.00', 'CANINO', '1', null);
-INSERT INTO `producto` VALUES ('50', '1', '11160', '92.220', '50.00', 'MATAMBRE', '1', null);
-INSERT INTO `producto` VALUES ('51', '1', '11170', '111.710', '75.00', 'VACIO', '1', null);
-INSERT INTO `producto` VALUES ('52', '1', '11180', '106.860', '50.00', 'ALA DE PECHO', '1', null);
-INSERT INTO `producto` VALUES ('53', '1', '11190', '133.860', '50.00', 'COSTILLA', '1', null);
-INSERT INTO `producto` VALUES ('54', '1', '11200', '30.180', '50.00', 'MARUCHA', '1', null);
-INSERT INTO `producto` VALUES ('55', '1', '11210', '112.810', '50.00', 'TAPA DE NALGA', '1', null);
-INSERT INTO `producto` VALUES ('56', '1', '11220', '47.510', '50.00', 'CORTE MALVINA', '1', null);
-INSERT INTO `producto` VALUES ('57', '1', '11230', '39.460', '281.00', 'FALDA', '1', null);
-INSERT INTO `producto` VALUES ('58', '1', '11240', '136.620', '50.00', 'COSTELETAS', '1', null);
-INSERT INTO `producto` VALUES ('59', '1', '11250', '105.710', '98.25', 'AGUJA', '1', null);
-INSERT INTO `producto` VALUES ('60', '1', '11260', '57.700', '50.00', 'BRAZUELO', '1', null);
-INSERT INTO `producto` VALUES ('61', '1', '11270', '36.160', '50.00', 'BIFE ANCHO/ANGOSTO', '1', null);
-INSERT INTO `producto` VALUES ('62', '1', '11280', '114.390', '50.00', 'ENTRECOT', '1', null);
-INSERT INTO `producto` VALUES ('63', '1', '11290', '87.570', '50.00', 'ROAST BEEF', '1', null);
-INSERT INTO `producto` VALUES ('64', '1', '11300', '114.240', '50.00', 'NALGAS', '1', null);
-INSERT INTO `producto` VALUES ('65', '1', '11310', '43.250', '50.00', 'LOMO', '1', null);
-INSERT INTO `producto` VALUES ('66', '1', '11320', '36.660', '50.00', 'PECETO', '1', null);
-INSERT INTO `producto` VALUES ('67', '1', '11330', '61.650', '50.00', 'CUADRIL', '1', null);
-INSERT INTO `producto` VALUES ('68', '1', '11340', '123.510', '50.00', 'PALOMITA', '1', null);
-INSERT INTO `producto` VALUES ('69', '1', '11350', '130.630', '50.00', 'JAMON CUADRADO', '1', null);
-INSERT INTO `producto` VALUES ('70', '1', '11360', '46.800', '50.00', 'CABEZA DE LOMO', '1', null);
-INSERT INTO `producto` VALUES ('71', '1', '11370', '108.510', '50.00', 'PULPA BRAZUELO', '1', null);
-INSERT INTO `producto` VALUES ('72', '1', '11380', '149.570', '50.00', 'PULPA PALETA', '1', null);
-INSERT INTO `producto` VALUES ('73', '1', '11390', '25.880', '50.00', 'TORTUGUITA', '1', null);
-INSERT INTO `producto` VALUES ('74', '1', '11400', '142.610', '50.00', 'MILANESAS DE CARNE', '1', null);
-INSERT INTO `producto` VALUES ('75', '1', '11410', '55.910', '50.00', 'MILANESAS DE POLLO', '1', null);
-INSERT INTO `producto` VALUES ('76', '1', '11420', '63.670', '50.00', 'HAMBURGUESAS', '1', null);
-INSERT INTO `producto` VALUES ('77', '1', '11430', '38.150', '50.00', 'ALBONDIGAS', '1', null);
-INSERT INTO `producto` VALUES ('78', '1', '11440', '125.670', '50.00', 'COSTELETAS', '1', null);
-INSERT INTO `producto` VALUES ('79', '1', '11450', '138.760', '50.00', 'BONDIOLA', '1', null);
-INSERT INTO `producto` VALUES ('80', '1', '11460', '83.870', '50.00', 'MATAMBRITO', '1', null);
-INSERT INTO `producto` VALUES ('81', '1', '11470', '69.460', '50.00', 'COSTILLA/PECHITO', '1', null);
-INSERT INTO `producto` VALUES ('82', '1', '11480', '28.950', '50.00', 'PULPAS', '1', null);
-INSERT INTO `producto` VALUES ('83', '1', '11490', '37.080', '50.00', 'MARUCHA', '1', null);
-INSERT INTO `producto` VALUES ('84', '1', '11500', '141.580', '50.00', 'CARACU', '1', null);
-INSERT INTO `producto` VALUES ('85', '1', '11510', '69.250', '50.00', 'PAT./HUE./CUE.', '1', null);
-INSERT INTO `producto` VALUES ('86', '1', '11520', '79.810', '50.00', 'MILANESAS', '1', null);
-INSERT INTO `producto` VALUES ('87', '1', '11530', '77.840', '50.00', 'HAMBURGUESAS', '1', null);
-INSERT INTO `producto` VALUES ('88', '1', '11540', '78.480', '50.00', 'PATAMUSLO', '1', null);
-INSERT INTO `producto` VALUES ('89', '1', '11550', '122.900', '50.00', 'TROZADO', '1', null);
-INSERT INTO `producto` VALUES ('90', '1', '11560', '89.560', '50.00', 'PECHUGA', '1', null);
-INSERT INTO `producto` VALUES ('91', '1', '11570', '41.960', '50.00', 'FILET', '1', null);
-INSERT INTO `producto` VALUES ('92', '1', '11580', '135.130', '50.00', 'BROCHET', '1', null);
-INSERT INTO `producto` VALUES ('93', '1', '11590', '130.990', '50.00', 'BONDIOLA', '1', null);
-INSERT INTO `producto` VALUES ('94', '1', '11600', '108.720', '50.00', 'PALETA', '1', null);
-INSERT INTO `producto` VALUES ('95', '1', '11610', '61.440', '50.00', 'JAMON COCIDO', '1', null);
-INSERT INTO `producto` VALUES ('96', '1', '11620', '110.730', '50.00', 'JAMON CRUDO', '1', null);
-INSERT INTO `producto` VALUES ('97', '1', '11630', '102.460', '50.00', 'SALAME MILAN', '1', null);
-INSERT INTO `producto` VALUES ('98', '1', '11640', '34.330', '50.00', 'SALAMIN', '1', null);
-INSERT INTO `producto` VALUES ('99', '1', '11650', '117.640', '50.00', 'QUESO BARRA', '1', null);
-INSERT INTO `producto` VALUES ('100', '1', '11660', '61.960', '50.00', 'CREMOSO', '1', null);
-INSERT INTO `producto` VALUES ('101', '1', '11670', '129.930', '50.00', 'CASCARA COLORADA', '1', null);
-INSERT INTO `producto` VALUES ('102', '1', '11680', '53.510', '50.00', 'QUESO CREMOSO', '1', null);
-INSERT INTO `producto` VALUES ('103', '1', '11690', '51.580', '50.00', 'QUESO TREEMBLAY', '1', null);
-INSERT INTO `producto` VALUES ('104', '1', '11700', '54.320', '50.00', 'QUESO PROVOLETA', '1', null);
-INSERT INTO `producto` VALUES ('105', '1', '11710', '126.280', '50.00', 'QUESO SARDO', '1', null);
-INSERT INTO `producto` VALUES ('106', '1', '11720', '78.640', '50.00', 'MORTADELA', '1', null);
-INSERT INTO `producto` VALUES ('107', '1', '11730', '122.700', '50.00', 'MORTADELA', '1', null);
+INSERT INTO `producto` VALUES ('34', '1', '0990', '48.950', '48.96', 'CHORIZO ESPECIAL', '1', null);
+INSERT INTO `producto` VALUES ('35', '1', '1000', '53.330', '126.65', 'CHORIZO PARRILLERO', '1', null);
+INSERT INTO `producto` VALUES ('36', '1', '1010', '125.560', '92.00', 'CHORIZO DE CERDO', '1', null);
+INSERT INTO `producto` VALUES ('37', '1', '1020', '31.580', '75.00', 'CHORIZO COLORADO', '1', null);
+INSERT INTO `producto` VALUES ('38', '1', '1030', '41.820', '71.00', 'SALCHICHA PARRILL.', '1', null);
+INSERT INTO `producto` VALUES ('39', '1', '1040', '144.400', '50.00', 'MORCILLA', '1', null);
+INSERT INTO `producto` VALUES ('40', '1', '1050', '72.380', '86.25', 'MORCILLA', '1', null);
+INSERT INTO `producto` VALUES ('41', '1', '1060', '54.580', '50.00', 'SALCHICHAS SNACK', '1', null);
+INSERT INTO `producto` VALUES ('42', '1', '1070', '38.680', '50.00', 'PATE', '1', null);
+INSERT INTO `producto` VALUES ('43', '1', '1080', '107.300', '50.00', 'QUESO DE CERDO', '1', null);
+INSERT INTO `producto` VALUES ('44', '1', '1100', '30.120', '103.00', 'PICADA COMUN', '1', null);
+INSERT INTO `producto` VALUES ('45', '1', '1110', '116.230', '73.00', 'PICADA INTERMEDIA', '1', null);
+INSERT INTO `producto` VALUES ('46', '1', '1120', '250.280', '460.00', 'PICADA ESPECIAL', '1', null);
+INSERT INTO `producto` VALUES ('47', '1', '1130', '37.920', '50.00', 'PUCHERO COMUN', '1', null);
+INSERT INTO `producto` VALUES ('48', '1', '1140', '40.125', '62.00', 'PUCHERO ESPECIAL', '1', null);
+INSERT INTO `producto` VALUES ('49', '1', '1150', '41.230', '50.00', 'CANINO', '1', null);
+INSERT INTO `producto` VALUES ('50', '1', '1160', '92.220', '50.00', 'MATAMBRE', '1', null);
+INSERT INTO `producto` VALUES ('51', '1', '1170', '111.710', '75.00', 'VACIO', '1', null);
+INSERT INTO `producto` VALUES ('52', '1', '1180', '106.860', '50.00', 'ALA DE PECHO', '1', null);
+INSERT INTO `producto` VALUES ('53', '1', '1190', '133.860', '50.00', 'COSTILLA', '1', null);
+INSERT INTO `producto` VALUES ('54', '1', '1200', '30.180', '50.00', 'MARUCHA', '1', null);
+INSERT INTO `producto` VALUES ('55', '1', '1210', '112.810', '50.00', 'TAPA DE NALGA', '1', null);
+INSERT INTO `producto` VALUES ('56', '1', '1220', '47.510', '50.00', 'CORTE MALVINA', '1', null);
+INSERT INTO `producto` VALUES ('57', '1', '1230', '39.460', '281.00', 'FALDA', '1', null);
+INSERT INTO `producto` VALUES ('58', '1', '1240', '136.620', '50.00', 'COSTELETAS', '1', null);
+INSERT INTO `producto` VALUES ('59', '1', '1250', '105.710', '98.25', 'AGUJA', '1', null);
+INSERT INTO `producto` VALUES ('60', '1', '1260', '57.700', '50.00', 'BRAZUELO', '1', null);
+INSERT INTO `producto` VALUES ('61', '1', '1270', '36.160', '50.00', 'BIFE ANCHO/ANGOSTO', '1', null);
+INSERT INTO `producto` VALUES ('62', '1', '1280', '114.390', '50.00', 'ENTRECOT', '1', null);
+INSERT INTO `producto` VALUES ('63', '1', '1290', '87.570', '50.00', 'ROAST BEEF', '1', null);
+INSERT INTO `producto` VALUES ('64', '1', '1300', '114.240', '50.00', 'NALGAS', '1', null);
+INSERT INTO `producto` VALUES ('65', '1', '1310', '43.250', '50.00', 'LOMO', '1', null);
+INSERT INTO `producto` VALUES ('66', '1', '1320', '36.660', '50.00', 'PECETO', '1', null);
+INSERT INTO `producto` VALUES ('67', '1', '1330', '61.650', '50.00', 'CUADRIL', '1', null);
+INSERT INTO `producto` VALUES ('68', '1', '1340', '123.510', '50.00', 'PALOMITA', '1', null);
+INSERT INTO `producto` VALUES ('69', '1', '1350', '130.630', '50.00', 'JAMON CUADRADO', '1', null);
+INSERT INTO `producto` VALUES ('70', '1', '1360', '46.800', '50.00', 'CABEZA DE LOMO', '1', null);
+INSERT INTO `producto` VALUES ('71', '1', '1370', '108.510', '50.00', 'PULPA BRAZUELO', '1', null);
+INSERT INTO `producto` VALUES ('72', '1', '1380', '149.570', '50.00', 'PULPA PALETA', '1', null);
+INSERT INTO `producto` VALUES ('73', '1', '1390', '25.880', '50.00', 'TORTUGUITA', '1', null);
+INSERT INTO `producto` VALUES ('74', '1', '1400', '142.610', '50.00', 'MILANESAS DE CARNE', '1', null);
+INSERT INTO `producto` VALUES ('75', '1', '1410', '55.910', '50.00', 'MILANESAS DE POLLO', '1', null);
+INSERT INTO `producto` VALUES ('76', '1', '1420', '63.670', '50.00', 'HAMBURGUESAS', '1', null);
+INSERT INTO `producto` VALUES ('77', '1', '1430', '38.150', '50.00', 'ALBONDIGAS', '1', null);
+INSERT INTO `producto` VALUES ('78', '1', '1440', '125.670', '50.00', 'COSTELETAS', '1', null);
+INSERT INTO `producto` VALUES ('79', '1', '1450', '138.760', '50.00', 'BONDIOLA', '1', null);
+INSERT INTO `producto` VALUES ('80', '1', '1460', '83.870', '50.00', 'MATAMBRITO', '1', null);
+INSERT INTO `producto` VALUES ('81', '1', '1470', '69.460', '50.00', 'COSTILLA/PECHITO', '1', null);
+INSERT INTO `producto` VALUES ('82', '1', '1480', '28.950', '50.00', 'PULPAS', '1', null);
+INSERT INTO `producto` VALUES ('83', '1', '1490', '37.080', '50.00', 'MARUCHA', '1', null);
+INSERT INTO `producto` VALUES ('84', '1', '1500', '141.580', '50.00', 'CARACU', '1', null);
+INSERT INTO `producto` VALUES ('85', '1', '1510', '69.250', '50.00', 'PAT./HUE./CUE.', '1', null);
+INSERT INTO `producto` VALUES ('86', '1', '1520', '79.810', '50.00', 'MILANESAS', '1', null);
+INSERT INTO `producto` VALUES ('87', '1', '1530', '77.840', '50.00', 'HAMBURGUESAS', '1', null);
+INSERT INTO `producto` VALUES ('88', '1', '1540', '78.480', '50.00', 'PATAMUSLO', '1', null);
+INSERT INTO `producto` VALUES ('89', '1', '1550', '122.900', '50.00', 'TROZADO', '1', null);
+INSERT INTO `producto` VALUES ('90', '1', '1560', '89.560', '50.00', 'PECHUGA', '1', null);
+INSERT INTO `producto` VALUES ('91', '1', '1570', '41.960', '50.00', 'FILET', '1', null);
+INSERT INTO `producto` VALUES ('92', '1', '1580', '135.130', '50.00', 'BROCHET', '1', null);
+INSERT INTO `producto` VALUES ('93', '1', '1590', '130.990', '50.00', 'BONDIOLA', '1', null);
+INSERT INTO `producto` VALUES ('94', '1', '1600', '108.720', '50.00', 'PALETA', '1', null);
+INSERT INTO `producto` VALUES ('95', '1', '1610', '61.440', '50.00', 'JAMON COCIDO', '1', null);
+INSERT INTO `producto` VALUES ('96', '1', '1620', '110.730', '50.00', 'JAMON CRUDO', '1', null);
+INSERT INTO `producto` VALUES ('97', '1', '1630', '102.460', '50.00', 'SALAME MILAN', '1', null);
+INSERT INTO `producto` VALUES ('98', '1', '1640', '34.330', '50.00', 'SALAMIN', '1', null);
+INSERT INTO `producto` VALUES ('99', '1', '1650', '117.640', '50.00', 'QUESO BARRA', '1', null);
+INSERT INTO `producto` VALUES ('100', '1', '1660', '61.960', '50.00', 'CREMOSO', '1', null);
+INSERT INTO `producto` VALUES ('101', '1', '1670', '129.930', '50.00', 'CASCARA COLORADA', '1', null);
+INSERT INTO `producto` VALUES ('102', '1', '1680', '53.510', '50.00', 'QUESO CREMOSO', '1', null);
+INSERT INTO `producto` VALUES ('103', '1', '1690', '51.580', '50.00', 'QUESO TREEMBLAY', '1', null);
+INSERT INTO `producto` VALUES ('104', '1', '1700', '54.320', '50.00', 'QUESO PROVOLETA', '1', null);
+INSERT INTO `producto` VALUES ('105', '1', '1710', '126.280', '50.00', 'QUESO SARDO', '1', null);
+INSERT INTO `producto` VALUES ('106', '1', '1720', '78.640', '50.00', 'MORTADELA', '1', null);
+INSERT INTO `producto` VALUES ('107', '1', '1730', '122.700', '50.00', 'MORTADELA', '1', null);
 INSERT INTO `producto` VALUES ('240', '4', null, '15.000', '0.00', '9 DE JULIO AGRIDULCES BIZCOCHOS 200G', '1', null);
 INSERT INTO `producto` VALUES ('241', '4', null, '15.000', '0.00', '9 DE JULIO AZUCARADOS BIZCOCHOS 200G', '1', null);
 INSERT INTO `producto` VALUES ('242', '4', null, '15.000', '0.00', '9 DE JULIO CLÁSICAS BIZCOCHO 200G', '1', null);
@@ -1420,7 +1420,7 @@ INSERT INTO `productoubicacion` VALUES ('206', '57', null, '4', '0.000', '2018-0
 INSERT INTO `productoubicacion` VALUES ('207', '48', null, '4', '21.000', null, '2018-05-15 17:41:12', '1', null);
 INSERT INTO `productoubicacion` VALUES ('208', '45', null, '4', '23.000', null, '2018-05-15 17:46:51', '1', null);
 INSERT INTO `productoubicacion` VALUES ('209', '35', null, '4', '21.000', null, '2018-05-15 19:40:07', '1', null);
-INSERT INTO `productoubicacion` VALUES ('210', '35', null, '1', '21.000', null, '2018-05-15 19:40:12', '1', null);
+INSERT INTO `productoubicacion` VALUES ('210', '35', null, '1', '17.651', null, '2018-05-15 19:40:12', '1', null);
 INSERT INTO `productoubicacion` VALUES ('211', null, '0', '4', '24.000', null, '2018-05-15 19:42:23', '1', null);
 INSERT INTO `productoubicacion` VALUES ('212', null, '0', '4', '21.000', null, '2018-05-15 19:43:36', '1', null);
 INSERT INTO `productoubicacion` VALUES ('213', '46', null, '4', '1.000', null, '2018-05-15 20:16:07', '1', null);
@@ -1629,7 +1629,7 @@ CREATE TABLE `usuariomodulo` (
   KEY `fk_us` (`id_usuario`),
   CONSTRAINT `fk_mod` FOREIGN KEY (`id_modulo`) REFERENCES `modulo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_us` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of usuariomodulo
@@ -1639,7 +1639,6 @@ INSERT INTO `usuariomodulo` VALUES ('2', '1', '2');
 INSERT INTO `usuariomodulo` VALUES ('4', '1', '4');
 INSERT INTO `usuariomodulo` VALUES ('5', '1', '7');
 INSERT INTO `usuariomodulo` VALUES ('6', '1', '9');
-INSERT INTO `usuariomodulo` VALUES ('7', '1', '10');
 INSERT INTO `usuariomodulo` VALUES ('8', '1', '11');
 INSERT INTO `usuariomodulo` VALUES ('15', '2', '12');
 INSERT INTO `usuariomodulo` VALUES ('16', '2', '1');
@@ -1655,6 +1654,8 @@ INSERT INTO `usuariomodulo` VALUES ('26', '1', '15');
 INSERT INTO `usuariomodulo` VALUES ('27', '1', '16');
 INSERT INTO `usuariomodulo` VALUES ('28', '1', '17');
 INSERT INTO `usuariomodulo` VALUES ('29', '1', '18');
+INSERT INTO `usuariomodulo` VALUES ('30', '1', '19');
+INSERT INTO `usuariomodulo` VALUES ('31', '1', '5');
 
 -- ----------------------------
 -- Table structure for venta
@@ -1668,7 +1669,7 @@ CREATE TABLE `venta` (
   `fecha_baja` datetime DEFAULT NULL,
   `id_operacion` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of venta
@@ -1718,6 +1719,8 @@ INSERT INTO `venta` VALUES ('43', '12.000', '2018-05-11 19:51:29', '1', null, '3
 INSERT INTO `venta` VALUES ('44', '24.000', '2018-05-11 19:55:24', '1', null, '38');
 INSERT INTO `venta` VALUES ('45', '1345.250', '2018-05-15 21:17:42', '1', null, '38');
 INSERT INTO `venta` VALUES ('46', '8200.000', '2018-05-17 20:21:58', '1', null, '39');
+INSERT INTO `venta` VALUES ('47', '778.621', '2018-05-23 17:23:04', '1', null, '0');
+INSERT INTO `venta` VALUES ('48', '60.000', '2018-05-23 17:47:55', '1', null, '0');
 
 -- ----------------------------
 -- Table structure for ventadetalle
@@ -1735,7 +1738,7 @@ CREATE TABLE `ventadetalle` (
   PRIMARY KEY (`id`),
   KEY `fk_liquidacion` (`id_venta`),
   KEY `fk_produ` (`id_producto`)
-) ENGINE=InnoDB AUTO_INCREMENT=245 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=248 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of ventadetalle
@@ -1954,6 +1957,9 @@ INSERT INTO `ventadetalle` VALUES ('241', '45', null, '32', '45.250', '147.250',
 INSERT INTO `ventadetalle` VALUES ('242', '46', '25', null, '3700.000', '50.000', '1', null);
 INSERT INTO `ventadetalle` VALUES ('243', '46', '33', null, '1500.000', '25.000', '1', null);
 INSERT INTO `ventadetalle` VALUES ('244', '46', '33', null, '3000.000', '25.000', '1', null);
+INSERT INTO `ventadetalle` VALUES ('245', '47', '306', null, '600.000', '50.000', '1', null);
+INSERT INTO `ventadetalle` VALUES ('246', '47', '35', null, '178.621', '3.349', '1', null);
+INSERT INTO `ventadetalle` VALUES ('247', '48', '307', null, '60.000', '2.000', '1', null);
 
 -- ----------------------------
 -- View structure for vistacompra
