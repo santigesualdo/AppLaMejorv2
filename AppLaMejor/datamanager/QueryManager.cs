@@ -804,7 +804,7 @@ namespace AppLaMejor.datamanager
         }
         public string GetProductoUbicacionTotal()
         {
-            return "select case when g.id is null then concat('Producto: ', p.descripcion_breve, ' ',COALESCE(substr(p.id_codigo_barra,2,4), 'SIN PLU')) else concat('Garron: ', g.numero, ' ', g.peso, ' kg. ', gt.descripcion) end as mercaderia, " +
+            return "select case when g.id is null then concat('Producto: ', p.descripcion_breve, ' ',COALESCE(p.id_codigo_barra, 'SIN PLU')) else concat('Garron: ', g.numero, ' ', g.peso, ' kg. ', gt.descripcion) end as mercaderia, " +
             "u.descripcion as ubicacion, pu.peso as peso,  pt.descripcion AS TipoProducto from productoubicacion pu " +
             "left join garron g on pu.id_garron is not null and g.id = pu.id_garron " +
             "left join producto p on pu.id_producto is not null and p.id = pu.id_producto " +
@@ -836,7 +836,7 @@ namespace AppLaMejor.datamanager
         {
             return " SELECT" +
             " p.id," +
-            " substring(p.id_codigo_barra,2,4) as CodigoBarra," +
+            " id_codigo_barra as CodigoBarra," +
             " p.descripcion_breve AS DescripcionBreve "+
             " FROM " +
             " producto p " +
