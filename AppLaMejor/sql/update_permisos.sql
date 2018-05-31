@@ -1,0 +1,12 @@
+delete from usuariomodulo where id_usuario = 1;
+insert into usuariomodulo (id_usuario, id_modulo) values (1,1);
+insert into usuariomodulo (id_usuario, id_modulo) values (1,2);
+insert into usuariomodulo (id_usuario, id_modulo) values (1,5);
+insert into usuariomodulo (id_usuario, id_modulo) values (1,7);
+insert into usuariomodulo (id_usuario, id_modulo) values (1,6);
+insert into usuariomodulo (id_usuario, id_modulo) values (1,9);
+insert into usuariomodulo (id_usuario, id_modulo) values (1,11);
+insert into usuariomodulo (id_usuario, id_modulo) values (1,13);
+insert into usuariomodulo (id_usuario, id_modulo) values (1,17);
+insert into usuariomodulo (id_usuario, id_modulo) values (1,18);
+insert into usuariomodulo (id_usuario, id_modulo) values (1,19);

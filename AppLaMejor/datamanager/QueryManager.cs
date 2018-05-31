@@ -132,6 +132,34 @@ namespace AppLaMejor.datamanager
                 }
             }
         }
+        
+        public int ExecuteSQLExpectId(MySqlConnection conn, string query)
+        {
+            int id;
+            MySqlCommand sqlCommand = new MySqlCommand(query, conn);
+            try
+            {
+                if (conn.State.Equals(ConnectionState.Closed))
+                    conn.Open();
+                sqlCommand.ExecuteNonQuery();
+                id = FuncionesGlobales.GetLastInsertId(sqlCommand);
+                conn.Close();
+                return id;
+            }
+            catch (Exception ex)
+            {
+                FormMessageBox dialog = new FormMessageBox();
+                dialog.ShowErrorDialog("Ocurrio un fallor en la BD: " + ex.Message);
+                return -1;
+            }
+            finally
+            {
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+            }
+        }
         /* Operaciones Generales END*/
         /* Tipos */
         public string GetTipoMovimiento()
@@ -211,7 +239,7 @@ namespace AppLaMejor.datamanager
         {
             return " SELECT c.id, c.cod_cliente as CodCliente, c.razon_social AS RazonSocial, c.domicilio AS Domicilio, c.localidad AS Localidad, cast(c.id_tipo_cliente as CHAR(50)) AS TipoCliente, " +
                 " c.fecha_desde as FechaDesde, c.civa AS IVA, c.cuit AS CUIT, c.nombre_responsable AS NombreResponsable, c.nombre_local AS NombreLocal, c.telefono AS Telefono, "+
-                " c.fecha_baja AS FechaBaja FROM cliente c order by c.id";
+                " c.fecha_baja AS FechaBaja FROM cliente c where c.fecha_baja is null order by c.id";
         }
         public string GetClientesSaldoActual()
         {
@@ -435,9 +463,10 @@ namespace AppLaMejor.datamanager
         }
         public string InsertNuevaCuentaProveedor(Cuenta newCuenta, string idProveedor)
         {
-            return "INSERT INTO proveedorcuenta ( cbu, descripcion, id_proveedor, fecha_updated, usuario, fecha_baja) " +
+            return "INSERT INTO proveedorcuenta ( cbu, descripcion, id_banco, id_proveedor, fecha_updated, usuario, fecha_baja) " +
             " VALUES ('" + newCuenta.Cbu + "', '" +
             newCuenta.Descripcion + "', '" +		
+            newCuenta.Banco.Id+ "', '" +
             idProveedor + "', " +
             " NOW() , 0 , null );";
         }

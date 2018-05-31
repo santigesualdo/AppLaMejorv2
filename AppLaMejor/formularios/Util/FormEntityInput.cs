@@ -184,7 +184,7 @@ namespace AppLaMejor.formularios.Util
                 switch (currentModo)
                 {
                     case MODO_INSERTAR:
-                        textField.MaxLength = 5;
+                        textField.MaxLength = 4;
                         textField.Leave += TextFieldCodigoBarra_Leave;
                         break;
                 }
@@ -198,9 +198,9 @@ namespace AppLaMejor.formularios.Util
         {
             
             TextBox text = (TextBox)sender;
-            if (text.Text.Length<5)
+            if (text.Text.Length<4)
             {
-                MyTextTimer.TStartFade("El valor minimo de CodigoBarra es 5 numeros.", this.statusStripFormEntityInput, this.mensajeroFormEntityInput, MyTextTimer.TIME_LONG);
+                MyTextTimer.TStartFade("El valor minimo de CodigoBarra es 4 numeros.", this.statusStripFormEntityInput, this.mensajeroFormEntityInput, MyTextTimer.TIME_LONG);
                 text.Focus();
             }else
             {

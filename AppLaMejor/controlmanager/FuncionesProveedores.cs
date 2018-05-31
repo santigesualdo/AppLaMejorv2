@@ -27,11 +27,11 @@ namespace AppLaMejor.controlmanager
             return mapper.Map(table).ToList();
         }
 
-        public static bool InsertCuenta(Cuenta newCuenta, string idProveedor)
+        public static int InsertCuenta(Cuenta newCuenta, string idProveedor)
         {
             QueryManager manager = QueryManager.Instance();
             string consulta = manager.InsertNuevaCuentaProveedor(newCuenta, idProveedor);
-            return manager.ExecuteSQL(ConnecionBD.Instance().Connection, consulta);
+            return manager.ExecuteSQLExpectId(ConnecionBD.Instance().Connection, consulta);
         }
 
         public static Proveedor GetProveedorById(int id)
@@ -112,11 +112,11 @@ namespace AppLaMejor.controlmanager
             return manager.ExecuteSQL(ConnecionBD.Instance().Connection, consulta);
         }
 
-        public static bool InsertProveedor(Proveedor newProv)
+        public static int InsertProveedor(Proveedor newProv)
         {
             QueryManager manager = QueryManager.Instance();
             string consulta = manager.InsertNuevoProveedor(newProv);
-            return manager.ExecuteSQL(ConnecionBD.Instance().Connection, consulta);
+            return manager.ExecuteSQLExpectId(ConnecionBD.Instance().Connection, consulta);
         }
 
         public static Proveedor AgregarProveedor(string title)
@@ -128,13 +128,15 @@ namespace AppLaMejor.controlmanager
             /* Form Entity Input */
             FormEntityInput dialog = new FormEntityInput(null, FormEntityInput.MODO_INSERTAR, title);
             Boolean result = dialog.Execute(newProv);
+            int res;
             if (result)
             {
                 newProv = (Proveedor)dialog.SelectedObject;
                 /* Insert en BD */
-
-                if (FuncionesProveedores.InsertProveedor(newProv))
+                res = FuncionesProveedores.InsertProveedor(newProv);
+                if (!res.Equals(-1))
                 {
+                    newProv.Id = res;   
                     return newProv;
                 }
                 else
@@ -142,7 +144,8 @@ namespace AppLaMejor.controlmanager
                     return null;
                 }
             }
-            else return null;
+            else
+                return null;
         }
 
     }

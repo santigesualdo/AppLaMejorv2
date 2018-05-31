@@ -237,14 +237,14 @@ namespace AppLaMejor.formularios
 
             /* Form Entity Input */
             FormEntityInput dialog = new FormEntityInput(null, FormEntityInput.MODO_INSERTAR, "Cuenta de Proveedor. ");
+            dialog.SetTitulo("Insertando cuenta a Proveedor: "+ provSelected.RazonSocial);
             Boolean result = dialog.Execute(newCuenta);
 
             if (result)
             {
                 newCuenta = (Cuenta)dialog.SelectedObject;
-                /* Insert en BD */
-
-                if (FuncionesProveedores.InsertCuenta(newCuenta, provSelected.ToString()))
+                /* Insert en BD */               
+                if (!FuncionesProveedores.InsertCuenta(newCuenta, provSelected.Id.ToString()).Equals(-1))
                 {
                     MyTextTimer.TStartFade("Cuenta se guardo correctamente", statusStrip1, tsslMensaje, MyTextTimer.TIME_SHORT);
                 }

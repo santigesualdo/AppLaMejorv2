@@ -1,0 +1,13 @@
+Plan para próxima implementacion 31/05/2018:
+Ejecutar SQL
+- Insert productos kiosco. Ejecutar SQL de insert_kiosco.sql
+- Dar los permisos necesarios al usuario 'a'. Ejecutar SQL de update_permisos.sql
+
+Mostrar:
+- Clientes, cuenta cliente. Para que usamos clientes. ABM.
+- Venta Mayorista. 
+- Ventas. Buscador.
+- Proveedores, cuenta para proveedores. Para que usamos proveedores. ABM.
+- Carga Nueva Compra.
+- Compras. Buscador.
+- Compra Faltante Entregas.

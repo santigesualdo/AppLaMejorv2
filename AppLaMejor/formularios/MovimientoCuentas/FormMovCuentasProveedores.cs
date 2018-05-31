@@ -172,7 +172,7 @@ namespace AppLaMejor.formularios
                     {
                         newCuenta = (Cuenta)dialog.SelectedObject;
                         /* Insert en BD */
-                        if (FuncionesProveedores.InsertCuenta(newCuenta, prov.Id.ToString()))
+                        if (!FuncionesProveedores.InsertCuenta(newCuenta, prov.Id.ToString()).Equals(-1))
                         {
                             MyTextTimer.TStartFade("Cuenta se guardo correctamente", statusStrip1, tsslMensaje, MyTextTimer.TIME_LONG);
                             return newCuenta;

@@ -14,6 +14,7 @@ namespace AppLaMejor.formularios.Compras
 { 
      public partial class FormCargaCompras : Form
     {
+        // TODO: CUANDO SE CREA PROVEEDOR Y SE CARGA COMPRA, NO SE REGISTRA ID_PROVEEDOR
         // TODO : CargaCompras - No debe poder ingresar dos veces el mismo producto.
         List<Garron> listGarron;
         List<Producto> listProducto;
@@ -279,17 +280,36 @@ namespace AppLaMejor.formularios.Compras
         private void bAgregarProveedor_Click(object sender, EventArgs e)
         {
             Proveedor newProv = FuncionesProveedores.AgregarProveedor("Agregar Proveedor");
-            if (newProv != null)
+
+            Cuenta c = new Cuenta();
+            Banco b = new Banco();
+            b.Id = 6; // TODO : hardcodeo banco por defecto "Sin Especificar".
+            c.Banco = b;
+            c.Cbu = "-";
+            c.Descripcion = "EFECTIVO";
+            int res = FuncionesProveedores.InsertCuenta(c,newProv.Id.ToString());
+
+            if (!res.Equals(-1))
             {
-                MyTextTimer.TStartFade("Se guardo Proveedor " + newProv.RazonSocial.ToUpper() + ".", statusStrip1, tsslMensaje, MyTextTimer.TIME_SHORT);
-                LoadTextBoxProveedor();
-                labelProveedorSeleccionado.Text = newProv.RazonSocial;
-                proveedorSeleccionado = true;
-            }
-            else
+                if (newProv != null)
+                {
+                    MyTextTimer.TStartFade("Se guardo Proveedor " + newProv.RazonSocial.ToUpper() + ".", statusStrip1, tsslMensaje, MyTextTimer.TIME_SHORT);
+                    LoadTextBoxProveedor();
+                    labelProveedorSeleccionado.Text = newProv.RazonSocial;
+                    proveedorSeleccionado = true;
+                    currentIdCuentaProveedor = res;
+                    provSelec = newProv;
+                }
+                else
+                {
+                    MyTextTimer.TStartFade("No se guardo el Proveedor. Ocurrio un error.", statusStrip1, tsslMensaje, MyTextTimer.TIME_SHORT);
+                }
+            }else
             {
-                MyTextTimer.TStartFade("No se guardo el Proveedor. Ocurrio un error.", statusStrip1, tsslMensaje, MyTextTimer.TIME_SHORT);
+                MyTextTimer.TStartFade("No se guardo la Cuenta para el proveedor. Ocurrio un error.", statusStrip1, tsslMensaje, MyTextTimer.TIME_SHORT);
             }
+
+
         }
 
         private void bAgregarGarron_Click(object sender, EventArgs e)

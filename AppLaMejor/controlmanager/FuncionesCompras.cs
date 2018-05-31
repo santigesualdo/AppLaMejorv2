@@ -63,11 +63,11 @@ namespace AppLaMejor.controlmanager
                         newOperacion.proveedor = new Proveedor();
                         newOperacion.proveedor.Id = 0;
                     }
-                    
+
                     TipoOperacion to = new TipoOperacion();
                     to.Id = 3; //(Compra Proveedor)
                     newOperacion.tipoOperacion = to;
-
+                    
                     consulta = manager.InsertOperacionProveedor(newOperacion);
                     command.CommandText = consulta;
                     command.ExecuteNonQuery();
@@ -202,7 +202,7 @@ namespace AppLaMejor.controlmanager
 
         public static bool ConfirmarEntregaProductosRestantesTransaction(int idCompra)
         {
-            MySqlConnection connection = ConnecionBD.Instance().Connection;
+            MySqlConnection connection = new MySqlConnection(ConnecionBD.Instance().connstring);
             using (connection)
             {
                 MySqlTransaction tran = null;
