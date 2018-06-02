@@ -41,7 +41,10 @@ namespace AppLaMejor.controlmanager
         {
             return QueryManager.Instance().GetTableResults(ConnecionBD.Instance().Connection, QueryManager.Instance().GetProductosMayoristaSalonDeposito());
         }
-
+        public static DataTable fillProductosVentaMayoristaSinTraba()
+        {
+            return QueryManager.Instance().GetTableResults(ConnecionBD.Instance().Connection, QueryManager.Instance().GetProductosMayoristaSinTrabas());
+        }
         internal static List<ProductoUbicacion> listProductoUbicacion(DataTable tableUbicacion)
         {
             DataNamesMapper<ProductoUbicacion> mapper = new DataNamesMapper<ProductoUbicacion>();

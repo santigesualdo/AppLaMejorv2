@@ -947,7 +947,21 @@ namespace AppLaMejor.datamanager
                 " where p.id_producto_tipo = 3 " +
                 " and pu.id_ubicacion = 4 " +
                 " and pu.fecha_egreso is null ";
-        }       
+        }
+        public string GetProductosMayoristaSinTrabas()
+        {
+            return " SELECT" +
+                " p.id," +
+                " p.id_codigo_barra as CodigoBarra," +
+                " p.descripcion_breve AS DescripcionBreve," +
+                " cast(p.id_producto_tipo AS CHAR (50)) AS TipoProducto," +
+                " p.precio as Precio," +
+                " 1000 AS Cantidad " +
+                " FROM " +
+                " producto p " +
+                " where  " +
+                " p.id_producto_tipo in (3) ";
+        }
         public string GetProductoFaltanteData(int idCompra)
         {
             return " SELECT" +

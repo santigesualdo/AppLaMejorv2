@@ -63,7 +63,7 @@ namespace AppLaMejor.formularios.Caja
 
         void cargar(List<VentaDetalle> listVentaDetalle)
         {
-            tableProductos = FuncionesProductos.fillProductosVentaMayoristaDeposito();
+            tableProductos = FuncionesProductos.fillProductosVentaMayoristaSinTraba();
             listProds = FuncionesProductos.listProductos(tableProductos);
 
             if (listVentaDetalle.Count > 0)
