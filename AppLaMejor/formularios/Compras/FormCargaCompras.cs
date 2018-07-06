@@ -281,6 +281,9 @@ namespace AppLaMejor.formularios.Compras
         {
             Proveedor newProv = FuncionesProveedores.AgregarProveedor("Agregar Proveedor");
 
+            if (newProv == null)
+                return;
+
             Cuenta c = new Cuenta();
             Banco b = new Banco();
             b.Id = 6; // TODO : hardcodeo banco por defecto "Sin Especificar".
