@@ -193,7 +193,7 @@ namespace AppLaMejor.formularios.Caja
                 List<Cuenta> cuentasCliente = FuncionesClientes.GetCuentaEfectivoCliente(clienteSelected.Id);
                 foreach(Cuenta c in cuentasCliente)
                 {
-                    if (c.Descripcion.Equals("EFECTIVO"))
+                    if (c.Descripcion.Equals("EFECTIVO")|| c.Descripcion.Equals("CUENTA CORRIENTE")|| c.Descripcion.Equals("CHEQUE"))
                     {
                         cuentaSelected = c;
                         break;

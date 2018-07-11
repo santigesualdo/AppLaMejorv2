@@ -251,11 +251,13 @@ namespace AppLaMejor.datamanager
         {
             return "CALL borrarCliente(" + idCliente.ToString() + ",'" + fechaBaja.ToString(VariablesGlobales.dateFormat) + "')";
         }
+
+        //combobox de cliente con cuenta muestra la razón social y la descripción de la cuenta en el mismo combobox
         public string GetClientesMayoristasConCuenta()
         {
-            return "SELECT c.id,c.cod_cliente AS CodCliente,c.razon_social AS RazonSocial, c.domicilio AS Domicilio,c.localidad AS Localidad,cast(ct.id AS CHAR(50)) AS TipoCliente, "+
-            "cu.id AS IdCuenta,c.fecha_desde AS FechaDesde,	c.civa AS IVA,c.cuit AS CUIT,c.nombre_responsable AS NombreResponsable,	c.nombre_local AS NombreLocal,c.telefono AS Telefono "+
-            "FROM cliente c INNER JOIN clientetipo ct ON ct.id = c.id_tipo_cliente INNER JOIN clientecuenta cu ON cu.id_cliente = c.id where c.id_tipo_cliente = 1 and cu.descripcion = 'EFECTIVO'" ;
+            return "SELECT c.id,c.cod_cliente AS CodCliente,CONCAT(c.razon_social, ' | ', cu.descripcion) AS RazonSocial, c.domicilio AS Domicilio,c.localidad AS Localidad,cast(ct.id AS CHAR(50)) AS TipoCliente, " +
+            " cu.id AS IdCuenta,c.fecha_desde AS FechaDesde,	c.civa AS IVA,c.cuit AS CUIT,c.nombre_responsable AS NombreResponsable,	c.nombre_local AS NombreLocal,c.telefono AS Telefono " +
+             " FROM cliente c INNER JOIN clientetipo ct ON ct.id = c.id_tipo_cliente INNER JOIN clientecuenta cu ON cu.id_cliente = c.id where c.id_tipo_cliente = 1 ORDER BY c.razon_social; ";
         }
         /* Proveedores */
         public string InsertNuevoProveedor(Proveedor Proveedor)
@@ -1474,7 +1476,7 @@ namespace AppLaMejor.datamanager
         }
         public string SumarCantidadProducto(Producto p)
         {
-            return " UPDATE producto set cantidad = cantidad + '" + p.Cantidad + "' where id = '" + p.Id + "'";
+            return " UPDATE producto set cantidad = cantidad + '" + p.CantidadEntregada + "' where id = '" + p.Id + "'";
         }
         public string UpdateCantidadProducto(int idProducto, decimal nuevoPeso)
         {

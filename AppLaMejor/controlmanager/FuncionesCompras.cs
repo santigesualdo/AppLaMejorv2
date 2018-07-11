@@ -159,21 +159,39 @@ namespace AppLaMejor.controlmanager
                         command.CommandText = consulta;
                         command.ExecuteNonQuery();
                     }
-                    
+
                     foreach (Producto p in listProducto)
                     {
                         // Registro compra detalle.
                         consulta = manager.InsertCompraDetalle(idCompra, p);
                         command.CommandText = consulta;
                         command.ExecuteNonQuery();
-                        // Los productos se suman en campo "Cantidad". 
+
+                        // Se suma cantidadEntregada en tabla productos se suman en campo "Cantidad". 
                         consulta = manager.SumarCantidadProducto(p);
                         command.CommandText = consulta;
                         command.ExecuteNonQuery();
+
                         // Se ubican todos los productos ingresados en MESA DE ENTRADA.
-                        consulta = manager.UbicarCompraDetalleUbicacionEntrada(p);
-                        command.CommandText = consulta;
-                        command.ExecuteNonQuery();
+                        // Verificamos que ese producto no exista en ubicacion entrada.
+                        ProductoUbicacion puD = FuncionesProductos.GetProductoUbicacion(p, FuncionesGlobales.ObtenerUbicacionEntrada().Id);
+
+                        // Si no existe el producto en destino, insertamos productoUbicacion.
+                        if (puD == null)
+                        {
+                            // Se inserta la nueva ubicacion en ProductoUbicacion
+                            consulta = manager.InsertProductoUbicacion(p.Id, FuncionesGlobales.ObtenerUbicacionEntrada().Id, p.CantidadEntregada);
+                            command.CommandText = consulta;
+                            command.ExecuteNonQuery();
+                        }
+                        else
+                        // Caso contrario sumamos el peso.
+                        {
+                            decimal nuevoPeso = puD.peso + p.CantidadEntregada;
+                            consulta = manager.UpdatePesoProductoDestino(puD.Id, nuevoPeso);
+                            command.CommandText = consulta;
+                            command.ExecuteNonQuery();
+                        }
                     }
 
                     tran.Commit();

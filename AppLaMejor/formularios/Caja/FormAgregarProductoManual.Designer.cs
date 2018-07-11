@@ -58,6 +58,9 @@ namespace AppLaMejor.formularios.Caja
             this.mensajeroFormEntityInput = new System.Windows.Forms.ToolStripStatusLabel();
             this.topPanel = new System.Windows.Forms.Panel();
             this.formTittleText = new System.Windows.Forms.Label();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.tbPrecioModificable = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.mainPanel.SuspendLayout();
             this.contentPanel.SuspendLayout();
             this.controlsPanel.SuspendLayout();
@@ -72,6 +75,7 @@ namespace AppLaMejor.formularios.Caja
             this.tableBottomPanel.SuspendLayout();
             this.statusStripFormEntityInput.SuspendLayout();
             this.topPanel.SuspendLayout();
+            this.panel7.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainPanel
@@ -136,16 +140,19 @@ namespace AppLaMejor.formularios.Caja
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Controls.Add(this.panel6, 1, 0);
+            this.tableLayoutPanel1.ColumnCount = 3;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 34F));
+            this.tableLayoutPanel1.Controls.Add(this.panel7, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.panel4, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.panel6, 2, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(5, 149);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(522, 66);
             this.tableLayoutPanel1.TabIndex = 15;
             // 
@@ -154,15 +161,15 @@ namespace AppLaMejor.formularios.Caja
             this.panel6.Controls.Add(this.tbPrecioFinal);
             this.panel6.Controls.Add(this.lblPrecio);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel6.Location = new System.Drawing.Point(264, 3);
+            this.panel6.Location = new System.Drawing.Point(347, 3);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(255, 60);
+            this.panel6.Size = new System.Drawing.Size(172, 60);
             this.panel6.TabIndex = 1;
             // 
             // tbPrecioFinal
             // 
             this.tbPrecioFinal.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.tbPrecioFinal.Location = new System.Drawing.Point(79, 28);
+            this.tbPrecioFinal.Location = new System.Drawing.Point(38, 28);
             this.tbPrecioFinal.Name = "tbPrecioFinal";
             this.tbPrecioFinal.Size = new System.Drawing.Size(100, 20);
             this.tbPrecioFinal.TabIndex = 13;
@@ -172,11 +179,11 @@ namespace AppLaMejor.formularios.Caja
             // 
             this.lblPrecio.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblPrecio.AutoSize = true;
-            this.lblPrecio.Location = new System.Drawing.Point(76, 12);
+            this.lblPrecio.Location = new System.Drawing.Point(35, 12);
             this.lblPrecio.Name = "lblPrecio";
-            this.lblPrecio.Size = new System.Drawing.Size(40, 13);
+            this.lblPrecio.Size = new System.Drawing.Size(65, 13);
             this.lblPrecio.TabIndex = 12;
-            this.lblPrecio.Text = "Precio:";
+            this.lblPrecio.Text = "Precio Final:";
             // 
             // panel4
             // 
@@ -185,14 +192,14 @@ namespace AppLaMejor.formularios.Caja
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(3, 3);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(255, 60);
+            this.panel4.Size = new System.Drawing.Size(166, 60);
             this.panel4.TabIndex = 0;
             // 
             // label2
             // 
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(76, 12);
+            this.label2.Location = new System.Drawing.Point(32, 12);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(85, 13);
             this.label2.TabIndex = 14;
@@ -201,7 +208,7 @@ namespace AppLaMejor.formularios.Caja
             // tbPrecio
             // 
             this.tbPrecio.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.tbPrecio.Location = new System.Drawing.Point(79, 28);
+            this.tbPrecio.Location = new System.Drawing.Point(35, 28);
             this.tbPrecio.Name = "tbPrecio";
             this.tbPrecio.ReadOnly = true;
             this.tbPrecio.Size = new System.Drawing.Size(100, 20);
@@ -413,6 +420,36 @@ namespace AppLaMejor.formularios.Caja
             this.formTittleText.Text = "Agregar Producto Manualmente";
             this.formTittleText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // panel7
+            // 
+            this.panel7.Controls.Add(this.tbPrecioModificable);
+            this.panel7.Controls.Add(this.label4);
+            this.panel7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel7.Location = new System.Drawing.Point(175, 3);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(166, 60);
+            this.panel7.TabIndex = 2;
+            // 
+            // tbPrecioModificable
+            // 
+            this.tbPrecioModificable.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.tbPrecioModificable.Location = new System.Drawing.Point(35, 28);
+            this.tbPrecioModificable.Name = "tbPrecioModificable";
+            this.tbPrecioModificable.Size = new System.Drawing.Size(100, 20);
+            this.tbPrecioModificable.TabIndex = 13;
+            this.tbPrecioModificable.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPrecioModificable_KeyPress);
+            this.tbPrecioModificable.Leave += new System.EventHandler(this.tbPrecioModificable_Leave);
+            // 
+            // label4
+            // 
+            this.label4.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(32, 12);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(79, 13);
+            this.label4.TabIndex = 12;
+            this.label4.Text = "Precio Unitario:";
+            // 
             // FormAgregarProductoManual
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -444,6 +481,8 @@ namespace AppLaMejor.formularios.Caja
             this.statusStripFormEntityInput.ResumeLayout(false);
             this.statusStripFormEntityInput.PerformLayout();
             this.topPanel.ResumeLayout(false);
+            this.panel7.ResumeLayout(false);
+            this.panel7.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -479,6 +518,9 @@ namespace AppLaMejor.formularios.Caja
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cmbProductos;
         private System.Windows.Forms.Label lCantidadMaxima;
+        private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.TextBox tbPrecioModificable;
+        private System.Windows.Forms.Label label4;
     }
 
 

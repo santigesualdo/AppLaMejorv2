@@ -54,7 +54,6 @@
             this.labelSubTotal = new System.Windows.Forms.Label();
             this.navTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.agregarVenta = new System.Windows.Forms.Button();
-            this.btRemito = new System.Windows.Forms.Button();
             this.lTittle = new System.Windows.Forms.Label();
             this.groupVentasAnterioresDataGrid = new System.Windows.Forms.GroupBox();
             this.dataGridVentas = new System.Windows.Forms.DataGridView();
@@ -375,7 +374,6 @@
             this.navTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.navTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.navTableLayoutPanel.Controls.Add(this.agregarVenta, 0, 0);
-            this.navTableLayoutPanel.Controls.Add(this.btRemito, 1, 0);
             this.navTableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.navTableLayoutPanel.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize;
             this.navTableLayoutPanel.Location = new System.Drawing.Point(0, 344);
@@ -403,25 +401,6 @@
             this.agregarVenta.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.agregarVenta.UseVisualStyleBackColor = false;
             this.agregarVenta.Click += new System.EventHandler(this.agregarVenta_Click);
-            // 
-            // btRemito
-            // 
-            this.btRemito.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btRemito.FlatAppearance.BorderColor = System.Drawing.Color.Green;
-            this.btRemito.FlatAppearance.BorderSize = 2;
-            this.btRemito.FlatAppearance.MouseDownBackColor = System.Drawing.Color.MediumSeaGreen;
-            this.btRemito.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkSlateGray;
-            this.btRemito.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btRemito.Image = global::AppLaMejor.Properties.Resources.add_icon_30x30_green;
-            this.btRemito.Location = new System.Drawing.Point(231, 3);
-            this.btRemito.Name = "btRemito";
-            this.btRemito.Size = new System.Drawing.Size(222, 51);
-            this.btRemito.TabIndex = 13;
-            this.btRemito.Text = "Generar Remito";
-            this.btRemito.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btRemito.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btRemito.UseVisualStyleBackColor = false;
-            this.btRemito.Click += new System.EventHandler(this.btRemito_Click);
             // 
             // lTittle
             // 
@@ -889,7 +868,6 @@
         private System.Windows.Forms.TableLayoutPanel tableDatos;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label lblCliente;
-        private System.Windows.Forms.Button btRemito;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.ComboBox cmbCliente;
         private System.Windows.Forms.Panel panel6;

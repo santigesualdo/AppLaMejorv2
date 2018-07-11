@@ -40,6 +40,7 @@ namespace AppLaMejor.formularios.Caja
                 string cantidadStr = t.Text;
                 decimal.TryParse(cantidadStr, out cantidad);
                 tbPrecio.Text = (selectedProducto.Precio * cantidad).ToString();
+                tbPrecioModificable.Text = selectedProducto.Precio.ToString();
             }
         }
 
@@ -126,7 +127,8 @@ namespace AppLaMejor.formularios.Caja
         {
             if (e.KeyChar == (char)13)
             {
-                tbPrecioFinal.Focus();
+                //tbPrecioFinal.Focus();
+                tbPrecioModificable.Focus();
             }
             FuncionesGlobales.DecimalTextBox_KeyPress(sender, e);
         }
@@ -147,6 +149,26 @@ namespace AppLaMejor.formularios.Caja
                 dialog.ShowConfirmationDialog("La cantidad ingresada supera a la cantidad permitida.");
                 tbCantidad.Focus();
             }
+        }
+
+        private void tbPrecioModificable_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)13)
+            {
+                tbPrecioFinal.Text = (Convert.ToDecimal(tbPrecioModificable.Text) * cantidad).ToString();
+                
+                tbPrecioFinal.Focus();
+               
+            }
+            FuncionesGlobales.DecimalTextBox_KeyPress(sender, e);
+        }
+
+        private void tbPrecioModificable_Leave(object sender, EventArgs e)
+        {
+            //TB PARA MODIFICAR EL PRECIO UNITARIO
+            tbPrecioFinal.Text = (Convert.ToDecimal(tbPrecioModificable.Text) * cantidad).ToString();
+
+            tbPrecioFinal.Focus();
         }
     }
 }
