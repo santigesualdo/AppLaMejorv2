@@ -1,0 +1,11 @@
+Lo necesario para que funcione el backup:
+
+1) Modificar las variables de entorno del sistema para que se pueda ejecutar mysql y mysqldump por consola
+en la variable path: agregar C:\Program Files (x86)\MySQL\MySQL Server 5.7\bin o donde esté alojado mysql y mysqldump.
+Luego reiniciar para que tome la variable.
+
+2) Crear una carpeta en el C:\backupBD\sql o descomprimir el RAR backupBD.
+
+3) Crear la tabla backup en mysql como figura en backupBD\sql\bdlamejor_dev_2018_07_13.sql
+
+Listo. Si falla es pq me olvidé de algo.

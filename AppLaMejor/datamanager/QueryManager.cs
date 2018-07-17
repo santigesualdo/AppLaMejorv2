@@ -27,6 +27,20 @@ namespace AppLaMejor.datamanager
                 _instance = new QueryManager();
             return _instance;
         }
+
+        internal string InsertNuevoBackup(Backup bkp)
+        {
+            string consulta;
+            consulta = "insert into backup(id, descripcion, fecha) " +
+            "VALUES('" + bkp.Id + "','" + bkp.Descripcion + "', now());";
+            return consulta;
+        }
+
+        internal string GetNextBackupId()
+        {
+            return "SELECT case when MAX(id)+1 is not null then MAX(id)+1  else 1 end as nextid from BACKUP;";
+        }
+
         /* Operaciones Generales */
         /* Recibe coneccion y consulta, y retorna data table llena */
         public DataTable GetTableResults(MySqlConnection conn, string query)
@@ -1617,6 +1631,16 @@ namespace AppLaMejor.datamanager
         public string GetModulo(int v)
         {
             return "select * from modulo where id=" + v;
+        }
+
+        public string GetBackupsData()
+        {
+            return " SELECT * from backup order by id desc";
+        }
+
+        public string GetLastBackup()
+        {
+            return " SELECT if (date(fecha)=date(now()), 1,0) as fecha  from backup order by id desc limit 1;";
         }
     }
 

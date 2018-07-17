@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -11,6 +10,7 @@ using AppLaMejor.formularios.Util;
 using AppLaMejor.entidades;
 using AppLaMejor.controlmanager;
 using AppLaMejor.stylemanager;
+using System.IO;
 
 namespace AppLaMejor.formularios
 {
@@ -19,6 +19,7 @@ namespace AppLaMejor.formularios
 
         List<Backup> listBackups;
         DataTable tableBackups;
+        internal string i;
       
         public FormBackup()
         {
@@ -40,12 +41,6 @@ namespace AppLaMejor.formularios
             listTipoClientes.Add(tcvacio);
             listTipoClientes = listTipoClientes.OrderBy(x => x.Id).ToList();
             BindingList<TipoCliente> objects = new BindingList<TipoCliente>(listTipoClientes);
-
-            comboTipoFilter.ValueMember = null;
-            comboTipoFilter.DisplayMember = "Descripcion";
-            comboTipoFilter.DataSource = objects;
-
-            comboTipoFilter.SelectedIndex = -1;
         }        
 
         private void CargarDataGrid()
@@ -71,95 +66,6 @@ namespace AppLaMejor.formularios
                     continue;
                 }
             }
-
-            
-        }
-
-        private void EliminarRegistro(object sender, EventArgs e)
-        {
-            // Seteamos fecha baja en el registro por ID de Cliente
-   //         int i = FuncionesGlobales.obtenerIndexDeListFromGrid(dataGridClientes);
-   //         Cliente clientSelected = listClients.First(s => s.Id == i);
-
-   //         FormMessageBox dialog = new FormMessageBox();
-			//if (dialog.ShowConfirmationDialog("¿Eliminar registro del cliente " + clientSelected.RazonSocial + " ?")){
-   //                 string consultaEliminar = QueryManager.Instance().GetDeleteClient(clientSelected.Id.ToString(), DateTime.Now);
-   //                 if (QueryManager.Instance().ExecuteSQL(ConnecionBD.Instance().Connection, consultaEliminar))
-   //                 {
-   //                     MyTextTimer.TStartFade("Cliente eliminado correctamente", statusStrip1, tsslMensaje, MyTextTimer.TIME_SHORT);
-   //                     CargarDataGrid();
-   //                 }                   
-				
-			//}
-        }
-
-        private void ModoEdicion(object sender, EventArgs e)
-        {
-            ///* Obtenemos los datos de la fila seleccionada y la convertimos a entidad Cliente */
-            //int i = FuncionesGlobales.obtenerIndexDeListFromGrid(dataGridClientes);
-            //Cliente clientSelected = listClients.First(s => s.Id == i);
-            //int idCliente = clientSelected.Id;
-
-            ///* Form Entity Input */
-            //FormEntityInput dialog = new FormEntityInput(null, FormEntityInput.MODO_EDITAR, formTittleText.Text);
-            //Boolean result = dialog.Execute(clientSelected, idCliente);
-
-            //if (result)
-            //{
-            //    Cliente client = (Cliente)dialog.SelectedObject;
-            //    /* Update en BD */
-
-            //    if (FuncionesClientes.UpdateCliente(client))
-            //    {
-            //        // se actualizo bien
-            //        CargarDataGrid();
-            //        MyTextTimer.TStartFade("Cliente actualizado correctamente", statusStrip1, tsslMensaje, MyTextTimer.TIME_SHORT);
-            //    }
-            //    else
-            //    {
-            //        // se actualizo mal
-            //        MyTextTimer.TStartFade("Cliente NO se actualizo correctamente", statusStrip1, tsslMensaje, MyTextTimer.TIME_SHORT);
-            //    }
-                
-            //}
-        }
-
-        private void ModoVer(object sender, EventArgs e)
-        {
-            ///* Obtenemos los datos de la fila seleccionada y la convertimos a entidad Cliente */
-            //int i = FuncionesGlobales.obtenerIndexDeListFromGrid(dataGridClientes);
-            //Cliente clientSelected= listClients.First(s => s.Id == i);
-            //int idCliente = clientSelected.Id;
-
-            ///* Form Entity Input */
-            //FormEntityInput dialog = new FormEntityInput(null,FormEntityInput.MODO_VER, formTittleText.Text);
-            //Boolean result = dialog.Execute(clientSelected, idCliente);
-        }
-
-        private void AgregarCliente()
-        {
-            ///* Obtenemos los datos de la fila seleccionada y la convertimos a entidad Cliente */
-            //Cliente newClient = new Cliente();
-            //newClient.FechaDesde = DateTime.Now;
-
-            ///* Form Entity Input */
-            //FormEntityInput dialog = new FormEntityInput(null, FormEntityInput.MODO_INSERTAR, formTittleText.Text);
-            //Boolean result = dialog.Execute(newClient);
-            //if (result)
-            //{
-            //    newClient = (Cliente)dialog.SelectedObject;
-            //    /* Insert en BD */
-
-            //    if (FuncionesClientes.InsertCliente(newClient))
-            //    {
-            //        CargarDataGrid();
-            //        MyTextTimer.TStartFade("Se guardo cliente " + newClient.RazonSocial.ToUpper() + ".", statusStrip1, tsslMensaje, MyTextTimer.TIME_SHORT);    
-            //    }
-            //    else
-            //    {
-            //        MyTextTimer.TStartFade("No se guardo el cliente. Ocurrio un error.", statusStrip1, tsslMensaje, MyTextTimer.TIME_SHORT);
-            //    }                    
-            //}
         }
 
         private void bAceptar_Click(object sender, EventArgs e)
@@ -172,35 +78,43 @@ namespace AppLaMejor.formularios
             this.Close();
         }
 
-        private void bEliminar_Click(object sender, EventArgs e)
-        {
-           EliminarRegistro(sender, e);
-        }
-        
         private void bAgregar_Click(object sender, EventArgs e)
         {
-            AgregarCliente();
-        }
-
-        private void bVer_Click(object sender, EventArgs e)
-        {
-            ModoVer(sender, e);
+            string path = @"c:\backupBD\sql\MyTest.bat";
+            string pathsql = @"C:\backupBD\sql\";
+            string sqlfile = i;
+            if (!File.Exists(path))
+            {
+                // Create a file to write to.
+                using (StreamWriter sw = File.CreateText(path))
+                {
+                    sw.WriteLine("@echo off");
+                    sw.WriteLine("echo Comenzando la Restauración de la Base de Datos en el Servidor");
+                    sw.WriteLine("mysql--user = root--password = dd74f695 bdlamejor_dev < " + pathsql + sqlfile + ".sql");
+                    sw.WriteLine("echo on");
+                    sw.WriteLine("echo Restauración Completa.");
+                }
+            }
         }
 
         private void bEditar_Click(object sender, EventArgs e)
         {
-            ModoEdicion(sender, e);
+            if (dataGridClientes.Rows.Count >= 1)
+            {
+                preguntarParaRestaurarCopia();
+            }
+            else MessageBox.Show("No hay backups");
         }
 
         private void filterTextBox_TextChanged(object sender, EventArgs e)
         {
             // Aplicar filtro a data grid por texto en Razon Social
-            if (!filterTextBox.Text.Equals(""))
+            if (!filter4TextBox.Text.Equals(""))
             {
                 StringBuilder filter = new StringBuilder();
-                if (!(string.IsNullOrEmpty(filterTextBox.Text)))
+                if (!(string.IsNullOrEmpty(filter4TextBox.Text)))
                 {
-                    filter.Append("descripcion Like '%" + filterTextBox.Text + "%'");
+                    filter.Append("descripcion Like '%" + filter4TextBox.Text + "%'");
                     (dataGridClientes.DataSource as DataTable).DefaultView.RowFilter = filter.ToString();
                 }
             }
@@ -210,24 +124,6 @@ namespace AppLaMejor.formularios
             }
         }
 
-        private void filterCodClienteTextBox_TextChanged(object sender, EventArgs e)
-        {
-            //// Aplicar filtro a data grid por texto en Razon Social
-            //if (!filterTextBox.Text.Equals(""))
-            //{
-            //    StringBuilder filter = new StringBuilder();
-            //    if (!(string.IsNullOrEmpty(filterTextBox.Text)))
-            //    {
-            //        filter.Append("CodCliente Like '%" + filterTextBox.Text + "%'");
-            //        (dataGridClientes.DataSource as DataTable).DefaultView.RowFilter = filter.ToString();
-            //    }
-            //}
-            //else
-            //{
-            //    (dataGridClientes.DataSource as DataTable).DefaultView.RowFilter = string.Empty;
-            //}
-
-        }
         private void dtpFilter_ValueChanged(object sender, EventArgs e)
         {
             string theDate = dtpFilter.Value.Date.ToString("yyyy-MM-dd");
@@ -248,32 +144,6 @@ namespace AppLaMejor.formularios
             }
         }
 
-        private void comboTipoFilterOnChange(object sender, EventArgs e)
-        {
-    //        comboNomencladorFilterChange(sender);
-        }
-
-        private void comboNomencladorFilterChange(object sender)
-        {
-            //ComboBox combo = (ComboBox)sender;
-            //TipoCliente tipoCliente = (TipoCliente)combo.SelectedValue;
-
-            ////Aplicar filtro a data grid por texto fecha en Razon Social
-            //if ( tipoCliente!=null && !string.IsNullOrEmpty(tipoCliente.Descripcion))
-            //{
-            //    StringBuilder filter = new StringBuilder();
-            //    if (!(string.IsNullOrEmpty(tipoCliente.Descripcion)))
-            //    {
-            //        filter.Append("TipoCliente = '" + tipoCliente.Descripcion + "'");
-            //        (dataGridClientes.DataSource as DataTable).DefaultView.RowFilter = filter.ToString();
-            //    }
-            //}
-            //else
-            //{
-            //    (dataGridClientes.DataSource as DataTable).DefaultView.RowFilter = string.Empty;
-            //}
-        }
-
         private void filterTextBox_Click(object sender, EventArgs e)
         {
             TextBox textBox = (TextBox)sender;
@@ -290,45 +160,29 @@ namespace AppLaMejor.formularios
             this.Close();
         }
 
-        private void bAgregarCuenta_Click(object sender, EventArgs e)
+        private void dataGridClientes_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-     //       AgregarCuenta();
+            if (dataGridClientes.Rows.Count >= 1)
+            {
+                preguntarParaRestaurarCopia();
+            }
+            else MessageBox.Show("No hay backups");
         }
 
-        private void AgregarCuenta()
+        void preguntarParaRestaurarCopia()
         {
-            //int i = FuncionesGlobales.obtenerIndexDeListFromGrid(dataGridClientes);
-            //Cliente clientSelected = listClients.First(s => s.Id == i);
-            //int idCliente = clientSelected.Id;
+            //elemento 1 es la fecha en la que se hizo el backup
+            i = FuncionesBackups.obtenerTextFromGrid(dataGridClientes).ElementAt(1);
 
-            ///* Obtenemos los datos de la fila seleccionada y la convertimos a entidad Cliente */
-            //Cuenta newCuenta= new Cuenta();
-            //newCuenta.FechaUltimaActualizacion = DateTime.Now;
-
-            ///* Form Entity Input */
-            //FormEntityInput dialog = new FormEntityInput(null, FormEntityInput.MODO_INSERTAR, "Cuenta de cliente. ");
-            //Boolean result = dialog.Execute(newCuenta);
-           
-            //if (result)
-            //{
-            //    newCuenta = (Cuenta)dialog.SelectedObject;
-            //    /* Insert en BD */
-
-            //    if (FuncionesClientes.InsertCuenta(newCuenta,idCliente.ToString()))
-            //    {
-            //        MyTextTimer.TStartFade("Cuenta se guardo correctamente", statusStrip1, tsslMensaje, MyTextTimer.TIME_SHORT);    
-            //    }
-            //    else
-            //    {
-            //        MyTextTimer.TStartFade("No se guardo cuenta.", statusStrip1, tsslMensaje, MyTextTimer.TIME_SHORT);
-            //    }
-
-            //}
-
-
+            FormMessageBox dialog = new FormMessageBox();
+            if (dialog.ShowConfirmationDialog("¿Desea restaurar la base de datos a la fecha " + i + " ?"))
+            {
+                //envío como parametro el nombre del archivo sql para restaurar copia
+                FuncionesBackups.restaurarCopia(FuncionesBackups.obtenerTextFromGrid(dataGridClientes).ElementAt(0));
+                
+                MyTextTimer.TStartFade("Restauración realizada correctamente", statusStrip1, tsslMensaje, MyTextTimer.TIME_SHORT);
+                CargarDataGrid();
+            }
         }
-
-
-
     }
 }

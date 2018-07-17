@@ -12,10 +12,7 @@ namespace AppLaMejor.entidades
         public int Id { get; set; }
         [DataNames("descripcion")]
         public string Descripcion { get; set; }
-
-        [DataNames("ubicacion")]
-        public string ubicacion { get; set; }
-
+               
         [DataNames("fecha")]
         public DateTime Fecha { get; set; }
     }
