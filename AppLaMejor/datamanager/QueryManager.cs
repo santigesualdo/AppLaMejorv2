@@ -18,7 +18,7 @@ namespace AppLaMejor.datamanager
     {
         private static QueryManager _instance = null;
         
-        // TODO: Chequear por que tienen 0 referencia algunas funciones.
+        // TODO: Chequear por que tienen 0 C:\dev\branches\jjBranch\AppLaMejor\datamanager\QueryManager.csreferencia algunas funciones.
 
         /* Clase singleton que retorna consultas sql en un string */
         public static QueryManager Instance()
@@ -27,6 +27,24 @@ namespace AppLaMejor.datamanager
                 _instance = new QueryManager();
             return _instance;
         }
+
+        internal string InsertNuevoBackup(Backup bkp)
+        {
+            string consulta;
+            consulta = "insert into backup(id, descripcion, fecha) " +
+            "VALUES('" + bkp.Id + "','" + bkp.Descripcion + "', now());";
+            return consulta;
+        }
+
+        internal string GetNextBackupId()
+        {
+            return "SELECT case when MAX(id)+1 is not null then MAX(id)+1  else 1 end as nextid from BACKUP;";
+        }
+        internal string GetNextClienteId()
+        {//se le pone sin el +1 pq necesito el ultimo de la tabla
+            return "SELECT case when MAX(id) is not null then MAX(id)  else 1 end as nextid from CLIENTE;";
+        }
+
         /* Operaciones Generales */
         /* Recibe coneccion y consulta, y retorna data table llena */
         public DataTable GetTableResults(MySqlConnection conn, string query)
@@ -952,17 +970,27 @@ namespace AppLaMejor.datamanager
         }
         public string GetProductosMayoristaSinTrabas()
         {
-            return " SELECT" +
-                " p.id," +
-                " p.id_codigo_barra as CodigoBarra," +
-                " p.descripcion_breve AS DescripcionBreve," +
-                " cast(p.id_producto_tipo AS CHAR (50)) AS TipoProducto," +
-                " p.precio as Precio," +
-                " 1000 AS Cantidad " +
-                " FROM " +
-                " producto p " +
-                " where  " +
-                " p.id_producto_tipo in (3) ";
+            return " SELECT DISTINCT " +
+"    p.id, " +
+"	p.id_codigo_barra AS CodigoBarra, IF(ISNULL(CONCAT(p.descripcion_breve, ' (', SUM(pu.peso), ') ')), " +
+"    CONCAT(p.descripcion_breve, ' (COMPRAR) '), " +
+"    CONCAT(p.descripcion_breve, ' (', SUM(pu.peso), ') ')) AS 'DescripcionBreve', " +
+"	cast(p.id_producto_tipo AS CHAR(50)) AS TipoProducto, " +
+"   p.precio AS Precio, 1000 AS Cantidad, SUM(pu.peso)AS Cantidad_Ubicada " +
+"       FROM producto p LEFT JOIN productoubicacion pu ON p.id = pu.id_producto " +
+"       WHERE p.id_producto_tipo IN(3) GROUP BY(p.id);";
+
+            //return " SELECT" +
+            //    " p.id," +
+            //    " p.id_codigo_barra as CodigoBarra," +
+            //    " p.descripcion_breve AS DescripcionBreve," +
+            //    " cast(p.id_producto_tipo AS CHAR (50)) AS TipoProducto," +
+            //    " p.precio as Precio," +
+            //    " 1000 AS Cantidad " +
+            //    " FROM " +
+            //    " producto p " +
+            //    " where  " +
+            //    " p.id_producto_tipo in (3) ";
         }
         public string GetProductoFaltanteData(int idCompra)
         {
@@ -1279,7 +1307,7 @@ namespace AppLaMejor.datamanager
         "'Septiembre'," +
         "'Octubre'," +
         "'Noviembre', " +
-		"'Diciembre') AS `mes`, "+
+        "'Diciembre') AS `mes`, MONTH (`v`.`fecha`) AS `mesNumero`," +
                     " YEAR(`v`.`fecha`) AS `año`," + 
 	" date_format(`v`.`fecha`, '%d/%m/%Y') AS `fecha`," +
     " date_format(`v`.`fecha`, '%H:%i') AS `hora`," +
@@ -1313,7 +1341,7 @@ namespace AppLaMejor.datamanager
             "'Octubre',"+
             "'Noviembre',"+
             "'Diciembre'"+
-            ") AS mes,"+
+            ") AS mes, MONTH (`cm`.`fecha`) AS `mesNumero`," +
             " YEAR (cm.fecha) AS año,"+
             " DATE_FORMAT(cm.fecha, '%d-%m-%Y') AS fecha,"+
             " DATE_FORMAT(cm.fecha, '%H:%i') AS hora,"+
@@ -1357,7 +1385,7 @@ namespace AppLaMejor.datamanager
         "'Octubre', " +
         "'Noviembre', " +
         "'Diciembre' " +
-    ") AS `mes`, " +
+    ") AS `mes`, MONTH (`cm`.`fecha`) AS `mesNumero`, " +
     "YEAR(`cm`.`fecha`) AS `año`, " +
     "date_format(`cm`.`fecha`, '%d-%m-%Y') AS `fecha`, " +
     "date_format(`cm`.`fecha`, '%H:%i') AS `hora`, " +
@@ -1617,6 +1645,16 @@ namespace AppLaMejor.datamanager
         public string GetModulo(int v)
         {
             return "select * from modulo where id=" + v;
+        }
+
+        public string GetBackupsData()
+        {
+            return " SELECT * from backup order by id desc";
+        }
+
+        public string GetLastBackup()
+        {
+            return " SELECT if (date(fecha)=date(now()), 1,0) as fecha  from backup order by id desc limit 1;";
         }
     }
 
