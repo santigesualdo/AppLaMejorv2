@@ -35,12 +35,15 @@ namespace AppLaMejor.formularios.Caja
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.tbPrecioFinal = new System.Windows.Forms.TextBox();
-            this.lblPrecio = new System.Windows.Forms.Label();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.tbPrecioModificable = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.tbPrecio = new System.Windows.Forms.TextBox();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.tbPrecioFinal = new System.Windows.Forms.TextBox();
+            this.lblPrecio = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.lCantidadMaxima = new System.Windows.Forms.Label();
             this.tbCantidad = new System.Windows.Forms.TextBox();
@@ -58,16 +61,14 @@ namespace AppLaMejor.formularios.Caja
             this.mensajeroFormEntityInput = new System.Windows.Forms.ToolStripStatusLabel();
             this.topPanel = new System.Windows.Forms.Panel();
             this.formTittleText = new System.Windows.Forms.Label();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.tbPrecioModificable = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.mainPanel.SuspendLayout();
             this.contentPanel.SuspendLayout();
             this.controlsPanel.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            this.panel6.SuspendLayout();
+            this.panel7.SuspendLayout();
             this.panel4.SuspendLayout();
+            this.panel6.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -75,7 +76,6 @@ namespace AppLaMejor.formularios.Caja
             this.tableBottomPanel.SuspendLayout();
             this.statusStripFormEntityInput.SuspendLayout();
             this.topPanel.SuspendLayout();
-            this.panel7.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainPanel
@@ -152,38 +152,39 @@ namespace AppLaMejor.formularios.Caja
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 66F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(522, 66);
             this.tableLayoutPanel1.TabIndex = 15;
             // 
-            // panel6
+            // panel7
             // 
-            this.panel6.Controls.Add(this.tbPrecioFinal);
-            this.panel6.Controls.Add(this.lblPrecio);
-            this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel6.Location = new System.Drawing.Point(347, 3);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(172, 60);
-            this.panel6.TabIndex = 1;
+            this.panel7.Controls.Add(this.tbPrecioModificable);
+            this.panel7.Controls.Add(this.label4);
+            this.panel7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel7.Location = new System.Drawing.Point(175, 3);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(166, 60);
+            this.panel7.TabIndex = 2;
             // 
-            // tbPrecioFinal
+            // tbPrecioModificable
             // 
-            this.tbPrecioFinal.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.tbPrecioFinal.Location = new System.Drawing.Point(38, 28);
-            this.tbPrecioFinal.Name = "tbPrecioFinal";
-            this.tbPrecioFinal.Size = new System.Drawing.Size(100, 20);
-            this.tbPrecioFinal.TabIndex = 13;
-            this.tbPrecioFinal.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPrecioFinal_KeyPress);
+            this.tbPrecioModificable.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.tbPrecioModificable.Location = new System.Drawing.Point(35, 28);
+            this.tbPrecioModificable.Name = "tbPrecioModificable";
+            this.tbPrecioModificable.Size = new System.Drawing.Size(100, 20);
+            this.tbPrecioModificable.TabIndex = 13;
+            this.tbPrecioModificable.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPrecioModificable_KeyPress);
+            this.tbPrecioModificable.Leave += new System.EventHandler(this.tbPrecioModificable_Leave);
             // 
-            // lblPrecio
+            // label4
             // 
-            this.lblPrecio.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblPrecio.AutoSize = true;
-            this.lblPrecio.Location = new System.Drawing.Point(35, 12);
-            this.lblPrecio.Name = "lblPrecio";
-            this.lblPrecio.Size = new System.Drawing.Size(65, 13);
-            this.lblPrecio.TabIndex = 12;
-            this.lblPrecio.Text = "Precio Final:";
+            this.label4.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(32, 12);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(79, 13);
+            this.label4.TabIndex = 12;
+            this.label4.Text = "Precio Unitario:";
             // 
             // panel4
             // 
@@ -213,6 +214,35 @@ namespace AppLaMejor.formularios.Caja
             this.tbPrecio.ReadOnly = true;
             this.tbPrecio.Size = new System.Drawing.Size(100, 20);
             this.tbPrecio.TabIndex = 13;
+            // 
+            // panel6
+            // 
+            this.panel6.Controls.Add(this.tbPrecioFinal);
+            this.panel6.Controls.Add(this.lblPrecio);
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel6.Location = new System.Drawing.Point(347, 3);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(172, 60);
+            this.panel6.TabIndex = 1;
+            // 
+            // tbPrecioFinal
+            // 
+            this.tbPrecioFinal.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.tbPrecioFinal.Location = new System.Drawing.Point(38, 28);
+            this.tbPrecioFinal.Name = "tbPrecioFinal";
+            this.tbPrecioFinal.Size = new System.Drawing.Size(100, 20);
+            this.tbPrecioFinal.TabIndex = 13;
+            this.tbPrecioFinal.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPrecioFinal_KeyPress);
+            // 
+            // lblPrecio
+            // 
+            this.lblPrecio.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblPrecio.AutoSize = true;
+            this.lblPrecio.Location = new System.Drawing.Point(35, 12);
+            this.lblPrecio.Name = "lblPrecio";
+            this.lblPrecio.Size = new System.Drawing.Size(65, 13);
+            this.lblPrecio.TabIndex = 12;
+            this.lblPrecio.Text = "Precio Final:";
             // 
             // panel2
             // 
@@ -280,12 +310,16 @@ namespace AppLaMejor.formularios.Caja
             this.cmbProductos.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.cmbProductos.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmbProductos.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbProductos.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbProductos.FormattingEnabled = true;
             this.cmbProductos.Location = new System.Drawing.Point(100, 28);
             this.cmbProductos.Name = "cmbProductos";
             this.cmbProductos.Size = new System.Drawing.Size(265, 21);
             this.cmbProductos.TabIndex = 12;
+            this.cmbProductos.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbProductos_DrawItem);
+            this.cmbProductos.SelectedIndexChanged += new System.EventHandler(this.cmbProductos_SelectedIndexChanged);
             this.cmbProductos.SelectionChangeCommitted += new System.EventHandler(this.cmbProductos_SelectionChangeCommitted);
+            this.cmbProductos.SelectedValueChanged += new System.EventHandler(this.cmbProductos_SelectedValueChanged);
             // 
             // panel5
             // 
@@ -420,36 +454,6 @@ namespace AppLaMejor.formularios.Caja
             this.formTittleText.Text = "Agregar Producto Manualmente";
             this.formTittleText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // panel7
-            // 
-            this.panel7.Controls.Add(this.tbPrecioModificable);
-            this.panel7.Controls.Add(this.label4);
-            this.panel7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel7.Location = new System.Drawing.Point(175, 3);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(166, 60);
-            this.panel7.TabIndex = 2;
-            // 
-            // tbPrecioModificable
-            // 
-            this.tbPrecioModificable.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.tbPrecioModificable.Location = new System.Drawing.Point(35, 28);
-            this.tbPrecioModificable.Name = "tbPrecioModificable";
-            this.tbPrecioModificable.Size = new System.Drawing.Size(100, 20);
-            this.tbPrecioModificable.TabIndex = 13;
-            this.tbPrecioModificable.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPrecioModificable_KeyPress);
-            this.tbPrecioModificable.Leave += new System.EventHandler(this.tbPrecioModificable_Leave);
-            // 
-            // label4
-            // 
-            this.label4.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(32, 12);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(79, 13);
-            this.label4.TabIndex = 12;
-            this.label4.Text = "Precio Unitario:";
-            // 
             // FormAgregarProductoManual
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -467,10 +471,12 @@ namespace AppLaMejor.formularios.Caja
             this.controlsPanel.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
-            this.panel6.ResumeLayout(false);
-            this.panel6.PerformLayout();
+            this.panel7.ResumeLayout(false);
+            this.panel7.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
+            this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
@@ -481,8 +487,6 @@ namespace AppLaMejor.formularios.Caja
             this.statusStripFormEntityInput.ResumeLayout(false);
             this.statusStripFormEntityInput.PerformLayout();
             this.topPanel.ResumeLayout(false);
-            this.panel7.ResumeLayout(false);
-            this.panel7.PerformLayout();
             this.ResumeLayout(false);
 
         }

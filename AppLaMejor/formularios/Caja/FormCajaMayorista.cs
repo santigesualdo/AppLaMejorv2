@@ -276,6 +276,13 @@ namespace AppLaMejor.formularios.Caja
             }
         }
 
+        private void cmbCliente_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            lblCliente.Text = "Cliente: " + cmbCliente.Text;
+            ComboBox combo = (ComboBox)sender;
+            clienteSelected = (Cliente)combo.SelectedItem;
+        }
+
         private void btRemito_Click(object sender, EventArgs e)
         {
                FormReportes fmr = new FormReportes();

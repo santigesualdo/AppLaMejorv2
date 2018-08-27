@@ -20,7 +20,7 @@ namespace AppLaMejor.formularios.Util
         public const int MODO_EDITAR = 0;
         public const int MODO_INSERTAR = 1;
         public const int MODO_VER = 2;
-
+        
         int currentModo;
         
         public FormEntityInput(Object reflection, int modo)

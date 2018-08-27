@@ -29,6 +29,13 @@ namespace AppLaMejor.formularios
             ApplicationLookAndFeel.ApplyThemeToAll(this);
 
             MyTextTimer.TStartFade("Seleccione Modulo.", this.statusStrip1, this.tsslMensaje, MyTextTimer.TIME_FOREVER);
+
+
+            //consulta si se ha creado un backup en el dia, si es falso (0)
+            //se crea un backup de la base de datos
+            if (FuncionesBackups.ConsultaBackupDelDia() == 0)
+                FuncionesBackups.crearBackUp();
+            
         }
 
         private void CargarFormInicio()
@@ -105,10 +112,15 @@ namespace AppLaMejor.formularios
 				case "Reportes": boton.Click += new System.EventHandler(IniciarReportes); break;
                 case "Compras con Productos a Entregar": boton.Click+= new System.EventHandler(IniciarComprasConProduFaltante); break;
                 case "Compras": boton.Click += new System.EventHandler(IniciarCompras); break;
+                case "Backups": boton.Click += new System.EventHandler(IniciarBackups); break;
             }
             return boton;
         }
-
+        private void IniciarBackups(object sender, EventArgs e)
+        {
+            FormBackup formbackup = new FormBackup();
+            formbackup.ShowDialog();
+        }
         private void IniciarCompras(object sender, EventArgs e)
         {
             FormCompras formCompras = new FormCompras();

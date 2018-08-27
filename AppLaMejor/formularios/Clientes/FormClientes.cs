@@ -19,7 +19,7 @@ namespace AppLaMejor.formularios
 
         List<Cliente> listClients;
         DataTable tableClientes;
-      
+        int IdCliente;
         public FormClientes()
         {
             InitializeComponent();
@@ -100,7 +100,6 @@ namespace AppLaMejor.formularios
                         MyTextTimer.TStartFade("Cliente eliminado correctamente", statusStrip1, tsslMensaje, MyTextTimer.TIME_SHORT);
                         CargarDataGrid();
                     }                   
-				
 			}
         }
 
@@ -164,6 +163,21 @@ namespace AppLaMejor.formularios
                 if (FuncionesClientes.InsertCliente(newClient))
                 {
                     CargarDataGrid();
+                    //mensaje consulta para crearle una cuenta nueva
+                    DialogResult dialogResult = MessageBox.Show("     No hay cuenta asociada al cliente aún \r\n   ¿Desea crear una cuenta y asociarla?", "Mensaje", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        int i = FuncionesClientes.GetNextIdCliente();
+                        Cliente clientSelected = listClients.First(s => s.Id == i);
+                        AgregarCuenta(clientSelected);
+                        //MessageBox.Show("acá linkear para crear una cuenta"); //do something
+                    }
+                    else if (dialogResult == DialogResult.No)
+                    {
+                        //do something else
+                    }
+
+                    
                     MyTextTimer.TStartFade("Se guardo cliente " + newClient.RazonSocial.ToUpper() + ".", statusStrip1, tsslMensaje, MyTextTimer.TIME_SHORT);    
                 }
                 else
@@ -206,12 +220,12 @@ namespace AppLaMejor.formularios
         private void filterTextBox_TextChanged(object sender, EventArgs e)
         {
             // Aplicar filtro a data grid por texto en Razon Social
-            if (!filterTextBox.Text.Equals(""))
+            if (!filter4TextBox.Text.Equals(""))
             {
                 StringBuilder filter = new StringBuilder();
-                if (!(string.IsNullOrEmpty(filterTextBox.Text)))
+                if (!(string.IsNullOrEmpty(filter4TextBox.Text)))
                 {
-                    filter.Append("RazonSocial Like '%" + filterTextBox.Text + "%'");
+                    filter.Append("RazonSocial Like '%" + filter4TextBox.Text + "%'");
                     (dataGridClientes.DataSource as DataTable).DefaultView.RowFilter = filter.ToString();
                 }
             }
@@ -303,13 +317,14 @@ namespace AppLaMejor.formularios
 
         private void bAgregarCuenta_Click(object sender, EventArgs e)
         {
-            AgregarCuenta();
-        }
-
-        private void AgregarCuenta()
-        {
             int i = FuncionesGlobales.obtenerIndexDeListFromGrid(dataGridClientes);
             Cliente clientSelected = listClients.First(s => s.Id == i);
+            AgregarCuenta(clientSelected);
+        }
+
+        private void AgregarCuenta(Cliente clientSelected)
+        {
+            
             int idCliente = clientSelected.Id;
 
             /* Obtenemos los datos de la fila seleccionada y la convertimos a entidad Cliente */
@@ -333,10 +348,7 @@ namespace AppLaMejor.formularios
                 {
                     MyTextTimer.TStartFade("No se guardo cuenta.", statusStrip1, tsslMensaje, MyTextTimer.TIME_SHORT);
                 }
-
             }
-
-
         }
 
 

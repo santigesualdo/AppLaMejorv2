@@ -20,6 +20,8 @@ namespace AppLaMejor.formularios.Caja
         public decimal precioFinal;
         public string codigomanual;
 
+        bool selectable; //flag para ver si el item se puede comprar o no
+
         DataTable tableProductos;
         List<Producto> listProds = new List<Producto>();
         public FormAgregarProductoManual(List<VentaDetalle> listVentaDetalle)
@@ -117,6 +119,7 @@ namespace AppLaMejor.formularios.Caja
             if (combo.SelectedIndex != -1)
             {
                 selectedProducto = (Producto)combo.SelectedValue;
+                combo.Text = selectedProducto.DescripcionBreve;
                 tbPrecio.Text = selectedProducto.Precio.ToString();
                 lCantidadMaxima.Text = "(Cantidad Maxima: " + selectedProducto.Cantidad.ToString() + ")";
                 tbCantidad.Focus();
@@ -169,6 +172,56 @@ namespace AppLaMejor.formularios.Caja
             tbPrecioFinal.Text = (Convert.ToDecimal(tbPrecioModificable.Text) * cantidad).ToString();
 
             tbPrecioFinal.Focus();
+        }
+
+        private void cmbProductos_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            //En el caso de que quiera usar en un futuro el DrawItem, tengo que cambiar el control de drawItem.Normal a OwnerAlgoFixed
+
+            // Dibujo el fondo
+            e.DrawBackground();
+
+            // Obtengo el texto del item  
+            string text = listProds[e.Index].DescripcionBreve;
+
+            // Veo si en la descripción dice Comprar, pongo color ROJO, si está en negativo, pongo en ANARANJADO 
+            Brush brush;
+            if (listProds[e.Index].DescripcionBreve.Contains("COMPRAR"))
+            {
+                brush = Brushes.Red;
+
+
+            }
+            else if (listProds[e.Index].DescripcionBreve.Contains("-"))  
+            {
+                brush = Brushes.Orange;
+                
+            }
+            else
+            {
+                brush = Brushes.White;
+            }
+
+            // Dibujo el texto
+            e.Graphics.DrawString(text, ((Control)sender).Font, brush, e.Bounds.X, e.Bounds.Y);
+        }
+
+        private void cmbProductos_SelectedValueChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void cmbProductos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ComboBox combo = (ComboBox)sender;
+            if (combo.Text.Contains("COMPRAR"))
+                
+            {
+                combo.SelectedIndex = -1;
+                tbPrecio.Clear();
+                MessageBox.Show("No se puede seleccionar, hace falta comprar este producto");
+                combo.DroppedDown = true;
+            }
         }
     }
 }
