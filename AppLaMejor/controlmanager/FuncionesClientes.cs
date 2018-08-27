@@ -194,5 +194,17 @@ namespace AppLaMejor.controlmanager
             DataNamesMapper<Cuenta> mapper = new DataNamesMapper<Cuenta>();
             return mapper.Map(cuentaClienteTable).ToList();
         }
+
+        //obtiene el proximo id cliente
+        public static int GetNextIdCliente()
+        {
+            QueryManager manager = QueryManager.Instance();
+            string consulta = manager.GetNextClienteId();
+            DataTable result = manager.GetTableResults(ConnecionBD.Instance().Connection, consulta);
+
+            if (result.Rows[0][0].ToString().Length == 0)
+                return 1;
+            else return Int32.Parse(result.Rows[0][0].ToString());
+        }
     }
 }

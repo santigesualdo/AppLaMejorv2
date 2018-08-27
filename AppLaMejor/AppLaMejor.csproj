@@ -98,6 +98,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="controlmanager\FuncionesBackups.cs" />
     <Compile Include="controlmanager\FuncionesClientes.cs" />
     <Compile Include="controlmanager\FuncionesCompras.cs" />
     <Compile Include="controlmanager\FuncionesGarron.cs" />
@@ -118,8 +119,15 @@
     <Compile Include="datamanager\DataNamesMapper.cs" />
     <Compile Include="datamanager\PropertyMapHelper.cs" />
     <Compile Include="datamanager\QueryManager.cs" />
+    <Compile Include="entidades\Backup.cs" />
     <Compile Include="entidades\Modulo.cs" />
     <Compile Include="entidades\MovimientoCuentaProveedor.cs" />
+    <Compile Include="formularios\Backups\FormBackup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formularios\Backups\FormBackup.Designer.cs">
+      <DependentUpon>FormBackup.cs</DependentUpon>
+    </Compile>
     <Compile Include="formularios\Caja\FormAgregarGarronManual.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -363,6 +371,10 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="formularios\Backups\FormBackup.resx">
+      <DependentUpon>FormBackup.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="formularios\Caja\FormAgregarGarronManual.resx">
       <DependentUpon>FormAgregarGarronManual.cs</DependentUpon>
       <SubType>Designer</SubType>
