@@ -17,7 +17,7 @@ namespace AppLaMejor.formularios.Caja
         List<VentaDetalle> listDetalleVentas;
         List<Venta> listVentas;
         List<Cliente> listClients;
-        DataTable currentVentasDetalle, tableClientes;
+        DataTable currentVentasDetalle;
 
         Cuenta cuentaSelected;
         Cliente clienteSelected;

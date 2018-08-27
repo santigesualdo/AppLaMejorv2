@@ -604,12 +604,16 @@ namespace AppLaMejor.formularios.Util
                 newOperacion.Id = VariablesGlobales.idOperacion;
 
                 newOperacion.tipoOperacion = to;
+                
+                newOperacion.idUsuario = VariablesGlobales.userIdLogueado;
 
                 VariablesGlobales.FormMovCuentas_activo = true;
 
                 cuenta = FuncionesClientes.GetCuentaById(lastCuenta);
 
                 Cliente cliente = FuncionesClientes.GetClienteById(lastEntityId);
+
+                newOperacion.cliente = cliente;
 
                 if (cliente != null)
                 {
@@ -643,15 +647,19 @@ namespace AppLaMejor.formularios.Util
 
                         if (FuncionesMovCuentas.insertarMovimiento(movCuenta1))
                         {
-                            if (tp.Id.Equals(1))
-                            {
-                                MyTextTimer.TStartFade("Debito realizado. ", this.statusStripFormEntityInput, this.mensajeroFormEntityInput, MyTextTimer.TIME_LONG);
-                            }
-                            else
-                            {
-                                MyTextTimer.TStartFade("Acreditacion realizada.", this.statusStripFormEntityInput, this.mensajeroFormEntityInput, MyTextTimer.TIME_LONG);
-                            }
+                            //inserto la operacion
 
+                            if (FuncionesOperaciones.insertarOperacion(newOperacion))
+                            {
+                                if (tp.Id.Equals(1))
+                                {
+                                    MyTextTimer.TStartFade("Debito realizado. ", this.statusStripFormEntityInput, this.mensajeroFormEntityInput, MyTextTimer.TIME_LONG);
+                                }
+                                else
+                                {
+                                    MyTextTimer.TStartFade("Acreditacion realizada.", this.statusStripFormEntityInput, this.mensajeroFormEntityInput, MyTextTimer.TIME_LONG);
+                                }
+                            }
                             cargar();
 
                             tableMovCuentas.AcceptChanges();

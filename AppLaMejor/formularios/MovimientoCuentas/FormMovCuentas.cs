@@ -178,26 +178,50 @@ namespace AppLaMejor.formularios
 
         private void ModoVer(object sender, EventArgs e)
         {
-            /* Obtenemos los datos de la fila seleccionada y la convertimos a entidad Cliente */
-            int i = FuncionesGlobales.obtenerIndexDeListFromGrid(dataGridClientes);
-            Cliente clientSelected = listClients.First(s => s.Id == i);
+            try
+            {
+                /* Obtenemos los datos de la fila seleccionada y la convertimos a entidad Cliente */
+                int i = FuncionesGlobales.obtenerIndexDeListFromGrid(dataGridClientes);
+                Cliente clientSelected = listClients.First(s => s.Id == i);
 
-            /* Form Entity Input */
-            FormMovDetalle dialog = new FormMovDetalle(FormMovDetalle.MODO_VER, clientSelected);
-            dialog.SetTitulo("Cliente: " + clientSelected.RazonSocial);
-            Boolean result = dialog.Execute(clientSelected.Id);
+                /* Form Entity Input */
+                FormMovDetalle dialog = new FormMovDetalle(FormMovDetalle.MODO_VER, clientSelected);
+                dialog.SetTitulo("Cliente: " + clientSelected.RazonSocial);
+                Boolean result = dialog.Execute(clientSelected.Id);
+            }
+            catch (Exception ex)
+            {
+                FormMessageBox dialog = new FormMessageBox();
+                dialog.ShowErrorDialog("El cliente seleccionado está dado de baja: \r\n");
+            }
+            finally
+            {
+
+            }
         }
 
         private void ModoAgregar(object sender, EventArgs e)
         {
-            /* Obtenemos los datos de la fila seleccionada y la convertimos a entidad Cliente */
-            int i = FuncionesGlobales.obtenerIndexDeListFromGrid(dataGridClientes);
-            Cliente clientSelected = listClients.First(s => s.Id == i);
+            try
+            {
+                /* Obtenemos los datos de la fila seleccionada y la convertimos a entidad Cliente */
+                int i = FuncionesGlobales.obtenerIndexDeListFromGrid(dataGridClientes);
+                Cliente clientSelected = listClients.First(s => s.Id == i);
 
-            /* Form Entity Input */
-            FormMovDetalle dialog = new FormMovDetalle(FormMovDetalle.MODO_AGREGAR, clientSelected);
-            dialog.SetTitulo("Cliente: " + clientSelected.RazonSocial);
-            Boolean result = dialog.Execute(clientSelected.Id);
+                /* Form Entity Input */
+                FormMovDetalle dialog = new FormMovDetalle(FormMovDetalle.MODO_AGREGAR, clientSelected);
+                dialog.SetTitulo("Cliente: " + clientSelected.RazonSocial);
+                Boolean result = dialog.Execute(clientSelected.Id);
+            }
+            catch (Exception ex)
+            {
+                FormMessageBox dialog = new FormMessageBox();
+                dialog.ShowErrorDialog("El cliente seleccionado está dado de baja: \r\n");
+            }
+            finally
+            {
+                
+            }
         }
 
         private void FormMovCuentas_Activated(object sender, EventArgs e)

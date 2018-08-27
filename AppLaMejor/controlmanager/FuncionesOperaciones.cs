@@ -77,5 +77,11 @@ namespace AppLaMejor.controlmanager
             else return Int32.Parse(result.Rows[0][0].ToString());
         }
 
+        public static bool insertarOperacion(Operacion operacion)
+        {
+            string consulta = QueryManager.Instance().InsertOperacion(operacion);
+            return QueryManager.Instance().ExecuteSQL(ConnecionBD.Instance().Connection, consulta);
+        }
+
     }
 }

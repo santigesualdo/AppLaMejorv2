@@ -262,7 +262,7 @@ namespace AppLaMejor.datamanager
         public string GetClientesSaldoActual()
         {
            // return "CALL obtenerClientesSaldoActual()";
-            return "SELECT cliente.id, cliente.cod_cliente as CodCliente, cliente.razon_social AS `RazonSocial`, cliente.nombre_local AS `NombreLocal`, cliente.civa AS IVA, cast(cliente.id_tipo_cliente as CHAR(50)) AS TipoCliente,count(cuenta.id) AS CantidadCuentas FROM cliente inner join clientecuenta cuenta on cliente.id = cuenta.id_cliente       INNER JOIN banco ON cuenta.id_banco = banco.id INNER JOIN clientetipo ct ON ct.id = cliente.id_tipo_cliente group by cliente.id order by cliente.id";
+            return "SELECT cliente.id, cliente.cod_cliente as CodCliente, cliente.razon_social AS `RazonSocial`, cliente.nombre_local AS `NombreLocal`, cliente.civa AS IVA, cast(cliente.id_tipo_cliente as CHAR(50)) AS TipoCliente,count(cuenta.id) AS CantidadCuentas,cliente.fecha_baja FROM cliente inner join clientecuenta cuenta on cliente.id = cuenta.id_cliente       INNER JOIN banco ON cuenta.id_banco = banco.id INNER JOIN clientetipo ct ON ct.id = cliente.id_tipo_cliente group by cliente.id order by cliente.id";
 
         }
         public string GetDeleteClient(string idCliente, DateTime fechaBaja)
@@ -272,10 +272,10 @@ namespace AppLaMejor.datamanager
 
         //combobox de cliente con cuenta muestra la razón social y la descripción de la cuenta en el mismo combobox
         public string GetClientesMayoristasConCuenta()
-        {
+        {//xxx
             return "SELECT c.id,c.cod_cliente AS CodCliente,CONCAT(c.razon_social, ' | ', cu.descripcion) AS RazonSocial, c.domicilio AS Domicilio,c.localidad AS Localidad,cast(ct.id AS CHAR(50)) AS TipoCliente, " +
             " cu.id AS IdCuenta,c.fecha_desde AS FechaDesde,	c.civa AS IVA,c.cuit AS CUIT,c.nombre_responsable AS NombreResponsable,	c.nombre_local AS NombreLocal,c.telefono AS Telefono " +
-             " FROM cliente c INNER JOIN clientetipo ct ON ct.id = c.id_tipo_cliente INNER JOIN clientecuenta cu ON cu.id_cliente = c.id where c.id_tipo_cliente = 1 ORDER BY c.razon_social; ";
+             " FROM cliente c INNER JOIN clientetipo ct ON ct.id = c.id_tipo_cliente INNER JOIN clientecuenta cu ON cu.id_cliente = c.id where c.id_tipo_cliente = 1 AND c.fecha_baja is null ORDER BY c.razon_social; ";
         }
         /* Proveedores */
         public string InsertNuevoProveedor(Proveedor Proveedor)
