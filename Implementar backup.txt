@@ -1,0 +1,35 @@
+Lo necesario para que funcione el backup:
+
+1) Modificar las variables de entorno del sistema para que se pueda ejecutar mysql y mysqldump por consola
+en la variable path: agregar C:\Program Files (x86)\MySQL\MySQL Server 5.7\bin o donde esté alojado mysql y mysqldump.
+Luego reiniciar para que tome la variable.
+
+2) Crear una carpeta en el C:\backupBD\sql o descomprimir el RAR backupBD.
+
+3) Crear la tabla backup en mysql como figura en backupBD\sql\bdlamejor_dev_2018_07_13.sql
+
+Listo. Si falla es pq me olvidé de algo.
+
+
+
+
+SELECT DISTINCT
+	p.id,
+	p.id_codigo_barra AS CodigoBarra,
+
+IF LENGTH(	CONCAT(		p.descripcion_breve,		' (',		SUM(pu.peso),		') ')) < 0 
+THEN	CONCAT(		p.descripcion_breve,		' (',		SUM(pu.peso),		') '	)
+END IF,
+ cast(
+	p.id_producto_tipo AS CHAR (50)
+) AS TipoProducto,
+ p.precio AS Precio,
+ 1000 AS Cantidad,
+ SUM(pu.peso) AS Cantidad_Ubicada
+FROM
+	producto p
+LEFT JOIN productoubicacion pu ON p.id = pu.id_producto
+WHERE
+	p.id_producto_tipo IN (3)
+GROUP BY
+	(p.id)
