@@ -41,9 +41,10 @@ namespace AppLaMejor.formularios.Caja
                 TextBox t = (TextBox)sender;
                 string cantidadStr = t.Text;
                 decimal.TryParse(cantidadStr, out cantidad);
-                tbPrecio.Text = (selectedProducto.Precio * cantidad).ToString();
+                tbPrecio.Text = Math.Round((selectedProducto.Precio * cantidad),2).ToString();
                 tbPrecioModificable.Text = selectedProducto.Precio.ToString();
             }
+            //twoDec = Math.Round(val, 2)
         }
 
         private void bAceptar_Click(object sender, EventArgs e)
@@ -158,7 +159,7 @@ namespace AppLaMejor.formularios.Caja
         {
             if (e.KeyChar == (char)13)
             {
-                tbPrecioFinal.Text = (Convert.ToDecimal(tbPrecioModificable.Text) * cantidad).ToString();
+                tbPrecioFinal.Text = Math.Round((Convert.ToDecimal(tbPrecioModificable.Text) * cantidad),2).ToString();
                 
                 tbPrecioFinal.Focus();
                
@@ -169,7 +170,7 @@ namespace AppLaMejor.formularios.Caja
         private void tbPrecioModificable_Leave(object sender, EventArgs e)
         {
             //TB PARA MODIFICAR EL PRECIO UNITARIO
-            tbPrecioFinal.Text = (Convert.ToDecimal(tbPrecioModificable.Text) * cantidad).ToString();
+            tbPrecioFinal.Text = Math.Round((Convert.ToDecimal(tbPrecioModificable.Text) * cantidad),2).ToString();
 
             tbPrecioFinal.Focus();
         }
