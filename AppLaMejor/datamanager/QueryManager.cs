@@ -1224,12 +1224,9 @@ namespace AppLaMejor.datamanager
             " `ccm`.`id_operacion`,   `mt`.`descripcion` AS 'tipo',   `ccm`.`fecha`,   IF((`ccm`.`id_movimiento_tipo` = 2), `ccm`.`monto`, (`ccm`.`monto` *-(1))) AS 'saldo' " +
             " FROM(((`clientecuenta` cc    JOIN `cliente` c ON ((`cc`.`id_cliente` = `c`.`id`)))    JOIN `clientecuentamovimiento` ccm ON ((`ccm`.`id_cuenta` = `cc`.`id`)))    JOIN `movimientotipo` mt ON ((`ccm`.`id_movimiento_tipo` = `mt`.`id`))) " +
             " WHERE(`c`.`id` = " + id.ToString() + ") ; " +
-            " ALTER VIEW vistasaldocliente AS SELECT   `id`, `razon_social`, SUM(`saldo`) * - (1) AS 'saldo' FROM   `vistasaldoporidcliente` GROUP BY   `id`;";
-            //" ALTER VIEW vistapagadoporidcliente AS select `vistasaldoporidcliente`.`id` AS `id`,`vistasaldoporidcliente`.`cod_cliente` AS `cod_cliente`,`vistasaldoporidcliente`.`razon_social` AS `razon_social`,`vistasaldoporidcliente`.`cuit` AS `cuit`,`vistasaldoporidcliente`.`id_cliente_cuenta` AS `id_cliente_cuenta`,`vistasaldoporidcliente`.`descripcion` AS `descripcion`,`vistasaldoporidcliente`.`id_banco` AS `id_banco`,`vistasaldoporidcliente`.`id_operacion` AS `id_operacion`,`vistasaldoporidcliente`.`tipo` AS `tipo`,`vistasaldoporidcliente`.`fecha` AS `fecha`,`vistasaldoporidcliente`.`saldo` AS `saldo` from `vistasaldoporidcliente` where(`vistasaldoporidcliente`.`tipo` = 'PAGO' and `id_operacion` =" + ido.ToString() + ");" +
-            //" select `vsc`.`id` AS `id`,(`vvs`.`monto_total` - `vsc`.`saldo`) AS `total` " +
-            //" from(`vistaventaseleccionada` `vvs` " +
-            //" join `vistasaldocliente` `vsc` on((`vvs`.`id_cliente` = `vsc`.`id`))) ";
-            //order by `ccm`.`fecha` desc limit 1,8932173897
+            " ALTER VIEW vistasaldocliente AS SELECT   `id`, `razon_social`, SUM(`saldo`) * - (1) AS 'saldo' FROM   `vistasaldoporidcliente` GROUP BY   `id`;" +
+            " ALTER VIEW vistasaldoporidclientetodos AS select `c`.`id` AS `id`,`c`.`cod_cliente` AS `cod_cliente`,`c`.`razon_social` AS `razon_social`,`c`.`cuit` AS `cuit`,`cc`.`id` AS `id_cliente_cuenta`,`cc`.`descripcion` AS `descripcion`,`cc`.`id_banco` AS `id_banco`,`ccm`.`id_operacion` AS `id_operacion`,`mt`.`descripcion` AS `tipo`,`ccm`.`fecha` AS `fecha`,if((`ccm`.`id_movimiento_tipo` = 2),`ccm`.`monto`,(`ccm`.`monto` * -(1))) AS `saldo` from (((`clientecuenta` `cc` join `cliente` `c` on((`cc`.`id_cliente` = `c`.`id`))) join `clientecuentamovimiento` `ccm` on((`ccm`.`id_cuenta` = `cc`.`id`))) join `movimientotipo` `mt` on((`ccm`.`id_movimiento_tipo` = `mt`.`id`)));" +
+            " ALTER VIEW vistasaldoclientetodos AS select `vistasaldoporidclientetodos`.`id` AS `id`,`vistasaldoporidclientetodos`.`cod_cliente` AS `Codigo`,`vistasaldoporidclientetodos`.`razon_social` AS `razon_social`,(sum(`vistasaldoporidclientetodos`.`saldo`) * -(1)) AS `saldo` from `vistasaldoporidclientetodos` group by `vistasaldoporidclientetodos`.`id`;";
         }
         public string ReportVistaUltimaVenta(int idv)
         {

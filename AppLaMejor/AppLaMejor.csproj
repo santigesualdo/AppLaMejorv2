@@ -161,6 +161,12 @@
       <DependentUpon>crListadoMovClientes.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\crListadoMovClientes3.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>crListadoMovClientes3.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\crListadoMovProveedores.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -486,6 +492,10 @@
     <EmbeddedResource Include="Reports\crListadoMovClientes.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>crListadoMovClientes.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\crListadoMovClientes3.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crListadoMovClientes3.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\crListadoMovProveedores.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

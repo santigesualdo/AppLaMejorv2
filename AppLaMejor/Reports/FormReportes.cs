@@ -146,6 +146,18 @@ namespace AppLaMejor.Reports
                 this.crVisor.ReportSource = scr;
             }
         }
+
+        private void resumenDeSaldosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //FormModalReportes fmr = new FormModalReportes("MovClientes");
+            //if (fmr.ShowDialog() == DialogResult.OK)
+            //{
+
+                crListadoMovClientes3 scr = new crListadoMovClientes3();
+                scr.SetDataSource(DS);
+                this.crVisor.ReportSource = scr;
+            //}
+        }
     }
 }
 

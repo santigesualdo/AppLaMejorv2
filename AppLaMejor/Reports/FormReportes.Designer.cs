@@ -45,6 +45,7 @@
             this.proveedoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.agruparPorFechaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.agruparPorProveedorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.resumenDeSaldosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tlpReportes.SuspendLayout();
             this.msReportes.SuspendLayout();
             this.SuspendLayout();
@@ -170,7 +171,8 @@
             // 
             this.clientesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.agruparPorFechaToolStripMenuItem,
-            this.agruparPorClienteToolStripMenuItem});
+            this.agruparPorClienteToolStripMenuItem,
+            this.resumenDeSaldosToolStripMenuItem});
             this.clientesToolStripMenuItem.Name = "clientesToolStripMenuItem";
             this.clientesToolStripMenuItem.Size = new System.Drawing.Size(167, 26);
             this.clientesToolStripMenuItem.Text = "Clientes";
@@ -212,6 +214,13 @@
             this.agruparPorProveedorToolStripMenuItem.Text = "Agrupar por Proveedor";
             this.agruparPorProveedorToolStripMenuItem.Click += new System.EventHandler(this.agruparPorProveedorToolStripMenuItem_Click);
             // 
+            // resumenDeSaldosToolStripMenuItem
+            // 
+            this.resumenDeSaldosToolStripMenuItem.Name = "resumenDeSaldosToolStripMenuItem";
+            this.resumenDeSaldosToolStripMenuItem.Size = new System.Drawing.Size(217, 26);
+            this.resumenDeSaldosToolStripMenuItem.Text = "Resumen de Saldos";
+            this.resumenDeSaldosToolStripMenuItem.Click += new System.EventHandler(this.resumenDeSaldosToolStripMenuItem_Click);
+            // 
             // FormReportes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -248,5 +257,6 @@
         private System.Windows.Forms.ToolStripMenuItem agruparPorClienteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem agruparPorFechaToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem agruparPorProveedorToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem resumenDeSaldosToolStripMenuItem;
     }
 }
