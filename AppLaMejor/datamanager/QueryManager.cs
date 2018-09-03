@@ -824,6 +824,23 @@ namespace AppLaMejor.datamanager
             "where v.fecha_baja is null " +
             "GROUP BY v.id; ";
         }
+
+        public string GetVentas(int id)
+        {
+            return " SELECT	v.id,	CASE WHEN id_operacion = 0 THEN	'CAJA'ELSE	'MAYORISTA'END AS TipoVenta, v.monto_total AS MontoTotal, v.fecha AS Fecha, v.usuario, concat(c.cod_cliente,' ',c.razon_social,' ',c.cuit) as cliente, " +
+            " v.fecha_baja, GROUP_CONCAT(CONCAT(CASE        WHEN p.id_codigo_barra IS NULL THEN         ''      ELSE            concat(p.id_codigo_barra, ' ')      END, p.descripcion_breve, ' ', vd.peso, ' kg') SEPARATOR ' || ') AS Descripcion " +
+            " FROM operacion o inner join venta v on v.id_operacion = o.id inner join cliente c on o.id_cliente = c.id INNER JOIN ventadetalle vd ON vd.id_venta = v.id INNER JOIN producto p ON p.id = vd.id_producto WHERE " +
+            " v.id = " + id.ToString()  +" AND v.fecha_baja is null GROUP BY v.id; ";
+        }
+
+        public string GetVentasDetalle(int id)
+        {
+            return " SELECT	v.id,	CASE WHEN id_operacion = 0 THEN		'CAJA'	ELSE		'MAYORISTA'	END AS TipoVenta,	v.monto_total AS MontoTotal,	v.fecha AS Fecha,	v.usuario,	v.fecha_baja, " +
+            "vd.id_producto as Producto,    CONCAT(CASE            WHEN p.id_codigo_barra IS NULL THEN             ''          ELSE                concat(p.id_codigo_barra, ' ')          END, p.descripcion_breve) AS Descripcion, " +
+            " vd.peso as peso, round(vd.monto/vd.peso,2) as precio, vd.monto FROM   operacion o INNER JOIN venta v ON v.id_operacion = o.id INNER JOIN cliente c ON o.id_cliente = c.id INNER JOIN ventadetalle vd ON vd.id_venta = v.id " +
+            " INNER JOIN producto p ON p.id = vd.id_producto WHERE v.id = " + id.ToString() + " AND v.fecha_baja is null; ";
+        }
+
         public string GetNextVentaId()
         {
             return "SELECT MAX(id)+1 as nextid from venta;";

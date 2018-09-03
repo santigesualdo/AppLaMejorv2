@@ -10,13 +10,23 @@ using AppLaMejor.controlmanager;
 using AppLaMejor.datamanager;
 using AppLaMejor.entidades;
 using AppLaMejor.stylemanager;
+using AppLaMejor.formularios.Util;
 
 namespace AppLaMejor.formularios
 {
     public partial class FormVentas : Form
     {
-        DataTable dataTableVentas;
+        DataTable dataTableVentas, dataTableDatosCliente, dataTableVentaParaDetalle;
         //List<Venta> listVentas;
+
+
+        string tipo;
+        public int idCliente;
+       // public int idProveedor;
+      //  public int idOperacion;
+        public int idVenta;
+       // public int idCompra;
+       // List<Venta> listVentas = new List<Venta>();
 
         public FormVentas()
         {
@@ -219,6 +229,129 @@ namespace AppLaMejor.formularios
             string text = ((TextBox)sender).Text;
             if (text.Equals("") || text.Equals(string.Empty))
                 limpiarFiltros();
+        }
+
+        private void dataGridVentas_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dataGridVentas.Rows.Count > 1)
+            {
+              //  if (tipo.Equals("Cliente"))
+                {
+                    //int i = FuncionesGlobales.obtenerIndexDeListFromGrid(dataGridVentas);
+                    //Venta ventaSelected = listVentas.First(s => s.Id == i);
+                    //idOperacion = opSelected.Id;
+                    // idVenta = 9;
+
+                    //int j = FuncionesGlobales.obtenerIndexClienteDeListFromGrid(dataGridVentas);
+                    //idCliente = j;
+
+                    int k = FuncionesGlobales.obtenerIndexDeListFromGrid(dataGridVentas);
+                    idVenta = k;
+
+                    CargarVentaParaDetalle(k);
+                }
+
+                //
+
+                panel1.Visible = true;
+            }
+            else MessageBox.Show("No hay ventas");
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //anular venta \r\n 
+            FormMessageBox dialog = new FormMessageBox();
+            if (ValidarAnulacion())
+            {
+                if (dialog.ShowConfirmationDialog("¿Desea Anular la venta?"))
+                {
+                    if (ConfirmarAnulacion())
+                    {
+                        MyTextTimer.TStartFade("Anulación confirmada. ", this.statusStrip1, this.tsslMensaje, MyTextTimer.TIME_LONG);
+                        Cargar();
+                    }
+                    else
+                    {
+                        MyTextTimer.TStartFade("No se confirmo la Anulación. Intente nuevamente.", this.statusStrip1, this.tsslMensaje, MyTextTimer.TIME_LONG);
+                    }
+                }
+            }
+        }
+
+        private bool ValidarAnulacion()
+        {
+            return true;
+        }
+
+        private bool ConfirmarAnulacion()
+        {
+            return true;
+        }
+
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            panel1.Visible = false;
+        }
+
+
+
+
+        public void CargarVentaParaDetalle(int id)
+        {
+            dataTableDatosCliente = FuncionesVentas.GetVentas(id);
+            dgvDatosCliente.DataSource = dataTableDatosCliente;
+            dgvDatosCliente.AllowUserToAddRows = false;
+            dgvDatosCliente.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+
+            // Hacemos que todas las columnas cambien su tamaño a lo ancho para que se vea toda la info
+            for (int i = 0; i < dgvDatosCliente.Columns.Count; i++)
+            {
+               // lblDatosCliente.Text += dataTableVentaParaDetalle.Columns[5].ToString() + " ";
+
+                string name = dgvDatosCliente.Columns[i].Name;
+                if (name.Equals("id") || 
+                    name.Equals("usuario") || 
+                    name.Equals("Descripcion") ||
+                    name.Equals("Fecha") ||
+                    name.Equals("MontoTotal") ||
+                    name.Equals("fecha_baja"))
+                {
+                    dgvDatosCliente.Columns[i].Visible = false;
+                    continue;
+                }
+
+                dgvDatosCliente.Columns[i].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            }
+
+            dataTableVentaParaDetalle = FuncionesVentas.GetVentasDetalle(id);
+            dgvVentaParaDetalle.DataSource = dataTableVentaParaDetalle;
+            dgvVentaParaDetalle.AllowUserToAddRows = false;
+            dgvVentaParaDetalle.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+
+            // Hacemos que todas las columnas cambien su tamaño a lo ancho para que se vea toda la info
+            for (int i = 0; i < dgvVentaParaDetalle.Columns.Count; i++)
+            {
+                // lblDatosCliente.Text += dataTableVentaParaDetalle.Columns[5].ToString() + " ";
+
+                string name = dgvVentaParaDetalle.Columns[i].Name;
+                if (name.Equals("id") ||
+                    name.Equals("TipoVenta") ||
+                    name.Equals("MontoTotal") ||
+                    name.Equals("Fecha") ||
+                    name.Equals("usuario") ||
+                    name.Equals("fecha_baja"))
+                {
+                    dgvVentaParaDetalle.Columns[i].Visible = false;
+                    continue;
+                }
+
+                dgvVentaParaDetalle.Columns[i].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            }
+
+
+
         }
     }
 }

@@ -340,5 +340,21 @@ namespace AppLaMejor.controlmanager
             DataNamesMapper<Venta> dv = new DataNamesMapper<Venta>();
             return dv.Map(dataTableVentas).ToList();
         }
+
+        //datos del cliente que de la venta
+        public static DataTable GetVentas(int id)
+        {
+            QueryManager manager = QueryManager.Instance();
+            string consulta = manager.GetVentas(id);
+            return manager.GetTableResults(ConnecionBD.Instance().Connection, consulta);
+        }
+
+        //datos del detalle de la venta
+        public static DataTable GetVentasDetalle(int id)
+        {
+            QueryManager manager = QueryManager.Instance();
+            string consulta = manager.GetVentasDetalle(id);
+            return manager.GetTableResults(ConnecionBD.Instance().Connection, consulta);
+        }
     }
 }
