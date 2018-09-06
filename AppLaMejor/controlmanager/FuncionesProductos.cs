@@ -178,6 +178,15 @@ namespace AppLaMejor.controlmanager
             return mapperProd.Map(table).ToList().First();
         }
 
+        public static ProductoUbicacion GetProductoUbicacion(int idProducto)
+        {
+            QueryManager manager = QueryManager.Instance();
+            DataTable table = manager.GetTableResults(ConnecionBD.Instance().Connection, manager.GetProductoUbicacion(idProducto));
+            DataNamesMapper<ProductoUbicacion> mapperProd = new DataNamesMapper<ProductoUbicacion>();
+            return mapperProd.Map(table).ToList().First();
+        }
+
+
         public static Ubicacion GetUbicacionByName(string name)
         {
             QueryManager manager = QueryManager.Instance();

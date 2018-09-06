@@ -84,6 +84,15 @@ namespace AppLaMejor.controlmanager
             DataNamesMapper<Ubicacion> mg = new DataNamesMapper<Ubicacion>();
             return mg.Map(dataTableUbicacion).ToList().First();
         }
+
+        public static ProductoUbicacion GetGarronUbicacion(int idGarron)
+        {
+            QueryManager manager = QueryManager.Instance();
+            DataTable table = manager.GetTableResults(ConnecionBD.Instance().Connection, manager.GetGarronUbicacion(idGarron));
+            DataNamesMapper<ProductoUbicacion> mapperProd = new DataNamesMapper<ProductoUbicacion>();
+            return mapperProd.Map(table).ToList().First();
+        }
+
         public static bool ConfirmarDeposte(List<GarronDeposte> listDeposte, Garron garronDeposte, Ubicacion origenGarron)
         {
             MySqlConnection connection = new MySqlConnection(ConnecionBD.Instance().connstring);

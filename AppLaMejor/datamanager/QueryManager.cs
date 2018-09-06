@@ -746,6 +746,37 @@ namespace AppLaMejor.datamanager
                 " NOW() , '" +
                 VariablesGlobales.userIdLogueado.ToString() + "'," + v.Operacion.Id + ");";
         }
+
+        public string NullVenta(Venta v)
+        {
+            return "UPDATE venta SET fecha_baja = NOW(), usuario = " + VariablesGlobales.userIdLogueado.ToString() + 
+                ", id_operacion = " + v.Operacion.Id + " WHERE id = " + v.Id  +" );";
+        }
+
+        public string NullVentaDetalle(Venta v)
+        {
+            string consulta = "UPDATE ventadetalle SET usuario = " + VariablesGlobales.userIdLogueado.ToString() +
+                    ", fecha_baja = NOW() WHERE id_venta = " + v.Id + ");";
+            return consulta;
+            //es mas sencillo, agarra todas las ventadetalle y donde tenga el id de la venta, actualiza
+        }
+
+        public string AlterVenta(Venta v)
+        {
+            return "UPDATE venta SET fecha = NOW(), usuario = '" + VariablesGlobales.userIdLogueado.ToString() +
+                "', monto_total = '" + v.MontoTotal.ToString() + "' WHERE id = " + v.Id + ";";
+        }
+
+
+        public string AlterVentaDetalle(VentaDetalle vd)
+        {
+                return "UPDATE ventadetalle SET monto = '" + vd.Monto + 
+                    "', peso = '" + vd.Peso + 
+                    "', usuario = '" + VariablesGlobales.userIdLogueado.ToString() + 
+                    "' WHERE id = "+ vd.Id + ";";
+        }
+
+
         public string InsertOperacion(Operacion o)
         {
             return "INSERT INTO operacion (id_tipo_operacion, id_cliente, fecha, usuario) VALUES (" +
@@ -837,7 +868,7 @@ namespace AppLaMejor.datamanager
         {
             return " SELECT	v.id,	CASE WHEN id_operacion = 0 THEN		'CAJA'	ELSE		'MAYORISTA'	END AS TipoVenta,	v.monto_total AS MontoTotal,	v.fecha AS Fecha,	v.usuario,	v.fecha_baja, " +
             "vd.id_producto as Producto,    CONCAT(CASE            WHEN p.id_codigo_barra IS NULL THEN             ''          ELSE                concat(p.id_codigo_barra, ' ')          END, p.descripcion_breve) AS Descripcion, " +
-            " vd.peso as peso, round(vd.monto/vd.peso,2) as precio, vd.monto FROM   operacion o INNER JOIN venta v ON v.id_operacion = o.id INNER JOIN cliente c ON o.id_cliente = c.id INNER JOIN ventadetalle vd ON vd.id_venta = v.id " +
+            " vd.peso as peso, round(vd.monto/vd.peso,2) as precio, vd.monto, vd.id as id_vd FROM   operacion o INNER JOIN venta v ON v.id_operacion = o.id INNER JOIN cliente c ON o.id_cliente = c.id INNER JOIN ventadetalle vd ON vd.id_venta = v.id " +
             " INNER JOIN producto p ON p.id = vd.id_producto WHERE v.id = " + id.ToString() + " AND v.fecha_baja is null; ";
         }
 
@@ -1594,6 +1625,15 @@ namespace AppLaMejor.datamanager
         {
             return "SELECT u.* FROM productoubicacion pu inner join ubicacion u  on u.id = pu.id_ubicacion WHERE id_garron = '"+id.ToString()+ "' and pu.fecha_egreso is null ";
         }
+        public string GetGarronUbicacion(int id)
+        {
+            return "SELECT * FROM productoubicacion WHERE id_garron = '" + id.ToString() + "';";
+        }
+
+        public string GetProductoUbicacion(int id)
+        {
+            return "SELECT * FROM productoubicacion WHERE id_producto = '" + id.ToString() + "';";
+        }
         public string GetUbicacionDestino(int idOrigen)
         {
             return "select * from ubicacion where id <> '"+idOrigen.ToString()+"';";
@@ -1618,6 +1658,13 @@ namespace AppLaMejor.datamanager
         {
             return "update productoubicacion set peso = 0 , fecha_egreso = now(), fecha_baja = NULL where id = '" + idProductoUbicacion.ToString() + "';";
         }
+
+        public string UpdateProductoUbicacionVuelve(int idProductoUbicacion)
+        {
+            //TO DO: tengo que recuperar el peso
+            return "update productoubicacion set peso = 0 , fecha_egreso = NULL, fecha_baja = NULL where id = '" + idProductoUbicacion.ToString() + "';";
+        }
+
         public string UpdateProductoUbicacion(int idProductoUbicacion, decimal pesoRestante)
         {
             return " update productoubicacion set peso = '"+ pesoRestante + "', fecha_baja = NULL where id = '"+idProductoUbicacion.ToString()+"' ;";

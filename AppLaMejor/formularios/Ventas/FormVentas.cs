@@ -18,8 +18,9 @@ namespace AppLaMejor.formularios
     {
         DataTable dataTableVentas, dataTableDatosCliente, dataTableVentaParaDetalle;
         //List<Venta> listVentas;
-
-
+        List<VentaDetalle> listDetalleVentas;
+        int index;
+        decimal cantidad, precio;
         string tipo;
         public int idCliente;
        // public int idProveedor;
@@ -33,6 +34,7 @@ namespace AppLaMejor.formularios
             InitializeComponent();
             Cargar();
             ApplicationLookAndFeel.ApplyThemeToAll(this);
+            ApplicationLookAndFeel.ApplyThemeToChild(button3);
         }
 
         public void Cargar()
@@ -48,7 +50,7 @@ namespace AppLaMejor.formularios
             for (int i = 0; i < dataGridVentas.Columns.Count; i++)
             {
                 string name = dataGridVentas.Columns[i].Name;
-                if (name.Equals("id") || name.Equals("usuario") || name.Equals("fecha_baja"))
+                if (name.Equals("id") || name.Equals("usuario")  || name.Equals("fecha_baja"))
                 {
                     dataGridVentas.Columns[i].Visible = false;
                     continue;
@@ -260,23 +262,84 @@ namespace AppLaMejor.formularios
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //anular venta \r\n 
+            //modificar venta
+
             FormMessageBox dialog = new FormMessageBox();
-            if (ValidarAnulacion())
+            if (ValidarModificacion())
             {
-                if (dialog.ShowConfirmationDialog("¿Desea Anular la venta?"))
+                if (dialog.ShowConfirmationDialog("¿Desea Modificar la venta?"))
                 {
-                    if (ConfirmarAnulacion())
+                    if (ConfirmarModificacion())
                     {
-                        MyTextTimer.TStartFade("Anulación confirmada. ", this.statusStrip1, this.tsslMensaje, MyTextTimer.TIME_LONG);
+                        MyTextTimer.TStartFade("Modificación confirmada. ", this.statusStrip1, this.tsslMensaje, MyTextTimer.TIME_LONG);
+                        limpiar();
+                        panel1.Visible = false;
                         Cargar();
                     }
                     else
                     {
-                        MyTextTimer.TStartFade("No se confirmo la Anulación. Intente nuevamente.", this.statusStrip1, this.tsslMensaje, MyTextTimer.TIME_LONG);
+                        MyTextTimer.TStartFade("No se confirmo la modificación. Intente nuevamente.", this.statusStrip1, this.tsslMensaje, MyTextTimer.TIME_LONG);
                     }
                 }
             }
+
+
+            //anular venta \r\n 
+            //FormMessageBox dialog = new FormMessageBox();
+            //if (ValidarAnulacion())
+            //{
+            //    if (dialog.ShowConfirmationDialog("¿Desea Anular la venta?"))
+            //    {
+            //        if (ConfirmarAnulacion())
+            //        {
+            //            MyTextTimer.TStartFade("Anulación confirmada. ", this.statusStrip1, this.tsslMensaje, MyTextTimer.TIME_LONG);
+            //            Cargar();
+            //        }
+            //        else
+            //        {
+            //            MyTextTimer.TStartFade("No se confirmo la Anulación. Intente nuevamente.", this.statusStrip1, this.tsslMensaje, MyTextTimer.TIME_LONG);
+            //        }
+            //    }
+            //}
+
+            limpiar();
+        }
+
+        private bool ValidarModificacion()
+        {
+
+            listDetalleVentas = new List<VentaDetalle>();
+            
+            for (int i = 0; i < dgvVentaParaDetalle.Rows.Count; i++)
+            {
+                VentaDetalle vd = new VentaDetalle();
+                vd.Id = (int)dgvVentaParaDetalle[11, i].Value;
+                vd.Peso = (decimal)dgvVentaParaDetalle[8, i].Value;
+                vd.Monto = (decimal)dgvVentaParaDetalle[10, i].Value;
+                listDetalleVentas.Add(vd);
+            }
+            return true;
+        }
+
+        private bool ConfirmarModificacion()
+        {
+            if (FuncionesVentas.AlterVentaMayorista(listDetalleVentas, idVenta))
+            {
+                //crRemito scr = new crRemito();
+                //FormReportes fr = new FormReportes(scr);
+                //fr.ShowDialog();
+
+                MyTextTimer.TStartFade("Se modificó venta  correctamente.", statusStrip1, tsslMensaje, MyTextTimer.TIME_LONG);
+
+                listDetalleVentas.Clear();
+                Cargar();
+            }
+            else
+            {
+                MyTextTimer.TStartFade("Fallo la nueva venta. Intente nuevamente.", statusStrip1, tsslMensaje, MyTextTimer.TIME_LONG);
+            }
+
+            return true;
         }
 
         private bool ValidarAnulacion()
@@ -289,10 +352,113 @@ namespace AppLaMejor.formularios
             return true;
         }
 
+        private void dgvVentaParaDetalle_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //qqq
+
+            plModificaVenta.Visible = true;
+
+            index = dgvVentaParaDetalle.CurrentRow.Index;
+            
+            tbPeso.Text = dgvVentaParaDetalle[8, index].Value.ToString();
+            tbPrecio.Text = dgvVentaParaDetalle[9, index].Value.ToString();
+            tbMonto.Text = dgvVentaParaDetalle[10, index].Value.ToString();
+
+            lblDescripcionProducto.Text = dgvVentaParaDetalle[7, index].Value.ToString();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            limpiar();
+        }
+
+        private void limpiar()
+        {
+            plModificaVenta.Visible = false;
+            lblDescripcionProducto.Text = "";
+            tbPeso.Clear();
+            tbPrecio.Clear();
+            tbMonto.Clear();
+        }
+
+        private void dgvVentaParaDetalle_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void tbPeso_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)13)
+            {
+                tbPrecio.Focus();
+            }
+            FuncionesGlobales.DecimalTextBox_KeyPress(sender, e);
+        }
+
+        private void tbPrecio_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)13)
+            {
+                tbMonto.Focus();
+            }
+            FuncionesGlobales.DecimalTextBox_KeyPress(sender, e);
+        }
+
+        private void tbMonto_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)13)
+            {
+                button2.Focus();
+            }
+            FuncionesGlobales.DecimalTextBox_KeyPress(sender, e);
+        }
+
+        private void tbPeso_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void tbPeso_Leave(object sender, EventArgs e)
+        {
+            if (tbPeso != null)
+            {
+                TextBox t = (TextBox)sender;
+                string cantidadStr = t.Text;
+                decimal.TryParse(cantidadStr, out cantidad);
+                tbMonto.Text = Math.Round((Convert.ToDecimal(tbPrecio.Text) * cantidad), 2).ToString();
+
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            dgvVentaParaDetalle[8, index].Value = tbPeso.Text;
+
+            dgvVentaParaDetalle[9, index].Value = tbPrecio.Text;
+
+            dgvVentaParaDetalle[10, index].Value = tbMonto.Text;
+
+      
+            limpiar();
+        }
+
+        private void tbPrecio_Leave(object sender, EventArgs e)
+        {
+            if (tbPrecio != null)
+            {
+
+                TextBox t = (TextBox)sender;
+                string precioStr = t.Text;
+                decimal.TryParse(precioStr, out precio);
+                tbMonto.Text = Math.Round(precio * (Convert.ToDecimal(tbPeso.Text)), 2).ToString();
+
+            }
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
             panel1.Visible = false;
+            limpiar();
         }
 
 
@@ -341,6 +507,7 @@ namespace AppLaMejor.formularios
                     name.Equals("MontoTotal") ||
                     name.Equals("Fecha") ||
                     name.Equals("usuario") ||
+                    name.Equals("id_vd") ||
                     name.Equals("fecha_baja"))
                 {
                     dgvVentaParaDetalle.Columns[i].Visible = false;
