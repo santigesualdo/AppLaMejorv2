@@ -725,8 +725,6 @@
             // 
             this.checkTotalPagado.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.checkTotalPagado.AutoSize = true;
-            this.checkTotalPagado.Checked = true;
-            this.checkTotalPagado.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkTotalPagado.Location = new System.Drawing.Point(15, 9);
             this.checkTotalPagado.Margin = new System.Windows.Forms.Padding(15, 3, 3, 3);
             this.checkTotalPagado.Name = "checkTotalPagado";
@@ -746,7 +744,6 @@
             this.labelPrecioPagado.TabIndex = 1;
             this.labelPrecioPagado.Text = "Ingrese precio pagado";
             this.labelPrecioPagado.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.labelPrecioPagado.Visible = false;
             // 
             // textPagoParcial
             // 
@@ -755,7 +752,6 @@
             this.textPagoParcial.Name = "textPagoParcial";
             this.textPagoParcial.Size = new System.Drawing.Size(93, 20);
             this.textPagoParcial.TabIndex = 2;
-            this.textPagoParcial.Visible = false;
             this.textPagoParcial.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxDecimal_KeyPress);
             // 
             // panelSelecProv

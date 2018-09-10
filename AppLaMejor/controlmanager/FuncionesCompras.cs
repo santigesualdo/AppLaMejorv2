@@ -21,7 +21,7 @@ namespace AppLaMejor.controlmanager
         // ERROR : -1 
         // EXITO : id de la Compra para mostrar
 
-        public static int ConfirmarCompraTransaction(decimal currentMontoCompra, decimal currentMontoPagado, Proveedor provSelec, List<Garron> listGarron, List<Producto> listProducto, int idCuentaProveedor)
+        public static int ConfirmarCompraTransaction(decimal currentMontoCompra, decimal currentMontoPagado, Proveedor provSelec, List<Garron> listGarron, List<Producto> listProducto, int idCuentaProveedor, bool total)
         {
             //0. begin transaction
             //1. Se inserta el registro en compra.
@@ -86,6 +86,7 @@ namespace AppLaMejor.controlmanager
                     else
                     {
                         // Si monto pagado es diferente de cero, se inserta el monto pagado.
+                      
                         consulta = manager.InsertNuevaCompra(provSelec, newOperacion, currentMontoCompra, currentMontoCompra);
                     }
 
@@ -127,18 +128,21 @@ namespace AppLaMejor.controlmanager
                         command.ExecuteNonQuery();
                     }
                     else{
-                        MovimientoCuentaProveedor mcPago2 = new MovimientoCuentaProveedor();
-                        TipoMovimiento tp2 = new TipoMovimiento();
-                        tp2.Id = 2;
-                        mcPago2.Operacion = newOperacion;
-                        mcPago2.TipoMovimiento = tp2;
-                        mcPago2.Cuenta = new Cuenta();
-                        mcPago2.Cuenta.Id = idCuentaProveedor;
-                        mcPago2.Monto = currentMontoCompra;
-                        mcPago2.Cobrado = 'S';
-                        consulta = manager.InsertMovCuentaProveedor(mcPago2);
-                        command.CommandText = consulta;
-                        command.ExecuteNonQuery();
+                        if (total)
+                        {
+                            MovimientoCuentaProveedor mcPago2 = new MovimientoCuentaProveedor();
+                            TipoMovimiento tp2 = new TipoMovimiento();
+                            tp2.Id = 2;
+                            mcPago2.Operacion = newOperacion;
+                            mcPago2.TipoMovimiento = tp2;
+                            mcPago2.Cuenta = new Cuenta();
+                            mcPago2.Cuenta.Id = idCuentaProveedor;
+                            mcPago2.Monto = currentMontoCompra;
+                            mcPago2.Cobrado = 'S';
+                            consulta = manager.InsertMovCuentaProveedor(mcPago2);
+                            command.CommandText = consulta;
+                            command.ExecuteNonQuery();
+                        }
                     }
 
                     //4. Se inserta el registro en compraDetalle. (obtener siguiente id de compra)

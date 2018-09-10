@@ -498,7 +498,7 @@ namespace AppLaMejor.formularios.Compras
         private bool ConfirmarCompra()
         {
             // En result queda el ID de Compra si todo salio bien.
-            int result = FuncionesCompras.ConfirmarCompraTransaction(currentMontoCompra, currentPagoParcial, provSelec, listGarron, listProducto, currentIdCuentaProveedor);
+            int result = FuncionesCompras.ConfirmarCompraTransaction(currentMontoCompra, currentPagoParcial, provSelec, listGarron, listProducto, currentIdCuentaProveedor, checkTotalPagado.Checked);
             if (result.Equals(-1))
             {
                 return false;
@@ -562,7 +562,7 @@ namespace AppLaMejor.formularios.Compras
                 // Y el pago parcial esta vacio
                 if (textPagoParcial.Text.Equals(""))
                 {
-                    if (!box.ShowConfirmationDialog("Se selecciono pago parcial pero no se ingreso monto parcial. Si elige ACEPTAR la compra se registrara impaga."))
+                    if (!box.ShowConfirmationDialog("Advertencia:\r\n Si elige ACEPTAR la compra se registrara impaga."))
                     {
                         return false;
                     }
