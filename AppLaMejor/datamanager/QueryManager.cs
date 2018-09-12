@@ -1365,6 +1365,34 @@ namespace AppLaMejor.datamanager
 	" WHERE    (		`v`.`fecha` BETWEEN '" + d + "' AND DATE_ADD('" + h + "',INTERVAL 1 DAY));";
             return consulta;
         }
+
+        public string ReportVistaVentaDetalle(string d, string h)
+        {
+            string consulta = "ALTER VIEW vistaventadetalle as SELECT " +
+           "  c.id AS  'id' , " +
+           "  c.cod_cliente AS  'cod_cliente' , " +
+           "  c.razon_social AS  'razon_social' , " +
+           "  c.cuit AS  'cuit' , " +
+           "  o.id AS  'id_operacion' , " +
+           "  v.fecha AS  'fecha' , " +
+           "  v.id AS  'id_venta' , " +
+           "  vd.id AS  'id_ventadetalle' , " +
+           "  p.descripcion_breve AS  'producto' , " +
+           "  round(vd.peso, 2) AS  'peso' , " +
+           "  round(vd.monto / vd.peso, 2) AS  'preciounitario', " +
+           " round(vd.monto, 2) AS  'subtotal', " +
+           "  round(v.monto_total, 2) AS  'total' " +
+           " FROM cliente   c " +
+           " inner join operacion   o ON  o.id_cliente = c.id " +
+           "  inner JOIN  venta v  ON v.id_operacion = o.id " +
+           "  inner join  ventadetalle vd  ON v.id = vd.id_venta " +
+           " inner join  producto p  ON p.id = vd.id_producto " +
+           " WHERE c.id IS NOT NULL   AND v.fecha BETWEEN '" + d + "' AND DATE_ADD('" + h + "',INTERVAL 1 DAY)" +
+           "  order by v.id";
+
+            return consulta;
+        }
+
         public string ReportVistaListadoMovCuentas(string d, string h)
         {
             string consulta = "ALTER VIEW vistalistadomovimientosclientes AS SELECT"+

@@ -42,10 +42,11 @@
             this.clientesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.agruparPorFechaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.agruparPorClienteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.resumenDeSaldosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.proveedoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.agruparPorFechaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.agruparPorProveedorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.resumenDeSaldosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.detalladoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tlpReportes.SuspendLayout();
             this.msReportes.SuspendLayout();
             this.SuspendLayout();
@@ -117,7 +118,8 @@
             this.ventasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ultimaOperaciónToolStripMenuItem,
             this.remitoToolStripMenuItem,
-            this.resumenToolStripMenuItem});
+            this.resumenToolStripMenuItem,
+            this.detalladoToolStripMenuItem});
             this.ventasToolStripMenuItem.Name = "ventasToolStripMenuItem";
             this.ventasToolStripMenuItem.Size = new System.Drawing.Size(105, 25);
             this.ventasToolStripMenuItem.Text = "Ventas";
@@ -191,6 +193,13 @@
             this.agruparPorClienteToolStripMenuItem.Text = "Agrupar por Cliente";
             this.agruparPorClienteToolStripMenuItem.Click += new System.EventHandler(this.agruparPorClienteToolStripMenuItem_Click);
             // 
+            // resumenDeSaldosToolStripMenuItem
+            // 
+            this.resumenDeSaldosToolStripMenuItem.Name = "resumenDeSaldosToolStripMenuItem";
+            this.resumenDeSaldosToolStripMenuItem.Size = new System.Drawing.Size(217, 26);
+            this.resumenDeSaldosToolStripMenuItem.Text = "Resumen de Saldos";
+            this.resumenDeSaldosToolStripMenuItem.Click += new System.EventHandler(this.resumenDeSaldosToolStripMenuItem_Click);
+            // 
             // proveedoresToolStripMenuItem
             // 
             this.proveedoresToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -214,12 +223,12 @@
             this.agruparPorProveedorToolStripMenuItem.Text = "Agrupar por Proveedor";
             this.agruparPorProveedorToolStripMenuItem.Click += new System.EventHandler(this.agruparPorProveedorToolStripMenuItem_Click);
             // 
-            // resumenDeSaldosToolStripMenuItem
+            // detalladoToolStripMenuItem
             // 
-            this.resumenDeSaldosToolStripMenuItem.Name = "resumenDeSaldosToolStripMenuItem";
-            this.resumenDeSaldosToolStripMenuItem.Size = new System.Drawing.Size(217, 26);
-            this.resumenDeSaldosToolStripMenuItem.Text = "Resumen de Saldos";
-            this.resumenDeSaldosToolStripMenuItem.Click += new System.EventHandler(this.resumenDeSaldosToolStripMenuItem_Click);
+            this.detalladoToolStripMenuItem.Name = "detalladoToolStripMenuItem";
+            this.detalladoToolStripMenuItem.Size = new System.Drawing.Size(167, 26);
+            this.detalladoToolStripMenuItem.Text = "Detallado";
+            this.detalladoToolStripMenuItem.Click += new System.EventHandler(this.detalladoToolStripMenuItem_Click);
             // 
             // FormReportes
             // 
@@ -258,5 +267,6 @@
         private System.Windows.Forms.ToolStripMenuItem agruparPorFechaToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem agruparPorProveedorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem resumenDeSaldosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem detalladoToolStripMenuItem;
     }
 }

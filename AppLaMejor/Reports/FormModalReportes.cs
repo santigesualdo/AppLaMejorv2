@@ -106,7 +106,10 @@ namespace AppLaMejor.formularios.Reports
 
         void cargar()
         {
-            if (tipo.Equals("Resumen") || tipo.Equals("MovClientes") || tipo.Equals("MovProveedores"))
+            if (tipo.Equals("Resumen") 
+                || tipo.Equals("MovClientes")
+                || tipo.Equals("Detallado")
+                || tipo.Equals("MovProveedores"))
             {
                 controlsPanel.Visible = false;
                 controlsModalResumen.Visible = true;
@@ -248,7 +251,9 @@ namespace AppLaMejor.formularios.Reports
                 FuncionesReportes.informeListadoVentas(d,h);
             else if (tipo.Equals("MovClientes"))
                 FuncionesReportes.informeListadoMovCuentas(d, h);
-                else if (tipo.Equals("MovProveedores"))
+            else if (tipo.Equals("Detallado"))
+                FuncionesReportes.informeListadoVentaDetalle(d, h);
+            else if (tipo.Equals("MovProveedores"))
                     FuncionesReportes.informeListadoMovCuentasProveedores(d, h);
             DialogResult = DialogResult.OK;
                 this.Close();
