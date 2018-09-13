@@ -61,6 +61,14 @@ namespace AppLaMejor.formularios.Caja
 
         private void Cargar()
         {
+            // Limpieza de "clientSelected"
+            if (clienteSelected!=null)
+                clienteSelected = null;
+
+            // Limpieza de "cuentaSelected"
+            if (cuentaSelected != null)
+                cuentaSelected = null;
+
             // Armamos la tabla de nueva venta para mostrar en el grid
             currentVentasDetalle = GetTable();
 
@@ -75,8 +83,6 @@ namespace AppLaMejor.formularios.Caja
             dataGridNuevaVentaDetalle.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             tableDatos.CellBorderStyle = TableLayoutPanelCellBorderStyle.Outset;
-
-            
 
             tbCodigo.Focus();
             listDetalleVentas = new List<VentaDetalle>();
@@ -95,7 +101,6 @@ namespace AppLaMejor.formularios.Caja
             cmbCliente.ValueMember = null;
             cmbCliente.DisplayMember = "RazonSocial";
             cmbCliente.DataSource = objects;
-
             cmbCliente.SelectedIndex = -1;
 
 
@@ -199,6 +204,13 @@ namespace AppLaMejor.formularios.Caja
                         break;
                     }
                 }
+            }
+
+            if (cuentaSelected == null)
+            {
+                FormMessageBox dialog = new FormMessageBox();
+                dialog.ShowErrorDialog("No se encontro cuenta del cliente " + clienteSelected.RazonSocial + "|"+clienteSelected.CodCliente+". Por favor comprobar existencia de cuenta.");
+                return;
             }
 
             if (listDetalleVentas.Count.Equals(0)) {
