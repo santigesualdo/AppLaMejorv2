@@ -69,7 +69,8 @@ namespace AppLaMejor.formularios.Util
             tipo = "Cliente";
 
             InitializeComponent();
-
+            lblTituloDebe.Text = "Debe";
+            lblTituloPago.Text = "Pagó";
             cargar();
             lastEntityId = client.Id;
 
@@ -83,7 +84,8 @@ namespace AppLaMejor.formularios.Util
         {
             currentModo = modo;
             tipo = "Cliente";
-
+            lblTituloDebe.Text = "Debe";
+            lblTituloPago.Text = "Pagó";
             InitializeComponent();
 
             cargar();
@@ -103,7 +105,8 @@ namespace AppLaMejor.formularios.Util
             currentModo = modo;
             tipo = "Proveedor";
             InitializeComponent();
-
+            lblTituloDebe.Text = "Pagado";
+            lblTituloPago.Text = "Comprado";
             cargar();
             lastEntityId = proveedor.Id;
 

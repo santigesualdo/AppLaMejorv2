@@ -95,9 +95,10 @@ namespace AppLaMejor.controlmanager
                     idCompra = FuncionesGlobales.GetLastInsertId(command);
                     // 3. Movimiento Cuenta Proveedor
                     // Insertamos el el total del monto de la compra en el debe de la cuenta.
+                    // 15/9/2018 CORRECCIÓN: NO VA EN EL DEBE, VA EN EL PAGO (DADO QUE  ES UN PROVEEDOR ESTO EQUIVALE A "COMPRADO")
                     MovimientoCuentaProveedor mcDebito = new MovimientoCuentaProveedor();
                     TipoMovimiento tp = new TipoMovimiento();
-                    tp.Id = 1;
+                    tp.Id = 2;
                     mcDebito.Operacion = newOperacion; //.Vob = '1';
                     mcDebito.TipoMovimiento = tp;
                     mcDebito.Cuenta = new Cuenta();
@@ -111,12 +112,13 @@ namespace AppLaMejor.controlmanager
 
                     // Si pago una parte, insertamos en el haber la parte que pago.
                     // Sino insertamos el total en el haber de la cuenta.
+                    // 15/9/2018 CORRECCIÓN: NO VA EN EL PAGO, VA EN EL DEBE (DADO QUE  ES UN PROVEEDOR ESTO EQUIVALE A "PAGADO")
                     if (!currentMontoPagado.Equals(decimal.Zero))
                     {  
                         // currentMontoPagado lo que pago
                         MovimientoCuentaProveedor mcPago = new MovimientoCuentaProveedor();
                         TipoMovimiento tp2 = new TipoMovimiento();
-                        tp2.Id = 2;
+                        tp2.Id = 1;
                         mcPago.Operacion = newOperacion; 
                         mcPago.TipoMovimiento = tp2;
                         mcPago.Cuenta = new Cuenta();
@@ -132,7 +134,7 @@ namespace AppLaMejor.controlmanager
                         {
                             MovimientoCuentaProveedor mcPago2 = new MovimientoCuentaProveedor();
                             TipoMovimiento tp2 = new TipoMovimiento();
-                            tp2.Id = 2;
+                            tp2.Id = 1;
                             mcPago2.Operacion = newOperacion;
                             mcPago2.TipoMovimiento = tp2;
                             mcPago2.Cuenta = new Cuenta();
