@@ -71,6 +71,8 @@ namespace AppLaMejor.formularios.Util
             InitializeComponent();
             lblTituloDebe.Text = "Debe";
             lblTituloPago.Text = "Pagó";
+            rDebitar.Text = "Debitar";
+            rAcreditar.Text = "Acreditar";
             cargar();
             lastEntityId = client.Id;
 
@@ -86,6 +88,8 @@ namespace AppLaMejor.formularios.Util
             tipo = "Cliente";
             lblTituloDebe.Text = "Debe";
             lblTituloPago.Text = "Pagó";
+            rDebitar.Text = "Debitar";
+            rAcreditar.Text = "Acreditar";
             InitializeComponent();
 
             cargar();
@@ -107,6 +111,8 @@ namespace AppLaMejor.formularios.Util
             InitializeComponent();
             lblTituloDebe.Text = "Pagado";
             lblTituloPago.Text = "Comprado";
+            rDebitar.Text = "Pagar";
+            rAcreditar.Text = "Comprar";
             cargar();
             lastEntityId = proveedor.Id;
 

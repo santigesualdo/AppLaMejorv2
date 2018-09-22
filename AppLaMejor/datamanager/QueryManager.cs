@@ -595,7 +595,16 @@ namespace AppLaMejor.datamanager
                 movCuenta.Monto + ", NOW(),'" +
                 movCuenta.Cobrado + "'," +
                 VariablesGlobales.userIdLogueado+ ");";
-        }			
+        }
+
+        public string AlterMovCuenta(MovimientoCuenta movCuenta)
+        {
+            /* modifica el movimiento de cuenta*/
+            return "UPDATE clientecuentamovimiento SET monto = "+ movCuenta.Monto 
+                + " where id_operacion = " + movCuenta.Operacion.Id + " and fecha like '" + movCuenta.Operacion.Fecha.ToString(VariablesGlobales.dateTimeFormat) + "';";
+        }
+
+
         /* Movimiento Cuentas proveedores */
         public string GetMovCuentasProveedores()
         {
@@ -613,7 +622,7 @@ namespace AppLaMejor.datamanager
                     "gc.id_proveedor," +
                     "banco.descripcion as Banco, " +
                     "cm.id_movimiento_tipo," +
-                    "mt.descripcion as Descripcion, " +
+                    "IF(cm.id_movimiento_tipo = 1,'PAGADO','COMPRADO') as Descripcion, " +
                     "banco.descripcion as Banco, " +
                     "round(cm.monto, 2) AS Monto, " +
                     "DATE_FORMAT(cm.fecha,'%Y-%m-%d') AS FechaUltimaActualizacion" +
@@ -633,7 +642,7 @@ namespace AppLaMejor.datamanager
                     "gc.id_proveedor," +
                     "cm.id_cuenta, " +
                     "cm.id_movimiento_tipo," +
-                    "mt.descripcion as Descripcion, " +
+                    "IF(cm.id_movimiento_tipo = 1,'PAGADO','COMPRADO')  as Descripcion, " +
                     "banco.descripcion as Banco, " +
                     "round(cm.monto, 2) AS Monto, " +
                     "DATE_FORMAT(cm.fecha,'%Y-%m-%d') AS FechaUltimaActualizacion " +
@@ -763,7 +772,7 @@ namespace AppLaMejor.datamanager
 
         public string AlterVenta(Venta v)
         {
-            return "UPDATE venta SET fecha = NOW(), usuario = '" + VariablesGlobales.userIdLogueado.ToString() +
+            return "UPDATE venta SET usuario = '" + VariablesGlobales.userIdLogueado.ToString() +
                 "', monto_total = '" + v.MontoTotal.ToString() + "' WHERE id = " + v.Id + ";";
         }
 
@@ -885,6 +894,13 @@ namespace AppLaMejor.datamanager
         {
             return "SELECT MAX(id)+1 as nextid from operacionproveedor;";
         }
+
+        public string  GetOperacionByVenta (int idVenta)
+        {
+            return "SELECT id_operacion, fecha from venta where id = " + idVenta.ToString() + ";";
+        }
+        
+
         /* Productos */
         public string GetProductoUbicacionData()
         {
@@ -1393,6 +1409,14 @@ namespace AppLaMejor.datamanager
             return consulta;
         }
 
+        public string ReportVistaVentaDetalleConMovimientos(string d, string h)  //parte del detallado 2
+        {
+            string consulta = "ALTER VIEW vistamovcliente AS " +
+                "select `cm`.`id` AS `id`,date_format(`cm`.`fecha`, '%d-%m-%Y') AS `fecha`,date_format(`cm`.`fecha`, '%H:%i') AS `hora`,`gc`.`id_cliente` AS `id_cliente`,`c`.`razon_social` AS `razon_social`,`c`.`cuit` AS `cuit`,`gc`.`descripcion` AS `descripcion`,`cm`.`id_cuenta` AS `cuenta`,`cm`.`id_movimiento_tipo` AS `id_tipo`,`mt`.`descripcion` AS `tipo`,`gc`.`id_banco` AS `id_banco`,`cm`.`id_operacion` AS `operacion`,if ((`cm`.`id_movimiento_tipo` = 2),`cm`.`monto`,(`cm`.`monto` *-(1))) AS `monto` from(((`clientecuentamovimiento` `cm` join `clientecuenta` `gc` on((`cm`.`id_cuenta` = `gc`.`id`))) join `movimientotipo` `mt` on((`cm`.`id_movimiento_tipo` = `mt`.`id`))) join `cliente` `c` on((`gc`.`id_cliente` = `c`.`id`))) where((`gc`.`id_cliente` is not null) " +
+                "and(`cm`.`fecha` between '" + d + "' AND DATE_ADD('" + h + "',INTERVAL 1 DAY))) order by `gc`.`id_cliente` desc ;";
+            return consulta;
+        }
+
         public string ReportVistaListadoMovCuentas(string d, string h)
         {
             string consulta = "ALTER VIEW vistalistadomovimientosclientes AS SELECT"+
@@ -1467,7 +1491,7 @@ namespace AppLaMejor.datamanager
     "`gc`.`descripcion` AS `descripcion`, " +
     "`cm`.`id_cuenta` AS `cuenta`, " +
     "`cm`.`id_movimiento_tipo` AS `id_tipo`, " +
-    "`mt`.`descripcion` AS `tipo`, " +
+    "IF(cm.id_movimiento_tipo = 1,'PAGADO','COMPRADO') AS `tipo`, " +
     "`gc`.`id_banco` AS `id_banco`, " +
     "`cm`.`id_operacion` AS `operacion`, " +
     "IF ((`cm`.`id_movimiento_tipo` = 2),`cm`.`monto`,(`cm`.`monto` * -(1))) AS `monto` " +
@@ -1504,7 +1528,7 @@ namespace AppLaMejor.datamanager
 		 "   JOIN proveedorcuentamovimiento ccm ON ((ccm.id_cuenta = cc.id))) " +
 		 "   JOIN movimientotipo mt ON ((ccm.id_movimiento_tipo = mt.id))) " +
 		 " WHERE " +	 
-		 " (ccm.id_operacion = " + id.ToString() + "); " +
+		 " (ccm.id_operacion = " + ido.ToString() + "); " +
          " ALTER VIEW vistasaldoporidProveedor AS SELECT   c.id,   c.razon_social,   c.cuit,   cc.id AS 'id_proveedor_cuenta',    cc.descripcion,   cc.id_banco,   ccm.id_operacion,  " +
          " mt.descripcion AS 'tipo', ccm.fecha, IF((ccm.id_movimiento_tipo = 2), ccm.monto, (ccm.monto *-(1))) AS 'saldo'  FROM(((proveedorcuenta cc    JOIN proveedor c ON((cc.id_proveedor = c.id)))   " +
          " JOIN proveedorcuentamovimiento ccm ON ((ccm.id_cuenta = cc.id))) JOIN movimientotipo mt ON ((ccm.id_movimiento_tipo = mt.id)))   WHERE(c.id = " + id.ToString() + " ); " +

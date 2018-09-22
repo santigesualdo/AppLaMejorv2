@@ -109,6 +109,7 @@ namespace AppLaMejor.formularios.Reports
             if (tipo.Equals("Resumen") 
                 || tipo.Equals("MovClientes")
                 || tipo.Equals("Detallado")
+                || tipo.Equals("Detallado2")
                 || tipo.Equals("MovProveedores"))
             {
                 controlsPanel.Visible = false;
@@ -248,13 +249,18 @@ namespace AppLaMejor.formularios.Reports
             string h = dtpHasta.Value.ToString("yyyy-MM-dd");
 
             if (tipo.Equals("Resumen"))
-                FuncionesReportes.informeListadoVentas(d,h);
+                FuncionesReportes.informeListadoVentas(d, h);
             else if (tipo.Equals("MovClientes"))
                 FuncionesReportes.informeListadoMovCuentas(d, h);
             else if (tipo.Equals("Detallado"))
                 FuncionesReportes.informeListadoVentaDetalle(d, h);
+            else if (tipo.Equals("Detallado2"))
+            {
+                FuncionesReportes.informeListadoVentaDetalle(d, h);
+                FuncionesReportes.informeVistaVentaDetalleConMovimientos(d, h);
+            }
             else if (tipo.Equals("MovProveedores"))
-                    FuncionesReportes.informeListadoMovCuentasProveedores(d, h);
+                FuncionesReportes.informeListadoMovCuentasProveedores(d, h);
             DialogResult = DialogResult.OK;
                 this.Close();
         }

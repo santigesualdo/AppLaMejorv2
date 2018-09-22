@@ -36,6 +36,7 @@
             this.ultimaOperaciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.remitoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resumenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.detalladoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.comprasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ultimaOperaciónToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.movimientosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,7 +47,7 @@
             this.proveedoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.agruparPorFechaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.agruparPorProveedorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.detalladoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.detallado2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tlpReportes.SuspendLayout();
             this.msReportes.SuspendLayout();
             this.SuspendLayout();
@@ -119,7 +120,8 @@
             this.ultimaOperaciónToolStripMenuItem,
             this.remitoToolStripMenuItem,
             this.resumenToolStripMenuItem,
-            this.detalladoToolStripMenuItem});
+            this.detalladoToolStripMenuItem,
+            this.detallado2ToolStripMenuItem});
             this.ventasToolStripMenuItem.Name = "ventasToolStripMenuItem";
             this.ventasToolStripMenuItem.Size = new System.Drawing.Size(105, 25);
             this.ventasToolStripMenuItem.Text = "Ventas";
@@ -144,6 +146,13 @@
             this.resumenToolStripMenuItem.Size = new System.Drawing.Size(167, 26);
             this.resumenToolStripMenuItem.Text = "Resumen";
             this.resumenToolStripMenuItem.Click += new System.EventHandler(this.resumenToolStripMenuItem_Click);
+            // 
+            // detalladoToolStripMenuItem
+            // 
+            this.detalladoToolStripMenuItem.Name = "detalladoToolStripMenuItem";
+            this.detalladoToolStripMenuItem.Size = new System.Drawing.Size(167, 26);
+            this.detalladoToolStripMenuItem.Text = "Detallado";
+            this.detalladoToolStripMenuItem.Click += new System.EventHandler(this.detalladoToolStripMenuItem_Click);
             // 
             // comprasToolStripMenuItem
             // 
@@ -223,12 +232,12 @@
             this.agruparPorProveedorToolStripMenuItem.Text = "Agrupar por Proveedor";
             this.agruparPorProveedorToolStripMenuItem.Click += new System.EventHandler(this.agruparPorProveedorToolStripMenuItem_Click);
             // 
-            // detalladoToolStripMenuItem
+            // detallado2ToolStripMenuItem
             // 
-            this.detalladoToolStripMenuItem.Name = "detalladoToolStripMenuItem";
-            this.detalladoToolStripMenuItem.Size = new System.Drawing.Size(167, 26);
-            this.detalladoToolStripMenuItem.Text = "Detallado";
-            this.detalladoToolStripMenuItem.Click += new System.EventHandler(this.detalladoToolStripMenuItem_Click);
+            this.detallado2ToolStripMenuItem.Name = "detallado2ToolStripMenuItem";
+            this.detallado2ToolStripMenuItem.Size = new System.Drawing.Size(167, 26);
+            this.detallado2ToolStripMenuItem.Text = "Detallado 2";
+            this.detallado2ToolStripMenuItem.Click += new System.EventHandler(this.detallado2ToolStripMenuItem_Click);
             // 
             // FormReportes
             // 
@@ -268,5 +277,6 @@
         private System.Windows.Forms.ToolStripMenuItem agruparPorProveedorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem resumenDeSaldosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem detalladoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem detallado2ToolStripMenuItem;
     }
 }

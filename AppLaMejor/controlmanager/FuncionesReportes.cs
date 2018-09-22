@@ -28,6 +28,11 @@ namespace AppLaMejor.controlmanager
             string consulta = QueryManager.Instance().ReportVistaVentaSeleccionada(idv);
             return QueryManager.Instance().ExecuteSQL(ConnecionBD.Instance().Connection, consulta);
         }
+        public static bool informeVistaVentaDetalleConMovimientos(string d, string h)
+        {
+            string consulta = QueryManager.Instance().ReportVistaVentaDetalleConMovimientos(d,h);
+            return QueryManager.Instance().ExecuteSQL(ConnecionBD.Instance().Connection, consulta);
+        }
         public static bool informeListadoVentas(string d, string h)
         {
             string consulta = QueryManager.Instance().ReportVistaListadoVentas(d, h);

@@ -580,19 +580,20 @@ namespace AppLaMejor.controlmanager
                         command.ExecuteNonQuery();
                     }
 
-                    //MovimientoCuenta mcDebito = new MovimientoCuenta();
-                    //TipoMovimiento tp = new TipoMovimiento();
-                    //tp.Id = 1;
+                    MovimientoCuenta mcDebito = new MovimientoCuenta();
+                    TipoMovimiento tp = new TipoMovimiento();
+                    tp.Id = 1;
 
-                    //mcDebito.Operacion = newOperacion; //.Vob = '1';
+                    mcDebito.Operacion = FuncionesOperaciones.ObtenerOperacionByVenta(idVenta);   //.Vob = '1';
                     //mcDebito.TipoMovimiento = tp;
                     //mcDebito.Cuenta = cuenta;
-                    //mcDebito.Monto = montoTotal;
+                    mcDebito.Monto = montoTotal;
+                    mcDebito.Fecha = mcDebito.Operacion.Fecha;
                     //mcDebito.Cobrado = 'N';
 
-                    //consulta = manager.InsertMovCuenta(mcDebito);
-                    //command.CommandText = consulta;
-                    //command.ExecuteNonQuery();
+                    consulta = manager.AlterMovCuenta(mcDebito);
+                    command.CommandText = consulta;
+                    command.ExecuteNonQuery();
 
                     //// Modifica vista de reporte ultima venta.
                     //consulta = manager.ReportVistaUltimaVenta(cliente.Id, newOperacion.Id);

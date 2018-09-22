@@ -172,6 +172,20 @@ namespace AppLaMejor.Reports
                 this.crVisor.ReportSource = scr;
             }
         }
+
+        private void detallado2ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormModalReportes fmr = new FormModalReportes("Detallado2");
+            if (fmr.ShowDialog() == DialogResult.OK)
+            {
+                //FuncionesReportes.informeVistaUltimaVenta(fmr.idCliente, fmr.idOperacion);
+                //FuncionesReportes.informeVistaUltimaVentaPorCliente(fmr.idCliente);
+                
+                crListadoVentaDetalleConMovimientos scr = new crListadoVentaDetalleConMovimientos();
+                scr.SetDataSource(DS);
+                this.crVisor.ReportSource = scr;
+            }
+        }
     }
 }
 
