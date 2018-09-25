@@ -862,7 +862,7 @@ namespace AppLaMejor.datamanager
             "inner join ventadetalle vd on vd.id_venta = v.id " +
             "inner join producto p on p.id = vd.id_producto " +
             "where v.fecha_baja is null " +
-            "GROUP BY v.id; ";
+            "GROUP BY v.id ORDER BY v.id DESC; ";
         }
 
         public string GetVentas(int id)
