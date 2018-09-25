@@ -1411,9 +1411,10 @@ namespace AppLaMejor.datamanager
 
         public string ReportVistaVentaDetalleConMovimientos(string d, string h)  //parte del detallado 2
         {
-            string consulta = "ALTER VIEW vistamovcliente AS " +
-                "select `cm`.`id` AS `id`,date_format(`cm`.`fecha`, '%d-%m-%Y') AS `fecha`,date_format(`cm`.`fecha`, '%H:%i') AS `hora`,`gc`.`id_cliente` AS `id_cliente`,`c`.`razon_social` AS `razon_social`,`c`.`cuit` AS `cuit`,`gc`.`descripcion` AS `descripcion`,`cm`.`id_cuenta` AS `cuenta`,`cm`.`id_movimiento_tipo` AS `id_tipo`,`mt`.`descripcion` AS `tipo`,`gc`.`id_banco` AS `id_banco`,`cm`.`id_operacion` AS `operacion`,if ((`cm`.`id_movimiento_tipo` = 2),`cm`.`monto`,(`cm`.`monto` *-(1))) AS `monto` from(((`clientecuentamovimiento` `cm` join `clientecuenta` `gc` on((`cm`.`id_cuenta` = `gc`.`id`))) join `movimientotipo` `mt` on((`cm`.`id_movimiento_tipo` = `mt`.`id`))) join `cliente` `c` on((`gc`.`id_cliente` = `c`.`id`))) where((`gc`.`id_cliente` is not null) " +
-                "and(`cm`.`fecha` between '" + d + "' AND DATE_ADD('" + h + "',INTERVAL 1 DAY))) order by `gc`.`id_cliente` desc ;";
+            string consulta = "ALTER VIEW vistamovcliente AS SELECT    cm.id AS id, 	date_format(cm.fecha, '%d-%m-%Y') AS fecha, date_format(cm.fecha, '%H:%i') AS hora, gc.id_cliente AS id_cliente, 	c.razon_social AS razon_social, 	c.cuit AS cuit, 	gc.descripcion AS descripcion, 	cm.id_cuenta AS cuenta, 	cm.id_movimiento_tipo AS id_tipo, 	mt.descripcion AS tipo, 	gc.id_banco AS id_banco, 	cm.id_operacion AS operacion, sum(cm.monto) AS monto " +
+                " FROM clientecuentamovimiento cm JOIN clientecuenta gc ON cm.id_cuenta = gc.id JOIN movimientotipo mt ON cm.id_movimiento_tipo = mt.id JOIN cliente c ON gc.id_cliente = c.id WHERE cm.id_movimiento_tipo = 2 AND gc.id_cliente IS NOT NULL AND cm.fecha " +
+                " BETWEEN '" + d + "' AND '" + h + "' + INTERVAL 1 DAY GROUP BY gc.id_cliente ORDER BY gc.id_cliente DESC";
+
             return consulta;
         }
 
