@@ -1,53 +1,6 @@
-CREATE VIEW vistamovcliente_prueba AS SELECT
-	`cm`.`id` AS `id`,
-	date_format(`cm`.`fecha`, '%d-%m-%Y') AS `fecha`,
-	date_format(`cm`.`fecha`, '%H:%i') AS `hora`,
-	`gc`.`id_cliente` AS `id_cliente`,
-	`c`.`razon_social` AS `razon_social`,
-	`c`.`cuit` AS `cuit`,
-	`gc`.`descripcion` AS `descripcion`,
-	`cm`.`id_cuenta` AS `cuenta`,
-	`cm`.`id_movimiento_tipo` AS `id_tipo`,
-	`mt`.`descripcion` AS `tipo`,
-	`gc`.`id_banco` AS `id_banco`,
-	`cm`.`id_operacion` AS `operacion`,
-	`cm`.`monto` AS `monto`
-FROM
-	(
-		(
-			(
-				`clientecuentamovimiento` `cm`
-				JOIN `clientecuenta` `gc` ON (
-					(`cm`.`id_cuenta` = `gc`.`id`)
-				)
-			)
-			JOIN `movimientotipo` `mt` ON (
-				(
-					`cm`.`id_movimiento_tipo` = `mt`.`id`
-				)
-			)
-		)
-		JOIN `cliente` `c` ON (
-			(`gc`.`id_cliente` = `c`.`id`)
-		)
-	)
-WHERE
-	(
-		(
-			`cm`.`id_movimiento_tipo` = 2
-		)
-		AND (`gc`.`id_cliente` IS NOT NULL)
-		AND (
-			`cm`.`fecha` BETWEEN '2018-04-01'
-			AND ('2018-10-17' + INTERVAL 1 DAY)
-		)
-AND c.id = 2
-	)
-ORDER BY
-	`gc`.`id_cliente`,
-	`cm`.`fecha`;
 
-CREATE VIEW vistaventadetalle_prueba AS SELECT
+ALTER VIEW vistaventadetalle_prueba AS
+SELECT
 	`c`.`id` AS `id`,
 	`c`.`cod_cliente` AS `cod_cliente`,
 	`c`.`razon_social` AS `razon_social`,
@@ -93,10 +46,117 @@ WHERE
 	(
 		(`c`.`id` IS NOT NULL)
 		AND (
-			`v`.`fecha` BETWEEN '2018-04-01'
-			AND ('2018-10-17' + INTERVAL 1 DAY)
+			`v`.`fecha` BETWEEN '2018-09-01'
+			AND ('2018-09-10' + INTERVAL 1 DAY)
 		)
 	)
 ORDER BY
 	`c`.`id`,
-	`v`.`fecha`
+	`v`.`fecha`;
+
+
+ALTER VIEW vistamovcliente_prueba AS SELECT
+	`cm`.`id` AS `id`,
+	date_format(`cm`.`fecha`, '%d-%m-%Y') AS `fecha`,
+	date_format(`cm`.`fecha`, '%H:%i') AS `hora`,
+	`gc`.`id_cliente` AS `id_cliente`,
+	`c`.`razon_social` AS `razon_social`,
+	`c`.`cuit` AS `cuit`,
+	`gc`.`descripcion` AS `descripcion`,
+	`cm`.`id_cuenta` AS `cuenta`,
+	`cm`.`id_movimiento_tipo` AS `id_tipo`,
+	`mt`.`descripcion` AS `tipo`,
+	`gc`.`id_banco` AS `id_banco`,
+	`cm`.`id_operacion` AS `operacion`,
+	`cm`.`monto` AS `monto`
+FROM
+	(
+		(
+			(
+				`clientecuentamovimiento` `cm`
+				JOIN `clientecuenta` `gc` ON (
+					(`cm`.`id_cuenta` = `gc`.`id`)
+				)
+			)
+			JOIN `movimientotipo` `mt` ON (
+				(
+					`cm`.`id_movimiento_tipo` = `mt`.`id`
+				)
+			)
+		)
+		JOIN `cliente` `c` ON (
+			(`gc`.`id_cliente` = `c`.`id`)
+		)
+	)
+WHERE
+	(
+		(
+			`cm`.`id_movimiento_tipo` = 2
+		)
+		AND (`gc`.`id_cliente` IS NOT NULL)
+		AND (
+			`cm`.`fecha` BETWEEN '2018-09-01'
+			AND ('2018-09-10' + INTERVAL 1 DAY)
+		)
+	)
+ORDER BY
+	`gc`.`id_cliente`,
+	`cm`.`fecha`;
+
+drop table venta_temp;
+create TABLE venta_temp
+SELECT
+	`c`.`id` AS `id`,
+	`c`.`cod_cliente` AS `cod_cliente`,
+	`c`.`razon_social` AS `razon_social`,
+	`c`.`cuit` AS `cuit`,
+	o.id as id_operacion,
+	date_format(`v`.`fecha`, '%d-%m-%Y') AS `fecha`,
+	date_format(`v`.`fecha`, '%H:%i') AS `hora`,
+	`v`.`id` AS `id_venta`,
+	round(`v`.`monto_total`, 2) AS `total`
+FROM
+	(
+		(
+			(
+				(
+					`cliente` `c`
+					JOIN `operacion` `o` ON (
+						(`o`.`id_cliente` = `c`.`id`)
+					)
+				)
+				JOIN `venta` `v` ON (
+					(
+						`v`.`id_operacion` = `o`.`id`
+					)
+				)
+			)
+			
+		)
+	)
+WHERE
+	(
+		(`c`.`id` IS NOT NULL)
+		AND (
+			`v`.`fecha` BETWEEN '2018-09-01'
+			AND ('2018-09-10' + INTERVAL 1 DAY)
+		)
+	)
+ORDER BY
+	`c`.`id`,
+	`v`.`id`,
+	`v`.`fecha`;
+
+drop table movcliente_temp;
+create TABLE movcliente_temp
+select (id_cliente), fecha, cod_cliente, razon_social from vistamovcliente_prueba order by id_cliente;
+
+INSERT INTO venta_temp(id,fecha, cod_cliente, razon_social)
+SELECT mc.id_cliente as id, mc.fecha, mc.cod_cliente, mc.razon_social FROM venta_temp v
+RIGHT JOIN movcliente_temp mc
+ON v.id = mc.id_cliente
+WHERE v.id IS NULL;
+
+ALTER view vistaventadetalle_venta_temp AS SELECT vp.id, v.cod_cliente, v.razon_social, vp.cuit, v.id_operacion, v.fecha, vp.hora,v.id_venta, vp.id_ventadetalle,
+vp.producto, vp.peso, vp.preciounitario, vp.subtotal, vp.total  FROM vistaventadetalle_prueba vp RIGHT JOIN venta_temp v 
+ON vp.id_venta = v.id_venta ORDER BY v.id, v.fecha;
