@@ -146,7 +146,7 @@ ORDER BY
 	`c`.`id`,
 	`v`.`id`,
 	`v`.`fecha`;
-
+#ojo, agregar c.cod_cliente a la vista prueba
 drop table movcliente_temp;
 create TABLE movcliente_temp
 select (id_cliente), fecha, cod_cliente, razon_social from vistamovcliente_prueba order by id_cliente;
@@ -160,3 +160,22 @@ WHERE v.id IS NULL;
 ALTER view vistaventadetalle_venta_temp AS SELECT vp.id, v.cod_cliente, v.razon_social, vp.cuit, v.id_operacion, v.fecha, vp.hora,v.id_venta, vp.id_ventadetalle,
 vp.producto, vp.peso, vp.preciounitario, vp.subtotal, vp.total  FROM vistaventadetalle_prueba vp RIGHT JOIN venta_temp v 
 ON vp.id_venta = v.id_venta ORDER BY v.id, v.fecha;
+
+
+#INSERT INTO venta_temp(id,fecha, cod_cliente, razon_social)
+#SELECT mc.id_cliente as id, mc.fecha, mc.cod_cliente, mc.razon_social FROM venta_temp v
+#RIGHT JOIN movcliente_temp mc
+#ON v.id = mc.id_cliente
+#WHERE v.id IS NULL;
+#select * from movcliente_temp
+
+
+DROP TABLE movcliente_temp;
+CREATE TABLE movcliente_temp
+select distinct vp.id,vp.id_cliente, vp.fecha, vp.cod_cliente, vp.razon_social,vp.monto from vistamovcliente_prueba vp
+join venta_temp vt on vp.id_cliente = vt.id
+WHERE NOT vt.fecha = vp.fecha
+ORDER BY vp.id_cliente
+
+INSERT INTO venta_temp(id,fecha, cod_cliente, razon_social)
+SELECT mc.id_cliente as id, mc.fecha, mc.cod_cliente, mc.razon_social FROM movcliente_temp mc

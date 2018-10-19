@@ -155,12 +155,6 @@
     <Compile Include="formularios\Usuarios\FormGestionUsuarios.Designer.cs">
       <DependentUpon>FormGestionUsuarios.cs</DependentUpon>
     </Compile>
-    <Compile Include="Reports\crListadoDetallado3.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>crListadoDetallado3.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Reports\crListadoMovClientes.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -201,6 +195,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>crListadoVentas.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\crListadoVentasyMovimientos.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>crListadoVentasyMovimientos.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\crRemito.cs">
@@ -507,10 +507,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Reports\crListadoDetallado3.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>crListadoDetallado3.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="Reports\crListadoMovClientes.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>crListadoMovClientes.cs</LastGenOutput>
@@ -538,6 +534,10 @@
     <EmbeddedResource Include="Reports\crListadoVentas.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>crListadoVentas1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\crListadoVentasyMovimientos.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crListadoVentasyMovimientos.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\crRemito.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
