@@ -20,7 +20,7 @@ namespace AppLaMejor.formularios.Util
         public const int MODO_AGREGAR = 1;
         public const int MODO_VER = 2;
 
-        public const int ROWCOUNTPAGINATION = 8;
+        public const int ROWCOUNTPAGINATION = 10;
 
         decimal debe, pago, saldo;
         int currentModo;

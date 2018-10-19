@@ -258,6 +258,7 @@ namespace AppLaMejor.formularios.Reports
             {
                 FuncionesReportes.informeListadoVentaDetalle(d, h);
                 FuncionesReportes.informeVistaVentaDetalleConMovimientos(d, h);
+                
             }
             else if (tipo.Equals("MovProveedores"))
                 FuncionesReportes.informeListadoMovCuentasProveedores(d, h);

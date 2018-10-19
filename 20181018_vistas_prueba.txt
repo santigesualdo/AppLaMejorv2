@@ -1,6 +1,4 @@
-
-ALTER VIEW vistaventadetalle_prueba AS
-SELECT
+ALTER VIEW vistaventadetalle_prueba AS SELECT
 	`c`.`id` AS `id`,
 	`c`.`cod_cliente` AS `cod_cliente`,
 	`c`.`razon_social` AS `razon_social`,
@@ -42,24 +40,15 @@ FROM
 			)
 		)
 	)
-WHERE
-	(
-		(`c`.`id` IS NOT NULL)
-		AND (
-			`v`.`fecha` BETWEEN '2018-09-01'
-			AND ('2018-09-10' + INTERVAL 1 DAY)
-		)
-	)
-ORDER BY
-	`c`.`id`,
-	`v`.`fecha`;
-
+WHERE		`c`.`id` IS NOT NULL		AND 			`v`.`fecha` BETWEEN '2018-04-01'			AND ('2018-10-19' + INTERVAL 1 DAY)
+ORDER BY	`c`.`id`,	`v`.`fecha`;
 
 ALTER VIEW vistamovcliente_prueba AS SELECT
 	`cm`.`id` AS `id`,
 	date_format(`cm`.`fecha`, '%d-%m-%Y') AS `fecha`,
 	date_format(`cm`.`fecha`, '%H:%i') AS `hora`,
 	`gc`.`id_cliente` AS `id_cliente`,
+	`c`.`cod_cliente` AS `cod_cliente`,
 	`c`.`razon_social` AS `razon_social`,
 	`c`.`cuit` AS `cuit`,
 	`gc`.`descripcion` AS `descripcion`,
@@ -95,22 +84,23 @@ WHERE
 		)
 		AND (`gc`.`id_cliente` IS NOT NULL)
 		AND (
-			`cm`.`fecha` BETWEEN '2018-09-01'
-			AND ('2018-09-10' + INTERVAL 1 DAY)
+			`cm`.`fecha` BETWEEN '2018-04-01'
+			AND '2018-10-19' + INTERVAL 1 DAY
 		)
 	)
+
 ORDER BY
 	`gc`.`id_cliente`,
 	`cm`.`fecha`;
 
-drop table venta_temp;
-create TABLE venta_temp
-SELECT
+#DROP TABLE venta_temp;
+
+CREATE TABLE venta_temp SELECT
 	`c`.`id` AS `id`,
 	`c`.`cod_cliente` AS `cod_cliente`,
 	`c`.`razon_social` AS `razon_social`,
 	`c`.`cuit` AS `cuit`,
-	o.id as id_operacion,
+	o.id AS id_operacion,
 	date_format(`v`.`fecha`, '%d-%m-%Y') AS `fecha`,
 	date_format(`v`.`fecha`, '%H:%i') AS `hora`,
 	`v`.`id` AS `id_venta`,
@@ -131,51 +121,69 @@ FROM
 					)
 				)
 			)
-			
 		)
 	)
 WHERE
 	(
 		(`c`.`id` IS NOT NULL)
 		AND (
-			`v`.`fecha` BETWEEN '2018-09-01'
-			AND ('2018-09-10' + INTERVAL 1 DAY)
+			`v`.`fecha` BETWEEN '2018-04-01'
+			AND '2018-10-19' + INTERVAL 1 DAY
 		)
 	)
 ORDER BY
 	`c`.`id`,
 	`v`.`id`,
 	`v`.`fecha`;
-#ojo, agregar c.cod_cliente a la vista prueba
-drop table movcliente_temp;
-create TABLE movcliente_temp
-select (id_cliente), fecha, cod_cliente, razon_social from vistamovcliente_prueba order by id_cliente;
-
-INSERT INTO venta_temp(id,fecha, cod_cliente, razon_social)
-SELECT mc.id_cliente as id, mc.fecha, mc.cod_cliente, mc.razon_social FROM venta_temp v
-RIGHT JOIN movcliente_temp mc
-ON v.id = mc.id_cliente
-WHERE v.id IS NULL;
-
-ALTER view vistaventadetalle_venta_temp AS SELECT vp.id, v.cod_cliente, v.razon_social, vp.cuit, v.id_operacion, v.fecha, vp.hora,v.id_venta, vp.id_ventadetalle,
-vp.producto, vp.peso, vp.preciounitario, vp.subtotal, vp.total  FROM vistaventadetalle_prueba vp RIGHT JOIN venta_temp v 
-ON vp.id_venta = v.id_venta ORDER BY v.id, v.fecha;
-
-
-#INSERT INTO venta_temp(id,fecha, cod_cliente, razon_social)
-#SELECT mc.id_cliente as id, mc.fecha, mc.cod_cliente, mc.razon_social FROM venta_temp v
-#RIGHT JOIN movcliente_temp mc
-#ON v.id = mc.id_cliente
-#WHERE v.id IS NULL;
-#select * from movcliente_temp
-
 
 DROP TABLE movcliente_temp;
-CREATE TABLE movcliente_temp
-select distinct vp.id,vp.id_cliente, vp.fecha, vp.cod_cliente, vp.razon_social,vp.monto from vistamovcliente_prueba vp
-join venta_temp vt on vp.id_cliente = vt.id
-WHERE NOT vt.fecha = vp.fecha
-ORDER BY vp.id_cliente
 
-INSERT INTO venta_temp(id,fecha, cod_cliente, razon_social)
-SELECT mc.id_cliente as id, mc.fecha, mc.cod_cliente, mc.razon_social FROM movcliente_temp mc
+CREATE TABLE movcliente_temp SELECT DISTINCT
+	vp.id,
+	vp.id_cliente,
+	vp.fecha,
+	vp.cod_cliente,
+	vp.razon_social,
+	vp.monto
+FROM
+	vistamovcliente_prueba vp
+JOIN venta_temp vt ON vp.id_cliente = vt.id
+WHERE
+	NOT vt.fecha = vp.fecha
+ORDER BY
+	vp.id_cliente;
+
+INSERT INTO venta_temp (
+	id,
+	fecha,
+	cod_cliente,
+	razon_social
+) SELECT
+	mc.id_cliente AS id,
+	mc.fecha,
+	mc.cod_cliente,
+	mc.razon_social
+FROM
+	movcliente_temp mc;
+
+ALTER VIEW vistaventadetalle_venta_temp AS SELECT
+	v.id,
+	v.cod_cliente,
+	v.razon_social,
+	vp.cuit,
+	v.id_operacion,
+	v.fecha,
+	vp.hora,
+	v.id_venta,
+	vp.id_ventadetalle,
+	vp.producto,
+	vp.peso,
+	vp.preciounitario,
+	vp.subtotal,
+	vp.total
+FROM
+	vistaventadetalle_prueba vp
+RIGHT JOIN venta_temp v ON vp.id_venta = v.id_venta
+ORDER BY
+	v.id,
+	v.fecha;

@@ -180,8 +180,10 @@ namespace AppLaMejor.Reports
             {
                 //FuncionesReportes.informeVistaUltimaVenta(fmr.idCliente, fmr.idOperacion);
                 //FuncionesReportes.informeVistaUltimaVentaPorCliente(fmr.idCliente);
-                
-                crListadoVentaDetalleConMovimientos scr = new crListadoVentaDetalleConMovimientos();
+
+                //crListadoVentaDetalleConMovimientos scr = new crListadoVentaDetalleConMovimientos();
+                crListadoVentasyMovimientos scr = new crListadoVentasyMovimientos();
+
                 scr.SetDataSource(DS);
                 this.crVisor.ReportSource = scr;
             }
