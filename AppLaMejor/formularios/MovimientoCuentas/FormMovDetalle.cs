@@ -20,7 +20,8 @@ namespace AppLaMejor.formularios.Util
         public const int MODO_AGREGAR = 1;
         public const int MODO_VER = 2;
 
-        public const int ROWCOUNTPAGINATION = 10;
+        public const int ROWCOUNTPAGINATION = 13;
+        //ME FALTA ORDENAR LA TABLA DE MOVIMIENTOS
 
         decimal debe, pago, saldo;
         int currentModo;
@@ -561,6 +562,8 @@ namespace AppLaMejor.formularios.Util
                 e.Handled = true;
             }
         }
+
+     
 
         private void btFiltroFecha_Click(object sender, EventArgs e)
         {
